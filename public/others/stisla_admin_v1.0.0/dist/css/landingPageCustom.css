@@ -1,0 +1,33 @@
+.txtArea{
+  max-height: 350px;
+  min-height: 100px;
+}
+#map{
+  border:none;
+  height:215px;
+  margin-top: -20px;
+}
+#navLogo{
+  height:50px; 
+  width:auto;
+  position: fixed;
+  top:12px;
+}
+#footerLogo{
+  height:100px; 
+  width:auto;
+  position: relative;
+  right:85px;
+}
+#btnLogin{
+  font-size:20px;
+  background-color:#3F52E3;
+  border-color:#3F52E3;
+}
+#btnLogin:hover{
+  background-color:#2d3db8;
+  border-color:#2d3db8;
+}
+.txtRed{
+  color:red;
+}

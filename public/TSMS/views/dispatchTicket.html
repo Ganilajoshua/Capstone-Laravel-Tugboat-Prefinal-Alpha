@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" name="viewport">
+  <title>TSMS &mdash; Admin</title>
+
+  <link rel="stylesheet" href="../dist/modules/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../dist/modules/ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
+  <link rel="stylesheet" href="../dist/css/demo.css">
+  <link rel="stylesheet" href="../dist/css/cssAll.css">
+  <link rel="stylesheet" href="../dist/css/font.css">
+  <link rel="stylesheet" href="../dist/css/animate.min.css">
+  <link rel="stylesheet" href="../dist/modules/sweetalerts/sweetalert.css">
+  <link rel="stylesheet" href="../dist/modules/datatables/datatables.min.css">
+  <link rel="stylesheet" href="../dist/modules/waves/waves.css">
+  <link rel="stylesheet" href="../dist/modules/toastr/build/toastr.css">
+  <link rel="stylesheet" href="../dist/css/style.css">
+  <link rel="shortcut icon" href="../dist/img/tbLogo.png">
+</head>
+<body>
+  <div id="app">
+    <div class="main-wrapper">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="ion ion-navicon-round"></i></a></li>
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="ion ion-search"></i></a></li>
+          </ul>
+          <div class="search-element">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn" type="submit"><i class="ion ion-search"></i></button>
+          </div>
+        </form>
+        <ul class="navbar-nav navbar-right">
+          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="ion ion-ios-bell-outline"></i></a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right">
+              <div class="dropdown-header">Notifications
+                <div class="float-right">
+                  <a href="#">View All</a>
+                </div>
+              </div>
+              <div class="dropdown-list-content">
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                  <img alt="image" src="../dist/img/avatar/avatar-1.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>
+                    <div class="time">10 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                  <img alt="image" src="../dist/img/avatar/avatar-2.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Ujang Maman</b> has moved task <b>Fix bug footer</b> to <b>Progress</b>
+                    <div class="time">12 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <img alt="image" src="../dist/img/avatar/avatar-3.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Agung Ardiansyah</b> has moved task <b>Fix bug sidebar</b> to <b>Done</b>
+                    <div class="time">12 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <img alt="image" src="../dist/img/avatar/avatar-4.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Ardian Rahardiansyah</b> has moved task <b>Fix bug navbar</b> to <b>Done</b>
+                    <div class="time">16 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <img alt="image" src="../dist/img/avatar/avatar-5.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Alfa Zulkarnain</b> has moved task <b>Add logo</b> to <b>Done</b>
+                    <div class="time">Yesterday</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg">
+            <i class="ion ion-android-person d-lg-none"></i>
+            <div class="d-sm-none d-lg-inline-block">Hi, John Carlos Pagaduan</div></a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a href="profile.html" class="dropdown-item has-icon waves-effect">
+                <i class="ion ion-android-person"></i> Profile
+              </a>
+              <a href="#" class="dropdown-item has-icon waves-effect">
+                <i class="ion ion-log-out"></i> Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="main-sidebar">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a href="admin-dashboard.html">Administrator</a>
+          </div>
+          <div class="sidebar-user">
+            <div class="sidebar-user-picture">
+              <img alt="image" src="../dist/img/avatar/avatar-5.jpeg">
+            </div>
+            <div class="sidebar-user-details">
+              <div class="user-name">John Carlos Pagaduan</div>
+              <div class="user-role">
+                Administrator
+              </div>
+            </div>
+          </div>
+          <ul class="sidebar-menu">
+            <li class="menu-header">Dashboard</li>
+            <li>
+              <a class="waves-effect" href="admin-dashboard.html"><i class="ion ion-speedometer"></i><span>Dashboard</span></a>
+            </li>
+            <li class="menu-header">Main Navigation</li>
+            <li>
+              <a href="#" class="has-dropdown waves-effect"><i class="fas fa-cog"></i><span>Maintenance</span></a>
+              <ul class="menu-dropdown">
+                <li><a class="waves-effect" href="general.html"><i class="fas fa-life-ring"></i>Berth</a></li>
+                <li><a class="waves-effect" href="components.html"><i class="ion ion-ios-paper"></i> Contracts</a></li>
+                <li><a class="waves-effect" href="buttons.html"><i class="ion ion-person"></i> Employee</a></li>
+                <li><a class="waves-effect" href="toastr.html"><i class="fas fa-anchor"></i> Equipment</a></li>
+                <li><a class="waves-effect" href="general.html"><i class="fas fa-life-ring"></i> Pier</a></li>
+                <li><a class="waves-effect" href="position.html"><i class="fas fa-sitemap"></i>Position</a></li>
+                <li class="waves-effect"><a href="tugboat.html"><i class="ion ion-android-boat"></i> Tugboat</a></li>
+              </ul>
+            </li>
+            <li class="active">
+              <a href="#" class="has-dropdown waves-effect"><i class="fas fa-tasks"></i><span>Transactions</span></a>
+              <ul class="menu-dropdown">
+                <li><a href="#" class="has-dropdown waves-effect"><i class="ion ion-android-people"></i>Consignee</a>
+                  <ul class="menu-dropdown">
+                    <li><a class="waves-effect" href="#"><i class="ion ion-ios-paper"></i>Contracts</a></li>
+                    <li><a class="waves-effect" href="#"><i class="ion ion-document-text"></i>Requests</a></li>
+                  </ul>
+                </li>
+                <li class="active"><a class="waves-effect" href="dispatchTicket.html"><i class="fas fa-ticket-alt"></i>Dispatch Ticket</a></li>
+                <li><a href="#" class="has-dropdown waves-effect"><i class="ion ion-android-boat"></i>Dispatch &amp; Hauling</a>
+                  <ul class="menu-dropdown">
+                    <li><a class="waves-effect" href="dhJobOrder.html"><i class="ion ion-ios-list"></i>Job Order</a></li>
+                    <li><a class="waves-effect" href="dhScheduling.html"><i class="ion ion-ios-time"></i>Scheduling</a></li>
+                    <li><a class="waves-effect" href="teamBuilder.html"><i class="ion ion-ios-people"></i>Team Builder</a></li>
+                    <li><a class="waves-effect" href="tugboatAssignment.html"><i class="ion ion-android-boat"></i>Tugboat Assignment</a></li>
+                  </ul>
+                </li>
+                <li><a class="waves-effect" href="invoice.html"><i class="ion ion-ios-list"></i>Invoice</a></li>
+                <li><a class="waves-effect" href="jobOrder.html"><i class="ion ion-clipboard"></i>Job Order</a></li>
+                <li><a class="waves-effect" href="paymentBilling.html"><i class="ion ion-cash"></i>Payment &amp; Billing</a></li>
+                <li><a class="waves-effect" href="toastr.html"><i class="fas fa-calendar-alt"></i>Schedule</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="has-dropdown waves-effect"><i class="ion ion-stats-bars"></i><span>Reports</span></a>
+              <ul class="menu-dropdown">
+                <li><a href="general.html"><i class="fas fa-life-ring"></i>Berth</a></li>
+                <li><a href="components.html"><i class="ion ion-ios-paper"></i> Contracts</a></li>
+                <li><a href="buttons.html"><i class="ion ion-person"></i> Employee</a></li>
+                <li><a href="toastr.html"><i class="fas fa-anchor"></i> Equipment</a></li>
+                <li><a href="general.html"><i class="fas fa-life-ring"></i> Pier</a></li>
+                <li><a href="position.html"><i class="fas fa-sitemap"></i>Position</a></li>
+                <li><a href="toastr.html"><i class="ion ion-android-boat"></i> Tugboat</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="has-dropdown waves-effect"><i class="fas fa-wrench"></i><span>Utilities</span></a>
+              <ul class="menu-dropdown">
+                <li><a class="waves-effect" href="contract.html"><i class="ion ion-ios-paper"></i> Contracts</a></li>
+              </ul>
+            </li>         
+          </ul> 
+        </aside>
+      </div>
+      <div class="main-content">
+        <section class="section">
+          <h1 class="section-header">
+            <div>
+              Dispatch Ticket
+              <small class="smCat">Transactions</small>
+            </div>
+          </h1>
+          <!-- Table View -->
+          <div class="dispatchTicketTable zoomIn animated fast">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h4> Dispatch Ticket List</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="detailedTable text-center table table-striped" style="width:100%">
+                    <thead class="bg-primary">
+                      <tr>
+                        <th>Ticket #</th>
+                        <th>Tugboat Used</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Time Arrived</th>
+                        <th>Purpose of Service</th>
+                        <th class="noSortAction">Actions</th>
+                      </tr>
+                    </thead>
+                      <tbody>
+                        <tr>
+                          <td>72286</td>
+                          <td>Energy Sun</td>
+                          <td>Baseco Port Area</td>
+                          <td>Guadalupe, Makati City</td>
+                          <td>15:00 HRS</td>
+                          <td>Towed Barge Bulgy containing Oil and Kerosene</td>
+                          <td style="width:15%">
+                            <div class="ml-1 mr-1">
+                              <button class="btnView btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
+                                <i class="bigIcon ion ion-ios-eye"></i>
+                              </button>
+                              <button class="btn btn-sm btn-success waves-circle waves-effect" data-toggle="tooltip" title="Print" role="button">
+                                <i class="miniIcon fa fa-print"></i>
+                              </button>
+                            </div>  
+                          </td>
+                        </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- View Detaials -->
+          <div class="viewDetails">
+            <div class="card card-primary animated slideInDown fast">
+              <div class="card-header">
+                <a href="#" class="btnBack btn btn-lg btn-link float-left" data-toggle="tooltip"  title="Back" role="button">
+                  <i class="ion-chevron-left"></i>
+                </a>
+                <h4 class="float-right">Date: March 17, 2018</h4>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-12 col-sm-4 col-lg-4">
+                    <h5 class="mb-2">From</h5>
+                    <div class="mb-1 font-weight-bold">
+                      Tugmasters Bargepool INC.
+                    </div>
+                    <div class="mb-1">
+                      404 San Fernando St.
+                    </div>
+                    <div class="mb-1">
+                      Binondo, Manila
+                    </div>
+                    <div class="mb-1">
+                      Phone: (02) 710-59-80
+                    </div>
+                    <div class="mb-1">
+                      Email: tugmaster@email.com
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-4 col-lg-4">
+                    <h5 class="mb-2">To</h5>
+                    <div class="mb-1 font-weight-bold">
+                      Account of North Star
+                    </div>
+                    <div class="mb-1">
+                      795 Folsom Ave. Suite 600
+                    </div>
+                    <div class="mb-1">
+                      San Francisco, CA 91407
+                    </div>
+                    <div class="mb-1">
+                      Phone: (555) 539-1037
+                    </div>
+                    <div class="mb-1">
+                      Email: northstar@email.com
+                    </div>
+                  </div>
+                  <div class="col-12 col-sm-4 col-lg-4">
+                    <div class="mb-1 font-weight-bold">
+                      Ticket Number: #007612
+                    </div>
+                    <div class="mb-1">
+                      <strong>Towed:</strong> B/ Bulgy
+                    </div>
+                    <div class="mb-1">
+                      <strong>Date:</strong> 2/22/2014
+                    </div>
+                    <div class="mb-1">
+                      <strong>Account:</strong> 968-34567
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="table-responsive">
+                    <table class="text-center table table-striped border-primary" style="width:100%">
+                      <thead class="bg-primary">
+                        <tr>
+                          <th class="text-white">Ticket #</th>
+                          <th class="text-white">Tugboat Used</th>
+                          <th class="text-white">From</th>
+                          <th class="text-white">To</th>
+                          <th class="text-white">Time Arrived</th>
+                          <th class="text-white">Purpose of Service</th>
+                        </tr>
+                      </thead>
+                        <tbody>
+                          <tr>
+                            <td>72286</td>
+                            <td>Energy Sun</td>
+                            <td>Baseco Port Area</td>
+                            <td>Guadalupe, Makati City</td>
+                            <td>15:00 HRS</td>
+                            <td>Towed Barge Bulgy containing Oil and Kerosene</td>
+                          </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-12 col-sm-12 col-lg-6">
+                    <h5 class="text-center mb-2">Amount Due: <strong>June 3, 2018</strong></h5>
+                    <div class="table-responsive">
+                      <table class="table table-striped">
+                        <tr>
+                          <td class="font-weight-bold">Subtotal (PHP):</td>
+                          <td>13500.00</td>
+                        </tr>
+                        <tr>
+                          <td class="font-weight-bold">Total Days:</td>
+                          <td>2</td>
+                        </tr>
+                        <tr>
+                          <td class="font-weight-bold">Total (PHP):</td>
+                          <td>13500.00</td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                <div class="col-12 col-sm-12 col-lg-6">
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+    <script src="../dist/modules/jquery.min.js"></script>
+    <script src="../dist/modules/tooltip.js"></script>
+    <script src="../dist/modules/popper.js"></script>
+    <script src="../dist/modules/toastr/toastr.js"></script>
+    <script src="../dist/modules/datatables/datatables.min.js"></script>
+    <script src="../dist/modules/sweetalerts/sweetalert.min.js"></script>
+    <script src="../dist/modules/waves/waves.js"></script>
+    <script src="../dist/modules/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="../dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js"></script>
+    <script src="../dist/modules/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../dist/js/dispatchTicket.js"></script>
+    <script src="../dist/js/scripts.js"></script>
+    <script src="../dist/js/demo.js"></script>
+</body>
+</html>

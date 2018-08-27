@@ -1,0 +1,167 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+
+use App\Tugboat;
+use App\TugboatMainSpecifications;
+use App\TeamAssignment;
+use App\JobOrder;
+use App\JobSchedule;
+use App\Schedules;
+
+use Auth;
+use DB;
+
+class TugboatAssignmentController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $tugboat = DB::table('tbltugboat as tugboat')
+        ->join('tbltugboatmain as main','tugboat.intTugboatID','main.intTugboatMainID')
+        ->join('tbltugboatassign as assign','tugboat.intTugboatID','assign.intTATugboatID')
+        ->where('assign.boolDeleted',0)
+        ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
+        ->orderBy('assign.enumStatus','ASC')
+        ->get();
+        $available = DB::table('tbltugboat as tugboat')
+        ->join('tbltugboatmain as main','tugboat.intTugboatID','main.intTugboatMainID')
+        ->join('tbltugboatassign as assign','tugboat.intTugboatID','assign.intTATugboatID')
+        ->where('assign.boolDeleted',0)
+        ->where('assign.enumStatus','Available')
+        ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
+        ->get();
+        $scheduledjob = DB::table('tbljoborder as joborder')
+        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->where('enumStatus','Scheduled')
+        ->get();
+        $joborder = DB::table('tbljobsched as sched')
+        ->join('tbljoborder as joborder','sched.intJSJobOrderID','joborder.intJobOrderID')
+        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->where('sched.intJSTugboatAssignID', null)
+        ->get();
+        return view('TugboatAssignment.index',compact('tugboat','available','joborder','scheduledjob'));
+        // return response()->json([$joborder]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Request
+     */
+    public function create(Request $request)
+    {
+        $joborder = JobOrder::findOrFail($request->jobOrderID);
+        $scheduleID = Schedules::max('intScheduleID') + 1 ;
+        $schedID = $scheduleID;     
+        
+        $schedule = new Schedules;
+        $schedule->timestamps = false;
+        $schedule->intScheduleID = $schedID;
+        $schedule->strScheduleDesc = $joborder->strJODesc;
+        $schedule->dttmETA = $joborder->dtmETA;
+        $schedule->dttmETD = $joborder->dtmETD;
+        $schedule->save();
+        
+        for($count=0; $count < count($request->tugboatsID); $count++){
+            
+            $tugboatassign = TeamAssignment::findOrFail($request->tugboatsID[$count]);
+            $tugboatassign->timestamps = false;
+            $tugboatassign->enumStatus = 'Occupied';
+            $tugboatassign->save();
+            
+            $jobsched = new JobSchedule;
+            $jobsched->timestamps = false;
+            $jobsched->intJSSchedID = $schedID;
+            $jobsched->intJSJobOrderID = $joborder->intJobOrderID;
+            $jobsched->intJSTugboatAssignID = $request->tugboatsID[$count];
+            $jobsched->save();
+            // $jobsched->status = ;
+
+        }
+        // $jobschedule = new JobSchedule;
+        // $jobschedule->timestamps = false;
+        // $jobschedule->intJSJobOrderID = $joborder->intJobOrderID;
+        // $jobschedule->intJSSchedID = $schedID; 
+        // $jobschedule->save();   
+        // $jobschedule->intJSScheduleID = $scheduleID; 
+        return response()->json([$joborder]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+    public function available(Request $request)
+    {
+        $available = DB::table('tbltugboat as tugboat')
+        ->join('tbltugboatmain as main','tugboat.intTugboatID','main.intTugboatMainID')
+        ->join('tbltugboatassign as assign','tugboat.intTugboatID','assign.intTATugboatID')
+        ->where('assign.boolDeleted',0)
+        ->where('assign.enumStatus','Available')
+        ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
+        ->get();
+        
+        return response()->json(['available'=>$available]);
+    }
+}

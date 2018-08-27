@@ -1,0 +1,11 @@
+.pendingCards,.forwardedCards,.declinedCards{
+  display: none;
+}
+.addJobOrder{
+  display: none;
+}
+.modal-header h2, .modal-footer h3{
+  margin:0;
+}
+
+

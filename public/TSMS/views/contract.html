@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" name="viewport">
+  <title>TSMS &mdash; Admin</title>
+
+  <link rel="stylesheet" href="../dist/modules/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../dist/modules/ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
+  <link rel="stylesheet" href="../dist/modules/nice-select/nice-select.css">
+  <link rel="stylesheet" href="../dist/modules/summernote/summernote-lite.css">
+  <link rel="stylesheet" href="../dist/css/demo.css">
+  <link rel="stylesheet" href="../dist/css/cssAll.css">
+  <link rel="stylesheet" href="../dist/css/font.css">
+  <link rel="stylesheet" href="../dist/modules/sweetalerts/sweetalert.css">
+  <link rel="stylesheet" href="../dist/modules/waves/waves.css">
+  <link rel="stylesheet" href="../dist/css/style.css">
+  <link rel="shortcut icon" href="../dist/img/tbLogo.png">
+</head>
+<body>
+  <div id="app">
+    <div class="main-wrapper">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="ion ion-navicon-round"></i></a></li>
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="ion ion-search"></i></a></li>
+          </ul>
+          <div class="search-element">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn" type="submit"><i class="ion ion-search"></i></button>
+          </div>
+        </form>
+        <ul class="navbar-nav navbar-right">
+          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="ion ion-ios-bell-outline"></i></a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right">
+              <div class="dropdown-header">Notifications
+                <div class="float-right">
+                  <a href="#">View All</a>
+                </div>
+              </div>
+              <div class="dropdown-list-content">
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                  <img alt="image" src="../dist/img/avatar/avatar-1.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>
+                    <div class="time">10 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                  <img alt="image" src="../dist/img/avatar/avatar-2.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Ujang Maman</b> has moved task <b>Fix bug footer</b> to <b>Progress</b>
+                    <div class="time">12 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <img alt="image" src="../dist/img/avatar/avatar-3.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Agung Ardiansyah</b> has moved task <b>Fix bug sidebar</b> to <b>Done</b>
+                    <div class="time">12 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <img alt="image" src="../dist/img/avatar/avatar-4.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Ardian Rahardiansyah</b> has moved task <b>Fix bug navbar</b> to <b>Done</b>
+                    <div class="time">16 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <img alt="image" src="../dist/img/avatar/avatar-5.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Alfa Zulkarnain</b> has moved task <b>Add logo</b> to <b>Done</b>
+                    <div class="time">Yesterday</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg">
+            <i class="ion ion-android-person d-lg-none"></i>
+            <div class="d-sm-none d-lg-inline-block">Hi, John Carlos Pagaduan</div></a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a href="profile.html" class="dropdown-item has-icon">
+                <i class="ion ion-android-person"></i> Profile
+              </a>
+              <a href="#" class="dropdown-item has-icon">
+                <i class="ion ion-log-out"></i> Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="main-sidebar">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a href="admin-dashboard.html">Administrator</a>
+          </div>
+          <div class="sidebar-user">
+            <div class="sidebar-user-picture">
+              <img alt="image" src="../dist/img/avatar/avatar-5.jpeg">
+            </div>
+            <div class="sidebar-user-details">
+              <div class="user-name">John Carlos Pagaduan</div>
+              <div class="user-role">
+                Administrator
+              </div>
+            </div>
+          </div>
+          <ul class="sidebar-menu">
+            <li class="menu-header">Dashboard</li>
+            <li class="active">
+              <a class="waves-effect" href="admin-dashboard.html"><i class="ion ion-speedometer"></i><span>Dashboard</span></a>
+            </li>
+            <li class="menu-header">Main Navigation</li>
+            <li>
+              <a href="#" class="has-dropdown waves-effect"><i class="fas fa-cog"></i><span>Maintenance</span></a>
+              <ul class="menu-dropdown">
+                <li><a class="waves-effect" href="general.html"><i class="fas fa-life-ring"></i>Berth</a></li>
+                <li><a class="waves-effect" href="components.html"><i class="ion ion-ios-paper"></i> Contracts</a></li>
+                <li><a class="waves-effect" href="buttons.html"><i class="ion ion-person"></i> Employee</a></li>
+                <li><a class="waves-effect" href="toastr.html"><i class="fas fa-anchor"></i> Equipment</a></li>
+                <li><a class="waves-effect" href="general.html"><i class="fas fa-life-ring"></i> Pier</a></li>
+                <li><a class="waves-effect" href="position.html"><i class="fas fa-sitemap"></i>Position</a></li>
+                <li class="waves-effect"><a href="tugboat.html"><i class="ion ion-android-boat"></i> Tugboat</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="has-dropdown waves-effect"><i class="fas fa-tasks"></i><span>Transactions</span></a>
+              <ul class="menu-dropdown">
+                <li><a href="#" class="has-dropdown waves-effect"><i class="ion ion-android-people"></i>Consignee</a>
+                  <ul class="menu-dropdown">
+                    <li><a class="waves-effect" href="#"><i class="ion ion-ios-paper"></i>Contracts</a></li>
+                    <li><a class="waves-effect" href="#"><i class="ion ion-document-text"></i>Requests</a></li>
+                  </ul>
+                </li>
+                <li><a class="waves-effect" href="general.html"><i class="fas fa-ticket-alt"></i>Dispatch Ticket</a></li>
+                <li><a class="waves-effect" href="dispatchHauling.html"><i class="ion ion-android-boat"></i>Dispatch &amp; Hauling</a></li>
+                <li><a class="waves-effect" href="buttons.html"><i class="ion ion-ios-list"></i>Invoice</a></li>
+                <li><a class="waves-effect" href="toastr.html"><i class="ion ion-clipboard"></i>Job Order</a></li>
+                <li><a class="waves-effect" href="buttons.html"><i class="ion ion-cash"></i>Payment &amp; Billing</a></li>
+                <li><a class="waves-effect" href="toastr.html"><i class="fas fa-calendar-alt"></i>Schedule</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="has-dropdown waves-effect"><i class="ion ion-stats-bars"></i><span>Reports</span></a>
+              <ul class="menu-dropdown">
+                <li><a href="general.html"><i class="fas fa-life-ring"></i>Berth</a></li>
+                <li><a href="components.html"><i class="ion ion-ios-paper"></i> Contracts</a></li>
+                <li><a href="buttons.html"><i class="ion ion-person"></i> Employee</a></li>
+                <li><a href="toastr.html"><i class="fas fa-anchor"></i> Equipment</a></li>
+                <li><a href="general.html"><i class="fas fa-life-ring"></i> Pier</a></li>
+                <li><a href="position.html"><i class="fas fa-sitemap"></i>Position</a></li>
+                <li><a href="toastr.html"><i class="ion ion-android-boat"></i> Tugboat</a></li>
+              </ul>
+            </li>
+            <li class="active">
+              <a href="#" class="has-dropdown waves-effect"><i class="fas fa-wrench"></i><span>Utilities</span></a>
+              <ul class="menu-dropdown">
+                <li class="active"><a class="waves-effect" href="contract.html"><i class="ion ion-ios-paper"></i> Contracts</a></li>
+                <li><a class="waves-effect" href="quotations.html"><i class="ion ion-arrow-graph-up-right"></i>Quotations</a></li>
+              </ul>
+            </li>
+            <li class="menu-header">OTHERS(will be removed)</li>
+            <li>
+              <a href="#" class="has-dropdown"><i class="ion ion-flag"></i><span>Icons</span></a>
+              <ul class="menu-dropdown">
+                <li><a class="waves-effect" href="ion-icons.html"><i class="ion ion-ios-circle-outline"></i> Ion Icons</a></li>
+                <li><a class="waves-effect" href="fontawesome.html"><i class="ion ion-ios-circle-outline"></i> Font Awesome</a></li>
+                <li><a class="waves-effect" href="flag.html"><i class="ion ion-ios-circle-outline"></i> Flag</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="table.html"><i class="ion ion-clipboard"></i><span>Tables</span></a>
+            </li>
+            <li>
+              <a href="chartjs.html"><i class="ion ion-stats-bars"></i><span>Chart.js</span></a>
+            </li>
+            <li>
+              <a href="simple.html"><i class="ion ion-ios-location-outline"></i><span>Google Maps</span></a>
+            </li>
+            <li>
+              <a href="#" class="has-dropdown"><i class="ion ion-ios-copy-outline"></i><span>Examples</span></a>
+              <ul class="menu-dropdown">
+                <li><a href="login.html"><i class="ion ion-ios-circle-outline"></i> Login</a></li>
+                <li><a href="register.html"><i class="ion ion-ios-circle-outline"></i> Register</a></li>
+                <li><a href="forgot.html"><i class="ion ion-ios-circle-outline"></i> Forgot Password</a></li>
+                <li><a href="reset.html"><i class="ion ion-ios-circle-outline"></i> Reset Password</a></li>
+                <li><a href="404.html"><i class="ion ion-ios-circle-outline"></i> 404</a></li>
+              </ul>
+            </li>
+
+            <li class="menu-header">More</li>
+            <li>
+              <a href="#" class="has-dropdown"><i class="ion ion-ios-nutrition"></i> Click Me</a>
+              <ul class="menu-dropdown">
+                <li><a href="#"><i class="ion ion-ios-circle-outline"></i> Menu 1</a></li>
+                <li><a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Menu 2</a>
+                  <ul class="menu-dropdown">
+                    <li><a href="#"><i class="ion ion-ios-circle-outline"></i> Child Menu 1</a></li>
+                    <li><a href="#"><i class="ion ion-ios-circle-outline"></i> Child Menu 2</a></li>
+                    <li><a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i> Child Menu 3</a>
+                      <ul class="menu-dropdown">
+                        <li><a href="#"><i class="ion ion-ios-circle-outline"></i> Child Menu 1</a></li>
+                        <li><a href="#"><i class="ion ion-ios-circle-outline"></i> Child Menu 2</a></li>
+                        <li><a href="#"><i class="ion ion-ios-circle-outline"></i> Child Menu 3</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#"><i class="ion ion-ios-circle-outline"></i> Child Menu 4</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#"><i class="ion ion-heart"></i> Badges <div class="badge badge-primary">10</div></a>
+            </li>
+            <li>
+              <a href="credits.html"><i class="ion ion-ios-information-outline"></i> Credits</a>
+            </li>          
+          </ul>
+        </aside>
+      </div>
+      <div class="main-content">
+        <section class="section">
+          <h1 class="section-header">
+            <div>
+              Contracts
+            </div>
+          </h1>
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="card">
+                <section class="sectionDark">
+                  <div class="container">
+                    <h5 class="section-header text-center" style="text-transform: uppercase;">
+                      Create
+                    </h5>
+                  </div>
+                  <div class="row ml-1 mr-1">
+                    <div class="col">
+                      <form class="needs-validation" novalidate="">
+                        <div class="card">
+                          <div class="card-body">
+                            <div class="form-group">
+                              <label for="addContractTitle">Title<sup class="text-primary">&#10033;</sup></label>
+                              <input type="text" name="addContractTitle" class="form-control" required>
+                              <div class="invalid-feedback">
+                                Please fill in the title.
+                              </div>
+                            </div>
+                            <div class="row mb-3">
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>Terms &amp; Conditions<sup class="text-primary">&#10033;</sup></label>
+                                  <div>
+                                    <select class="wide">
+                                      <option value="1">Terms &amp; Condition 1</option>
+                                      <option value="2">Terms &amp; Condition 2</option>
+                                      <option value="3">Terms &amp; Condition 3</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col">
+                                <div class="form-group">
+                                  <label>Quotations<sup class="text-primary">&#10033;</sup></label>
+                                  <div>
+                                    <select class="wide">
+                                      <option value="1">20% Discount</option>
+                                      <option value="2">Quotation 2</option>
+                                      <option value="3">Discount 2</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <label>Content<sup class="text-primary">&#10033;</sup></label>
+                              <textarea class="summernoteContract"></textarea>
+                            </div>
+                          </div>
+                          <div class="card-footer">
+                            <button class="float-right btn btn-primary waves-effect">Save</button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card">
+                <section class="sectionDark">
+                  <div class="container">
+                    <h5 class="section-header text-center" style="text-transform: uppercase;">
+                      Contract List  
+                    </h5>
+                  </div>
+                  <div class="container">
+                    <div class="card text-center">
+                      <div class="card-header bg-primary text-white">
+                        <h4>Contract 2</h4>
+                      </div>
+                      <div class="card-body">
+                        <a href="#" class="float-left mt-2" data-toggle="modal" data-target="#viewContractInfo">
+                          More Info <i class="ion ion-ios-arrow-right"></i>
+                        </a>
+                        <button type="button" class="delItem btn btn-sm btn-danger waves-effect waves-circle float-right" data-toggle="tooltip" title="Delete">
+                          <i class="miniIcon fas fa-trash"></i>
+                        </button> 
+                        <button type="button" class="btn btn-sm btn-secondary waves-effect waves-circle float-right mr-2" data-tooltip="tooltip" title="Edit" data-toggle="modal" data-target="#editContractInfo">
+                            <i class="miniIcon ion ion-edit"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+   <!-- View Contract Info Modal -->
+   <div class="modal fade" id="viewContractInfo" tabindex="-1" role="dialog" aria-labelledby="viewContractInfoTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewContractInfoTitle">Contract 2</h5>
+          <button type="button" class="close modalClose waves-effect" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body modalBody">
+            <h1>Terms and Conditions</h1>
+            <p>Last updated: July 19, 2018</p>
+            <p>Please read these Terms and Conditions ("Terms", "Terms and Conditions")
+               carefully before using the tsms.com website (the "Service")
+                operated by Tugboat Services Management System ("us", "we", or "our").</p>
+            <p>Your access to and use of the Service is conditioned on your acceptance of 
+              and compliance with these Terms. These Terms apply to all visitors, users and 
+              others who access or use the Service.</p>
+            <p>By accessing or using the Service you agree to be bound by these Terms. 
+              If you disagree with any part of the terms then you may not access the Service. 
+              This Terms and Conditions agreement  for Tugboat Services Management System is 
+              <a href="https://termsfeed.com/terms-conditions/generator/">generated by TermsFeed</a>.
+            <h2>Accounts</h2>
+            <p>When you create an account with us, you must provide us information that is 
+              accurate, complete, and current at all times. Failure to do so constitutes a breach of the
+               Terms, which may result in immediate termination of your account on our Service.</p>
+            
+            <p>You are responsible for safeguarding the password that you use to access the Service 
+              and for any activities or actions under your password, whether your password is with our 
+              Service or a third-party service.</p>
+            <p>You agree not to disclose your password to any third party. 
+              You must notify us immediately upon becoming aware of any breach of security or 
+              unauthorized use of your account.</p>
+            <h2>Links To Other Web Sites</h2>
+            
+            <p>Our Service may contain links to third-party web sites or services that are
+               not owned or controlled by Tugboat Services Management System.</p>
+            
+            <p>Tugboat Services Management System has no control over, and assumes no 
+              responsibility for, the content, privacy policies, or practices of any third party 
+              web sites or services. You further acknowledge and agree that 
+              Tugboat Services Management System shall not be responsible or liable, directly or indirectly,
+              for any damage or loss caused or alleged to be caused by or in connection with use of or 
+              reliance on any such content, goods or services available on or through any such web 
+              sites or services.</p>
+            <p>We strongly advise you to read the terms and conditions and privacy policies of any third-party 
+              web sites or services that you visit.</p>
+            <h2>Termination</h2>
+            
+            <p>We may terminate or suspend access to our Service immediately, without prior notice or liability,
+               for any reason whatsoever, including without limitation if you breach the Terms.</p>
+            
+            <p>All provisions of the Terms which by their nature should survive termination shall survive 
+              termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity 
+              and limitations of liability.</p>
+            
+            <p>We may terminate or suspend your account immediately, without prior notice or liability, 
+              for any reason whatsoever, including without limitation if you breach the Terms.</p>
+            
+            <p>Upon termination, your right to use the Service will immediately cease. If you wish to terminate 
+              your account, you may simply discontinue using the Service.</p>
+            
+            <p>All provisions of the Terms which by their nature should survive termination shall survive 
+              termination, including, without limitation, ownership provisions, warranty disclaimers,
+               indemnity and limitations of liability.</p>
+            
+            <h2>Changes</h2>
+            
+            <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. 
+              If a revision is material we will try to provide at least 30 days notice prior to any new terms 
+              taking effect. What constitutes a material change will be determined at our sole discretion.</p>
+            
+            <p>By continuing to access or use our Service after those revisions become effective, 
+              you agree to be bound by the revised terms. If you do not agree to the new terms,
+              please stop using the Service.</p>
+            <h2>Contact Us</h2>
+            <p>If you have any questions about these Terms, please contact us.</p>                                
+        </div>
+        <div class="modal-footer">
+          <button id="modalEdit" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#editContractInfo">Edit Contract</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Edit Contract Info Modal -->
+  <div class="modal fade" id="editContractInfo" tabindex="-1" role="dialog" aria-labelledby="editContractInfoTitle" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editContractInfoTitle">Contract 2<small class="smCat2">Edit Contract</small></h5>
+          <button type="button" class="close modalClose waves-effect" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body modalBody">
+          <div class="form-group">
+            <label for="editContractTitle">Title<sup class="text-primary">&#10033;</sup></label>
+            <input type="text" name="editContractTitle" class="form-control" required>
+            <div class="invalid-feedback">
+              Please fill in the title.
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <div class="form-group">
+                <label>Terms &amp; Conditions<sup class="text-primary">&#10033;</sup></label>
+                <div>
+                  <select class="wide">
+                    <option value="1">Terms &amp; Condition 1</option>
+                    <option value="2">Terms &amp; Condition 2</option>
+                    <option value="3">Terms &amp; Condition 3</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label>Quotations<sup class="text-primary">&#10033;</sup></label>
+                <div>
+                  <select class="wide">
+                    <option value="1">20% Discount</option>
+                    <option value="2">Quotation 2</option>
+                    <option value="3">Discount 2</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Content<sup class="text-primary">&#10033;</sup></label>
+            <textarea class="summernoteContract"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="editSave" class="btn btn-primary waves-effect">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../dist/modules/jquery.min.js"></script>
+  <script src="../dist/modules/tooltip.js"></script>
+  <script src="../dist/modules/popper.js"></script>
+  <script src="../dist/modules/summernote/summernote-lite.js"></script>
+  <script src="../dist/js/contract.js"></script>
+  <script src="../dist/modules/sweetalerts/sweetalert.min.js"></script>
+  <script src="../dist/modules/nice-select/jquery.nice-select.min.js"></script>
+  <script src="../dist/modules/waves/waves.js"></script>
+  <script src="../dist/modules/bootstrap/js/bootstrap.min.js"></script>
+  <script src="../dist/modules/nicescroll/jquery.nicescroll.min.js"></script>
+  <script src="../dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js"></script>
+  <script src="../dist/js/scripts.js"></script>
+  <script src="../dist/js/demo.js"></script>
+</body>
+</html>

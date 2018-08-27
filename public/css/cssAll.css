@@ -1,0 +1,31 @@
+html,body{
+    font-family: 'Montserrat', sans-serif;
+}
+.custSize{
+    font-size: 20px;
+}
+.smCat{
+    font-size: 15px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+input[type=date]::-webkit-inner-spin-button, 
+input[type=date]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.miniIcon{
+    font-size:15px;
+}
+#footerLogo{
+    height:100px; 
+    width:auto;
+    position: relative;
+    right:5px;
+}
+.googleIcon{
+    margin-top: 12px;
+}

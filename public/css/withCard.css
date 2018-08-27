@@ -1,0 +1,47 @@
+.detLayout{
+  display:none;
+}
+.editLayout{
+  display:none;
+}
+.addLayout{
+  display:none;
+}
+/* Important part */
+.modal-dialog{
+  overflow-y: initial !important
+}
+.modalBody{
+  height: 450px;
+  overflow-y: auto;
+}
+.modal {
+  max-width: 100%;
+}
+#EditsecPic, #EditfirstPic, #EditthirdPic,#AddsecPic, #AddfirstPic, #AddthirdPic{
+  cursor:pointer;
+}
+.addCard{
+  margin-top:3px;
+  width:15rem;
+  height:20.25rem;
+  outline: dashed;
+  background-color: rgba(245, 245, 245, 0.4);
+  font-size: 750%;
+}
+.addCardIcon{
+  position: absolute;
+  top: 25%;
+  right:32%;
+}
+.tabEdit{
+  font-size: 17px;
+}
+.nCustom {
+  width: 145px !important;
+  height:40px;
+  margin-bottom:6px;
+}
+.cTitle{
+  margin-top:-15px;
+}

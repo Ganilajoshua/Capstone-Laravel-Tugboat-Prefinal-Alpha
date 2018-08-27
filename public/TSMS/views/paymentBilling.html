@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" name="viewport">
+  <title>TSMS &mdash; Admin</title>
+
+  <link rel="stylesheet" href="../dist/modules/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../dist/modules/ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
+  <link rel="stylesheet" href="../dist/css/demo.css">
+  <link rel="stylesheet" href="../dist/css/cssAll.css">
+  <link rel="stylesheet" href="../dist/css/font.css">
+  <link rel="stylesheet" href="../dist/css/animate.min.css">
+  <link rel="stylesheet" href="../dist/modules/sweetalerts/sweetalert.css">
+  <link rel="stylesheet" href="../dist/modules/datatables/datatables.min.css">
+  <link rel="stylesheet" href="../dist/modules/waves/waves.css">
+  <link rel="stylesheet" href="../dist/modules/toastr/build/toastr.css">
+  <link rel="stylesheet" href="../dist/css/style.css">
+  <link rel="shortcut icon" href="../dist/img/tbLogo.png">
+</head>
+<body>
+  <div id="app">
+    <div class="main-wrapper">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="ion ion-navicon-round"></i></a></li>
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="ion ion-search"></i></a></li>
+          </ul>
+          <div class="search-element">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn" type="submit"><i class="ion ion-search"></i></button>
+          </div>
+        </form>
+        <ul class="navbar-nav navbar-right">
+          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="ion ion-ios-bell-outline"></i></a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right">
+              <div class="dropdown-header">Notifications
+                <div class="float-right">
+                  <a href="#">View All</a>
+                </div>
+              </div>
+              <div class="dropdown-list-content">
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                  <img alt="image" src="../dist/img/avatar/avatar-1.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>
+                    <div class="time">10 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                  <img alt="image" src="../dist/img/avatar/avatar-2.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Ujang Maman</b> has moved task <b>Fix bug footer</b> to <b>Progress</b>
+                    <div class="time">12 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <img alt="image" src="../dist/img/avatar/avatar-3.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Agung Ardiansyah</b> has moved task <b>Fix bug sidebar</b> to <b>Done</b>
+                    <div class="time">12 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <img alt="image" src="../dist/img/avatar/avatar-4.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Ardian Rahardiansyah</b> has moved task <b>Fix bug navbar</b> to <b>Done</b>
+                    <div class="time">16 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <img alt="image" src="../dist/img/avatar/avatar-5.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Alfa Zulkarnain</b> has moved task <b>Add logo</b> to <b>Done</b>
+                    <div class="time">Yesterday</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg">
+            <i class="ion ion-android-person d-lg-none"></i>
+            <div class="d-sm-none d-lg-inline-block">Hi, John Carlos Pagaduan</div></a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a href="profile.html" class="dropdown-item has-icon waves-effect">
+                <i class="ion ion-android-person"></i> Profile
+              </a>
+              <a href="#" class="dropdown-item has-icon waves-effect">
+                <i class="ion ion-log-out"></i> Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="main-sidebar">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a href="admin-dashboard.html">Administrator</a>
+          </div>
+          <div class="sidebar-user">
+            <div class="sidebar-user-picture">
+              <img alt="image" src="../dist/img/avatar/avatar-5.jpeg">
+            </div>
+            <div class="sidebar-user-details">
+              <div class="user-name">John Carlos Pagaduan</div>
+              <div class="user-role">
+                Administrator
+              </div>
+            </div>
+          </div>
+          <ul class="sidebar-menu">
+            <li class="menu-header">Dashboard</li>
+            <li>
+              <a class="waves-effect" href="admin-dashboard.html"><i class="ion ion-speedometer"></i><span>Dashboard</span></a>
+            </li>
+            <li class="menu-header">Main Navigation</li>
+            <li>
+              <a href="#" class="has-dropdown waves-effect"><i class="fas fa-cog"></i><span>Maintenance</span></a>
+              <ul class="menu-dropdown">
+                <li><a class="waves-effect" href="#"><i class="fas fa-life-ring"></i>Berth</a></li>
+                <li><a class="waves-effect" href="#"><i class="ion ion-ios-paper"></i> Contracts</a></li>
+                <li><a class="waves-effect" href="#"><i class="ion-person-add ml-1"></i> Employee</a></li>
+                <li><a class="waves-effect" href="#"><i class="fas fa-anchor"></i> Equipment</a></li>
+                <li><a class="waves-effect" href="#"><i class="fas fa-life-ring"></i> Pier</a></li>
+                <li><a class="waves-effect" href="position.html"><i class="fas fa-sitemap"></i>Position</a></li>
+                <li class="waves-effect"><a href="tugboat.html"><i class="ion ion-android-boat"></i> Tugboat</a></li>
+              </ul>
+            </li>
+            <li class="active">
+              <a href="#" class="has-dropdown waves-effect"><i class="fas fa-tasks"></i><span>Transactions</span></a>
+              <ul class="menu-dropdown">
+                <li><a href="#" class="has-dropdown waves-effect"><i class="ion ion-person"></i>Consignee</a>
+                  <ul class="menu-dropdown">
+                    <li><a class="waves-effect" href="#"><i class="ion ion-ios-paper"></i>Contracts</a></li>
+                    <li><a class="waves-effect" href="#"><i class="ion ion-document-text"></i>Requests</a></li>
+                  </ul>
+                </li>
+                <li><a class="waves-effect" href="dispatchTicket.html"><i class="fas fa-ticket-alt"></i>Dispatch Ticket</a></li>
+                <li><a href="#" class="has-dropdown waves-effect"><i class="ion ion-android-boat"></i>Dispatch &amp; Hauling</a>
+                  <ul class="menu-dropdown">
+                    <li><a class="waves-effect" href="dhJobOrder.html"><i class="ion ion-ios-list"></i>Job Order</a></li>
+                    <li><a class="waves-effect" href="dhScheduling.html"><i class="ion ion-ios-time"></i>Scheduling</a></li>
+                    <li><a class="waves-effect" href="teamBuilder.html"><i class="ion ion-ios-people"></i>Team Builder</a></li>
+                    <li><a class="waves-effect" href="tugboatAssignment.html"><i class="ion ion-android-boat"></i>Tugboat Assignment</a></li>
+                  </ul>
+                </li>
+                <li><a class="waves-effect" href="invoice.html"><i class="ion ion-ios-list"></i>Invoice</a></li>
+                <li><a class="waves-effect" href="jobOrder.html"><i class="ion ion-clipboard"></i>Job Order</a></li>
+                <li class="active"><a class="waves-effect" href="paymentBilling.html"><i class="ion ion-cash"></i>Payment &amp; Billing</a></li>
+                <li><a class="waves-effect" href="#"><i class="fas fa-calendar-alt"></i>Schedule</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="has-dropdown waves-effect"><i class="ion ion-stats-bars"></i><span>Reports</span></a>
+              <ul class="menu-dropdown">
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="has-dropdown waves-effect"><i class="fas fa-wrench"></i><span>Utilities</span></a>
+              <ul class="menu-dropdown">
+                <li><a class="waves-effect" href="contract.html"><i class="ion ion-ios-paper"></i> Contracts</a></li>
+                <li><a class="waves-effect" href="teamComposition.html"><i class="ion ion-android-people"></i>Team Composition</a></li>
+              </ul>
+            </li>         
+          </ul> 
+        </aside>
+      </div>
+      <div class="main-content">
+        <section class="section">
+          <h1 class="section-header">
+            <div>
+              Payment &amp; Billing
+              <small class="smCat">Transactions</small>
+            </div>
+          </h1>
+          <!-- Table View -->
+          <div class="zoomIn animated fast">
+            <div class="card card-primary">
+              <div class="card-header">
+                <h4 class="text-center">Payment List</h4>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="detailedTable text-center table table-striped" style="width:100%">
+                    <thead class="bg-primary">
+                      <tr>
+                        <th>#</th>
+                        <th>Consignee</th>
+                        <th>Payment Status</th>
+                        <th class="noSortAction">Actions</th>
+                      </tr>
+                    </thead>
+                      <tbody>
+                        <tr>
+                          <td>0001</td>
+                          <td><a href="#" class="gotoInvoices font-weight-bold">Eyenet Training Center</a></td>
+                          <td>
+                            <div class="badge badge-success">Paid</div>
+                          </td>
+                          <td style="width:15%">
+                            <div class="ml-1 mr-1">
+                              <button class="gotoInvoices btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
+                                <i class="bigIcon ion ion-ios-eye"></i>
+                              </button>
+                            </div>  
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>0002</td>
+                          <td><a href="#" class="gotoInvoices font-weight-bold">Sampaguita Canteen</a></td>
+                          <td>
+                              <div class="badge badge-danger">Not Yet Paid</div>
+                          </td>
+                          <td style="width:15%">
+                            <div class="ml-1 mr-1">
+                              <button class="gotoInvoices btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
+                                <i class="bigIcon ion ion-ios-eye"></i>
+                              </button>
+                            </div>  
+                          </td>
+                        </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+    <script src="../dist/modules/jquery.min.js"></script>
+    <script src="../dist/modules/tooltip.js"></script>
+    <script src="../dist/modules/popper.js"></script>
+    <script src="../dist/modules/toastr/toastr.js"></script>
+    <script src="../dist/modules/datatables/datatables.min.js"></script>
+    <script src="../dist/modules/sweetalerts/sweetalert.min.js"></script>
+    <script src="../dist/modules/waves/waves.js"></script>
+    <script src="../dist/modules/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="../dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js"></script>
+    <script src="../dist/modules/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../dist/js/paymentBilling.js"></script>
+    <script src="../dist/js/scripts.js"></script>
+    <script src="../dist/js/demo.js"></script>
+</body>
+</html>

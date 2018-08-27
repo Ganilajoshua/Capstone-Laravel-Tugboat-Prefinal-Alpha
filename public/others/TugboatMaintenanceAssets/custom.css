@@ -1,0 +1,113 @@
+
+.bCustom {
+    color: white;
+    position: relative;
+    top:-2px;
+}
+.custSize{
+    font-size: 20px;
+}
+.nCustom {
+    width: 145px !important;
+    height:38px;
+    margin-bottom:6px;
+}
+#ctitle{
+    margin-top:-15px;
+}
+.bCustom:hover {
+    color: white;   
+}
+.optCustom{
+    width: 70.33px !important;
+    height:38px;
+}
+.iconcenter{
+    margin-top:2px;
+    margin-left:3px;
+}
+.smPos{
+    position:relative;
+    left:-16px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+input[type=date]::-webkit-inner-spin-button, 
+input[type=date]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+/* Important part */
+.modal-dialog{
+    overflow-y: initial !important
+}
+#infoModalBody{
+    height: 450px;
+    overflow-y: auto;
+}
+.modal {
+    max-width: 100%;
+    
+}
+.verticalLine {
+    border-left-style: solid;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-left-width: thin;
+}
+#AddmInfo{
+    display:block;
+}
+#AddtugSpec{
+    display:none;
+}
+#AddtugClass{
+    display:none;
+}
+#AddcSummary{
+    display:none;
+}
+.stickBtn{
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index:1;
+}
+.addSize{
+    font-size: 25px;
+}
+.addSize:hover{
+    color:white;
+    background-color:black;
+    border-color:black;
+}
+.bRadius{
+    border-radius: 0%;
+}
+#detLayout{
+    display:none;
+}
+#cardLayout{
+    display:block;
+}
+html,body{
+    font-family: 'Muli', sans-serif;
+}
+ #EditsecPic, #EditfirstPic, #EditthirdPic,#AddsecPic, #AddfirstPic, #AddthirdPic{
+    cursor:pointer;
+}
+.szBtnGroup{
+    height:50px;
+    width:325px;
+    font-size:20px;
+}
+.cHeader{
+    font-size:17px;
+}
+.cHeader:hover{
+    color:gray;
+    border-left: 5px gray solid;
+}

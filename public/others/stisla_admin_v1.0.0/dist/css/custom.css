@@ -1,0 +1,166 @@
+html,body{
+    font-family: 'Montserrat', sans-serif;
+}
+#tugboatcardName
+{
+    font-size: 50px;
+}
+.custSize{
+    font-size: 20px;
+}
+.nCustom {
+    width: 145px !important;
+    height:40px;
+    margin-bottom:6px;
+}
+#ctitle{
+    margin-top:-15px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 18px;
+    
+    overflow: hidden;
+}
+.optCustom{
+    width: 72px !important;
+    height: 42px;
+}
+.iconcenter{
+    margin-top:2px;
+    margin-left:3px;
+}
+.smPos{
+    position:relative;
+    left:-16px;
+}
+.smCat{
+    font-size: 15px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+input[type=date]::-webkit-inner-spin-button, 
+input[type=date]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+/* Important part */
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modalBody{
+    height: 450px;
+    overflow-y: auto;
+}
+.modal {
+    max-width: 100%;
+    
+}
+.verticalLine {
+    border-left-style: solid;
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-left-width: thin;
+}
+#AddmInfo{
+    display:block;
+}
+#AddtugSpec{
+    display:none;
+}
+#AddtugClass{
+    display:none;
+}
+#AddcSummary{
+    display:none;
+}
+.stickBtn{
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index:1;
+}
+.addSize{
+    font-size: 25px;
+}
+.addSize:hover{
+    color:white;
+    background-color:black;
+    border-color:black;
+}
+.bRadius{
+    border-radius: 0%;
+}
+#detLayout{
+    display:none;
+}
+#editLayout{
+    display:none;
+}
+#addLayout{
+    display: none;
+    display: hidden;
+}
+ #EditsecPic, #EditfirstPic, #EditthirdPic,#AddsecPic, #AddfirstPic, #AddthirdPic{
+    cursor:pointer;
+}
+.szBtnGroup{
+    height:50px;
+    width:325px;
+    font-size:20px;
+}
+.cHeader{
+    font-size:17px;
+}
+.cHeader:hover{
+    color:gray;
+    border-left: 5px gray solid;
+}
+.sortSelect{
+    margin-bottom: 6px;
+}
+.tabEdit{
+    font-size: 17px;
+}
+#editFirstPic, #editSecPic, #editThirdPic{
+   cursor: pointer;
+}
+#addCard{
+    margin-top:3px;
+    width:15rem;
+    height:20.25rem;
+    outline: dashed;
+    background-color: rgba(245, 245, 245, 0.4);
+    font-size: 750%;
+}
+#addCardIcon{
+    position: absolute;
+    top: 25%;
+    right:32%;
+}
+#searchButton
+{
+    margin-left: 0px;
+    padding-left: 0px;
+    padding-right: 5px;
+}
+#searchForm{
+    padding-top: 4px;   
+    margin-bottom: 0px;
+    padding-bottom: 3px;
+}
+#searchIcon
+{
+    margin-left: 0px;
+    margin-right: 3px;
+}
+.largeIcon
+{
+    padding-top: 2px;
+    font-size: 19px;
+    margin: 0px auto;
+    margin-left: 0px;
+    padding-bottom: 0px;
+}

@@ -1,0 +1,128 @@
+html,body{
+    font-family: 'Montserrat', sans-serif;
+}
+.sweet-alert h2{
+  margin-top:30px;
+}
+.sectionDark{
+  background-color: #ebebeb !important;
+}
+.smCat{
+  font-size: 15px;
+}
+.widthBtn{
+  width:70px;
+}
+.widthBtn i{
+  font-size:20px;
+  margin-top: 2px;
+}
+a:link{
+  text-decoration: none;
+}
+.smCat2{
+  font-size: 10px;
+  margin-left:5px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+input[type=date]::-webkit-inner-spin-button, 
+input[type=date]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+li:hover{
+  cursor: default;
+}
+.toast {
+  opacity: 1 !important;
+}
+.miniIcon{
+  font-size:15px;
+}
+.bigIcon{
+  font-size:20px;
+}
+#footerLogo{
+    height:100px; 
+    width:auto;
+    position: relative;
+    right:5px;
+}
+/* Important part */
+.modal-dialog{
+  overflow-y: initial !important;
+}
+.modalBody{
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
+.modal {
+  max-width: 100%;
+}
+/* START --- New update August 5, 2018 */
+.animated.faster {
+  -webkit-animation-duration: 100ms;
+  animation-duration: 100ms;
+}
+.animated.fast {
+  -webkit-animation-duration: 400ms;
+  animation-duration: 400ms;
+}
+#moreInfoModal {
+  color:white;
+}
+#moreInfoModal .modal-header{
+  background:white;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  color:black;
+}
+#moreInfoModal .modal-footer{
+  background:white;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  color:black;
+}
+#moreInfoModal .modal-body{
+  background:white;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  color:black;
+}
+#moreInfoModalLabel h4,.modal-body .row h4{
+	font-size: 15px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	margin: 2px 0 -2px 0;
+  line-height: 30px;
+}
+textarea{
+  max-height: 500px;
+  min-height: 150px;
+}
+.popover .arrow{
+  display:none;
+}
+.popover{
+  border: 0.5px solid #5bc0de !important;
+}
+.popover-header{
+  border-top: 2px solid #5bc0de !important;
+}
+.border-danger {
+	border-color: #dc3545 !important;
+  border: 0.5px solid #dc3545 !important;
+}
+/* css for dispatchTicket.html */
+.viewDetails{
+  display: none;
+}
+.detailedTable th{
+  color: #fff !important;
+}
+/* END --- New update August 5, 2018 */

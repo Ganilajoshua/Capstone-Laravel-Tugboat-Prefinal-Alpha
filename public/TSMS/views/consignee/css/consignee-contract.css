@@ -1,0 +1,14 @@
+.desc a > i{
+  font-size:12px;
+  margin-bottom:12px;
+  font-weight:200px;
+}
+.desc a:hover {
+  text-decoration: underline;
+}
+.statistic__item h2{
+  text-transform: uppercase;
+}
+.bg-primary{
+  border-radius:0px;
+}

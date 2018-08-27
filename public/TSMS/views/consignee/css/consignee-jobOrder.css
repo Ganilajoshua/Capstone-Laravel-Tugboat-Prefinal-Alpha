@@ -1,0 +1,28 @@
+#moreInfoModal {
+  color:white;
+}
+#moreInfoModalLabel h4,.modal-body .row h4{
+	font-size: 15px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	margin: 2px 0 -2px 0;
+  line-height: 30px;
+}
+.modal-footer{
+  background:white;
+  border-top:0px;
+  color:black;
+}
+#moreInfoModal.modal-content{
+  border: solid 2px #00aeff;
+  border-radius:0px;
+}
+.nav-link{
+  margin:-14px;
+  height:65px;
+  line-height: 50px;
+}
+#navThirdTab .badge{
+  vertical-align: super;
+}

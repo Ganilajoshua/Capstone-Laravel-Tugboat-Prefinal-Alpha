@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" name="viewport">
+  <title>TSMS &mdash; Admin</title>
+
+  <link rel="stylesheet" href="../dist/modules/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../dist/modules/ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="../dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
+  <link rel="stylesheet" href="../dist/css/demo.css">
+  <link rel="stylesheet" href="../dist/css/cssAll.css">
+  <link rel="stylesheet" href="../dist/css/font.css">
+  <link rel="stylesheet" href="../dist/css/animate.min.css">
+  <link rel="stylesheet" href="../dist/css/teamBuilder.css">
+  <link rel="stylesheet" href="../dist/modules/sweetalerts/sweetalert.css">
+  <link rel="stylesheet" href="../dist/modules/fullcalendar/fullcalendar.min.css">
+  <link rel="stylesheet" href="../dist/modules/waves/waves.css">
+  <link rel="stylesheet" href="../dist/modules/toastr/build/toastr.css">
+  <link rel="stylesheet" href="../dist/css/style.css">
+  <link rel="shortcut icon" href="../dist/img/tbLogo.png">
+</head>
+<body>
+  <div id="app">
+    <div class="main-wrapper">
+      <div class="navbar-bg"></div>
+      <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto">
+          <ul class="navbar-nav mr-3">
+            <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="ion ion-navicon-round"></i></a></li>
+            <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="ion ion-search"></i></a></li>
+          </ul>
+          <div class="search-element">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn" type="submit"><i class="ion ion-search"></i></button>
+          </div>
+        </form>
+        <ul class="navbar-nav navbar-right">
+          <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="ion ion-ios-bell-outline"></i></a>
+            <div class="dropdown-menu dropdown-list dropdown-menu-right">
+              <div class="dropdown-header">Notifications
+                <div class="float-right">
+                  <a href="#">View All</a>
+                </div>
+              </div>
+              <div class="dropdown-list-content">
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                  <img alt="image" src="../dist/img/avatar/avatar-1.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>
+                    <div class="time">10 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item dropdown-item-unread">
+                  <img alt="image" src="../dist/img/avatar/avatar-2.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Ujang Maman</b> has moved task <b>Fix bug footer</b> to <b>Progress</b>
+                    <div class="time">12 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <img alt="image" src="../dist/img/avatar/avatar-3.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Agung Ardiansyah</b> has moved task <b>Fix bug sidebar</b> to <b>Done</b>
+                    <div class="time">12 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <img alt="image" src="../dist/img/avatar/avatar-4.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Ardian Rahardiansyah</b> has moved task <b>Fix bug navbar</b> to <b>Done</b>
+                    <div class="time">16 Hours Ago</div>
+                  </div>
+                </a>
+                <a href="#" class="dropdown-item">
+                  <img alt="image" src="../dist/img/avatar/avatar-5.jpeg" class="rounded-circle dropdown-item-img">
+                  <div class="dropdown-item-desc">
+                    <b>Alfa Zulkarnain</b> has moved task <b>Add logo</b> to <b>Done</b>
+                    <div class="time">Yesterday</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg">
+            <i class="ion ion-android-person d-lg-none"></i>
+            <div class="d-sm-none d-lg-inline-block">Hi, John Carlos Pagaduan</div></a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a href="profile.html" class="dropdown-item has-icon waves-effect">
+                <i class="ion ion-android-person"></i> Profile
+              </a>
+              <a href="#" class="dropdown-item has-icon waves-effect">
+                <i class="ion ion-log-out"></i> Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+      <div class="main-sidebar">
+        <aside id="sidebar-wrapper">
+          <div class="sidebar-brand">
+            <a href="admin-dashboard.html">Administrator</a>
+          </div>
+          <div class="sidebar-user">
+            <div class="sidebar-user-picture">
+              <img alt="image" src="../dist/img/avatar/avatar-5.jpeg">
+            </div>
+            <div class="sidebar-user-details">
+              <div class="user-name">John Carlos Pagaduan</div>
+              <div class="user-role">
+                Administrator
+              </div>
+            </div>
+          </div>
+          <ul class="sidebar-menu">
+            <li class="menu-header">Dashboard</li>
+            <li>
+              <a class="waves-effect" href="admin-dashboard.html"><i class="ion ion-speedometer"></i><span>Dashboard</span></a>
+            </li>
+            <li class="menu-header">Main Navigation</li>
+            <li>
+              <a href="#" class="has-dropdown waves-effect"><i class="fas fa-cog"></i><span>Maintenance</span></a>
+              <ul class="menu-dropdown">
+                <li><a class="waves-effect" href="general.html"><i class="fas fa-life-ring"></i>Berth</a></li>
+                <li><a class="waves-effect" href="components.html"><i class="ion ion-ios-paper"></i> Contracts</a></li>
+                <li><a class="waves-effect" href="buttons.html"><i class="ion ion-person"></i> Employee</a></li>
+                <li><a class="waves-effect" href="toastr.html"><i class="fas fa-anchor"></i> Equipment</a></li>
+                <li><a class="waves-effect" href="general.html"><i class="fas fa-life-ring"></i> Pier</a></li>
+                <li><a class="waves-effect" href="position.html"><i class="fas fa-sitemap"></i>Position</a></li>
+                <li class="waves-effect"><a href="tugboat.html"><i class="ion ion-android-boat"></i> Tugboat</a></li>
+              </ul>
+            </li>
+            <li class="active">
+              <a href="#" class="has-dropdown waves-effect"><i class="fas fa-tasks"></i><span>Transactions</span></a>
+              <ul class="menu-dropdown">
+                <li><a href="#" class="has-dropdown waves-effect"><i class="ion ion-android-people"></i>Consignee</a>
+                  <ul class="menu-dropdown">
+                    <li><a class="waves-effect" href="#"><i class="ion ion-ios-paper"></i>Contracts</a></li>
+                    <li><a class="waves-effect" href="#"><i class="ion ion-document-text"></i>Requests</a></li>
+                  </ul>
+                </li>
+                <li><a class="waves-effect" href="general.html"><i class="fas fa-ticket-alt"></i>Dispatch Ticket</a></li>
+                <li class="active"><a href="#" class="has-dropdown waves-effect"><i class="ion ion-android-boat"></i>Dispatch &amp; Hauling</a>
+                  <ul class="menu-dropdown">
+                    <li class="inactive"><a class="waves-effect" href="dhJobOrder.html"><i class="ion ion-ios-list"></i>Job Order</a></li>
+                    <li class="inactive"><a class="waves-effect" href="dhScheduling.html"><i class="ion ion-ios-time"></i>Scheduling</a></li>
+                    <li class="active"><a class="waves-effect" href="teamBuilder.html"><i class="ion ion-ios-people"></i>Team Builder</a></li>
+                    <li class="inactive"><a class="waves-effect" href="tugboatAssignment.html"><i class="ion ion-android-boat"></i>Tugboat Assignment</a></li>
+                  </ul>
+                </li>
+                <li><a class="waves-effect" href="buttons.html"><i class="ion ion-ios-list"></i>Invoice</a></li>
+                <li><a class="waves-effect" href="toastr.html"><i class="ion ion-clipboard"></i>Job Order</a></li>
+                <li><a class="waves-effect" href="buttons.html"><i class="ion ion-cash"></i>Payment &amp; Billing</a></li>
+                <li><a class="waves-effect" href="toastr.html"><i class="fas fa-calendar-alt"></i>Schedule</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="has-dropdown waves-effect"><i class="ion ion-stats-bars"></i><span>Reports</span></a>
+              <ul class="menu-dropdown">
+                <li><a href="general.html"><i class="fas fa-life-ring"></i>Berth</a></li>
+                <li><a href="components.html"><i class="ion ion-ios-paper"></i> Contracts</a></li>
+                <li><a href="buttons.html"><i class="ion ion-person"></i> Employee</a></li>
+                <li><a href="toastr.html"><i class="fas fa-anchor"></i> Equipment</a></li>
+                <li><a href="general.html"><i class="fas fa-life-ring"></i> Pier</a></li>
+                <li><a href="position.html"><i class="fas fa-sitemap"></i>Position</a></li>
+                <li><a href="toastr.html"><i class="ion ion-android-boat"></i> Tugboat</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="has-dropdown waves-effect"><i class="fas fa-wrench"></i><span>Utilities</span></a>
+              <ul class="menu-dropdown">
+                <li><a class="waves-effect" href="contract.html"><i class="ion ion-ios-paper"></i> Contracts</a></li>
+              </ul>
+            </li>         
+          </ul> 
+        </aside>
+      </div>
+      <div class="main-content">
+        <section class="section">
+          <h1 class="section-header">
+            <div>
+              Dispatch &amp; Hauling
+              <small class="smCat">Team Builder</small>
+            </div>
+          </h1>
+          <!-- Team Assignment -->
+          <div class="teamAssignment animated fadeIn">
+            <div class="row">
+              <div class="col-lg-5">
+                <div class="card">
+                  <section class="sectionDark">
+                    <div class="container">
+                      <h5 class="section-header text-center" style="text-transform: uppercase;">
+                        Team List 
+                        <button class="float-right btn-sm btn btn-primary waves-effect" data-toggle="modal" data-target="#addTeam" data-tooltip="tooltip" title="Add New Team">
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </h5>
+                    </div>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col">
+                          <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                              <a class="nav-link active" id="pillsCreatedTeam-tab" data-toggle="pill" href="#pillsCreatedTeam" role="tab" aria-controls="pillsCreatedTeam" aria-selected="true">Created</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" id="pillsReceivedTeam-tab" data-toggle="pill" href="#pillsReceivedTeam" role="tab" aria-controls="pillsReceivedTeam" aria-selected="false">Received</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pillsCreatedTeam" role="tabpanel" aria-labelledby="pillsCreatedTeam-tab">
+                          <div class="row">
+                            <div class="col">
+                              <a href="#">
+                              <div class="card">
+                                <div class="card-body">
+                                  <h6 class="float-left mt-2">Team Energy Sun</h6>
+                                  <button type="button" class="delItem btn btn-sm btn-danger waves-effect waves-circle float-right" data-toggle="tooltip" title="Delete">
+                                    <i class="miniIcon fas fa-trash"></i>
+                                  </button> 
+                                  <button type="button" class="btn btn-sm btn-secondary waves-effect waves-circle float-right mr-2"data-toggle="modal" data-target="#editTeam" data-tooltip="tooltip" title="Edit">
+                                      <i class="miniIcon ion ion-edit"></i>
+                                  </button>
+                                </div>
+                              </div>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane fade" id="pillsReceivedTeam" role="tabpanel" aria-labelledby="pillsReceivedTeam-tab">
+                          <button class="float-right btn btn-block btn-primary waves-effect mb-3 btnRequestTeam"><i class="fas fa-plus mr-2"></i>Request Team</button>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+              <div class="col-lg-7">
+                <div class="card">
+                  <section class="sectionDark">
+                    <div class="container">
+                      <h5 class="section-header text-center" style="text-transform: uppercase;">
+                        Tugboat List  
+                      </h5>
+                    </div>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col">
+                          <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                              <a class="nav-link active" id="pillsOwnedTugboat-tab" data-toggle="pill" href="#pillsOwnedTugboat" role="tab" aria-controls="pillsOwnedTugboat" aria-selected="true">Owned</a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" id="pillsReceivedTugboat-tab" data-toggle="pill" href="#pillsReceivedTugboat" role="tab" aria-controls="pillsReceivedTugboat" aria-selected="false">Received</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pillsOwnedTugboat" role="tabpanel" aria-labelledby="pillsOwnedTugboat-tab">
+                          <div class="card">
+                            <div class="card-header bg-success text-white">
+                              <div class="float-right">
+                                <a data-collapse="#ownedAvailableT" class="btn btn-icon"><i class="ion ion-minus"></i></a>
+                              </div>
+                              <h4 class="text-center ml-5">Available</h4>
+                            </div>
+                            <div class="collapse show" id="ownedAvailableT">
+                              <div class="card-body">
+                                <div class="card card-success">
+                                  <div class="card-header text-center">
+                                    <h4>Energy Sun</h4>
+                                  </div>
+                                  <div class="card-body text-white">
+                                    <div class="card bg-success">
+                                      <div class="card-header" id="dismissTeam">
+                                        Team Energy Sun 
+                                        <div class="float-right">
+                                          <a data-dismiss="#dismissTeam" class="btn btn-icon"><i class="ion ion-close"></i></a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card">
+                            <div class="card-header bg-info text-white">
+                              <div class="float-right">
+                                <a data-collapse="#ownedOccupiedT" class="btn btn-icon"><i class="ion ion-minus"></i></a>
+                              </div>
+                              <h4 class="text-center ml-5">Occupied</h4>
+                            </div>
+                            <div class="collapse show" id="ownedOccupiedT">
+                              <div class="card-body">
+                                <div class=" text-danger text-center">
+                                  <i class="fas fa-times mr-2"></i> No Occupied Tugboat <i class="fas fa-times ml-2"></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="card">
+                            <div class="card-header bg-danger text-white">
+                              <div class="float-right">
+                                <a data-collapse="#ownedUnderRepairT" class="btn btn-icon"><i class="ion ion-minus"></i></a>
+                              </div>
+                              <h4 class="text-center ml-5">Under Repair</h4>
+                            </div>
+                            <div class="collapse show" id="ownedUnderRepairT">
+                              <div class="card-body">
+                                <div class=" text-danger text-center">
+                                  <i class="fas fa-times mr-2"></i> No Under Repair Tugboat <i class="fas fa-times ml-2"></i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane fade" id="pillsReceivedTugboat" role="tabpanel" aria-labelledby="pillsReceivedTugboat-tab">
+                          <div class="row">
+                            <button class="float-right btn btn-block btn-primary waves-effect mb-3 mr-3 ml-3 btnRequestTugboat"><i class="fas fa-plus mr-2"></i>Request Tugboat</button>
+                          </div>
+                          <div class="row">
+                            <div class="col">
+                              <div class="card">
+                                <div class="card-header bg-success text-white">
+                                  <div class="float-right">
+                                    <a data-collapse="#receivedAvailableT" class="btn btn-icon"><i class="ion ion-minus"></i></a>
+                                  </div>
+                                  <h4 class="text-center ml-5">Available</h4>
+                                </div>
+                                <div class="collapse show" id="receivedAvailableT">
+                                  <div class="card-body">
+                                    <div class="card card-success">
+                                      <div class="card-header text-center">
+                                        <h4>Energy Sun</h4>
+                                      </div>
+                                      <div class="card-body text-white">
+                                        <div class="card bg-success">
+                                          <div class="card-header" id="dismissTeam2">
+                                            Team Energy Sun 
+                                            <div class="float-right">
+                                              <a data-dismiss="#dismissTeam2" class="btn btn-icon"><i class="ion ion-close"></i></a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="card">
+                                <div class="card-header bg-info text-white">
+                                  <div class="float-right">
+                                    <a data-collapse="#receivedOccupiedT" class="btn btn-icon"><i class="ion ion-minus"></i></a>
+                                  </div>
+                                  <h4 class="text-center ml-5">Occupied</h4>
+                                </div>
+                                <div class="collapse show" id="receivedOccupiedT">
+                                  <div class="card-body">
+                                    <div class=" text-danger text-center">
+                                      <i class="fas fa-times mr-2"></i> No Occupied Tugboat <i class="fas fa-times ml-2"></i>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+    <!-- Add Modal -->
+    <div class="modal fade" id="addTeam" tabindex="-1" role="dialog" aria-labelledby="addTeamLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content sectionDark">
+          <div class="modal-header">
+            <h4 class="modal-title" id="addTeamLabel">
+              TEAM BUILDER
+                <small class="smCat">Add Team</small>
+            </h4>
+            <button type="button" class="close modalClose"aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body modalBody">
+            <form class=" mb-3">
+                <label for="addTeamName">Team Name<sup class="text-primary">&#10033;</sup></label>
+                <input type="text" class="form-control" id="addTeamName" placeholder="Team 1">
+            </form>
+            <div class="row">
+              <div class="col-12">
+                <div class="card text-center">
+                  <div class="card-header">
+                    <div class="float-right">
+                      <a data-collapse="#addEmployeeCard" class="btn btn-icon"><i class="ion ion-minus"></i></a>
+                    </div>
+                    <h5 class="text-center ml-5">Employees</h5>
+                  </div>
+                  <div class="collapse show" id="addEmployeeCard">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group form-inline">
+                            <div class="dropdown mr-4" id="addTeamChoices">
+                              <button class="btn btn-primary dropdown-toggle waves-effect" type="button" id="addDdChoices" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                All
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="addDdChoices">
+                                <a id="addDdAll" class="waves-effect dropdown-item active" href="#">All</a>
+                                <a id="addDdCapt" class="waves-effect dropdown-item" href="#">Captain</a>
+                                <a id="addDdChiefEng" class="waves-effect dropdown-item" href="#">Chief Engineer</a>
+                                <a id="addDdCrew" class="waves-effect dropdown-item" href="#">Crew</a>
+                              </div>
+                            </div>
+                            <h6 class="mt-2 mr-2">Filter:<h6 class="mt-2 text-primary" id="addFilterName">All</h6></h6>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row" id="addTeamCard">
+                        <div class="addTeamCaptain mr-3 ml-3">
+                          <div class="row">
+                            <div class="col-auto">
+                              <div class="card bg-success">
+                                <div class="card-body">
+                                  <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" id="addCheckCapt1" class="custom-control-input">
+                                    <label class="custom-control-label" for="addCheckCapt1">
+                                      <p class="card-text text-center ml-2">Joshua Ganila</p>
+                                      <small class="text-center float-right" style="text-transform: uppercase;">
+                                        Captain  
+                                      </small>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-auto">
+                              <div class="card bg-success">
+                                <div class="card-body">
+                                  <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" id="addCheckCapt2" class="custom-control-input">
+                                    <label class="custom-control-label" for="addCheckCapt2">
+                                      <p class="card-text text-center ml-2">Levie Anne Mariñas</p>
+                                      <small class="text-center float-right" style="text-transform: uppercase;">
+                                        Captain  
+                                      </small>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="addTeamChiefEng mr-3 ml-3">
+                          <div class="row">
+                            <div class="col-auto">
+                              <div class="card bg-info">
+                                <div class="card-body">
+                                  <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" id="addCheckCE1" class="custom-control-input">
+                                    <label class="custom-control-label" for="addCheckCE1">
+                                      <p class="card-text text-center ml-2">John Carlos Pagaduan</p>
+                                      <small class="text-center float-right" style="text-transform: uppercase;">
+                                        Chief Engineer  
+                                      </small>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="addTeamCrew mr-3 ml-3">
+                          <div class="row">
+                            <div class="col-auto">
+                              <div class="card bg-secondary">
+                                <div class="card-body">
+                                  <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" id="addCheckCrew1" class="custom-control-input">
+                                    <label class="custom-control-label" for="addCheckCrew1">
+                                      <p class="card-text text-center ml-2">Reign Emmanuel Malto</p>
+                                      <small class="text-center float-right" style="text-transform: uppercase;">
+                                        Crew  
+                                      </small>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card text-center">
+                  <div class="card-header">
+                    <div class="float-right">
+                      <a data-collapse="#addSelectedCard" class="btn btn-icon"><i class="ion ion-minus"></i></a>
+                    </div>
+                    <h5 class="text-center ml-5">Selected</h5>
+                  </div>
+                  <div class="collapse show" id="addSelectedCard">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col">
+                          <div class="card bg-info" id="addDismissCard">
+                            <div class="card-header">
+                                John Carlos Pagaduan
+                              <div class="float-right">
+                                <a data-dismiss="#addDismissCard" class="btn btn-icon"><i class="ion ion-close"></i></a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary waves-effect btnAddTeam">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editTeam" tabindex="-1" role="dialog" aria-labelledby="editTeamLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content sectionDark">
+          <div class="modal-header">
+            <h4 class="modal-title" id="editTeamLabel">
+              TEAM BUILDER
+                <small class="smCat">Edit Team</small>
+            </h4>
+            <button type="button" class="close modalClose"aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body modalBody">
+            <form class=" mb-3">
+                <label for="editTeamName">Team Name<sup class="text-primary">&#10033;</sup></label>
+                <input type="text" class="form-control" id="editTeamName" placeholder="Team 1">
+            </form>
+            <div class="row">
+              <div class="col-12">
+                <div class="card text-center">
+                  <div class="card-header">
+                    <div class="float-right">
+                      <a data-collapse="#editEmployeeCard" class="btn btn-icon"><i class="ion ion-minus"></i></a>
+                    </div>
+                    <h5 class="text-center ml-5">Employees</h5>
+                  </div>
+                  <div class="collapse show" id="editEmployeeCard">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group form-inline">
+                            <div class="dropdown mr-4" id="editTeamChoices">
+                              <button class="btn btn-primary dropdown-toggle waves-effect" type="button" id="editDdChoices" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                All
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="editDdChoices">
+                                <a id="editDdAll" class="waves-effect dropdown-item active" href="#">All</a>
+                                <a id="editDdCapt" class="waves-effect dropdown-item" href="#">Captain</a>
+                                <a id="editDdChiefEng" class="waves-effect dropdown-item" href="#">Chief Engineer</a>
+                                <a id="editDdCrew" class="waves-effect dropdown-item" href="#">Crew</a>
+                              </div>
+                            </div>
+                            <h6 class="mt-2 mr-2">Filter:<h6 class="mt-2 text-primary"id="editFilterName">All</h6></h6>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="editTeamCaptain mr-3 ml-3">
+                          <div class="row">
+                            <div class="col-auto">
+                              <div class="card bg-success">
+                                <div class="card-body">
+                                  <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" id="editCheckCapt1" class="custom-control-input">
+                                    <label class="custom-control-label" for="editCheckCapt1">
+                                      <p class="card-text text-center ml-2">Joshua Ganila</p>
+                                      <small class="text-center float-right" style="text-transform: uppercase;">
+                                        Captain  
+                                      </small>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-auto">
+                              <div class="card bg-success">
+                                <div class="card-body">
+                                  <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" id="editCheckCapt2" class="custom-control-input">
+                                    <label class="custom-control-label" for="editCheckCapt2">
+                                      <p class="card-text text-center ml-2">Levie Anne Mariñas</p>
+                                      <small class="text-center float-right" style="text-transform: uppercase;">
+                                        Captain  
+                                      </small>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="editTeamChiefEng mr-3 ml-3">
+                          <div class="row">
+                            <div class="col-auto">
+                              <div class="card bg-info">
+                                <div class="card-body">
+                                  <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" id="editCheckCE1" class="custom-control-input">
+                                    <label class="custom-control-label" for="editCheckCE1">
+                                      <p class="card-text text-center ml-2">John Carlos Pagaduan</p>
+                                      <small class="text-center float-right" style="text-transform: uppercase;">
+                                        Chief Engineer  
+                                      </small>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="editTeamCrew  mr-3 ml-3">
+                          <div class="row">
+                            <div class="col-auto">
+                              <div class="card bg-secondary">
+                                <div class="card-body">
+                                  <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" id="editCheckCrew1" class="custom-control-input">
+                                    <label class="custom-control-label" for="editCheckCrew1">
+                                      <p class="card-text text-center ml-2">Reign Emmanuel Malto</p>
+                                      <small class="text-center float-right" style="text-transform: uppercase;">
+                                        Crew  
+                                      </small>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card text-center">
+                  <div class="card-header">
+                    <div class="float-right">
+                      <a data-collapse="#editSelectedCard" class="btn btn-icon"><i class="ion ion-minus"></i></a>
+                    </div>
+                    <h5 class="text-center ml-5">Selected</h5>
+                  </div>
+                  <div class="collapse show" id="editSelectedCard">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col">
+                          <div class="card bg-info" id="editDismissCard">
+                            <div class="card-header">
+                                John Carlos Pagaduan
+                              <div class="float-right">
+                                <a data-dismiss="#editDismissCard" class="btn btn-icon"><i class="ion ion-close"></i></a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary waves-effect btnEditTeam">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../dist/modules/jquery.min.js"></script>
+    <script src="../dist/modules/tooltip.js"></script>
+    <script src="../dist/modules/popper.js"></script>
+    <script src="../dist/modules/toastr/toastr.js"></script>
+    <script src="../dist/modules/sweetalerts/sweetalert.min.js"></script>
+    <script src="../dist/modules/waves/waves.js"></script>
+    <script src="../dist/modules/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="../dist/modules/scroll-up-bar/dist/scroll-up-bar.min.js"></script>
+    <script src="../dist/modules/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../dist/js/teamBuilder.js"></script>
+    <script src="../dist/js/scripts.js"></script>
+    <script src="../dist/js/demo.js"></script>
+</body>
+</html>

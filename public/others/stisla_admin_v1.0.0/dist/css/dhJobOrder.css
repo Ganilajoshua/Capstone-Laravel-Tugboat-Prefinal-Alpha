@@ -1,0 +1,39 @@
+.pendingCards,.forwardedCards,.declinedCards{
+  display: none;
+}
+.addJobOrder{
+  display: none;
+}
+.modal-header h2, .modal-footer h3{
+  margin:0;
+}
+#moreInfoModal {
+  color:white;
+}
+#moreInfoModal .modal-header{
+  background:white;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  color:black;
+}
+#moreInfoModal .modal-footer{
+  background:white;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  color:black;
+}
+#moreInfoModal .modal-body{
+  background:white;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  color:black;
+}
+#moreInfoModalLabel h4,.modal-body .row h4{
+	font-size: 15px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	margin: 2px 0 -2px 0;
+  line-height: 30px;
+}
+

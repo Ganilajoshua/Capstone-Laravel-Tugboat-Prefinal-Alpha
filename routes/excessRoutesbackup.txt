@@ -1,0 +1,174 @@
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+
+// Route::get('/','WebpagesController@index');
+
+Auth::routes();
+//must use this route prefixes to be more organized
+Route::group(['prefix'=>'administrator/'],function(){
+    //Maintenance Routes
+    Route::group(['prefix'=>'maintenance/'],function(){
+        //Maintenance Resource
+        Route::resource('/berth','BerthController');
+        Route::resource('/pier','PierController');
+        Route::resource('/position','PositionController');
+        Route::resource('/employees','EmployeesController');
+        Route::resource('/tugboattype','TugboatTypeController');
+        Route::resource('/tugboat','TugboatController');
+        Route::resource('/usertype','UsertypeController');
+
+        //Maintenance Create / Store to Database
+        Route::post('/berth/store','BerthController@store');
+        Route::post('/pier/store','PierController@store');
+        Route::post('/position/store','PositionController@store');
+        Route::post('/employees/store','EmployeesController@store');
+        Route::post('/tugboattype/store','TugboatTypeController@store');
+        Route::post('/tugboat/store','TugboatController@store');
+        Route::post('/usertype/store','UsertypeController@store');
+        
+        //Maintenance Edit (JSON Data Render)
+        Route::get('/berth/{intBerthID}/edit','BerthController@edit');
+        Route::get('/pier/{intPierID}/edit','PierController@edit');
+        Route::get('/position/{intPositionID}/get','PositionController@get');
+        Route::get('/employees/{intEmployeeID}/edit','EmployeesController@edit');
+        Route::get('/tugboattype/{intTugboatTypeID}/edit','TugboatTypeController@edit');
+        Route::get('/tugboat/{intTugboatMainID}/please','TugboatController@please');
+        Route::get('/usertype/{intUserTypeID}/edit','UsertypeController@edit');
+        
+        //Maintenance Update
+        Route::post('/berth/update','BerthController@update');
+        Route::post('/pier/update','PierController@update');
+        Route::post('/position/update','PositionController@update');
+        Route::post('/tugboattype/update','TugboatTypeController@update');
+        Route::post('/employees/update','EmployeesController@update');
+        Route::post('/usertype/update','UsertypeController@update');
+        
+        //for Tugboat Only
+        Route::post('/tugboat/pictures','TugboatController@updatePictures');
+        Route::post('/tugboat/maininfo','TugboatController@updateMain');
+        Route::post('/tugboat/specifications','TugboatController@updateSpecs');
+        Route::post('/tugboat/classification','TugboatController@updateClass');
+    
+        //Maintenance Delete (Delete for Soft Delete)
+        Route::get('/berth/{intBerthID}/delete','BerthController@delete');
+        Route::get('/pier/{intPierID}/delete','PierController@delete');
+        Route::get('/position/{intPositionID}/delete','PositionController@delete');
+        Route::get('/employees/{intEmployeeID}/delete','EmployeesController@delete');
+        Route::get('/tugboattype/{intTugboatTypeID}/delete','TugboatTypeController@delete');
+        Route::get('/tugboat/{intTugboatMainID}/delete','TugboatController@delete');
+        Route::get('/usertype/{intUserTypeID}/delete','UsertypeController@delete');
+        
+        //Maintenance Delete (Destroy for total Deletion)
+        Route::get('/berth/{intBerthID}/destroy','BerthController@destroy');
+        Route::get('/pier/{intPierID}/destroy','PierController@destroy');
+        Route::get('/position/{intPositionID}/destroy','PositionController@destroy');
+        Route::get('/employees/{intEmployeeID}/destroy','EmployeesController@destroy');
+        Route::get('/tugboattype/{intTugboatTypeID}/destroy','TugboatTypeController@destroy');
+        Route::get('/tugboat/{intTugboatMainID}/destroy','TugboatController@destroy');
+        Route::get('/usertype/{intUserTypeID}/destroy','UsertypeController@destroy');
+        
+    });
+    //Transactions Routes
+    Route::group(['prefix'=>'transactions/'],function(){
+        //Transaction Resources
+        Route::resource('/teamassignment','TugboatTeamAssignmentController');
+        Route::resource('/scheduling','SchedulingController');
+        Route::resource('/joborders','JobOrderController');
+        //Dispatch and Hauling Job Orders
+        Route::get('/joborders/{intJobOrderID}/accept','JobOrderController@accept');
+        Route::get('/joborders/{intJobOrderID}/forwardrequest','JobOrderController@forwardrequest');
+        Route::post('/joborders/{intJobOrderID}/forward','JobOrderController@forward');
+        Route::get('/joborders/{intJobOrderID}/decline','JobOrderController@decline');
+        //Dispatch and Hauling Team Builder (Team Assignment)
+        Route::post('/teamassignment/store','TugboatTeamAssignmentController@store');
+        Route::post('/teamassignment/teamassignment','TugboatTeamAssignmentController@teamassignment');
+        //Scheduling
+
+    });
+    //Reports Routes
+    Route::group(['prefix'=>'reports/'],function(){
+    });
+    //Queries Routes
+    Route::group(['prefix'=>'queries/'],function(){
+    });
+    //Utitlities Routes
+    Route::group(['prefix'=>'utilities/'],function(){
+    });
+
+});
+Route::group(['prefix'=>'consignee/'],function(){
+
+});
+Route::group(['prefix'=>'affiliates/'],function(){
+
+});
+//Routes with CRUD and Full Resources
+//Maintenance
+
+Route::resource('/agreements','AgreementsController');
+Route::resource('/contracts','ContractsController');
+Route::resource('/equipments','EquipmentsController');
+// Route::resource('/login','LoginController');
+Route::resource('/invoiceTugboat','InvoiceController');
+//Transactions
+Route::resource('/contracts','ContractsController');
+//Login
+// Route::get('/register','LoginControllers\UserLoginController@register');
+// Route::get('/login','LoginControllers\UserLoginController@showLogin');
+// Route::post('/login','LoginControllers\UserLoginController@login');
+//Delete Functions use the following format
+// Route::get('/modulename/{databaseID}/delete','ControllerRou  te');
+
+//JSON Data for maintenance tables
+Route::get('/agreements/{intAgreementsID}/edit','AgreementsController@edit');
+//Show info for Contracts Clauses
+Route::get('/agreements/{intAgreementsID}/show','AgreementsController@show');
+//tugboat MaxID
+Route::get('/tugboat/maxid','TugboatController@maxid');
+
+//post AJAX Route
+Route::post('/agreements/store','AgreementsController@store');
+
+//edit AJAX Route
+Route::post('/agreements/update','AgreementsController@update');
+//Tugboat editRoutes
+//end Edit
+
+//transaction Scheduling Pre render
+Route::get('/scheduling/schedules','SchedulingController@schedules');
+//transactions Create
+Route::post('/contracts/store','ContractsController@store');
+//transactions getData
+Route::get('/contracts/{intContractListID}/show','ContractsController@show');
+//transactions edit Data
+Route::get('/contracts/{intContractListID}/edit','ContractsController@edit');
+//transaction Update
+Route::post('/contracts/update','ContractsController@update');
+//deleteTransactions
+Route::get('/contracts/{intContractListID}/delete','ContractsController@delete');
+// Route::get('/', function () {
+//    return view('welcome');
+// });
+
+
+// Auth::routes();
+
+// Route::get('/administrator/login','AuthController\AdminController@showLogin');
+// Route::post('/administrator/login','AuthController\AdminController@login')->name('admin.login.submit');
+// Route::get('/home', 'HomeController@index')->name('home');
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
+
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
