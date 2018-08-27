@@ -1,12 +1,15 @@
 <div class="row createContracts">
     <div class="col">
         <div class="card">
-            <section class="sectionDark">
+            <section class="sectionDark section">
                 <div class="container">
                     <h5 class="section-header text-center" style="text-transform: uppercase;">
-                    Create Contract For: 
-                    <small class="ml-1 smCat companyNameHolder">
-                    </small>
+                        <a href="" class="btnBack btn btn-link float-left" data-toggle="tooltip"  title="Back" role="button">
+                            <i class="ion-chevron-left"></i>
+                        </a>
+                        Create Contract For: 
+                        <small class="ml-1 smCat companyNameHolder">
+                        </small>
                 </h5>
                 </div>
                 <div class="row ml-1 mr-1">

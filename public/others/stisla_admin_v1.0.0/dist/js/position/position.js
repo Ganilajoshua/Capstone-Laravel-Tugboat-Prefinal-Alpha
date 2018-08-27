@@ -4,6 +4,10 @@ $(document).ready(function(){
     $('#addPositionButton').on('click',function(){
         $('#addPositionModal').modal('show');
     });
+    $('.modalClose').on('click',function(){
+        $('#addPositionModal').modal('hide');
+        $('#editPositionModal').modal('hide');
+    });
 });
 
 var url = '/administrator/maintenance/position';

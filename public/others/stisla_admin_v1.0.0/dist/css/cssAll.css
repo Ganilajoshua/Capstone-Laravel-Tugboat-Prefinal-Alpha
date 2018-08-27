@@ -98,11 +98,12 @@ display: none;
 }
 .detailedTable th{
 color: #fff !important;
+border: 0px;
 }
 /* END --- New update August 5, 2018 */
 .createContracts{
   display : none;
 }
-.custom-border{
-  
+th.noSortAction{
+  width:20% !important;
 }

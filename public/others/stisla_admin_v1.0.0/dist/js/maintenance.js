@@ -1,5 +1,7 @@
 $(document).ready(function(){
-    jQuery('.mainTable').DataTable({
+    jQuery('.mainTable').DataTable({columnDefs: [
+        { targets: 'noSortAction', orderable: false }
+    ], 
         responsive : true,
     });
 

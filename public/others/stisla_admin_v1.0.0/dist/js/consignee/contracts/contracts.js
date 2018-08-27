@@ -5,9 +5,6 @@ $(document).ready(function(){
     $('.btnRequest').on('click',function(e){
         e.preventDefault();
     });
-    $('#finalContract').on('click',function(e){
-        e.preventDefault();
-    });
     
 });
 var url = '/consignee/contracts';
@@ -111,50 +108,6 @@ function requestForChanges(){
         });
     });
 }
-function showFinalContract(showID){
-    console.log('contractlistID : ', showID);
-    $.ajax({
-        url : url + '/' + showID + '/show',
-        type : 'GET',
-        dataType : 'JSON',
-        success : function(data){
-            console.log(data);
-                // $('#viewFinalContractInfoTitle').empty();
-                // $('.viewfinalcontractmodalBody').empty();
-                $('#contractsID').val(data.contract[0].intContractListID);
-                
-                console.log('aak');
-
-                // console.log('standard ID :', data.contract[0].intCStandardID);
-                // console.log('quotation ID : ', data.contract[0].intCQuotationID);
-                if(data.contract[0].enumConvalidity == 1 || '1'){
-                    var text = '1 year'
-                }else{
-                    var text = '6 months'
-                }
-                console.log(data.contract[0].enumStatus);
-
-                var appendData =
-                "<h2>"+ data.contract[0].strContractListTitle +"</h2>" +
-                "<h5 class='mt-2'>Contract Validity : " + text + "</h5>"+ 
-                "<p>"+ data.contract[0].strContractListDesc +"</p>" + 
-                "<h3>"+ data.contract[0].strQuotationTitle +"</h3>"+
-                "<p>"+ data.contract[0].strQuotationDesc +"</p>" +
-                "<p> Standard Rate : "+ data.contract[0].fltStandardRate +"</p>" +
-                "<p> Tugboat Delay Fee : "+ data.contract[0].fltQuotationTDelayFee +"</p>" +
-                "<p> Violation Fee : "+ data.contract[0].fltQuotationViolationFee +"</p>" +
-                "<p> Minimum Damage Fee(s) : "+ data.contract[0].fltQuotationConsigneeLateFee +"</p>" +
-                "<p> Minimum Damage Fee(s) : "+ data.contract[0].fltMinDamageFee +"</p>" +
-                "<p> Maximum Damage Fee(s) : "+ data.contract[0].fltMaxDamageFee +"</p>" +
-                "<p> Maximum Discount : "+ data.contract[0].intDiscount +"</p>";
-                $(appendData).appendTo('.viewfinalcontractmodalBody');
-                $('#finalContractInfo').modal('show');
-            },
-            error : function(error){
-                throw error;
-            }
-        });
-}
 function showContract(showID){
     console.log('contractlistID : ', showID);
     $.ajax({
@@ -164,26 +117,12 @@ function showContract(showID){
         success : function(data){
             console.log(data);
                 $('.viewcontractmodalBody').empty();
-                $('#viewCContractInfoTitle').empty();
-                
                 $('#contractsID').val(data.contract[0].intContractListID);
-                
                 console.log('aak');
-
-                // console.log('standard ID :', data.contract[0].intCStandardID);
-                // console.log('quotation ID : ', data.contract[0].intCQuotationID);
-                if(data.contract[0].enumConvalidity == 1 || '1'){
-                    var text = '1 year'
-                }else{
-                    var text = '6 months'
-                }
-               
-                var appendStatus = "<div class='badge badge-warning ml-2'>NOT FINALIZED</div>";
-                
-                console.log(data.contract[0].enumStatus);
+                console.log('standard ID :', data.contract[0].intCStandardID);
+                console.log('quotation ID : ', data.contract[0].intCQuotationID);
                 var appendData =
                 "<h2>"+ data.contract[0].strContractListTitle +"</h2>" +
-                "<h5 class='mt-2'>Contract Validity : " + text + "</h5>"+ 
                 "<p>"+ data.contract[0].strContractListDesc +"</p>" + 
                 "<h3>"+ data.contract[0].strQuotationTitle +"</h3>"+
                 "<p>"+ data.contract[0].strQuotationDesc +"</p>" +
@@ -195,8 +134,7 @@ function showContract(showID){
                 "<p> Maximum Damage Fee(s) : "+ data.contract[0].fltMaxDamageFee +"</p>" +
                 "<p> Maximum Discount : "+ data.contract[0].intDiscount +"</p>";
                 $(appendData).appendTo('.viewcontractmodalBody');
-                $(appendStatus).appendTo('#viewCContractInfoTitle');
-                $('#finalContractInfo').modal('show');
+                $('#viewCContractInfo').modal('show');
                 
         },
         error : function(error){

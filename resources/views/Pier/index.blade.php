@@ -22,8 +22,8 @@
         </button>
         <div class="mt-3">
             @if(count($piers)>0)    
-                <table class="detailedTable table table-striped text-center table-bordered mainTable" style="width:100%">
-                    <thead class="thead-dark">
+                <table class="detailedTable table table-striped text-center  mainTable" style="width:100%">
+                    <thead class="bg-primary">
                         <tr>
                             <th>Pier</th>
                             <th class="noSortAction">Action</th>
@@ -48,8 +48,8 @@
                     </tbody>
                 </table>
             @else
-                <table class="detailedTable table table-striped text-center table-bordered mainTable" style="width:100%">
-                    <thead class="thead-dark">
+                <table class="detailedTable table table-striped text-center  mainTable" style="width:100%">
+                    <thead class="bg-primary">
                         <tr>
                             <th>Pier</th>
                             <th class="noSortAction">Action</th>

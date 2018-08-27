@@ -20,23 +20,23 @@
         </div>
     </h1>
     <div class="row">
-        <div class="col-lg-3 col-md-6 col-12">
-            <form class="selectViews">
-                <div class="btn-group mt-3 btn-group-toggle" id="sbtn" role="group" aria-label="Button group with nested dropdown">
-                    <button id="detView" type="button" class="btn btn-secondary btn-lg" data-toggle="tooltip" title="Detailed View"><i class="fas fa-align-left"></i></button>
-                    <button id="cardView" type="button" class="btn btn-secondary btn-lg active" data-toggle="tooltip" title="Card View"><i class="fas fa-credit-card"></i></button>
-                    <div id="sortSelect" class="btn-group" role="group">
-                        <button id="sortDdown" class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Sort
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a id="sortName" class="dropdown-item active" href="#">Name</a>
-                            <a id="sortHP" class="dropdown-item" href="#">Horse Power</a>
-                        </div>
+    <div class="col-lg-3 col-md-6 col-12">
+        <form class="selectViews">
+            <div class="btn-group btn-group-toggle" role="group" aria-label="Button group with nested dropdown">
+                <button type="button" class="detView btn btn-secondary waves-effect" data-toggle="tooltip" title="Detailed View"><i class="fas fa-align-left"></i></button>
+                <button type="button" class="cardView btn btn-secondary active waves-effect" data-toggle="tooltip" title="Card View"><i class="fas fa-credit-card"></i></button>
+                <!-- <div class="sortSelect btn-group" role="group">
+                    <button class="sortDdown btn btn-primary dropdown-toggle waves-effect" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Sort
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="sortName dropdown-item active waves-effect" href="#">Name</a>
+                        <a class="sortHP dropdown-item waves-effect" href="#">Horse Power</a>
                     </div>
-                </div>
-            </form>
-        </div>
+                </div> -->
+            </div>
+        </form>
+    </div>
     </div>
     @include('Tugboat.card')
     @include('Tugboat.add')

@@ -68,7 +68,7 @@
                             <ul class="menu-dropdown">
                                 <li id="tConsignee"><a href="#" class="has-dropdown"><i class="ion ion-android-people"></i>Consignee</a>
                                     <ul class="menu-dropdown">
-                                        <li id="activeconsigneeMenu"><a href="/administrator/transactions/consignee"><i class="ion ion-document-text"></i>Consignees Accounts</a></li>
+                                        <li id="activeconsigneeMenu"><a href="/administrator/transactions/consignee"><i class="ion ion-document-text"></i>Consignee Accounts</a></li>
                                         <li id="contractRequestsMenu"><a href="/administrator/transactions/contractrequests"><i class="ion ion-document-text"></i>Contract Requests</a></li>
                                         <li id="contractsMenu"><a href="/administrator/transactions/contracts"><i class="ion ion-ios-paper"></i>Contracts</a></li>
                                     </ul>
@@ -132,7 +132,5 @@
                     </li>
                     
                 </ul>
-                <div class="p-3 mt-4 mb-4">
-                </div>
             </aside>
         </div>

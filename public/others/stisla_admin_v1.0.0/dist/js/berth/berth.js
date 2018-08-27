@@ -10,6 +10,10 @@
     $('#addBerthButton').on('click',function(){
         $('#addBerthModal').modal('show');
     });
+    $('.modalClose').on('click',function(){
+        $('#addBerthModal').modal('hide');
+        $('#editBerthModal').modal('hide');
+    });
     // $('.table-fit').css();
     // $('#pierSelect').niceSelect();
 
