@@ -4,7 +4,7 @@ $(document).ready(function(){
 
     /* START --- New update August 5, 2018 */
   //Initialize Date Picker for Last Dry Docked
-  $('#AddLastDryDocked,#AddDateBuilt,#AddLicenseExpDate,#editLastDryDocked,#editDateBuilt,#editLicenseExpDate').datetimepicker({
+  $('#AddLastDryDocked,#AddDateBuilt,#AddLicenseExpDate,#editLastDryDocked,#editDateBuilt,#editLicenseExpDate').datepicker({
     format: 'L'
   });
   $('.summaryModal').css('max-width','68%');
@@ -113,11 +113,14 @@ $(function(){
   });
 
   // Toolbar extra buttons
+  var appendIcon = `<i class="fas fa-ship mr-3"></i>`;
   var btnViewSummary = $('<button class="btn btn-primary waves-effect" >View Summary</button>')
     .on('click',function(){
         $('#viewSummaryModal').modal('show');
         $('#sumInsurances').empty();
         var name = $('#AddName').val();
+        $('.summaryLabel').empty();
+        $('.summaryLabel').append(appendIcon + name);
         var length = $('#AddLength').val();
         var breadth  = $('#AddBreadth').val();
         var depth = $('#AddDepth').val();
@@ -389,12 +392,7 @@ $('.btnBack').on('click',function(s) {
       closeOnConfirm: false
   },
   function(){
-    if(window.location.href.indexOf("tugboat.html") > -1) {
-      window.location = "tugboat.html"
-    }
-    else if(window.location.href.indexOf("position.html") > -1) {
-    window.location = "position.html"
-    }
+      window.location = "/administrator/maintenance/tugboat"
   });
 });
 
@@ -440,7 +438,7 @@ $('.btnAdd').on('click',function() {
   // Change to Card View
   $('.cardView').on('click',function(g) {
       g.preventDefault();
-      $('.cardView').css('border-radius', '0px');
+    //   $('.cardView').css('border-radius', '0px');
       $('.detView').removeClass('active');
       $('.cardView').addClass('active');
       $('.cardLayout').css('display', 'block');

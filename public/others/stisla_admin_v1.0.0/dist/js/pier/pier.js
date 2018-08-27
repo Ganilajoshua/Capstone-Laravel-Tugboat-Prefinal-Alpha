@@ -4,7 +4,11 @@ $(document).ready(function(){
 
     $('#addPierButton').on('click',function(){
         $('#addPierModal').modal('show');
-    })
+    });
+    $('.modalClose').on('click',function(){
+        $('#addPierModal').modal('hide');
+        $('#editPierModal').modal('hide');
+    });
 });
 
 var url = '/administrator/maintenance/pier';

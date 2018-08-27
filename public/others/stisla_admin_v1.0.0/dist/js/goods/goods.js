@@ -4,6 +4,10 @@ $(document).ready(function(){
     $('#addGoodsButton').on('click',function(){
         $('#addGoodsModal').modal('show');
     });
+    $('.modalClose').on('click',function(){
+        $('#addGoodsModal').modal('hide');
+        $('#editGoodsModal').modal('hide');
+    });
 });
 
 var url = '/administrator/maintenance/goods';

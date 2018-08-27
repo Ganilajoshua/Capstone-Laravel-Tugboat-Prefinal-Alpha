@@ -5,6 +5,10 @@ $(document).ready(function(){
         $('#addEmployeeModal').modal('show');
     })
     $('.modal-lg').css('max-width','68%');
+    $('.modalClose').on('click',function(){
+        $('#addEmployeeModal').modal('hide');
+        $('#editEmployeeModal').modal('hide');
+    });
 });
 
 var url = '/administrator/maintenance/employees';

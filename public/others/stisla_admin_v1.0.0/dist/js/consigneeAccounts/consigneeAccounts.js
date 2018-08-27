@@ -36,6 +36,16 @@ $(document).ready(function(){
             }
         });
     });
+
+    // Change Views
+        $('.showCRequests').on('click',function(){
+            $('.consigneeActive').css('display', 'none');
+            $('.consigneeRequests').css('display','block');
+        });
+        $('.showCActive').on('click',function(){
+            $('.consigneeActive').css('display', 'block');
+            $('.consigneeRequests').css('display','none');
+        });
         // var checked;
         // var ck_box = $('input[type="checkbox"]:checked').length;
         // if(ck_box > 0){

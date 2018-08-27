@@ -25,4 +25,3 @@
         <script type="text/javascript" src="/others/stisla_admin_v1.0.0/dist/modules/waves/waves.js"></script>
         @yield('pakingshet')
         <script src="{{URL::asset('/others/stisla_admin_v1.0.0/dist/modules/summernote/summernote-lite.js')}}"></script>
-        <script src="{{URL::asset('/others/stisla_admin_v1.0.0/dist/modules/toastr/build/toastr.min.js')}}"></script>

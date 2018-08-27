@@ -3,6 +3,8 @@ var url = '/administrator/transactions/contractrequests';
 $(document).ready(function(){
     $('#transactionTree').addClass("active");
     $('#tConsignee').addClass("active");
+    $('#activeconsigneeMenu').addClass("inactive");
+    $('#contractsMenu').addClass("inactive");
     $('#contractRequestsMenu').addClass("active");
     $('.createContracts').addClass('animated fadeIn');
     // $('select').niceSelect();
@@ -20,7 +22,7 @@ $(document).ready(function(){
             ['color', ['color']],
             ['para', ['ul', 'ol', 'paragraph']],
             ['height', ['height']],
-            ['insert', ['table', 'link']],
+            ['insert', [ 'link']],
             ['help']
         ]
     });
@@ -80,8 +82,6 @@ function storeContracts(){
     var id = $('#hideCompanyID').val();
     var title = $('#addContractTitle').val();
     var details = $('#addContractDetails').val();
-    var validity = $('#contractValidity').val();
-    
     // var standard = $('#addStandard').val();
     // var agreements = $('#addAgreements').val();
     // var termscondition = $('#addTermsandCondition').val();
@@ -90,8 +90,6 @@ function storeContracts(){
     console.log(title, details);
     // console.log(standard, agreements);
     console.log(quotation);
-    console.log(validity);
-    // return false;
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -105,7 +103,6 @@ function storeContracts(){
             contractID : id,
             contractTitle : title,
             contractDetails : details,
-            contractValidity : validity,
             // standardID : standard,
             // agreementID : agreements,
             // termsID : termscondition,
@@ -139,7 +136,6 @@ function showContracts(){
     var id = $('#hideCompanyID').val();
     $('#hideCompanyID').val(id);
     var validity = $('#contractValidity').val();
-    var text = $('#contractValidity option:selected').text();
     
     var title = $('#addContractTitle').val();
     var details = $('#addContractDetails').val();
@@ -173,7 +169,7 @@ function showContracts(){
     //     return false;
     // }
     console.log(contractID);
-    return false;
+    // return false;
     $('.modalContractDetails').empty();
     $.ajaxSetup({
         headers: {
@@ -193,7 +189,6 @@ function showContracts(){
             // if(data.standard == null){
                 var appendData =
                 "<h2>"+ title +"</h2>" +
-                "<h5>Contract Validity : " + text + "</h5>"+ 
                 "<p>"+ details +"</p>" + 
                 "<h3>"+ data.quotations.strQuotationTitle +"</h3>"+
                 "<p>"+ data.quotations.strQuotationDesc +"</p>" +
@@ -251,111 +246,49 @@ function showContracts(){
     });
 }
 function createActiveContract(contractID){
-
-    $.ajax({
-        url : url + '/' + contractID + '/getactive',
-        type : 'GET',
-        dataType : 'JSON',
-        success : function(data, response){
-            console.log(data);
-            swal({
-                title: "Create Active Contract?",
-                text: "Finalized This Quotation as A Contract",
-                type: "info",
-                showCancelButton: true,
-                confirmButtonClass: "btn-info",
-                confirmButtonText: "Ok",
-                closeOnConfirm: true,
-
-            },function(){
-                var currDate = moment().format('YYYY-MM-DD');
-                console.log(data.contract.enumConValidity);
-                console.log(data.contract.intContractListID);
-                var id = data.contract.intContractListID;
-                var a = parseInt(data.contract.enumConValidity);
-                console.log(a);
-                // currDate = moment().add(data.contract.enumConValidity, 'Y').format('YYYY-MM-DD');
-                if(a == 6){
-                    expireContract = moment().add(a, 'M').format('YYYY-MM-DD');
-                    console.log(expireContract);
-                }else if(a == 1){
-                    expireContract = moment().add(a, 'Y').format('YYYY-MM-DD');
-                    console.log(expireContract);
-                }
-                console.log(currDate);
-                console.log(id);
-                // return false;
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    swal({
+        title: "Create Active Contract?",
+        text: "Finalized This Quotation as A Contract",
+        type: "info",
+        showCancelButton: false,
+        confirmButtonClass: "btn-info",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true,
+        timer : 1500
+    },function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });   
+        $.ajax({
+            url : url + '/activate',
+            type : 'POST',
+            data : {
+                "_token" : $('meta[name="csrf-token"]').attr('content'),
+                contractID : contractID,
+            },
+            success : function(data,response){
+                console.log(data);
+                swal({
+                    title: "Success",
+                    text: "Contract Activated",
+                    type: "success",
+                    showCancelButton: false,
+                    confirmButtonClass: "btn-success",
+                    confirmButtonText: "Ok",
+                    closeOnConfirm: true,
+                    timer : 1500
+                },
+                function(isConfirm){
+                    if(isConfirm){
+                        window.location = url;
                     }
-                });   
-                $.ajax({
-                    url : url + '/activate',
-                    type : 'POST',
-                    data : {
-                        "_token" : $('meta[name="csrf-token"]').attr('content'),
-                        contractID : id,
-                        contractActive : currDate,
-                        contractExpire : expireContract,
-                    },
-                    success : function(data,response){
-                        
-                    },
-                    error : function(error){
-            
-                    }
-                });
-            });
-        },
-        error : function(error){
-            throw error;
-        }
-    });
-
-    // swal({
-    //     title: "Create Active Contract?",
-    //     text: "Finalized This Quotation as A Contract",
-    //     type: "info",
-    //     showCancelButton: false,
-    //     confirmButtonClass: "btn-info",
-    //     confirmButtonText: "Ok",
-    //     closeOnConfirm: true,
-    //     timer : 1500
-    // },function(){
-    //     $.ajaxSetup({
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         }
-    //     });   
-    //     $.ajax({
-    //         url : url + '/activate',
-    //         type : 'POST',
-    //         data : {
-    //             "_token" : $('meta[name="csrf-token"]').attr('content'),
-    //             contractID : contractID,
-    //         },
-    //         success : function(data,response){
-    //             console.log(data);
-    //             swal({
-    //                 title: "Success",
-    //                 text: "Contract Activated",
-    //                 type: "success",
-    //                 showCancelButton: false,
-    //                 confirmButtonClass: "btn-success",
-    //                 confirmButtonText: "Ok",
-    //                 closeOnConfirm: true,
-    //                 timer : 1500
-    //             },
-    //             function(isConfirm){
-    //                 if(isConfirm){
-    //                     window.location = url;
-    //                 }
-    //             });           
-    //         },
-    //         error : function(error){
+                });           
+            },
+            error : function(error){
     
-    //         }
-    //     });
-    // });
+            }
+        });
+    });
 }

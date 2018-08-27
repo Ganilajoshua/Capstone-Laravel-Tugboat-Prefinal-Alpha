@@ -1,6 +1,12 @@
 //Display Info modal
 var url = '/administrator/maintenance/tugboat';
+$(document).ready(function(){
+    $('#maintenanceTree').addClass("active");
+    $('#tugboatMenu').addClass("active");
+});
 var maincounter;
+
+var appendIcon = `<i class="fas fa-ship mr-3"></i>`;
 function getData(id){
     console.log('hi');
     $.ajax({
@@ -13,7 +19,7 @@ function getData(id){
             $('#tugboatInfoModal').empty();
             console.log(data.main.datLastDrydocked);
             $('#tugboatName').html(data.main.strName);
-            $('#infoModalLabel').html(data.main.strName);      
+            $('#infoModalLabel').html(appendIcon + data.main.strName);      
             $('#tugboatLength').html(data.main.strLength);
             $('#tugboatBreadth').html(data.main.strBreadth);
             $('#tugboatDepth').html(data.main.strDepth);

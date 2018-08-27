@@ -1,7 +1,9 @@
 $(document).ready(function(){
     $('#transactionTree').addClass("active");
     $('#tConsignee').addClass("active");
+    $('#activeconsigneeMenu').addClass("inactive");
     $('#contractsMenu').addClass("active");
+    $('#contractRequestsMenu').addClass("inactive");
 
     $('.btnadd2').on('click',function(){
         $('.addModal2').modal('show');

@@ -22,8 +22,8 @@
         </button>
         <div class="mt-3">
             @if(count($employees)>0)    
-                <table class="detailedTable table table-striped text-center table-bordered mainTable" style="width:100%">
-                    <thead class="thead-dark">
+                <table class="detailedTable table table-striped text-center  mainTable" style="width:100%">
+                    <thead class="bg-primary">
                         <tr>
                             <th>Employees</th>
                             <th>Position</th>
@@ -50,8 +50,8 @@
                     </tbody>
                 </table>
             @else
-                <table class="detailedTable table table-striped text-center table-bordered mainTable" style="width:100%">
-                    <thead class="thead-dark">
+                <table class="detailedTable table table-striped text-center  mainTable" style="width:100%">
+                    <thead class="bg-primary">
                         <tr>
                             <th>Employees</th>
                             <th class="noSortAction">Action</th>

@@ -40,7 +40,7 @@
                     <div class="row">
                         <div class="col align-self-center">
                             <table class="table table-striped">
-                                <thead class="thead-dark">
+                                <thead class="bg-primary">
                                     <tr>
                                         <th scope="col">Main Information</th>
                                         <th scope="col"></th>

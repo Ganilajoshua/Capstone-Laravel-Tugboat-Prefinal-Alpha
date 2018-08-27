@@ -22,7 +22,27 @@ class ContractRequestsController extends Controller
     public function index()
     {
         
-        $company = DB::table('tblcontractlist as contracts')
+        $companyPending = DB::table('tblcontractlist as contracts')
+        ->join('tblcompany as company','contracts.intCCompanyID','company.intCompanyID')
+        // ->join('tblgoods as goods','company.intCGoodsID','goods.intGoodsID')
+        // ->where('company.boolDeleted', 0)
+        // ->where('contracts.intCQuotationID', null)
+        ->where('contracts.boolDeleted',0)
+        // ->where('contracts.enumStatus')
+        ->where('contracts.enumStatus','!=','Finalized')
+        // ->groupBy('contracts.enumStatus')  
+        ->get();
+        $companyRChanges = DB::table('tblcontractlist as contracts')
+        ->join('tblcompany as company','contracts.intCCompanyID','company.intCompanyID')
+        // ->join('tblgoods as goods','company.intCGoodsID','goods.intGoodsID')
+        // ->where('company.boolDeleted', 0)
+        // ->where('contracts.intCQuotationID', null)
+        ->where('contracts.boolDeleted',0)
+        // ->where('contracts.enumStatus')
+        ->where('contracts.enumStatus','!=','Finalized')
+        // ->groupBy('contracts.enumStatus')  
+        ->get();
+        $companyAccepted = DB::table('tblcontractlist as contracts')
         ->join('tblcompany as company','contracts.intCCompanyID','company.intCompanyID')
         // ->join('tblgoods as goods','company.intCGoodsID','goods.intGoodsID')
         // ->where('company.boolDeleted', 0)
@@ -61,8 +81,10 @@ class ContractRequestsController extends Controller
         // ->where('tblcontractlist.intCTermsConditionID', null)
         // ->get();
         return view('ContractsRequests.index')
-        ->with('company',$company)
+        ->with('companyPending',$companyPending)
         ->with('company2',$company2)
+        ->with('companyRChanges',$companyRChanges)
+        ->with('companyAccepted',$companyAccepted)
         ->with('quotations',$quotations);
         // return response()->json(['company'=>$company]);
     }
@@ -93,7 +115,7 @@ class ContractRequestsController extends Controller
         $contract->strContractListTitle = $request->contractTitle;
         $contract->strContractListDesc = $request->contractDetails;
         $contract->intCQuotationID = $request->quotationsID;
-        $contract->enumConValidity  = $request->contractValidity;
+    
         $contract->enumStatus = 'Created';
         $contract->save();
         return response()->json(['contract'=>$contract]);
@@ -160,17 +182,10 @@ class ContractRequestsController extends Controller
     {
         //
     }
-    public function getactive($intContractListID)
-    {
-        $contract = Contract::findOrFail($intContractListID);
-        return response()->json(['contract'=>$contract]);
-    }
     public function activate(Request $request){
         $contract = Contract::findOrFail($request->contractID);
         $contract->timestamps = false;
         $contract->enumStatus = 'Finalized';
-        $contract->datContractActive = $request->contractActive;
-        $contract->datContractExpire = $request->contractExpire;
         $contract->save();
 
         return response()->json(['contract'=>$contract]);

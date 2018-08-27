@@ -140,7 +140,6 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::post('/consignee/activate','ConsigneeAccountsController@activate');
         //Consignee Contracts
         Route::get('/contractrequests/{intContractID}/create','ContractRequestsController@create');
-        Route::get('/contractrequests/{intContractID}/getactive','ContractRequestsController@getactive');
         Route::post('/contractrequests/show','ContractRequestsController@show');
         Route::post('/contractrequests/store','ContractRequestsController@store');
         Route::post('/contractrequests/activate','ContractRequestsController@activate');
@@ -180,8 +179,6 @@ Route::group(['prefix'=>'consignee/'],function(){
     // Route::resource('/')
     Route::post('/logout','LoginControllers\UserLoginController@logout');
     Route::get('/dashboard','ConsigneeControllers\ConsigneeController@index');
-    Route::post('/dashboard/getnotifs','ConsigneeControllers\ConsigneeController@getnotifs');
-    
     //Contract Request
     Route::resource('/contracts','ConsigneeControllers\ContractsController');
     Route::get('/contracts/{intContractListID}/show','ConsigneeControllers\ContractsController@show');

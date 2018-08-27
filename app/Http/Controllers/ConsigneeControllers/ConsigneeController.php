@@ -5,7 +5,6 @@ namespace App\Http\Controllers\ConsigneeControllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Company;
-use App\Contract;
 use App\JobOrder;
 use DB;
 use Auth;
@@ -95,9 +94,5 @@ class ConsigneeController extends Controller
     public function destroy($id)
     {
         //
-    }
-    public function getnotifs(Request $request){
-        $contract = Contract::where('intCCompanyID',Auth::user()->intUCompanyID)->get();
-        return response()->json(['contract'=>$contract]);
     }
 }

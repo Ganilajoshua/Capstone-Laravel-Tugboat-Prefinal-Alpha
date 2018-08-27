@@ -150,7 +150,7 @@
                                         <h4 class=" text-white">{{$contract[0]->strContractListTitle}}</h4>
                                     </div>
                                     <div class="card-body">
-                                        <a href="#" id="finalContract" onclick="showFinalContract({{$contract[0]->intContractListID}})" class="float-left mt-2">
+                                        <a href="#" onclick="showContract({{$contract[0]->intContractListID}})" class="float-left mt-2" data-toggle="modal" data-target="#viewCContractInfo">
                                         More Info <i class="ion ion-ios-arrow-right"></i>
                                         </a>
                                         <button type="button" class="delItem btn btn-sm btn-danger waves-effect waves-circle float-right" data-toggle="tooltip" title="Delete">
@@ -172,5 +172,4 @@
 
     </section>
     @include('Consignee.Contracts.info')
-    @include('Consignee.Contracts.finalcontract')
 @endsection

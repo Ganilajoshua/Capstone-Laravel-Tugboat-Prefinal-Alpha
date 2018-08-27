@@ -24,8 +24,8 @@
         <input type="hidden" id="userData" value="{{$user}}">
         <div class="mt-3">
             @if(count($berths)>0)    
-                <table class="detailedTable table table-striped text-center table-bordered mainTable" style="width:100%">
-                    <thead class="thead-dark">
+                <table class="detailedTable table table-striped text-center  mainTable" style="width:100%">
+                    <thead class="bg-primary">
                         <tr>
                             <th>Berths</th>
                             <th>Pier</th>
@@ -52,8 +52,8 @@
                     </tbody>
                 </table>
             @else
-                <table class="detailedTable table table-striped text-center table-bordered mainTable" style="width:100%">
-                    <thead class="thead-dark">
+                <table class="detailedTable table table-striped text-center  mainTable" style="width:100%">
+                    <thead class="bg-primary">
                         <tr>
                             <th>Berth</th>
                             <th class="noSortAction">Action</th>

@@ -3,7 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="addModalLabel">Add Goods</h5>
-                <button id="closeEdit" type="button" class="close modalClose" aria-label="Close">
+                <button type="button" class="close modalClose" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
