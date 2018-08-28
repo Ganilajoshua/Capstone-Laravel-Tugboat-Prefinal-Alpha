@@ -140,6 +140,7 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::post('/consignee/activate','ConsigneeAccountsController@activate');
         //Consignee Contracts
         Route::get('/contractrequests/{intContractID}/create','ContractRequestsController@create');
+        Route::get('/contractrequests/{intContractID}/getactive','ContractRequestsController@getactive');
         Route::post('/contractrequests/show','ContractRequestsController@show');
         Route::post('/contractrequests/store','ContractRequestsController@store');
         Route::post('/contractrequests/activate','ContractRequestsController@activate');

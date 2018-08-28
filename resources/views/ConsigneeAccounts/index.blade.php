@@ -31,42 +31,60 @@
             </div>
             <div class="card-body">
                     <div class="consigneeRequests animated zoomIn fast">
-                        
-                        <div class="table-responsive">
-                            <table class="detailedTable table table-striped table-bordered text-center mainTable" style="width:100%">
-                                <thead class="bg-primary">
-                                    <tr>
-                                        <th>Consignee</th>
-                                        <th>Email</th>
-                                        <th class="noSortAction">Status</th>
-                                        <th class="noSortAction">Action</th>
-                                    </tr>
-                                </thead>  
-                                <tbody>
+                        @if(count($inactiveuser)>0)
+                            <div class="table-responsive">
+                                <table class="detailedTable table table-striped table-bordered text-center mainTable" style="width:100%">
+                                    <thead class="bg-primary">
                                         <tr>
-                                            <td></td>
-                                            <td><span class="block-email"><a href="#"></a></span></td>
-                                            <td> 
-                                                <div class="checkbox activate ml-3">
-                                                    <label>
-                                                        <input type="checkbox" id="checkboxStatus" data-size="small" data-toggle="toggle"data-onstyle="success"data-offstyle="danger" data-on="Active" data-off="Inactive">
-                                                    </label>
-                                                </div> 
-                                            </td>
-                                            <td>
-                                                <div class="ml-1 mr-1">
-                                                    <button class="gotoInvoices btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
-                                                        <i class="bigIcon ion ion-ios-eye"></i>
-                                                    </button>
-                                                </div>  
-                                            </td>
+                                            <th>Consignee</th>
+                                            <th>Email</th>
+                                            <th class="noSortAction">Status</th>
+                                            <th class="noSortAction">Action</th>
                                         </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                                    </thead>  
+                                    <tbody>
+                                        @foreach($inactiveuser as $inactiveuser)
+                                            <tr>
+                                                <td>{{$inactiveuser->strCompanyName}}</td>
+                                                <td><span class="block-email"><a href="#"></a></span></td>
+                                                <td> 
+                                                    <div class="checkbox ml-3" data-id="{{$inactiveuser->id}}">
+                                                        <label>
+                                                            <input type="checkbox" id="checkboxStatuss" data-size="small" data-width="" data-toggle="toggle"data-onstyle="success"data-offstyle="danger" data-on="Active" data-off="Inactive" data-id="{{$inactiveuser->id}}">
+                                                        </label>
+                                                    </div>                                                    
+                                                </td>
+                                                <td>
+                                                    <div class="ml-1 mr-1">
+                                                        <button class="gotoInvoices btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
+                                                            <i class="bigIcon ion ion-ios-eye"></i>
+                                                        </button>
+                                                    </div>  
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @else
+                            <div class="table-responsive">
+                                <table class="detailedTable table table-striped table-bordered text-center mainTable" style="width:100%">
+                                    <thead class="bg-primary">
+                                        <tr>
+                                            <th>Consignee</th>
+                                            <th>Email</th>
+                                            <th class="noSortAction">Status</th>
+                                            <th class="noSortAction">Action</th>
+                                        </tr>
+                                    </thead>  
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
                     </div>
                     <div class="consigneeActive animated zoomIn fast">
-                        @if(count($user)>0)    
+                        @if(count($activeuser)>0)    
                         <div class="table-responsive">
                             <table class="detailedTable table table-striped table-bordered text-center mainTable" style="width:100%">
                                 <thead class="bg-primary">
@@ -78,29 +96,23 @@
                                     </tr>
                                 </thead>  
                                 <tbody>
-                                    @foreach($user as $user)
+                                    @foreach($activeuser as $activeuser)
                                         <tr>
-                                            <td>{{$user->strCompanyName}}</td>
-                                            <td><span class="block-email"><a href="mailto:{{$user->email}}">{{$user->email}}</a></span></td>
+                                            <td>{{$activeuser->strCompanyName}}</td>
+                                            <td><span class="block-email"><a href="mailto:{{$activeuser->email}}">{{$activeuser->email}}</a></span></td>
                                             <td> 
-                                                {{-- <div class="checkbox activate" data-id="{{$user->id}}">
+                                                {{-- <div class="checkbox activate" data-id="{{$activeuser->id}}">
                                                     <label>
-                                                        <input type="checkbox" id="checkboxStatus" data-size="small" data-toggle="toggle"data-onstyle="success"data-offstyle="danger" data-on="Active" data-off="Inactive" data-id="{{$user->id}}">
+                                                        <input type="checkbox" id="checkboxStatus" data-size="small" data-toggle="toggle"data-onstyle="success"data-offstyle="danger" data-on="Active" data-off="Inactive" data-id="{{$activeuser->id}}">
                                                     </label>
                                                 </div> --}}
-                                                @if($user->isActive == 0)
-                                                    <div class="checkbox ml-3" data-id="{{$user->id}}">
-                                                        <label>
-                                                            <input type="checkbox" id="checkboxStatuss" data-size="small" data-width="" data-toggle="toggle"data-onstyle="success"data-offstyle="danger" data-on="Active" data-off="Inactive" data-id="{{$user->id}}">
-                                                        </label>
-                                                    </div>
-                                                @else
-                                                    <div class="checkbox ml-3" data-id="{{$user->id}}" checked>
-                                                        <label>
-                                                            <input type="checkbox" checked id="checkboxStatuss" data-size="small" data-width="" data-toggle="toggle"data-onstyle="success"data-offstyle="danger" data-on="Active" data-off="Inactive" data-id="{{$user->id}}">
-                                                        </label>
-                                                    </div>
-                                                @endif
+                                                
+                                                <div class="checkbox ml-3" data-id="{{$activeuser->id}}" checked>
+                                                    <label>
+                                                        <input type="checkbox" checked id="checkboxStatuss" data-size="small" data-width="" data-toggle="toggle"data-onstyle="success"data-offstyle="danger" data-on="Active" data-off="Inactive" data-id="{{$activeuser->id}}">
+                                                    </label>
+                                                </div>
+                                                
                                             </td>
                                             <td style="width:15%">
                                                 <div class="ml-1 mr-1">

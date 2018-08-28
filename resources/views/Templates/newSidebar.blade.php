@@ -44,6 +44,7 @@
                                 <li id="goodsMenu"><a href="/administrator/maintenance/goods"><i class="fas fa-cube"></i>Goods</a></li>
                                 <li id="tugboatTypeMenu"><a href="/administrator/maintenance/tugboattype"><i class="ion ion-android-boat"></i>Tugboat Type</a></li>
                                 <li id="tugboatMenu"><a href="/administrator/maintenance/tugboat"><i class="ion ion-android-boat"></i>Tugboats</a></li>
+                                <li id="quotationsMenu"><a href="/administrator/maintenance/quotations"><i class="fas fa-life-ring"></i>Quotations</a></li>
                             @elseif(Auth::user()->enumUserType == 'Affiliates')
                                 <li id="positionMenu"><a href="/administrator/maintenance/position"><i class="fas fa-sitemap"></i>Position</a></li>
                                 <li id="employeesMenu"><a href="/administrator/maintenance/employees"><i class="ion ion-person"></i> Employee</a></li>
@@ -54,7 +55,6 @@
                                 {{-- <li id="standardMenu"><a href="/administrator/maintenance/standard"><i class="fas fa-life-ring"></i>Standard Rates</a></li>
                                 <li id="termsconditionMenu"><a href="/administrator/maintenance/termsandcondition"><i class="fas fa-life-ring"></i>Terms and Conditions</a></li>
                                 <li id="agreementsMenu"><a href="/administrator/maintenance/agreements"><i class="ion ion-android-document"></i>Agreements</a></li>
-                                <li id="quotationsMenu"><a href="/administrator/maintenance/quotations"><i class="fas fa-life-ring"></i>Quotations</a></li> --}}
                                 {{-- <li id="usertypeMenu"><a href="/administrator/maintenance/usertype"><i class="ion ion-person-stalker"></i>User Type</a></li> --}}
                             {{-- @elseif(Auth::user()->enumUserType == 'Affiliates')
                                 <li id="positionMenu"><a href="/administrator/maintenance/position"><i class="fas fa-sitemap"></i>Position</a></li>

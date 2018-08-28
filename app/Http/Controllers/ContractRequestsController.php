@@ -186,8 +186,15 @@ class ContractRequestsController extends Controller
         $contract = Contract::findOrFail($request->contractID);
         $contract->timestamps = false;
         $contract->enumStatus = 'Finalized';
+        $contract->datContractActive = $request->contractActive;
+        $contract->datContractExpire = $request->contractExpire;
+        
         $contract->save();
-
+        return response()->json(['contract'=>$contract]);
+    }
+    public function getactive($intContractListID)
+    {
+        $contract = Contract::findOrFail($intContractListID);
         return response()->json(['contract'=>$contract]);
     }
     public function getnotifs(Request $request){

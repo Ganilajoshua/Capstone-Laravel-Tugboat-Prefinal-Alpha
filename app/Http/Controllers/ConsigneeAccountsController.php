@@ -19,10 +19,15 @@ class ConsigneeAccountsController extends Controller
      */
     public function index()
     {
-        $user = DB::table('users as user')
+        $activeuser = DB::table('users as user')
         ->join('tblcompany as company','user.intUCompanyID','company.intCompanyID') 
+        ->where('user.isActive',1)
         ->get();
-        return view('ConsigneeAccounts.index',compact('user'));
+        $inactiveuser = DB::table('users as user')
+        ->join('tblcompany as company','user.intUCompanyID','company.intCompanyID') 
+        ->where('user.isActive',0)
+        ->get();
+        return view('ConsigneeAccounts.index',compact('activeuser','inactiveuser'));
     }
 
     /**
