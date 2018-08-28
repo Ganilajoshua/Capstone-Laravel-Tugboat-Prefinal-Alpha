@@ -25,7 +25,9 @@ function createJobOrder(){
     var location = $('#destinationLocation').val();
     var dtmETA = moment(eta).format("Y-MM-D HH:mm:ss");
     var dtmETD = moment(etd).format("Y-MM-D HH:mm:ss");
-    console.log(dtmETA, dtmETD);
+    var berth = $('#addBerth option:selected').text();
+    var berthID = $('#addBerth').val();
+    console.log(dtmETA, dtmETD, berth, berthID);
     console.log(location, eta, cargo, weight,goods,desc,etd);
     // return false;
     $.ajaxSetup({   
@@ -45,6 +47,7 @@ function createJobOrder(){
             jobWeight : weight,
             jobGoods : goods,
             jobDesc : desc,
+            jobBerth : berthID,
         }, 
         beforeSend: function (request) {
             return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));

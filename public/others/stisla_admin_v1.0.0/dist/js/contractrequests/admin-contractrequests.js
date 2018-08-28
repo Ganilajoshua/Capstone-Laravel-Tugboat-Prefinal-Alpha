@@ -1,4 +1,7 @@
 $(document).ready(function(){
+    $('.btnButtons').on('click',function(e){
+        e.preventDefault();
+    })
 // Change Views
     $('.showPending').on('click',function(){
         $('.contractPending').css('display','block');
@@ -17,6 +20,10 @@ $(document).ready(function(){
     });
     $('.createContract').on('click',function(){
         $('.createContracts').css('display', 'block');
+        $('.detLayout').css('display','none');
+    });
+    $('.btnEditRChanges').on('click',function(){
+        $('.editContracts').css('display', 'block');
         $('.detLayout').css('display','none');
     });
     $('.btnBack').on('click',function(s) {

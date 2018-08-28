@@ -66,7 +66,7 @@
             </div> --}}
         </div>
         <div class="row">
-            <div class="col-12 col-sm-12 col-lg-6">
+            <div class="col-12 col-sm-12 col-lg-4">
                 <div class="form-group">
                     <label for="destinationLocation">Destination Location<sup class="text-primary">&#10033;</sup></label>
                     <input id="destinationLocation" type="text" class="form-control" placeholder="Pandacan, Manila" required>
@@ -76,7 +76,7 @@
                     
                 </div>
             </div>
-            <div class="col-12 col-sm-12 col-lg-6">
+            <div class="col-12 col-sm-12 col-lg-4">
                 <div class="form-group">
                     <label for="addGoods1">Goods to be delivered<sup class="text-primary">&#10033;</sup></label>
                     {{-- <input type="text" class="form-control" id="addGoods1" placeholder="Very Good" required> --}}
@@ -84,6 +84,21 @@
                         <option>Select Goods</option>
                         @foreach($goods as $goods)
                             <option value="{{$goods->intGoodsID}}">{{$goods->strGoodsName}}</option>
+                        @endforeach
+                    </select>
+                    <div class="invalid-feedback">
+                        Please fill in the Estimated Goods to be delivered.
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-lg-4">
+                <div class="form-group">
+                    <label for="addBerth">Select Berth<sup class="text-primary">&#10033;</sup></label>
+                    {{-- <input type="text" class="form-control" id="addBerth" placeholder="Berth" required> --}}
+                    <select id="addBerth" name="addBerth" class="form-control">
+                        <option>Select Berth</option>
+                        @foreach($berth as $berth)
+                            <option value="{{$berth->intBerthID}}">{{$berth->strPierName}} - {{$berth->strBerthName}}</option>
                         @endforeach
                     </select>
                     <div class="invalid-feedback">

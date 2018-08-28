@@ -9,7 +9,7 @@ class Quotations extends Model
     protected $table = 'tblquotation';
     protected $primaryKey = 'intQuotationID';
     protected $fillable = [
-        'intQAgreementID',
+        'intQContractListID',
         'strQuotationTitle',
         'strQuotationDesc',
         'isAssigned', 

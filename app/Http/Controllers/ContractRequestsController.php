@@ -59,14 +59,14 @@ class ContractRequestsController extends Controller
         ->join('tblgoods',function($join){
             $join->on('tblcompany.intCGoodsID', '=','tblgoods.intGoodsID');
         })
-        ->join('tblquotation',function($join){
-            $join->on('tblquotation.intQuotationID', '=','tblcontractlist.intCQuotationID');
-        })
-        ->where('tblcontractlist.intCQuotationID', '!=' ,null)
+        // ->join('tblquotation',function($join){
+        //     $join->on('tblquotation.intQuotationID', '=','tblcontractlist.intCQuotationID');
+        // })
+        // ->where('tblcontractlist.intCQuotationID', '!=' ,null)
         // ->where('tblcontractlist.intCTermsConditionID', '!=' , null)
         ->where('tblcompany.boolDeleted', 0)
         ->get();
-        $quotations = Quotations::where('boolDeleted',0)->where('isAssigned',0)->get();
+        $quotations = Quotations::where('boolDeleted',0)->get();
        
 
         // ->join('tblcompany',function($join){
@@ -111,13 +111,27 @@ class ContractRequestsController extends Controller
     public function store(Request $request)
     {
         $contract = Contract::findOrFail($request->contractID);
+        $quotationID = $contract->intContractListID;
         $contract->timestamps = false;
         $contract->strContractListTitle = $request->contractTitle;
         $contract->strContractListDesc = $request->contractDetails;
-        $contract->intCQuotationID = $request->quotationsID;
-    
+        $contract->enumConValidity = $request->contractValidity;
+        
         $contract->enumStatus = 'Created';
         $contract->save();
+
+        $quotation = new Quotations; 
+        $quotation->timestamps = false;
+        $quotation->fltQuotationTDelayFee = $request->contractDelayFee;
+        $quotation->fltQuotationViolationFee = $request->contractViolationFee;
+        $quotation->fltQuotationConsigneeLateFee = $request->contractLateFee;
+        $quotation->fltMinDamageFee = $request->contractMinDamage;
+        $quotation->fltMaxDamageFee = $request->contractMaxDamage;
+        $quotation->fltStandardRate = $request->contractStandardFee;
+        $quotation->intDiscount = $request->discount;
+        $quotation->intQContractListID = $quotationID;
+        
+        $quotation->save();
         return response()->json(['contract'=>$contract]);
     }
 
@@ -192,6 +206,21 @@ class ContractRequestsController extends Controller
         $contract->save();
         return response()->json(['contract'=>$contract]);
     }
+    public function requestchanges($intContractListID)
+    {
+        $contractList = Contract::findOrFail($intContractListID);
+        $quotation = Quotations::where('intQContractListID',$intContractListID)->get();
+        $company = Company::where('intCompanyID',$contractList->intCCompanyID)->get();
+        // $contract = DB::table('tblcontractlist as contract')
+        // ->join('tblquotation as quotation','contract.intContractListID','quotation.intQContractListID')
+        // ->where('contra')
+        // ->get();
+        // $compname = $contract->intCCompanyID;
+        // Contract::findOrFail($intContractID);
+        // $contracts = $contract->intCCompanyID;
+        // $company = Company::findOrFail($contracts);
+        return response()->json(['company'=>$company,'quotation'=>$quotation,'contract'=>$contractList]);
+    }
     public function getactive($intContractListID)
     {
         $contract = Contract::findOrFail($intContractListID);
@@ -202,5 +231,31 @@ class ContractRequestsController extends Controller
         ->where('enumStatus','!=','Created')
         ->get();
         return response()->json(['contract'=>$contract]);
+    }
+    public function saverequestchanges(Request $request){
+        $contract = Contract::findOrFail($request->editHCompany);
+        $quotationID = $contract->intContractListID;
+        $contract->timestamps = false;
+        $contract->strContractListTitle = $request->editContractTitle;
+        $contract->strContractListDesc = $request->editContractD;
+        $contract->enumConValidity = $request->editContractV;
+        
+        $contract->enumStatus = 'Created';
+        $contract->save();
+        // $quotes = Quotations::where('intQContractListID',$quotationID)->get();
+        // $quotation = new Quotations; 
+        $quotation = Quotations::findOrFail($request->editHQuote);
+        $quotation->timestamps = false;
+        $quotation->fltQuotationTDelayFee = $request->editDelayFee;
+        $quotation->fltQuotationViolationFee = $request->editViolationFee;
+        $quotation->fltQuotationConsigneeLateFee = $request->editLateFee;
+        $quotation->fltMinDamageFee = $request->editMinDamage;
+        $quotation->fltMaxDamageFee = $request->editMaxDamage;
+        $quotation->fltStandardRate = $request->editStandardFee;
+        $quotation->intDiscount = $request->editD;
+        $quotation->intQContractListID = $quotationID;
+        
+        $quotation->save();
+        return response()->json(['contract'=>$contract, 'quotation'=> $quotation]);
     }
 }

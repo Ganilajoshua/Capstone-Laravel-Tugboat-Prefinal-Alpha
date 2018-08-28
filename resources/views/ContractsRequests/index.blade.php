@@ -92,11 +92,11 @@
                                                     <td>{{$companyRChanges->strCompanyName}}</td>
                                                     <td>
                                                         <div class="ml-1 mr-1">
-                                                            <button onclick="getBerth({{$companyRChanges->intContractListID}})" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Edit" role="button">
+                                                            <button onclick="requestingForChanges({{$companyRChanges->intContractListID}})" class="btnEditRChanges btn btn-sm btn-secondary" data-toggle="tooltip" title="Edit" role="button">
                                                                 <i class="miniIcon fas fa-edit custSize"></i>
                                                             </button>
-                                                            <button onclick="deleteBerth({{$companyRChanges->intContractListID}})" class="btn btn-sm btn btn-danger" data-toggle="tooltip" title="Delete">
-                                                                <i class="miniIcon fas fa-trash custSize"></i>
+                                                            <!-- <button onclick="deleteRequestChanges({{$companyRChanges->intContractListID}})" class="btn btn-sm btn btn-danger" data-toggle="tooltip" title="Delete">
+                                                                <i class="miniIcon fas fa-trash custSize"></i> -->
                                                             </button>
                                                         </div>
                                                     </td>
@@ -165,6 +165,7 @@
                 </div>
             </div>
             @include('ContractsRequests.create')
+            @include('ContractsRequests.edit')
         </div>
     </section>
     @include('ContractsRequests.info')
