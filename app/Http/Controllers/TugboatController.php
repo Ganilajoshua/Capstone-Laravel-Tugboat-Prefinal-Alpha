@@ -211,14 +211,16 @@ class TugboatController extends Controller
         $specs->strDrive = $request->drive;
         $specs->strCylinderperCycle = $request->cylinderpercycle;
         $specs->strAuxEngine = $request->auxEngine;
-        $specs->strBuiltIn = $request->builtIn;
+        $specs->strLocationBuilt = $request->builtIn;
         $specs->save();
+        return response()->json(['specs' => $specs]);
+
     }
     public function updateClass(Request $request)
     {
         $class = Tugboatclass::findOrFail($request->classID);
         $class->timestamps = false;
-        $class->strTugboatType = $request->tugboatType;
+        $class->intTCTugboatTypeID = $request->tugboatType;
         $class->strClassNum = $request->classNum;
         $class->strOfficialNum = $request->officialNum;
         $class->strIMONum = $request->imoNum;

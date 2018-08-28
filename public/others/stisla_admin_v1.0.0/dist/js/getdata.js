@@ -92,7 +92,7 @@ function infoEdit(){
             console.log('Drydocked',data.main.datLastDrydocked);
             console.log('classnum',data.class.strClassNum);
             console.log(data.class.strHomePort);
-            
+            $('#tugboatID').val(data.tugboat.intTugboatID);
             $('#editName').val(data.main.strName);
             $('#infoModalLabel').val(data.main.strName);      
             $('#editLength').val(data.main.strLength);
@@ -187,6 +187,7 @@ function editData(findid){
             $('#editHullMaterial').val(data.specs.strHullMaterial);
             $('#editDrive').val(data.specs.strDrive);
             $('#editAuxEngine').val(data.specs.strAuxEngine);
+
             var split = data.specs.strCylinderperCycle;
             splitted = split.split('/');
             cylinder = splitted[0];
@@ -584,7 +585,7 @@ function editSpecificationSubmit(){
     var cycle = $('#editCycle').val();
     var drive = $('#editDrive').val();
     var auxengine = $('#editAuxEngine').val();
-    var id = parseInt($('#editTugID').val());
+    var id = ($('#editTugID').val());
     var cylcycle = cylinder +'/'+ cycle ;
     console.log(cylcycle);
     console.log(id);

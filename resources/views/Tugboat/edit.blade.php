@@ -277,8 +277,10 @@
                                             <input type="text" class="form-control" id="editAuxEngine" placeholder="Tugboat Auxiliary Engine">
                                         </div>
                                     </div>
+                                    <input type="hidden" id="editTugID" name="editTugID">
                                 </div>
-                                <button type="submit" id="btnETSpecSubmit" class=" btn btn-primary float-right font-weight-bold waves-effect">Save Changes</button>
+                                <button onclick="editSpecificationSubmit()" type="button" class="btn btn-primary float-right font-weight-bold waves-effect">Save Changes</button>
+                                {{-- <button type="submit" id="btnETSpecSubmit" class=" btn btn-primary float-right font-weight-bold waves-effect">Save Changes</button> --}}
                             </form>
                         </div>
                         <!-- Tug Class Tab -->
@@ -404,7 +406,9 @@
                                     </div> --}}
                                     </div>
                                 </div>
-                                <button type="submit" id="btnETClassSubmit" class="btn btn-primary float-right font-weight-bold waves-effect mt-3">Save Changes</button>
+                                <button onclick="editClassificationSubmit()" type="button" class="btn btn-primary float-right font-weight-bold waves-effect">Save Changes</button>
+                                {{-- editClassificationSubmit --}}
+                                {{-- <button type="submit" id="btnETClassSubmit" class="btn btn-primary float-right font-weight-bold waves-effect mt-3">Save Changes</button> --}}
                             </form>
                         </div>
                     </div>
