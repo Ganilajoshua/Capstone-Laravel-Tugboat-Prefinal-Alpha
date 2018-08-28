@@ -271,7 +271,7 @@ function createActiveContract(contractID){
                 console.log(a);
                 // currDate = moment().add(data.contract.enumConValidity, 'Y').format('YYYY-MM-DD');
                 if(a == 6){
-                    expireContract = moment().add(a, 'M').format('YYYY-MM-DD');
+                    var expireContract = moment().add(a, 'M').format('YYYY-MM-DD');
                     console.log(expireContract);
                 }else if(a == 1){
                     expireContract = moment().add(a, 'Y').format('YYYY-MM-DD');
