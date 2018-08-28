@@ -46,8 +46,6 @@ function postQuotation(e){
     console.log($('#discountRange').val());
     console.log($('#addStandardRate').val());
 
-    var title = $('#addQuoteTitle').val();
-    var desc = $('.summernoteQuote').val();
     var standard = $('#addStandardRate').val();
     var delayFee = $('#addDelayFee').val();
     var violationFee = $('#addViolationFee').val();

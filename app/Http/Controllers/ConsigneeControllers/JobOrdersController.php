@@ -13,6 +13,7 @@ use App\Company;
 use App\Contract;
 use App\JobOrder;
 use App\Goods;
+use App\Berth;
 
 use Auth;
 use DB;
@@ -28,6 +29,9 @@ class JobOrdersController extends Controller
     {
         $goods =  Goods::where('boolDeleted',0)->get();
         $contract = Contract::where('intCCompanyID',Auth::user()->intUCompanyID)->get();
+        $berth = DB::table('tblberth as berth')
+        ->join('tblpier as pier','berth.intBPierID','pier.intPierID')
+        ->get();
         $createdjob = JobOrder::where('boolDeleted',0)
         ->where('intJOCompanyID',Auth::user()->intUCompanyID)
         ->where('enumStatus','Created')
@@ -55,8 +59,8 @@ class JobOrdersController extends Controller
         // ->get();
         
         return view('Consignee.Joborders.joborder',
-        compact('goods','createdjob','pendingjob','accepted','ongoing','finishedjob','contract'));
-        // return response()->json(['joborder'=>$goods,Auth::user()]);
+        compact('goods','createdjob','pendingjob','accepted','ongoing','finishedjob','contract','berth'));
+        // return response()->json(['joborder'=>$goods,Auth::user(),'berth'=>$berth]);
     }
 
     /**
@@ -76,6 +80,7 @@ class JobOrdersController extends Controller
         $joborder->dtmETD = Carbon::parse($request->jobETD)->format('Y/m/d H:i:s');
         $joborder->fltWeight = $request->jobWeight;
         $joborder->strJODesc = $request->jobDesc;
+        $joborder->intJOBerthID = $request->jobBerth;
         $joborder->enumStatus = 'Created';
         $joborder->save();
 

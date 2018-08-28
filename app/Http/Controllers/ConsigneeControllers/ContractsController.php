@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Company;
 use App\Contract;
-use App\Quotation;
+use App\Quotations;
 use App\QuotationFees;
 
 use Auth;
@@ -78,12 +78,13 @@ class ContractsController extends Controller
     public function show($intContractListID)
     {
         $contractList = Contract::findOrFail($intContractListID);    
+        $quotation = Quotations::where('intQContractListID',$intContractListID)->get();
         $contract = DB::table('tblcontractlist as contract')
-        ->join('tblquotation as quotation','contract.intCQuotationID','quotation.intQuotationID')
+        ->join('tblquotation as quotation','contract.intContractListID','quotation.intQContractListID')
         ->where('contract.intContractListID',$intContractListID)
-        ->select('contract.*','quotation.*')
+        ->where('quotation.intQContractListID',$intContractListID)
         ->get();
-        return response()->json(['contract'=>$contract]);
+        return response()->json(['contract'=>$contract,'quotation'=>$quotation]);
         
 
     }

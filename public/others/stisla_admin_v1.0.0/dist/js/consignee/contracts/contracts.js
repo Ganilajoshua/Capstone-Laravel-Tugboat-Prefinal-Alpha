@@ -61,51 +61,55 @@ function requestForChanges(){
         title: "Request for Change?",
         text: "Request changes for quotations",
         type: "info",
-        showCancelButton: false,
+        showCancelButton: true,
         confirmButtonClass: "btn-info",
         confirmButtonText: "Ok",
     },function(isConfirm){
-        // alert('bobo');
-         $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $.ajax({
-            url : url + '/requestchanges',
-            type : 'POST',
-            data : { 
-                "_token" : $('meta[name="csrf-token"]').attr('content'),    
-                contractID : contractID,
-            }, 
-            beforeSend: function (request) {
-                return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-            },
-            success : function(data){
-                console.log('success pota');
-                console.log(data);
-                swal({
-                    title: "Success",
-                    text: "Contract Requested",
-                    type: "success",
-                    showCancelButton: false,
-                    confirmButtonClass: "btn-success",
-                    confirmButtonText: "Ok",
-                    closeOnConfirm: true,
-                    timer : 2000
+        if (isConfirm) {
+            $('#viewCContractInfo').modal('hide');
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+    
+            $.ajax({
+                url : url + '/requestchanges',
+                type : 'POST',
+                data : { 
+                    "_token" : $('meta[name="csrf-token"]').attr('content'),    
+                    contractID : contractID,
+                }, 
+                beforeSend: function (request) {
+                    return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
                 },
-                function(isConfirm){
-                    if(isConfirm){
-                    }
-                });                       
-                setTimeout(window.location = url, 2000); 
-            },
-            error : function(error){
-                throw error;
-            }
-
-        });
+                success : function(data){
+                    console.log('success pota');
+                    console.log(data);
+                    swal({
+                        title: "Success",
+                        text: "Contract Requested",
+                        type: "success",
+                        showCancelButton: false,
+                        confirmButtonClass: "btn-success",
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: true,
+                        timer : 2000
+                    },
+                    function(isConfirm){
+                        if(isConfirm){
+                        }
+                    });                       
+                    setTimeout(window.location = url, 2000); 
+                },
+                error : function(error){
+                    throw error;
+                }
+    
+            });
+        } else {
+            $('#viewCContractInfo').modal('show');
+          }
     });
 }
 function showContract(showID){
@@ -124,8 +128,6 @@ function showContract(showID){
                 var appendData =
                 "<h2>"+ data.contract[0].strContractListTitle +"</h2>" +
                 "<p>"+ data.contract[0].strContractListDesc +"</p>" + 
-                "<h3>"+ data.contract[0].strQuotationTitle +"</h3>"+
-                "<p>"+ data.contract[0].strQuotationDesc +"</p>" +
                 "<p> Standard Rate : "+ data.contract[0].fltStandardRate +"</p>" +
                 "<p> Tugboat Delay Fee : "+ data.contract[0].fltQuotationTDelayFee +"</p>" +
                 "<p> Violation Fee : "+ data.contract[0].fltQuotationViolationFee +"</p>" +

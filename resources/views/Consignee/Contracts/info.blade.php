@@ -48,7 +48,7 @@
             <input type="hidden" id="contractsID">
             <div class="modal-footer">
                 <button onclick="requestForChanges()" class="btn btn-primary waves-effect" data-toggle="modal">Request for Changes</button>
-                <button onclick="acceptContractQuotation()" class="btn btn-primary waves-effect" data-toggle="modal" data-target="#editContractInfo">Accept Contract</button>
+                <button onclick="acceptContractQuotation()" class="btn btn-primary waves-effect btnButtons" data-toggle="modal" data-target="#editContractInfo">Accept Contract</button>
             </div>
         </div>
     </div>

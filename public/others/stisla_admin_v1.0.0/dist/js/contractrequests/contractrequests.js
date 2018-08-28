@@ -80,16 +80,18 @@ function createContracts(contractID){
 }
 function storeContracts(){
     var id = $('#hideCompanyID').val();
+    var validity = $('#contractValidity').val();
     var title = $('#addContractTitle').val();
     var details = $('#addContractDetails').val();
-    // var standard = $('#addStandard').val();
-    // var agreements = $('#addAgreements').val();
-    // var termscondition = $('#addTermsandCondition').val();
-    var quotation = $('#addQuotations').val();
+    var delayFee = $('#addDelayFee').val();
+    var violationFee = $('#addViolationFee').val();
+    var lateFee = $('#addLateFee').val();
+    var standardFee = $('#addStandardRate').val();
+    var minDamage = $('#minDamageFee').val();
+    var maxDamage= $('#maxDamageFee').val();
+    var discount = $('#discountRange').val();
     console.log(id);
     console.log(title, details);
-    // console.log(standard, agreements);
-    console.log(quotation);
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -103,10 +105,14 @@ function storeContracts(){
             contractID : id,
             contractTitle : title,
             contractDetails : details,
-            // standardID : standard,
-            // agreementID : agreements,
-            // termsID : termscondition,
-            quotationsID : quotation
+            contractValidity : validity,
+            contractDelayFee : delayFee,
+            contractViolationFee : violationFee,
+            contractLateFee : lateFee,
+            contractStandardFee : standardFee,
+            contractMinDamage : minDamage,
+            contractMaxDamage : maxDamage,
+            contractDiscount : discount,
         },
         success : function(data,response){
             console.log(data);
@@ -139,66 +145,34 @@ function showContracts(){
     
     var title = $('#addContractTitle').val();
     var details = $('#addContractDetails').val();
-    // var standard = $('#addStandard').val();
-    // var agreements = $('#addAgreements').val();
-    // var termscondition = $('#addTermsandCondition').val();
-    var quotation = $('#addQuotations').val();
+    var delayFee = $('#addDelayFee').val();
+    var violationFee = $('#addViolationFee').val();
+    var lateFee = $('#addLateFee').val();
+    var standardFee = $('#addStandardRate').val();
+    var minDamage = $('#minDamageFee').val();
+    var maxDamage= $('#maxDamageFee').val();
+    var discount = $('#discountRange').val();
     var contractID = $('#hideCompanyID').val();
-    console.log(quotation);
-    console.log(id);
-    console.log(validity);
     if(validity == 6){
         var currDate = moment().add(validity, 'M').format('YYYY-MM-DD');
     }else{
         var currDate = moment().add(validity, 'Y').format('YYYY-MM-DD');
     }
-    // var exp =(validity, 'M').format('YYYY-MM-DD');
     console.log(currDate);
     // return false;
-
-    // if(quotation == 0 && standard == 0){
-    //     swal({
-    //         title: "Must Select A Value",
-    //         text: "Please Select a Quotation or a Standard Rate",
-    //         type: "error",
-    //         showCancelButton: true,
-    //         confirmButtonClass: "btn-danger waves-effect",
-    //         confirmButtonText: "Ok",
-    //         closeOnConfirm: true
-    //     });
-    //     return false;
-    // }
-    console.log(contractID);
-    // return false;
     $('.modalContractDetails').empty();
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });   
-    $.ajax({
-        url : url + '/show',
-        type : 'POST',
-        data : {
-            "_token" : $('meta[name="csrf-token"]').attr('content'),
-            // standardID : standard,
-            quotationsID : quotation
-        },
-        success : function(data,response){
-            console.log(data);
+
             // if(data.standard == null){
                 var appendData =
                 "<h2>"+ title +"</h2>" +
                 "<p>"+ details +"</p>" + 
-                "<h3>"+ data.quotations.strQuotationTitle +"</h3>"+
-                "<p>"+ data.quotations.strQuotationDesc +"</p>" +
-                "<p> Standard Rate : "+ data.quotations.fltStandardRate +"</p>" +
-                "<p> Tugboat Delay Fee : "+ data.quotations.fltQuotationTDelayFee +"</p>" +
-                "<p> Violation Fee : "+ data.quotations.fltQuotationViolationFee +"</p>" +
-                "<p> Minimum Damage Fee(s) : "+ data.quotations.fltQuotationConsigneeLateFee +"</p>" +
-                "<p> Minimum Damage Fee(s) : "+ data.quotations.fltMinDamageFee +"</p>" +
-                "<p> Maximum Damage Fee(s) : "+ data.quotations.fltMaxDamageFee +"</p>" +
-                "<p> Maximum Discount : "+ data.quotations.intDiscount +"</p>";
+                "<p> Standard Rate : "+ standardFee +"</p>" +
+                "<p> Consignee Late Fee : "+ lateFee +"</p>" +
+                "<p> Tugboat Delay Fee : "+ delayFee +"</p>" +
+                "<p> Violation Fee : "+ violationFee +"</p>" +
+                "<p> Minimum Damage Fee(s) : "+ minDamage +"</p>" +
+                "<p> Maximum Damage Fee(s) : "+ maxDamage +"</p>" +
+                "<p> Maximum Discount : "+ discount +"</p>";
                 $(appendData).appendTo('.modalContractDetails');
                 $('#viewContractInfo').modal('show');
                 
@@ -239,11 +213,6 @@ function showContracts(){
             //     $('#viewContractInfo').modal('show');
             // }
             
-        },
-        error : function(error){
-
-        }
-    });
 }
 function createActiveContract(contractID){
     //Comment
@@ -320,6 +289,96 @@ function createActiveContract(contractID){
         },
         error : function(error){
             throw error;
+        }
+    });
+}
+function requestingForChanges(contractID){
+    console.log(contractID);
+    $.ajax({
+        url : url + '/' + contractID + '/requestchanges',
+        type : 'GET',
+        dataType : 'JSON',
+        success : function(data, response){
+            console.log(data);
+            $('.companyNameHolder').html(data.company[0].strCompanyName);
+            console.log(data.company.intCompanyID);
+            $('#hideCompanyID').val(data.contract.intContractListID);
+            $('#hideQuotationID').val(data.quotation[0].intQuotationID);
+            $('#editContractTitle').val(data.contract.strContractListTitle);
+            $('#editContractValidity').val(data.contract.enumConValidity);
+            $('#editContractDetails').summernote('code',data.contract.strContractListDesc);
+            $('#editDelayFee').val(data.quotation[0].fltQuotationTDelayFee);
+            $('#editViolationFee').val(data.quotation[0].fltQuotationViolationFee);
+            $('#editLateFee').val(data.quotation[0].fltQuotationConsigneeLateFee);
+            $('#editStandardRate').val(data.quotation[0].fltStandardRate);
+            $('#editMinDamage').val(data.quotation[0].fltMinDamageFee);
+            $('#editMaxDamageFee').val(data.quotation[0].fltMaxDamageFee);
+            $('#editDiscountRange').val(data.quotation[0].intDiscount);
+            // $('#hideCompanyID').val(data.contract.intContractListID);
+            $('.editContracts').css('display','block');
+            $('.detLayout').css('display','none');
+        },
+        error : function(error){
+            throw error;
+        }
+    });
+}
+function saveContracts(){
+    var editHideCompany = $('#hideCompanyID').val();
+    var editHideQuotation = $('#hideQuotationID').val();
+    var editContractTitle = $('#editContractTitle').val();
+    var editContractValid = $('#editContractValidity').val();
+    var editContractDet = $('#editContractDetails').val();
+    var editDelay = $('#editDelayFee').val();
+    var editViolation = $('#editViolationFee').val();
+    var editLate = $('#editLateFee').val();
+    var editStandard = $('#editStandardRate').val();
+    var editMinD = $('#editMinDamage').val();
+    var editMaxD = $('#editMaxDamageFee').val();
+    var editDiscount = $('#editDiscountRange').val();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });   
+    $.ajax({
+        url : url + '/saverequestchanges',
+        type : 'POST',
+        data : {
+            "_token" : $('meta[name="csrf-token"]').attr('content'),
+            editHCompany : editHideCompany,
+            editHQuote : editHideQuotation,
+            editContractTitle : editContractTitle,
+            editContractV : editContractValid,
+            editContractD : editContractDet,
+            editDelayFee : editDelay,
+            editViolationFee : editViolation,
+            editLateFee : editLate,
+            editStandardFee : editStandard,
+            editMinDamage : editMinD,
+            editMaxDamage : editMaxD,
+            editD : editDiscount,
+        },
+        success : function(data,response){
+            console.log(data);
+            swal({
+                title: "Success",
+                text: "Contract Activate",
+                type: "success",
+                showCancelButton: false,
+                confirmButtonClass: "btn-success",
+                confirmButtonText: "Ok",
+                closeOnConfirm: true,
+                timer : 1500
+            },
+            function(isConfirm){
+                if(isConfirm){
+                    window.location = url;
+                }
+            });    
+        },
+        error : function(error){
+
         }
     });
 }
