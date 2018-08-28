@@ -246,7 +246,7 @@ function showContracts(){
     });
 }
 function createActiveContract(contractID){
-
+    //Comment
     $.ajax({
         url : url + '/' + contractID + '/getactive',
         type : 'GET',
@@ -274,7 +274,7 @@ function createActiveContract(contractID){
                     var expireContract = moment().add(a, 'M').format('YYYY-MM-DD');
                     console.log(expireContract);
                 }else if(a == 1){
-                    expireContract = moment().add(a, 'Y').format('YYYY-MM-DD');
+                    var expireContract = moment().add(a, 'Y').format('YYYY-MM-DD');
                     console.log(expireContract);
                 }
                 console.log(currDate);
