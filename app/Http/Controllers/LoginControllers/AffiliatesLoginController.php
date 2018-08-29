@@ -21,7 +21,7 @@ class AffiliatesLoginController extends Controller
     }
     public function login(Request $request){
         if(Auth::guard('web')->attempt(['email'=>$request->email,'password'=>$request->password],$request->remember)){
-            return redirect()->intended('/administrator/maintenance/employees');
+            return redirect()->intended('/affiliates/maintenance/position');
         }
     }
     public function showRegister(){

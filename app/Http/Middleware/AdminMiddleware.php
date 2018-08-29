@@ -25,7 +25,7 @@ class AdminMiddleware
                 return $next($request);
                 return redirect('/administrator/maintenance/berth');
             }elseif(Auth::user()->enumUserType == 'Affiliates'){
-                return redirect('/administrator/maintenance/employees');
+                return redirect('/affiliates/maintenance/employees');
             }else{
                 Auth::logout();
                 $request->session()->flush();
