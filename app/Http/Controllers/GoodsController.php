@@ -106,4 +106,18 @@ class GoodsController extends Controller
         $goods->save();
         return response()->json(['goods'=>$goods]);
     }
+    public function activate(Request $request)
+    {
+        $goods = Goods::findOrFail($request->activateID);
+        if($goods->isActive == 0){
+            $goods->timestamps = false;
+            $goods->isActive = 1;
+            $goods->save();
+        }else{
+            $goods->timestamps = false;
+            $goods->isActive = 0;
+            $goods->save();
+        }
+        return response(['goods'=>$goods]);
+    }
 }

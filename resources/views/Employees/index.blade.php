@@ -27,6 +27,7 @@
                         <tr>
                             <th>Employees</th>
                             <th>Position</th>
+                            <th>Status</th>
                             <th class="noSortAction">Action</th>
                         </tr>
                     </thead>  
@@ -35,6 +36,21 @@
                             <tr>
                                 <td>{{$employees->strLName}}, {{$employees->strFName}} {{$employees->strMName}}</td>
                                 <td>{{$employees->strPositionName}}</td>
+                                <td>
+                                    @if($employees->isActive == 1)
+                                        <div class="employeeCheckbox" data-id="{{$employees->intEmployeeID}}">
+                                            <label>
+                                                <input type="checkbox" checked data-size="small" data-width="" data-toggle="toggle"data-onstyle="success"data-offstyle="danger" data-on="Active" data-off="Inactive" data-id="{{$employees->intEmployeeID}}">
+                                            </label>
+                                        </div>
+                                    @elseif($employees->isActive == 0)
+                                        <div class="employeeCheckbox" data-id="{{$employees->intEmployeeID}}">
+                                            <label>
+                                                <input type="checkbox" data-size="small" data-width="" data-toggle="toggle"data-onstyle="success"data-offstyle="danger" data-on="Active" data-off="Inactive" data-id="{{$employees->intEmployeeID}}">
+                                            </label>
+                                        </div>
+                                    @endif
+                                </td>
                                 <td>
                                     <div class="ml-1 mr-1">
                                         <button onclick="getEmployees({{$employees->intEmployeeID}})" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Edit" role="button">
@@ -54,6 +70,8 @@
                     <thead class="bg-primary">
                         <tr>
                             <th>Employees</th>
+                            <th>Position</th>
+                            <th>Status</th>
                             <th class="noSortAction">Action</th>
                         </tr>
                     </thead>  

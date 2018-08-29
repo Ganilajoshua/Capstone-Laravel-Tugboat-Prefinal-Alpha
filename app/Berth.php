@@ -11,6 +11,7 @@ class Berth extends Model
     protected $fillable = [
         'intBPierID',
         'strBerthName',
+        'isActive',
         'boolDeleted',
     ];
 

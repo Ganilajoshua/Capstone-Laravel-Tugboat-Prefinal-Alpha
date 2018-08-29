@@ -28,6 +28,7 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::resource('/berth','BerthController');
         Route::post('/berth/store','BerthController@store');
         Route::post('/berth/update','BerthController@update');
+        Route::post('/berth/activate','BerthController@activate');
         Route::get('/berth/{intBerthID}/edit','BerthController@edit');
         Route::get('/berth/{intBerthID}/delete','BerthController@delete');
         Route::get('/berth/{intBerthID}/destroy','BerthController@destroy');
@@ -35,6 +36,7 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::resource('/pier','PierController');
         Route::post('/pier/store','PierController@store');
         Route::post('/pier/update','PierController@update');
+        Route::post('/pier/activate','PierController@activate');
         Route::get('/pier/{intPierID}/edit','PierController@edit');
         Route::get('/pier/{intPierID}/delete','PierController@delete');
         Route::get('/pier/{intPierID}/destroy','PierController@destroy');
@@ -42,6 +44,7 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::resource('/position','PositionController');
         Route::post('/position/store','PositionController@store');
         Route::post('/position/update','PositionController@update');
+        Route::post('/position/activate','PositionController@activate');
         Route::get('/position/{intPositionID}/get','PositionController@get');
         Route::get('/position/{intPositionID}/delete','PositionController@delete');
         Route::get('/position/{intPositionID}/destroy','PositionController@destroy');
@@ -49,6 +52,7 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::resource('/employees','EmployeesController');
         Route::post('/employees/store','EmployeesController@store');
         Route::post('/employees/update','EmployeesController@update');
+        Route::post('/employees/activate','EmployeesController@activate');
         Route::get('/employees/{intEmployeeID}/edit','EmployeesController@edit');
         Route::get('/employees/{intEmployeeID}/delete','EmployeesController@delete');
         Route::get('/employees/{intEmployeeID}/destroy','EmployeesController@destroy');
@@ -56,6 +60,7 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::resource('/goods','GoodsController');
         Route::post('/goods/store','GoodsController@store');
         Route::post('/goods/update','GoodsController@update');
+        Route::post('/goods/activate','GoodsController@activate');
         Route::get('/goods/{intGoodsID}/edit','GoodsController@edit');
         Route::get('/goods/{intGoodsID}/delete','GoodsController@delete');
         Route::get('/goods/{intGoodsID}/destroy','GoodsController@destroy');
@@ -63,6 +68,7 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::resource('/tugboattype','TugboatTypeController');
         Route::post('/tugboattype/store','TugboatTypeController@store');
         Route::post('/tugboattype/update','TugboatTypeController@update');
+        Route::post('/tugboattype/activate','TugboatTypeController@activate');
         Route::get('/tugboattype/{intTugboatTypeID}/edit','TugboatTypeController@edit');
         Route::get('/tugboattype/{intTugboatTypeID}/delete','TugboatTypeController@delete');
         Route::get('/tugboattype/{intTugboatTypeID}/destroy','TugboatTypeController@destroy');

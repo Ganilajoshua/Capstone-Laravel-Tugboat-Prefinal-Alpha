@@ -41,22 +41,20 @@ class BerthController extends Controller
         ->get();
         $berths = DB::table('tblberth as berth')
         ->join('tblpier as pier','pier.intPierID','berth.intBPierID')
-        ->select('berth.intBerthID as intBerthID',
-        'berth.strBerthName as strBerthName',
-        'pier.intPierID as intPierID',
-        'pier.strPierName as strPierName',
-        'berth.boolDeleted as boolDeleted')
+        ->select('berth.*','pier.strPierName')
         ->where('berth.boolDeleted',0)
         ->orderBy('pier.intPierID','DESC')
         ->get();
         $user = Auth::user();
-        $piers = Pier::where('boolDeleted',0)->get();
+        $piers = Pier::where('boolDeleted',0)
+        ->where('isActive',1)
+        ->get();
         return view('Berth.index')
         ->with('berths',$berths)
         ->with('piers', $piers)
         ->with('user',$user)
         ->with('noContract',$noContract);
-        // return response()->json(['contract'=>$noContract,'user'=>$user]);
+        // return response()->json(['berth'=>$berths]);
     }
 
     /**
@@ -157,5 +155,19 @@ class BerthController extends Controller
         $berth->boolDeleted = 1;
         $berth->save();
         return response()->json(['berths' => $berth]);
+    }
+    public function activate(Request $request){
+        $berth = Berth::findOrFail($request->activateID);
+        if($berth->isActive == 0){
+            $berth->timestamps = false;
+            $berth->isActive = 1;
+            $berth->save();
+        }else{
+            $berth->timestamps = false;
+            $berth->isActive = 0;
+            $berth->save();
+        }
+        return response(['berth'=>$berth]);
+     
     }
 }

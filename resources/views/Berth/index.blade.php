@@ -29,6 +29,7 @@
                         <tr>
                             <th>Berths</th>
                             <th>Pier</th>
+                            <th>Status</th>
                             <th class="noSortAction">Action</th>
                         </tr>
                     </thead>  
@@ -37,6 +38,21 @@
                             <tr>
                                 <td>{{$berths->strBerthName}}</td>
                                 <td>{{$berths->strPierName}}</td>
+                                <td>
+                                    @if($berths->isActive == 1)
+                                        <div class="berthCheckbox" data-id="{{$berths->intBerthID}}">
+                                            <label>
+                                                <input type="checkbox" checked data-size="small" data-width="" data-toggle="toggle"data-onstyle="success"data-offstyle="danger" data-on="Active" data-off="Inactive" data-id="{{$berths->intBerthID}}">
+                                            </label>
+                                        </div>
+                                    @elseif($berths->isActive == 0)
+                                        <div class="berthCheckbox" data-id="{{$berths->intBerthID}}">
+                                            <label>
+                                                <input type="checkbox" data-size="small" data-width="" data-toggle="toggle"data-onstyle="success"data-offstyle="danger" data-on="Active" data-off="Inactive" data-id="{{$berths->intBerthID}}">
+                                            </label>
+                                        </div>
+                                    @endif
+                                </td>
                                 <td>
                                     <div class="ml-1 mr-1">
                                         <button onclick="getBerth({{$berths->intBerthID}})" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Edit" role="button">

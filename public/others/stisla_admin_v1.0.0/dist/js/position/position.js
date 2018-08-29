@@ -1,3 +1,5 @@
+var url = '/administrator/maintenance/position';
+
 $(document).ready(function(){
     $('#maintenanceTree').addClass("active");
     $('#positionMenu').addClass("active");
@@ -8,9 +10,38 @@ $(document).ready(function(){
         $('#addPositionModal').modal('hide');
         $('#editPositionModal').modal('hide');
     });
-});
 
-var url = '/administrator/maintenance/position';
+    $(".positionCheckbox").on('change',function(){
+        var id = $(this).data('id');
+        var mode = $(this).prop('checked');
+        console.log(id)
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url : url + '/activate',
+            type : 'POST',
+            data : {
+                "_token" : $('meta[name="csrf-token"]').attr('content'),
+                activateID : id,
+            },
+            beforeSend : function (request) {
+                return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+            },
+            success : function(data, response){
+                console.log(response);
+                console.log(data);
+                console.log('Success');
+                window.location = url;
+            },
+            error : function(error){
+                throw error;
+            }
+        });
+    });
+});
 
 function getPosition(id){
 

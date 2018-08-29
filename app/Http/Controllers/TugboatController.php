@@ -40,7 +40,9 @@ class TugboatController extends Controller
         // ->where('intTCompanyID',Auth::user()->intUCompanyID)
         // ->get();
 
-        $tugboattype = TugboatType::where('boolDeleted',0)->get();
+        $tugboattype = TugboatType::where('boolDeleted',0)
+        ->where('isActive',1)
+        ->get();
         $maxMain = TugboatMainSpecifications::max('intTugboatMainID');
         $maxSpecs = TugboatSpecifications::max('intTugboatSpecsID');
         $maxClass = TugboatClass::max('intTugboatClassID');

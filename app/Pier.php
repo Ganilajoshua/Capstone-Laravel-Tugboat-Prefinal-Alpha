@@ -9,6 +9,7 @@ class Pier extends Model
     protected $table = 'tblpier';
     protected $primaryKey = 'intPierID';
     protected $fillable = [
+        'isActive',
         'strPierName',
         'boolDeleted',
     ];

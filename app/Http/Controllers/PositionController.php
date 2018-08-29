@@ -110,6 +110,20 @@ class PositionController extends Controller
         $position->save();
         return response()->json(['positions' => $position]);
     }
+    public function activate(Request $request){
+        $position = Position::findOrFail($request->activateID);
+        if($position->isActive == 0){
+            $position->timestamps = false;
+            $position->isActive = 1;
+            $position->save();
+        }else{
+            $position->timestamps = false;
+            $position->isActive = 0;
+            $position->save();
+        }
+        return response(['berth'=>$position]);
+     
+    }
     public function get($intPositionID)
     {
         

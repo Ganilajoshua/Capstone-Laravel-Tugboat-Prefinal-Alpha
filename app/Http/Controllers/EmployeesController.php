@@ -20,11 +20,14 @@ class EmployeesController extends Controller
         // $employee = Employees::where('boolDeleted', 0)->get();
         $employee = DB::table('tblemployee as employee')
         ->join('tblposition as position','employee.intEPositionID','position.intPositionID')
+        ->select('employee.*','position.strPositionName')
         ->where('employee.intECompanyID',Auth::user()->intUCompanyID)
         ->where('employee.boolDeleted',0)
         ->get();
         $position = Position::where('boolDeleted',0)
-        ->where('intPCompanyID',Auth::user()->intUCompanyID)->get();
+        ->where('intPCompanyID',Auth::user()->intUCompanyID)
+        ->where('isActive',1)
+        ->get();
         return view('Employees.index')
         ->with('employees', $employee)
         ->with('positions', $position);
@@ -128,5 +131,19 @@ class EmployeesController extends Controller
         $employees->save();
 
         return response()->json(['employees' => $employees]);
+    }
+    public function activate(Request $request)
+    {
+        $employees = Employees::findOrFail($request->activateID);
+        if($employees->isActive == 0){
+            $employees->timestamps = false;
+            $employees->isActive = 1;
+            $employees->save();
+        }else{
+            $employees->timestamps = false;
+            $employees->isActive = 0;
+            $employees->save();
+        }
+        return response(['employees'=>$employees]);
     }
 }

@@ -104,4 +104,18 @@ class TugboatTypeController extends Controller
         $type->save();
         return response()->json(['type'=>$type]);
     }
+    public function activate(Request $request)
+    {
+        $tugboattype = TugboatType::findOrFail($request->activateID);
+        if($tugboattype->isActive == 0){
+            $tugboattype->timestamps = false;
+            $tugboattype->isActive = 1;
+            $tugboattype->save();
+        }else{
+            $tugboattype->timestamps = false;
+            $tugboattype->isActive = 0;
+            $tugboattype->save();
+        }
+        return response(['goods'=>$tugboattype]);
+    }
 }

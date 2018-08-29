@@ -27,6 +27,7 @@
                         <tr>
                             <th>Goods</th>
                             <th>Rate per Ton</th>
+                            <th>Status</th>
                             <th class="noSortAction">Action</th>
                         </tr>
                     </thead>  
@@ -35,6 +36,21 @@
                             <tr>
                                 <td>{{$goods->strGoodsName}}</td>
                                 <td>&#8369; {{$goods->fltRateperTon}}</td>
+                                <td>
+                                    @if($goods->isActive == 1)
+                                        <div class="goodsCheckbox" data-id="{{$goods->intGoodsID}}">
+                                            <label>
+                                                <input type="checkbox" checked data-size="small" data-width="" data-toggle="toggle"data-onstyle="success"data-offstyle="danger" data-on="Active" data-off="Inactive" data-id="{{$goods->intGoodsID}}">
+                                            </label>
+                                        </div>
+                                    @elseif($goods->isActive == 0)
+                                        <div class="goodsCheckbox" data-id="{{$goods->intGoodsID}}">
+                                            <label> 
+                                                <input type="checkbox" data-size="small" data-width="" data-toggle="toggle"data-onstyle="success"data-offstyle="danger" data-on="Active" data-off="Inactive" data-id="{{$goods->intGoodsID}}">
+                                            </label>
+                                        </div>
+                                    @endif
+                                </td>
                                 <td>
                                     <div class="ml-1 mr-1">
                                         <button onclick="editGoods({{$goods->intGoodsID}})" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Edit" role="button">
@@ -55,6 +71,7 @@
                         <tr>
                             <th>Goods</th>
                             <th>Rate per Ton</th>
+                            <th>Status</th>
                             <th class="noSortAction">Action</th>
                         </tr>
                     </thead>  

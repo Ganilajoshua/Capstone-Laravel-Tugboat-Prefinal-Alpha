@@ -28,6 +28,7 @@
                     <thead class="bg-primary">
                         <tr>
                             <th>Tugboat Type</th>
+                            <th>Status</th>
                             <th class="noSortAction">Action</th>
                         </tr>
                     </thead>  
@@ -35,6 +36,21 @@
                         @foreach($tugboattype as $tugboattype)
                             <tr>
                                 <td>{{$tugboattype->strTugboatTypeName}}</td>
+                                <td>
+                                    @if($tugboattype->isActive == 1)
+                                        <div class="tugboattypeCheckbox" data-id="{{$tugboattype->intTugboatTypeID}}">
+                                            <label>
+                                                <input type="checkbox" checked data-size="small" data-width="" data-toggle="toggle"data-onstyle="success"data-offstyle="danger" data-on="Active" data-off="Inactive" data-id="{{$tugboattype->intTugboatTypeID}}">
+                                            </label>
+                                        </div>
+                                    @elseif($tugboattype->isActive == 0)
+                                        <div class="tugboattypeCheckbox" data-id="{{$tugboattype->intTugboatTypeID}}">
+                                            <label> 
+                                                <input type="checkbox" data-size="small" data-width="" data-toggle="toggle"data-onstyle="success"data-offstyle="danger" data-on="Active" data-off="Inactive" data-id="{{$tugboattype->intTugboatTypeID}}">
+                                            </label>
+                                        </div>
+                                    @endif
+                                </td>
                                 <td>
                                     <div class="ml-1 mr-1">
                                         <button onclick="getTugboatType({{$tugboattype->intTugboatTypeID}})"class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Edit" role="button">
@@ -54,6 +70,7 @@
                     <thead class="bg-primary">
                         <tr>
                             <th>Tugboat Type</th>
+                            <th>Status</th>
                             <th class="noSortAction">Action</th>
                         </tr>
                     </thead>  

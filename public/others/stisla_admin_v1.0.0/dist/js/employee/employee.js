@@ -1,3 +1,5 @@
+var url = '/administrator/maintenance/employees';
+
 $(document).ready(function(){
     $('#maintenanceTree').addClass("active");
     $('#employeesMenu').addClass("active");
@@ -9,9 +11,39 @@ $(document).ready(function(){
         $('#addEmployeeModal').modal('hide');
         $('#editEmployeeModal').modal('hide');
     });
+
+    $(".employeeCheckbox").on('change',function(){
+        var id = $(this).data('id');
+        var mode = $(this).prop('checked');
+        console.log(id)
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url : url + '/activate',
+            type : 'POST',
+            data : {
+                "_token" : $('meta[name="csrf-token"]').attr('content'),
+                activateID : id,
+            },
+            beforeSend : function (request) {
+                return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+            },
+            success : function(data, response){
+                console.log(response);
+                console.log(data);
+                console.log('Success');
+                window.location = url;
+            },
+            error : function(error){
+                throw error;
+            }
+        });
+    });
 });
 
-var url = '/administrator/maintenance/employees';
 
 function getEmployees(id)
 {

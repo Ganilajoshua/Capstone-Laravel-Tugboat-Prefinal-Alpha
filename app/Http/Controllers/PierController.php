@@ -17,7 +17,9 @@ class PierController extends Controller
      */
     public function index()
     {
-        $piers = Pier::where('boolDeleted',0)->get();
+        $piers = Pier::where('boolDeleted',0)
+        ->orderBy('intPierID','Desc')
+        ->get();
         return view('Pier.index')->with('piers',$piers);
     }
 
@@ -108,5 +110,20 @@ class PierController extends Controller
         $pier->boolDeleted = 1;
         $pier->save();
         return response()->json(['pier' => $pier]);
+    }
+    public function activate(Request $request)
+    {
+        $pier = Pier::findOrFail($request->activateID);
+        if($pier->isActive == 0){
+            $pier->timestamps = false;
+            $pier->isActive = 1;
+            $pier->save();
+        }else{
+            $pier->timestamps = false;
+            $pier->isActive = 0;
+            $pier->save();
+        }
+        return response(['pier'=>$pier]);
+        
     }
 }

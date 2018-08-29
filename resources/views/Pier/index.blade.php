@@ -26,6 +26,7 @@
                     <thead class="bg-primary">
                         <tr>
                             <th>Pier</th>
+                            <th>Status</th>
                             <th class="noSortAction">Action</th>
                         </tr>
                     </thead>  
@@ -33,6 +34,23 @@
                         @foreach($piers as $piers)
                             <tr>
                                 <td>{{$piers->strPierName}}</td>
+
+                                <td>
+                                    @if(($piers->isActive) == 1)
+                                        <div class="pierCheckbox" data-id="{{$piers->intPierID}}">
+                                            <label>
+                                                <input type="checkbox" checked id="" data-size="small" data-width="" data-toggle="toggle"data-onstyle="success"data-offstyle="danger" data-on="Active" data-off="Inactive" data-id="{{$piers->intPierID}}">
+                                            </label>
+                                        </div>    
+                                    @elseif(($piers->isActive) == 0)
+                                        <div class="pierCheckbox" data-id="{{$piers->intPierID}}">
+                                            <label>
+                                                <input type="checkbox" id="" data-size="small" data-width="" data-toggle="toggle"data-onstyle="success"data-offstyle="danger" data-on="Active" data-off="Inactive" data-id="{{$piers->intPierID}}">
+                                            </label>
+                                        </div>    
+                                    @endif
+                                </td>
+                                </td>
                                 <td>
                                     <div class="ml-1 mr-1">
                                         <button onclick="getPier({{$piers->intPierID}})" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Edit" role="button">
@@ -52,6 +70,7 @@
                     <thead class="bg-primary">
                         <tr>
                             <th>Pier</th>
+                            <th>Status</th>
                             <th class="noSortAction">Action</th>
                         </tr>
                     </thead>  
