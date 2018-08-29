@@ -5,12 +5,12 @@ Pre Final Repository Monday August 27,2018
 
 ### Database Changes
 
-[x] tblpier - `new` isActive -> null
-[x] tblberth - `new` isActive -> null
-[x] tblposition - `new` isActive -> null
-[x] tblemployee - `new` isActive -> null
-[x] tblgoods - `new` isActive -> null
-[x] tbltugboattype - `new` isActive -> null
+- [x] tblpier - `new` isActive -> null
+- [x] tblberth - `new` isActive -> null
+- [x] tblposition - `new` isActive -> null
+- [x] tblemployee - `new` isActive -> null
+- [x] tblgoods - `new` isActive -> null
+- [x] tbltugboattype - `new` isActive -> null
 
 ### Maintenance tables has now a Status (Active / Inactive) 
 - [x] Pier
