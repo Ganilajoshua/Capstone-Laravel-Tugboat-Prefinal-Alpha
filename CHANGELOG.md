@@ -2,13 +2,12 @@
 Pre Final Repository Monday August 27,2018
 
 # 0.0.5 - 2018-02-29 α
-
 ## fixed Middlewares for Admin and Affiliates
 
 - [x] Affiliates are now redirected to `/affiliates/maintenance/employees`
 - [x] Administrator are now redirected to `/administrator/maintenance/pier`
 
-## `new`
+### `new`
 ### Added Functionality to Affilates
 
 #### `Maintenance`
