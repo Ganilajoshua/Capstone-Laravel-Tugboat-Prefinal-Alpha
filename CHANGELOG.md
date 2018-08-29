@@ -46,6 +46,7 @@ asdasdasdasd
 # 0.0.2 - 2018-08-28
 All Datatables are set to bg-primary
 
+Added XD
 Added Pills to Consignee Accounts
 - Requests Tab
 - Active Tab
