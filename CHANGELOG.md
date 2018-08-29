@@ -1,6 +1,8 @@
 # Changelog Capstone-Laravel-tugboat-dev-PreFinal
 Pre Final Repository Monday August 27,2018
 
+# 0.0.4 - 2018-02-29
+
 # 0.0.3 - 2018-08-29
 
 ### Database Changes
