@@ -4,6 +4,7 @@ Pre Final Repository Monday August 27,2018
 # 0.0.3 - 2018-08-29
 
 ### Database Changes
+
 - [x] tblpier - `new` isActive -> null
 - [x] tblberth - `new` isActive -> null
 - [x] tblposition - `new` isActive -> null
