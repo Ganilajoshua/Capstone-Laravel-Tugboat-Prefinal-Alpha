@@ -4,29 +4,30 @@ Pre Final Repository Monday August 27,2018
 # 0.0.3 - 2018-08-29
 
 ### Database Changes
-tblpier - `new` isActive -> null
-tblberth - `new` isActive -> null
-tblposition - `new` isActive -> null
-tblemployee - `new` isActive -> null
-tblgoods - `new` isActive -> null
-tbltugboattype - `new` isActive -> null
+
+- [x] tblpier - `new` isActive -> null
+- [x] tblberth - `new` isActive -> null
+- [x] tblposition - `new` isActive -> null
+- [x] tblemployee - `new` isActive -> null
+- [x] tblgoods - `new` isActive -> null
+- [x] tbltugboattype - `new` isActive -> null
 
 ### Maintenance tables has now a Status (Active / Inactive) 
-- Pier
-- Berth
-- Position
-- Employees
-- Goods
-- Tugboat Type
+- [x] Pier
+- [x] Berth
+- [x] Position
+- [x] Employees
+- [x] Goods
+- [x] Tugboat Type
 
 ### `new` Routes 
 
-Route::post('/berth/activate','BerthController@activate');
-Route::post('/pier/activate','PierController@activate');
-Route::post('/position/activate','PositionController@activate');
-Route::post('/employees/activate','EmployeesController@activate');
-Route::post('/goods/activate','GoodsController@activate');
-Route::post('/tugboattype/activate','TugboatTypeController@activate');
+- [x] Route::post('/berth/activate','BerthController@activate');
+- [x] Route::post('/pier/activate','PierController@activate');
+- [x] Route::post('/position/activate','PositionController@activate');
+- [x] Route::post('/employees/activate','EmployeesController@activate');
+- [x] Route::post('/goods/activate','GoodsController@activate');
+- [x] Route::post('/tugboattype/activate','TugboatTypeController@activate');
 
 ### Updated `Controllers` & `Models` 
 
