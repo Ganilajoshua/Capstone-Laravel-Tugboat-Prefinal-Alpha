@@ -27,10 +27,13 @@ class JobOrdersController extends Controller
      */
     public function index()
     {
-        $goods =  Goods::where('boolDeleted',0)->get();
+        $goods =  Goods::where('boolDeleted',0)
+        ->where('isActive',1)
+        ->get();
         $contract = Contract::where('intCCompanyID',Auth::user()->intUCompanyID)->get();
         $berth = DB::table('tblberth as berth')
         ->join('tblpier as pier','berth.intBPierID','pier.intPierID')
+        ->where('berth.isActive',1)
         ->get();
         $createdjob = JobOrder::where('boolDeleted',0)
         ->where('intJOCompanyID',Auth::user()->intUCompanyID)

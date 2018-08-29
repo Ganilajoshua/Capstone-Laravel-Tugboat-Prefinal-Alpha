@@ -26,3 +26,4 @@
     <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/waves/waves.css">
     <!-- Page Icon -->
     <link rel="shortcut icon" href="/others/ConsigneeAssets/dist/img/tbLogo.png">
+    <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/toastr/build/toastr.css">

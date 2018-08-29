@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="viewCContractInfoTitle">Contract 2<div class="badge badge-success ml-2">ACTIVE</div></h5>
+                <h5 class="modal-title" id="viewCContractInfoTitle">Contract 2<div class="badge badge-warning ml-2">NOT FINALIZED</div></h5>
                 <button type="button" class="close waves-effect" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
