@@ -1,6 +1,38 @@
 # Changelog Capstone-Laravel-tugboat-dev-PreFinal α
 Pre Final Repository Monday August 27,2018
 
+# 0.0.5 - 2018-02-29 α
+
+## fixed Middlewares for Admin and Affiliates
+
+- [x] Affiliates are now redirected to `/affiliates/maintenance/employees`
+- [x] Administrator are now redirected to `/administrator/maintenance/pier`
+
+## `new`
+
+### Added Functionality to Affilates
+
+####`Maintenance`
+- [x] Position
+- [x] Employees
+- [x] Tugboats
+
+##### Routes (Everything needed for Maintenance)
+
+- [x] /position
+- [x] /employees
+- [x] /tugboats
+
+##### Javascript
+
+- [x] positionAffiliates.js
+- [x] employeeAffiliates.js
+- [x] tugboatAffiliates.js
+
+`changes`
+- getdata.js is relocated to /dist/js/tugboat
+- getdata.js is renamed as tugboat.js
+
 # 0.0.4 - 2018-02-29 α
 #### fixed the view modal for
 - view initial contract
@@ -8,14 +40,14 @@ Pre Final Repository Monday August 27,2018
 
 `additions`
 
-user is now notified when 
+####user is now notified when 
 
 - the contract is 1 or 2 days from being activated
 - the contract expiration a month before expiry
 - the contract is expired
 
 `fixes`
-joborder dropdowns are properly rendering when there is an inactive data
+####joborder dropdowns are properly rendering when there is an inactive data
 - Goods
 - Berth
  

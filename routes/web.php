@@ -211,6 +211,7 @@ Route::group(['prefix'=>'affiliates/'],function(){
         Route::resource('/position','PositionController');
         Route::post('/position/store','PositionController@store');
         Route::post('/position/update','PositionController@update');
+        Route::post('/position/activate','PositionController@activate');
         Route::get('/position/{intPositionID}/get','PositionController@get');
         Route::get('/position/{intPositionID}/delete','PositionController@delete');
         Route::get('/position/{intPositionID}/destroy','PositionController@destroy');
@@ -218,6 +219,7 @@ Route::group(['prefix'=>'affiliates/'],function(){
         Route::resource('/employees','EmployeesController');
         Route::post('/employees/store','EmployeesController@store');
         Route::post('/employees/update','EmployeesController@update');
+        Route::post('/employees/activate','EmployeesController@activate');
         Route::get('/employees/{intEmployeeID}/edit','EmployeesController@edit');
         Route::get('/employees/{intEmployeeID}/delete','EmployeesController@delete');
         Route::get('/employees/{intEmployeeID}/destroy','EmployeesController@destroy');

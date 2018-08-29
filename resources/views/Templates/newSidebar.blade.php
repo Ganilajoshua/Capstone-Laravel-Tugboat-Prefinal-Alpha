@@ -46,9 +46,9 @@
                                 <li id="tugboatMenu"><a href="/administrator/maintenance/tugboat"><i class="ion ion-android-boat"></i>Tugboats</a></li>
                                 <li id="quotationsMenu"><a href="/administrator/maintenance/quotations"><i class="fas fa-life-ring"></i>Quotations</a></li>
                             @elseif(Auth::user()->enumUserType == 'Affiliates')
-                                <li id="positionMenu"><a href="/administrator/maintenance/position"><i class="fas fa-sitemap"></i>Position</a></li>
-                                <li id="employeesMenu"><a href="/administrator/maintenance/employees"><i class="ion ion-person"></i> Employee</a></li>
-                                <li id="tugboatMenu"><a href="/administrator/maintenance/tugboat"><i class="ion ion-android-boat"></i>Tugboats</a></li>
+                                <li id="positionMenu"><a href="/affiliates/maintenance/position"><i class="fas fa-sitemap"></i>Position</a></li>
+                                <li id="employeesMenu"><a href="/affiliates/maintenance/employees"><i class="ion ion-person"></i> Employee</a></li>
+                                <li id="tugboatMenu"><a href="/affiliates/maintenance/tugboat"><i class="ion ion-android-boat"></i>Tugboats</a></li>
                             @endif
                                 <!--<li id="equipmentsMenu"><a href="/equipment"><i class="fas fa-anchor"></i> Equipment</a></li>-->
                                 {{-- <li id="insurancesMenu"><a href="/administrator/maintenance/insurances"><i class="ion ion-medkit"></i>Insurances</a></li> --}}
