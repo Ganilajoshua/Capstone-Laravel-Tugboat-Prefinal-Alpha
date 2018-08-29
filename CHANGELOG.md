@@ -3,7 +3,7 @@ Pre Final Repository Monday August 27,2018
 
 # 0.0.3 - 2018-08-29
 
-Database Changes
+### Database Changes
 tblpier - `new` isActive -> null
 tblberth - `new` isActive -> null
 tblposition - `new` isActive -> null
@@ -11,7 +11,7 @@ tblemployee - `new` isActive -> null
 tblgoods - `new` isActive -> null
 tbltugboattype - `new` isActive -> null
 
-Maintenance tables has now a Status (Active / Inactive) 
+### Maintenance tables has now a Status (Active / Inactive) 
 - Pier
 - Berth
 - Position
@@ -19,7 +19,7 @@ Maintenance tables has now a Status (Active / Inactive)
 - Goods
 - Tugboat Type
 
-`new` Routes 
+### `new` Routes 
 
 Route::post('/berth/activate','BerthController@activate');
 Route::post('/pier/activate','PierController@activate');
@@ -28,7 +28,7 @@ Route::post('/employees/activate','EmployeesController@activate');
 Route::post('/goods/activate','GoodsController@activate');
 Route::post('/tugboattype/activate','TugboatTypeController@activate');
 
-Updated `Controllers` & `Models` 
+### Updated `Controllers` & `Models` 
 
 - PierController::activate -> `Pier`
 - BerthController::activate -> `Berth`
