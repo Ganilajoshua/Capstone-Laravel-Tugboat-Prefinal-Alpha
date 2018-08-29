@@ -8,7 +8,7 @@ Pre Final Repository Monday August 27,2018
 - [x] Affiliates are now redirected to `/affiliates/maintenance/employees`
 - [x] Administrator are now redirected to `/administrator/maintenance/pier`
 
-### `new`
+`new`
 ### Added Functionality to Affilates
 
 #### `Maintenance`
@@ -29,7 +29,7 @@ Pre Final Repository Monday August 27,2018
 - [x] employeeAffiliates.js
 - [x] tugboatAffiliates.js
 
-### `changes`
+`changes`
 - getdata.js is relocated to /dist/js/tugboat
 - getdata.js is renamed as tugboat.js
 
@@ -92,7 +92,6 @@ Pre Final Repository Monday August 27,2018
 # 0.0.2 - 2018-08-28 α
 All Datatables are set to bg-primary
 
-Added XD
 Added Pills to Consignee Accounts
 - Requests Tab
 - Active Tab
