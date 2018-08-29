@@ -28,8 +28,7 @@ Pre Final Repository Monday August 27,2018
 - [x] employeeAffiliates.js
 - [x] tugboatAffiliates.js
 
-## `changes`
-
+### `changes`
 - getdata.js is relocated to /dist/js/tugboat
 - getdata.js is renamed as tugboat.js
 
