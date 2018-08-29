@@ -22,6 +22,11 @@ Pre Final Repository Monday August 27,2018
 
 ### `new` Routes 
 
+adasdasd
+asdasdasd
+asdasdad
+asdasdasdasd
+
 - [x] Route::post('/berth/activate','BerthController@activate');
 - [x] Route::post('/pier/activate','PierController@activate');
 - [x] Route::post('/position/activate','PositionController@activate');
