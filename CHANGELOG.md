@@ -73,12 +73,12 @@ Pre Final Repository Monday August 27,2018
 
 ### `new` Routes 
 
-- [x] Route::post('/berth/activate','BerthController@activate');
-- [x] Route::post('/pier/activate','PierController@activate');
-- [x] Route::post('/position/activate','PositionController@activate');
-- [x] Route::post('/employees/activate','EmployeesController@activate');
-- [x] Route::post('/goods/activate','GoodsController@activate');
-- [x] Route::post('/tugboattype/activate','TugboatTypeController@activate');
+- [x] /berth/activate
+- [x] /pier/activate
+- [x] /position/activate
+- [x] /employees/activate
+- [x] /goods/activate
+- [x] /tugboattype/activate
 
 ### Updated `Controllers` & `Models` 
 
