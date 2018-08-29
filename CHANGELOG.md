@@ -13,12 +13,12 @@ Pre Final Repository Monday August 27,2018
 - [x] tbltugboattype - `new` isActive -> null
 
 ### Maintenance tables has now a Status (Active / Inactive) 
-- Pier
-- Berth
-- Position
-- Employees
-- Goods
-- Tugboat Type
+- [x] Pier
+- [x] Berth
+- [x] Position
+- [x] Employees
+- [x] Goods
+- [x] Tugboat Type
 
 ### `new` Routes 
 
