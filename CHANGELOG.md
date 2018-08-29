@@ -9,10 +9,10 @@ Pre Final Repository Monday August 27,2018
 - [x] Administrator are now redirected to `/administrator/maintenance/pier`
 
 ## `new`
-
 ### Added Functionality to Affilates
 
-####`Maintenance`
+#### `Maintenance`
+
 - [x] Position
 - [x] Employees
 - [x] Tugboats
@@ -29,25 +29,27 @@ Pre Final Repository Monday August 27,2018
 - [x] employeeAffiliates.js
 - [x] tugboatAffiliates.js
 
-`changes`
+## `changes`
+
 - getdata.js is relocated to /dist/js/tugboat
 - getdata.js is renamed as tugboat.js
 
 # 0.0.4 - 2018-02-29 α
+
 #### fixed the view modal for
 - view initial contract
 - view finalized (active) contract
 
 `additions`
 
-####user is now notified when 
+#### user is now notified when 
 
 - the contract is 1 or 2 days from being activated
 - the contract expiration a month before expiry
 - the contract is expired
 
 `fixes`
-####joborder dropdowns are properly rendering when there is an inactive data
+#### joborder dropdowns are properly rendering when there is an inactive data
 - Goods
 - Berth
  
@@ -71,11 +73,6 @@ Pre Final Repository Monday August 27,2018
 - [x] Tugboat Type
 
 ### `new` Routes 
-
-adasdasd
-asdasdasd
-asdasdad
-asdasdasdasd
 
 - [x] Route::post('/berth/activate','BerthController@activate');
 - [x] Route::post('/pier/activate','PierController@activate');
