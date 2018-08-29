@@ -118,16 +118,52 @@ function showContract(showID){
         url : url + '/' + showID + '/show',
         type : 'GET',
         dataType : 'JSON',
+        async: true,
         success : function(data){
             console.log(data);
-                $('.viewcontractmodalBody').empty();
+            $('.viewcontractmodalBody').empty();
+            $('#contractsID').val(data.contract[0].intContractListID);
+            console.log('aak');
+            console.log('standard ID :', data.contract[0].intCStandardID);
+            console.log('quotation ID : ', data.contract[0].intCQuotationID);
+            var appendData =
+            "<h2>"+ data.contract[0].strContractListTitle +"</h2>" +
+            "<p>"+ data.contract[0].strContractListDesc +"</p>" + 
+            "<p> Standard Rate : "+ data.contract[0].fltStandardRate +"</p>" +
+            "<p> Tugboat Delay Fee : "+ data.contract[0].fltQuotationTDelayFee +"</p>" +
+            "<p> Violation Fee : "+ data.contract[0].fltQuotationViolationFee +"</p>" +
+            "<p> Minimum Damage Fee(s) : "+ data.contract[0].fltQuotationConsigneeLateFee +"</p>" +
+            "<p> Minimum Damage Fee(s) : "+ data.contract[0].fltMinDamageFee +"</p>" +
+            "<p> Maximum Damage Fee(s) : "+ data.contract[0].fltMaxDamageFee +"</p>" +
+            "<p> Maximum Discount : "+ data.contract[0].intDiscount +"</p>";
+            $(appendData).appendTo('.viewcontractmodalBody');
+            $('#viewCContractInfo').modal('show');
+        },
+        error : function(error){
+            throw error;
+        }
+    });
+}
+function showFinalContract(showID){
+    console.log('contractlistID : ', showID);
+    $.ajax({
+        url : url + '/' + showID + '/show',
+        type : 'GET',
+        dataType : 'JSON',
+        success : function(data){
+            console.log(data);
+                $('.viewfinalcontractmodalBody').empty();
                 $('#contractsID').val(data.contract[0].intContractListID);
                 console.log('aak');
                 console.log('standard ID :', data.contract[0].intCStandardID);
                 console.log('quotation ID : ', data.contract[0].intCQuotationID);
+                console.log(data.contract[0].strContractListTitle)
+                $('#viewFinalContractInfoTitle').html(data.contract[0].strContractListTitle);
+                var appendBadge = "<div class='badge badge-success ml-2'>ACTIVE</div>";
                 var appendData =
                 "<h2>"+ data.contract[0].strContractListTitle +"</h2>" +
-                "<p>"+ data.contract[0].strContractListDesc +"</p>" + 
+                "<p>"+ data.contract[0].strContractListDesc +"</p>" +
+                "<p> Contract Expiry : "+ moment(data.contract[0].datContractExpire).format("MM/DD/YYYY") +"</p>" + 
                 "<p> Standard Rate : "+ data.contract[0].fltStandardRate +"</p>" +
                 "<p> Tugboat Delay Fee : "+ data.contract[0].fltQuotationTDelayFee +"</p>" +
                 "<p> Violation Fee : "+ data.contract[0].fltQuotationViolationFee +"</p>" +
@@ -135,8 +171,9 @@ function showContract(showID){
                 "<p> Minimum Damage Fee(s) : "+ data.contract[0].fltMinDamageFee +"</p>" +
                 "<p> Maximum Damage Fee(s) : "+ data.contract[0].fltMaxDamageFee +"</p>" +
                 "<p> Maximum Discount : "+ data.contract[0].intDiscount +"</p>";
-                $(appendData).appendTo('.viewcontractmodalBody');
-                $('#viewCContractInfo').modal('show');
+                $(appendBadge).appendTo('#viewFinalContractInfoTitle');
+                $(appendData).appendTo('.viewfinalcontractmodalBody');
+                $('#finalContractInfo').modal('show');
                 
         },
         error : function(error){

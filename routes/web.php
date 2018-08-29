@@ -188,6 +188,7 @@ Route::group(['prefix'=>'consignee/'],function(){
     // Route::resource('/')
     Route::post('/logout','LoginControllers\UserLoginController@logout');
     Route::get('/dashboard','ConsigneeControllers\ConsigneeController@index');
+    Route::post('/dashboard/getnotifs','ConsigneeControllers\ConsigneeController@getnotifs');
     //Contract Request
     Route::resource('/contracts','ConsigneeControllers\ContractsController');
     Route::get('/contracts/{intContractListID}/show','ConsigneeControllers\ContractsController@show');
