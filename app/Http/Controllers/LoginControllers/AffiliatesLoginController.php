@@ -36,6 +36,8 @@ class AffiliatesLoginController extends Controller
         $company->strCompanyName = $request->input('companyname');
         $company->strCompanyAddress = $request->input('address');
         $company->strCompanyEmail = $request->input('email');
+        $company->strCompanyContactPNum = $request->input('mobilenum');
+        $company->strCompanyContactTNum = $request->input('telnum');
         $company->save();
         // return response(['username'=>$request->input('username')]);
         $user = User::create([
