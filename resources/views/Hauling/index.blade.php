@@ -1,7 +1,7 @@
 @extends('Templates.newTemplate')
 
 @section('assets')
-   
+   @include('Hauling.scripts')
 @endsection
 
 @section('scripted')
@@ -17,8 +17,13 @@
             </small>
             </div>
         </h1>
-        
+        <!--Job Schedule List-->
+        @include('Hauling.list')
     </section>
+    <!--Location Updates Modal-->
+    @include('Hauling.location')
+    <!--More Info Modal-->
+    @include('Hauling.info')
 @endsection
 
 @section('outside')

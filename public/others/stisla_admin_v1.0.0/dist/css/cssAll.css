@@ -107,3 +107,17 @@ border: 0px;
 th.noSortAction{
   width:20% !important;
 }
+
+.stroke-success{
+	box-shadow: 0 0 10px #28a745;
+}
+.stroke-danger{
+
+}
+.stroke-info{
+	box-shadow: 0 0 10px #17a2b8;
+}
+
+.stroke-warning{
+
+}

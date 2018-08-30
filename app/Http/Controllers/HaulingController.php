@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 
-use App\Hauling;
+use App\Hauling;    
+use App\JobOrder;
+use App\JobSchedule;
+use App\Schedule;
 use DB;
 use Auth;
 
@@ -19,7 +22,7 @@ class HaulingController extends Controller
      */
     public function index()
     {
-        //
+        return view ('Hauling.index');
     }
 
     /**
