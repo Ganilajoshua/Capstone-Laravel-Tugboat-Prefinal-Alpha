@@ -1,6 +1,11 @@
 $(document).ready(function(){
-    $('#transactionTree').addClass("active");
-    $('#menuScheduling').addClass("active");
+    $('#transactionTree').addClass('active');
+    $('#tDispatch').addClass('active');
+    $('#menuTugboatAssignment').addClass('inactive');
+    $('#menuJobOrder').addClass('inactive');
+    $('#menuTeamBuilder').addClass('inactive');
+    $('#menuScheduling').addClass('active');
+    $('#menuHauling').addClass('inactive');;
     
     // $.ajax({
     //     url : '/scheduling/schedules',

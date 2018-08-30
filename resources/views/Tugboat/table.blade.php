@@ -5,9 +5,9 @@
             <tr>
                 <th class="text-center">Classification Number</th>
                 <th class="text-center">Name</th>
-                <th class="text-center">Length</th>
-                <th class="text-center">Horse Power</th>
-                <th class="text-center">Gross Tonnage</th>
+                <th class="text-center">Length (M)</th>
+                <th class="text-center">Horse Power (HP)</th>
+                <th class="text-center">Gross Tonnage (Tons)</th>
                 <th class="noSortAction text-center">Action</th>
             </tr>
         </thead>

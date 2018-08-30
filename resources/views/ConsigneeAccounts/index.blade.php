@@ -2,7 +2,7 @@
 
 @section('assets')
     @include('ConsigneeAccounts.styles')
-    @include('Employees.scripts')
+    @include('ConsigneeAccounts.scripts')
 @endsection
 @section('assets2')
     
