@@ -48,7 +48,12 @@ class TugboatAssignmentController extends Controller
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
         ->where('sched.intJSTugboatAssignID', null)
         ->get();
-        return view('TugboatAssignment.index',compact('tugboat','available','joborder','scheduledjob'));
+        $jobschedule = DB::table('tbljobsched as sched')
+        ->join('tbljoborder as joborder','sched.intJSJobOrderID','joborder.intJobOrderID')
+        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->where('sched.intJSTugboatAssignID','!=','null')
+        ->get(); 
+        return view('TugboatAssignment.index',compact('tugboat','available','joborder','scheduledjob','jobschedule'));
         // return response()->json([$joborder]);
     }
 

@@ -29,7 +29,7 @@
                                             <div class="row">
                                                 <div class="col mr-3 ml-3">
                                                     <a href="#">
-                                                        <div class="card border border-success" style="outline-width: 100px;">
+                                                        <div class="card bg-success text-white">
                                                             <div class="card-header ">
                                                                 <h6 class="text-center mt-2">{{$tugboat->strName}}</h6>
                                                             </div>
@@ -41,7 +41,7 @@
                                             <div class="row">
                                                 <div class="col mr-3 ml-3">
                                                     <a href="#">
-                                                        <div class="card border border-info">
+                                                        <div class="card bg-info text-white">
                                                             <div class="card-header ">
                                                                 <h6 class="text-center mt-2">{{$tugboat->strName}}</h6>
                                                             </div>
@@ -80,6 +80,27 @@
                                                     <div class="card-footer mt-2">
                                                         <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
                                                         <button onclick="showTugboatModal({{$scheduledjob->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Assign Tugboat</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                    @if(count($jobschedule) > 0)
+                                        @foreach($jobschedule as $jobschedule)
+                                            <div class="col-lg-12">
+                                                <div class="card card-sm-2 card-primary border-primary">
+                                                    <div class="card-icon">
+                                                        <i class="ion ion-android-boat text-primary"></i>
+                                                    </div>
+                                                    <div class="card-header">
+                                                        <h4 class="text-primary mb-2">Job Order # {{$jobschedule->intJobOrderID}}</h4>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <h5>{{$jobschedule->strCompanyName}}</h5>
+                                                    </div>
+                                                    <div class="card-footer mt-2">
+                                                        <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
+                                                        <button onclick="showTugboatModal({{$jobschedule->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Proceed To Hauling</button>
                                                     </div>
                                                 </div>
                                             </div>
