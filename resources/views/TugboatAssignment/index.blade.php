@@ -8,8 +8,8 @@
     <section class="section">
         <h1 class="section-header">
             <div>
-                Dispatch &amp; Hauling
-                <small class="smCat">Tugboat Assignment</small>
+                Tugboat Assignment
+                <small class="smCat">Dispatch &amp; Hauling</small>
             </div>
         </h1>
             <div class="tugboatAssignment animated fadeIn">

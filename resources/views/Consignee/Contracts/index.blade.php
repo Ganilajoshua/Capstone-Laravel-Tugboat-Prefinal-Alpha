@@ -128,7 +128,7 @@
                     </div>
                 </div>
             </div>
-        @elseif(($contractList[0]->enumStatus) == 'Finalized')
+        @elseif(($contractList[0]->enumStatus) == 'Active')
             <div class="container">
                 <div class="row">
                     <div class="col">
