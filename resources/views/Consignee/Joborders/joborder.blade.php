@@ -35,7 +35,7 @@
                 </div>
             </div>
         </section>
-    @elseif($contract[0]->enumStatus == 'Finalized')
+    @elseif($contract[0]->enumStatus == 'Active')
         <input type="hidden">
             <section class="p-t-20" style="margin-top: 50px; margin-bottom : 80px;">
                 <div class="container" style="">
