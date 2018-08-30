@@ -61,6 +61,22 @@
                                             </div>
                                         </div>
                                         <div class="row">
+                                            <div class="col">
+                                                <div class="form-group">
+                                                        <label for="telnum">Telephone Number</label>
+                                                        <input id="telnum" type="telnum" class="form-control" name="telnum">
+                                                        <div class="invalid-feedback">
+                                                        </div>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <label for="mobilenum">Mobile Number</label>
+                                                    <input id="mobilenum" type="text" class="form-control" name="mobilenum">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="form-group col-6">
                                                 <label for="password" class="d-block">Password</label>
                                                 <input id="password" type="password" class="form-control" name="password">

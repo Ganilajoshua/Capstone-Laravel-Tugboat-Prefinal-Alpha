@@ -3,7 +3,22 @@
 
 &nbsp;
 
-# 0.0.5 - 2018-02-29 α
+# 0.0.6 - 2018-08-30 α
+
+### added mobile number and telephone number to register forms of the ff:
+
+### Views
+
+-[x] adminRegister
+-[x] affiliatesRegister
+-[x] register
+
+### Routes   
+-[x] AdminLoginController@register
+-[x] AffiliatesLoginController@register
+-[x] UserLoginController@register
+
+# 0.0.5 - 2018-08-29 α
 
 ### fixed Middlewares for Admin and Affiliates
 
@@ -35,7 +50,7 @@
 - getdata.js is relocated to /dist/js/tugboat
 - getdata.js is renamed as tugboat.js
 
-# 0.0.4 - 2018-02-29 α
+# 0.0.4 - 2018-08-29 α
 
 #### fixed the view modal for
 - view initial contract
