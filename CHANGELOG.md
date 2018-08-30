@@ -9,14 +9,14 @@
 
 ### Views
 
--[x] adminRegister
--[x] affiliatesRegister
--[x] register
+- [x] adminRegister
+- [x] affiliatesRegister
+- [x] register
 
 ### Routes   
--[x] AdminLoginController@register
--[x] AffiliatesLoginController@register
--[x] UserLoginController@register
+- [x] AdminLoginController@register
+- [x] AffiliatesLoginController@register
+- [x] UserLoginController@register
 
 # 0.0.5 - 2018-08-29 α
 
