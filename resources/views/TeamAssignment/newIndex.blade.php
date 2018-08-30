@@ -8,8 +8,10 @@
     <section class="section">
         <h1 class="section-header">
             <div>
-              Dispatch &amp; Hauling
-              <small class="smCat">Team Builder</small>
+                Team Builder
+                <small class="smCat">
+                    Dispatch &amp; Hauling
+                </small>
             </div>
         </h1>
         <div class="teamAssignment animated fadeIn">
