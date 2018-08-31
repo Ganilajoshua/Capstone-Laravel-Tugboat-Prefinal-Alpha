@@ -77,7 +77,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="submitForward btn btn-primary waves-effect">Submit Forward Request</button>
+                <button onclick="forwardJobOrder()" type="button" class="btn btn-primary waves-effect">Submit Forward Request</button>
             </div>
         </div>
     </div>

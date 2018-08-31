@@ -13,6 +13,8 @@ use App\JobOrder;
 use App\JobSchedule;
 use App\Schedules;
 
+use Auth;
+
 class JobOrderController extends Controller
 {
     /**
@@ -34,7 +36,17 @@ class JobOrderController extends Controller
         ->get();
         $forwarded = DB::table('tbljoborder as joborder')
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-        ->where('joborder.enumstatus','Forwarded')
+        ->where('joborder.enumstatus','Forward Pending')
+        ->where('joborder.boolDeleted',0)
+        ->get();
+        $forwardp = DB::table('tbljoborder as joborder')
+        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->where('joborder.enumstatus','Forward Pending')
+        ->where('joborder.boolDeleted',0)
+        ->get();
+        $forwarda = DB::table('tbljoborder as joborder')
+        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->where('joborder.enumstatus','Forward Accepted')
         ->where('joborder.boolDeleted',0)
         ->get();
         $declined = DB::table('tbljoborder as joborder')
@@ -42,7 +54,7 @@ class JobOrderController extends Controller
         ->where('joborder.enumstatus','Declined')
         ->where('joborder.boolDeleted',0)
         ->get();
-        return view('Joborder.index',compact('accepted','forwarded','joborders','declined'));
+        return view('Joborder.index',compact('accepted','forwarded','joborders','declined','forwardp','forwarda'));
         // ->with('joborders',$joborder)
         // ->with('forwarded',$forwarded);
         // return response()->json(['job'=>$accepted]);    
@@ -67,27 +79,18 @@ class JobOrderController extends Controller
     public function store(Request $request)
     {
         // $joborder = JobOrder::findOrFail($request->joborderID);
-        $job = JobOrder::findOrFail($request->joborderID);
-        $job->timestamps = false;
-        $job->enumStatus = 'Scheduled';
-        $job->save();
-        // $scheduleID = Schedules::max('intScheduleID') + 1 ;
-        // $schedID = $scheduleID;     
+        if(Auth::user()->enumUserType == 'Admin'){
+            $job = JobOrder::findOrFail($request->joborderID);
+            $job->timestamps = false;
+            $job->enumStatus = 'Scheduled';
+            $job->save();
+        }elseif(Auth::user()->enumUserType == 'Affiliates'){
+            $job = JobOrder::findOrFail($request->joborderID);
+            $job->timestamps = false;
+            $job->enumStatus = 'Forward Scheduled';
+            $job->save();
+        }
         
-        // $schedule = new Schedules;
-        // $schedule->timestamps = false;
-        // $schedule->intScheduleID = $scheduleID;
-        // $schedule->strScheduleDesc = $joborder->strJODesc;
-        // $schedule->dttmETA = $joborder->dtmETA;
-        // $schedule->dttmETD = $joborder->dtmETD;
-        // $schedule->save();
-        
-        // $jobschedule = new JobSchedule;
-        // $jobschedule->timestamps = false;
-        // $jobschedule->intJSJobOrderID = $joborder->intJobOrderID;
-        // $jobschedule->intJSSchedID = $schedID; 
-        // $jobschedule->save();   
-        // $jobschedule->intJSScheduleID = $scheduleID; 
         return response()->json(['joborder'=>$job]);
     }
 
@@ -138,11 +141,21 @@ class JobOrderController extends Controller
 
     public function accept($intJobOrderID)
     {
-        $joborder = JobOrder::findOrFail($intJobOrderID);
-        $joborder->timestamps = false;
-        $joborder->enumStatus = 'Accepted';
-        $joborder->save();
-        return response()->json(['joborder'=>$joborder]);
+        if(Auth::user()->enumUserType == 'Admin'){
+            $joborder = JobOrder::findOrFail($intJobOrderID);
+            $joborder->timestamps = false;
+            $joborder->enumStatus = 'Accepted';
+            $joborder->save();
+            return response()->json(['joborder'=>$joborder]);
+
+        }elseif(Auth::user()->enumUserType == 'Affiliates'){
+            $joborder = JobOrder::findOrFail($intJobOrderID);
+            $joborder->timestamps = false;
+            $joborder->enumStatus = 'Forward Accepted';
+            $joborder->save();
+            return response()->json(['joborder'=>$joborder]);
+        }
+        
     }
     public function forwardRequest($intJobOrderID)
     {
@@ -159,7 +172,12 @@ class JobOrderController extends Controller
     }
     public function forward(Request $request)
     {
+        $joborder = JobOrder::findOrFail($request->joborderID);
+        $joborder->timestamps = false;
+        $joborder->enumStatus = 'Forward Pending';
+        $joborder->save();
 
+        return response()->json(['joborder'=>$joborder]);
     }
     public function decline($intJobOrderID)
     {

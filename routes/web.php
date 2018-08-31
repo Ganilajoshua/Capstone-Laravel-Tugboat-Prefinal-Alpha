@@ -158,7 +158,7 @@ Route::group(['prefix'=>'administrator/'],function(){
         //Dispatch and Hauling - Job Orders
         Route::get('/joborders/{intJobOrderID}/accept','JobOrderController@accept');
         Route::get('/joborders/{intJobOrderID}/forwardrequest','JobOrderController@forwardrequest');
-        Route::post('/joborders/{intJobOrderID}/forward','JobOrderController@forward');
+        Route::post('/joborders/forward','JobOrderController@forward');
         Route::post('/joborders/store','JobOrderController@store');
         Route::get('/joborders/{intJobOrderID}/decline','JobOrderController@decline');
         //Dispatch and Hauling - Team Builder (Team Assignment)

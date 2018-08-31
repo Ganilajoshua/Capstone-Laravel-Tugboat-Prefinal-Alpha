@@ -35,6 +35,7 @@ function forwardRequest(forwardID){
         success : function(data, response){
             console.log(data);  
             $('.modalBody').empty();
+            $('#forwardModal').data('id',data.jobs[0].intJobOrderID);
             var append = 
                 `<div class="card card-sm-2 card-primary border-primary">
                     <div class="card-icon">
@@ -145,7 +146,49 @@ function forwardRequest(forwardID){
 //Forward Job Order
 function forwardJobOrder()
 {
+    console.log($('#forwardModal').data('id'));
+    var joborderID = $('#forwardModal').data('id')
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 
+    $.ajax({
+        url : url + '/forward',
+        type : 'POST',
+        data : { 
+            "_token" : $('meta[name="csrf-token"]').attr('content'),    
+            joborderID : joborderID
+        }, 
+        beforeSend: function (request) {
+            return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+        },
+        success : function(data){
+            console.log('success pota');
+            console.log(data);
+            swal({
+                title: "Success",
+                text: "Job Order Forwarded",
+                type: "success",
+                showCancelButton: false,
+                confirmButtonClass: "btn-success",
+                confirmButtonText: "Ok",
+                closeOnConfirm: true,
+                timer : 1500
+            },
+            function(isConfirm){
+                if(isConfirm){
+                    window.location = url ; 
+                }
+            });                       
+        },
+        error : function(error){
+            throw error;
+        }
+
+    });
+    
 }
 //Decline Job Order
 function declineJobOrder()
@@ -154,6 +197,50 @@ function declineJobOrder()
 }
 //Create Job Schedule
 function createJobsched(id){
+    console.log(id);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        url : url + '/store',
+        type : 'POST',
+        data : { 
+            "_token" : $('meta[name="csrf-token"]').attr('content'),    
+            joborderID : id
+        }, 
+        beforeSend: function (request) {
+            return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+        },
+        success : function(data){
+            console.log('success pota');
+            console.log(data);
+            swal({
+                title: "Success",
+                text: "Job Schedule Created",
+                type: "success",
+                showCancelButton: false,
+                confirmButtonClass: "btn-success",
+                confirmButtonText: "Ok",
+                closeOnConfirm: true,
+                timer : 1500
+            },
+            function(isConfirm){
+                if(isConfirm){
+                    window.location = url ; 
+                }
+            });                       
+        },
+        error : function(error){
+            throw error;
+        }
+
+    });
+    
+}
+function createFJobsched(id){
     console.log(id);
     $.ajaxSetup({
         headers: {

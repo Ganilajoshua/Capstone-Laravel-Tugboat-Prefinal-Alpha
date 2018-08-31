@@ -41,28 +41,28 @@
                                 </div>
                             </div>
                         </div> --}}
-                        @if(count($accepted)>0)
-                            @foreach($accepted as $accepted)
+                        @if(count($forwarda)>0)
+                            @foreach($forwarda as $forwarda)
                                 <div class="col-12 col-sm-12 col-lg-6 createdCards">
                                     <div class="card card-sm-2 card-primary border-primary">
                                         <div class="card-icon">
                                             <i class="ion ion-android-boat text-primary"></i>
                                         </div>
                                         <div class="card-header">
-                                            <h4 class="text-primary mb-2">Job Order # {{$accepted->intJobOrderID}}</h4>
+                                            <h4 class="text-primary mb-2">Job Order # {{$forwarda->intJobOrderID}}</h4>
                                         </div>
                                         <div class="card-body">
-                                            <h5>{{$accepted->strCompanyName}}</h5>
+                                            <h5>{{$forwarda->strCompanyName}}</h5>
                                         </div>
                                         <div class="card-footer mt-2">
                                             <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
                                             <button class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect" data-toggle="modal" data-target="#forwardModal">Forward</button>
-                                            <button onclick="createJobsched({{$accepted->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right waves-effect">Make Job Schedule</button>
+                                            <button onclick="createFJobsched({{$forwarda->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right waves-effect">Make Job Schedule</button>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-                        @elseif(count($accepted) == 'null' || 0)
+                        @elseif(count($forwarda) == 'null' || 0)
                         @endif
                         @if(count($forwarded)>0)
                             @foreach($forwarded as $forwarded)
@@ -75,7 +75,6 @@
                                             <h4 class="text-primary mb-2">Job Order # {{$forwarded->intJobOrderID}}</h4>
                                         </div>
                                         <div class="card-body">
-                                            <h4>{{$forwarded->strJODesc}}</h4>
                                             <h5>{{$forwarded->strCompanyName}}</h5>
                                         </div>
                                         <div class="card-footer mt-2">
@@ -90,30 +89,29 @@
                         @elseif(count($forwarded) == 'null' || 0)
                         @endif
                         {{-- pending cards  --}}
-                        @if(count($joborders)>0)
-                            @foreach($joborders as $joborders)
+                        @if(count($forwardp)>0)
+                            @foreach($forwardp as $forwardp)
                                 <div class="col-12 col-sm-12 col-lg-6 pendingCards">
                                     <div class="card card-sm-2 card-primary border-primary active">
                                         <div class="card-icon">
                                             <i class="ion ion-android-boat text-primary"></i>
                                         </div>
                                         <div class="card-header">
-                                            <h4 class="text-primary mb-2">Job Order # {{$joborders->intJobOrderID}}</h4>
+                                            <h4 class="text-primary mb-2">Job Order # {{$forwardp->intJobOrderID}}</h4>
                                         </div>
                                         <div class="card-body">
-                                            <h4>{{$joborders->strJODesc}}</h4>
-                                            <h6>{{$joborders->strCompanyName}}</h6>
+                                            <h4>{{$forwardp->strJODesc}}</h4>
+                                            <h6>{{$forwardp->strCompanyName}}</h6>
                                         </div>
                                         <div class="card-footer mt-2">
-                                            <a href="#" onclick="forwardRequest({{$joborders->intJobOrderID}})" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
-                                            <button onclick="declineJobOrder({{$joborders->intJobOrderID}})" class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect">Decline</button>
-                                            <button onclick="forwardRequest({{$joborders->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect" data-toggle="modal" data-target="#forwardModal">Forward</button>
-                                            <button onclick="acceptJobOrder({{$joborders->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right waves-effect">Accept</button>
+                                            <a href="#" onclick="forwardRequest({{$forwardp->intJobOrderID}})" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
+                                            <button onclick="declineJobOrder({{$forwardp->intJobOrderID}})" class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect">Decline</button>
+                                            <button onclick="acceptJobOrder({{$forwardp->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right waves-effect">Accept</button>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-                        @elseif(count($joborders) == 'null' || 0)
+                        @elseif(count($forwardp) == 'null' || 0)
                             
                         @endif
 
