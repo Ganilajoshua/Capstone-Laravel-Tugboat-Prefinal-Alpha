@@ -33,7 +33,109 @@ function forwardRequest(forwardID){
         type : 'GET',
         dataType : 'JSON',
         success : function(data, response){
-               
+            console.log(data);  
+            $('.modalBody').empty();
+            var append = 
+                `<div class="card card-sm-2 card-primary border-primary">
+                    <div class="card-icon">
+                        <i class="ion ion-android-boat text-primary"></i>
+                    </div>
+                    <div class="card-header">
+                        <h4 class="text-primary mb-2">Job Order # 4</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5>`+ data.jobs[0].strCompanyName +`</h5>
+                    </div>
+                    <div class="card-footer mt-2">
+                        <div class="row">
+                            <div class="col-6"> 
+                                <ul class="list-inline">
+                                    <li class="list-inline-item text-primary">
+                                        <h6>Estimated Start Time of Hauling : </h6></li>
+                                    <li class="list-inline-item">
+                                        <h6>`+ moment(data.joborder.dtmETA).format("DD/MM/YY HH:MM") +` HRS</h6></li>
+                                </ul>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item text-primary">
+                                        <h6>Estimated End Time of Hauling : </h6></li>
+                                    <li class="list-inline-item">
+                                        <h6>`+ moment(data.joborder.dtmETD).format("DD/MM/YY HH:MM") +` HRS</h6></li>
+                                </ul>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item text-primary">
+                                        <h6>Estimated End Time of Hauling : </h6></li>
+                                    <li class="list-inline-item">
+                                        <h6>`+ data.joborder.strJOVesselName + `</h6></li>
+                                </ul>
+                            </div>
+                            <div class="col-6">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item text-primary">
+                                        <h6>Starting Location : </h6></li>
+                                    <li class="list-inline-item">
+                                        <h6>`+ data.jobs[0].strPierName + ` - ` +  data.jobs[0].strBerthName +`</h6></li>
+                                </ul>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item text-primary">
+                                        <h6>Destination : </h6></li>
+                                    <li class="list-inline-item">
+                                        <h6>`+ data.joborder.strJODestination +`</h6></li>
+                                </ul>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item text-primary">
+                                        <h6>Goods to be delivered : </h6></li>
+                                    <li class="list-inline-item">
+                                        <h6>`+ data.jobs[0].strGoodsName +`</h6></li>
+                                </ul>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item text-primary">
+                                        <h6>Weight (Tons) : </h6></li>
+                                    <li class="list-inline-item">
+                                        <h6>`+ data.jobs[0].fltWeight +`</h6></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            var appendBody = 
+            "<div class='row mt-2'>" +  
+                "<div class='col-12'>" +
+                    "<ul class='list-inline'> " + 
+                        "<li class='list-inline-item text-primary'>" +
+                            "<h6>Estimated Start Time of Hauling  : </h6></li>" + 
+                        "<li class='list-inline-item'>" + 
+                            "<h6>"+ data.joborder.dtmETA +"</h6></li>" +
+                    "</ul>" +
+                "</div>"+
+                "<div class='col-12'>" +
+                    "<ul class='list-inline'> " + 
+                        "<li class='list-inline-item text-primary'>" +
+                            "<h6>Estimated Start Time of Hauling : </h6></li>" + 
+                        "<li class='list-inline-item'>" + 
+                            "<h6>"+ data.joborder.dtmETD +"</h6></li>" +
+                    "</ul>" +
+                    "<ul class='list-inline'> " + 
+                        "<li class='list-inline-item text-primary'>" +
+                            "<h6>Estimated Start Time of Hauling : </h6></li>" + 
+                        "<li class='list-inline-item'>" + 
+                            "<h6>"+  +"</h6></li>" +
+                    "</ul>" +
+                    "<ul class='list-inline'> " + 
+                        "<li class='list-inline-item text-primary'>" +
+                            "<h6>User Name : </h6></li>" + 
+                        "<li class='list-inline-item'>" + 
+                            "<h6>"+  +"</h6></li>" +
+                    "</ul>" +
+                    "<ul class='list-inline'> " + 
+                        "<li class='list-inline-item text-primary'>" +
+                            "<h6>Email : </h6></li>" + 
+                        "<li class='list-inline-item'>" + 
+                            "<h6>"+  +"</h6></li>" +
+                    "</ul>" +
+                "</div>"+
+            "<div>";  
+            $(append).appendTo('.modalBody');
+            $('#forwardModal').modal('show');
         },
         error : function(error){
             throw error;

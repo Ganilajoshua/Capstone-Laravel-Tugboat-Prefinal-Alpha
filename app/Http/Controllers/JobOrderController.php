@@ -147,7 +147,15 @@ class JobOrderController extends Controller
     public function forwardRequest($intJobOrderID)
     {
         $joborder = JobOrder::findOrFail($intJobOrderID);
-        return response()->json(['joborder'=>$joborder]);
+        $jobs = DB::table('tbljoborder as joborder')
+        ->join('tblberth as berth','berth.intBerthID','joborder.intJOBerthID')
+        ->join('tblpier as pier','pier.intPierID','berth.intBPierID')
+        ->join('tblgoods as goods','goods.intGoodsID','joborder.intJOGoodsID')
+        ->join('tblcompany as company','company.intCompanyID','joborder.intJOCompanyID')
+        ->where('joborder.boolDeleted',0)
+        ->where('joborder.intJobOrderID',$intJobOrderID)
+        ->get();
+        return response()->json(['joborder'=>$joborder,'jobs'=>$jobs]);
     }
     public function forward(Request $request)
     {

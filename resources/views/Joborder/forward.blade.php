@@ -1,5 +1,5 @@
 <div class="modal fade" id="forwardModal" tabindex="-1" role="dialog" aria-labelledby="forwardModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg" style="max-width: 68%;"role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="forwardModalLabel">Forward Job Order</h5>

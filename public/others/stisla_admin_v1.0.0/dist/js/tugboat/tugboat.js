@@ -208,6 +208,7 @@ function editData(findid){
             $('#editClassNum').val(data.class[0].strClassNum);
             $('#editOfficialNum').val(data.class[0].strOfficialNum);
             $('#editIMONum').val(data.class[0].strIMONum);
+            $('#editFlag').val(data.class[0].strTugboatFlag);
             $('#editTradingArea').val(data.class[0].strTradingArea);
             $('#editType').val(data.class[0].intTugboatTypeID).niceSelect('update');
             $('#editHomePort').val(data.class[0].strHomePort);
@@ -628,6 +629,7 @@ function editClassificationSubmit(){
     var id = parseInt($('#editTugID').val());
     var officialnum = $('#editOfficialNum').val();
     var classnum = $('#editClassNum').val();
+    var flag = $('#editFlag').val();
     var imonum = $('#editIMONum').val();
     var tarea = $('#editTradingArea').val();
     var type = $('#editType').val();
@@ -635,8 +637,10 @@ function editClassificationSubmit(){
     var name = $('#editName').val();
     var ispscomp = $('input[name=editISPSCompliance]:checked').val();
     var ismcode = $('input[name=editCStandard]:checked').val();
-    console.log(id, ispscomp, ismcode);
+    var navigation = $('input[name=editAISGPSVHFRadar]:checked').val();
+    console.log(flag, id, navigation, ispscomp, ismcode);
 
+    // return false;
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -649,7 +653,7 @@ function editClassificationSubmit(){
         data : {
             "_token" : $('meta[name=_token]').attr('content'),
             classID : id,
-            // tugboatFlag : flag,
+            tugboatFlag : flag,
             tugboatType : type,
             classNum : classnum,
             officialNum : officialnum,
@@ -657,7 +661,8 @@ function editClassificationSubmit(){
             tradingArea : tarea,
             homePort : home, 
             ispsComp : ispscomp,
-            ismCode : ismcode  
+            ismCode : ismcode,
+            navigation : navigation
         },
         beforeSend: function (request) {
             return request.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr('content'));
