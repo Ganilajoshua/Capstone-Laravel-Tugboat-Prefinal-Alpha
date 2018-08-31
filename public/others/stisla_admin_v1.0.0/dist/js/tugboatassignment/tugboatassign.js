@@ -106,3 +106,54 @@ function createTugboatAssignment(){
     });
 
 }
+function proceedToHauling(jobOrderID){
+
+    swal({
+        title: "Proceed To Hauling?",
+        text: "Move This Job Order To Hauling",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonClass: "btn-info",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true,
+
+    },function(){
+
+        $.ajax({
+            url : url + '/hauling',
+            type : 'POST',
+            data : { 
+                "_token" : $('meta[name="csrf-token"]').attr('content'), 
+                joborderID : jobOrderID
+            }, 
+            beforeSend: function (request) {
+                return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+            },
+            success : function(data, response){
+                console.log('success pota');
+                console.log(data);
+                console.log(response);
+                swal({
+                    title: "Success",
+                    text: "Job Order Ready To Haul",
+                    type: "success",
+                    showCancelButton: false,
+                    confirmButtonClass: "btn-success",
+                    confirmButtonText: "Ok",
+                    closeOnConfirm: true,
+                    timer : 1500
+                },
+                function(isConfirm){
+                    if(isConfirm){
+                        window.location = url;
+                    }
+                });                       
+            },
+            error : function(error){
+                throw error;
+            }
+    
+        });
+    
+    });
+}

@@ -22,10 +22,12 @@ class ConsigneeAccountsController extends Controller
         $activeuser = DB::table('users as user')
         ->join('tblcompany as company','user.intUCompanyID','company.intCompanyID') 
         ->where('user.isActive',1)
+        ->where('user.enumUserType','Consignee')
         ->get();
         $inactiveuser = DB::table('users as user')
         ->join('tblcompany as company','user.intUCompanyID','company.intCompanyID') 
         ->where('user.isActive',0)
+        ->where('user.enumUserType','Consignee')
         ->get();
         return view('ConsigneeAccounts.index',compact('activeuser','inactiveuser'));
     }
@@ -57,9 +59,13 @@ class ConsigneeAccountsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($intCompanyID)
     {
-        //
+        $user = DB::table('users as user')
+        ->join('tblcompany as company','user.intUCompanyID','company.intCompanyID')
+        ->where('company.intCompanyID',$intCompanyID)
+        ->get();
+        return response()->json(['user'=>$user]);
     }
 
     /**

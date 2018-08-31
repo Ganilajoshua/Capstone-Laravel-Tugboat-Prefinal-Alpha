@@ -22,7 +22,21 @@ class HaulingController extends Controller
      */
     public function index()
     {
-        return view ('Hauling.index');
+        $joborder = DB::table('tbljoborder as joborder')
+        ->join('tblcompany as company','company.intCompanyID','joborder.intJOCompanyID')
+        ->where('joborder.enumStatus','Ready to Haul')
+        ->where('joborder.boolDeleted',0)
+        ->get();
+        $ongoingjob = DB::table('tbljoborder as joborder')
+        ->join('tblcompany as company','company.intCompanyID','joborder.intJOCompanyID')
+        ->where('joborder.enumStatus','Ongoing')
+        ->where('joborder.boolDeleted',0)
+        ->get(); 
+        // JobOrder::where('boolDeleted',0)
+        
+        // ->where('enumStatus','Ready To Haul')
+        // ->get();
+        return view ('Hauling.index',compact('joborder','ongoingjob'));
     }
 
     /**
@@ -89,5 +103,36 @@ class HaulingController extends Controller
     public function destroy($id)
     {
         //
+    }   
+    public function start(Request $request){
+        $joborder = JobOrder::findOrFail($request->joborderID);
+        $joborder->timestamps = false;
+        $joborder->enumStatus = 'Ongoing';
+        $joborder->save();
+
+        $jobsched = JobSchedule::where('intJSJobOrderID',$request->joborderID)->get();
+        for($count = 0; $count < count ($jobsched); $count++){
+            $jobschedule = JobSchedule::findOrFail($jobsched[$count]->intJobSchedID);
+            $jobschedule->timestamps = false;
+            $jobschedule->datTimeStarted = $request->haulingStart;
+            $jobschedule->enumStatus = 'Ongoing';
+            $jobschedule->save();
+        }
+    }
+    public function terminate(Request $request){
+
+        $joborder = JobOrder::findOrFail($request->joborderID);
+        $joborder->timestamps = false;
+        $joborder->enumStatus = 'Finished';
+        $joborder->save();
+        
+        $jobsched = JobSchedule::where('intJSJobOrderID',$request->joborderID)->get();
+        for($count = 0; $count < count ($jobsched); $count++){
+            $jobschedule = JobSchedule::findOrFail($jobsched[$count]->intJobSchedID);
+            $jobschedule->timestamps = false;
+            $jobschedule->datTimeTerminated = $request->haulingEnd;
+            $jobschedule->enumStatus = 'Finished';
+            $jobschedule->save();
+        }
     }
 }

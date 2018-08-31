@@ -46,7 +46,7 @@
                                         @foreach($inactiveuser as $inactiveuser)
                                             <tr>
                                                 <td>{{$inactiveuser->strCompanyName}}</td>
-                                                <td><span class="block-email"><a href="#"></a></span></td>
+                                                <td><span class="block-email"><a href="mailto:{{$inactiveuser->email}}">{{$inactiveuser->email}}</a></span></td>
                                                 <td> 
                                                     <div class="checkbox ml-3" data-id="{{$inactiveuser->id}}">
                                                         <label>
@@ -56,7 +56,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="ml-1 mr-1">
-                                                        <button class="gotoInvoices btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
+                                                        <button onclick="viewConsigneeDetails({{$inactiveuser->intCompanyID}})" class="gotoInvoices btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
                                                             <i class="bigIcon ion ion-ios-eye"></i>
                                                         </button>
                                                     </div>  
@@ -116,7 +116,7 @@
                                             </td>
                                             <td style="width:15%">
                                                 <div class="ml-1 mr-1">
-                                                    <button class="gotoInvoices btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
+                                                    <button onclick="viewConsigneeDetails({{$activeuser->intCompanyID}})" class="gotoInvoices btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
                                                         <i class="bigIcon ion ion-ios-eye"></i>
                                                     </button>
                                                 </div>  
@@ -143,6 +143,7 @@
         </div>
     </div>
 </section>
+@include('ConsigneeAccounts.info')
 {{-- @include('Employees.create')
 @include('Employees.edit') --}}
 @endsection
