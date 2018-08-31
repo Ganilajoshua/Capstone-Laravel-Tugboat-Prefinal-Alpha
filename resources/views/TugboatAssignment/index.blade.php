@@ -74,28 +74,51 @@
                                     </ul>
                                     <div class="tab-content" id="pills-tabContent">
                                         <div class="tab-pane fade show active" id="pillsAssignT" role="tabpanel" aria-labelledby="pillsAssignT-tab">
+                                            @if(Auth::user()->enumUserType == 'Admin')
                                                 @if(count($notugboat) > 0)
-                                                @foreach($notugboat as $notugboat)
+                                                    @foreach($notugboat as $notugboat)
+                                                        <div class="col-lg-12">
+                                                            <div class="card card-sm-2 card-primary border-primary">
+                                                                <div class="card-icon">
+                                                                    <i class="ion ion-android-boat text-primary"></i>
+                                                                </div>
+                                                                <div class="card-header">
+                                                                    <h4 class="text-primary mb-2">Job Order # {{$notugboat->intJobOrderID}}</h4>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <h5>{{$notugboat->strCompanyName}}</h5>
+                                                                </div>
+                                                                <div class="card-footer mt-2">
+                                                                    <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
+                                                                    <button onclick="showTugboatModal({{$notugboat->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Assign Tugboat</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                            @elseif(Auth::user()->enumUserType == 'Affiliates')
+                                                @if(count($noftugboat) > 0)
+                                                @foreach($noftugboat as $noftugboat)
                                                     <div class="col-lg-12">
                                                         <div class="card card-sm-2 card-primary border-primary">
                                                             <div class="card-icon">
                                                                 <i class="ion ion-android-boat text-primary"></i>
                                                             </div>
                                                             <div class="card-header">
-                                                                <h4 class="text-primary mb-2">Job Order # {{$notugboat->intJobOrderID}}</h4>
+                                                                <h4 class="text-primary mb-2">Job Order # {{$noftugboat->intJobOrderID}}</h4>
                                                             </div>
                                                             <div class="card-body">
-                                                                <h5>{{$notugboat->strCompanyName}}</h5>
+                                                                <h5>{{$noftugboat->strCompanyName}}</h5>
                                                             </div>
                                                             <div class="card-footer mt-2">
                                                                 <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
-                                                                <button onclick="showTugboatModal({{$notugboat->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Assign Tugboat</button>
+                                                                <button onclick="showTugboatModal({{$noftugboat->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Assign Tugboat</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 @endforeach
                                             @endif
-        
+                                            @endif            
                                             {{-- @if(count($scheduledjob) > 0)
                                                 @foreach($scheduledjob as $scheduledjob)
                                                     <div class="col-lg-12">
