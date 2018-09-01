@@ -313,8 +313,7 @@
                                         <div class="form-group">
                                             <label>Flag<sup class="text-primary">&#10033;</sup></label>
                                             <br>
-                                            <div class="niceCountryInputSelector form-control" data-selectedcountry="PH" data-showspecial="false" data-showflags="true" data-i18nall="All selected" data-i18nnofilter="No selection" data-i18nfilter="Filter" data-onchangecallback="onChangeCallback">
-                                            </div>
+                                            @include('Tugboat.select2')
                                         </div>
                                     </div>
                                 </div>

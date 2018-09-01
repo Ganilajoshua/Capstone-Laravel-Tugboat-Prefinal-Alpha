@@ -220,12 +220,17 @@ class TugboatController extends Controller
     }
     public function updateClass(Request $request)
     {
+        $specs = TugboatSpecifications::findOrFail($request->classID);
+        $specs->timestamps = false;
+        $specs->enumAISGPSVHFRadar = $request->navigation;
+        $specs->save();
         $class = Tugboatclass::findOrFail($request->classID);
         $class->timestamps = false;
         $class->intTCTugboatTypeID = $request->tugboatType;
         $class->strClassNum = $request->classNum;
         $class->strOfficialNum = $request->officialNum;
         $class->strIMONum = $request->imoNum;
+        $class->strTugboatFlag = $request->tugboatFlag;
         $class->strTradingArea = $request->tradingArea;
         $class->strHomePort = $request->homePort;
         $class->enumISPSCodeCompliance = $request->ispsComp;
