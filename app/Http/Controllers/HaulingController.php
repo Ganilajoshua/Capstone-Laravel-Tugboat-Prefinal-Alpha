@@ -31,12 +31,22 @@ class HaulingController extends Controller
         ->join('tblcompany as company','company.intCompanyID','joborder.intJOCompanyID')
         ->where('joborder.enumStatus','Ongoing')
         ->where('joborder.boolDeleted',0)
+        ->get();
+        $joborderf = DB::table('tbljoborder as joborder')
+        ->join('tblcompany as company','company.intCompanyID','joborder.intJOCompanyID')
+        ->where('joborder.enumStatus','Forward Ready to Haul')
+        ->where('joborder.boolDeleted',0)
+        ->get();
+        $ongoingjobf = DB::table('tbljoborder as joborder')
+        ->join('tblcompany as company','company.intCompanyID','joborder.intJOCompanyID')
+        ->where('joborder.enumStatus','Forward Ongoing')
+        ->where('joborder.boolDeleted',0)
         ->get(); 
         // JobOrder::where('boolDeleted',0)
         
         // ->where('enumStatus','Ready To Haul')
         // ->get();
-        return view ('Hauling.index',compact('joborder','ongoingjob'));
+        return view ('Hauling.index',compact('joborder','ongoingjob','joborderf','ongoingjobf'));
     }
 
     /**
@@ -107,7 +117,11 @@ class HaulingController extends Controller
     public function start(Request $request){
         $joborder = JobOrder::findOrFail($request->joborderID);
         $joborder->timestamps = false;
-        $joborder->enumStatus = 'Ongoing';
+        if(Auth::user()->enumUserType == 'Admin'){
+            $joborder->enumStatus = 'Ongoing';
+        }elseif(Auth::user()->enumUserType == 'Affiliates'){
+            $joborder->enumStatus = 'Forward Ongoing';
+        }
         $joborder->save();
 
         $jobsched = JobSchedule::where('intJSJobOrderID',$request->joborderID)->get();
@@ -123,7 +137,11 @@ class HaulingController extends Controller
 
         $joborder = JobOrder::findOrFail($request->joborderID);
         $joborder->timestamps = false;
-        $joborder->enumStatus = 'Finished';
+        if(Auth::user()->enumUserType == 'Admin'){
+            $joborder->enumStatus = 'Finished';
+        }elseif(Auth::user()->enumUserType == 'Affiliates'){
+            $joborder->enumStatus = 'Forward Finished';
+        }
         $joborder->save();
         
         $jobsched = JobSchedule::where('intJSJobOrderID',$request->joborderID)->get();

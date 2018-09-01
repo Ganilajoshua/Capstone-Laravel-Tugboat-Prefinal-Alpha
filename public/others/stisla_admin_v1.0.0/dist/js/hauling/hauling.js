@@ -67,8 +67,8 @@ function startHauling(joborderID){
     var startTime = moment().format("Y-MM-D HH:mm");
     // return false;
     swal({
-        title: "Prepare for Hauling?",
-        text: "Perform Maintenances for Tugboats",
+        title: "Start Hauling?",
+        text: "Deploy Tugboats on Job Orders",
         type: "info",
         showCancelButton: true,
         confirmButtonClass: "btn-info",
