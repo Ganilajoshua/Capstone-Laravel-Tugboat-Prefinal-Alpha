@@ -3,12 +3,17 @@ $(document).ready(function(){
     $('#menujobordersM').addClass('active');
     $('#submitJob').on('click',function(e){
         e.preventDefault(); 
-    })
-    $('#addTransacDate').datetimepicker({
-    // Default : false,   
-    }); 
-    $('#addHaulingETA').datetimepicker({
-    });
+    })  
+    $('#addTransacDate').datetimepicker();
+        $('#addHaulingETA').datetimepicker({
+            useCurrent: false
+        });
+        $("#addTransacDate").on("change.datetimepicker", function (e) {
+            $('#addHaulingETA').datetimepicker('minDate', e.date);
+        });
+        $("#addHaulingETA").on("change.datetimepicker", function (e) {
+            $('#addTransacDate').datetimepicker('maxDate', e.date);
+        });
     console.log('PUTANG INA MO BOBO');
 });
 

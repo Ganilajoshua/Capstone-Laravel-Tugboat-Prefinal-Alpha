@@ -22,13 +22,10 @@
                         </div>
                         <div class="card-body">
                             <h3>YOU DON'T HAVE ANY CONTRACTS</h3>
-                            <span><a href="#" onclick="requestContracts({{$company[0]->intCompanyID}})" id="requestContracts" class="mt-3 text-black btnRequest">
+                            <span><a href="#" onclick="requestContracts({{$company[0]->intCompanyID}})" id="requestContracts" class="mt-3">
                                     Request Contract<span><i class="fas fa-chevron-right ml-2 mt-2"></i></span>
                             </a></span>
 
-                        </div>
-                        <div class="card-footer mt-2">
-                            <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -72,15 +69,9 @@
                                         <h4 class=" text-white"><span>{{$contract[0]->strContractListTitle}}</span><span><div class="badge badge-warning ml-2">NOT YET FINALIZED</div></h4>
                                     </div>
                                     <div class="card-body">
-                                        <a href="#" onclick="showContract({{$contract[0]->intContractListID}})" class="float-left mt-2" data-toggle="modal" data-target="#viewCContractInfo">
+                                        <a href="#" onclick="showContract({{$contract[0]->intContractListID}})" class="float-left mt-2">
                                         More Info <i class="ion ion-ios-arrow-right"></i>
                                         </a>
-                                        <button type="button" class="delItem btn btn-sm btn-danger waves-effect waves-circle float-right" data-toggle="tooltip" title="Delete">
-                                            <i class="miniIcon fas fa-trash"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-secondary waves-effect waves-circle float-right mr-2" data-tooltip="tooltip" title="Edit" data-toggle="modal" data-target="#editQuoteInfo">
-                                            <i class="miniIcon ion ion-edit"></i>
-                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +117,7 @@
                             <div style="font-size: 18px;" class="mt-4 badge badge-warning text-black disabled">
                                 Waiting for Response . . .
                             </div>
-
+                            
                         </div>
                         <div class="card-footer mt-2">
                             <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
@@ -134,31 +125,72 @@
                     </div>
                 </div>
             </div>
-        @elseif(($contractList[0]->enumStatus) == 'Finalized')
+        @elseif(($contractList[0]->enumStatus) == 'Active')
             <div class="container">
                 <div class="row">
                     <div class="col">
                         <div class="card">
-                            <div class="card-header">
-                                <h5 class="section-header text-center" style="text-transform: uppercase;">
-                                    Contracts
-                                </h5>
+                            <div class="card-header bg-primary" style="border-radius:0px;">
+                                <h4 class="text-center text-white">{{$contract[0]->strContractListTitle}}</h4>
                             </div>
-                            <div class="container mt-3">
-                                <div class="card text-center">
-                                    <div class="card-header bg-primary" style="border-radius:0px;">
-                                        <h4 class=" text-white">{{$contract[0]->strContractListTitle}}</h4>
+                            <div class="card-body">
+                                <div class="mt-2">
+                                    <h4 class="mt-2 text-primary">
+                                        Contract Expiry : 
+                                        <small class="ml-2 text-black">{{$contract[0]->datContractExpire}}</small>
+                                        <span class="float-right">
+                                            <span class="">Status : </span>
+                                            <button type="button" tab-index="-1" class="text-white btn btn-success btn-sm" style="font-size: 12px; border-radius: 3px; font-weight:bold; pointer-events: none;" aria-disabled="false">ACTIVE</button>
+                                        </span> 
+                                    </h4>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Standard Rate : </p></li>
+                                            <li class="list-inline-item">
+                                                <p class="text-black" id="standardRate"> &#8369;</p></li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Tugboat Delay Fee : </p></li>
+                                            <li class="list-inline-item">
+                                                <p class="text-black" id="tugboatDelayFee"> &#8369;</p></li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Violation Fee : </p></li>
+                                            <li class="list-inline-item"> 
+                                                <p class="text-black" id="violationFee"> &#8369;</p></li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Consignee Late Fee : </p></li>
+                                            <li class="list-inline-item">
+                                            <p class="text-black" id="consigneeLateFee"> &#8369;</p></li>
+                                        </ul>
                                     </div>
-                                    <div class="card-body">
-                                        <a href="#" onclick="showContract({{$contract[0]->intContractListID}})" class="float-left mt-2" data-toggle="modal" data-target="#viewCContractInfo">
-                                        More Info <i class="ion ion-ios-arrow-right"></i>
-                                        </a>
-                                        <button type="button" class="delItem btn btn-sm btn-danger waves-effect waves-circle float-right" data-toggle="tooltip" title="Delete">
-                                            <i class="miniIcon fas fa-trash"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-sm btn-secondary waves-effect waves-circle float-right mr-2" data-tooltip="tooltip" title="Edit" data-toggle="modal" data-target="#editQuoteInfo">
-                                            <i class="miniIcon ion ion-edit"></i>
-                                        </button>
+                                    <div class="col-6">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Minimum Damage Fee : </p></li>
+                                            <li class="list-inline-item">
+                                            <p class="text-black" id="minDamageFee"> &#8369;</p></li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Maximum Damage Fee : </p></li>
+                                            <li class="list-inline-item">
+                                                <p class="text-black" id="maxDamageFee"> &#8369;</p></li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Discount : </p></li>
+                                            <li class="list-inline-item">
+                                                <p class="text-black" id="discount"> &#37;</p></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -171,5 +203,6 @@
         @endif
 
     </section>
+    @include('Consignee.Contracts.finalcontract')
     @include('Consignee.Contracts.info')
 @endsection

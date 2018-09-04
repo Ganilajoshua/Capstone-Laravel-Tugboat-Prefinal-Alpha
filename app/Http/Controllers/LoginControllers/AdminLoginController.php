@@ -22,7 +22,7 @@ class AdminLoginController extends Controller
     }
     public function login(Request $request){
         if(Auth::guard('web')->attempt(['email' => $request->email,'password'=>$request->password],$request->remember)){
-            return redirect()->intended('/administrator/maintenance/berth');
+            return redirect()->intended('/administrator/maintenance/pier');
         }
     }
     public function showRegister(){
@@ -37,6 +37,8 @@ class AdminLoginController extends Controller
         $company->strCompanyName = $request->input('companyname');
         $company->strCompanyAddress = $request->input('address');
         $company->strCompanyEmail = $request->input('email');
+        $company->strCompanyContactPNum = $request->input('mobilenum');
+        $company->strCompanyContactTNum = $request->input('telnum');
         $company->save();
         // return response(['username'=>$request->input('username')]);
         $user = User::create([

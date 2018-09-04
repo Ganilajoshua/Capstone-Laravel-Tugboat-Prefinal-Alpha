@@ -1,6 +1,11 @@
 $(document).ready(function(){
-    $('#transactionTree').addClass("active");
-    $('#menuTeamBuilder').addClass("active");
+    $('#transactionTree').addClass('active');
+    $('#tDispatch').addClass('active');
+    $('#menuTugboatAssignment').addClass('inactive');
+    $('#menuJobOrder').addClass('inactive');
+    $('#menuTeamBuilder').addClass('active');
+    $('#menuScheduling').addClass('inactive');
+    $('#menuHauling').addClass('inactive');;
 
     $('.captCheckbox').click(function(){
         if($(this).checked){

@@ -8,8 +8,8 @@
     <section class="section">
         <h1 class="section-header">
             <div>
-                Dispatch &amp; Hauling
-                <small class="smCat">Tugboat Assignment</small>
+                Tugboat Assignment
+                <small class="smCat">Dispatch &amp; Hauling</small>
             </div>
         </h1>
             <div class="tugboatAssignment animated fadeIn">
@@ -29,7 +29,7 @@
                                             <div class="row">
                                                 <div class="col mr-3 ml-3">
                                                     <a href="#">
-                                                        <div class="card border border-success" style="outline-width: 100px;">
+                                                        <div class="card bg-success text-white">
                                                             <div class="card-header ">
                                                                 <h6 class="text-center mt-2">{{$tugboat->strName}}</h6>
                                                             </div>
@@ -41,7 +41,7 @@
                                             <div class="row">
                                                 <div class="col mr-3 ml-3">
                                                     <a href="#">
-                                                        <div class="card border border-info">
+                                                        <div class="card bg-info text-white">
                                                             <div class="card-header ">
                                                                 <h6 class="text-center mt-2">{{$tugboat->strName}}</h6>
                                                             </div>
@@ -64,27 +64,62 @@
                                     </h5>
                                 </div>
                                 <div class="container">
-                                    @if(count($scheduledjob) > 0)
-                                        @foreach($scheduledjob as $scheduledjob)
-                                            <div class="col-lg-12">
-                                                <div class="card card-sm-2 card-primary border-primary">
-                                                    <div class="card-icon">
-                                                        <i class="ion ion-android-boat text-primary"></i>
+                                    <ul class="nav nav-pills nav-fill mb-2" id="pills-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="pillsAssignT-tab" data-toggle="pill" href="#pillsAssignT" role="tab" aria-controls="pillsAssignT" aria-selected="true">Assign Tugboat</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="pillsProceedH-tab" data-toggle="pill" href="#pillsProceedH" role="tab" aria-controls="pillsProceedH" aria-selected="false">Proceed To Hauling</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="pills-tabContent">
+                                        <div class="tab-pane fade show active" id="pillsAssignT" role="tabpanel" aria-labelledby="pillsAssignT-tab">
+                                            @if(count($scheduledjob) > 0)
+                                                @foreach($scheduledjob as $scheduledjob)
+                                                    <div class="col-lg-12">
+                                                        <div class="card card-sm-2 card-primary border-primary">
+                                                            <div class="card-icon">
+                                                                <i class="ion ion-android-boat text-primary"></i>
+                                                            </div>
+                                                            <div class="card-header">
+                                                                <h4 class="text-primary mb-2">Job Order # {{$scheduledjob->intJobOrderID}}</h4>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <h5>{{$scheduledjob->strCompanyName}}</h5>
+                                                            </div>
+                                                            <div class="card-footer mt-2">
+                                                                <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
+                                                                <button onclick="showTugboatModal({{$scheduledjob->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Assign Tugboat</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="card-header">
-                                                        <h4 class="text-primary mb-2">Job Order # {{$scheduledjob->intJobOrderID}}</h4>
+                                                @endforeach
+                                            @endif
+                                        </div>
+                                        <div class="tab-pane fade" id="pillsProceedH" role="tabpanel" aria-labelledby="pillsProceedH-tab">
+                                            @if(count($jobschedule) > 0)
+                                                @foreach($jobschedule as $jobschedule)
+                                                    <div class="col-lg-12">
+                                                        <div class="card card-sm-2 card-primary border-primary">
+                                                            <div class="card-icon">
+                                                                <i class="ion ion-android-boat text-primary"></i>
+                                                            </div>
+                                                            <div class="card-header">
+                                                                <h4 class="text-primary mb-2">Job Order # {{$jobschedule->intJobOrderID}}</h4>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <h5>{{$jobschedule->strCompanyName}}</h5>
+                                                            </div>
+                                                            <div class="card-footer mt-2">
+                                                                <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
+                                                                <button onclick="showTugboatModal({{$jobschedule->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Proceed To Hauling</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="card-body">
-                                                        <h5>{{$scheduledjob->strCompanyName}}</h5>
-                                                    </div>
-                                                    <div class="card-footer mt-2">
-                                                        <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
-                                                        <button onclick="showTugboatModal({{$scheduledjob->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Assign Tugboat</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    @endif
+                                                @endforeach
+                                            @endif
+                                        </div>
+                                    </div>
                                     <nav aria-label="Page navigation example">
                                         <ul class="pagination justify-content-end">
                                             <li class="page-item">

@@ -10,9 +10,9 @@
     <section id="mainSection" class="section">
         <h1 class="section-header">
             <div>
-            Dispatch &amp; Hauling
+            Job Orders
             <small class="ml-1 smCat">
-            Job Order
+                Dispatch &amp; Hauling
             </small>
             </div>
         </h1>

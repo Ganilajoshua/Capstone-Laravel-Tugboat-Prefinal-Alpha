@@ -1,0 +1,9 @@
+$(document).ready(function(){
+    $('#transactionTree').addClass('active');
+    $('#tDispatch').addClass('active');
+    $('#menuHauling').addClass('active');
+    $('#menuJobOrder').addClass('inactive');
+    $('#menuTeamBuilder').addClass('inactive');
+    $('#menuScheduling').addClass('inactive');
+    $('#menuTugboatAssignment').addClass('inactive');
+});

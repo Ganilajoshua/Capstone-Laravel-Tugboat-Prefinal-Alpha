@@ -199,7 +199,7 @@ class ContractRequestsController extends Controller
     public function activate(Request $request){
         $contract = Contract::findOrFail($request->contractID);
         $contract->timestamps = false;
-        $contract->enumStatus = 'Finalized';
+        $contract->enumStatus = 'Active';
         $contract->datContractActive = $request->contractActive;
         $contract->datContractExpire = $request->contractExpire;
         

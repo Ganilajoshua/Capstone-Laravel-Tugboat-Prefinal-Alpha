@@ -112,14 +112,16 @@ function requestForChanges(){
           }
     });
 }
-function showContract(showID){
-    console.log('contractlistID : ', showID);
-    $.ajax({
-        url : url + '/' + showID + '/show',
-        type : 'GET',
-        dataType : 'JSON',
-        success : function(data){
-            console.log(data);
+$(document).ready(function(){
+    function showContract(showID){
+        console.log('contractlistID : ', showID);
+        $.ajax({
+            url : url + '/' + showID + '/show',
+            type : 'GET',
+            dataType : 'JSON',
+            async: true,
+            success : function(data){
+                console.log(data);
                 $('.viewcontractmodalBody').empty();
                 $('#contractsID').val(data.contract[0].intContractListID);
                 console.log('aak');
@@ -137,13 +139,42 @@ function showContract(showID){
                 "<p> Maximum Discount : "+ data.contract[0].intDiscount +"</p>";
                 $(appendData).appendTo('.viewcontractmodalBody');
                 $('#viewCContractInfo').modal('show');
-                
-        },
-        error : function(error){
-            throw error;
-        }
-    });
-}
+            },
+            error : function(error){
+                throw error;
+            }
+        });
+    }
+    function showFinalContract(showID){
+        console.log('contractlistID : ', showID);
+        $.ajax({
+            url : url + '/' + showID + '/show',
+            type : 'GET',
+            dataType : 'JSON',
+            success : function(data){
+                console.log(data);
+                    $('.viewfinalcontractmodalBody').empty();
+                    $('#contractsID').val(data.contract[0].intContractListID);
+                    console.log('aak');
+                    console.log('standard ID :', data.contract[0].intCStandardID);
+                    console.log('quotation ID : ', data.contract[0].intCQuotationID);
+                    console.log(data.contract[0].strContractListTitle)
+                    $('#viewFinalContractInfoTitle').html(data.contract[0].strContractListTitle);
+                    $('#standardRate').html(data.contract[0].fltStandardRate);
+                    $('#tugboatDelayFee').html(data.contract[0].fltQuotationTDelayFee);
+                    $('#violationFee').html(data.contract[0].fltQuotationViolationFee);
+                    $('#consigneeLateFee').html(data.contract[0].fltQuotationConsigneeLateFee);
+                    $('#minDamageFee').html(data.contract[0].fltMinDamageFee);
+                    $('#maxDamageFee').html(data.contract[0].fltMaxDamageFee);
+                    $('#discount').html(data.contract[0].intDiscount);
+            },
+            error : function(error){
+                throw error;
+            }
+        });
+    }
+});
+
 function acceptContractQuotation(){
     var contractID = $('#contractsID').val();
     swal({

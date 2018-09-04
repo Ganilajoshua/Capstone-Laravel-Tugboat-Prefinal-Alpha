@@ -1,6 +1,11 @@
 $(document).ready(function(){
-    $('#transactionTree').addClass("active");
-    $('#menuJobOrder').addClass("active");
+    $('#transactionTree').addClass('active');
+    $('#tDispatch').addClass('active');
+    $('#menuTugboatAssignment').addClass('inactive');
+    $('#menuJobOrder').addClass('active');
+    $('#menuTeamBuilder').addClass('inactive');
+    $('#menuScheduling').addClass('inactive');
+    $('#menuHauling').addClass('inactive');;
 });
 var url = '/administrator/transactions/joborders';
 //Accept Job Order

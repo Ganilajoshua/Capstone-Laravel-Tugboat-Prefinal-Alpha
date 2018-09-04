@@ -4,7 +4,10 @@ $(document).ready(function(){
     $('#transactionTree').addClass('active');
     $('#tDispatch').addClass('active');
     $('#menuTugboatAssignment').addClass('active');
-    $('#tConsignee').removeClass('active');
+    $('#menuJobOrder').addClass('inactive');
+    $('#menuTeamBuilder').addClass('inactive');
+    $('#menuScheduling').addClass('inactive');
+    $('#menuHauling').addClass('inactive');
     // $('#assignTugboatButton').on('click',function(){
     //     $('#assignTugboatModal').modal('show');
     // });

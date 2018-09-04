@@ -1,22 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="modal fade" id="addTeam" tabindex="-1" role="dialog" aria-labelledby="addTeamLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content sectionDark">
@@ -167,32 +148,6 @@
                                                 @endforeach
                                             @endif
                                         </div>     
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card text-center">
-                            <div class="card-header">
-                                <div class="float-right">
-                                    <a data-collapse="#addSelectedCard" class="btn btn-icon"><i class="ion ion-minus"></i></a>
-                                </div>
-                                <h5 class="text-center ml-5">Selected</h5>
-                            </div>
-                            <div class="collapse show" id="addSelectedCard">
-                                <div class="card-body">
-                                    <div class="row" id="happiness">
-                                        <div class="col-4">
-                                            <div class="card bg-info" id="addDismissCard">
-                                                <div class="card-header">
-                                                    John Carlos Pagaduan
-                                                    <div class="float-right">
-                                                        <a data-dismiss="#addDismissCard" class="btn btn-icon"><i class="ion ion-close"></i></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

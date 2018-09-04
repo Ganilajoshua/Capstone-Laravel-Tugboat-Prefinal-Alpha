@@ -20,7 +20,7 @@ class AffiliatesMiddleware
         if(!Auth::guest()){
             if(Auth::user()->enumUserType == 'Affiliates'){   
                 return $next($request);
-                return redirect('/administrator/maintenance/employees');
+                return redirect('/affiliates/maintenance/employees');
             }else{
                 Auth::logout();
                 $request->session()->flush();

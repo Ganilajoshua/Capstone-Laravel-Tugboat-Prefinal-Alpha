@@ -153,21 +153,22 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::post('/contractrequests/activate','ContractRequestsController@activate');
         Route::post('/contractrequests/getnotifs','ContractRequestsController@getnotifs');
         Route::post('/contractrequests/saverequestchanges','ContractRequestsController@saverequestchanges');
-        //Dispatch and Hauling Job Orders
+        //Dispatch and Hauling - Job Orders
         Route::get('/joborders/{intJobOrderID}/accept','JobOrderController@accept');
         Route::get('/joborders/{intJobOrderID}/forwardrequest','JobOrderController@forwardrequest');
         Route::post('/joborders/{intJobOrderID}/forward','JobOrderController@forward');
         Route::post('/joborders/store','JobOrderController@store');
         Route::get('/joborders/{intJobOrderID}/decline','JobOrderController@decline');
-        //Dispatch and Hauling Team Builder (Team Assignment)
+        //Dispatch and Hauling - Team Builder (Team Assignment)
         Route::post('/teamassignment/store','TugboatTeamAssignmentController@store');
         Route::post('/teamassignment/teamassignment','TugboatTeamAssignmentController@teamassignment');
         Route::get('/teamassignment/{intTeamID}/show','TugboatTeamAssignmentController@show');
-        //Dispatch and Hauling Tugboat Assignment
+        //Dispatch and Hauling - Tugboat Assignment
         Route::resource('/tugboatassignment','TugboatAssignmentController');
         Route::post('/tugboatassignment/create','TugboatAssignmentController@create');
         Route::post('/tugboatassignment/available','TugboatAssignmentController@available');
-
+        //Dispatch and Hauling - Hauling
+        Route::resource('/hauling','HaulingController');
         //Scheduling
         
     });
@@ -188,6 +189,7 @@ Route::group(['prefix'=>'consignee/'],function(){
     // Route::resource('/')
     Route::post('/logout','LoginControllers\UserLoginController@logout');
     Route::get('/dashboard','ConsigneeControllers\ConsigneeController@index');
+    Route::post('/dashboard/getnotifs','ConsigneeControllers\ConsigneeController@getnotifs');
     //Contract Request
     Route::resource('/contracts','ConsigneeControllers\ContractsController');
     Route::get('/contracts/{intContractListID}/show','ConsigneeControllers\ContractsController@show');
@@ -210,6 +212,7 @@ Route::group(['prefix'=>'affiliates/'],function(){
         Route::resource('/position','PositionController');
         Route::post('/position/store','PositionController@store');
         Route::post('/position/update','PositionController@update');
+        Route::post('/position/activate','PositionController@activate');
         Route::get('/position/{intPositionID}/get','PositionController@get');
         Route::get('/position/{intPositionID}/delete','PositionController@delete');
         Route::get('/position/{intPositionID}/destroy','PositionController@destroy');
@@ -217,6 +220,7 @@ Route::group(['prefix'=>'affiliates/'],function(){
         Route::resource('/employees','EmployeesController');
         Route::post('/employees/store','EmployeesController@store');
         Route::post('/employees/update','EmployeesController@update');
+        Route::post('/employees/activate','EmployeesController@activate');
         Route::get('/employees/{intEmployeeID}/edit','EmployeesController@edit');
         Route::get('/employees/{intEmployeeID}/delete','EmployeesController@delete');
         Route::get('/employees/{intEmployeeID}/destroy','EmployeesController@destroy');
