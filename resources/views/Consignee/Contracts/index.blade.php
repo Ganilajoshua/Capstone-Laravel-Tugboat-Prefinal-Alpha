@@ -129,7 +129,8 @@
                 </div>
             </div>
         @elseif(($contractList[0]->enumStatus) == 'Active')
-            <div class="container">
+            <!-- Since Hindi Mo I Bibind sa button yung id para makuha yung contract ilagay natin siya sa || data-id="" || -->
+            <div class="container" id="activeContract" data-id="{{$contract[0]->intContractListID}}">
                 <div class="row">
                     <div class="col">
                         <div class="card">
