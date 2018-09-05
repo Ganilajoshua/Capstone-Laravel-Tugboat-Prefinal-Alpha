@@ -52,6 +52,9 @@ li:hover{
     position: relative;
     right:5px;
 }
+.text-black{
+  color:#000;
+}
 /* Important part */
 .modal-dialog{
   overflow-y: initial !important;

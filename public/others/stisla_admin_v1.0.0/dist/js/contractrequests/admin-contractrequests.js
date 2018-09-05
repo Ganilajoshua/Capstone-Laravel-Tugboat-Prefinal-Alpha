@@ -1,4 +1,10 @@
 $(document).ready(function(){
+    $(function() {
+        var sig = $('.signCanvas').signature();
+        $('.clearCanvas').click(function() {
+            sig.signature('clear');
+        });
+    });
     $('.btnButtons').on('click',function(e){
         e.preventDefault();
     })
@@ -30,4 +36,8 @@ $(document).ready(function(){
         s.preventDefault();
         window.location = "/administrator/transactions/contractrequests"
       });
+    $('.modalClose').on('click',function(){
+        $('#applySignatureModal').modal('hide');
+    });
+    
 });

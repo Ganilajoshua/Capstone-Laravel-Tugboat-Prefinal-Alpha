@@ -74,6 +74,9 @@
                                     </ul>
                                     <div class="tab-content" id="pills-tabContent">
                                         <div class="tab-pane fade show active" id="pillsAssignT" role="tabpanel" aria-labelledby="pillsAssignT-tab">
+<<<<<<< HEAD
+                                            @if(count($scheduledjob) > 0)
+=======
                                             @if(Auth::user()->enumUserType == 'Admin')
                                                 @if(count($notugboat) > 0)
                                                     @foreach($notugboat as $notugboat)
@@ -120,6 +123,7 @@
                                             @endif
                                             @endif            
                                             {{-- @if(count($scheduledjob) > 0)
+>>>>>>> 20c2916bc31bceead8d8bc983914614343f85f0a
                                                 @foreach($scheduledjob as $scheduledjob)
                                                     <div class="col-lg-12">
                                                         <div class="card card-sm-2 card-primary border-primary">
@@ -139,7 +143,11 @@
                                                         </div>
                                                     </div>
                                                 @endforeach
+<<<<<<< HEAD
+                                            @endif
+=======
                                             @endif --}}
+>>>>>>> 20c2916bc31bceead8d8bc983914614343f85f0a
                                         </div>
                                         <div class="tab-pane fade" id="pillsProceedH" role="tabpanel" aria-labelledby="pillsProceedH-tab">
                                             @if(count($jobschedule) > 0)
@@ -157,14 +165,22 @@
                                                             </div>
                                                             <div class="card-footer mt-2">
                                                                 <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
+<<<<<<< HEAD
+                                                                <button onclick="showTugboatModal({{$jobschedule->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Proceed To Hauling</button>
+=======
                                                                 <button onclick="proceedToHauling({{$jobschedule->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Proceed To Hauling</button>
+>>>>>>> 20c2916bc31bceead8d8bc983914614343f85f0a
                                                             </div>
                                                         </div>
                                                     </div>
                                                 @endforeach
                                             @endif
                                         </div>
+<<<<<<< HEAD
+                                    </div>
+=======
                                     </div>    
+>>>>>>> 20c2916bc31bceead8d8bc983914614343f85f0a
                                     <nav aria-label="Page navigation example">
                                         <ul class="pagination justify-content-end">
                                             <li class="page-item">

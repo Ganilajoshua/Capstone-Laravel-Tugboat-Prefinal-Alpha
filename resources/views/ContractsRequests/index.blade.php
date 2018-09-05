@@ -1,4 +1,4 @@
-@extends('Templates.newTemplate')
+    @extends('Templates.newTemplate')
 
 @section('assets')
     @include('ContractsRequests.styles')
@@ -138,8 +138,8 @@
                                                     <td>{{$companyAccepted->strCompanyName}}</td>
                                                     <td>
                                                         <div class="ml-1 mr-1">
-                                                            <button onclick="createActiveContract({{$companyAccepted->intContractListID}})" class="btn btn-sm btn-success" data-toggle="tooltip" title="Finalize Quotation as Contract" role="button">
-                                                                <i class="miniIcon fas fa-check custSize"></i>
+                                                            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#applySignatureModal" role="button">
+                                                                Sign
                                                             </button>
                                                         </div>
                                                     </td>
@@ -169,4 +169,5 @@
         </div>
     </section>
     @include('ContractsRequests.info')
+    @include('ContractsRequests.infoSign')
 @endsection
