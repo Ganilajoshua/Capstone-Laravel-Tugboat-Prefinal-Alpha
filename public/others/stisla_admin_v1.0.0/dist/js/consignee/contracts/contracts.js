@@ -15,30 +15,26 @@ $(document).ready(function(){
     var showID = $('#activeContract').data('id');
     
     console.log(showID);
+    var peso = ` &#8369; `;
+    var percent = ` &#37;`;
     $.ajax({
         url : url + '/' + showID + '/show',
         type : 'GET',
         dataType : 'JSON',
         async: true,
         success : function(data){
-            console.log(data);
-            $('.viewcontractmodalBody').empty();
             $('#contractsID').val(data.contract[0].intContractListID);
             console.log('aak');
             console.log('standard ID :', data.contract[0].intCStandardID);
             console.log('quotation ID : ', data.contract[0].intCQuotationID);
-            var appendData =
-            "<h2>"+ data.contract[0].strContractListTitle +"</h2>" +
-            "<p>"+ data.contract[0].strContractListDesc +"</p>" + 
-            "<p> Standard Rate : "+ data.contract[0].fltStandardRate +"</p>" +
-            "<p> Tugboat Delay Fee : "+ data.contract[0].fltQuotationTDelayFee +"</p>" +
-            "<p> Violation Fee : "+ data.contract[0].fltQuotationViolationFee +"</p>" +
-            "<p> Minimum Damage Fee(s) : "+ data.contract[0].fltQuotationConsigneeLateFee +"</p>" +
-            "<p> Minimum Damage Fee(s) : "+ data.contract[0].fltMinDamageFee +"</p>" +
-            "<p> Maximum Damage Fee(s) : "+ data.contract[0].fltMaxDamageFee +"</p>" +
-            "<p> Maximum Discount : "+ data.contract[0].intDiscount +"</p>";
-            $(appendData).appendTo('.viewcontractmodalBody');
-            $('#viewCContractInfo').modal('show');
+            $('#contractDetails').html(data.contract[0].strContractListDesc);
+            $('#standardRate').html(peso + data.contract[0].fltStandardRate);
+            $('#tugboatDelayFee').html(peso + data.contract[0].fltQuotationTDelayFee);
+            $('#violationFee').html(peso + data.contract[0].fltQuotationViolationFee);
+            $('#consigneeLateFee').html(peso + data.contract[0].fltQuotationConsigneeLateFee);
+            $('#minDamageFee').html(peso + data.contract[0].fltMinDamageFee);
+            $('#maxDamageFee').html(peso + data.contract[0].fltMaxDamageFee);
+            $('#discount').html(data.contract[0].intDiscount + percent);
         },
         error : function(error){
             throw error;

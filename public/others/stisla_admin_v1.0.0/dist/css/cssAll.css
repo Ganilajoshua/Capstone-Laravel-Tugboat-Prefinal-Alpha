@@ -4,6 +4,9 @@ html,body{
 .editForm{
   display:none;
 }
+.text-black{
+  color: black !important;
+}
 .sweet-alert h2{
 margin-top:30px;
 }

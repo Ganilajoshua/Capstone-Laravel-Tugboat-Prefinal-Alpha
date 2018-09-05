@@ -45,7 +45,7 @@
                         </div>
                         <div class="card-body">
                             <h3>CONTRACT REQUEST PENDING</h3>
-                            <div style="font-size: 18px;" class="mt-4 badge badge-warning text-black disabled">
+                            <div style="font-size: 18px;" class="mt-4 badge badge-warning text-black">
                                 Waiting for Response . . .
                             </div>
 
@@ -94,7 +94,7 @@
                         </div>
                         <div class="card-body">
                             <h3>CONTRACT CHANGE REQUEST PENDING</h3>
-                            <div style="font-size: 18px;" class="mt-4 badge badge-warning text-black disabled">
+                            <div style="font-size: 18px;" class="mt-4 badge badge-warning text-black">
                                 Waiting for Response . . .
                             </div>
 
@@ -117,7 +117,7 @@
                         </div>
                         <div class="card-body">
                             <h3>WAITING FOR FINALIZATION OF CONTRACT</h3>
-                            <div style="font-size: 18px;" class="mt-4 badge badge-warning text-black disabled">
+                            <div style="font-size: 18px;" class="mt-4 badge badge-warning text-black">
                                 Waiting for Response . . .
                             </div>
                             
@@ -134,36 +134,71 @@
                 <div class="row">
                     <div class="col">
                         <div class="card">
-                            <div class="card-header">
-                                <h5 class="section-header text-center" style="text-transform: uppercase;">
-                                    Contracts
-                                </h5>
+                            <div class="card-header bg-primary" style="border-radius:0px;">
+                                <h4 class="text-center text-white">{{$contract[0]->strContractListTitle}}</h4>
                             </div>
-                            <div class="container mt-3">
-                                <div class="card">
-                                    <div class="card-header bg-primary" style="border-radius:0px;">
-                                        <h4 class="text-center text-white">{{$contract[0]->strContractListTitle}}</h4>
+                            <div class="card-body">
+                                <h4 class="text-primary">
+                                    Contract Expiry : 
+                                    <small class="ml-2 text-black">{{$contract[0]->datContractExpire}}</small>
+                                    <span class="float-right">
+                                        <span class="text-black">Status : </span>
+                                        <button type="button" tab-index="-1" class="text-white btn btn-success btn-sm" style="font-size: 12px; border-radius: 3px; font-weight:bold; pointer-events: none;" aria-disabled="true">ACTIVE</button>
+                                    </span> 
+                                </h4>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="text-black text-center" id="contractDetails"></p>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="mt-2">
-                                            <h3 class="mt-2">
-                                                <span>Consignee Name :&nbsp;</span>
-                                                <small style="font-size: 25px;">{{Auth::user()->name}}</small>
-                                            </h3>
-                                            <h4 class="mt-3">
-                                                Contract Expiry : 
-                                                <small class="ml-2">{{$contract[0]->datContractExpire}}</small>
-                                                <span class="float-right">
-                                                    <span class="">STATUS : </span>
-                                                    <button type="button" tab-index="-1" class="text-white btn btn-success btn-sm disabled" style="font-size: 12px; border-radius: 3px; font-weight:bold; pointer-events: none;" aria-disabled="true">ACTIVE</button>
-                                                </span> 
-                                            </h4>
-                                        </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Standard Rate : </p></li>
+                                            <li class="list-inline-item">
+                                                <p class="text-black" id="standardRate"></p></li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Tugboat Delay Fee : </p></li>
+                                            <li class="list-inline-item">
+                                                <p class="text-black" id="tugboatDelayFee"></p></li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Violation Fee : </p></li>
+                                            <li class="list-inline-item"> 
+                                                <p class="text-black" id="violationFee"></p></li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Consignee Late Fee : </p></li>
+                                            <li class="list-inline-item">
+                                            <p class="text-black" id="consigneeLateFee"></p></li>
+                                        </ul>
                                     </div>
-                                    <div class="card-footer">
-                                        <a href="#" onclick="showFinalContract({{$contract[0]->intContractListID}})" class="float-left mt-2" style="display: block;" data-toggle="tooltip" title="View Details">
-                                            More Info <i class="ion ion-ios-arrow-right"></i>
-                                        </a>
+                                    <div class="col-6">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Minimum Damage Fee : </p></li>
+                                            <li class="list-inline-item">
+                                            <p class="text-black" id="minDamageFee"></p></li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Maximum Damage Fee : </p></li>
+                                            <li class="list-inline-item">
+                                                <p class="text-black" id="maxDamageFee"></p></li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Discount : </p></li>
+                                            <li class="list-inline-item">
+                                                <p class="text-black" id="discount"></p></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
