@@ -127,3 +127,11 @@ th.noSortAction{
 .stroke-warning{
 
 }
+.signCanvas{
+  height: 300px;
+  width: 750px;
+}
+.modal-body {
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+}
