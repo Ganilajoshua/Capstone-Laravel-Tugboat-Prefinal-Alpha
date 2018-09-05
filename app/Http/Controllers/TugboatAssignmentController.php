@@ -43,18 +43,36 @@ class TugboatAssignmentController extends Controller
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
         ->where('enumStatus','Scheduled')
         ->get();
+        $scheduledfjob = DB::table('tbljoborder as joborder')
+        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->where('enumStatus','Scheduled')
+        ->get();
+        $notugboat = DB::table('tbljoborder as joborder')
+        ->leftjoin('tbljobsched as sched','sched.intJSJobOrderID','joborder.intJobOrderID')
+        ->join('tblcompany as company','company.intCompanyID','joborder.intJOCompanyID')
+        ->where('joborder.enumStatus','Scheduled')
+        ->where('sched.intJobSchedID',null)
+        ->get();
+        $noftugboat = DB::table('tbljoborder as joborder')
+        ->leftjoin('tbljobsched as sched','sched.intJSJobOrderID','joborder.intJobOrderID')
+        ->join('tblcompany as company','company.intCompanyID','joborder.intJOCompanyID')
+        ->where('joborder.enumStatus','Forward Scheduled')
+        ->where('sched.intJobSchedID',null)
+        ->get();
         $joborder = DB::table('tbljobsched as sched')
         ->join('tbljoborder as joborder','sched.intJSJobOrderID','joborder.intJobOrderID')
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
         ->where('sched.intJSTugboatAssignID', null)
         ->get();
-        $jobschedule = DB::table('tbljobsched as sched')
-        ->join('tbljoborder as joborder','sched.intJSJobOrderID','joborder.intJobOrderID')
+        // $jobschedule = JobOrder::where('enumStatus','Ready')->get();
+        $jobschedule = DB::table('tbljoborder as joborder','sched.intJSJobOrderID','joborder.intJobOrderID')
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-        ->where('sched.intJSTugboatAssignID','!=','null')
+        // ->select('joborder.')
+        ->where('joborder.enumStatus','Ready')
         ->get(); 
-        return view('TugboatAssignment.index',compact('tugboat','available','joborder','scheduledjob','jobschedule'));
-        // return response()->json([$joborder]);
+        return view('TugboatAssignment.index',
+        compact('tugboat','available','joborder','scheduledjob','jobschedule','notugboat','noftugboat'));
+        // return response()->json([$notugboat]);
     }
 
     /**
@@ -66,6 +84,15 @@ class TugboatAssignmentController extends Controller
     public function create(Request $request)
     {
         $joborder = JobOrder::findOrFail($request->jobOrderID);
+        $jobID = $joborder->intJobOrderID;
+        $joborder->timestamps = false;
+        if(Auth::user()->enumUserType == 'Admin'){
+            $joborder->enumStatus = 'Ready';
+        }elseif(Auth::user()->enumUserType == 'Affiliates'){
+            $joborder->enumStatus = 'Forward Ready';
+        }
+        $joborder->save();
+
         $scheduleID = Schedules::max('intScheduleID') + 1 ;
         $schedID = $scheduleID;     
         
@@ -87,7 +114,7 @@ class TugboatAssignmentController extends Controller
             $jobsched = new JobSchedule;
             $jobsched->timestamps = false;
             $jobsched->intJSSchedID = $schedID;
-            $jobsched->intJSJobOrderID = $joborder->intJobOrderID;
+            $jobsched->intJSJobOrderID = $jobID;
             $jobsched->intJSTugboatAssignID = $request->tugboatsID[$count];
             $jobsched->save();
             // $jobsched->status = ;
@@ -156,6 +183,23 @@ class TugboatAssignmentController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function hauling(Request $request){
+        if(Auth::user()->enumUserType == 'Admin'){
+            $joborder = JobOrder::findOrFail($request->joborderID);
+            $joborder->timestamps = false;
+            $joborder->enumStatus = 'Ready To Haul';
+            $joborder->save();
+            return response()->json(['joborder'=>$joborder]);
+
+        }elseif(Auth::user()->enumUserType == 'Affiliates'){
+            $joborder = JobOrder::findOrFail($request->joborderID);
+            $joborder->timestamps = false;
+            $joborder->enumStatus = 'Forward Ready To Haul';
+            $joborder->save();
+            return response()->json(['joborder'=>$joborder]);
+        }
+
     }
     public function available(Request $request)
     {

@@ -3,6 +3,16 @@
 
 &nbsp;
 
+<<<<<<< HEAD
+=======
+# 0.0.7 - 2018-08-30 α
+
+- [x] Added Hauling in Dispatch and Hauling Module
+- [x] BreadCrumbs of Dispatch Hauling fixed
+- [x] Added Pills to Tugboat Assignment
+- [x] Added View Modal on Consignee Accounts
+
+>>>>>>> 20c2916bc31bceead8d8bc983914614343f85f0a
 # 0.0.6 - 2018-08-30 α
 
 ### added mobile number and telephone number to register forms of the ff:

@@ -18,7 +18,15 @@
             </div>
         </h1>
         <!--Job Schedule List-->
+<<<<<<< HEAD
         @include('Hauling.list')
+=======
+        @if(Auth::user()->enumUserType == 'Admin')
+            @include('Hauling.list')
+        @elseif(Auth::user()->enumUserType == 'Affiliates')
+            @include('Hauling.forwardlist')
+        @endif
+>>>>>>> 20c2916bc31bceead8d8bc983914614343f85f0a
     </section>
     <!--Location Updates Modal-->
     @include('Hauling.location')

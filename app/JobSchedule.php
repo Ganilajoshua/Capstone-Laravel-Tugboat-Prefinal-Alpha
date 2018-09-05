@@ -13,5 +13,7 @@ class JobSchedule extends Model
         'intJSSchedID',
         'intJSTugboatAssignID',
         'boolDeleted',
+        'datTimeStarted',
+        'datTimeTerminated',
     ];
 }

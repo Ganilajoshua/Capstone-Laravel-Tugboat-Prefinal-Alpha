@@ -143,7 +143,9 @@ Route::group(['prefix'=>'administrator/'],function(){
         
         //Consignee Accounts
         Route::resource('/consignee','ConsigneeAccountsController');
+        Route::post('/consignee/verify','ConsigneeAccountsController@verify');
         Route::post('/consignee/activate','ConsigneeAccountsController@activate');
+        Route::get('/consignee/{intCompanyID}/show','ConsigneeAccountsController@show');
         //Consignee Contracts
         Route::get('/contractrequests/{intContractID}/create','ContractRequestsController@create');
         Route::get('/contractrequests/{intContractID}/requestchanges','ContractRequestsController@requestchanges');
@@ -156,7 +158,7 @@ Route::group(['prefix'=>'administrator/'],function(){
         //Dispatch and Hauling - Job Orders
         Route::get('/joborders/{intJobOrderID}/accept','JobOrderController@accept');
         Route::get('/joborders/{intJobOrderID}/forwardrequest','JobOrderController@forwardrequest');
-        Route::post('/joborders/{intJobOrderID}/forward','JobOrderController@forward');
+        Route::post('/joborders/forward','JobOrderController@forward');
         Route::post('/joborders/store','JobOrderController@store');
         Route::get('/joborders/{intJobOrderID}/decline','JobOrderController@decline');
         //Dispatch and Hauling - Team Builder (Team Assignment)
@@ -166,9 +168,13 @@ Route::group(['prefix'=>'administrator/'],function(){
         //Dispatch and Hauling - Tugboat Assignment
         Route::resource('/tugboatassignment','TugboatAssignmentController');
         Route::post('/tugboatassignment/create','TugboatAssignmentController@create');
+        Route::post('/tugboatassignment/hauling','TugboatAssignmentController@hauling');
         Route::post('/tugboatassignment/available','TugboatAssignmentController@available');
         //Dispatch and Hauling - Hauling
         Route::resource('/hauling','HaulingController');
+        // Route::post('/hauling/prepare','HaulingController@prepare');
+        Route::post('/hauling/start','HaulingController@start');
+        Route::post('/hauling/terminate','HaulingController@terminate');
         //Scheduling
         
     });

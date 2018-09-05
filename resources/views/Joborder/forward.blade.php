@@ -1,5 +1,5 @@
 <div class="modal fade" id="forwardModal" tabindex="-1" role="dialog" aria-labelledby="forwardModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg" style="max-width: 68%;"role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="forwardModalLabel">Forward Job Order</h5>
@@ -77,7 +77,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="submitForward btn btn-primary waves-effect">Submit Forward Request</button>
+                <button onclick="forwardJobOrder()" type="button" class="btn btn-primary waves-effect">Submit Forward Request</button>
             </div>
         </div>
     </div>

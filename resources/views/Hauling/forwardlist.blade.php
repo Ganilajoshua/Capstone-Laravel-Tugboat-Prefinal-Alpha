@@ -19,46 +19,26 @@
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pillsPending" role="tabpanel" aria-labelledby="pillsPending-tab">
                             <div class="row">
-<<<<<<< HEAD
-                                <div class="col-12 col-sm-12 col-lg-6">
-                                    <div class="card card-sm-2 card-primary border-primary pendingCards">
-                                        <div class="card-icon">
-                                            <i class="ion ion-android-boat text-primary"></i>
-                                        </div>
-                                        <div class="card-header">
-                                            <h4 class="text-primary mb-2">Job Order # 17</h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <h5>Consignee Name</h5>
-                                        </div>
-                                        <div class="card-footer mt-2">
-                                            <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
-                                            <button class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect btnEnd">End</button>
-                                            <button class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect btnUL" data-toggle="modal" data-target="#updateLoc">Update Location</button>
-                                            <button class="btn btn-primary btn-sm text-center float-right waves-effect btnStart">Start</button>
-                                        </div>
-                                    </div>
-                                </div>
-=======
-                                @if(count($joborder) > 0)
-                                    @foreach($joborder as $joborder)
+                                @if(count($joborderf) > 0)
+                                    @foreach($joborderf as $joborderf)
                                         <div class="col-12 col-sm-12 col-lg-6">
                                             <div class="card card-sm-2 card-primary border-primary pendingCards">
                                                 <div class="card-icon">
                                                     <i class="ion ion-android-boat text-primary"></i>
                                                 </div>
                                                 <div class="card-header">
-                                                    <h4 class="text-primary mb-2">Job Order # {{$joborder->intJobOrderID}}</h4>
+                                                    <h4 class="text-primary mb-2">Job Order # {{$joborderf->intJobOrderID}}</h4>
                                                 </div>
                                                 <div class="card-body">
-                                                    <h3>{{$joborder->strJODesc}}</h3>
-                                                    <h6>{{$joborder->strCompanyName}}</h6>
+                                                    <h3>{{$joborderf->strJODesc}}</h3>
+                                                    <h6>{{$joborderf->strCompanyName}}</h6>
                                                 </div>
                                                 <div class="card-footer mt-2">
                                                     <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
                                                     
-                                                    <button onclick="terminateHauling({{$joborder->intJobOrderID}})" class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect btnEnd">End</button>
-                                                    <button onclick="startHauling({{$joborder->intJobOrderID}})"class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect btnStart">Start</button>
+                                                    <button onclick="terminateHauling({{$joborderf->intJobOrderID}})" class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect btnEnd">End</button>
+                                                    <button class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect btnUL" data-toggle="modal" data-target="#updateLoc">Update Location</button>
+                                                    <button onclick="startHauling({{$joborderf->intJobOrderID}})"class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect btnStart">Start</button>
                                                     
                                                 </div>
                                             </div>
@@ -67,48 +47,26 @@
                                 @else
                                     NO Results
                                 @endif
->>>>>>> 20c2916bc31bceead8d8bc983914614343f85f0a
                             </div>
                         </div>
                         <div class="tab-pane fade" id="pillsActive" role="tabpanel" aria-labelledby="pillsActive-tab">
                             <div class="row">
-<<<<<<< HEAD
-                                <div class="col-12 col-sm-12 col-lg-6">
-                                    <div class="card card-sm-2 card-primary border-primary activeCards">
-                                        <div class="card-icon">
-                                            <i class="ion ion-android-boat text-primary"></i>
-                                        </div>
-                                        <div class="card-header">
-                                            <h4 class="text-primary mb-2">Job Order # 17</h4>
-                                        </div>
-                                        <div class="card-body">
-                                            <h5>Consignee Name</h5>
-                                        </div>
-                                        <div class="card-footer mt-2">
-                                            <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
-                                            <button class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect btnEnd">End</button>
-                                            <button class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect" data-toggle="modal" data-target="#updateLoc">Update Location</button>
-                                            <button class="btn btn-primary btn-sm text-center float-right waves-effect btnStart">Start</button>
-                                        </div>
-                                    </div>
-                                </div>
-=======
-                                @if(count($ongoingjob)>0)
-                                    @foreach($ongoingjob as $ongoingjob)
+                                @if(count($ongoingjobf)>0)
+                                    @foreach($ongoingjobf as $ongoingjobf)
                                         <div class="col-12 col-sm-12 col-lg-6">
                                             <div class="card card-sm-2 card-primary border-primary activeCards">
                                                 <div class="card-icon">
                                                     <i class="ion ion-android-boat text-primary"></i>
                                                 </div>
                                                 <div class="card-header">
-                                                    <h4 class="text-primary mb-2">Job Order # {{$ongoingjob->intJobOrderID}}</h4>
+                                                    <h4 class="text-primary mb-2">Job Order # {{$ongoingjobf->intJobOrderID}}</h4>
                                                 </div>
                                                 <div class="card-body">
-                                                    <h5>{{$ongoingjob->strCompanyName}}</h5>
+                                                    <h5>{{$ongoingjobf->strCompanyName}}</h5>
                                                 </div>
                                                 <div class="card-footer mt-2">
                                                     <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
-                                                    <button onclick="terminateHauling({{$ongoingjob->intJobOrderID}})" class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect btnEnd">End</button>
+                                                    <button onclick="terminateHauling({{$ongoingjobf->intJobOrderID}})" class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect btnEnd">End</button>
                                                     <button class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect" data-toggle="modal" data-target="#updateLoc">Update Location</button>
                                                     <button class="btn btn-primary btn-sm text-center float-right waves-effect btnStart">Start</button>
                                                 </div>
@@ -118,7 +76,6 @@
                                 @else
                                     No Results Found
                                 @endif
->>>>>>> 20c2916bc31bceead8d8bc983914614343f85f0a
                             </div>
                         </div>
                     </div>

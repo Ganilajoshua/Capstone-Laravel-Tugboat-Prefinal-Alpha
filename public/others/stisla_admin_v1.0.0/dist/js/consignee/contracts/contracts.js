@@ -1,3 +1,5 @@
+var url = '/consignee/contracts';
+
 $(document).ready(function(){
     $('#menucontractsD').addClass('active');
     $('#menucontractsM').addClass('active');
@@ -5,9 +7,41 @@ $(document).ready(function(){
     $('.btnRequest').on('click',function(e){
         e.preventDefault();
     });
+    // para makuha mo yung value ng contract na kukunin 
+    // nagdedefine ng || data-id="" || kasi wala namang click event
+    // yung data id nilagyan ko din ng comment sa blade
+    
+    //PS ikaw nalang magbago ulit ng UI thankies
+    var showID = $('#activeContract').data('id');
+    
+    console.log(showID);
+    var peso = ` &#8369; `;
+    var percent = ` &#37;`;
+    $.ajax({
+        url : url + '/' + showID + '/show',
+        type : 'GET',
+        dataType : 'JSON',
+        async: true,
+        success : function(data){
+            $('#contractsID').val(data.contract[0].intContractListID);
+            console.log('aak');
+            console.log('standard ID :', data.contract[0].intCStandardID);
+            console.log('quotation ID : ', data.contract[0].intCQuotationID);
+            $('#contractDetails').html(data.contract[0].strContractListDesc);
+            $('#standardRate').html(peso + data.contract[0].fltStandardRate);
+            $('#tugboatDelayFee').html(peso + data.contract[0].fltQuotationTDelayFee);
+            $('#violationFee').html(peso + data.contract[0].fltQuotationViolationFee);
+            $('#consigneeLateFee').html(peso + data.contract[0].fltQuotationConsigneeLateFee);
+            $('#minDamageFee').html(peso + data.contract[0].fltMinDamageFee);
+            $('#maxDamageFee').html(peso + data.contract[0].fltMaxDamageFee);
+            $('#discount').html(data.contract[0].intDiscount + percent);
+        },
+        error : function(error){
+            throw error;
+        }
+    });
     
 });
-var url = '/consignee/contracts';
 
 function requestContracts(companyID){
     console.log(companyID);
@@ -112,24 +146,58 @@ function requestForChanges(){
           }
     });
 }
-$(document).ready(function(){
-    function showContract(showID){
-        console.log('contractlistID : ', showID);
-        $.ajax({
-            url : url + '/' + showID + '/show',
-            type : 'GET',
-            dataType : 'JSON',
-            async: true,
-            success : function(data){
-                console.log(data);
-                $('.viewcontractmodalBody').empty();
+function showContract(showID){
+    console.log('contractlistID : ', showID);
+    $.ajax({
+        url : url + '/' + showID + '/show',
+        type : 'GET',
+        dataType : 'JSON',
+        async: true,
+        success : function(data){
+            console.log(data);
+            $('.viewcontractmodalBody').empty();
+            $('#contractsID').val(data.contract[0].intContractListID);
+            console.log('aak');
+            console.log('standard ID :', data.contract[0].intCStandardID);
+            console.log('quotation ID : ', data.contract[0].intCQuotationID);
+            var appendData =
+            "<h2>"+ data.contract[0].strContractListTitle +"</h2>" +
+            "<p>"+ data.contract[0].strContractListDesc +"</p>" + 
+            "<p> Standard Rate : "+ data.contract[0].fltStandardRate +"</p>" +
+            "<p> Tugboat Delay Fee : "+ data.contract[0].fltQuotationTDelayFee +"</p>" +
+            "<p> Violation Fee : "+ data.contract[0].fltQuotationViolationFee +"</p>" +
+            "<p> Minimum Damage Fee(s) : "+ data.contract[0].fltQuotationConsigneeLateFee +"</p>" +
+            "<p> Minimum Damage Fee(s) : "+ data.contract[0].fltMinDamageFee +"</p>" +
+            "<p> Maximum Damage Fee(s) : "+ data.contract[0].fltMaxDamageFee +"</p>" +
+            "<p> Maximum Discount : "+ data.contract[0].intDiscount +"</p>";
+            $(appendData).appendTo('.viewcontractmodalBody');
+            $('#viewCContractInfo').modal('show');
+        },
+        error : function(error){
+            throw error;
+        }
+    });
+}
+function showFinalContract(showID){
+    console.log('contractlistID : ', showID);
+    $.ajax({
+        url : url + '/' + showID + '/show',
+        type : 'GET',
+        dataType : 'JSON',
+        success : function(data){
+            console.log(data);
+                $('.viewfinalcontractmodalBody').empty();
                 $('#contractsID').val(data.contract[0].intContractListID);
                 console.log('aak');
                 console.log('standard ID :', data.contract[0].intCStandardID);
                 console.log('quotation ID : ', data.contract[0].intCQuotationID);
+                console.log(data.contract[0].strContractListTitle)
+                $('#viewFinalContractInfoTitle').html(data.contract[0].strContractListTitle);
+                var appendBadge = "<div class='badge badge-success ml-2'>ACTIVE</div>";
                 var appendData =
                 "<h2>"+ data.contract[0].strContractListTitle +"</h2>" +
-                "<p>"+ data.contract[0].strContractListDesc +"</p>" + 
+                "<p>"+ data.contract[0].strContractListDesc +"</p>" +
+                "<p> Contract Expiry : "+ moment(data.contract[0].datContractExpire).format("MM/DD/YYYY") +"</p>" + 
                 "<p> Standard Rate : "+ data.contract[0].fltStandardRate +"</p>" +
                 "<p> Tugboat Delay Fee : "+ data.contract[0].fltQuotationTDelayFee +"</p>" +
                 "<p> Violation Fee : "+ data.contract[0].fltQuotationViolationFee +"</p>" +
@@ -137,44 +205,16 @@ $(document).ready(function(){
                 "<p> Minimum Damage Fee(s) : "+ data.contract[0].fltMinDamageFee +"</p>" +
                 "<p> Maximum Damage Fee(s) : "+ data.contract[0].fltMaxDamageFee +"</p>" +
                 "<p> Maximum Discount : "+ data.contract[0].intDiscount +"</p>";
-                $(appendData).appendTo('.viewcontractmodalBody');
-                $('#viewCContractInfo').modal('show');
-            },
-            error : function(error){
-                throw error;
-            }
-        });
-    }
-    function showFinalContract(showID){
-        console.log('contractlistID : ', showID);
-        $.ajax({
-            url : url + '/' + showID + '/show',
-            type : 'GET',
-            dataType : 'JSON',
-            success : function(data){
-                console.log(data);
-                    $('.viewfinalcontractmodalBody').empty();
-                    $('#contractsID').val(data.contract[0].intContractListID);
-                    console.log('aak');
-                    console.log('standard ID :', data.contract[0].intCStandardID);
-                    console.log('quotation ID : ', data.contract[0].intCQuotationID);
-                    console.log(data.contract[0].strContractListTitle)
-                    $('#viewFinalContractInfoTitle').html(data.contract[0].strContractListTitle);
-                    $('#standardRate').html(data.contract[0].fltStandardRate);
-                    $('#tugboatDelayFee').html(data.contract[0].fltQuotationTDelayFee);
-                    $('#violationFee').html(data.contract[0].fltQuotationViolationFee);
-                    $('#consigneeLateFee').html(data.contract[0].fltQuotationConsigneeLateFee);
-                    $('#minDamageFee').html(data.contract[0].fltMinDamageFee);
-                    $('#maxDamageFee').html(data.contract[0].fltMaxDamageFee);
-                    $('#discount').html(data.contract[0].intDiscount);
-            },
-            error : function(error){
-                throw error;
-            }
-        });
-    }
-});
-
+                $(appendBadge).appendTo('#viewFinalContractInfoTitle');
+                $(appendData).appendTo('.viewfinalcontractmodalBody');
+                $('#finalContractInfo').modal('show');
+                
+        },
+        error : function(error){
+            throw error;
+        }
+    });
+}
 function acceptContractQuotation(){
     var contractID = $('#contractsID').val();
     swal({
