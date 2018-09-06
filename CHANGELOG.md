@@ -18,6 +18,11 @@
 - [x] employeeAffiliates.js
 this files are intended for generating 'GET' and 'POST' requests for the affiliates
 
+`additions`
+
+- [x] added Profile Card in Consignee View Button Modal
+- [x] added folders for Picture Alphabet in /dist/img
+
 # 0.0.7 - 2018-08-30 α
 
 - [x] Added Hauling in Dispatch and Hauling Module

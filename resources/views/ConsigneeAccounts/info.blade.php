@@ -4,8 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <div class="modal-title" id="moreInfoModalLabel">
-                    <small class="mb-2">Consignee Name</small>
-                    <h4 id="consigneeName" class="mt-4"></h4>
+                    <h6>Consignee Name</h6>
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -13,41 +12,26 @@
             </div>
 
             <div class="modal-body" id="consigneeDetails">
-                <div class="row mt-2">
-                    <div class="col-6">
-                        <ul class="list-inline">
-                            <li class="list-inline-item text-primary">
-                                <h6>Date of Transaction : </h6></li>
-                            <li class="list-inline-item">
-                                <h6>May 4, 2018</h6></li>
-                        </ul>
-                        <ul class="list-inline">
-                            <li class="list-inline-item text-primary">
-                                <h6>Estimated Time of Hauling : </h6></li>
-                            <li class="list-inline-item">
-                                <h6>0730 HRS</h6></li>
-                        </ul>
-                    </div>
-                    <div class="col-6">
-                        <ul class="list-inline">
-                            <li class="list-inline-item text-primary">
-                                <h6>Starting Location : </h6></li>
-                            <li class="list-inline-item">
-                                <h6>PUP</h6></li>
-                        </ul>
-                        <ul class="list-inline">
-                            <li class="list-inline-item text-primary">
-                                <h6>Destination : </h6></li>
-                            <li class="list-inline-item">
-                                <h6>Pureza</h6></li>
-                        </ul>
-                        <ul class="list-inline">
-                            <li class="list-inline-item text-primary">
-                                <h6>Goods to be delivered : </h6></li>
-                            <li class="list-inline-item">
-                                <h6>Very Good</h6></li>
-                        </ul>
-                    </div>
+                <div class="box-body box-profile">
+                    <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+              
+                    <h3 class="profile-username text-center">Nina Mcintire</h3>
+              
+                    <p class="text-muted text-center">Software Engineer</p>
+              
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <b>Followers</b> <a class="pull-right">1,322</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Following</b> <a class="pull-right">543</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Friends</b> <a class="pull-right">13,287</a>
+                        </li>
+                    </ul>
+              
+                    <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
                 </div>
                 {{-- <div class="row">
                     <div class="col-12 mt-2 text-center">
