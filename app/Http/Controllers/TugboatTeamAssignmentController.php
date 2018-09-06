@@ -319,4 +319,13 @@ class TugboatTeamAssignmentController extends Controller
     {
         //
     }
+    public function viewteam($intTeamID)
+    {
+        $employees = DB::table('tblemployee as employee')
+        ->join('tblteam as team','employee.intETeamID','team.intTeamID')
+        ->join('tblposition as position','employee.intEPositionID','position.intPositionID')
+        ->where('employee.intETeamID',$intTeamID)
+        ->get();
+        return response()->json(['employees'=>$employees]);
+    }
 }

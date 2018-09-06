@@ -32,3 +32,4 @@
 <script src="/others/stisla_admin_v1.0.0/dist/js/bootstrap-toggle.js"></script>
 <script src="/others/stisla_admin_v1.0.0/dist/js/consigneeAccounts/consigneeAccounts.js"></script>
 <script type="text/javascript" src="/others/stisla_admin_v1.0.0/dist/modules/moment/moment.js"></script>
+<script type="text/javascript" src="/others/stisla_admin_v1.0.0/dist/js/plugins/plugins.js" defer></script>

@@ -22,6 +22,7 @@ this files are intended for generating 'GET' and 'POST' requests for the affilia
 
 - [x] added Profile Card in Consignee View Button Modal
 - [x] added folders for Picture Alphabet in /dist/img
+- [x] added view Team Members in Team Assignment
 
 # 0.0.7 - 2018-08-30 α
 
