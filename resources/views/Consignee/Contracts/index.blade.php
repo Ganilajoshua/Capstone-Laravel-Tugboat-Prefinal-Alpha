@@ -116,7 +116,7 @@
                             <div class="card-footer">
                                 <input type="hidden" id="contractsID">
                                 <button onclick="requestForChanges()" class="btn btn-primary waves-effect" data-toggle="modal">Request for Changes</button>
-                                <button class="btn btn-success waves-effect" data-toggle="modal" data-target="#applySignatureModal">Sign and Accept Contract</button>
+                                <button id="applySignatureButton" class="btn btn-success waves-effect">Sign and Accept Contract</button>
                             </div>
                         </div>
                     </div>

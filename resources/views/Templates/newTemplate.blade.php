@@ -5,10 +5,9 @@
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" name="viewport">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>TSMS &mdash; Admin</title>
-        @include('Templates.newTemplateScripts')
+        @include('Templates.newTemplateStyle')
         @yield('assets')
         <!--Primary Styles-->
-        @include('Templates.newTemplateStyle')
     </head>
     <body>
         <div id="app">
@@ -24,6 +23,7 @@
                 @include('Templates.newTemplateFooter')
             </div>
         </div>
+        @include('Templates.newTemplateScripts')
         @yield('scripted')
     </body>
 </html>

@@ -1,5 +1,6 @@
 //Display Info modal
 var url = '/administrator/maintenance/tugboat';
+
 $(document).ready(function(){
     $('#maintenanceTree').addClass("active");
     $('#tugboatMenu').addClass("active");

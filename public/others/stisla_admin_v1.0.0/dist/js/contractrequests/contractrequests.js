@@ -53,7 +53,9 @@ $(document).ready(function(){
         }
 
     });
-
+    $('#addSignatureButton').on('click',function(){
+        $('#applySignatureModal').modal('show');
+    });
 });
 
 
@@ -214,8 +216,13 @@ function showContracts(){
             // }
             
 }
-function createActiveContract(contractID){
+function createActiveContract(){
     //Comment
+    // Tinanggal ko yung contractID nag eerror yun kasi bag empty yung table sa DB
+    // Ginawa ko nalang data ID
+    console.log($('#addSignatureButton').data('id'));
+
+    var contractID = $('#addSignatureButton').data('id')
     if ($('.signCanvas').signature('isEmpty')) {
         toastr.error('Please provide a signature first.', 'Signature Pad Empty!', {
             closeButton: true,
