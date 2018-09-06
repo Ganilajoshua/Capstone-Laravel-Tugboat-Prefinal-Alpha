@@ -138,7 +138,7 @@
                                                     <td>{{$companyAccepted->strCompanyName}}</td>
                                                     <td>
                                                         <div class="ml-1 mr-1">
-                                                            <button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#applySignatureModal" role="button">
+                                                            <button id="addSignatureButton" class="btn btn-sm btn-primary" data-id="{{$companyAccepted->intContractListID}}" role="button">
                                                                 Sign
                                                             </button>
                                                         </div>

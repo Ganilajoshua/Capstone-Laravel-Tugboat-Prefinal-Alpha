@@ -1,11 +1,15 @@
 @extends('Templates.newTemplate')
 
+{{-- Local Style --}}
 @section('assets')
-    {{-- @include('Berth.scripts') --}}
+
 @endsection
+
+{{-- Local Scripts --}}
 @section('scripted')
     @include('Goods.scripts')
 @endsection
+
 @section('content')
 <section class="section">
     <h1 class="section-header">

@@ -16,7 +16,8 @@
                 <button class="clearCanvas btn btn-primary btn-sm waves-effect float-left">Clear Canvas</button> 
             </div>
             <div class="modal-footer">
-                <button onclick="createActiveContract({{$companyAccepted->intContractListID}})" class="btn waves-effect btn-success">
+                <button onclick="createActiveContract()" class="btn waves-effect btn-success"> 
+                    {{-- {{$companyAccepted->intContractListID}} --}}
                     Finalize Contract
                 </button>
             </div>

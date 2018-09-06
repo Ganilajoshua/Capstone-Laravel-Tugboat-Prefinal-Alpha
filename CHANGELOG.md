@@ -3,8 +3,27 @@
 
 &nbsp;
 
-<<<<<<< HEAD
-=======
+# 0.0.8 - 2018-09-06 α 
+
+`fixes`
+
+### Scripts and Styleshseets are now properly arranged
+
+- scripts now use the ('scripted') section
+- styles now use the ('assets') section
+
+### Added JS files for Affiliates Maintenance
+- [x] positionAffiliates.js
+- [x] tugboatAffiliates.js
+- [x] employeeAffiliates.js
+this files are intended for generating 'GET' and 'POST' requests for the affiliates
+
+`additions`
+
+- [x] added Profile Card in Consignee View Button Modal
+- [x] added folders for Picture Alphabet in /dist/img
+- [x] added view Team Members in Team Assignment
+
 # 0.0.7 - 2018-08-30 α
 
 - [x] Added Hauling in Dispatch and Hauling Module
@@ -12,7 +31,6 @@
 - [x] Added Pills to Tugboat Assignment
 - [x] Added View Modal on Consignee Accounts
 
->>>>>>> 20c2916bc31bceead8d8bc983914614343f85f0a
 # 0.0.6 - 2018-08-30 α
 
 ### added mobile number and telephone number to register forms of the ff:

@@ -122,67 +122,38 @@ function viewConsigneeDetails(companyID){
         dataType: 'JSON',
         success : function(data){
             console.log('Data Recieved', data);
-            $('#consigneeDetails').empty();
-            $('#consigneeName').html(data.user[0].strCompanyName)
-            var appendBody = 
-                "<div class='row mt-2'>" +  
-                    "<div class='col-12'>" +
-                        "<ul class='list-inline'> " + 
-                            "<li class='list-inline-item text-primary'>" +
-                                "<h6>Company Address : </h6></li>" + 
-                            "<li class='list-inline-item'>" + 
-                                "<h6>"+ data.user[0].strCompanyAddress +"</h6></li>" +
-                        "</ul>" +
-                    "</div>"+
-                    "<div class='col-6'>" +
-                        "<ul class='list-inline'> " + 
-                            "<li class='list-inline-item text-primary'>" +
-                                "<h6>Telephone Number : </h6></li>" + 
-                            "<li class='list-inline-item'>" + 
-                                "<h6>"+ data.user[0].strCompanyContactTNum +"</h6></li>" +
-                        "</ul>" +
-                        "<ul class='list-inline'> " + 
-                            "<li class='list-inline-item text-primary'>" +
-                                "<h6>Mobile Number : </h6></li>" + 
-                            "<li class='list-inline-item'>" + 
-                                "<h6>"+ data.user[0].strCompanyContactPNum +"</h6></li>" +
-                        "</ul>" +
-                        "<ul class='list-inline'> " + 
-                            "<li class='list-inline-item text-primary'>" +
-                                "<h6>User Name : </h6></li>" + 
-                            "<li class='list-inline-item'>" + 
-                                "<h6>"+ data.user[0].name +"</h6></li>" +
-                        "</ul>" +
-                        "<ul class='list-inline'> " + 
-                            "<li class='list-inline-item text-primary'>" +
-                                "<h6>Email : </h6></li>" + 
-                            "<li class='list-inline-item'>" + 
-                                "<h6>"+ data.user[0].strCompanyEmail +"</h6></li>" +
-                        "</ul>" +
-                    "</div>"+
-                "<div>";
-                //     <div class='col-6'>
-                //         <ul class='list-inline'>
-                //             <li class='list-inline-item text-primary'>
-                //                 <h6>Starting Location : </h6></li>
-                //             <li class='list-inline-item'>
-                //                 <h6>PUP</h6></li>
-                //         </ul>
-                //         <ul class='list-inline'>
-                //             <li class='list-inline-item text-primary'>
-                //                 <h6>Destination : </h6></li>
-                //             <li class='list-inline-item'>
-                //                 <h6>Pureza</h6></li>
-                //         </ul>
-                //         <ul class='list-inline'>
-                //             <li class='list-inline-item text-primary'>
-                //                 <h6>Goods to be delivered : </h6></li>
-                //             <li class='list-inline-item'>
-                //                 <h6>Very Good</h6></li>
-                //         </ul>
-                //     </div>
-                // </div>
-            $(appendBody).appendTo('#consigneeDetails');
+            $('#consigneeDetails').empty();     
+            var imageVar = (data.user[0].strCompanyName).charAt(0);
+            console.log(imageVar);
+            var appendProfile = 
+            `<div class="box-body box-profile">
+                <div class="text-center">
+                    <img class="img-responsive" src="/others/stisla_admin_v1.0.0/dist/img/Alphabet/`+imageVar+`tbLogo.png" height="150px" width="150px" alt="User profile picture">
+                </div>
+            
+                <h3 class="profile-username text-center mt-4">` + data.user[0].strCompanyName + `</h3>
+            
+                <h6 class="text-muted text-center">`+ data.user[0].enumUserType +`</h6>
+            
+                <ul class="list-group list-group-unbordered">
+                    <li class="list-group-item">
+                        <b>Address : </b> <a class="pull-right">` + data.user[0].strCompanyAddress + `</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>User Name : </b> <a class="pull-right">1,322</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Email : </b> <a class="pull-right">`+ data.user[0].email + `</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Telephone Number : </b> <a class="pull-right">`+ data.user[0].strCompanyContactTNum+`</a>
+                    </li>
+                    <li class="list-group-item">
+                        <b>Mobile Number : </b><a class="pull-right">`+ data.user[0].strCompanyContactPNum +`</a>
+                    </li>
+                </ul>
+            </div>`
+            $(appendProfile).appendTo('#consigneeDetails');
             $('#accountInfoModal').modal('show');
         },
         error : function(error){

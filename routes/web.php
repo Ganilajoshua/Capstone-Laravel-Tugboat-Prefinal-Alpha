@@ -89,47 +89,6 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::get('/quotations/{intQuotationID}/show','QuotationsController@show');
         Route::get('/quotations/{intQuotationID}/edit','QuotationsController@edit');
         Route::get('/quotations/{intQuotationID}/delete','QuotationsController@delete');
-        
-        // Good as Deleted for Next Update
-        // Route::resource('/insurances','InsurancesController');
-        // Route::resource('/usertype','UsertypeController');
-        // Route::resource('/standard','StandardController');
-        // Route::resource('/termsandcondition','TermsandConditionsController');
-        // Route::resource('/agreements','AgreementsController');
-        //Maintenance Create / Store to Database
-        // Route::post('/usertype/store','UsertypeController@store');
-        // Route::post('/insurances/store','InsurancesController@store');
-        // Route::post('/standard/store','StandardController@store');
-        // Route::post('/termsandcondition/store','TermsandConditionsController@store');
-        // Route::post('/agreements/store','AgreementsController@store');
-        
-        //Maintenance Edit (JSON Data Render)
-        // Route::get('/insurances/{intInsuranceID}/edit','InsurancesController@edit');
-        // Route::get('/usertype/{intUserTypeID}/edit','UsertypeController@edit');
-        // Route::get('/standard/{intStandardID}/edit','StandardController@store');
-        // Route::get('/agreements/{intAgreementsID}/edit','AgreementsController@edit');
-        // Route::get('/termsandcondition/{intTermsConditionID}/edit','TermsandConditionsController@edit');
-        
-        //Maintenance Update
-        // Route::post('/insurances/update','InsurancesController@update');
-        // Route::post('/usertype/update','UsertypeController@update');
-        // Route::post('/standard/update','StandardController@update');
-        // Route::post('/agreements/update','AgreementsController@update');
-        
-        //for Tugboat Only
-        
-        //Maintenance Delete (Delete for Soft Delete)
-        // Route::get('/insurances/{intInsurancesID}/delete','InsurancesController@delete');
-        // Route::get('/usertype/{intUserTypeID}/delete','UsertypeController@delete');
-        // Route::get('/standard/{intStandarID}/delete','StandardController@delete');
-        // Route::get('/agreements/{intAgreementsID}/delete','AgreementsController@delete');
-        
-        //Maintenance Delete (Destroy for total Deletion)
-        // Route::get('/usertype/{intUserTypeID}/destroy','UsertypeController@destroy');
-        
-        //Show Modals
-        // Route::get('/agreements/{intAgreementsID}/show','AgreementsController@show');
-        // Route::get('/termsandcondition/{intTermsConditionID}/show','TermsandConditionsController@show');
     });
     //Transactions Routes
     Route::group(['prefix'=>'transactions/'],function(){
@@ -165,6 +124,8 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::post('/teamassignment/store','TugboatTeamAssignmentController@store');
         Route::post('/teamassignment/teamassignment','TugboatTeamAssignmentController@teamassignment');
         Route::get('/teamassignment/{intTeamID}/show','TugboatTeamAssignmentController@show');
+        Route::get('/teamassignment/{intTeamID}/viewteam','TugboatTeamAssignmentController@viewteam');
+        
         //Dispatch and Hauling - Tugboat Assignment
         Route::resource('/tugboatassignment','TugboatAssignmentController');
         Route::post('/tugboatassignment/create','TugboatAssignmentController@create');
