@@ -176,76 +176,48 @@ class TugboatTeamAssignmentController extends Controller
      */
     public function store(Request $request)
     {
-        $teamID = Team::max('intTeamID')+1;
-        $teamID2 = $teamID;
-    
-        $team = new Team;
-        $team->timestamps = false;
-        $team->strTeamName = $request->teamName;
-        $team->intTCompanyID = Auth::user()->intUCompanyID;
-        $team->save();
+        try{
+            DB::beginTransaction();
+            $teamID = Team::max('intTeamID')+1;
+            $teamID2 = $teamID;
         
-        // $assignment = new TeamAssignment;
-        // $assignment->timestamps = false;
-        // $assignment->strTADesc = $request->teamName;
-        // $assignment->intTATeamID = $teamID2;
-        // $assignment->save();
-        
-        if(empty($request->teamCaptainID)){
-
-        }else{
-            for($count=0;$count < count($request->teamCaptainID); $count++){
-                $emp = Employees::findOrFail($request->teamCaptainID[$count]);
-                $emp->timestamps = false;
-                $emp->intETeamID = $teamID2;
-                $emp->save();
+            $team = new Team;
+            $team->timestamps = false;
+            $team->strTeamName = $request->teamName;
+            $team->intTCompanyID = Auth::user()->intUCompanyID;
+            $team->save();
+            
+            if(!empty($request->teamCaptainID)){        
+                for($count=0;$count < count($request->teamCaptainID); $count++){
+                    $emp = Employees::findOrFail($request->teamCaptainID[$count]);
+                    $emp->timestamps = false;
+                    $emp->intETeamID = $teamID2;
+                    $emp->save();
+                }
             }
-        }
-        if(empty($request->teamCaptainID)){
-
-        }else{
-            for($count=0;$count < count($request->teamChiefEngineerID); $count++){
-                $emp = Employees::findOrFail($request->teamChiefEngineerID[$count]);
-                $emp->timestamps = false;
-                $emp->intETeamID = $teamID2;
-                $emp->save();
+            if(!empty($request->teamCaptainID)){
+                for($count=0;$count < count($request->teamChiefEngineerID); $count++){
+                    $emp = Employees::findOrFail($request->teamChiefEngineerID[$count]);
+                    $emp->timestamps = false;
+                    $emp->intETeamID = $teamID2;
+                    $emp->save();
+                }
             }
-        }
-        if(empty($request->teamCrewID)){
-
-        }else{
-            for($count=0;$count < count($request->teamCrewID); $count++){
-                $emp = Employees::findOrFail($request->teamCrewID[$count]);
-                $emp->timestamps = false;
-                $emp->intETeamID = $teamID2;
-                $emp->save();
+            if(!empty($request->teamCrewID)){
+                for($count=0;$count < count($request->teamCrewID); $count++){
+                    $emp = Employees::findOrFail($request->teamCrewID[$count]);
+                    $emp->timestamps = false;
+                    $emp->intETeamID = $teamID2;
+                    $emp->save();
+                }
             }
+            DB::commit();
+        }catch(\Illuminate\Database\QueryException $errors){
+            DB::rollback();
+            $errorMessage = $errors->getMessage();
+            return Redirect::back()->withErrors($errorMessage);
         }
         return response()->json(['crew'=>$emp]);  
-        
-        // foreach($request->teamCaptainID as $key => $value){
-        //     $emp = Employees::findOrFail($value);
-        //     $emp->timestamps = false;
-        //     $emp->intETeamID = $teamID;
-        //     $emp->save();
-        // }
-        
-        // foreach($request->teamChiefEngineerID as $key => $valu)
-        // {
-        //     $emp = Employees::findOrFail($valu);
-        //     $emp->timestamps = false;
-        //     $emp->intETeamID = $teamID;
-        //     $emp->save();
-        //     // return response()->json(['chiefengineer'=>$emp]);   
-        // }
-        // foreach($request->teamCrewID as $key => $val)
-        // {
-        //     $emp = Employees::findOrFail($val);
-        //     $emp->timestamps = false;
-        //     $emp->intETeamID = $teamID;
-        //     $emp->save();
-            
-        
         
     }
     /**
@@ -327,5 +299,20 @@ class TugboatTeamAssignmentController extends Controller
         ->where('employee.intETeamID',$intTeamID)
         ->get();
         return response()->json(['employees'=>$employees]);
+    }
+    public function viewtugboatteam($intTATeamID){
+        $team = DB::table('tbltugboatassign as assign')
+        ->join('tbltugboat as tugboat','assign.intTATugboatID','tugboat.intTugboatID')
+        ->join('tbltugboatmain as main','main.intTugboatMainID','tugboat.intTTugboatMainID')
+        ->join('tblteam as team','team.intTeamID','assign.intTATeamID')
+        ->join('tblemployee as employee','employee.intETeamID','team.intTeamID')
+        ->join('tblposition as position','position.intPositionID','employee.intEPositionID')
+        // ->join('tbltugboat as tugboat','assign.intTATugboatID','tugboat.intTugboatID')
+        // ->join('tbltugboatmain as main','tugboat.intTugboatID','main.intTugboatMainID')
+        ->where('employee.intETeamID',$intTATeamID)
+
+        ->get();
+
+        return response()->json(['team'=>$team]);
     }
 }

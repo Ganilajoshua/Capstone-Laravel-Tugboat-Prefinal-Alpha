@@ -35,7 +35,7 @@ class TugboatController extends Controller
         ->join('tblcompany as company','tugboat.intTCompanyID','company.intCompanyID')
         ->where('tugboat.boolDeleted',0)
         ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
-        ->get();
+        ->get();    
         // $tugboat = TugboatMainSpecifications::where('boolDeleted',0)
         // ->where('intTCompanyID',Auth::user()->intUCompanyID)
         // ->get();

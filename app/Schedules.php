@@ -20,5 +20,6 @@ class Schedules extends Model
         'tmETD',
         'enumStatus', 
         'boolDeleted',
+        'intScheduleCompanyID',
     ];
 }

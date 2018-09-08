@@ -26,7 +26,7 @@ $(document).ready(function(){
     });
     $('.modalCloseButton').on('click',function(event){
         $('#viewTeamCompositionModal').modal('hide');
-    })
+    });
     //view Team Modal
     $('.viewTeamButton').on('click',function(event){
         event.preventDefault();
@@ -56,11 +56,11 @@ $(document).ready(function(){
                     var appendData = 
                     `
                         <div class="col-auto">
-                            <div class="card bg-`+colorString+`">
+                            <div class="card bg-${colorString}">
                                 <div class="card-body">
-                                    <p class="card-text text-center ml-2">`+ data.employees[counter].strLName+', &nbsp;'+ data.employees[counter].strFName +`</p>
+                                    <p class="card-text text-center ml-2">${data.employees[counter].strLName},&nbsp;${data.employees[counter].strFName}</p>
                                     <small class="text-center float-left" style="text-transform: uppercase;">
-                                        `+ data.employees[counter].strPositionName +`
+                                        ${data.employees[counter].strPositionName}
                                     </small>    
                                 </div>
                             </div>
@@ -103,14 +103,14 @@ $(document).ready(function(){
                     `
                     
                         <div class="col-auto">
-                            <div class="card bg-`+colorString+`">
+                            <div class="card bg-${colorString}">
                                 <div class="card-body">
                                     <div class="custom-control custom-checkbox custom-control-inline">
-                                        <input type="checkbox" id="addCheckEmployees`+data.employees[counter].intEmployeeID+`" name="employees[]" value="`+ data.employees[counter].intEmployeeID +`" class="custom-control-input employeesCheckbox">
-                                        <label class="custom-control-label" for="addCheckEmployees`+ data.employees[counter].intEmployeeID +`">
-                                            <p class="card-text text-center ml-2">`+ data.employees[counter].strLName + ', &nbsp;'+data.employees[counter].strFName+`</p>
+                                        <input type="checkbox" id="addCheckEmployees${data.employees[counter].intEmployeeID}" name="employees[]" value="${data.employees[counter].intEmployeeID}" class="custom-control-input employeesCheckbox">
+                                        <label class="custom-control-label" for="addCheckEmployees${data.employees[counter].intEmployeeID}">
+                                            <p class="card-text text-center ml-2">${data.employees[counter].strLName},&nbsp;${data.employees[counter].strFName}</p>
                                             <small class="text-center float-right" style="text-transform: uppercase;">
-                                               `+ data.employees[counter].strPositionName +`
+                                               ${data.employees[counter].strPositionName}
                                             </small>
                                         </label>
                                     </div>
@@ -142,6 +142,69 @@ $('.deselectAll').on('click',function(){
     console.log('hi');    
     $('.employeesCheckbox').prop('checked',false);
     // $(checkbox).prop('checked',$(this).prop('checked'));
+});
+
+$('.closeInfoModal').on('click',function(){
+    $('.modal').modal('hide');
+});
+
+$('.occupiedTugboats').on('click',function(event){
+    event.preventDefault();
+    console.log('kyaaa');
+    var teamID = $(this).data('id');
+    console.log(teamID);
+    
+
+    $.ajax({
+        url : url + '/' + teamID + '/viewtugboatteam', 
+        type : 'GET',
+        dataType : 'JSON',
+        success : function(data){
+            $('.viewTeamInfo').empty();
+            console.log(data)
+            console.log();
+            $('.tugboatname').html(data.team[0].strName);
+            $('.teamname').html('Team Name :&nbsp;' + data.team[0].strTeamName);
+            for(var counter=0; counter < (data.team).length; counter++){
+                var colorString;
+                if(data.team[counter].strPositionName == 'Captain'){
+                    colorString = 'primary';
+                }else if(data.team[counter].strPositionName == 'Chief Engineer'){
+                    colorString = 'info';
+                }else if(data.team[counter].strPositionName == 'Crew'){
+                    colorString = 'dark';
+                }else{
+                    colorString = 'success';
+                }
+                console.log(data.team[counter].intEmployeeID);
+                var appendData = 
+                `
+                    <div class="col-auto">
+                        <div class="card bg-${colorString}">
+                            <div class="card-body">
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input type="checkbox" id="addCheckEmployees${data.team[counter].intEmployeeID}" name="employees[]" value="${data.team[counter].intEmployeeID}" class="custom-control-input employeesCheckbox">
+                                    <label class="custom-control-label" for="addCheckEmployees${data.team[counter].intEmployeeID}">
+                                        <p class="card-text text-center ml-2">${data.team[counter].strLName},&nbsp;${data.team[counter].strFName}</p>
+                                        <small class="text-center float-right" style="text-transform: uppercase;">
+                                           ${data.team[counter].strPositionName}
+                                        </small>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  
+                `;
+                $(appendData).appendTo('.viewTeamInfo');
+                // $('#viewTeamCompositionModal').modal('show');
+                $('#viewTeamModal').modal('show');
+            }
+        },
+        error : function(error){
+            throw error;
+        }
+    })
 });
 
 function showTeamAssignment(teamID){
@@ -233,7 +296,7 @@ function submitTeamName(){
                 timer : 1500
             },
             function(){
-                // window.location = "/teamassignment";
+                window.location = url + '/teamassignment';
             });                       
         },
         error : function(error){
@@ -335,36 +398,3 @@ function submitTeam(){
 
     
 }
-// function booYa(lastName){
-//     name =lastName;
-//     namet = lastName.toString();
-//     console.log(name);
-//     if($(this).checked){
-//         console.log('hi checked');
-//     }
-//     $('#happiness').append(
-//         '<div class="col-4">' +
-//             '<div class="card bg-info" id="addDismissCard'+name+'">' +
-//                 '<div class="card-header">' +
-//                     name +
-//                     '<div class="float-right">' +
-//                         '<a data-dismiss="#addDismissCard'+name+'" onclick="pots('+namet+')" class="btn btn-icon"><i class="ion ion-close"></i></a>'+
-//                     '</div>'+
-//                 '</div>'+
-//             '</div>'+
-//         '</div>'   
-//     );
-    
-// }
-// $('.removeThis').click(function(name){
-//     console.log(name);
-//     // $("#addDismisscard'++'");
-// });
-// function pots(){
-//     $(this).remove();
-// }
-// $('.removeThis').on('click',function(e){
-//     // e.stopPropagation();
-//     var $target = $(this).parent('#rowOne');
-//     $target.detach('slow', function(){$target.remove(); });
-// })
