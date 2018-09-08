@@ -125,18 +125,21 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::post('/teamassignment/teamassignment','TugboatTeamAssignmentController@teamassignment');
         Route::get('/teamassignment/{intTeamID}/show','TugboatTeamAssignmentController@show');
         Route::get('/teamassignment/{intTeamID}/viewteam','TugboatTeamAssignmentController@viewteam');
+        Route::get('/teamassignment/{intTATeamID}/viewtugboatteam','TugboatTeamAssignmentController@viewtugboatteam');
         
         //Dispatch and Hauling - Tugboat Assignment
         Route::resource('/tugboatassignment','TugboatAssignmentController');
         Route::post('/tugboatassignment/create','TugboatAssignmentController@create');
         Route::post('/tugboatassignment/hauling','TugboatAssignmentController@hauling');
         Route::post('/tugboatassignment/available','TugboatAssignmentController@available');
+        Route::post('/tugboatassignment/tugboatsavailable','TugboatAssignmentController@tugboatsavailable');
         //Dispatch and Hauling - Hauling
         Route::resource('/hauling','HaulingController');
         // Route::post('/hauling/prepare','HaulingController@prepare');
         Route::post('/hauling/start','HaulingController@start');
         Route::post('/hauling/terminate','HaulingController@terminate');
         //Scheduling
+        Route::post('/scheduling/tugboatsavailable','SchedulingController@tugboatsavailable');
         
     });
     //Reports Routes

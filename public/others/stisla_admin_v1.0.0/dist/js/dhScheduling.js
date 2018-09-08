@@ -1,4 +1,6 @@
-$(document).ready(function() {
+var url = '/administrator/transactions/scheduling';
+
+$(document).ready(()=>{
     
     $(function() {
         /* initialize the external events
@@ -24,7 +26,16 @@ $(document).ready(function() {
   
             })
         }
-  
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('.modalCloseButton').on('click',function(event){
+            $('.modal').modal('hide');
+            $('.modal').refresh();
+        });
+
         init_events($('#external-events div.external-event'))
   
         /* initialize the calendar
@@ -38,13 +49,13 @@ $(document).ready(function() {
 
         var a = $('#sched').val()
         var schedules = JSON.parse(a);
-        console.log(schedules);
+        // console.log(schedules);
         var eventsSched = [];
         for(var count=0; count<schedules.length; count++){
             schedStartDate = schedules[count].dttmETA;
             schedEndDate = schedules[count].dttmETD;
-            console.log('start time : ', schedStartDate);
-            console.log('end time : ', schedEndDate);
+            // console.log('start time : ', schedStartDate);
+            // console.log('end time : ', schedEndDate);
 
             //First split on receive remove spaces
             //Start Date
@@ -56,16 +67,16 @@ $(document).ready(function() {
             var edate = esched[0];
             var etime = esched[1];
             //Log Start Time
-            console.log(ssched); console.log(sdate); console.log(stime);
+            // console.log(ssched); console.log(sdate); console.log(stime);
             //Log End Time
-            console.log(esched); console.log(edate); console.log(etime);
+            // console.log(esched); console.log(edate); console.log(etime);
 
             //Second Split remove colon from time and hyphen from date
             //Start Date and Time
             var sDate = sdate.split('-');
             var sTime = stime.split(':');
             //Log Start Time Second Split
-            console.log(sDate); console.log(sTime);
+            // console.log(sDate); console.log(sTime);
             var eDate = edate.split('-');
             var eTime = etime.split(':');
 
@@ -91,19 +102,140 @@ $(document).ready(function() {
                 start : new Date (startYear, startMonth, startDay, startHour, startMin, startSec),
                 end : new Date (endYear, endMonth, endDay, endHour, endMin, endSec),
                 allDay : false,
-                backgroundColor: '#f39c12', //yellow
-                borderColor: '#f39c12' //yellow
+                displayEventTime : true,
+                backgroundColor: schedules[count].strColor, //yellow
+                borderColor: schedules[count].strColor, //yellow
+                className: 'text-left',
+ 
             });
         }
         
         $('#calendar').fullCalendar({
             selectable: true,
             dayClick: function(date) {
-                alert('clicked ' + date.format());
+                // alert('clicked ' + date.format() + 'Heyaaaaaaaaaaaa');
+                // alert('Kiki I Love You');
+                getdate = date.format();
+                // console.log(date.format());
+                // $('.viewAvailableTugboatsCard').empty();
+                // $('.viewUnvailableTugboatsCard').empty();
+                $.ajax({
+                    url : url + '/tugboatsavailable',
+                    type : 'POST',
+                    data : { 
+                        "_token" : $('meta[name="csrf-token"]').attr('content'),
+                        date : getdate,
+                    }, 
+                    beforeSend: function (request) {
+                        return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                    },
+                    success : function(data){
+                        $('.tugboatsAvailableCard').empty();
+                        $('.tugboatsUnavailableCard').empty();
+                        console.log(data);
+                        if((data.available).length === 0){   
+                            $('.tugboatsAvailableCard').empty();
+                            var appendData = 
+                            
+                            `
+                            <div class="card-header text-center" style="text-transform : uppercase;">
+                                <h4>Available Tugboats</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class=" text-danger text-center">
+                                    <h5><i class="fas fa-times mr-2"></i> No Available Tugboats For This Day<i class="fas fa-times ml-2"></i></h5>
+                                </div>
+                            </div>`; 
+                            $(appendData).appendTo('.tugboatsAvailableCard');
+                        
+                        }
+                        // If there are Available Tugboats
+                        else if((data.available).length > 0){
+                            $('.tugboatsAvailableCard').empty();
+                            var appendContent =
+                            `<div class="card-header text-center" style="text-transform : uppercase;">
+                                <h4>Available Tugboats</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="availablecard row">
+                                </div>
+                            </div>`;
+                            $(appendContent).appendTo('.tugboatsAvailableCard');
+
+                            for(var counter=0; counter < (data.available).length; counter++){       
+                                var appendData = 
+                                `<div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="card bg-success">
+                                        <div class="card-body">
+                                            <b><h6 class="card-text text-left"> ${data.available[counter].strName} </h6></b>
+                                            <small class="float-left mt-2" style="text-transform: uppercase;">
+                                                Bollard Pull : &nbsp; ${data.available[counter].strBollardPull}
+                                            </small>    
+                                        </div>
+                                    </div>
+                                </div>`;
+                                $(appendData).appendTo('.availablecard');
+                            }
+                        }
+                        // If There Are No Unavailable Tugboats
+                        if((data.unavailable).length === 0){
+                            $('.tugboatsUnavailableCard').empty();
+                            var appendData =  
+                            `<div class="card-header text-center" style="text-transform : uppercase;">
+                                <h4>Occupied Tugboats</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class=" text-danger text-center">
+                                    <h5><i class="fas fa-times mr-2"></i> No Occupied Tugboats<i class="fas fa-times ml-2"></i></h5>
+                                </div>
+                            </div>`; 
+                            $(appendData).appendTo('.tugboatsUnavailableCard');
+                        }
+                        // If there are Unavailable Tugboats
+                        else if((data.unavailable).length > 0){
+                            console.log(data.unavailable);
+                            $('.tugboatsUnavailableCard').empty();
+                            var appendContent =
+                            `<div class="card-header text-center" style="text-transform : uppercase;">
+                                <h4>Occupied Tugboats</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="unavailablecard row">
+                                </div>
+                            </div>`;
+                            $(appendContent).appendTo('.tugboatsUnavailableCard');
+
+                            
+                            for(var count=0; count < (data.unavailable).length; count++){
+                                var appendData = 
+                                `<div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="card bg-info">
+                                        <div class="card-body">
+                                            <b><h6 class="card-text text-left"> ${data.unavailable[count].strName} </h6></b>
+                                            <small class="float-left mt-2" style="text-transform: uppercase;">
+                                                Bollard Pull : &nbsp; ${data.unavailable[count].strBollardPull}
+                                            </small>    
+                                        </div>
+                                    </div>
+                                </div>`; 
+                                $(appendData).appendTo('.unavailablecard');
+                            }
+                        }
+                        
+                        $('#viewTugboatsModal').modal('show');    
+                        
+                        
+                    },
+                    error : function(error){
+                        throw error;
+                    }
+                });
+                // $('#viewTugboatsModal').modal('show');
+                
             },
-            dayClick: function(date) {
-                alert('clicked ' + date.format());
-            },
+            // dayClick: function(date) {
+            //     alert('clicked ' + date.format());
+            // },
             header: {
                 left: 'prev,next today',
                 center: 'title',

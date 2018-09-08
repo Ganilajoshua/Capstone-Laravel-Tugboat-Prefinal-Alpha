@@ -151,7 +151,7 @@
                                                         @foreach($tugboatAvail as $tugboatAvail)
                                                             <div class="card bg-info mb-2 text-center" id="dismissTeam">
                                                                 <div style="margin-top: 10px;">
-                                                                    <a href="#" onclick="selectTugboatTeam({{$tugboatAvail->intTAssignID}})"class="teamTugboat text-white">
+                                                                    <a href="#" data-id="{{$tugboatAvail->intTATeamID}}" class="occupiedTugboats text-white">
                                                                         <div class="card-header">
                                                                             {{$tugboatAvail->strName}}
                                                                             <div class="float-right">
@@ -274,5 +274,6 @@
     @include('TeamAssignment.createTeam')
     @include('TeamAssignment.create')
     @include('TeamAssignment.edit')
+    @include('TeamAssignment.info')
     @include('TeamAssignment.viewTeamModal')
 @endsection

@@ -1,9 +1,14 @@
 @extends('Templates.newTemplate')
 
+{{-- Local Styles --}}
 @section('assets')
     @include('Schedule.styles')
-    @include('Schedule.scripts')
 @endsection
+
+{{-- Local Scripts --}}
+@section('scripted')
+    @include('Schedule.scripts')
+@endsection    
 
 @section('content')
     <section class="section">
@@ -28,7 +33,7 @@
                                     <input type="hidden" value="{{$schedules}}" id="sched">
                                     @if(count($schedules)>0)
                                         @foreach($schedules as $schedules)
-                                            <div class="external-event bg-green">{{$schedules->strScheduleDesc}}</div>
+                                            <div class="external-event text-white" style="background-color:{{$schedules->strColor}};">{{$schedules->strScheduleDesc}}</div>
                                         @endforeach
                                     @endif
                                     <div class="custom-control custom-checkbox">
@@ -85,4 +90,5 @@
         </div>
 
     </section>
+    @include('Schedule.info')
 @endsection

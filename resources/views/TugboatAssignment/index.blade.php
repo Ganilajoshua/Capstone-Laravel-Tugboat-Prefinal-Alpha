@@ -1,6 +1,12 @@
 @extends('Templates.newTemplate')
 
+{{-- Local Styles --}}
 @section('assets')
+
+@endsection
+
+{{-- Local Scripts --}}
+@section('scripted')
     @include('TugboatAssignment.scripts')
 @endsection
 
@@ -78,7 +84,7 @@
                                                 @if(Auth::user()->enumUserType == 'Admin')
                                                     @if(count($notugboat) > 0)
                                                         @foreach($notugboat as $notugboat)
-                                                            <div class="col-lg-12">
+                                                            <div class="col-lg-12 joborder" data-id="{{$notugboat->intJobOrderID}}">
                                                                 <div class="card card-sm-2 card-primary border-primary">
                                                                     <div class="card-icon">
                                                                         <i class="ion ion-android-boat text-primary"></i>
@@ -91,7 +97,8 @@
                                                                     </div>
                                                                     <div class="card-footer mt-2">
                                                                         <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
-                                                                        <button onclick="showTugboatModal({{$notugboat->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Assign Tugboat</button>
+                                                                        <button data-id="{{$notugboat->intJobOrderID}}" data-date="{{$notugboat->dtmETA}}" onclick="showTugboatModal({{$notugboat->intJobOrderID}})" class="assignTugboatButton btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Assign Tugboat</button>
+                                                                        {{-- onclick="showTugboatModal({{$notugboat->intJobOrderID}})" --}}
                                                                     </div>
                                                                 </div>
                                                             </div>

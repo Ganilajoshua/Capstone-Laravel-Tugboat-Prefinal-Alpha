@@ -25,7 +25,6 @@ $(document).ready(function(){
         error : function(error){
             throw error;
         }
-
     });
 });
 
