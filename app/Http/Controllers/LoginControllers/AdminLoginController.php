@@ -22,7 +22,7 @@ class AdminLoginController extends Controller
     }
     public function login(Request $request){
         if(Auth::guard('web')->attempt(['email' => $request->email,'password'=>$request->password],$request->remember)){
-            return redirect()->intended('/administrator/maintenance/pier');
+            return redirect()->intended('/administrator/dashboard');
         }
     }
     public function showRegister(){

@@ -20,6 +20,12 @@
 .note-tooltip.bottom .note-tooltip-arrow{
   border-bottom-color:#3DC7BE !important;
 }
+.timeline li:before {
+  border-color: #3DC7BE !important;
+}
+.timeline li:first-child i {
+  background: #3DC7BE !important;
+}
 .niceCountryInputMenuDropdownContent a:hover {
 	background-color: #3DC7BE !important;
 }

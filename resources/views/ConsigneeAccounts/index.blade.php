@@ -2,10 +2,9 @@
 
 @section('assets')
     @include('ConsigneeAccounts.styles')
-    @include('ConsigneeAccounts.scripts')
 @endsection
-@section('assets2')
-    
+@section('scripted')
+    @include('ConsigneeAccounts.scripts')
 @endsection
 @section('content')
 <section id="mainSection" class="section">

@@ -136,6 +136,9 @@ Route::group(['prefix'=>'administrator/'],function(){
         // Route::post('/hauling/prepare','HaulingController@prepare');
         Route::post('/hauling/start','HaulingController@start');
         Route::post('/hauling/terminate','HaulingController@terminate');
+        
+        //Dispatch Ticket
+        Route::resource('/dispatchticket','DispatchTicketController');
         //Scheduling
         
     });

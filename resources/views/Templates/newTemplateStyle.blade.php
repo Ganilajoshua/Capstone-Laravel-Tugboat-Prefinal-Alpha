@@ -2,6 +2,7 @@
 <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/ionicons/css/ionicons.min.css">
 <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/toastr/build/toastr.css">
 <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/css/sweetalert.css">
+{{-- <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/sweetalert2/sweetalert2.min.css"> --}}
 <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/bootstrap-datepicker/bootstrap-datepicker.css">
 <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/countrypicker/niceCountryInput.css">
 
@@ -25,5 +26,7 @@
 <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/waves/waves.css">
 <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/css/titatoggle-dist.css">
 <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/css/bootstrap-toggle.css">
+
+<link rel="shortcut icon" href="/others/stisla_admin_v1.0.0/dist/img/tbLogo.png">
 {{-- others\stisla_admin_v1.0.0\dist\css --}}
 

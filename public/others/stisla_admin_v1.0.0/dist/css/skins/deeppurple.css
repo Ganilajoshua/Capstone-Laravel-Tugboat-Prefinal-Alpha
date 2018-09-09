@@ -19,6 +19,12 @@
 .demo-settings .demo-settings-toggle {
   background-color:#39065A!important;
 }  
+.timeline li:before {
+  border-color: #39065A !important;
+}
+.timeline li:first-child i {
+  background: #39065A !important;
+}
 .sw-theme-arrows>ul.step-anchor>li.active>a{
   border-color:rgb(32, 28, 56)!important;
   color:#fff

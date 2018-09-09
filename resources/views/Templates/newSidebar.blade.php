@@ -2,11 +2,11 @@
             <aside id="sidebar-wrapper">
                 @if(Auth::user()->enumUserType == 'Admin')
                     <div class="sidebar-brand">
-                        <a href="index.html">Administrator</a>
+                        <a href="/administrator/dashboard">Administrator</a>
                     </div>
                 @elseif( Auth::user()->enumUserType == 'Affiliates')
                     <div class="sidebar-brand">
-                        <a href="index.html">Affiliates</a>
+                        <a href="/affilates/dashboard">Affiliates</a>
                     </div>
                 @endif
                 <div class="sidebar-user">
@@ -29,12 +29,12 @@
                 </div>
                 <ul class="sidebar-menu">
                     <li class="menu-header">Dashboard</li>
-                    <li class="">
-                        <a href="index.html"><i class="ion ion-speedometer"></i><span>Dashboard</span></a>
+                    <li id="dashboardMenu">
+                        <a href="/administrator/dashboard"><i class="ion ion-speedometer"></i><span>Dashboard</span></a>
                     </li>
                     <li class="menu-header">Main Navigation</li>
                     <li id="maintenanceTree">
-                        <a href="#" class="has-dropdown"><i class="ion ion-ios-cog-outline"></i><span>Maintenance</span></a>
+                        <a href="#" class="has-dropdown"><i class="fas fa-cog"></i><span>Maintenance</span></a>
                         <ul class="menu-dropdown">
                             @if(Auth::user()->enumUserType == 'Admin')
                                 <li id="pierMenu"><a href="/administrator/maintenance/pier"><i class="fas fa-life-ring"></i> Pier</a></li>
@@ -83,10 +83,16 @@
                                         {{-- <li id="menuScheduling"><a class="waves-effect" href=""><i class="ion ion-ios-time"></i>Scheduling</a></li> --}}
                                     </ul>
                                 </li>
-                                <li id="menuDispatchTicket"><a href="general.html"><i class="fas fa-ticket-alt"></i>Dispatch Ticket</a></li>
+                                <li id="tPaymentBilling"><a href="#" class="has-dropdown waves-effect"><i class="fas fa-money-bill-alt"></i>Payment &amp; Billing</a>
+                                    <ul class="menu-dropdown">
+                                        <li id="menuDispatchTicket"><a href="/administrator/transactions/dispatchticket"><i class="fas fa-ticket-alt"></i>Dispatch Ticket</a></li>
+                                        <li id="menuInvoice"><a href="/administrator/transactions/invoice"><i class="ion ion-ios-list"></i>Invoice</a></li>
+                                        <li id="menuPayment"><a href="/administrator/transactions/payment"><i class="ion ion-cash"></i>Payment</a></li>
+                                    </ul>
+                                </li>
+                                {{-- <li id="menuDispatchTicket"><a href="/administrator/transactions/dispatchticket"><i class="fas fa-ticket-alt"></i>Dispatch Ticket</a></li>
                                 <li id="menuInvoice"><a href="buttons.html"><i class="ion ion-ios-list"></i>Invoice</a></li>
-                                <li id="menuPayment"><a href="buttons.html"><i class="ion ion-cash"></i>Payment &amp; Billing</a></li>
-                                {{-- <li id=""><a href="toastr.html"><i class="ion ion-clipboard"></i>Job Order</a></li> --}}
+                                <li id="menuPayment"><a href="buttons.html"><i class="ion ion-cash"></i>Payment &amp; Billing</a></li> --}}
                             </ul>
                         @elseif(Auth::user()->enumUserType == 'Affiliates')
                             <ul class="menu-dropdown">
@@ -110,12 +116,6 @@
                         @endif
                     </li>
                     <li>
-                        <a id="logout" onclick="event.preventDefault(); document.getElementById('logout-form-admin').submit();"href="/administrator/logout"><i class="ion ion-log-out"></i><span>Logout</span></a>
-                    </li>
-                    <form id="logout-form-admin" action="/administrator/Adminlogout" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    </form>
-                    <li>
                         <a href="#" class="has-dropdown"><i class="ion ion-stats-bars"></i><span>Reports</span></a>
                         <ul class="menu-dropdown">
                             <li><a href="general.html"><i class="fas fa-life-ring"></i>Berth</a></li>
@@ -133,7 +133,12 @@
                             <li><a href="/contracts"><i class="ion ion-ios-paper"></i> Contracts</a></li>
                         </ul>
                     </li>
-                    
+                    <li>
+                        <a id="logout" onclick="event.preventDefault(); document.getElementById('logout-form-admin').submit();"href="/administrator/logout"><i class="ion ion-log-out"></i><span>Logout</span></a>
+                    </li>
+                    <form id="logout-form-admin" action="/administrator/Adminlogout" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
                 </ul>
             </aside>
         </div>

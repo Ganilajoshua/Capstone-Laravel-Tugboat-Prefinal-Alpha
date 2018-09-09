@@ -2,9 +2,11 @@
 
 @section('assets')
     @include('ContractsRequests.styles')
-    @include('ContractsRequests.scripts')
 @endsection
 
+@section('scripted')
+    @include('ContractsRequests.scripts')
+@endsection
 @section('content')
     <section class="section">
         <h1 class="section-header">

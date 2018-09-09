@@ -127,9 +127,18 @@ th.noSortAction{
 .stroke-warning{
 
 }
-.signCanvas{
-  height: 300px;
-  width: 750px;
+.signCanvas,.signAdminCanvas,.signConsigneeCanvas,.signAdminCanvasDisplay, .signConsigneeCanvasDisplay{
+  width: 450px;
+  height: 200px;
+}
+.signCanvas,.signConsigneeCanvas{
+  margin-left:8px;
+}
+.signConsigneeCanvasDisplay{
+  cursor:not-allowed;
+}
+.rowOverflow{
+  overflow: auto;
 }
 .modal-body {
   max-height: calc(100vh - 200px);
