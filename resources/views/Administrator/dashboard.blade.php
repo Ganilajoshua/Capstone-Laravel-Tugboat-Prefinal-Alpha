@@ -1,8 +1,11 @@
 @extends('Templates.newTemplate')
 
 @section('assets')
-    {{-- @include('Administrator.styles')
-    @include('Administrator.scripts') --}}
+    @include('Administrator.styles')
+@endsection
+
+@section('scripted')
+    @include('Administrator.scripts')
 @endsection
 
 @section('content')
@@ -11,23 +14,58 @@
             <div>Dashboard</div>
         </h1>
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="card card-sm-3">
-                    <div class="card-icon bg-primary">
-                        <i class="ion ion-person"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Admin</h4>
+            <div class="col-12">
+                <div class="card border-primary">
+                    <div class="card-header bg-primary text-white">
+                        <div class="float-right">
+                            <a data-collapse="#ongoingJOCard" class="btn btn-icon"><i class="ion ion-minus"></i></a>
                         </div>
+                        <h4># Ongoing Job Orders</h4>
+                    </div>
+                    <div class="collapse show" id="ongoingJOCard">
                         <div class="card-body">
-                            10
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="card card-sm-2 card-primary border-primary activeCards">
+                                    <div class="card-icon">
+                                        <i class="ion ion-android-boat text-primary"></i>
+                                    </div>
+                                    <div class="card-header">
+                                        <h4 class="text-primary mb-2">Job Order</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <h5>Consignee</h5>
+                                    </div>
+                                    <div class="card-footer">
+                                        <p class="card-text">Location Update: safasfasfasf</p>
+                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="card card-sm-3">
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-12 col-12">
+                <a href="/administrator/transactions/hauling">
+                    <div class="card card-sm-3">
+                        <div class="card-icon bg-primary">
+                            <i class="ion ion-android-boat"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Ongoing Job Orders</h4>
+                            </div>
+                            <div class="card-body mt-1" style="font-size:25px;">
+                                10
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="card card-sm-4">
                     <div class="card-icon bg-danger">
                         <i class="ion ion-ios-paper-outline"></i>
                     </div>
@@ -41,7 +79,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-12">
+            <div class="col-lg-4 col-md-6 col-12">
                 <div class="card card-sm-3">
                     <div class="card-icon bg-warning">
                         <i class="ion ion-paper-airplane"></i>
@@ -56,17 +94,62 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-12">
-                <div class="card card-sm-3">
-                    <div class="card-icon bg-success">
-                        <i class="ion ion-record"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Online Users</h4>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <div class="float-right">
+                            <a data-collapse="#timelineCard" class="btn btn-icon"><i class="ion ion-minus"></i></a>
                         </div>
+                        <h4>Timeline</h4>
+                    </div>
+                    <div class="collapse show" id="timelineCard">
                         <div class="card-body">
-                            47
+                            <div id="resume" class="section-padding">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div>
+                                                <ul class="timeline">
+                                                    <li>
+                                                        <i class="fas fa-map-marker-alt"></i>
+                                                        <h2 class="timelin-title">September 8 ,2018</h2>
+                                                    </li>
+                                                    <li>
+                                                        <div class="content-text">
+                                                        <h3 class="line-title">1230 HRS</h3>
+                                                            <span>
+                                                                <a href="/administrator/transactions/hauling">Job Order # 17</a>
+                                                            </span>
+                                                            <p class="line-text float-right">25 hours ago</p>
+                                                            <p class="line-text"><i class="fas fa-map-pin text-primary mr-2"></i>Currently at North</p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div>
+                                                <ul class="timeline">
+                                                    <li>
+                                                        <i class="fas fa-map-marker-alt"></i>
+                                                        <h2 class="timelin-title">September 9 ,2018</h2>
+                                                    </li>
+                                                    <li>
+                                                        <div class="content-text">
+                                                            <h3 class="line-title">0130 HRS</h3>
+                                                            <span>
+                                                                <a href="/administrator/transactions/hauling">Job Order # 17</a>
+                                                            </span>
+                                                            <p class="line-text float-right">25 minutes ago</p>
+                                                            <p class="line-text"><i class="fas fa-map-pin text-primary mr-2"></i>Currently at Pasig</p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -115,7 +198,7 @@
             <div class="col-lg-4 col-md-12 col-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Recent Activities</h4>
+                        <h4>Activity Log</h4>
                     </div>
                     <div class="card-body">
                         <ul class="list-unstyled list-unstyled-border">
@@ -156,126 +239,6 @@
                             <a href="#" class="btn btn-primary btn-round">
                             View All
                             </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-5 col-md-12 col-12 col-sm-12">
-                <form method="post" class="needs-validation" novalidate="">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Quick Draft</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label>Title</label>
-                                <input type="text" name="title" class="form-control" required>
-                                <div class="invalid-feedback">
-                                    Please fill in the title
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Content</label>
-                                <textarea class="summernote-simple"></textarea>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-primary">Save Draft</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-7 col-md-12 col-12 col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="float-right">
-                            <a href="#" class="btn btn-primary">View All</a>
-                        </div>
-                        <h4>Latest Posts</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Author</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            Introduction Laravel 5
-                                            <div class="table-links">
-                                                in <a href="#">Web Development</a>
-                                                <div class="bullet"></div>
-                                                <a href="#">View</a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a href="#"><img src="../dist/img/avatar/avatar-1.jpeg" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="ion ion-edit"></i></a>
-                                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete"><i class="ion ion-trash-b"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Laravel 5 Tutorial - Installation
-                                            <div class="table-links">
-                                                in <a href="#">Web Development</a>
-                                                <div class="bullet"></div>
-                                                <a href="#">View</a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a href="#"><img src="../dist/img/avatar/avatar-1.jpeg" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="ion ion-edit"></i></a>
-                                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete"><i class="ion ion-trash-b"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Laravel 5 Tutorial - MVC
-                                            <div class="table-links">
-                                                in <a href="#">Web Development</a>
-                                                <div class="bullet"></div>
-                                                <a href="#">View</a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a href="#"><img src="../dist/img/avatar/avatar-1.jpeg" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="ion ion-edit"></i></a>
-                                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete"><i class="ion ion-trash-b"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Laravel 5 Tutorial - Migration
-                                            <div class="table-links">
-                                                in <a href="#">Web Development</a>
-                                                <div class="bullet"></div>
-                                                <a href="#">View</a>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <a href="#"><img src="../dist/img/avatar/avatar-1.jpeg" alt="avatar" width="30" class="rounded-circle mr-1"> Bagus Dwi Cahya</a>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit"><i class="ion ion-edit"></i></a>
-                                            <a class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete"><i class="ion ion-trash-b"></i></a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>

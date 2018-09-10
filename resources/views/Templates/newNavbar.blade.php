@@ -8,7 +8,7 @@
             <input class="form-control" type="search" placeholder="Search" aria-label="Search">
             <button class="btn" type="submit"><i class="ion ion-search"></i></button>
         </div>
-        <div class="float-left text-white mt-1 ml-5 clock"></div>
+        <div class="float-left text-white mt-1 ml-4 clock"></div>
     </form>
     <ul class="navbar-nav navbar-right">
         <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="ion ion-ios-bell-outline"></i></a>

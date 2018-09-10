@@ -15,7 +15,6 @@
         <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/waves/waves.css">
         <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/css/font.css">
         <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/css/cssAll.css">
-        <link rel="shortcut icon" href="/others/stisla_admin_v1.0.0/dist/img/tbLogo.png">
     </head>
     <body>
         <div id="app">
