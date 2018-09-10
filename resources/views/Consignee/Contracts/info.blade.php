@@ -1,19 +1,23 @@
 <div class="modal fade" id="applySignatureModal" tabindex="-1" role="dialog" aria-labelledby="applySignatureModalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="applySignatureModalTitle">Contract 2<div class="badge badge-warning ml-2">NOT FINALIZED</div></h5>
+                <h5 class="modal-title" id="applySignatureModalTitle">Sign Contract</h5>
                 <button type="button" class="close waves-effect" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="alert alert-info mt-2">
-                    <i class="bigIcon fas fa-info-circle mr-2 mt-1"></i>
-                    You must sign in the canvas first before accepting the contract.
+                <div class="row">
+                    <div class="col-12">
+                        <div class="alert alert-info mt-2 text-center">
+                            <i class="bigIcon fas fa-info-circle mr-2 mt-1"></i>
+                            Sign in the canvas before accepting the contract.
+                        </div>
+                            <div class="signCanvas"></div>
+                    </div>
                 </div>
-                <div class="signCanvas"></div>
-                <button class="clearCanvas btn btn-primary btn-sm waves-effect float-left">Clear Canvas</button> 
+                <button class="clearCanvas btn btn-primary btn-sm waves-effect float-left ml-2">Clear Canvas</button> 
             </div>
             <div class="modal-footer">
                 <button onclick="acceptContractQuotation()" class="btn btn-primary waves-effect btnButtons" data-toggle="modal" data-target="#editContractInfo">Accept Contract</button>

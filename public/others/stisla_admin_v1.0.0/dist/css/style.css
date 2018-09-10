@@ -50,6 +50,12 @@
   background-color: #39065A !important;
   color: #fff;
 }
+.timeline li:before {
+  border-color: #574B90 !important;
+}
+.timeline li:first-child i {
+  background: #574B90 !important;
+}
 .btn-primary:not([disabled]):not(.disabled).active,
 .btn-primary:not([disabled]):not(.disabled):active,
 .show>.btn-primary.dropdown-toggle {
@@ -303,7 +309,7 @@ a:not(.btn-social-icon):not(.btn-social):not(.page-link) .fab {
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 115px;
+	height: 110px;
 	background-color: #574B90;
 	z-index: -1;
 }
@@ -563,7 +569,7 @@ body.sidebar-gone .main-content {
 .main-sidebar .sidebar-menu li a {
 	display: inline-block;
 	width: 100%;
-	padding: 15px 25px;
+	padding: 15px 15px;
 	color: #868e96;
 	font-weight: 500;
 	text-decoration: none;
@@ -575,7 +581,7 @@ body.sidebar-gone .main-content {
 }
 .main-sidebar .sidebar-menu li a i {
 	width: 20px;
-	margin-right: 25px;
+	margin-right: 10px;
 	font-size: 20px;
 	text-align: center;
 	float: left;
@@ -620,7 +626,8 @@ body.sidebar-gone .main-content {
 .main-sidebar .sidebar-menu li ul.menu-dropdown li.inactive a {
 	color: #505c66;
 	font-weight: 400;
-}.main-sidebar .sidebar-menu li.active ul.menu-dropdown li {
+}
+.main-sidebar .sidebar-menu li.active ul.menu-dropdown li {
 	background-color: #f9f9f9 !important;
 }
 .main-sidebar .sidebar-menu li ul.menu-dropdown li.inactive a:hover {
@@ -723,7 +730,7 @@ body.sidebar-gone .main-content {
 	width: 100%;
 	font-family: 'Montserrat';
 	font-weight: 700;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 .section .section-header div {
 	display: inline-block;
@@ -2248,7 +2255,7 @@ table tr:hover .table-links {
 	.section .section-header .float-right {
 		display: inline-block;
 		width: 100%;
-		margin-top: 15px;
+		margin-top:10px;
 	}
 	.section .section-header {
 		margin-bottom: 20px !important;

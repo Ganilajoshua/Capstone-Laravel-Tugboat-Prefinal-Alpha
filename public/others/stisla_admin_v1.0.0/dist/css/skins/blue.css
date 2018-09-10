@@ -10,6 +10,12 @@
     color: #fff;
     background-color: #182794;
 }
+.timeline li:before {
+  border-color: #3F52E3 !important;
+}
+.timeline li:first-child i {
+  background: #3F52E3 !important;
+}
 .niceCountryInputMenuDropdownContent a:hover {
   background-color: #182794 !important;
 }
