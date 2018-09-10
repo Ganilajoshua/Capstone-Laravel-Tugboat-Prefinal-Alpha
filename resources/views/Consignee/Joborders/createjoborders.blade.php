@@ -1,7 +1,7 @@
 <div class="tab-pane show active animated slideInRight faster" id="firstTab" role="tabpanel" aria-labelledby="navFirstTab">
     <form class="needs-validation" novalidate="">
         <div class="row">
-            <div class="col-12 col-sm-12 col-lg-6">
+            <div class="col-12 col-sm-12 col-lg-12">
                 <div class="form-group">
                     <label for="addTransacDate">Hauling Date and Start Time<sup class="text-primary">&#10033;</sup></label>
                     <div class="input-group date" id="addTransacDate" data-target-input="nearest">
@@ -11,20 +11,6 @@
                         </div>
                         <div class="invalid-feedback">
                             Please fill in the Transaction Date.
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-12 col-lg-6">
-                <div class="form-group">
-                    <label for="addHaulingETA">Hauling Date and End Time<sup class="text-primary">&#10033;</sup></label>
-                    <div class="input-group date" id="addHaulingETA" data-target-input="nearest">
-                        <input id="timeETD" type="text" class="form-control datetimepicker-input" data-target="#addHaulingETA" placeholder="21:00" required>
-                        <div class="input-group-append" data-target="#addHaulingETA" data-toggle="datetimepicker">
-                            <button type="button" class="btn btn-outline-primary waves-effect"><i class="fa fa-clock"></i></button>
-                        </div>
-                        <div class="invalid-feedback">
-                            Please fill in the Estimated Time of Hauling.
                         </div>
                     </div>
                 </div>
