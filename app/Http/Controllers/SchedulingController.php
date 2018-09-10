@@ -11,6 +11,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Carbon\Carbon;
 
 use App\Schedules;
+use Auth;
+use Session;
+
 
 class SchedulingController extends Controller
 {
@@ -21,9 +24,11 @@ class SchedulingController extends Controller
      */
     public function index()
     {
+        
         $schedules = DB::table('tblschedule')
         ->select('tblschedule.*')
         ->where('boolDeleted',0)
+        ->where('intScheduleCompanyID',Auth::user()->intUCompanyID)
         ->get();
         // return response(['schedules' => $schedules]);
         return view('Schedule.index',compact('schedules'));
@@ -103,5 +108,28 @@ class SchedulingController extends Controller
         ->get();
         // $schedules->toArray();
         return json_encode($schedules);
+    }
+
+    public function tugboatsavailable(Request $request){
+        $unavailable = DB::table('tbltugboatassign as assign')
+        ->join('tbljobsched as jobsched','jobsched.intJSTugboatAssignID','assign.intTAssignID')
+        ->join('tblschedule as schedule','jobsched.intJSSchedID','schedule.intScheduleID')
+        ->join('tbltugboat as tugboat','assign.intTATugboatID','tugboat.intTugboatID')
+        ->join('tbltugboatmain as main','tugboat.intTugboatID','main.intTugboatMainID')
+        ->whereDate('schedule.dttmETA',$request->date)
+        ->where('assign.intTACompanyID',Auth::user()->intUCompanyID)
+        ->get();
+        
+        $available = DB::table('tbltugboatassign as assign')
+        ->leftjoin('tbljobsched as jobsched','jobsched.intJSTugboatAssignID','assign.intTAssignID')
+        ->leftjoin('tblschedule as schedule','jobsched.intJSSchedID','schedule.intScheduleID')
+        ->join('tbltugboat as tugboat','assign.intTATugboatID','tugboat.intTugboatID')
+        ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+        ->whereDate('schedule.dttmETA','!=',$request->date)
+        ->where('assign.intTACompanyID',Auth::user()->intUCompanyID)
+        ->orWhere('schedule.dttmETA',null)
+        // ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
+        ->get();
+        return response()->json(['unavailable'=>$unavailable,'available'=>$available]);
     }
 }

@@ -1,11 +1,14 @@
 @extends('Templates.newTemplate')
 
+{{-- Local Styles --}}
 @section('assets')
+@endsection
+
+{{-- Local Scripts --}}
+@section('scripted')
     @include('Pier.scripts')
 @endsection
-@section('assets2')
-    
-@endsection
+   
 @section('content')
 <section class="section">
     <h1 class="section-header">

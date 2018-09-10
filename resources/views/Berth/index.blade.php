@@ -1,10 +1,12 @@
 @extends('Templates.newTemplate')
 
+{{-- Local Styles --}}
 @section('assets')
-    @include('Berth.scripts')
 @endsection
-@section('assets2')
-    
+
+{{-- Local Scripts --}}
+@section('scripted')
+    @include('Berth.scripts')
 @endsection
 @section('content')
 <section class="section">

@@ -1,0 +1,11 @@
+/* 
+.signAdminCanvasDisplay, .signConsigneeCanvasDisplay{
+    width: 400px;
+} */
+
+.signAdminCanvasDisplay{
+    cursor:pointer;
+}
+/* .alertConsigneeSign{
+    display:none;
+} */

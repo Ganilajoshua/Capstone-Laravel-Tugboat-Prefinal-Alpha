@@ -44,7 +44,11 @@
                                         </div>
                                     @endforeach
                                 @else
-                                    NO Results
+                                    <div class="col-12">
+                                        <div class="alert alert-danger text-center">
+                                            <i class="fas fa-exclamation-triangle mr-2"></i>NO RESULTS FOUND!
+                                        </div>
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -73,7 +77,11 @@
                                         </div>
                                     @endforeach
                                 @else
-                                    No Results Found
+                                    <div class="col-12">
+                                        <div class="alert alert-danger text-center">
+                                            <i class="fas fa-exclamation-triangle mr-2"></i>NO RESULTS FOUND!
+                                        </div>
+                                    </div>
                                 @endif
                             </div>
                         </div>

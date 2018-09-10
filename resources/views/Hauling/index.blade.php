@@ -1,11 +1,11 @@
 @extends('Templates.newTemplate')
 
 @section('assets')
-   @include('Hauling.scripts')
+   @include('Hauling.styles')
 @endsection
 
 @section('scripted')
-
+   @include('Hauling.scripts')
 @endsection
 @section('content')
     <section id="mainSection" class="section">

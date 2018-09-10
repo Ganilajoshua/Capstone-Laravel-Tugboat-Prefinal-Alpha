@@ -44,6 +44,8 @@
                                                         </div>
                                                     </div>
                                                 @endforeach
+                                            @else
+
                                             @endif
                                         </div>
                                         {{-- End of Team Builder Team List --}}

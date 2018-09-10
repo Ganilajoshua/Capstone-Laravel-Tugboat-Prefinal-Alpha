@@ -1,14 +1,20 @@
 @extends('Templates.newTemplate')
 
+{{-- Local Styles --}}
 @section('assets')
     @include('Tugboat.style')
-    @include('Tugboat.scripts')
 @endsection
 
+{{-- Local Scripts --}}
+@section('scripted')
+    @include('Tugboat.scripts')
+@endsection    
+
 @section('outside')
-@include('Tugboat.info')
-@include('Tugboat.summary')
+    @include('Tugboat.info')
+    @include('Tugboat.summary')
 @endsection
+
 @section('content')
 <section id="sectionOne" class="section">
     <h1 class="section-header">

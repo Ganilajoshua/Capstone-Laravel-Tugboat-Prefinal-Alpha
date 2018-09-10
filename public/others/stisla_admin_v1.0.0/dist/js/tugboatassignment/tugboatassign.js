@@ -4,10 +4,10 @@ $(document).ready(function(){
     $('#transactionTree').addClass('active');
     $('#tDispatch').addClass('active');
     $('#menuTugboatAssignment').addClass('active');
-    $('#menuJobOrder').addClass('inactive');
-    $('#menuTeamBuilder').addClass('inactive');
-    $('#menuScheduling').addClass('inactive');
-    $('#menuHauling').addClass('inactive');
+    $('#menuJobOrder').removeClass('active');
+    $('#menuTeamBuilder').removeClass('active');
+    $('#menuScheduling').removeClass('active');
+    $('#menuHauling').removeClass('active');
     // $('#assignTugboatButton').on('click',function(){
     //     $('#assignTugboatModal').modal('show');
     // });
@@ -36,12 +36,12 @@ $(document).ready(function(){
                     preventDuplicates : true, 
                     showDuration : "300",
                     "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut !important"
+                    "hideMethod": "fadeOut"
                 });
             }else if((data.available).length == 1){
-                toastr.warning('You Have only &nbsp;' + (data.available).length + '&nbsp; Tugboat Available', "You're Almost out of Tugboats!", { positionClass: 'toast-bottom-right', preventDuplicates: true, });
+                toastr.warning(`You Have only &nbsp; ${(data.available).length} &nbsp; Tugboat Available`, "You're Almost out of Tugboats!", { positionClass: 'toast-bottom-right', preventDuplicates: true, });
             }else{
-                toastr.success('You Have &nbsp;' + (data.available).length + '&nbsp; Tugboat(s) Available', "Tugboats Left", { positionClass: 'toast-bottom-right', preventDuplicates: true, });
+                toastr.success(`You Have &nbsp; ${(data.available).length} &nbsp; Tugboat(s) Available`, "Tugboats Left", { positionClass: 'toast-bottom-right', preventDuplicates: true, });
             }                  
         },
         error : function(error){
@@ -49,9 +49,30 @@ $(document).ready(function(){
         }
 
     });
-
 });
 
+$('.assignTugboatButton').on('click', function(){    
+    console.log($(this).data('id'));
+    console.log($(this).data('date'));
+    var date = moment($(this).data('date')).format('YYYY-MM-DD');
+    console.log(date);
+    $('#assignTugboatModal').modal('show');
+    $.ajax({
+        url : url + '/tugboatsavailable',
+        type : 'POST',
+        data : {
+            "_token" : $('meta[name="csrf-token"]').attr('content'),
+            date : date,
+        },
+        success : (data)=>{
+            console.log(data);
+            
+        },error : (error)=>{
+            throw error;
+        },
+
+    });
+});
 
 function showTugboatModal(jobOrderID){
     console.log(jobOrderID);

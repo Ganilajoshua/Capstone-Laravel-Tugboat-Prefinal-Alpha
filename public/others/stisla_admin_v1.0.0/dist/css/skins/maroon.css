@@ -23,6 +23,12 @@
 .note-tooltip.bottom .note-tooltip-arrow{
   border-bottom-color:#800000!important;
 }
+.timeline li:before {
+  border-color: #924444 !important;
+}
+.timeline li:first-child i {
+  background: #924444 !important;
+}
 .sw-theme-arrows>ul.step-anchor>li.active>a{
   border-color:#800000!important;
   color:#fff

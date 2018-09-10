@@ -11,6 +11,9 @@
 .navbar .nav-link:hover {
 	color: #fff;
 }
+.main-sidebar .sidebar-menu li.active ul.menu-dropdown li {
+	background-color: #1f202e !important;
+}
 .navbar .form-inline .form-control {
 	background-color: #f2f2f2;
 }

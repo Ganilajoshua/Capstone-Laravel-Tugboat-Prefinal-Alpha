@@ -1,10 +1,12 @@
-@extends('Templates.newTemplate')
+    @extends('Templates.newTemplate')
 
 @section('assets')
     @include('ContractsRequests.styles')
-    @include('ContractsRequests.scripts')
 @endsection
 
+@section('scripted')
+    @include('ContractsRequests.scripts')
+@endsection
 @section('content')
     <section class="section">
         <h1 class="section-header">
@@ -138,8 +140,8 @@
                                                     <td>{{$companyAccepted->strCompanyName}}</td>
                                                     <td>
                                                         <div class="ml-1 mr-1">
-                                                            <button onclick="createActiveContract({{$companyAccepted->intContractListID}})" class="btn btn-sm btn-success" data-toggle="tooltip" title="Finalize Quotation as Contract" role="button">
-                                                                <i class="miniIcon fas fa-check custSize"></i>
+                                                            <button id="addSignatureButton" class="btn btn-sm btn-primary" data-id="{{$companyAccepted->intContractListID}}" role="button">
+                                                                Sign
                                                             </button>
                                                         </div>
                                                     </td>
@@ -169,4 +171,5 @@
         </div>
     </section>
     @include('ContractsRequests.info')
+    @include('ContractsRequests.infoSign')
 @endsection

@@ -12,13 +12,35 @@ $(document).ready(function(){
     // yung data id nilagyan ko din ng comment sa blade
     
     //PS ikaw nalang magbago ulit ng UI thankies
-    var showID = $('#activeContract').data('id');
-    
-    console.log(showID);
     var peso = ` &#8369; `;
     var percent = ` &#37;`;
+    var activeContractID = $('#activeContract').data('id');
+    var createdContractID = $('#createdContract').data('id');
     $.ajax({
-        url : url + '/' + showID + '/show',
+        url : url + '/' + activeContractID + '/show',
+        type : 'GET',
+        dataType : 'JSON',
+        async: true,
+        success : function(data){
+            $('#contractsID').val(data.contract[0].intContractListID);
+            console.log('aak');
+            console.log('standard ID :', data.contract[0].intCStandardID);
+            console.log('quotation ID : ', data.contract[0].intCQuotationID);
+            $('#contractDetails').html(data.contract[0].strContractListDesc);
+            $('#standardRate').html(peso + data.contract[0].fltStandardRate);
+            $('#tugboatDelayFee').html(peso + data.contract[0].fltQuotationTDelayFee);
+            $('#violationFee').html(peso + data.contract[0].fltQuotationViolationFee);
+            $('#consigneeLateFee').html(peso + data.contract[0].fltQuotationConsigneeLateFee);
+            $('#minDamageFee').html(peso + data.contract[0].fltMinDamageFee);
+            $('#maxDamageFee').html(peso + data.contract[0].fltMaxDamageFee);
+            $('#discount').html(data.contract[0].intDiscount + percent);
+        },
+        error : function(error){
+            throw error;
+        }
+    });
+    $.ajax({
+        url : url + '/' + createdContractID + '/show',
         type : 'GET',
         dataType : 'JSON',
         async: true,
@@ -98,9 +120,7 @@ function requestForChanges(){
         showCancelButton: true,
         confirmButtonClass: "btn-info",
         confirmButtonText: "Ok",
-    },function(isConfirm){
-        if (isConfirm) {
-            $('#viewCContractInfo').modal('hide');
+    },function(){
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -122,28 +142,22 @@ function requestForChanges(){
                     console.log(data);
                     swal({
                         title: "Success",
-                        text: "Contract Requested",
+                        text: "Quotation Changes Requested",
                         type: "success",
                         showCancelButton: false,
                         confirmButtonClass: "btn-success",
                         confirmButtonText: "Ok",
-                        closeOnConfirm: true,
-                        timer : 2000
+                        closeOnConfirm: false,
                     },
-                    function(isConfirm){
-                        if(isConfirm){
-                        }
+                    function(){
+                        window.location = url;
                     });                       
-                    setTimeout(window.location = url, 2000); 
                 },
                 error : function(error){
                     throw error;
                 }
     
             });
-        } else {
-            $('#viewCContractInfo').modal('show');
-          }
     });
 }
 function showContract(showID){
@@ -214,58 +228,74 @@ function showFinalContract(showID){
             throw error;
         }
     });
-}
-function acceptContractQuotation(){
-    var contractID = $('#contractsID').val();
-    swal({
-        title: "Are You Sure?",
-        text: "Accept Contract Quotation?",
-        type: "info",
-        showCancelButton: false,
-        confirmButtonClass: "btn-info",
-        confirmButtonText: "Ok",
-    },function(isConfirm){
-        // alert('bobo');
-        // return false;
-         $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+}function acceptContractQuotation(){
+    if ($('.signCanvas').signature('isEmpty')) {
+        toastr.error('Please provide a signature first.', 'Signature Pad Empty!', {
+            closeButton: true,
+            debug: false,
+            timeOut: 2000,
+            positionClass: "toast-bottom-right",
+            preventDuplicates: true,
+            showDuration: 300,
+            hideDuration: 300,
+            showMethod: "slideDown",
+            hideMethod: "slideUp"
         });
-
-        $.ajax({
-            url : url + '/activate',
-            type : 'POST',
-            data : { 
-                "_token" : $('meta[name="csrf-token"]').attr('content'),    
-                contractID : contractID,
-            }, 
-            beforeSend: function (request) {
-                return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-            },
-            success : function(data){
-                console.log('success pota');
-                console.log(data);
-                swal({
-                    title: "Success",
-                    text: "Contract Request Accepted",
-                    type: "success",
-                    showCancelButton: false,
-                    confirmButtonClass: "btn-success",
-                    confirmButtonText: "Ok",
-                    closeOnConfirm: true,
-                    timer : 2000
-                },
-                function(isConfirm){
-                    if(isConfirm){
-                        window.location = url; 
+      } else {
+        $('#applySignatureModal').modal('hide');
+        var contractID = $('#contractsID').val();
+        swal({
+            title: "Are You Sure?",
+            text: "Accept Contract Quotation?",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonClass: "btn-info",
+            confirmButtonText: "Ok",
+        },function(isConfirm){
+            if(isConfirm){
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
-                });                       
-            },
-            error : function(error){
-                throw error;
+                });
+    
+                $.ajax({
+                    url : url + '/activate',
+                    type : 'POST',
+                    data : { 
+                        "_token" : $('meta[name="csrf-token"]').attr('content'),    
+                        contractID : contractID,
+                    }, 
+                    beforeSend: function (request) {
+                        return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                    },
+                    success : function(data){
+                        console.log('success pota');
+                        console.log(data);
+                        swal({
+                            title: "Success",
+                            text: "Contract Request Accepted",
+                            type: "success",
+                            showCancelButton: false,
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "Ok",
+                            closeOnConfirm: true,
+                            timer : 2000
+                        },
+                        function(isConfirm){
+                            if(isConfirm){
+                                window.location = url; 
+                            }
+                        });                       
+                    },
+                    error : function(error){
+                        throw error;
+                    }
+    
+                });
+            }else{
+                $('#applySignatureModal').modal('show');
             }
-
         });
-    });
+      }
 }

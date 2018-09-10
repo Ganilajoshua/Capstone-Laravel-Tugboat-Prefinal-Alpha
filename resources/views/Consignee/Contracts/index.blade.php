@@ -22,13 +22,10 @@
                         </div>
                         <div class="card-body">
                             <h3>YOU DON'T HAVE ANY CONTRACTS</h3>
-                            <span><a href="#" onclick="requestContracts({{$company[0]->intCompanyID}})" id="requestContracts" class="mt-3 text-black btnRequest">
+                            <span><a href="#" onclick="requestContracts({{$company[0]->intCompanyID}})" id="requestContracts" class="mt-3">
                                     Request Contract<span><i class="fas fa-chevron-right ml-2 mt-2"></i></span>
                             </a></span>
 
-                        </div>
-                        <div class="card-footer mt-2">
-                            <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -48,35 +45,78 @@
                             <div style="font-size: 18px;" class="mt-4 badge badge-warning text-black">
                                 Waiting for Response . . .
                             </div>
-
-                        </div>
-                        <div class="card-footer mt-2">
-                            <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         @elseif(($contractList[0]->enumStatus) == 'Created')
-            <div class="container">
+            <div class="container" id="createdContract" data-id="{{$contract[0]->intContractListID}}">
                 <div class="row">
                     <div class="col">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="section-header text-center" style="text-transform: uppercase;">
-                                    Quotation List
-                                    </h5>
+                        <div class="card text-center">
+                            <div class="card-header bg-primary" style="border-radius:0px;">
+                                <h4 class=" text-white"><span>{{$contract[0]->strContractListTitle}}</span><span><div class="badge badge-warning ml-2">NOT YET FINALIZED</div></h4>
                             </div>
-                            <div class="container mt-3">
-                                <div class="card text-center">
-                                    <div class="card-header bg-primary" style="border-radius:0px;">
-                                        <h4 class=" text-white"><span>{{$contract[0]->strContractListTitle}}</span><span><div class="badge badge-warning ml-2">NOT YET FINALIZED</div></h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <a href="#" onclick="showContract({{$contract[0]->intContractListID}})" class="float-left mt-2">
-                                        More Info <i class="ion ion-ios-arrow-right"></i>
-                                        </a>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="text-black text-center" id="contractDetails"></p>
                                     </div>
                                 </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Standard Rate : </p></li>
+                                            <li class="list-inline-item">
+                                                <p class="text-black" id="standardRate"></p></li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Tugboat Delay Fee : </p></li>
+                                            <li class="list-inline-item">
+                                                <p class="text-black" id="tugboatDelayFee"></p></li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Violation Fee : </p></li>
+                                            <li class="list-inline-item"> 
+                                                <p class="text-black" id="violationFee"></p></li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Consignee Late Fee : </p></li>
+                                            <li class="list-inline-item">
+                                            <p class="text-black" id="consigneeLateFee"></p></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6">
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Minimum Damage Fee : </p></li>
+                                            <li class="list-inline-item">
+                                            <p class="text-black" id="minDamageFee"></p></li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Maximum Damage Fee : </p></li>
+                                            <li class="list-inline-item">
+                                                <p class="text-black" id="maxDamageFee"></p></li>
+                                        </ul>
+                                        <ul class="list-inline">
+                                            <li class="list-inline-item text-primary">
+                                                <p class="font-weight-bold">Discount : </p></li>
+                                            <li class="list-inline-item">
+                                                <p class="text-black" id="discount"></p></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <input type="hidden" id="contractsID">
+                                <button onclick="requestForChanges()" class="btn btn-primary waves-effect">Request for Changes</button>
+                                <button id="applySignatureButton" class="btn btn-success waves-effect" data-toggle="modal" data-target="#applySignatureModal">Sign and Accept Contract</button>
                             </div>
                         </div>
                     </div>
@@ -97,10 +137,6 @@
                             <div style="font-size: 18px;" class="mt-4 badge badge-warning text-black">
                                 Waiting for Response . . .
                             </div>
-
-                        </div>
-                        <div class="card-footer mt-2">
-                            <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -120,10 +156,6 @@
                             <div style="font-size: 18px;" class="mt-4 badge badge-warning text-black">
                                 Waiting for Response . . .
                             </div>
-                            
-                        </div>
-                        <div class="card-footer mt-2">
-                            <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>

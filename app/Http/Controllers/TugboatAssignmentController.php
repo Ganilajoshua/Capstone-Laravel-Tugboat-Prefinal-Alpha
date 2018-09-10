@@ -12,7 +12,7 @@ use App\TeamAssignment;
 use App\JobOrder;
 use App\JobSchedule;
 use App\Schedules;
-
+use Redirect;
 use Auth;
 use DB;
 
@@ -83,50 +83,54 @@ class TugboatAssignmentController extends Controller
      */
     public function create(Request $request)
     {
-        $joborder = JobOrder::findOrFail($request->jobOrderID);
-        $jobID = $joborder->intJobOrderID;
-        $joborder->timestamps = false;
-        if(Auth::user()->enumUserType == 'Admin'){
-            $joborder->enumStatus = 'Ready';
-        }elseif(Auth::user()->enumUserType == 'Affiliates'){
-            $joborder->enumStatus = 'Forward Ready';
-        }
-        $joborder->save();
-
-        $scheduleID = Schedules::max('intScheduleID') + 1 ;
-        $schedID = $scheduleID;     
-        
-        $schedule = new Schedules;
-        $schedule->timestamps = false;
-        $schedule->intScheduleID = $schedID;
-        $schedule->strScheduleDesc = $joborder->strJODesc;
-        $schedule->dttmETA = $joborder->dtmETA;
-        $schedule->dttmETD = $joborder->dtmETD;
-        $schedule->save();
-        
-        for($count=0; $count < count($request->tugboatsID); $count++){
+        try{
+            DB::beginTransaction();
+            $joborder = JobOrder::findOrFail($request->jobOrderID);
+            $jobID = $joborder->intJobOrderID;
             
-            $tugboatassign = TeamAssignment::findOrFail($request->tugboatsID[$count]);
-            $tugboatassign->timestamps = false;
-            $tugboatassign->enumStatus = 'Occupied';
-            $tugboatassign->save();
+            $joborder->timestamps = false;
+            if(Auth::user()->enumUserType == 'Admin'){
+                $joborder->enumStatus = 'Ready';
+            }elseif(Auth::user()->enumUserType == 'Affiliates'){
+                $joborder->enumStatus = 'Forward Ready';
+            }
+            $joborder->save();
+    
+            $scheduleID = Schedules::max('intScheduleID') + 1 ;
+            $schedID = $scheduleID;     
             
-            $jobsched = new JobSchedule;
-            $jobsched->timestamps = false;
-            $jobsched->intJSSchedID = $schedID;
-            $jobsched->intJSJobOrderID = $jobID;
-            $jobsched->intJSTugboatAssignID = $request->tugboatsID[$count];
-            $jobsched->save();
-            // $jobsched->status = ;
-
-        }
-        // $jobschedule = new JobSchedule;
-        // $jobschedule->timestamps = false;
-        // $jobschedule->intJSJobOrderID = $joborder->intJobOrderID;
-        // $jobschedule->intJSSchedID = $schedID; 
-        // $jobschedule->save();   
-        // $jobschedule->intJSScheduleID = $scheduleID; 
+            $schedule = new Schedules;
+            $schedule->timestamps = false;
+            $schedule->intScheduleID = $schedID;
+            $schedule->strScheduleDesc = $joborder->strJODesc;
+            $schedule->dttmETA = $joborder->dtmETA;
+            $schedule->dttmETD = $joborder->dtmETD;
+            $schedule->save();
+            
+            for($count=0; $count < count($request->tugboatsID); $count++){
+                
+                $tugboatassign = TeamAssignment::findOrFail($request->tugboatsID[$count]);
+                $tugboatassign->timestamps = false;
+                $tugboatassign->enumStatus = 'Occupied';
+                $tugboatassign->save();
+                
+                $jobsched = new JobSchedule;
+                $jobsched->timestamps = false;
+                $jobsched->intJSSchedID = $schedID;
+                $jobsched->intJSJobOrderID = $jobID;
+                $jobsched->intJSTugboatAssignID = $request->tugboatsID[$count];
+                $jobsched->save();
+            }
+            DB::commit();
+           
+        }catch(\Illuminate\Database\QueryException $errors){
+            DB::rollback();
+            $errorMessage = $errors->getMessage();
+            return Redirect::back()->withErrors($errorMessage);
+        } 
         return response()->json([$joborder]);
+        
+    
     }
 
     /**
@@ -213,4 +217,25 @@ class TugboatAssignmentController extends Controller
         
         return response()->json(['available'=>$available]);
     }
+
+    public function tugboatsavailable(Request $request){
+        $unavailable = DB::table('tbljobsched as jobsched')
+        ->join('tbltugboatassign as assign','jobsched.intJSTugboatAssignID','assign.intTAssignID')
+        ->join('tblschedule as schedule','jobsched.intJSSchedID','schedule.intScheduleID')
+        ->join('tbltugboat as tugboat','assign.intTATugboatID','tugboat.intTugboatID')
+        ->join('tbltugboatmain as main','tugboat.intTugboatID','main.intTugboatMainID')
+        ->where('schedule.datScheduleDate',$request->date)
+        ->get();
+        
+        $available = DB::table('tbljobsched as jobsched')
+        ->join('tbltugboatassign as assign','jobsched.intJSTugboatAssignID','assign.intTAssignID')
+        ->join('tblschedule as schedule','jobsched.intJSSchedID','schedule.intScheduleID')
+        ->join('tbltugboat as tugboat','assign.intTATugboatID','tugboat.intTugboatID')
+        ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+        ->where('schedule.datScheduleDate','!=',$request->date)
+        ->where('assign.intTACompanyID',Auth::user()->intUCompanyID)
+        ->get();
+        return response()->json(['unavailable'=>$unavailable,'available'=>$available]);
+    }
+
 }

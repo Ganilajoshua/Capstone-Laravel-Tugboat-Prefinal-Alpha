@@ -1,4 +1,10 @@
 $(document).ready(function(){
+  $(function() {
+    var sig = $('.signCanvas').signature();
+    $('.clearCanvas').click(function() {
+        sig.signature('clear');
+    });
+  }); 
   $('.btnRequest').on('click',function(event) {
     event.preventDefault();
     swal({

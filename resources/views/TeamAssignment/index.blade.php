@@ -128,12 +128,12 @@
                                                     @if(count($teamavailable)>0)
                                                         @foreach($teamavailable as $teamavailable)
                                                             @if($teamavailable->intTATeamID != null)
-                                                                <a href="" onclick="showTeamAssignment({{$teamavailable->intTATeamID}})" class="teamTugboat text-white">
+                                                                <a href="" data-id="{{$teamavailable->intTATeamID}}" class="occupiedTugboats text-white">
                                                                     <div class="card bg-info">
-                                                                        <div class="card-header" id="dismissTeam">
+                                                                        <div class="card-header" id="dismissOccupied">
                                                                             {{$teamavailable->strName}}
                                                                             <div class="float-right">
-                                                                                <a data-dismiss="#dismissTeam" class="btn btn-icon"><i class="ion ion-close"></i></a>
+                                                                                <a data-dismiss="#dismissOccupied" class="btn btn-icon"><i class="ion ion-close"></i></a>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -146,37 +146,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="card">
-                                    <div class="card-header bg-danger text-white">
-                                        <div class="float-right">
-                                            <a data-collapse="#underRepairTugboat" class="btn btn-icon"><i class="ion ion-minus"></i></a>
-                                        </div>
-                                        <h4 class="text-center ml-5">Disabled Tugboats</h4>
-                                    </div>
-                                    <div class="collapse show" id="underRepairTugboat">
-                                        <div class="card-body">
-                                            <div class="card card-danger">
-                                                <div class="card-header text-center">
-                                                    <h4>Tugboat List</h4>
-                                                </div>
-                                                <div class="card-body text-white">
-                                                    @if(count($nocompliance)>0)
-                                                        @foreach($nocompliance as $nocompliance)
-                                                            <div class="card bg-danger">
-                                                                <div class="card-header" id="dismissTeam">
-                                                                    {{$nocompliance->strName}}
-                                                                    <div class="float-right">
-                                                                        <a data-dismiss="#dismissTeam" class="btn btn-icon"><i class="ion ion-close"></i></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        @endforeach
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
                             </div>
                         </section>
                     </div>
@@ -188,7 +157,4 @@
     @include('TeamAssignment.createTeam')
     @include('TeamAssignment.edit')
     @include('TeamAssignment.info')
-@endsection
-@section('dateHolder')
-    {{$now}}
 @endsection

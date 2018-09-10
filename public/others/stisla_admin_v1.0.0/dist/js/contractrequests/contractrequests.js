@@ -53,7 +53,9 @@ $(document).ready(function(){
         }
 
     });
-
+    $('#addSignatureButton').on('click',function(){
+        $('#applySignatureModal').modal('show');
+    });
 });
 
 
@@ -214,83 +216,108 @@ function showContracts(){
             // }
             
 }
-function createActiveContract(contractID){
+function createActiveContract(){
     //Comment
-    $.ajax({
-        url : url + '/' + contractID + '/getactive',
-        type : 'GET',
-        dataType : 'JSON',
-        success : function(data, response){
-            console.log(data);
-            swal({
-                title: "Create Active Contract?",
-                text: "Finalized This Quotation as A Contract",
-                type: "info",
-                showCancelButton: true,
-                confirmButtonClass: "btn-info",
-                confirmButtonText: "Ok",
-                closeOnConfirm: true,
+    // Tinanggal ko yung contractID nag eerror yun kasi bag empty yung table sa DB
+    // Ginawa ko nalang data ID
+    console.log($('#addSignatureButton').data('id'));
 
-            },function(){
-                var currDate = moment().format('YYYY-MM-DD');
-                console.log(data.contract.enumConValidity);
-                console.log(data.contract.intContractListID);
-                var id = data.contract.intContractListID;
-                var a = parseInt(data.contract.enumConValidity);
-                console.log(a);
-                // currDate = moment().add(data.contract.enumConValidity, 'Y').format('YYYY-MM-DD');
-                if(a == 6){
-                    var expireContract = moment().add(a, 'M').format('YYYY-MM-DD');
-                    console.log(expireContract);
-                }else if(a == 1){
-                    var expireContract = moment().add(a, 'Y').format('YYYY-MM-DD');
-                    console.log(expireContract);
-                }
-                console.log(currDate);
-                console.log(id);
-                // return false;
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });   
-                $.ajax({
-                    url : url + '/activate',
-                    type : 'POST',
-                    data : {
-                        "_token" : $('meta[name="csrf-token"]').attr('content'),
-                        contractID : id,
-                        contractActive : currDate,
-                        contractExpire : expireContract,
-                    },
-                    success : function(data,response){
-                        console.log(data);
-                        swal({
-                            title: "Success",
-                            text: "Contract Activate",
-                            type: "success",
-                            showCancelButton: false,
-                            confirmButtonClass: "btn-success",
-                            confirmButtonText: "Ok",
-                            closeOnConfirm: true,
-                            timer : 1500
-                        },
-                        function(isConfirm){
-                            if(isConfirm){
-                                window.location = url;
+    var contractID = $('#addSignatureButton').data('id')
+    if ($('.signCanvas').signature('isEmpty')) {
+        toastr.error('Please provide a signature first.', 'Signature Pad Empty!', {
+            closeButton: true,
+            debug: false,
+            timeOut: 2000,
+            positionClass: "toast-bottom-right",
+            preventDuplicates: true,
+            showDuration: 300,
+            hideDuration: 300,
+            showMethod: "slideDown",
+            hideMethod: "slideUp"
+        });
+    }else {
+        $('#applySignatureModal').modal('hide');
+        $.ajax({
+            url : url + '/' + contractID + '/getactive',
+            type : 'GET',
+            dataType : 'JSON',
+            success : function(data, response){
+                console.log(data);
+                swal({
+                    title: "Create Active Contract?",
+                    text: "Finalized This Quotation as A Contract",
+                    type: "info",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-info",
+                    confirmButtonText: "Ok",
+                    closeOnConfirm: true,
+
+                },function(isConfirm){
+                    if (isConfirm) {
+                        var currDate = moment().format('YYYY-MM-DD');
+                        console.log(data.contract.enumConValidity);
+                        console.log(data.contract.intContractListID);
+                        var id = data.contract.intContractListID;
+                        var a = parseInt(data.contract.enumConValidity);
+                        console.log(a);
+                        // currDate = moment().add(data.contract.enumConValidity, 'Y').format('YYYY-MM-DD');
+                        if(a == 6){
+                            var expireContract = moment().add(a, 'M').format('YYYY-MM-DD');
+                            console.log(expireContract);
+                        }else if(a == 1){
+                            var expireContract = moment().add(a, 'Y').format('YYYY-MM-DD');
+                            console.log(expireContract);
+                        }
+                        console.log(currDate);
+                        console.log(id);
+                        // return false;
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             }
-                        });    
-                    },
-                    error : function(error){
-            
+                        });   
+                        $.ajax({
+                            url : url + '/activate',
+                            type : 'POST',
+                            data : {
+                                "_token" : $('meta[name="csrf-token"]').attr('content'),
+                                contractID : id,
+                                contractActive : currDate,
+                                contractExpire : expireContract,
+                            },
+                            success : function(data,response){
+                                console.log(data);
+                                swal({
+                                    title: "Success",
+                                    text: "Contract Activate",
+                                    type: "success",
+                                    showCancelButton: false,
+                                    confirmButtonClass: "btn-success",
+                                    confirmButtonText: "Ok",
+                                    closeOnConfirm: true,
+                                    timer : 1500
+                                },
+                                function(isConfirm){
+                                    if(isConfirm){
+                                        window.location = url;
+                                    }
+                                });    
+                            },
+                            error : function(error){
+                    
+                            }
+                        });
+                    } else {
+                        $('#applySignatureModal').modal('show');
                     }
+                    
                 });
-            });
-        },
-        error : function(error){
-            throw error;
-        }
-    });
+            },
+            error : function(error){
+                throw error;
+            }
+        });
+    }
 }
 function requestingForChanges(contractID){
     console.log(contractID);
