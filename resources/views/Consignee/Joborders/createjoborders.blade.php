@@ -1,6 +1,17 @@
 <div class="tab-pane show active animated slideInRight faster" id="firstTab" role="tabpanel" aria-labelledby="navFirstTab">
     <form class="needs-validation" novalidate="">
         <div class="row">
+            <div class="col-12 col-sm-12 col-lg-12">
+                <div class="form-group">
+                    <label for="jobordertitle">Job Order Title<sup class="text-primary">&#10033;</sup></label>
+                    <input id="jobordertitle" type="text" class="form-control" placeholder="Job Order Title" required>
+                    <div class="invalid-feedback">
+                        Please Type Job Order Title
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-12 col-sm-12 col-lg-6">
                 <div class="form-group">
                     <label for="addTransacDate">Hauling Date and Start Time<sup class="text-primary">&#10033;</sup></label>

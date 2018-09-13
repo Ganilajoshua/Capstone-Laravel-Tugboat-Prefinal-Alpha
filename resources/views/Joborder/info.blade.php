@@ -1,7 +1,7 @@
 <div class="modal animated bounceIn fast" id="moreInfoModal" tabindex="-1" role="dialog" aria-labelledby="moreInfoModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header joborderheader ">
 
                 <div class="modal-title" id="moreInfoModalLabel"><small>Job Order # 4</small>
                     <h4>Consignee Name</h4></div>
@@ -9,7 +9,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body modalBody">
+            <div class="modal-body modalBody joborderinfo">
                 <div class="row mt-2">
                     <div class="col-6">
                         <ul class="list-inline">

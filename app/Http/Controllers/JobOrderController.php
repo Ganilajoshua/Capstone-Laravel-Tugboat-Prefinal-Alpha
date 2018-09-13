@@ -9,10 +9,12 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
 use App\Company;
+use App\ForwardRequest;
 use App\JobOrder;
 use App\JobSchedule;
 use App\Schedules;
 
+use Redirect;
 use Auth;
 
 class JobOrderController extends Controller
@@ -44,6 +46,12 @@ class JobOrderController extends Controller
         ->where('joborder.enumstatus','Forward Pending')
         ->where('joborder.boolDeleted',0)
         ->get();
+        $forwardrequest = DB::table('tblrequest as request')
+        ->join('tbljoborder as joborder','request.intRJobOrderID','joborder.intJobOrderID')
+        ->join('tblcompany as company','request.intRCompanyID','company.intCompanyID')
+        ->join('tblcompany as comp','comp.intCompanyID','joborder.intJOCompanyID')
+        ->where('request.intRForwardCompanyID',Auth::user()->intUCompanyID)
+        ->get();
         $forwarda = DB::table('tbljoborder as joborder')
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
         ->where('joborder.enumstatus','Forward Accepted')
@@ -54,7 +62,13 @@ class JobOrderController extends Controller
         ->where('joborder.enumstatus','Declined')
         ->where('joborder.boolDeleted',0)
         ->get();
-        return view('Joborder.index',compact('accepted','forwarded','joborders','declined','forwardp','forwarda'));
+        $affiliates = DB::table('users as user')
+        ->join('tblcompany as company','user.intUCompanyID','company.intCompanyID')
+        ->where('user.enumUserType','Affiliates')
+        ->get();
+
+
+        return view('Joborder.index',compact('accepted','forwarded','joborders','declined','forwardp','forwarda','affiliates','forwardrequest'));
         // ->with('joborders',$joborder)
         // ->with('forwarded',$forwarded);
         // return response()->json(['job'=>$accepted]);    
@@ -168,14 +182,46 @@ class JobOrderController extends Controller
         ->where('joborder.boolDeleted',0)
         ->where('joborder.intJobOrderID',$intJobOrderID)
         ->get();
-        return response()->json(['joborder'=>$joborder,'jobs'=>$jobs]);
+        $affiliates = DB::table('users as user')
+        ->join('tblcompany as company','user.intUCompanyID','company.intCompanyID')
+        ->where('user.enumUserType','Affiliates')
+        ->get();
+        $forwardrequest = DB::table('tblrequest as request')
+        ->join('tbljoborder as joborder','request.intRJobOrderID','joborder.intJobOrderID')
+        ->join('tblcompany as company','request.intRCompanyID','company.intCompanyID')
+        ->where('request.intRForwardCompanyID',2)   
+        ->get();
+        return response()->json(['joborder'=>$joborder,'jobs'=>$jobs,'affiliates'=>$affiliates,'forwardrequest'=>$forwardrequest]);
     }
     public function forward(Request $request)
     {
-        $joborder = JobOrder::findOrFail($request->joborderID);
-        $joborder->timestamps = false;
-        $joborder->enumStatus = 'Forward Pending';
-        $joborder->save();
+        try{
+            DB::beginTransaction();
+
+            $forward = new ForwardRequest;
+            $forward->strRequestDescription = $request->joborderDetails;
+            $forward->enumRequestType = 'Forward JobOrder';
+            $forward->intRJobOrderID = $request->joborderID;
+            $forward->intRCompanyID = Auth::user()->intUCompanyID;
+            $forward->intRForwardCompanyID = $request->joborderForwardCompany;
+            $forward->save();
+
+            DB::commit();
+        }catch(\Illuminate\Database\QueryException $errors){
+            DB::rollback();
+            $errorMessage = $errors->getMessage();
+            return Redirect::back()->withErrors($errorMessage);
+        }
+        return response()->json(['forward'=>$forward]);
+    }
+    public function viewdetails($intJobOrderID){
+        $joborder = DB::table('tbljoborder as joborder')
+        ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
+        ->join('tblpier as pier','berth.intBPierID','intPierID')
+        ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->where('jobOrder.intJobOrderID',$intJobOrderID)
+        ->get();
 
         return response()->json(['joborder'=>$joborder]);
     }
