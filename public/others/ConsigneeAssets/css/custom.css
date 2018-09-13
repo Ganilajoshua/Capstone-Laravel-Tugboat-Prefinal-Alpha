@@ -209,7 +209,7 @@ a:hover {
 input::-webkit-input-placeholder {
   font-size: 13px;
 }
-#cardJO #titleJO.card-header{
+#cardJO > .card-header{
   background:#00aeff;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;

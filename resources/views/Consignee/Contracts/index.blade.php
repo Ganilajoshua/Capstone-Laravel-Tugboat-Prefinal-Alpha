@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <section class="p-t-20">
+    <section>
         @if(count($contract) == 0 || null)
             <div class="container">
                 <div class="col-12 col-sm-12 col-lg">

@@ -1,7 +1,7 @@
 @extends('Consignee.Templates.ConsigneeTemplate')
 
 @section('content')
-    <section class="welcome p-t-10">
+    <section class="welcome">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">

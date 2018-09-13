@@ -37,8 +37,10 @@
             @endforeach
         </div>
     @else
-        <div class="row">
-            No Results Found
+        <div class="col-12">
+            <div class="alert alert-danger text-center">
+                <i class="fas fa-exclamation-triangle mr-2"></i>NO ONGOING JOB ORDERS!
+            </div>
         </div>
     @endif
 </div>
