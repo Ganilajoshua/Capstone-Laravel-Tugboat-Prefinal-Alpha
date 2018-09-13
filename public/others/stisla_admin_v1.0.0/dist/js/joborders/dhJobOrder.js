@@ -7,7 +7,7 @@ $(document).ready(function(){
     format:'HH:mm'
   });
   // Custom Select
-  $('select').niceSelect();
+  // $('select').niceSelect();
   // Filter
   var jobOrders = " Job Orders ";
   document.getElementById("ddJobOrder").innerHTML = "Pending" + jobOrders;

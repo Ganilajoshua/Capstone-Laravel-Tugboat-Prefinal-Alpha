@@ -89,29 +89,31 @@
                         @elseif(count($forwarded) == 'null' || 0)
                         @endif
                         {{-- pending cards  --}}
-                        @if(count($forwardp)>0)
-                            @foreach($forwardp as $forwardp)
+                        @if(count($forwardrequest)>0)
+                            <div>{{$forwardrequest}}</div>
+                            @foreach($forwardrequest as $forwardrequest)
                                 <div class="col-12 col-sm-12 col-lg-6 pendingCards">
                                     <div class="card card-sm-2 card-primary border-primary active">
+                                        
                                         <div class="card-icon">
                                             <i class="ion ion-android-boat text-primary"></i>
                                         </div>
                                         <div class="card-header">
-                                            <h4 class="text-primary mb-2">Job Order # {{$forwardp->intJobOrderID}}</h4>
+                                            <h4 class="text-primary mb-2">Job Order # {{$forwardrequest->intJobOrderID}}</h4>
                                         </div>
                                         <div class="card-body">
-                                            <h4>{{$forwardp->strJODesc}}</h4>
-                                            <h6>{{$forwardp->strCompanyName}}</h6>
+                                            <h4>{{$forwardrequest->strJODesc}}</h4>
+                                            <h6>{{$forwardrequest->strCompanyName}}</h6>
                                         </div>
                                         <div class="card-footer mt-2">
-                                            <a href="#" onclick="forwardRequest({{$forwardp->intJobOrderID}})" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
-                                            <button onclick="declineJobOrder({{$forwardp->intJobOrderID}})" class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect">Decline</button>
-                                            <button onclick="acceptJobOrder({{$forwardp->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right waves-effect">Accept</button>
+                                            <a href="#" onclick="forwardRequest({{$forwardrequest->intJobOrderID}})" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
+                                            <button onclick="declineJobOrder({{$forwardrequest->intJobOrderID}})" class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect">Decline</button>
+                                            <button onclick="acceptJobOrder({{$forwardrequest->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right waves-effect">Accept</button>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-                        @elseif(count($forwardp) == 'null' || 0)
+                        @elseif(count($forwardrequest) == 'null' || 0)
                             
                         @endif
 

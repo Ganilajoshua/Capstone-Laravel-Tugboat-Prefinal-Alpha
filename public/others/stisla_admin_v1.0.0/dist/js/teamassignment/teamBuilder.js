@@ -1,6 +1,6 @@
 $(document).ready(function(){
   $('[data-tooltip="tooltip"]').tooltip();
-  $('select').niceSelect(); 
+  // $('select').niceSelect(); 
   
   // Filter for Add
   $('#addDdAll').on('click',function() {

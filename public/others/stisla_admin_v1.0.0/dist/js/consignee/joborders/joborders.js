@@ -19,8 +19,11 @@ $(document).ready(function(){
 
 var url = '/consignee/joborders';
 
+$('.createJobOrder').on('click',function(){
+});
+
 function createJobOrder(){
-    
+    var title = $('#jobordertitle').val();
     var eta = $('#timeETA').val();
     var cargo = $('#cargoName1').val();
     var weight = $('#cargoWeight1').val();
@@ -32,7 +35,7 @@ function createJobOrder(){
     var dtmETD = moment(etd).format("Y-MM-D HH:mm:ss");
     var berth = $('#addBerth option:selected').text();
     var berthID = $('#addBerth').val();
-    console.log(dtmETA, dtmETD, berth, berthID);
+    console.log(dtmETA, dtmETD, berth, berthID, title);
     console.log(location, eta, cargo, weight,goods,desc,etd);
     // return false;
     $.ajaxSetup({   
@@ -46,13 +49,15 @@ function createJobOrder(){
         type : 'POST',
         data : { 
             "_token" : $('meta[name="csrf-token"]').attr('content'),    
+            jobTitle : title,
+            jobDesc : desc,
             jobETA : dtmETA,
             jobETD : dtmETD,
+            jobBerth : berthID,
+            jobLocation : location,
             jobVesselName : cargo,
             jobWeight : weight,
             jobGoods : goods,
-            jobDesc : desc,
-            jobBerth : berthID,
         }, 
         beforeSend: function (request) {
             return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
@@ -83,6 +88,10 @@ function createJobOrder(){
     });
 }
 //request Job Orders
+
+$('.requestJobOrder').on('click',function(){
+});
+
 function requestJoborder(requestID){
     console.log(requestID);
     swal({

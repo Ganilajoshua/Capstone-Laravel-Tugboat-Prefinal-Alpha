@@ -43,13 +43,15 @@
                             </div>
                         </div>
                         <div class="col">
-                            <label for="addEmpType">Employee Type<sup class="text-primary">&#10033;</sup></label>
-                            <select name="addEmpType" class="form-control" id="addEmpType">
-                                <option disabled>Select Type</option>
-                                <option value="Regular">Regular</option>
-                                <option value="Reserved">Reserved</option>
-                                <option value="On Call">On Call</option>
-                            </select>
+                            <div class="form-group">
+                                <label for="addEmpType">Employee Type<sup class="text-primary">&#10033;</sup></label>
+                                <select name="addEmpType" class="form-control" id="addEmpType">
+                                    <option disabled>Select Type</option>
+                                    <option value="Regular">Regular</option>
+                                    <option value="Reserved">Reserved</option>
+                                    <option value="On Call">On Call</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <input type="hidden" id="editIDhide">

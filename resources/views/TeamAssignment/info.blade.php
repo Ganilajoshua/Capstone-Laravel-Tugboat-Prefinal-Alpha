@@ -30,7 +30,8 @@
             </div>
             <input type="hidden" id="tugboatIDHide">
             <div class="modal-footer">
-                <button type="button" class="closeInfoModal btn btn-primary waves-effect">Close</button>
+                <button type="button" class="btn btn-primary waves-effect closeInfoModal">Close</button>
+                <button type="button" class="btn btn-primary waves-effect removeTugboatTeam">Remove Team</button>
             </div>
         </div>
     </div>

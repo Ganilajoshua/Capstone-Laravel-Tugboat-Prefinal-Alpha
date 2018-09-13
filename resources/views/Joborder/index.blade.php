@@ -26,7 +26,7 @@
 @endsection
 
 @section('outside')
-    {{-- @include('Joborder.info') --}}
+    @include('Joborder.info')
     @include('Joborder.forward')
     {{-- @include('Joborder.declined') --}}
 @endsection
