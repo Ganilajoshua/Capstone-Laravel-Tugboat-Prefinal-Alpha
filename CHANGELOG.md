@@ -2,7 +2,7 @@
 ### `Pre Final Repository Monday August 27,2018`
 
 &nbsp;
-#.0.0.9 - 2018-09-13 α
+# 0.0.9 - 2018-09-13 α
 
 `new`
 - [x] requestTeamModal
