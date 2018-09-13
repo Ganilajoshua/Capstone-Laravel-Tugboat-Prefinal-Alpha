@@ -112,6 +112,8 @@ Route::group(['prefix'=>'administrator/'],function(){
             Route::post('/teamassignment/removeteamemployees','TugboatTeamAssignmentController@removeteamemployees');
             Route::post('/teamassignment/requestteam','TugboatTeamAssignmentController@requestteam');
             Route::post('/teamassignment/requesttugboat','TugboatTeamAssignmentController@requesttugboat');
+            Route::post('/teamassignment/forwardteam','TugboatTeamAssignmentController@forwardteam');
+            Route::post('/teamassignment/returnteam','TugboatTeamAssignmentController@returnteam');
         });
 
         //Payment and Billing Module

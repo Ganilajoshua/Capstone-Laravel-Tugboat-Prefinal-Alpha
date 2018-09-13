@@ -139,12 +139,24 @@ class TugboatTeamAssignmentController extends Controller
         // ->where('intTATeamID','!=',null)
         ->get();
 
-        $affiliates = DB::table('users as user')
-        ->join('tblcompany as company','user.intUCompanyID','company.intCompanyID')
-        ->where('user.enumUserType','Affiliates')
+        if(Auth::user()->enumUserType == 'Admin'){
+            $affiliates = DB::table('users as user')
+            ->join('tblcompany as company','user.intUCompanyID','company.intCompanyID')
+            ->where('user.enumUserType','Affiliates')
+            ->get();
+        }else if(Auth::user()->enumUserType == 'Affiliates'){
+            $affiliates = DB::table('users as user')
+            ->join('tblcompany as company','user.intUCompanyID','company.intCompanyID')
+            ->where('user.enumUserType','!=','Consignee')
+            ->where('user.enumUserType','!=','Captain')
+            ->where('user.intUCompanyID','!=',Auth::user()->intUCompanyID)
+            ->get();
+        
+        }
+        $teamsReceived = DB::Table('tblteam as team')
+        ->join('tblcompany as company','team.intTCompanyID','company.intCompanyID')
+        ->where('intTForwardCompanyID',Auth::user()->intUCompanyID)
         ->get();
-
-        $teamsReceived = Team::where('intTForwardCompanyID',Auth::user()->intUCompanyID)->get();
 
         return view('TeamAssignment.newIndex')
         ->with('tugboatassign',$tugboatassign)
@@ -251,7 +263,8 @@ class TugboatTeamAssignmentController extends Controller
         }catch(\Illuminate\Database\QueryException $errors){
             DB::rollback();
             $errorMessage = $errors->getMessage();
-            return Redirect::back()->withErrors($errorMessage);
+            return response()->json(['error'=>$errorMessage]);
+            // return Redirect::back()->withErrors($errorMessage);
         }
         return response()->json(['team'=>$team,'teamassign'=>$teamassign]);
 
@@ -399,5 +412,37 @@ class TugboatTeamAssignmentController extends Controller
             $errorMessage = $errors->getMessage();
             return Redirect::back()->withErrors($errorMessage);
         }
+    }
+
+    public function forwardteam(Request $request){
+        try{
+            DB::beginTransaction();
+            $team = Team::findOrFail($request->teamID);
+            $team->timestamps = false;
+            $team->intTForwardCompanyID = $request->companyID;
+            $team->save();
+            DB::commit();
+        }catch(\Illuminate\Database\QueryException $errors){
+            DB::rollback();
+            $errorMessage = $errors->getMessage();
+            return Redirect::back()->withErrors($errorMessage);
+        }
+        return response()->json(['team'=>$team]);
+    }
+    
+    public function returnteam(Request $request){
+        try{
+            DB::beginTransaction();
+            $team = Team::findOrFail($request->teamID);
+            $team->timestamps = false;
+            $team->intTForwardCompanyID = null;
+            $team->save();
+            DB::commit();
+        }catch(\Illuminate\Database\QueryException $errors){
+            DB::rollback();
+            $errorMessage = $errors->getMessage();
+            return Redirect::back()->withErrors($errorMessage);
+        }
+        return response()->json(['team'=>$team]);
     }
 }

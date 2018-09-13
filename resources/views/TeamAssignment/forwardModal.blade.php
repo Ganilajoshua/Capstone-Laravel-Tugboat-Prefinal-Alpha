@@ -8,12 +8,29 @@
                 </button>
             </div>
             <div class="modal-body modalBody">
-                <div class="appendContent">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                <div class="float-right">
+                                    <a data-collapse="#viewForwardEmployees" class="btn btn-icon"><i class="ion ion-minus"></i></a>
+                                </div>
+                                <h5 class="text-center ml-5 teamname">List of Employees</h5>
+                            </div>
+                            <div class="collapse show" id="viewForwardEmployees">
+                                <div class="card-body">
+                                    <div class="viewTeamInfo row">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-12 col-sm-12 col-lg-12">
                     <div class="form-group">
-                        <label for="selectCompany">Select Company To Forward To<sup class="text-primary">&#10033;</sup></label>
-                        <select id="selectCompany" name="selectCompany" class="form-control form-control-lg">
+                        <label for="selectForwardCompany">Select Company To Forward To<sup class="text-primary">&#10033;</sup></label>
+                        <select id="selectForwardCompany" name="selectForwardCompany" class="form-control form-control-lg">
                             <option>Select Company</option>
                             @foreach($affiliates as $affiliates)
                                 <option value="{{$affiliates->intCompanyID}}">{{$affiliates->strCompanyName}}</option>
@@ -21,15 +38,15 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-12 col-sm-12 col-lg-12">
+                {{-- <div class="col-12 col-sm-12 col-lg-12">
                     <div class="form-group">
                         <label for="exDetails">Extra Details</label>
                         <textarea class="form-control" id="exDetails" rows="5" placeholder="Message"></textarea>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary waves-effect forwardRequestButton">Submit Forward Request</button>
+                <button type="button" class="btn btn-primary waves-effect forwardTeamButton">Forward Team</button>
             </div>
         </div>
     </div>
