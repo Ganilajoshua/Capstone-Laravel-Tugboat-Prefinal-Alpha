@@ -1,9 +1,22 @@
 $(document).ready(function(){
   // Add Date Pickers
-  $('#addTransacDate').datetimepicker({
-    // Default : false,   
+  $('#addHaulingDate').datetimepicker({
+    format: 'L'
   }); 
-  $('#addHaulingETA').datetimepicker({
+  $('#addHaulingTime').datetimepicker({
+    format: 'LT'
+  });
+  $('#addAssistDate').datetimepicker({
+    format: 'L'
+  }); 
+  $('#addAssistTime').datetimepicker({
+    format: 'LT'
+  });
+  $('#addSalvageDate').datetimepicker({
+    format: 'L'
+  }); 
+  $('#addSalvageTime').datetimepicker({
+    format: 'LT'
   });
   // Edit Date Pickers
   // $('#editTransacDate').datetimepicker({
@@ -12,36 +25,102 @@ $(document).ready(function(){
   // $('#editHaulingETA').datetimepicker({
   //   format:'HH:mm'
   // });
+  // Route Change
+  $('#addHaulingRoute').change(function(){
+    if(this.value == "LocPier"){
+      $('.LocPier').show().addClass('animated fadeIn fast');
+      $('.PierLoc').hide();
+      $('.LocLoc').hide();
+    }else if(this.value == "PierLoc"){
+      $('.PierLoc').show().addClass('animated fadeIn fast');
+      $('.LocPier').hide();
+      $('.LocLoc').hide();
+    }else if(this.value == "LocLoc"){
+      $('.LocLoc').show().addClass('animated fadeIn fast');
+      $('.PierLoc').hide();
+      $('.LocPier').hide();
+    }
+  });
+  $('#addTugAssistRoute').change(function(){
+    if(this.value == "LocPier"){
+      $('.LocPier').show().addClass('animated fadeIn fast');
+      $('.PierLoc').hide();
+      $('.LocLoc').hide();
+    }else if(this.value == "PierLoc"){
+      $('.PierLoc').show().addClass('animated fadeIn fast');
+      $('.LocPier').hide();
+      $('.LocLoc').hide();
+    }else if(this.value == "LocLoc"){
+      $('.LocLoc').show().addClass('animated fadeIn fast');
+      $('.PierLoc').hide();
+      $('.LocPier').hide();
+    }
+  });
+
+  // Choose Service Type
+  $('.btnGoToChoices').on('click', function(e){
+    e.preventDefault();
+    $('.chooseServiceTab').show();
+    $('.haulingTab').hide();
+    $('.tugAssistTab').hide();
+    $('.salvageTab').hide();
+    $('.btnGoToChoices').hide();
+  });
+  $('#showHaulingTab').on('click', function(e){
+    e.preventDefault();
+    $('.haulingTab').show();
+    $('.haulingTab').addClass('animated fadeIn fast');
+    $('.btnGoToChoices').show();
+    $('.chooseServiceTab').hide();
+  });
+  $('#showTugAssistTab').on('click', function(e){
+    e.preventDefault();
+    $('.tugAssistTab').show();
+    $('.tugAssistTab').addClass('animated fadeIn fast');
+    $('.btnGoToChoices').show();
+    $('.chooseServiceTab').hide();
+  });
+  $('#showSalvageTab').on('click', function(e){
+    e.preventDefault();
+    $('.salvageTab').show();
+    $('.salvageTab').addClass('animated fadeIn fast');
+    $('.chooseServiceTab').hide();
+  });
   // Add Job Order
   $('#navFirstTab').on('click', function(){
-    document.getElementById("titleJO").innerHTML = "Add Job Order";
-    $('.paginateJO').css('display','none');
+    $('#titleJO').text("Add Job Order");
+    $('.paginateJO').hide();
+    $('.btnGoToChoices').show();
   });
   // Created Job Orders
   $('#navSecondTab').on('click', function(){
-    document.getElementById("titleJO").innerHTML = "Created Job Orders";
+    $('#titleJO').text("Created Job Orders");
     $('.createdCards').addClass('animated zoomIn faster');
-    $('.paginateJO').css('display','block');
+    $('.paginateJO').show();
     $('.show-on-created').show();
+    $('.btnGoToChoices').hide();
   });
   // Pending Job Orders
   $('#navThirdTab').on('click', function(){
-    document.getElementById("titleJO").innerHTML = "Pending Job Orders";
+    $('#titleJO').text("Pending Job Orders");
     $('.pendingCards').addClass('animated zoomIn faster');
-    $('.paginateJO').css('display','block');
+    $('.paginateJO').show();
+    $('.btnGoToChoices').hide();
     $('.show-on-created').hide();
   });
   // Ongoing Job Orders
   $('#navFourthTab').on('click', function(){
-    document.getElementById("titleJO").innerHTML = "Ongoing Job Order /s";
+    $('#titleJO').text("Ongoing Job Order /s");
     $('.pendingCards').addClass('animated zoomIn faster');
-    $('.paginateJO').css('display','block');
+    $('.paginateJO').show();
+    $('.btnGoToChoices').hide();
     $('.show-on-created').hide();
   });
   // Job Order History
   $('#navFifthTab').on('click', function(){
-    document.getElementById("titleJO").innerHTML = "Job Order History";
-    $('.paginateJO').css('display','none');
+    $('#titleJO').text("Job Order History");
+    $('.btnGoToChoices').hide();
+    $('.paginateJO').hide();
   });
   
   // Initialize Datatable

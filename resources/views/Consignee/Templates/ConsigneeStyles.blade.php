@@ -23,6 +23,7 @@
     <link href="/others/ConsigneeAssets/css/custom.css" rel="stylesheet" media="all">
 
     <!--08 19 2018-->
+    <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/css/animate.min.css">
     <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/waves/waves.css">
     <!-- Page Icon -->
     <link rel="shortcut icon" href="/others/ConsigneeAssets/dist/img/tbLogo.png">
