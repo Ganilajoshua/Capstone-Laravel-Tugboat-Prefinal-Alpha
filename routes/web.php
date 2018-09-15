@@ -112,6 +112,8 @@ Route::group(['prefix'=>'administrator/'],function(){
             Route::post('/teamassignment/removeteamemployees','TugboatTeamAssignmentController@removeteamemployees');
             Route::post('/teamassignment/requestteam','TugboatTeamAssignmentController@requestteam');
             Route::post('/teamassignment/requesttugboat','TugboatTeamAssignmentController@requesttugboat');
+            Route::post('/teamassignment/forwardteam','TugboatTeamAssignmentController@forwardteam');
+            Route::post('/teamassignment/returnteam','TugboatTeamAssignmentController@returnteam');
         });
 
         //Payment and Billing Module
@@ -137,6 +139,8 @@ Route::group(['prefix'=>'administrator/'],function(){
         //Final Contracts
         Route::resource('/contracts','ContractsController');
         
+        //Dispatch and Hauling - Forward Requests
+        Route::resource('/forwardrequests','ForwardRequestsController');
         //Dispatch and Hauling - Job Orders
         Route::resource('/joborders','JobOrderController');
         Route::get('/joborders/{intJobOrderID}/accept','JobOrderController@accept');

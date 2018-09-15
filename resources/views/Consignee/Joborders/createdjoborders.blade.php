@@ -34,6 +34,11 @@
                 </div>
             @endforeach
         @else
+            <div class="col-12">
+                <div class="alert alert-danger text-center">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>NO CREATED JOB ORDERS!
+                </div>
+            </div>
         @endif
     </div>
 </div>

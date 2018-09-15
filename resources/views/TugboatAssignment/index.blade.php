@@ -26,38 +26,59 @@
                                 <div class="container">
                                     <h5 class="section-header text-center" style="text-transform: uppercase;">
                                     Tugboat List 
-                                    <a href="tugboat.html" class="float-right btn-sm btn btn-primary waves-effect"data-toggle="tooltip" title="Add new Tugboat"><i class="fas fa-plus"></i></a>
+                                    <a href="/administrator/maintenance/tugboat" class="float-right btn-sm btn btn-primary waves-effect"data-toggle="tooltip" title="Add new Tugboat"><i class="fas fa-plus"></i></a>
                                     </h5>
                                 </div>
-                                @if(count($tugboat)>0)
-                                    @foreach($tugboat as $tugboat)
-                                        @if($tugboat->enumStatus == 'Available') 
-                                            <div class="row">
-                                                <div class="col mr-3 ml-3">
-                                                    <a href="#">
-                                                        <div class="card bg-success text-white">
-                                                            <div class="card-header ">
-                                                                <h6 class="text-center mt-2">{{$tugboat->strName}}</h6>
-                                                            </div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col">
+                                            <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" id="pillsOwnedTugboat-tab" data-toggle="pill" href="#pillsOwnedTugboat" role="tab" aria-controls="pillsOwnedTugboat" aria-selected="true">Owned</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="pillsReceivedTugboat-tab" data-toggle="pill" href="#pillsReceivedTugboat" role="tab" aria-controls="pillsReceivedTugboat" aria-selected="false">Received</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="tab-content" id="pills-tabContent">
+                                        <div class="tab-pane fade show active" id="pillsOwnedTugboat" role="tabpanel" aria-labelledby="pillsOwnedTugboat-tab">
+                                            @if(count($tugboat)>0)
+                                            @foreach($tugboat as $tugboat)
+                                                @if($tugboat->enumStatus == 'Available') 
+                                                    <div class="row">
+                                                        <div class="col mr-3 ml-3">
+                                                            <a href="#">
+                                                                <div class="card bg-success text-white">
+                                                                    <div class="card-header ">
+                                                                        <h6 class="text-center mt-2">{{$tugboat->strName}}</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
                                                         </div>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        @elseif($tugboat->enumStatus == 'Occupied')
-                                            <div class="row">
-                                                <div class="col mr-3 ml-3">
-                                                    <a href="#">
-                                                        <div class="card bg-info text-white">
-                                                            <div class="card-header ">
-                                                                <h6 class="text-center mt-2">{{$tugboat->strName}}</h6>
-                                                            </div>
+                                                    </div>
+                                                @elseif($tugboat->enumStatus == 'Occupied')
+                                                    <div class="row">
+                                                        <div class="col mr-3 ml-3">
+                                                            <a href="#">
+                                                                <div class="card bg-info text-white">
+                                                                    <div class="card-header ">
+                                                                        <h6 class="text-center mt-2">{{$tugboat->strName}}</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
                                                         </div>
-                                                    </a>
-                                                </div>
-                                            </div>
+                                                    </div>
+                                                @endif
+                                            @endforeach
                                         @endif
-                                    @endforeach
-                                @endif
+                                        </div>
+                                        <div class="tab-pane fade" id="pillsReceivedTugboat" role="tabpanel" aria-labelledby="pillsReceivedTugboat-tab">
+                                            <button class="float-right btn btn-block btn-primary waves-effect mb-3 btnRequestTeam"><i class="fas fa-plus mr-2"></i>Request Team</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </section>
                         </div>
                     </div>
@@ -149,6 +170,10 @@
                                                         </div>
                                                     </div>
                                                 @endforeach
+                                            @else
+                                                <div class="alert alert-danger text-center">
+                                                    <i class="fas fa-exclamation-triangle mr-2"></i>NO RESULTS FOUND!
+                                                </div>
                                             @endif
                                         </div>
                                     </div>    

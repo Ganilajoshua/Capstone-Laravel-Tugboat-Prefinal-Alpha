@@ -112,6 +112,7 @@ $(document).ready(function(){
   });
   $('.modalClose').on('click',function() {
     $('#addTeam').modal('hide');
+    $('#addTeamModal').modal('hide');
     $('#editTeam').modal('hide');
   });
   $('.btnAddTeam').on('click',function() {

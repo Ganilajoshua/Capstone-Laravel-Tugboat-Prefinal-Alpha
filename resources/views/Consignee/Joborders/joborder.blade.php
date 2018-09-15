@@ -1,6 +1,7 @@
 @extends('Consignee.Templates.ConsigneeTemplate')
 
 @section('styles')
+    @include('Consignee.Joborders.styles')
 @endsection
 @section('pakingshet')
     @include('Consignee.Joborders.scripts')
@@ -37,7 +38,7 @@
         </section>
     @elseif($contract[0]->enumStatus == 'Active')
         <input type="hidden">
-            <section class="p-t-20" style="margin-top: 50px; margin-bottom : 80px;">
+            <section style="margin-bottom : 80px;">
                 <div class="container" style="">
                     <div class="row">
                         <div class="col-md-12">
@@ -71,13 +72,16 @@
                                 </div>
                                 <div class="col-12 col-sm-12 col-md-8">
                                     <div class="card" id="cardJO">
-                                        <div id="titleJO" class="card-header bg-primary text-white text-center">
-                                            Add Job Order
+                                        <div class="card-header bg-primary text-white text-center">
+                                            <a href="#" class="btnGoToChoices btn btn-lg btn-link btn-sm float-left" data-toggle="tooltip"  title="Back" role="button">
+                                                <i class="ion-chevron-left text-white"></i>
+                                            </a>
+                                            <div class="text-center" id="titleJO">Add Job Order</div>
                                         </div>
                                         <div class="card-body">
                                             <div class="tab-content">
                                                 <!-- Add Job Order -->
-                                                @include('Consignee.Joborders.createjoborders')
+                                                @include('Consignee.Joborders.chooseservice')
                                                 <!-- Created Job Orders -->
                                                 @include('Consignee.Joborders.createdjoborders')
                                                 <!-- Pending Job Orders -->

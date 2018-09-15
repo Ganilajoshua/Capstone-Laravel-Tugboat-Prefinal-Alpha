@@ -15,15 +15,25 @@
         </h1>
         <div class="row">
             <div class="col-12">
-                <div class="card border-primary">
-                    <div class="card-header bg-primary text-white">
-                        <div class="float-right">
-                            <a data-collapse="#ongoingJOCard" class="btn btn-icon"><i class="ion ion-minus"></i></a>
+                <div class="card">
+                    <div class="card-header p-0 bg-primary">
+                        <div class="card card-sm-3 p-0 bg-primary m-0">
+                            <div class="card-icon bg-white">
+                                <i class="ion ion-android-boat text-primary"></i>
+                            </div>
+                            <div class="card-wrap">
+                                <div class="card-header">
+                                <a data-collapse="#ongoingJOCard" class="btn btn-icon text-white float-right"><i class="ion ion-minus"></i></a>
+                                    <h4 class="text-white" style="color:#fff !important;">Ongoing Job Orders</h4>
+                                </div>
+                                <div class="card-body mt-1 text-white" style="font-size:25px;">
+                                    10
+                                </div>
+                            </div>
                         </div>
-                        <h4># Ongoing Job Orders</h4>
                     </div>
                     <div class="collapse show" id="ongoingJOCard">
-                        <div class="card-body">
+                        <div class="card-body m-0">
                             <div class="col-lg-4 col-md-6 col-12">
                                 <div class="card card-sm-2 card-primary border-primary activeCards">
                                     <div class="card-icon">
@@ -47,23 +57,6 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-md-12 col-12">
-                <a href="/administrator/transactions/hauling">
-                    <div class="card card-sm-3">
-                        <div class="card-icon bg-primary">
-                            <i class="ion ion-android-boat"></i>
-                        </div>
-                        <div class="card-wrap">
-                            <div class="card-header">
-                                <h4>Ongoing Job Orders</h4>
-                            </div>
-                            <div class="card-body mt-1" style="font-size:25px;">
-                                10
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
             <div class="col-lg-4 col-md-6 col-12">
                 <div class="card card-sm-4">
                     <div class="card-icon bg-danger">

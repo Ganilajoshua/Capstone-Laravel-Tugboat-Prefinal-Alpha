@@ -51,23 +51,51 @@
                                     <div class="tab-pane fade show active" id="pillsCreatedTeam" role="tabpanel" aria-labelledby="pillsCreatedTeam-tab">
                                         @if(count($team)>0)
                                             @foreach($team as $team)
-                                                <div class="row">
-                                                    <div class="col">
-                                                        {{-- <a href="#" id="viewTeamButton"> --}}
-                                                            <div class="card">
-                                                                <div class="card-body">
-                                                                    <a href="#" class="viewTeamButton" data-id="{{$team->intTeamID}}"><h6 class="float-left mt-2">{{$team->strTeamName}}</h6></a>
-                                                                    <button type="button" data-id="{{$team->intTeamID}}" class="removeTeamEmployees btn btn-sm btn-danger waves-effect waves-circle float-right" data-tooltip="tooltip" title="Delete">
-                                                                        <i class="miniIcon fas fa-trash"></i>
-                                                                    </button>
-                                                                    <button type="button" data-id="{{$team->intTeamID}}" class="editButton btn btn-sm btn-secondary waves-effect waves-circle float-right mr-2" data-tooltip="tooltip" title="Edit">
-                                                                        <i class="miniIcon ion ion-edit"></i>
-                                                                    </button>
+                                                @if(($team->intTForwardCompanyID) != null)
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            {{-- <a href="#" id="viewTeamButton"> --}}
+                                                                <div class="card">
+                                                                    <div class="card-body">
+                                                                        <a href="#" class="viewTeamButton" data-id="{{$team->intTeamID}}"><h6 class="float-left mt-2">{{$team->strTeamName}}</h6></a>
+                                                                        <button disabled type="button" data-id="{{$team->intTeamID}}" class="removeTeamEmployees btn btn-sm btn-danger waves-effect waves-circle float-right" data-tooltip="tooltip" title="Delete">
+                                                                            <i class="miniIcon fas fa-trash"></i>
+                                                                        </button>
+                                                                        <button disabled type="button" data-id="{{$team->intTeamID}}" class="forwardTeamButtonModal btn btn-sm btn-primary waves-effect waves-circle float-right mr-2" data-tooltip="tooltip" title="Forward Team">
+                                                                            <i class="miniIcon fas fa-paper-plane"></i>
+                                                                        </button>
+                                                                        <button disabled type="button" data-id="{{$team->intTeamID}}" class="editButton btn btn-sm btn-secondary waves-effect waves-circle float-right mr-2" data-tooltip="tooltip" title="Edit">
+                                                                            <i class="miniIcon ion ion-edit"></i>
+                                                                        </button>
+                                                                        
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        {{-- </a> --}}
+                                                            {{-- </a> --}}
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                @else
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            {{-- <a href="#" id="viewTeamButton"> --}}
+                                                                <div class="card">
+                                                                    <div class="card-body">
+                                                                        <a href="#" class="viewTeamButton" data-id="{{$team->intTeamID}}"><h6 class="float-left mt-2">{{$team->strTeamName}}</h6></a>
+                                                                        <button type="button" data-id="{{$team->intTeamID}}" class="removeTeamEmployees btn btn-sm btn-danger waves-effect waves-circle float-right" data-tooltip="tooltip" title="Delete">
+                                                                            <i class="miniIcon fas fa-trash"></i>
+                                                                        </button>
+                                                                        <button type="button" data-id="{{$team->intTeamID}}" class="forwardTeamButtonModal btn btn-sm btn-primary waves-effect waves-circle float-right mr-2" data-tooltip="tooltip" title="Forward Team">
+                                                                            <i class="miniIcon fas fa-paper-plane"></i>
+                                                                        </button>
+                                                                        <button type="button" data-id="{{$team->intTeamID}}" class="editButton btn btn-sm btn-secondary waves-effect waves-circle float-right mr-2" data-tooltip="tooltip" title="Edit">
+                                                                            <i class="miniIcon ion ion-edit"></i>
+                                                                        </button>
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            {{-- </a> --}}
+                                                        </div>
+                                                    </div>
+                                                @endif
                                             @endforeach
                                         @endif
                                     </div>
@@ -87,11 +115,12 @@
                                                                 {{-- <a href="#" id="viewTeamButton"> --}}
                                                                     <div class="card">
                                                                         <div class="card-body">
-                                                                            <a href="#" class="viewTeamButton" data-id="{{$teamsrecieved->intTeamID}}"><h6 class="float-left mt-2">{{$teamsrecieved->strTeamName}}</h6></a>
-                                                                            {{-- <button type="button" data-id="{{$teamsrecieved->intTeamID}}" class="removeTeamEmployees btn btn-sm btn-danger waves-effect waves-circle float-right" data-tooltip="tooltip" title="Delete">
-                                                                                <i class="miniIcon fas fa-trash"></i>
+                                                                            <div class="row"></div><a href="#" class="viewTeamButton" data-id="{{$teamsrecieved->intTeamID}}"><h class="float-left mt-2">{{$teamsrecieved->strTeamName}}</h></a>
+                                                                            <button type="button" data-id="{{$teamsrecieved->intTeamID}}" class="returnTeam btn btn-sm btn-info waves-effect waves-circle float-right mt-2" data-tooltip="tooltip" title="Return Team">
+                                                                                <i class="miniIcon fas fa-undo"></i>
                                                                             </button>
-                                                                            <button type="button" data-id="{{$teamsrecieved->intTeamID}}" class="editButton btn btn-sm btn-secondary waves-effect waves-circle float-right mr-2" data-tooltip="tooltip" title="Edit">
+                                                                            <small class="float-left" style="font-size: 12px;">FROM : {{$teamsrecieved->strCompanyName}}</small>
+                                                                            {{-- <button type="button" data-id="{{$teamsrecieved->intTeamID}}" class="editButton btn btn-sm btn-secondary waves-effect waves-circle float-right mr-2" data-tooltip="tooltip" title="Edit">
                                                                                 <i class="miniIcon ion ion-edit"></i>
                                                                             </button> --}}
                                                                         </div>
@@ -100,6 +129,16 @@
                                                             </div>
                                                         </div>
                                                     @endforeach
+                                                @else
+                                                    <div class="card card-danger border-danger">
+                                                        <div class="card-body">
+                                                            <h6>
+                                                                <div class=" text-danger text-center">
+                                                                    <i class="fas fa-times mr-2 mt-2"></i> No Teams Received <i class="fas fa-times ml-2"></i>
+                                                                </div>
+                                                            </h6>
+                                                        </div>
+                                                    </div>
                                                 @endif
                                             </div>
                                         </div>
@@ -144,14 +183,11 @@
                                                 @if(count($compliance)>0)
                                                     <div class="card-body text-white">
                                                         @foreach($compliance as $compliance)
-                                                            <div class="card bg-success mb-2 text-center" id="dismissTeam">
+                                                            <div class="card bg-success mb-2 text-center">
                                                                 <div style="margin-top: 10px;">
                                                                     <a href="#" onclick="selectTugboatTeam({{$compliance->intTAssignID}})"class="teamTugboat text-white">
                                                                         <div class="card-header">
                                                                             {{$compliance->strName}}
-                                                                            <div class="float-right">
-                                                                                <a data-dismiss="#dismissTeam" class="btn btn-icon"><i class="ion ion-close"></i></a>
-                                                                            </div>
                                                                         </div>
                                                                     </a>
                                                                 </div>
@@ -160,8 +196,8 @@
                                                     </div>
                                                 @else
                                                     <div class="card-body">
-                                                        <div class=" text-danger text-center">
-                                                            <i class="fas fa-times mr-2"></i> No Available Tugboats <i class="fas fa-times ml-2"></i>
+                                                        <div class="alert alert-danger text-center">
+                                                            <i class="fas fa-exclamation-triangle mr-2"></i>NO AVAIABLE OWNED TUGBOATS FOUND!
                                                         </div>
                                                     </div>
                                                 @endif
@@ -180,14 +216,11 @@
                                                 @if(count($tugboatAvail)>0)
                                                     <div class="card-body text-white">
                                                         @foreach($tugboatAvail as $tugboatAvail)
-                                                            <div class="card bg-info mb-2 text-center" id="dismissTeam">
+                                                            <div class="card bg-info mb-2 text-center">
                                                                 <div style="margin-top: 10px;">
                                                                     <a href="#" data-id="{{$tugboatAvail->intTATeamID}}" class="occupiedTugboats text-white">
                                                                         <div class="card-header">
                                                                             {{$tugboatAvail->strName}}
-                                                                            <div class="float-right">
-                                                                                <a data-dismiss="#dismissTeam" class="btn btn-icon"><i class="ion ion-close"></i></a>
-                                                                            </div>
                                                                         </div>
                                                                     </a>
                                                                 </div>
@@ -196,11 +229,38 @@
                                                     </div>
                                                 @else
                                                     <div class="card-body">
-                                                        <div class=" text-danger text-center">
-                                                            <i class="fas fa-times mr-2"></i> No Occupied Tugboats <i class="fas fa-times ml-2"></i>
+                                                        <div class="alert alert-danger text-center">
+                                                            <i class="fas fa-exclamation-triangle mr-2"></i>NO OWNED OCCUPIED TUGBOATS FOUND!
                                                         </div>
                                                     </div>
                                                 @endif
+<<<<<<< HEAD
+=======
+
+
+                                                {{-- @if(count($tugboatAvail)>0)
+                                                    <div class="card-body text-white">
+                                                        <div class="card bg-info" style="margin-top: 0px;">                                      
+                                                            @foreach($tugboatAvail as $tugboatAvail)
+                                                                <a href="#" onclick="selectTugboatTeam({{$tugboatAvail->intTAssignID}})"class="teamTugboat text-white">
+                                                                    <div class="card-header">
+                                                                        {{$tugboatAvail->strName}}
+                                                                        <div class="float-right">
+                                                                            <a data-dismiss="#dismissTeam" class="btn btn-icon"><i class="ion ion-close"></i></a>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <div class="card-body">
+                                                        <div class=" text-danger text-center">
+                                                            <i class="fas fa-times mr-2"></i> No Occupied Tugboat <i class="fas fa-times ml-2"></i>
+                                                        </div>
+                                                    </div>
+                                                @endif                                                --}}
+>>>>>>> 8648a27bddf770dd094663a34b430151a1ab644b
                                             </div>
                                         </div>
                                         <div class="card">
@@ -212,9 +272,9 @@
                                             </div>
                                             <div class="collapse show" id="ownedUnderRepairT">
                                                 <div class="card-body">
-                                                    <div class=" text-danger text-center">
-                                                        <i class="fas fa-times mr-2"></i> No Disabled Tugboat <i class="fas fa-times ml-2"></i>
-                                                    </div>
+                                                        <div class="alert alert-danger text-center">
+                                                            <i class="fas fa-exclamation-triangle mr-2"></i>NO DISABLED TUGBOATS FOUND!
+                                                        </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -261,8 +321,8 @@
                                                     </div>
                                                     <div class="collapse show" id="receivedOccupiedT">
                                                         <div class="card-body">
-                                                            <div class=" text-danger text-center">
-                                                                <i class="fas fa-times mr-2"></i> No Occupied Tugboat <i class="fas fa-times ml-2"></i>
+                                                            <div class="alert alert-danger text-center">
+                                                                <i class="fas fa-exclamation-triangle mr-2"></i>NO RECEIVED OCCOUPIED TUGBOATS FOUND!
                                                             </div>
                                                         </div>
                                                     </div>
@@ -285,4 +345,5 @@
     @include('TeamAssignment.viewTeamModal')
     @include('TeamAssignment.requestTeamModal')
     @include('TeamAssignment.requestTugboatModal')
+    @include('TeamAssignment.forwardModal')
 @endsection
