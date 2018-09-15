@@ -114,6 +114,8 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::post('/contractrequests/activate','ContractRequestsController@activate');
         Route::post('/contractrequests/getnotifs','ContractRequestsController@getnotifs');
         Route::post('/contractrequests/saverequestchanges','ContractRequestsController@saverequestchanges');
+        //Dispatch and Hauling - Forward Requests
+        Route::resource('/forwardrequests','ForwardRequestsController');
         //Dispatch and Hauling - Job Orders
         Route::get('/joborders/{intJobOrderID}/accept','JobOrderController@accept');
         Route::get('/joborders/{intJobOrderID}/forwardrequest','JobOrderController@forwardrequest');

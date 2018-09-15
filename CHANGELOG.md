@@ -3,11 +3,17 @@
 
 &nbsp;
 
+# 0.0.12 - 2018-09-15 α
+
+- [x] Added Forward Requests Page under /administrator/transactions/forwardrequests
+- [x] Fixed Ongoing Job Orders Header 
+- [x] Removed dismissable icon in tugboat list in team assignment
+
 # 0.0.8 - 2018-09-06 α 
 
 `fixes`
 
-### Scripts and Styleshseets are now properly arranged
+### Scripts and Stylesheets are now properly arranged
 
 - scripts now use the ('scripted') section
 - styles now use the ('assets') section

@@ -3,6 +3,7 @@ var url = '/administrator/transactions/teamassignment';
 $(document).ready(function(){
     $('#transactionTree').addClass('active');
     $('#tDispatch').addClass('active');
+    $('#menuForwardReq').addClass('inactive');
     $('#menuTugboatAssignment').addClass('inactive');
     $('#menuJobOrder').addClass('inactive');
     $('#menuTeamBuilder').addClass('active');

@@ -3,6 +3,7 @@ $(document).ready(function(){
     $('#tDispatch').addClass('active');
     $('#menuTugboatAssignment').addClass('inactive');
     $('#menuJobOrder').addClass('active');
+    $('#menuForwardReq').addClass('inactive');
     $('#menuTeamBuilder').addClass('inactive');
     $('#menuScheduling').addClass('inactive');
     $('#menuHauling').addClass('inactive');;

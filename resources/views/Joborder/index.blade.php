@@ -1,10 +1,10 @@
 @extends('Templates.newTemplate')
 
 @section('assets')
-    @include('Joborder.scripts')
     @include('Joborder.styles')
 @endsection
 @section('scripted')
+    @include('Joborder.scripts')
 @endsection
 @section('content')
     <section id="mainSection" class="section">
