@@ -139,6 +139,8 @@ Route::group(['prefix'=>'administrator/'],function(){
         //Final Contracts
         Route::resource('/contracts','ContractsController');
         
+        //Dispatch and Hauling - Forward Requests
+        Route::resource('/forwardrequests','ForwardRequestsController');
         //Dispatch and Hauling - Job Orders
         Route::resource('/joborders','JobOrderController');
         Route::get('/joborders/{intJobOrderID}/accept','JobOrderController@accept');

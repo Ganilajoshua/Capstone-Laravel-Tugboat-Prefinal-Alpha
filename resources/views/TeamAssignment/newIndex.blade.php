@@ -183,14 +183,11 @@
                                                 @if(count($compliance)>0)
                                                     <div class="card-body text-white">
                                                         @foreach($compliance as $compliance)
-                                                            <div class="card bg-success mb-2 text-center" id="dismissTeam">
+                                                            <div class="card bg-success mb-2 text-center">
                                                                 <div style="margin-top: 10px;">
                                                                     <a href="#" onclick="selectTugboatTeam({{$compliance->intTAssignID}})"class="teamTugboat text-white">
                                                                         <div class="card-header">
                                                                             {{$compliance->strName}}
-                                                                            <div class="float-right">
-                                                                                <a data-dismiss="#dismissTeam" class="btn btn-icon"><i class="ion ion-close"></i></a>
-                                                                            </div>
                                                                         </div>
                                                                     </a>
                                                                 </div>
@@ -199,8 +196,8 @@
                                                     </div>
                                                 @else
                                                     <div class="card-body">
-                                                        <div class=" text-danger text-center">
-                                                            <i class="fas fa-times mr-2"></i> No Available Tugboats <i class="fas fa-times ml-2"></i>
+                                                        <div class="alert alert-danger text-center">
+                                                            <i class="fas fa-exclamation-triangle mr-2"></i>NO AVAIABLE OWNED TUGBOATS FOUND!
                                                         </div>
                                                     </div>
                                                 @endif
@@ -219,14 +216,11 @@
                                                 @if(count($tugboatAvail)>0)
                                                     <div class="card-body text-white">
                                                         @foreach($tugboatAvail as $tugboatAvail)
-                                                            <div class="card bg-info mb-2 text-center" id="dismissTeam">
+                                                            <div class="card bg-info mb-2 text-center">
                                                                 <div style="margin-top: 10px;">
                                                                     <a href="#" data-id="{{$tugboatAvail->intTATeamID}}" class="occupiedTugboats text-white">
                                                                         <div class="card-header">
                                                                             {{$tugboatAvail->strName}}
-                                                                            <div class="float-right">
-                                                                                <a data-dismiss="#dismissTeam" class="btn btn-icon"><i class="ion ion-close"></i></a>
-                                                                            </div>
                                                                         </div>
                                                                     </a>
                                                                 </div>
@@ -235,11 +229,38 @@
                                                     </div>
                                                 @else
                                                     <div class="card-body">
-                                                        <div class=" text-danger text-center">
-                                                            <i class="fas fa-times mr-2"></i> No Occupied Tugboats <i class="fas fa-times ml-2"></i>
+                                                        <div class="alert alert-danger text-center">
+                                                            <i class="fas fa-exclamation-triangle mr-2"></i>NO OWNED OCCUPIED TUGBOATS FOUND!
                                                         </div>
                                                     </div>
                                                 @endif
+<<<<<<< HEAD
+=======
+
+
+                                                {{-- @if(count($tugboatAvail)>0)
+                                                    <div class="card-body text-white">
+                                                        <div class="card bg-info" style="margin-top: 0px;">                                      
+                                                            @foreach($tugboatAvail as $tugboatAvail)
+                                                                <a href="#" onclick="selectTugboatTeam({{$tugboatAvail->intTAssignID}})"class="teamTugboat text-white">
+                                                                    <div class="card-header">
+                                                                        {{$tugboatAvail->strName}}
+                                                                        <div class="float-right">
+                                                                            <a data-dismiss="#dismissTeam" class="btn btn-icon"><i class="ion ion-close"></i></a>
+                                                                        </div>
+                                                                    </div>
+                                                                </a>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <div class="card-body">
+                                                        <div class=" text-danger text-center">
+                                                            <i class="fas fa-times mr-2"></i> No Occupied Tugboat <i class="fas fa-times ml-2"></i>
+                                                        </div>
+                                                    </div>
+                                                @endif                                                --}}
+>>>>>>> 8648a27bddf770dd094663a34b430151a1ab644b
                                             </div>
                                         </div>
                                         <div class="card">
@@ -251,9 +272,9 @@
                                             </div>
                                             <div class="collapse show" id="ownedUnderRepairT">
                                                 <div class="card-body">
-                                                    <div class=" text-danger text-center">
-                                                        <i class="fas fa-times mr-2"></i> No Disabled Tugboat <i class="fas fa-times ml-2"></i>
-                                                    </div>
+                                                        <div class="alert alert-danger text-center">
+                                                            <i class="fas fa-exclamation-triangle mr-2"></i>NO DISABLED TUGBOATS FOUND!
+                                                        </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -300,8 +321,8 @@
                                                     </div>
                                                     <div class="collapse show" id="receivedOccupiedT">
                                                         <div class="card-body">
-                                                            <div class=" text-danger text-center">
-                                                                <i class="fas fa-times mr-2"></i> No Occupied Tugboat <i class="fas fa-times ml-2"></i>
+                                                            <div class="alert alert-danger text-center">
+                                                                <i class="fas fa-exclamation-triangle mr-2"></i>NO RECEIVED OCCOUPIED TUGBOATS FOUND!
                                                             </div>
                                                         </div>
                                                     </div>
