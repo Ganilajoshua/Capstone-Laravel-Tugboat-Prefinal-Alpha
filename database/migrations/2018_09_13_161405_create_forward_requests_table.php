@@ -13,7 +13,7 @@ class CreateForwardRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('forward_requests', function (Blueprint $table) {
+        Schema::create('tblrequest', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateForwardRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('forward_requests');
+        Schema::dropIfExists('tblrequest');
     }
 }
