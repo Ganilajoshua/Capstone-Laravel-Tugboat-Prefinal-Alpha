@@ -9,28 +9,31 @@
                 </button>
             </div>
             <div class="modal-body modalBody">
-                <form>
+                <form class="needs-validation" novalidate>
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
                                 <label for="editBerth">Berth Name<sup class="text-primary">&#10033;</sup></label>
-                                <input type="text" class="form-control" id="editBerth" name="editBerth" placeholder="Berth Name">
+                                <input type="text" class="form-control" id="editBerth" name="editBerth" placeholder="Berth Name" pattern="(Berth)\s*?[0-9]{1,39}" max="45" required>
+                                <div class="invalid-feedback">Invalid Input.</div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="editPierSelect">Pier<sup class="text-primary">&#10033;</sup></label>
-                                <select id="editPierSelect" name="editPierSelect" class="form-control form-control-lg">
+                                <select id="editPierSelect" name="editPierSelect" class="form-control form-control-lg" required>
                                     <option>Select Pier</option>
                                     @foreach($piers as $piers)
                                         <option value="{{$piers->intPierID}}">{{$piers->strPierName}}</option>
                                     @endforeach                    
                                 </select>
                             </div>
+                            <div class="invalid-feedback">Invalid Input.</div>
                         </div>
                     </div>
                     <input type="hidden" id="editIDhide">
-                    <button type="button" onclick="editBerthSubmit()" class="btnAdd btn btn-primary waves-effect float-right">Update</button>
+                    <!-- <button type="button" onclick="editBerthSubmit()" class="btnAdd btn btn-primary waves-effect float-right">Update</button> -->
+                    <button type="submit" class="btnAdd btn btn-primary waves-effect float-right">Update</button>
                 </form>
             </div>
         </div>
@@ -38,42 +41,26 @@
 </div>
 
 
-<!-- Edit View -->
-{{-- <div id="editLayout" class="editLayout">
-    <div class="card animated bounceInLeft">
-        <div class="card-header">
-            <spanstyle="height:50px;">
-                <button id="backButtonEdit" class="btn btn-lg btn-link float-left mt-1" data-toggle="tooltip" title="Back" role="button">
-                    <i class="ion-chevron-left custSize"></i>
-                </button>
-                <button class="btn btn-lg btn-link float-right"></button>
-                <h3 class="text-center">EDIT</h3>
-            </span>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="editBerth">Berth<sup class="text-primary">&#10033;</sup></label>
-                        <input type="text" class="form-control" id="editBerth" name="editBerth" placeholder="Berth">
-                        <p id="editID"></p>
-                        <input type="hidden" id="editIDhide">
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label for="editPierSelect">Pier<sup class="text-primary">&#10033;</sup></label>
-                        <select id="editPierSelect" name="editPierSelect" class="form-control form-control-lg">
-                            <option>Select Pier</option>
-                            @foreach($piers as $piers)
-                                <option value="{{$piers->intPierID}}">{{$piers->strPierName}}</option>
-                            @endforeach                    
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <button onclick="editBerthSubmit()" class="btn btn-primary float-right font-weight-bold">Submit</button>
-            <br>
-        </div>
-    </div>
-</div> --}}
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        else{
+            return editBerthSubmit();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
