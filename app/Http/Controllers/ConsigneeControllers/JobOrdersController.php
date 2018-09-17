@@ -15,6 +15,7 @@ use App\JobOrder;
 use App\Goods;
 use App\Berth;
 
+use Redirect;
 use Auth;
 use DB;
 
@@ -56,10 +57,6 @@ class JobOrdersController extends Controller
         ->where('intJOCompanyID',Auth::user()->intUCompanyID)
         ->where('enumStatus','Finished')
         ->get();
-        // $ongoing = JobOrder::where('boolDeleted',0)
-        // ->where('intSCompanyID',Auth::user()->intUCompanyID)
-        // ->where('enumStatus','Pending')
-        // ->get();
         
         return view('Consignee.Joborders.joborder',
         compact('goods','createdjob','pendingjob','accepted','ongoing','finishedjob','contract','berth'));
@@ -74,18 +71,27 @@ class JobOrdersController extends Controller
      */
     public function create(Request $request)
     {
-        $joborder = new JobOrder;
-        $joborder->timestamps = false;
-        $joborder->intJOCompanyID = Auth::user()->intUCompanyID;
-        $joborder->dtmETA = Carbon::parse($request->jobETA)->format('Y/m/d H:i:s');
-        $joborder->intJOGoodsID = $request->jobGoods;
-        $joborder->strJOVesselName = $request->jobVesselName;
-        $joborder->dtmETD = Carbon::parse($request->jobETD)->format('Y/m/d H:i:s');
-        $joborder->fltWeight = $request->jobWeight;
-        $joborder->strJODesc = $request->jobDesc;
-        $joborder->intJOBerthID = $request->jobBerth;
-        $joborder->enumStatus = 'Created';
-        $joborder->save();
+        try{
+            DB::beginTransaction();
+            $joborder = new JobOrder;
+            $joborder->strJOTitle = $request->jobTitle;
+            $joborder->strJODesc = $request->jobDesc;
+            $joborder->intJOCompanyID = Auth::user()->intUCompanyID;
+            $joborder->dtmETA = Carbon::parse($request->jobETA)->format('Y/m/d H:i:s');
+            $joborder->dtmETD = Carbon::parse($request->jobETD)->format('Y/m/d H:i:s');
+            $joborder->intJOBerthID = $request->jobBerth;
+            $joborder->strJODestination = $request->jobLocation;
+            $joborder->strJOVesselName = $request->jobVesselName;
+            $joborder->intJOGoodsID = $request->jobGoods;
+            $joborder->fltWeight = $request->jobWeight;
+            $joborder->enumStatus = 'Created';
+            $joborder->save();
+            DB::commit();
+        }catch(\Illuminate\Database\QueryException $errors){
+            DB::rollback();
+            $errorMessage = $errors->getMessage();
+            return Redirect::back()->withErrors($errorMessage);
+        }
 
         return response()->json(['joborder'=>'joborder']);
     }

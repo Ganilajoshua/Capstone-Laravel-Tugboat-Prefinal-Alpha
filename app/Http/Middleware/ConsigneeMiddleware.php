@@ -28,7 +28,7 @@ class ConsigneeMiddleware
                     return redirect('/consignee/login');
                 }else{
                     return $next($request);
-                    return redirect('/consignee/joborder');
+                    return redirect('/consignee/dashboard');
                 }
             }else{
                 Auth::logout();

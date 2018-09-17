@@ -1,5 +1,5 @@
 <div class="modal fade" id="addTeam" tabindex="-1" role="dialog" aria-labelledby="addTeamLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-lg createTeam" style="max-width: 70%" role="document">
         <div class="modal-content sectionDark">
             <div class="modal-header">
                 <h4 class="modal-title" id="addTeamLabel">
@@ -15,6 +15,13 @@
                     <label for="addTeamName">Team Name<sup class="text-primary">&#10033;</sup></label>
                     <input type="text" class="form-control" id="addTeamName" placeholder="Team 1">
                 </form>
+                {{-- <div class="form-group">
+                    <label for="pierSelect">Pier<sup class="text-primary">&#10033;</sup></label>
+                    <select id="pierSelect" name="pierSelect" class="form-control form-control-lg">
+                        <option>Select Color</option>
+                        <option value="" style="background-color: #001f3f;" class="text-white">Navy</option>
+                    </select>
+                </div> --}}
                 <div class="row">
                     <div class="col-12">
                         <div class="card text-center">
@@ -45,7 +52,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row" id="addTeamCard">
+                                    <div class="row" id="addTeamCompostionCard">
                                         <div class="row">
                                             @if(count($captains)>0)
                                                 @foreach($captains as $captains)
@@ -55,7 +62,7 @@
                                                                 <div class="card bg-primary">
                                                                     <div class="card-body">
                                                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                                                            <input type="checkbox" id="addCheckCapt{{$captains->intEmployeeID}}" name="captains[]" value="{{$captains->intEmployeeID}}" class="custom-control-input captCheckbox">
+                                                                            <input type="checkbox" id="addCheckCapt{{$captains->intEmployeeID}}" name="captains[]" data-id="{{$captains->intEmployeeID}}" data-position="{{$captains->strPositionName}}" data-name="{{$captains->strLName}}, {{$captains->strFName}}" value="{{$captains->intEmployeeID}}" class="custom-control-input captCheckbox">
                                                                             <label class="custom-control-label" for="addCheckCapt{{$captains->intEmployeeID}}">
                                                                                 <p class="card-text text-center ml-2">{{$captains->strLName}}, {{$captains->strFName}}</p>
                                                                                 <small class="text-center float-right" style="text-transform: uppercase;">
@@ -81,8 +88,8 @@
                                                                 <div class="card bg-info">
                                                                     <div class="card-body">
                                                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                                                            <input type="checkbox" id="addCheckCapt{{$chiefengineers->intEmployeeID}}" value="{{$chiefengineers->intEmployeeID}}" class="custom-control-input chiefCheckbox">
-                                                                            <label class="custom-control-label" for="addCheckCapt{{$chiefengineers->intEmployeeID}}">
+                                                                            <input type="checkbox" id="addCheckChief{{$chiefengineers->intEmployeeID}}" value="{{$chiefengineers->intEmployeeID}}" data-id="{{$chiefengineers->intEmployeeID}}" data-position="{{$chiefengineers->strPositionName}}" data-name="{{$chiefengineers->strLName}}, {{$chiefengineers->strFName}}" class="custom-control-input chiefCheckbox">
+                                                                            <label class="custom-control-label" for="addCheckChief{{$chiefengineers->intEmployeeID}}">
                                                                                 <p class="card-text text-center ml-2">{{$chiefengineers->strLName}}, {{$chiefengineers->strFName}}</p>
                                                                                 <small class="text-center float-right" style="text-transform: uppercase;">
                                                                                     {{$chiefengineers->strPositionName}}
@@ -107,8 +114,8 @@
                                                                 <div class="card bg-dark">
                                                                     <div class="card-body">
                                                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                                                            <input type="checkbox" id="addCheckCapt{{$crew->intEmployeeID}}" value="{{$crew->intEmployeeID}}"class="custom-control-input crewCheckbox">
-                                                                            <label class="custom-control-label" for="addCheckCapt{{$crew->intEmployeeID}}">
+                                                                            <input type="checkbox" id="addCheckCrews{{$crew->intEmployeeID}}" value="{{$crew->intEmployeeID}}" data-id="{{$crew->intEmployeeID}}" data-position="{{$crew->strPositionName}}" data-name="{{$crew->strLName}}, {{$crew->strFName}}" class="custom-control-input crewCheckbox">
+                                                                            <label class="custom-control-label" for="addCheckCrews{{$crew->intEmployeeID}}">
                                                                                 <p class="card-text text-center ml-2">{{$crew->strLName}}, {{$crew->strFName}}</p>
                                                                                 <small class="text-center float-right" style="text-transform: uppercase;">
                                                                                     {{$crew->strPositionName}}
@@ -151,9 +158,28 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="card text-center">
+                            <div class="card-header">
+                                <div class="float-right">
+                                    <a data-collapse="#addSelectedCard" class="btn btn-icon"><i class="ion ion-minus"></i></a>
+                                </div>
+                                <h5 class="text-center ml-5">Selected</h5>
+                            </div>
+                            <div class="collapse show" id="addSelectedCard">
+                                <div class="card-body">
+                                    <div class="row viewSelected">
+                                        
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
             <div class="modal-footer">
                 <button onclick="submitTeam()" type="button" class="btn btn-primary waves-effect">Add</button>

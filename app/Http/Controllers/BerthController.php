@@ -17,22 +17,17 @@ use Auth;
 
 class BerthController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-        $this->middleware('admin');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('admin');
+    // }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      * 
      */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    //     $this->middleware('tugAdmin');
-    // }
+
     public function index()
     {
         $noContract = DB::table('tblcompany as company')

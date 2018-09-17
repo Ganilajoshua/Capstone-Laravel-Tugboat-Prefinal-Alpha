@@ -1,0 +1,10 @@
+.haulingTab ,.tugAssistTab ,.salvageTab,.btnGoToChoices{
+    display:none;
+}
+.PierLoc ,.LocLoc{
+    display:none;
+}
+.card-deck .card .card-img-top{
+    border-top-left-radius: 0%;
+    border-top-right-radius: 0%;
+}

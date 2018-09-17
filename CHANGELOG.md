@@ -3,6 +3,25 @@
 
 &nbsp;
 
+# 0.0.10 - 2018-09-13 α
+
+- [x] Added Forward Requests
+
+# 0.0.9 - 2018-09-12 α
+
+`new`
+- [x] requestTeamModal
+- [x] requestTugboatModal
+- [x] Request Team
+- [x] Request Tugboat
+- [x] Summary of Selected Employees in Team Builder
+- [x] Remove Team From Tugboat
+- [x] Remove Employees From Team
+
+`fixes`
+- [x] More Info modal in Job Orders Properly Shows
+- [x] Forward Job Order Now Works
+
 # 0.0.8 - 2018-09-06 α 
 
 `fixes`

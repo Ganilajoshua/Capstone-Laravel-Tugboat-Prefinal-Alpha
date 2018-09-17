@@ -24,23 +24,6 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        {{-- <div class="col-6 col-sm-12 col-lg-6 createdCards">
-                            <div class="card card-sm-2 card-primary border-primary">
-                                <div class="card-icon">
-                                    <i class="ion ion-android-boat text-primary"></i>
-                                </div>
-                                <div class="card-header">
-                                    <h4 class="text-primary mb-2">Job Order # 4</h4>
-                                </div>
-                                <div class="card-body">
-                                    <h5>Consignee Name</h5>
-                                </div>
-                                <div class="card-footer mt-2">
-                                    <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
-                                    <button class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect" data-toggle="modal" data-target="#forwardModal">Forward</button>
-                                </div>
-                            </div>
-                        </div> --}}
                         @if(count($accepted)>0)
                             @foreach($accepted as $accepted)
                                 <div class="col-12 col-sm-12 col-lg-6 createdCards">
@@ -101,11 +84,11 @@
                                             <h4 class="text-primary mb-2">Job Order # {{$joborders->intJobOrderID}}</h4>
                                         </div>
                                         <div class="card-body">
-                                            <h4>{{$joborders->strJODesc}}</h4>
-                                            <h6>{{$joborders->strCompanyName}}</h6>
+                                            <h4 class="mt-2">{{$joborders->strJOTitle}}</h4>
+                                            <h6 class="mt-3">{{$joborders->strCompanyName}}</h6>
                                         </div>
                                         <div class="card-footer mt-2">
-                                            <a href="#" onclick="forwardRequest({{$joborders->intJobOrderID}})" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
+                                            <a href="#" data-id="{{$joborders->intJobOrderID}}" class="joborderMoreInfoButton" >More Info <i class="ion ion-ios-arrow-right"></i></a>
                                             <button onclick="declineJobOrder({{$joborders->intJobOrderID}})" class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect">Decline</button>
                                             <button onclick="forwardRequest({{$joborders->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect" data-toggle="modal" data-target="#forwardModal">Forward</button>
                                             <button onclick="acceptJobOrder({{$joborders->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right waves-effect">Accept</button>
@@ -161,4 +144,8 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="forwardfooter">
+    
 </div>
