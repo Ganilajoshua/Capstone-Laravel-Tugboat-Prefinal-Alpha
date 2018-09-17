@@ -141,6 +141,9 @@ Route::group(['prefix'=>'administrator/'],function(){
         
         //Dispatch Ticket
         Route::resource('/dispatchticket','DispatchTicketController');
+        Route::get('/dispatchticket','DispatchTicketController@index');
+        Route::get('/dispatchticket/{intDispatchTicketID}/info','DispatchTicketController@info');
+        Route::post('/dispatchticket/AdminAccept','DispatchTicketController@AdminAccept');
         //Scheduling
         Route::post('/scheduling/tugboatsavailable','SchedulingController@tugboatsavailable');
         
@@ -177,6 +180,10 @@ Route::group(['prefix'=>'consignee/'],function(){
     Route::post('/joborders/update','ConsigneeControllers\JobOrdersController@update');
     Route::get('/joborders/{intJobOrderID}/show','ConsigneeControllers\JobOrdersController@show');
 
+    Route::resource('/dispatchticket','ConsigneeControllers\ConsigneeControllerDispatch');
+    Route::get('/dispatchticket','ConsigneeControllers\ConsigneeControllerDispatch@index');
+    Route::get('/dispatchticket/{intDispatchTicketID}/info','ConsigneeControllers\ConsigneeControllerDispatch@info');
+    Route::post('/dispatchticket/store','ConsigneeControllers\ConsigneeControllerDispatch@store');
     // Route::get('/consignee/login','LoginControllers\UserLoginController@index')
 });
 Route::group(['prefix'=>'affiliates/'],function(){

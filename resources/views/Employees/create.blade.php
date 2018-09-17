@@ -9,24 +9,27 @@
                 </button>
             </div>
             <div class="modal-body modalBody">
-                <form>
+                <form class="needs-validation" novalidate>
                     <div class="row">
                         <div class="col">    
                             <div class="form-group">
                                 <label for="addLastName">Last Name<sup class="text-primary">&#10033;</sup></label>
-                                <input type="text" class="form-control" id="addLastName" name="addLastName" placeholder="Last Name">
+                                <input type="text" class="form-control" id="addLastName" name="addLastName" placeholder="Last Name" min="2" max="45" required>
+                                <div class="invalid-feedback">Invalid Input</div>
                             </div>
                         </div>
                         <div class="col">    
                             <div class="form-group">
                                 <label for="addFirstName">First Name<sup class="text-primary">&#10033;</sup></label>
-                                <input type="text" class="form-control" id="addFirstName" name="addFirstName" placeholder="First Name">
+                                <input type="text" class="form-control" id="addFirstName" name="addFirstName" placeholder="First Name" min="2" max="45" required>
+                                <div class="invalid-feedback">Invalid Input</div>
                             </div>
                         </div>
                         <div class="col">    
                             <div class="form-group">
-                                <label for="addMiddleName">Middle Name<sup class="text-primary">&#10033;</sup></label>
-                                <input type="text" class="form-control" id="addMiddleName" name="addMiddleName" placeholder="Middle Name">
+                                <label for="addMiddleName">Middle Name</label>
+                                <input type="text" class="form-control" id="addMiddleName" name="addMiddleName" placeholder="Middle Name" min="2" max="45">
+                                <div class="invalid-feedback">Invalid Input</div>
                             </div>
                         </div>
                     </div>
@@ -34,88 +37,52 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="positionSelect">Position<sup class="text-primary">&#10033;</sup></label>
-                                <select name="positionSelect" class="form-control" id="positionSelect">
-                                    <option>Select Position</option>
+                                <select name="positionSelect" class="form-control" id="positionSelect" required>
+                                    <option value="">Select Position</option>
                                     @foreach($positions as $positions)
                                         <option value="{{$positions->intPositionID}}">{{$positions->strPositionName}}</option>
                                     @endforeach
                                 </select>
+                                <div class="invalid-feedback">Invalid Select</div>
                             </div>
                         </div>
                         <div class="col">
                             <label for="addEmpType">Employee Type<sup class="text-primary">&#10033;</sup></label>
-                            <select name="addEmpType" class="form-control" id="addEmpType">
-                                <option disabled>Select Type</option>
+                            <select name="addEmpType" class="form-control" id="addEmpType" required>
+                                <option value="">Select Type</option>
                                 <option value="Regular">Regular</option>
                                 <option value="Reserved">Reserved</option>
                                 <option value="On Call">On Call</option>
                             </select>
+                            <div class="invalid-feedback">Invalid Select</div>
                         </div>
                     </div>
                     <input type="hidden" id="editIDhide">
-                    <button type="button" onclick="postEmployee()" class="btnAdd btn btn-primary waves-effect float-right">Add</button>
+                    <!-- <button type="Submit" onclick="postEmployee()" class="btnAdd btn btn-primary waves-effect float-right">Add</button> -->
+                    <button type="Submit" onclick="postEmployee()" class="btnAdd btn btn-primary waves-effect float-right">Add</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
-    
-<!-- Add View -->
-{{-- <div class="addLayout" id="addLayout">
-    <form id="employeeForm">
-        <div class="card animated bounceInLeft">
-            <div class="card-header">
-                <span>
-                    <button id="backButton" class="btn btn-lg btn-link float-left mt-1" data-toggle="tooltip"  title="Back" type="button">
-                    <i class="ion-chevron-left custSize"></i>
-                    </button>
-                    <button class="btn btn-lg btn-link float-right" disabled></button>
-                    <h3 class="text-center">ADD</h3>
-                </span>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">    
-                        <div class="form-group">
-                            <label for="addLastName">Last Name<sup class="text-primary">&#10033;</sup></label>
-                            <input type="text" class="form-control" id="addLastName" name="addLastName" placeholder="Last Name">
-                        </div>
-                    </div>
-                    <div class="col">    
-                        <div class="form-group">
-                            <label for="addFirstName">First Name<sup class="text-primary">&#10033;</sup></label>
-                            <input type="text" class="form-control" id="addFirstName" name="addFirstName" placeholder="First Name">
-                        </div>
-                    </div>
-                    <div class="col">    
-                        <div class="form-group">
-                            <label for="addMiddleName">Middle Name<sup class="text-primary">&#10033;</sup></label>
-                            <input type="text" class="form-control" id="addMiddleName" name="addMiddleName" placeholder="Middle Name">
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="positionSelect">Position<sup class="text-primary">&#10033;</sup></label>
-                            <select name="positionSelect" class="form-control" id="positionSelect">
-                                <option>Select Position</option>
-                                @foreach($positions as $positions)
-                                    <option value="{{$positions->intPositionID}}">{{$positions->strPositionName}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="addEmpType">Employee Type<sup class="text-primary">&#10033;</sup></label>
-                            <input type="text" class="form-control" id="addEmpType" name="addEmpType" placeholder="Employee Type">
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <button onclick="postEmployee()" role="button" class="btn btn-primary float-right font-weight-bold">Submit</button>
-            </div>
-        </div>
-    </form>
-</div>   --}}
+
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
