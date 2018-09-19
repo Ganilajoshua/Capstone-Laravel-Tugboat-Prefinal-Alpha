@@ -19,6 +19,7 @@ use App\TugboatClass;
 use App\TugboatMainSpecifications;
 use App\TugboatSpecifications;
 use App\TugboatAssignment;
+use App\TugboatInsurances;  
 
 use Redirect;
 use Auth;
@@ -33,39 +34,28 @@ class TugboatTeamAssignmentController extends Controller
      */
     public function index()
     {
-        // $emp = Employees::all();
-        $now = new Carbon();
-        // $max = TugboatMainSpecifications::max('intTugboatMainID');
-        $tugboatassign = DB::table('tbltugboatassign as assignment')
-        ->join('tblteam as team','assignment.intTATeamID','team.intTeamID')
-        ->where('assignment.boolDeleted',0)
-        ->get();
-        // ->paginate(5); 
-        $employees = DB::table('tblemployee as employee')
+        // List of Employees in Create Modal
+        $employee = DB::table('tblemployee as employee')
         ->join('tblposition as position','employee.intEPositionID','position.intPositionID')
         ->where('employee.boolDeleted',0)
         ->get();
-        $captain = DB::table('tblemployee as employee')
+        // List of Captains in Create Modal
+        $captains = DB::table('tblemployee as employee')
         ->join('tblposition as position','employee.intEPositionID','position.intPositionID')
         ->where('position.strPositionName','Captain')
         ->where('employee.intETeamID',null)
         ->where('employee.boolDeleted',0)
         ->where('employee.intECompanyID',Auth::user()->intUCompanyID)
         ->get();
-        $ceng = DB::table('tblemployee as employee')
+        // List of Chief Engineer in Create Modal
+        $chiefengineers = DB::table('tblemployee as employee')
         ->join('tblposition as position','employee.intEPositionID','position.intPositionID')
         ->where('position.strPositionName','Chief Engineer')
         ->where('employee.intETeamID',null)
         ->where('employee.boolDeleted',0)
         ->where('employee.intECompanyID',Auth::user()->intUCompanyID)
         ->get();
-        $fmate = DB::table('tblemployee as employee')
-        ->join('tblposition as position','employee.intEPositionID','position.intPositionID')
-        ->where('position.strPositionName','First Mate')
-        ->where('employee.intETeamID',null)
-        ->where('employee.boolDeleted',0)
-        ->where('employee.intECompanyID',Auth::user()->intUCompanyID)
-        ->get();
+        // List of Crew in Create Modal
         $crew = DB::table('tblemployee as employee')
         ->join('tblposition as position','employee.intEPositionID','position.intPositionID')
         ->where('position.strPositionName','Crew')
@@ -73,6 +63,7 @@ class TugboatTeamAssignmentController extends Controller
         ->where('employee.boolDeleted',0)
         ->where('employee.intECompanyID',Auth::user()->intUCompanyID)
         ->get();
+        // List of Other Employees in Create Modal
         $others = DB::table('tblemployee as employee')
         ->join('tblposition as position','employee.intEPositionID','position.intPositionID')
         ->where('position.strPositionName','!=','Captain')
@@ -82,12 +73,15 @@ class TugboatTeamAssignmentController extends Controller
         ->where('employee.intECompanyID',Auth::user()->intUCompanyID)
         // ->where('position.strPositionName','!=','First Mate')
         ->get();
+
+        // List of Unavailable Tugboats
         $noCompliance = DB::table('tbltugboat as tugboat')
         ->join('tbltugboatclass as class','tugboat.intTTugboatClassID','class.intTugboatClassID')
         ->join('tbltugboatmain as main','main.intTugboatMainID','tugboat.intTTugboatMainID')
         ->where('class.enumISPSCodeCompliance','no')
         ->orWhere('class.enumISMCodeStandard','no')
         ->get();
+        // List of Available Tugboats
         $compliance = DB::table('tbltugboat as tugboat')
         ->join('tbltugboatclass as class','tugboat.intTTugboatClassID','class.intTugboatClassID')
         ->join('tbltugboatmain as main','main.intTugboatMainID','tugboat.intTTugboatMainID')
@@ -97,6 +91,7 @@ class TugboatTeamAssignmentController extends Controller
         ->where('class.enumISMCodeStandard','yes')
         ->where('intTCompanyID',Auth::user()->intUCompanyID)
         ->get(); 
+
         $available = DB::table('tbltugboat as tugboat')
         ->leftjoin('tbltugboatassign as assign','tugboat.intTugboatID','assign.intTATugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
@@ -124,21 +119,24 @@ class TugboatTeamAssignmentController extends Controller
         ->join('tblposition as position','position.intPositionID','employee.intEPositionID')
         ->where('position.strPositionName','Captain')
         ->get();
-        $requestTeam = Team::where('intTCompanyID',Auth::user()->intUCompanyID)
+        $requestteam = Team::where('intTCompanyID',Auth::user()->intUCompanyID)
         ->where('boolDeleted',0)
         ->get();
-
+        // Available Tugboats
         $tugboatnoAvail = TeamAssignment::where('boolDeleted',0)
         ->where('intTATeamID',null)
         ->get();
+        // Not Available
         $tugboatAvail = DB::table('tbltugboatassign as assign')
         ->join('tbltugboat as tugboat','assign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','main.intTugboatMainID','tugboat.intTTugboatMainID')
-        ->where('intTATeamID','!=',null)
+        ->where('assign.intTATeamID','!=',null)
+        ->where('assign.intTACompanyID',Auth::user()->intUCompanyID)
         // TeamAssignment::where('boolDeleted',0)
         // ->where('intTATeamID','!=',null)
         ->get();
 
+        // Request Company Dropdown
         if(Auth::user()->enumUserType == 'Admin'){
             $affiliates = DB::table('users as user')
             ->join('tblcompany as company','user.intUCompanyID','company.intCompanyID')
@@ -153,32 +151,23 @@ class TugboatTeamAssignmentController extends Controller
             ->get();
         
         }
-        $teamsReceived = DB::Table('tblteam as team')
+        // Teams Received
+        $teamsreceived = DB::table('tblteam as team')
         ->join('tblcompany as company','team.intTCompanyID','company.intCompanyID')
         ->where('intTForwardCompanyID',Auth::user()->intUCompanyID)
         ->get();
 
-        return view('TeamAssignment.newIndex')
-        ->with('tugboatassign',$tugboatassign)
-        ->with('employee',$employees)
-        ->with('captains',$captain)
-        ->with('chiefengineers',$ceng)
-        ->with('crew',$crew)
-        ->with('others',$others)
-        ->with('nocompliance',$noCompliance)
-        ->with('compliance',$compliance)
-        ->with('team',$requestTeam)
-        ->with('available',$available)
-        ->with('teamavailable',$teamavailable)
-        ->with('availtug',$availtug)
-        ->with('teamlist',$teamlist)
-        ->with('teamList',$teamList)
-        ->with('tugboatnoAvail',$tugboatnoAvail)
-        ->with('tugboatAvail',$tugboatAvail)
-        ->with('affiliates',$affiliates)
-        ->with('teamsrecieved',$teamsReceived);
-        return response()->json(['teamsReceived' => $teamsReceived]);
+        // Tugboats Received
+        $tugboatsreceived = DB::table('tbltugboatassign as assign')
+        ->join('tbltugboat as tugboat','assign.intTATugboatID','tugboat.intTugboatID')
+        ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+        ->join('tblcompany as company','company.intCompanyID','assign.intTACompanyID')
+        ->where('intTAForwardCompanyID',Auth::user()->intUCompanyID)
+        ->get();
 
+        return view('TeamAssignment.index',
+        compact('tugboatassign','employee','captains','chiefengineers','crew','others','nocompliance','compliance','requestteam',
+        'available','teamavailable','availtug','teamlist','teamList','tugboatnoAvail','tugboatAvail','affiliates','teamsreceived','tugboatsreceived'));
     }
     
     /**
@@ -354,6 +343,7 @@ class TugboatTeamAssignmentController extends Controller
         //
     }
 
+    // View Employees on Team
     public function viewteam($intTeamID)
     {
         $employees = DB::table('tblemployee as employee')
@@ -364,6 +354,7 @@ class TugboatTeamAssignmentController extends Controller
         return response()->json(['employees'=>$employees]);
     }
 
+    // View Team on Occupied Tugboat
     public function viewtugboatteam($intTATeamID){
         $team = DB::table('tbltugboatassign as assign')
         ->join('tbltugboat as tugboat','assign.intTATugboatID','tugboat.intTugboatID')
@@ -380,6 +371,7 @@ class TugboatTeamAssignmentController extends Controller
         return response()->json(['team'=>$team]);
     }
 
+    // Request Team
     public function requestteam(Request $request){
         try{
             DB::beginTransaction();
@@ -397,6 +389,7 @@ class TugboatTeamAssignmentController extends Controller
         }
     }
 
+    // Request Tugboat
     public function requesttugboat(Request $request){
         try{
             DB::beginTransaction();
@@ -445,4 +438,74 @@ class TugboatTeamAssignmentController extends Controller
         }
         return response()->json(['team'=>$team]);
     }
+
+    public function forwardtugboat(Request $request){
+        try{
+            DB::beginTransaction();
+            $tugboatassign = TeamAssignment::findOrFail($request->tugboatassignID);
+            $tugboatassign->timestamps = false;
+            $tugboatassign->intTATeamID = null;
+            $tugboatassign->strTADesc = null;
+            $tugboatassign->intTAForwardCompanyID = $request->recipientCompanyID;
+            $tugboatassign->save();
+            DB::commit();
+        }catch(\Illuminate\Database\QueryException $errors){
+            DB::rollback();
+            $errorMessage = $errors->getMessage();
+            return Redirect::back()->withErrors($errorMessage);
+        }
+        return response()->json(['tugboatassign'=>$tugboatassign]);
+    }
+    public function returntugboat(Request $request){
+        try{
+            DB::beginTransaction();            
+            $tugboatassign = TeamAssignment::findOrFail($request->tugboatassignID);
+            $tugboatassign->timestamps = false;
+            $tugboatassign->intTATeamID = null;
+            $tugboatassign->intTAForwardCompanyID = null;
+            $tugboatassign->save();
+            DB::commit();
+        }catch(\Illuminate\Database\QueryException $errors){
+            DB::rollback();
+            $errorMessage = $errors->getMessage();
+            return Redirect::back()->withErrors($errorMessage);
+        }
+
+
+        return response()->json(['tugboatassign'=>$tugboatassign]);
+    }
+
+    public function showtugboatinformation($intTATugboatID)
+    {
+        $tugboat = DB::table('tbltugboat as tugboat')
+        ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+        ->join('tbltugboatclass as class','tugboat.intTTugboatClassID','class.intTugboatClassID')
+        ->join('tbltugboatspecs as specs','tugboat.intTTugboatSpecsID','specs.intTugboatSpecsID')
+        ->join('tbltugboattype as type','class.intTCTugboatTypeID','type.intTugboatTypeID')
+        ->join('tblcompany as company','tugboat.intTCompanyID','company.intCompanyID')
+        ->where('tugboat.intTugboatID',$intTATugboatID)
+        ->get();
+
+        $insurances = TugboatInsurances::where('intTITugboatID',$intTATugboatID)->get();
+        return response()->json(['tugboat'=>$tugboat,'insurances'=>$insurances]);
+    }
+    public function notifications(Request $request)
+    {
+        // Teams Received
+        $teamsreceived = DB::table('tblteam as team')
+        ->join('tblcompany as company','team.intTCompanyID','company.intCompanyID')
+        ->where('intTForwardCompanyID',Auth::user()->intUCompanyID)
+        ->get();
+
+        // Tugboats Received
+        $tugboatsreceived = DB::table('tbltugboatassign as assign')
+        ->join('tbltugboat as tugboat','assign.intTATugboatID','tugboat.intTugboatID')
+        ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+        ->join('tblcompany as company','company.intCompanyID','assign.intTACompanyID')
+        ->where('intTAForwardCompanyID',Auth::user()->intUCompanyID)
+        ->get();
+
+        return response()->json(['teamsreceived'=>$teamsreceived,'tugboatsreceived'=>$tugboatsreceived]);
+    }
+
 }

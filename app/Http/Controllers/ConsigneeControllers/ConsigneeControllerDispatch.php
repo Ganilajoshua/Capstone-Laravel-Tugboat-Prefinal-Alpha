@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ConsigneeControllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Response;
 use App\Http\Controllers\Controller;
-use Auth;
+use App\Company;
+use App\Contract;
+use App\JobOrder;
 use DB;
-use App\DispatchTicket;
-class DispatchTicketController extends Controller
+use Auth;
+class ConsigneeControllerDispatch extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +18,7 @@ class DispatchTicketController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         $dispatch = DB::table('tbljoborder as joborder')
         ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
         ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
@@ -30,10 +32,11 @@ class DispatchTicketController extends Controller
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
         ->join('tbldispatchticket as dispatch','dispatch.intDTTugboatAssignID','tugboatassign.intTAssignID')
-        ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
+        ->where('company.intCompanyID',Auth::user()->intUCompanyID)
         ->where('jobsched.enumstatus','Finished')
         ->get(); 
-        return view('DispatchTicket.index')
+
+        return view('Consignee.Dispatch.index')
         ->with('dispatch',$dispatch);
     }
 
@@ -55,7 +58,14 @@ class DispatchTicketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            $Dispatch = DispatchTicket::find($request->dispatch);
+            error_log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+            error_log($request->dispatch);
+            $Dispatch->timestamps = false;
+            $Dispatch->boolCApprovedby = 1;
+            // return response()->json(['dispatch'=>$dispatch]);    
+            $Dispatch->save();
+            
     }
 
     /**
@@ -102,9 +112,9 @@ class DispatchTicketController extends Controller
     {
         //
     }
-    public function info($id)
-        {
-        $dispatch = DB::table('tbljoborder as joborder')
+    public function info($intDispatchTicketID)
+    {
+        $Dispatch = DB::table('tbljoborder as joborder')
         ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
         ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
         ->join('tblpier as pier','berth.intBPierID','pier.intPierID')
@@ -117,20 +127,21 @@ class DispatchTicketController extends Controller
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
         ->join('tbldispatchticket as dispatch','dispatch.intDTTugboatAssignID','tugboatassign.intTAssignID')
-        ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
+        ->where('company.intCompanyID',Auth::user()->intUCompanyID)
         ->where('jobsched.enumstatus','Finished')
         ->where('dispatch.intDispatchTicketID',$intDispatchTicketID)
         ->get(); 
-        // return view('DispatchTicket.index')
-        // ->with('dispatch',$dispatch);
-        return response()->json(['dispatch'=>$dispatch]);    
 
-        }
-        public function AdminAccept(Request $request)
+        return response()->json(['dispatch'=>$Dispatch]);    
+
+    }
+    public function ConsigneeAccept(Request $request)
         {
         $Dispatch = DispatchTicket::find($request->dispatch);
+        error_log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+        error_log($request->dispatch);
         $Dispatch->timestamps = false;
-        $Dispatch->boolAApprovedby = 1;
+        $Dispatch->boolCApprovedby = 1;
         // return response()->json(['dispatch'=>$dispatch]);    
         $Dispatch->save();
         }

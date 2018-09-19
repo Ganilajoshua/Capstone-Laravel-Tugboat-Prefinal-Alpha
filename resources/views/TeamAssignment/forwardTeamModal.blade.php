@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-12 col-sm-12 col-lg-12">
                     <div class="form-group">
-                        <label for="selectForwardCompany">Select Company To Forward To<sup class="text-primary">&#10033;</sup></label>
+                        <label for="selectForwardCompany">Select Recipient of Team<sup class="text-primary">&#10033;</sup></label>
                         <select id="selectForwardCompany" name="selectForwardCompany" class="form-control form-control-lg">
                             <option>Select Company</option>
                             @foreach($affiliates as $affiliates)

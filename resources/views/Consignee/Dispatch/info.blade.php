@@ -83,46 +83,15 @@
                     </table>
                 </div>
             </div>
-                {{-- <div class="row mt-2">
-                    <div class="col-12 col-sm-12 col-lg-6 adminSign">
-                        <div class="card card-primary">
-                            <div class="card-header"><h4 class="text-center">Administrator Signature</h4></div>
-                            <div class="card-body rowOverflow">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="alert alert-danger alertAdminSign"><i class="fas fa-exclamation-circle mr-3"></i>No Administrator Signature!</div>
-                                        <div class="signAdminCanvas"></div>
-                                        <textarea id="signatureJSON" hidden rows="5"></textarea>
-                                    </div>
-                                </div>
-                                <button class="clearAdminCanvas btn btn-secondary btn-sm waves-effect">Clear</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-12 col-lg-6">
-                        <div class="card card-primary">
-                            <div class="card-header"><h4 class="text-center">Consignee Signature</h4></div>
-                            <div class="card-body rowOverflow">
-                                <div class="alert alert-danger alertConsigneeSign"><i class="fas fa-exclamation-circle mr-3"></i>No Consignee Signature!</div>
-                                <div class="signConsigneeCanvasDisplay"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
                 <div>
 
-                        <h3 id="Admin" class="d-none float-left">Accepted</h3>
-                        <h3 id="Consignee" class="d-none float-right">Accepted</h3>
+
                         <select name="" class="d-none" id="id">
                             <option id="dispatch3"></option>
                         </select>
-                        <button id="forAdmin" onclick="AdminAccept()" class="btn btn-primary waves-effect float-left" >Company ACCEPT</button>
-                        <button id="forConsignee" class="btnFinalizeDT btn btn-primary waves-effect float-right"> Consignee ACCEPT</button>
+                        <br>
+                        <button onclick="Accept()" class="btn btn-primary waves-effect float-right"> Consignee ACCEPT</button>
                     </div>
-        </div>
-        <div class="card-footer">
-            {{-- <button onclick="finalizeDispatch()" id="finalize" class="btnFinalizeDT btn btn-primary waves-effect float-right">Finalize Dispatch Ticket</button> --}}
-            <button onclick="finalizeDispatch()" class="btnFinalizeDT btn btn-primary waves-effect float-right">Finalize Dispatch Ticket</button>
         </div>
     </div>
 </div>

@@ -106,6 +106,7 @@ Route::group(['prefix'=>'administrator/'],function(){
             Route::get('/teamassignment/{intTeamID}/show','TugboatTeamAssignmentController@show');
             Route::get('/teamassignment/{intTeamID}/viewteam','TugboatTeamAssignmentController@viewteam');
             Route::get('/teamassignment/{intTATeamID}/viewtugboatteam','TugboatTeamAssignmentController@viewtugboatteam');
+            Route::get('/teamassignment/{intTATugboatID}/showtugboatinformation','TugboatTeamAssignmentController@showtugboatinformation');
             Route::post('/teamassignment/store','TugboatTeamAssignmentController@store');
             Route::post('/teamassignment/teamassignment','TugboatTeamAssignmentController@teamassignment');
             Route::post('/teamassignment/cleartugboatteam','TugboatTeamAssignmentController@cleartugboatteam');
@@ -113,7 +114,10 @@ Route::group(['prefix'=>'administrator/'],function(){
             Route::post('/teamassignment/requestteam','TugboatTeamAssignmentController@requestteam');
             Route::post('/teamassignment/requesttugboat','TugboatTeamAssignmentController@requesttugboat');
             Route::post('/teamassignment/forwardteam','TugboatTeamAssignmentController@forwardteam');
+            Route::post('/teamassignment/forwardtugboat','TugboatTeamAssignmentController@forwardtugboat');
             Route::post('/teamassignment/returnteam','TugboatTeamAssignmentController@returnteam');
+            Route::post('/teamassignment/returntugboat','TugboatTeamAssignmentController@returntugboat');
+            Route::post('/teamassignment/notifications','TugboatTeamAssignmentController@notifications');
         });
 
         //Payment and Billing Module
@@ -167,6 +171,9 @@ Route::group(['prefix'=>'administrator/'],function(){
 
         //Dispatch Ticket
         Route::resource('/dispatchticket','DispatchTicketController');
+        Route::get('/dispatchticket','DispatchTicketController@index');
+        Route::get('/dispatchticket/{intDispatchTicketID}/info','DispatchTicketController@info');
+        Route::post('/dispatchticket/AdminAccept','DispatchTicketController@AdminAccept');
         
         //Scheduling
         Route::post('/scheduling/tugboatsavailable','SchedulingController@tugboatsavailable');
@@ -204,6 +211,10 @@ Route::group(['prefix'=>'consignee/'],function(){
     Route::post('/joborders/update','ConsigneeControllers\JobOrdersController@update');
     Route::get('/joborders/{intJobOrderID}/show','ConsigneeControllers\JobOrdersController@show');
 
+    Route::resource('/dispatchticket','ConsigneeControllers\ConsigneeControllerDispatch');
+    Route::get('/dispatchticket','ConsigneeControllers\ConsigneeControllerDispatch@index');
+    Route::get('/dispatchticket/{intDispatchTicketID}/info','ConsigneeControllers\ConsigneeControllerDispatch@info');
+    Route::post('/dispatchticket/store','ConsigneeControllers\ConsigneeControllerDispatch@store');
     // Route::get('/consignee/login','LoginControllers\UserLoginController@index')
 });
 Route::group(['prefix'=>'affiliates/'],function(){

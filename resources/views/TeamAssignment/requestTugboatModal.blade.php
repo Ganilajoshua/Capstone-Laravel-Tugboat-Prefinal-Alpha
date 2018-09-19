@@ -10,7 +10,7 @@
             <div class="modal-body modalBody">
                 <div class="col-12 col-sm-12 col-lg-12">
                     <div class="form-group">
-                        <label for="selectTugboatCompany">Select Company To Forward To<sup class="text-primary">&#10033;</sup></label>
+                        <label for="selectTugboatCompany">Select Recipient of Request<sup class="text-primary">&#10033;</sup></label>
                         <select id="selectTugboatCompany" name="selectTugboatCompany" class="form-control form-control-lg wide">
                             <option>Select Company</option>
                             @foreach($affiliates as $affiliates)
@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-12 col-sm-12 col-lg-12">
                     <div class="form-group">
-                        <label for="exDetails">Extra Details</label>
+                        <label for="exTugboatDetails">Extra Details</label>
                         <textarea class="form-control" id="exTugboatDetails" rows="5" placeholder="Message"></textarea>
                     </div>
                 </div>
