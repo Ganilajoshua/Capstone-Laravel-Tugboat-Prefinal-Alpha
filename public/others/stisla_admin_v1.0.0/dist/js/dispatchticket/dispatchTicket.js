@@ -1,6 +1,6 @@
 $(document).ready(function(){
   $(function() {
-    var signConsigneeDisplay = $('.signConsigneeCanvasDisplay').signature();
+    var signConsignee = $('.signConsigneeCanvasDisplay').signature();
     var signAdmin = $('.signAdminCanvas').signature({
       syncField: '#signatureJSON'
       });
@@ -10,20 +10,21 @@ $(document).ready(function(){
     });
     
     $('.signConsigneeCanvasDisplay').signature(this ? 'disable' : 'disable'); 
-    if ($('.signConsigneeCanvasDisplay').signature('isEmpty')) {
-      $('.btnFinalizeDT').attr('disabled', true);
-      $('.btnFinalizeDT').css('cursor', 'not-allowed');
-  }else {
-    $('.btnFinalizeDT').attr('disabled', false);
-    $('.btnFinalizeDT').css('cursor', 'pointer');
-  }
-});
+  //   if ($('.signConsigneeCanvasDisplay').signature('isEmpty')) {
+  //     $('.btnFinalizeDT').attr('disabled', true);
+  //     $('.btnFinalizeDT').css('cursor', 'not-allowed');
+  // }else {
+  //   $('.btnFinalizeDT').attr('disabled', false);
+  //   $('.btnFinalizeDT').css('cursor', 'pointer');
+  // }
+  });
 
   $('#transactionTree').addClass('active');
   $('#tPaymentBilling').addClass('active');
   $('#menuDispatchTicket').addClass('active');
   $('#menuInvoice').addClass('inactive');
   $('#menuPayment').addClass('inactive');
+  
   // Initialize Datatable
   $('.detailedTable').DataTable( {
     columnDefs: [
@@ -44,12 +45,6 @@ $(document).ready(function(){
     $('.btnView').on('click',function() {
       $('.dispatchTicketTable').css('display','none');
       $('.viewDetails').css('display','block');
-      
-      if ($('.signConsigneeCanvasDisplay').signature('isEmpty')) {
-        
-      }else{
-        return false;  
-      }
     });
     $('.signAdminCanvasDisplay').on('click',function() {
       $('#applyAdminSignModal').modal('show');

@@ -1,0 +1,6 @@
+.signCanvas,.signAdminCanvas{
+    margin-left:8px;
+  }
+  .signAdminCanvas{
+    cursor:not-allowed !important;
+  }

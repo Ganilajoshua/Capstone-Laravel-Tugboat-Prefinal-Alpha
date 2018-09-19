@@ -7,7 +7,7 @@ $(document).ready(function(){
     });
     $('.btnButtons').on('click',function(e){
         e.preventDefault();
-    })
+    });
 // Change Views
     $('.showPending').on('click',function(){
         $('.contractPending').css('display','block');
@@ -34,10 +34,21 @@ $(document).ready(function(){
     });
     $('.btnBack').on('click',function(s) {
         s.preventDefault();
-        window.location = "/administrator/transactions/contractrequests"
+        $('.detLayout').css('display', 'block');
+        $('.editContracts').css('display','none');
       });
     $('.modalClose').on('click',function(){
         $('#applySignatureModal').modal('hide');
+    });
+    $("#discountRange").ionRangeSlider({
+        min: 1,
+        max: 20,
+        from: 1
+    });
+    $("#editDiscountRange").ionRangeSlider({
+        min: 1,
+        max: 20,
+        from: 1
     });
     
 });

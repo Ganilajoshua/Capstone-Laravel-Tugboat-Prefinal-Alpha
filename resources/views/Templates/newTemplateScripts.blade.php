@@ -13,6 +13,8 @@
 <script src="/others/stisla_admin_v1.0.0/dist/modules/bootstrap/js/bootstrap.min.js"></script>
 
 <script src="/others/stisla_admin_v1.0.0/dist/js/sweetalert.min.js"></script>
+<script src="/others/stisla_admin_v1.0.0/dist/modules/pace/pace.min.js"></script>
+
 
 {{-- <script src="/others/stisla_admin_v1.0.0/dist/modules/sweetalert2/sweetalert2.min.js"></script> --}}
 <script src="/others/stisla_admin_v1.0.0/dist/modules/waves/waves.js"></script>

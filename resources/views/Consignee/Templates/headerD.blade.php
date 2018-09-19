@@ -5,7 +5,7 @@
                 <div class="header3-wrap">
                     <div class="header__logo">
                         <a href="">
-                            <img src="/others/stisla_admin_v1.0.0/dist/img/tbPageLogoWhite.png" alt="CoolAdmin">
+                            <img id="navLogo" src="/others/stisla_admin_v1.0.0/dist/img/tbPageLogoWhite2.png" alt="CoolAdmin">
                             {{-- <img src="/others/ConsigneeAssets/dist/img/tbPageLogoWhite.png" alt="CoolAdmin" /> --}}
                         </a>
                     </div>
@@ -29,8 +29,22 @@
                                 <a href="/consignee/contracts">
                                     <i class="fas fa-file-alt"></i>
                                     <span class="bot-line"></span>
-                                    Contracts
+                                    Contract
                                 </a>
+                            </li>
+                            <li class="has-sub" id="tPaymentBillingD">
+                                <a href="#">
+                                    <i class="fas fa-money-bill-alt"></i>
+                                    <span class="bot-line"></span>Payment &amp; Billing<i class="ml-2 fas fa-angle-down"></i>
+                                </a>
+                                <ul class="header3-sub-list list-unstyled">
+                                    <li id="menuDispatchTicketD">
+                                        <a href="/consignee/paymentbilling/dispatchticket">Dispatch Ticket</a>
+                                    </li>
+                                    <li id="menuBillingD">
+                                        <a href="/consignee/paymentbilling/billing">Billing</a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </div>
@@ -76,7 +90,7 @@
                         <div class="account-wrap">
                             <div class="account-item account-item--style2 clearfix js-item-menu">
                                 <div class="image">
-                                    <img src="/others/ConsigneeAssets/images/icon/avatar-01.jpg" alt="John Doe" />
+                                    <img src="/others/stisla_admin_v1.0.0/dist/img/headerM.png" alt="Account Picture" />
                                 </div>
                                 <div class="content">
                                     <a class="js-acc-btn" href="#">{{Auth::user()->name}}</a>
@@ -85,7 +99,7 @@
                                     <div class="info clearfix">
                                         <div class="image">
                                             <a href="#">
-                                                <img src="/others/ConsigneeAssets/images/icon/avatar-01.jpg" alt="John Doe" />
+                                                <img src="/others/stisla_admin_v1.0.0/dist/img/tbLogo.png" alt="Account Picture" />
                                             </a>
                                         </div>
                                         <div class="content">

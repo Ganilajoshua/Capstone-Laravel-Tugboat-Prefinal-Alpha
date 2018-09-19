@@ -17,7 +17,7 @@
     <link href="/others/ConsigneeAssets/vendor/slick/slick.css" rel="stylesheet" media="all">
     <link href="/others/ConsigneeAssets/vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="/others/ConsigneeAssets/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
-
+    <link href={{URL::asset('/others/stisla_admin_v1.0.0/dist/modules/datatables/datatables.css')}} rel="stylesheet" media="all">
     <!-- Main CSS-->
     <link href="/others/ConsigneeAssets/css/theme.css" rel="stylesheet" media="all">
     <link href="/others/ConsigneeAssets/css/custom.css" rel="stylesheet" media="all">

@@ -203,7 +203,13 @@ Route::group(['prefix'=>'consignee/'],function(){
     Route::post('/joborders/{intJobOrderID}/store','ConsigneeControllers\JobOrdersController@store');
     Route::post('/joborders/update','ConsigneeControllers\JobOrdersController@update');
     Route::get('/joborders/{intJobOrderID}/show','ConsigneeControllers\JobOrdersController@show');
-
+    //Payment and Billing
+    Route::group(['prefix'=>'paymentbilling/'],function(){
+        // Route::resource('/')
+        Route::resource('/dispatchticket','ConsigneeControllers\CDispatchTicketController');
+        Route::resource('/billing','ConsigneeControllers\CBillingController');
+        // Route::get('/consignee/login','LoginControllers\UserLoginController@index')
+    });
     // Route::get('/consignee/login','LoginControllers\UserLoginController@index')
 });
 Route::group(['prefix'=>'affiliates/'],function(){

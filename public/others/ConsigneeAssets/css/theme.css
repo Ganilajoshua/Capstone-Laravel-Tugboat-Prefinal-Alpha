@@ -242,7 +242,17 @@ a {
     -moz-transition: all 0.3s ease;
     transition: all 0.3s ease;
 }
-
+#navLogo{
+    height:50px; 
+    width:auto;
+    position: fixed;
+    top:0px;
+}
+#navLogo2{
+    height:50px; 
+    width:auto;
+    top:7px;
+}
 /*-----------------------------------------------------*/
 /*                   OBJECTS                           */
 /*-----------------------------------------------------*/
@@ -442,6 +452,10 @@ section {
     padding-bottom: 30px;
 }
 
+.alert-danger{
+    background: #dc3545;
+    color: white;
+  }
 /*-----------------------------------------------------*/
 /*                   COMPONENTS                        */
 /*-----------------------------------------------------*/
@@ -587,7 +601,7 @@ section {
     border-top: 6px solid #f6f6f6;
     border-right: 6px solid #f6f6f6;
     border-bottom: 6px solid #f6f6f6;
-    border-left: 6px solid #1b1b1b;
+    border-left: 6px solid #00aeff;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
@@ -2815,7 +2829,9 @@ section {
     color: #00aeff;
     background: #f7f7f7;
 }
-
+.header__navbar .header3-sub-list li.active a{
+    color: #00aeff;
+}
 .header__tool {
     display: -webkit-box;
     display: -webkit-flex;
@@ -3161,13 +3177,22 @@ section {
         padding-right: 15px;
     }
 }
-
 .overview-item--c1 {
-    background-image: -moz-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
-    background-image: -webkit-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
-    background-image: -ms-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
+    background: linear-gradient(to top, #2193b0, #6dd5ed);
 }
-
+.overview-item--c1 h2{
+    font-weight:500 !important;
+}
+.overview-item--c1 span{
+    font-weight:400 !important;
+}
+.overview-item--c1 a{
+    font-weight:500 !important;
+    font-size:18px !important;
+}
+.overview-item--c1 a>i{
+    font-size:10px !important;
+}
 .overview-item--c2 {
     background-image: -moz-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
     background-image: -webkit-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);

@@ -3,6 +3,9 @@ var url = '/consignee/contracts';
 $(document).ready(function(){
     $('#menucontractsD').addClass('active');
     $('#menucontractsM').addClass('active');
+    $('#breadPB').hide();
+    $('#breadSlash').hide();
+    $('#breadCurrent').text('Contract');
     console.log($('#user').val());
     $('.btnRequest').on('click',function(e){
         e.preventDefault();
@@ -62,51 +65,63 @@ $(document).ready(function(){
             throw error;
         }
     });
-    
+    $('.signCanvas').mouseup(function(){
+        if ($('.signCanvas').signature('isEmpty')) {
+            $('.btnAcceptContract').attr('disabled', true);
+            $('.btnAcceptContract').css('cursor', 'not-allowed');
+          } else {
+            $('.btnAcceptContract').attr('disabled', false);
+            $('.btnAcceptContract').css('cursor', 'pointer');
+          }
+    });
 });
 
 function requestContracts(companyID){
     console.log(companyID);
+    swal({
+        title: "Request an Initial Contract?",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonClass: "btn-info",
+        confirmButtonText: "Ok",
+    },function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
     
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-
-    $.ajax({
-        url : url + '/store',
-        type : 'POST',
-        data : { 
-            "_token" : $('meta[name="csrf-token"]').attr('content'),    
-            companyID : companyID,
-        }, 
-        beforeSend: function (request) {
-            return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-        },
-        success : function(data){
-            console.log('success pota');
-            console.log(data);
-            swal({
-                title: "Success",
-                text: "Contract Requested",
-                type: "success",
-                showCancelButton: false,
-                confirmButtonClass: "btn-success",
-                confirmButtonText: "Ok",
-                closeOnConfirm: true,
-                timer : 2000
+        $.ajax({
+            url : url + '/store',
+            type : 'POST',
+            data : { 
+                "_token" : $('meta[name="csrf-token"]').attr('content'),    
+                companyID : companyID,
+            }, 
+            beforeSend: function (request) {
+                return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
             },
-            function(isConfirm){
-                if(isConfirm){
-                }
-            });                       
-            setTimeout(window.location = url, 2000); 
-        },
-        error : function(error){
-            throw error;
-        }
-
+            success : function(data){
+                console.log('success pota');
+                console.log(data);
+                swal({
+                    title: "Success",
+                    text: "Contract Requested",
+                    type: "success",
+                    showCancelButton: false,
+                    confirmButtonClass: "btn-success",
+                    confirmButtonText: "Ok",
+                    closeOnConfirm: true,
+                },
+                function(){
+                    window.location = url;
+                });                       
+            },
+            error : function(error){
+                throw error;
+            }
+    
+        });
     });
     
 }
@@ -229,19 +244,6 @@ function showFinalContract(showID){
         }
     });
 }function acceptContractQuotation(){
-    if ($('.signCanvas').signature('isEmpty')) {
-        toastr.error('Please provide a signature first.', 'Signature Pad Empty!', {
-            closeButton: true,
-            debug: false,
-            timeOut: 2000,
-            positionClass: "toast-bottom-right",
-            preventDuplicates: true,
-            showDuration: 300,
-            hideDuration: 300,
-            showMethod: "slideDown",
-            hideMethod: "slideUp"
-        });
-      } else {
         $('#applySignatureModal').modal('hide');
         var contractID = $('#contractsID').val();
         swal({
@@ -259,43 +261,42 @@ function showFinalContract(showID){
                     }
                 });
     
-                $.ajax({
-                    url : url + '/activate',
-                    type : 'POST',
-                    data : { 
-                        "_token" : $('meta[name="csrf-token"]').attr('content'),    
-                        contractID : contractID,
-                    }, 
-                    beforeSend: function (request) {
-                        return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+            $.ajax({
+                url : url + '/activate',
+                type : 'POST',
+                data : { 
+                    "_token" : $('meta[name="csrf-token"]').attr('content'),    
+                    contractID : contractID,
+                }, 
+                beforeSend: function (request) {
+                    return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                },
+                success : function(data){
+                    console.log('success pota');
+                    console.log(data);
+                    swal({
+                        title: "Success",
+                        text: "Contract Request Accepted",
+                        type: "success",
+                        showCancelButton: false,
+                        confirmButtonClass: "btn-success",
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: true,
+                        timer : 2000
                     },
-                    success : function(data){
-                        console.log('success pota');
-                        console.log(data);
-                        swal({
-                            title: "Success",
-                            text: "Contract Request Accepted",
-                            type: "success",
-                            showCancelButton: false,
-                            confirmButtonClass: "btn-success",
-                            confirmButtonText: "Ok",
-                            closeOnConfirm: true,
-                            timer : 2000
-                        },
-                        function(isConfirm){
-                            if(isConfirm){
-                                window.location = url; 
-                            }
-                        });                       
-                    },
-                    error : function(error){
-                        throw error;
-                    }
-    
-                });
-            }else{
-                $('#applySignatureModal').modal('show');
-            }
-        });
-      }
+                    function(isConfirm){
+                        if(isConfirm){
+                            window.location = url; 
+                        }
+                    });                       
+                },
+                error : function(error){
+                    throw error;
+                }
+
+            });
+        }else{
+            $('#applySignatureModal').modal('show');
+        }
+    });
 }

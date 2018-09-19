@@ -4,7 +4,7 @@
             <section class="sectionDark section">
                 <div class="container">
                     <h5 class="section-header text-center" style="text-transform: uppercase;">
-                        <a href="" class="btnBack btn btn-link float-left" data-toggle="tooltip"  title="Back" role="button">
+                        <a href="#" class="btnBack btn btn-link float-left" data-toggle="tooltip"  title="Back" role="button">
                             <i class="ion-chevron-left"></i>
                         </a>
                         Edit Contract For: 
@@ -44,19 +44,19 @@
                                         <div class="col-lg-4">
                                             <div class="form-group helpDelayFee">
                                                 <label for="editStandardRate">Standard Rate(&#8369;)</label>
-                                                <input type="text" name="editStandardRate" id="editStandardRate" class="form-control">
+                                                <input type="number" name="editStandardRate" id="editStandardRate" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group helpDelayFee">
                                                 <label for="editDelayFee">Tugboat Delay Fee (&#8369;)</label>
-                                                <input type="text" name="editDelayFee" id="editDelayFee" class="form-control">
+                                                <input type="number" name="editDelayFee" id="editDelayFee" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group helpViolationFee">
                                                 <label for="editViolationFee">Violation Fee (&#8369;)</label>
-                                                <input type="text" name="editViolationFee" id="editViolationFee" class="form-control">
+                                                <input type="number" name="editViolationFee" id="editViolationFee" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -64,25 +64,25 @@
                                         <div class="col-lg-4">
                                             <div class="form-group helpLateFee">
                                                 <label for="editLateFee">Consignee Late Fee (&#8369;)</label>
-                                                <input type="text" name="editLateFee" id="editLateFee" class="form-control">
+                                                <input type="number" name="editLateFee" id="editLateFee" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group helpDamageFee">
                                                 <label for="addDamageFee">Damage Fee (&#8369;)</label>
                                                 <div class="input-group">
-                                                    <input type="text" id="editMinDamage" class="form-control" placeholder="Minimum">
+                                                    <input type="number" id="editMinDamage" class="form-control" placeholder="Minimum">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="">&amp;</span>
                                                     </div>
-                                                    <input type="text" id="editMaxDamageFee" class="form-control" placeholder="Maximum">
+                                                    <input type="number" id="editMaxDamageFee" class="form-control" placeholder="Maximum">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group helpDiscount">
                                                 <label for="editDiscountRange">Discount (&#37;)</label>
-                                                <input id="editDiscountRange" name="editDiscountRange" class="form-control" required>
+                                                <input type="number" id="editDiscountRange" name="editDiscountRange" class="form-control" required>
                                             </div>
                                         </div>
                                     </div>

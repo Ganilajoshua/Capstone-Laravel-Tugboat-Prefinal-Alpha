@@ -14,6 +14,7 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ" async defer></script>
         <script src="https://maps.googleapis.com/maps/api/js" async defer></script>
         
+        <script src="/others/stisla_admin_v1.0.0/dist/modules/pace/pace.min.js"></script>
         <script src="/others/stisla_admin_v1.0.0/dist/modules/touchSwipe/jquery.touchSwipe.min.js"></script>
         <!-- Template Main Javascript File -->
         <script src="/others/stisla_admin_v1.0.0/dist/js/landingPage.js"></script>

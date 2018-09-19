@@ -4,9 +4,9 @@
     <section class="welcome">
         <div class="container">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 text-center">
                     <h1 class="title-4">Welcome
-                        <span>{{ Auth::user()->name }} !</span>
+                        <span class="text-primary">{{ Auth::user()->name }} !</span>
                     </h1>
                     <hr class="line-seprate">
                 </div>
@@ -65,11 +65,11 @@
                                     </div>
                                     <div class="text">
                                         <h2>No Results Found.</h2>
-                                        <span>You have no ongoing job orders</span>
+                                        <span>You have No Ongoing Job Orders</span>
                                         <div class="mb-5">
                                             <a href="/consignee/joborders" class="text-white mt-5">
                                                 Create and Request A Job Order
-                                                <i class="fas fa-chevron-right"></i>
+                                                <i class="fas fa-chevron-right mb-4"></i>
                                             </a>
                                         </div>
                                     </div>

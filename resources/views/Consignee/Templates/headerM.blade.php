@@ -4,7 +4,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="index.html">
-                            <img src="images/icon/logo-white.png" alt="CoolAdmin" />
+                            <img id="navLogo2" src="/others/stisla_admin_v1.0.0/dist/img/tbPageLogoWhite2.png" alt="CoolAdmin">
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -28,6 +28,18 @@
                         <li id="menucontractM">
                             <a href="/consignee/contracts">
                                 <i class="fas fa-file-alt"></i>Contract</a>
+                        </li>
+                        <li class="has-sub" id="tPaymentBillingM">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-money-bill-alt"></i>Payment &amp; Billing<i class="ml-2 fas fa-angle-down"></i></a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li id="menuDispatchTicketM">
+                                    <a href="/consignee/paymentbilling/dispatchticket">Dispatch Ticket</a>
+                                </li>
+                                <li id="menuBillingM">
+                                    <a href="/consignee/paymentbilling/billing">Billing</a>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -76,7 +88,7 @@
                 <div class="account-wrap">
                     <div class="account-item account-item--style2 clearfix js-item-menu">
                         <div class="image">
-                            <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                            <img src="/others/stisla_admin_v1.0.0/dist/img/tbLogo.png" alt="Account Picture" />
                         </div>
                         <div class="content">
                             <a class="js-acc-btn" href="#">{{Auth::user()->name}}</a>
@@ -85,7 +97,7 @@
                             <div class="info clearfix">
                                 <div class="image">
                                     <a href="#">
-                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                        <img src="/others/stisla_admin_v1.0.0/dist/img/tbLogo.png" alt="Account Picture" />
                                     </a>
                                 </div>
                                 <div class="content">

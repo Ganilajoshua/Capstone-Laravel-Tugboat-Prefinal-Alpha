@@ -84,6 +84,7 @@ $(document).ready(function(){
     e.preventDefault();
     $('.salvageTab').show();
     $('.salvageTab').addClass('animated fadeIn fast');
+    $('.btnGoToChoices').show();
     $('.chooseServiceTab').hide();
   });
   // Add Job Order

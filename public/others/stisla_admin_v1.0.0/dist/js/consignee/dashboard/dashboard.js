@@ -3,6 +3,8 @@ var url = '/consignee/dashboard';
 $(document).ready(function(){
     $('#menudashboardD').addClass('active');
     $('#menudashboardM').addClass('active');
+    $('#breadPB').hide();
+    $('#breadSlash').hide();
     console.log('hi');
 
     $.ajaxSetup({

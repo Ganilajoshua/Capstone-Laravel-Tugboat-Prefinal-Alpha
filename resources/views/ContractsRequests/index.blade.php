@@ -17,7 +17,7 @@
                 </small>
             </div>
         </h1>
-        <div id="detLayout" class="detLayout">
+        <div class="detLayout">
             <div class="card">
                 <div class="card-header">
                     <ul class="nav nav-pills nav-fill">

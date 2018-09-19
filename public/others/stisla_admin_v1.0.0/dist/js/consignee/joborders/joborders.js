@@ -1,6 +1,9 @@
 $(document).ready(function(){
     $('#menujobordersD').addClass('active');
     $('#menujobordersM').addClass('active');
+    $('#breadPB').hide();
+    $('#breadSlash').hide();
+    $('#breadCurrent').text('Job Order');
     $('#submitJob').on('click',function(e){
         e.preventDefault(); 
     })  

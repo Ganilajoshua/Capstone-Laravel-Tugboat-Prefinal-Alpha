@@ -3,6 +3,8 @@ $(document).ready(function(){
     var sig = $('.signCanvas').signature();
     $('.clearCanvas').click(function() {
         sig.signature('clear');
+      $('.btnAcceptContract').attr('disabled', true);
+      $('.btnAcceptContract').css('cursor', 'not-allowed');
     });
   }); 
   $('.btnRequest').on('click',function(event) {

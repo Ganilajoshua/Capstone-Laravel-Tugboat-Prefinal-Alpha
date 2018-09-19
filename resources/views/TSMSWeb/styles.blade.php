@@ -10,3 +10,4 @@
         <link href="/others/stisla_admin_v1.0.0/dist/modules/lightbox/css/lightbox.min.css" rel="stylesheet">
         <link href="/others/stisla_admin_v1.0.0/dist/css/landingPage.css" rel="stylesheet">
         <link href="/others/stisla_admin_v1.0.0/dist/css/landingPageCustom.css" rel="stylesheet">
+        <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/pace/pace-theme-flash.css">

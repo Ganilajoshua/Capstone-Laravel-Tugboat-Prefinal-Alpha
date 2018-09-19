@@ -390,7 +390,7 @@ function saveContracts(){
             console.log(data);
             swal({
                 title: "Success",
-                text: "Contract Activate",
+                text: "Contract Changes sent!",
                 type: "success",
                 showCancelButton: false,
                 confirmButtonClass: "btn-success",

@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>TSMS &mdash; Consignee</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @include('Consignee.Templates.ConsigneeStyles')
     @yield('styles')
+    <link rel="shortcut icon" href="/others/stisla_admin_v1.0.0/dist/img/tbLogo.png">
+    
     
 </head>
 <body class="animsition">

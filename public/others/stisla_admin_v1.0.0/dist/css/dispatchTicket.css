@@ -6,6 +6,9 @@
 .signAdminCanvasDisplay{
     cursor:pointer;
 }
+.signConsigneeCanvasDisplay{
+    cursor:not-allowed;
+  }
 /* .alertConsigneeSign{
     display:none;
 } */

@@ -13,7 +13,13 @@
                                         <li class="list-inline-item seprate">
                                             <span>/</span>
                                         </li>
-                                        <li class="list-inline-item current">Dashboard</li>
+                                        <li class="list-inline-item active" id="breadPB">
+                                            <a href="#">Payment &amp; Billing</a>
+                                        </li>
+                                        <li class="list-inline-item seprate" id="breadSlash">
+                                            <span>/</span>
+                                        </li>
+                                        <li class="list-inline-item current" id="breadCurrent">Dashboard</li>
                                     </ul>
                                 </div>
                                 <form class="au-form-icon--sm" action="" method="post">

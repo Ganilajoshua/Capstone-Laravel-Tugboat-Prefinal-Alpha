@@ -131,10 +131,6 @@
                         <div style="font-size: 18px;" class="mt-4 badge badge-warning text-black disabled">
                             Waiting for Response . . .
                         </div>
-
-                    </div>
-                    <div class="card-footer mt-2">
-                        <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
                     </div>
                 </div>
             </div>

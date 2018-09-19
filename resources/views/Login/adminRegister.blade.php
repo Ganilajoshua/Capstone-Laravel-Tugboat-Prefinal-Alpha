@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/ionicons/css/ionicons.min.css">
         <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
-
+        <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/pace/pace-theme-flash.css">
         <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/css/demo.css">
         <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/css/style.css">
         <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/css/font.css">
@@ -26,7 +26,7 @@
                     <div class="row">
                         <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
                             <div class="login-brand">
-                                <a href="index.html">
+                                <a href="/">
                                     <img id="footerLogo" src="/others/stisla_admin_v1.0.0/dist/img/tbPageLogoBlack.png" alt="Logo">
                                 </a>
                             </div>
@@ -174,6 +174,7 @@
         <script src="/others/stisla_admin_v1.0.0/dist/js/scripts.js"></script>
         <script src="/others/stisla_admin_v1.0.0/dist/js/custom.js"></script>
         <script src="/others/stisla_admin_v1.0.0/dist/js/demo.js"></script>
+        <script src="/others/stisla_admin_v1.0.0/dist/modules/pace/pace.min.js"></script>
     </body>
 
 </html>

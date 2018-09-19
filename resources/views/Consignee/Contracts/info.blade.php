@@ -20,7 +20,7 @@
                 <button class="clearCanvas btn btn-primary btn-sm waves-effect float-left ml-2">Clear Canvas</button> 
             </div>
             <div class="modal-footer">
-                <button onclick="acceptContractQuotation()" class="btn btn-primary waves-effect btnButtons" data-toggle="modal" data-target="#editContractInfo">Accept Contract</button>
+                <button onclick="acceptContractQuotation()" class="btnAcceptContract btn btn-primary waves-effect btnButtons" data-toggle="modal" data-target="#editContractInfo" disabled>Accept Contract</button>
             </div>
         </div>
     </div>

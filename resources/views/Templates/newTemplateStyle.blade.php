@@ -5,6 +5,7 @@
 {{-- <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/sweetalert2/sweetalert2.min.css"> --}}
 <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/bootstrap-datepicker/bootstrap-datepicker.css">
 <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/countrypicker/niceCountryInput.css">
+<link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/pace/pace-theme-flash.css">
 
 
 <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
