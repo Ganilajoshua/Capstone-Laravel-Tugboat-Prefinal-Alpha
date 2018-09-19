@@ -45,7 +45,6 @@ $(document).ready(function(){
             console.log(data);
             console.log(response);
             if((data.available).length == 0 || null){   
-<<<<<<< HEAD
                 toastr.error("You Have No Tugboats Available",'All Tugboat have been Occupied', { 
                     positionClass : 'toast-bottom-right', 
                     preventDuplicates : true, 
@@ -57,13 +56,6 @@ $(document).ready(function(){
                 toastr.warning(`You Have only &nbsp; ${(data.available).length} &nbsp; Tugboat Available`, "You're Almost out of Tugboats!", { positionClass: 'toast-bottom-right', preventDuplicates: true, });
             }else{
                 toastr.success(`You Have &nbsp; ${(data.available).length} &nbsp; Tugboat(s) Available`, "Tugboats Left", { positionClass: 'toast-bottom-right', preventDuplicates: true, });
-=======
-                toastr.error("You Have No Tugboats Available",'All Tugboat have been Occupied');
-            }else if((data.available).length == 1){
-                toastr.warning('You Have only &nbsp;' + (data.available).length + '&nbsp; Tugboat Available', "You're Almost out of Tugboats!");
-            }else{
-                toastr.success('You Have &nbsp;' + (data.available).length + '&nbsp; Tugboat(s) Available', "Tugboats Left");
->>>>>>> 8648a27bddf770dd094663a34b430151a1ab644b
             }                  
         },
         error : function(error){

@@ -62,6 +62,12 @@ cursor: default;
 .toast {
 opacity: 1 !important;
 }
+.border-thick{
+  border : solid 1px #28a745 !important;
+}
+.ultraminicon{
+  font-size: 13.5px;
+}
 .miniIcon{
 font-size:15px;
 }
@@ -143,5 +149,8 @@ th.noSortAction{
 .modal-body {
   max-height: calc(100vh - 200px);
   overflow-y: auto;
+}
+.border-radius-x {
+  border-radius: 3px !important;
 }
 /* Dashboard CSS */

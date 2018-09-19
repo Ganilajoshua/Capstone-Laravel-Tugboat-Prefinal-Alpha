@@ -106,6 +106,7 @@ Route::group(['prefix'=>'administrator/'],function(){
             Route::get('/teamassignment/{intTeamID}/show','TugboatTeamAssignmentController@show');
             Route::get('/teamassignment/{intTeamID}/viewteam','TugboatTeamAssignmentController@viewteam');
             Route::get('/teamassignment/{intTATeamID}/viewtugboatteam','TugboatTeamAssignmentController@viewtugboatteam');
+            Route::get('/teamassignment/{intTATugboatID}/showtugboatinformation','TugboatTeamAssignmentController@showtugboatinformation');
             Route::post('/teamassignment/store','TugboatTeamAssignmentController@store');
             Route::post('/teamassignment/teamassignment','TugboatTeamAssignmentController@teamassignment');
             Route::post('/teamassignment/cleartugboatteam','TugboatTeamAssignmentController@cleartugboatteam');
@@ -113,7 +114,10 @@ Route::group(['prefix'=>'administrator/'],function(){
             Route::post('/teamassignment/requestteam','TugboatTeamAssignmentController@requestteam');
             Route::post('/teamassignment/requesttugboat','TugboatTeamAssignmentController@requesttugboat');
             Route::post('/teamassignment/forwardteam','TugboatTeamAssignmentController@forwardteam');
+            Route::post('/teamassignment/forwardtugboat','TugboatTeamAssignmentController@forwardtugboat');
             Route::post('/teamassignment/returnteam','TugboatTeamAssignmentController@returnteam');
+            Route::post('/teamassignment/returntugboat','TugboatTeamAssignmentController@returntugboat');
+            Route::post('/teamassignment/notifications','TugboatTeamAssignmentController@notifications');
         });
 
         //Payment and Billing Module
