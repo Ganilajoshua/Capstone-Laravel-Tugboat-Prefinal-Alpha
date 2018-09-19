@@ -10,680 +10,104 @@ $(document).ready(function(){
     $('#menuScheduling').addClass('inactive');
     $('#menuHauling').addClass('inactive');;
     
+    // Define Ajax Setup Headers For CSRF Token
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
 
-    // $('.captCheckbox').click(function(){
-        
-    // });
     $('.teamTugboat').on('click',function(event){
         event.preventDefault();
     });
-    //Close Button 
-    $('.modalCloseButton').on('click',function(event){
-        $('#viewTeamCompositionModal').modal('hide');
+
+    $.ajax({
+        url : `${url}/notifications`,
+        type : 'POST',
+        data : {
+            "_token" : $('meta[name="csrf-token"]').attr('content'),
+        },
+        beforeSend:(request)=>{
+            return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+        },
+        success : (data, response)=>{
+            console.log('success pota');
+            console.log(data);
+            var tugboatnotifs = data.tugboatsreceived.length;
+            var teamnotifs = data.teamsreceived.length;
+
+            console.log(response);     
+            if((data.teamsreceived).length != 0){
+                var appendTeamBadge = 
+                `<span class="badge badge-danger border-radius-x float-right badgeTeamNotif" data-tooltip="tooltip" title="You Have ${data.teamsreceived.length} Notifications">${data.teamsreceived.length}</span>`;
+                $(appendTeamBadge).appendTo('#pillsReceivedTeam-tab');
+            }
+            if((data.tugboatsreceived).length != 0){  
+                var appendTeamBadge = 
+                `<span class="badge badge-danger border-radius-x float-right badgeTugboatNotif" data-tooltip="tooltip" title="You Have ${data.tugboatsreceived.length} Notifications">${data.tugboatsreceived.length}</span>`;
+                $(appendTeamBadge).appendTo('#pillsReceivedTugboat-tab');
+            }
+            
+        },
+        error : function(error){
+            throw error;
+        }
     });
 });
 
 var checkbox = $('.employeesCheckbox:checkbox');
 
-$('.captCheckbox').on('change',function(){
-    // if($(this).checked){
-    //     console.log('hi checked');
-    // }
-    var id = $(this).data('id');
-    var name = $(this).data('name');
-    var position = $(this).data('position');    
-    if($(this).prop('checked') == true){
-        console.log('HI');
-        console.log(id , name);
-        appendSelected =
-        `<div class="col-lg-4 col-md-12 col-sm-12"  id="addCaptain${id}">
-            <div class="card bg-primary">
-                <div class="card-header">
-                    <h4>${name}</h4>
-                    <small>${position}</small>
-                </div>
-            </div>
-        </div>`;
-        $(appendSelected).appendTo('.viewSelected');                                
-    }else{
-        console.log('PAYAMAN');
-        console.log(id, name);
-        $(`#addCaptain${id}`).fadeOut(200,function(){
-            $(this).remove();
-        });
-    }
-});
+// // Return Tugboats
+// $('.returnTugboat').on('click',function(){
+//     console.log('HI');
+//     console.log($(this).data('id'));
+//     var id = $(this).data('id');
 
-$('.chiefCheckbox').on('change',function(){
-    var id = $(this).data('id');
-    var name = $(this).data('name');
-    var position = $(this).data('position');
-    if($(this).prop('checked') == true){
-        console.log('HI');
-        console.log(id , name);
-        appendSelected =
-        `<div class="col-lg-4 col-md-12 col-sm-12" id="addChief${id}">
-            <div class="card bg-info" id="addDismissChiefCard${id}">
-                <div class="card-header">
-                    <h4>${name}</h4>
-                    <small>${position}</small>
-                </div>
-            </div>
-        </div>`;
-        $(appendSelected).appendTo('.viewSelected');                                
-    }else{
-        console.log('PAYAMAN');
-        console.log(id, name);
-        $(`#addChief${id}`).fadeOut(200,function(event){
-            $(this).remove();
-        });
-    }
-});
-
-$('.crewCheckbox').on('change',function(){
-    var id = $(this).data('id');
-    var name = $(this).data('name');
-    var position = $(this).data('position');
-    if($(this).prop('checked') == true){
-        console.log('HI');
-        console.log(id , name);
-        appendSelected =
-        `<div class="col-lg-4 col-md-12 col-sm-12" id="addCrew${id}">
-            <div class="card bg-dark">
-                <div class="card-header">
-                    <h4>${name}</h4>
-                    <small>${position}</small>
-                </div>
-            </div>
-        </div>`;
-        $(appendSelected).appendTo('.viewSelected');                                
-    }else{
-        console.log('PAYAMAN');
-        console.log(id, name);
-        $(`#addCrew${id}`).fadeOut(200,function(event){
-            $(this).remove();
-        });
-    }
-});
-
-// View Team Composition Modal
-$('.viewTeamButton').on('click',function(event){
-    event.preventDefault();
-    console.log($(this).data('id'));
-    var viewID = $(this).data('id');
-    console.log('aaaaaaaak');
-    $.ajax({
-        url : url + '/' + viewID + '/viewteam', 
-        type : 'GET',
-        dataType : 'JSON',
-        success : function(data){
-            $('.viewTeamCard').empty();
-            console.log(data)
-            console.log();
-            if((data.employees).length == 0){
-                $('#viewTeamCompositionModal').modal('show');
-            }else{
-                for(var counter=0; counter < (data.employees).length; counter++){
-                    var colorString;
-                    if(data.employees[counter].strPositionName == 'Captain'){
-                        colorString = 'primary';
-                    }else if(data.employees[counter].strPositionName == 'Chief Engineer'){
-                        colorString = 'info';
-                    }else if(data.employees[counter].strPositionName == 'Crew'){
-                        colorString = 'dark';
-                    }else{
-                        colorString = 'success';
-                    }
-                    console.log(data.employees[counter]);
-                    var appendData = 
-                    `
-                        <div class="col-auto">
-                            <div class="card bg-${colorString}">
-                                <div class="card-body">
-                                    <p class="card-text text-center ml-2">${data.employees[counter].strLName},&nbsp;${data.employees[counter].strFName}</p>
-                                    <small class="text-center float-left" style="text-transform: uppercase;">
-                                        ${data.employees[counter].strPositionName}
-                                    </small>    
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    $(appendData).appendTo('.viewTeamCard');
-                    $('#viewTeamCompositionModal').modal('show');
-                }
-            }
-        },
-        error : function(error){
-            throw error;
-        }
-    })
-
-});
-
-// Team Card Edit Button 
-$('.editButton').on('click',function(){
-    console.log($(this).data('id'));
-    var viewID = $(this).data('id')
-    $.ajax({
-        url : url + '/' + viewID + '/viewteam', 
-        type : 'GET',
-        dataType : 'JSON',
-        success : function(data){
-            $('.editTeam').empty();
-            console.log(data)
-            console.log();
-            for(var counter=0; counter < (data.employees).length; counter++){
-                var colorString;
-                if(data.employees[counter].strPositionName == 'Captain'){
-                    colorString = 'primary';
-                }else if(data.employees[counter].strPositionName == 'Chief Engineer'){
-                    colorString = 'info';
-                }else if(data.employees[counter].strPositionName == 'Crew'){
-                    colorString = 'dark';
-                }else{
-                    colorString = 'success';
-                }
-                console.log(data.employees[counter].intEmployeeID);
-                var appendData = 
-                `
-                
-                    <div class="col-auto">
-                        <div class="card bg-${colorString}">
-                            <div class="card-body">
-                                <div class="custom-control custom-checkbox custom-control-inline">
-                                    <input type="checkbox" id="addCheckEmployees${data.employees[counter].intEmployeeID}" name="employees[]" value="${data.employees[counter].intEmployeeID}" class="custom-control-input employeesCheckbox">
-                                    <label class="custom-control-label" for="addCheckEmployees${data.employees[counter].intEmployeeID}">
-                                        <p class="card-text text-center ml-2">${data.employees[counter].strLName},&nbsp;${data.employees[counter].strFName}</p>
-                                        <small class="text-center float-right" style="text-transform: uppercase;">
-                                           ${data.employees[counter].strPositionName}
-                                        </small>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                  
-                `;
-                $(appendData).appendTo('.editTeam');
-                // $('#viewTeamCompositionModal').modal('show');
-                $('#editTeamModal').modal('show');
-            }
-        },
-        error : function(error){
-            throw error;
-        }
-    })
-});
-
-// Edit Select All Employees
-$('.selectAll').on('click',function(){
-    console.log('hi');    
-    $('.employeesCheckbox').prop('checked',true);
-});
-
-// Edit Deselect All Employees
-$('.deselectAll').on('click',function(){
-    console.log('hi');    
-    $('.employeesCheckbox').prop('checked',false);
-});
-
-// Close Any Modal
-$('.closeInfoModal').on('click',function(){
-    $('.modal').modal('hide');
-});
-
-// Show Tugboat Team
-$('.occupiedTugboats').on('click',function(event){
-    event.preventDefault();
-    console.log('kyaaa');
-    var teamID = $(this).data('id');
-    console.log(teamID);
-
-    $.ajax({
-        url : url + '/' + teamID + '/viewtugboatteam', 
-        type : 'GET',
-        dataType : 'JSON',
-        success : function(data){
-            $('.viewTeamInfo').empty();
-            console.log(data)
-            console.log();
-            $('.tugboatname').html(data.team[0].strName);
-            $('.removeTugboatTeam').data('id',data.team[0].intTAssignID);
-            $('.teamname').html('Team Name :&nbsp;' + data.team[0].strTeamName);
-            for(var counter=0; counter < (data.team).length; counter++){
-                var colorString;
-                if(data.team[counter].strPositionName == 'Captain'){
-                    colorString = 'primary';
-                }else if(data.team[counter].strPositionName == 'Chief Engineer'){
-                    colorString = 'info';
-                }else if(data.team[counter].strPositionName == 'Crew'){
-                    colorString = 'dark';
-                }else{
-                    colorString = 'success';
-                }
-                console.log(data.team[counter].intEmployeeID);
-                var appendData = 
-                `
-                    <div class="col-auto">
-                        <div class="card bg-${colorString}">
-                            <div class="card-body">
-                                <div class="custom-control custom-checkbox custom-control-inline">
-                                    <input type="checkbox" id="addCheckEmployees${data.team[counter].intEmployeeID}" name="employees[]" value="${data.team[counter].intEmployeeID}" class="custom-control-input employeesCheckbox">
-                                    <label class="custom-control-label" for="addCheckEmployees${data.team[counter].intEmployeeID}">
-                                        <p class="card-text text-center ml-2">${data.team[counter].strLName},&nbsp;${data.team[counter].strFName}</p>
-                                        <small class="text-center float-right" style="text-transform: uppercase;">
-                                           ${data.team[counter].strPositionName}
-                                        </small>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                  
-                `;
-                $(appendData).appendTo('.viewTeamInfo');
-                // $('#viewTeamCompositionModal').modal('show');
-                $('#viewTeamModal').modal('show');
-            }
-        },
-        error : function(error){
-            throw error;
-        }
-    })
-});
-
-// Remove Team From Selected Tugboat
-$('.removeTugboatTeam').on('click',function(event){
-    var id = $('.removeTugboatTeam').data('id');
-    console.log(id);
-    swal({
-        title: "Are You Sure?",
-        text: "Do you want to remove the Team Assigned for this Tugboat?",
-        type: "error",
-        showCancelButton: true,
-        confirmButtonClass: "btn-danger",
-        confirmButtonText: "Ok",
-        closeOnConfirm: true,
-        timer : 1500
-
-    },(isConfirm)=>{
-        if(isConfirm){
-            console.log('heyaaaa');
-            $.ajax({
-                url : url + '/cleartugboatteam',
-                type : 'POST',
-                data : { 
-                    "_token" : $('meta[name="csrf-token"]').attr('content'),    
-                    tugboatassignID : id
-                }, 
-                beforeSend : (request)=>{
-                    return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-                },
-                success : (data, response) =>{
-                    console.log('success pota');
-                    console.log(data);
-                    console.log(response);
-                    swal({
-                        title: "Success",
-                        text: "Team Removed",
-                        type: "success",
-                        showCancelButton: false,
-                        confirmButtonClass: "btn-success",
-                        confirmButtonText: "Ok",
-                        closeOnConfirm: true,
-                        timer : 1500
-                    },(isConfirm)=>{
-                        window.location = url;
-                    });                       
-                },
-                error : function(error){
-                    throw error;
-                }
-        
-            });
-        }
-    });
-});
-
-// Remove Employees From Team
-$('.removeTeamEmployees').on('click',function(){
-    id = $(this).data('id');
-    console.log(id);
-    swal({
-        title: "Are You Sure?",
-        text: "Remove Employees From This Team",
-        type: "error",
-        showCancelButton: true,
-        confirmButtonClass: "btn-danger",
-        confirmButtonText: "Ok",
-        closeOnConfirm: true,
-    },(isConfirm)=>{
-        $.ajax({
-            url : url + '/removeteamemployees',
-            type : 'POST',
-            data : { 
-                "_token" : $('meta[name="csrf-token"]').attr('content'),    
-                teamID : id,
-            }, 
-            beforeSend: function (request) {
-                return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-            },
-            success : function(data, response){
-                console.log('success pota');
-                console.log(data);
-                console.log(response);
-                swal({
-                    title: "Success",
-                    text: "Employees Removed",
-                    type: "success",
-                    showCancelButton: false,
-                    confirmButtonClass: "btn-success",
-                    confirmButtonText: "Ok",
-                    closeOnConfirm: true,
-                },
-                function(){
-                    window.location = url;
-                });                       
-            },
-            error : function(error){
-                throw error;
-            }
-    
-        });
-    });
-
-    return false;
-
-
-});
-
-// Request Team Modal
-$('.requestTeamButtonModal').on('click',function(){
-    $('#requestTeamModal').modal('show');
-});
-
-// Request Team
-$('.requestTeam').on('click',function(){
-    var companyID = $('#selectCompany').val();
-    var details = $('#exDetails').val();
-    console.log(companyID, details);
-    swal({
-        title: "Are you sure?",
-        text: "Request For Extra Team(s)?",
-        type: "info",
-        showCancelButton: true,
-        confirmButtonClass: "btn-info",
-        confirmButtonText: "Ok",
-        closeOnConfirm: true,
-    },(isConfirm)=>{
-        // return false;
-        $.ajax({
-            url : `${url}/requestteam`,
-            type : 'POST',
-            data : { 
-                "_token" : $('meta[name="csrf-token"]').attr('content'),
-                requestForwardCompanyID : companyID,
-                requestDetails : details,
-            }, 
-            beforeSend: (request)=>{
-                return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-            },
-            success : (data, response)=>{
-                console.log('success pota');
-                console.log(data);
-                console.log(response);
-                swal({
-                    title: "Success",
-                    text: "Team Requested",
-                    type: "success",
-                    showCancelButton: false,
-                    confirmButtonClass: "btn-success",
-                    confirmButtonText: "Ok",
-                    closeOnConfirm: true,
-                    timer : 1500
-                },
-                (isConfirm)=>{
-                    if(isConfirm){
-                        location.reload();
-                    }
-                });                       
-            },
-            error : function(error){
-                throw error;
-            }
-
-        });
-    });
-});
-
-// Request Additional Tugboats Modal
-$('.requestTugboatButtonModal').on('click',function(){
-    $('#requestTugboatModal').modal('show');
-}); 
-
-// Request Additional Tugboats
-$('.requestTugboat').on('click',function(){
-    console.log('yyeaaaaaaaaaaa');
-    var companyID = $('#selectTugboatCompany').val();
-    var details = $('#exTugboatDetails').val();
-
-    console.log(companyID, details);
-    swal({
-        title: "Are you sure?",
-        text: "Request For Extra Tugboat(s)?",
-        type: "info",
-        showCancelButton: true,
-        confirmButtonClass: "btn-info",
-        confirmButtonText: "Ok",
-        closeOnConfirm: true,
-    },(isConfirm)=>{
-        $.ajax({    
-            url : `${url}/requesttugboat`,
-            type : 'POST',
-            data : { 
-                "_token" : $('meta[name="csrf-token"]').attr('content'),
-                requestForwardCompanyID : companyID,
-                requestDetails : details,
-            }, 
-            beforeSend: (request)=>{
-                return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-            },
-            success : (data, response)=>{
-                console.log('success pota');
-                console.log(data);
-                console.log(response);
-                swal({
-                    title: "Success",
-                    text: "Tugboat(s) Requested",
-                    type: "success",
-                    showCancelButton: false,
-                    confirmButtonClass: "btn-success",
-                    confirmButtonText: "Ok",
-                    closeOnConfirm: true,
-                    timer : 1500
-                },
-                (isConfirm)=>{
-                    if(isConfirm){
-                        location.reload();
-                    }
-                });                       
-            },
-            error : function(error){
-                throw error;
-            }
-
-        });
-    }); 
-});
-
-// Forward Team Modal
-$('.forwardTeamButtonModal').on('click',function(){
-    console.log('Forwaaard');
-
-    console.log($(this).data('id'));
-    var id = $(this).data('id')
-    // return false;
-    swal({
-        title: "Are you sure?",
-        text: "Forward This Team?, If this team is assigned the assignment will be removed",
-        type: "info",
-        showCancelButton: true,
-        confirmButtonClass: "btn-info",
-        confirmButtonText: "Ok",
-        closeOnConfirm: true,
-    },(isConfirm)=>{
-        $.ajax({
-            url : `${url}/${id}/viewteam`, 
-            type : 'GET',
-            dataType : 'JSON',
-            success : function(data){
-                $('.viewTeamInfo').empty();
-                $('.teamname').empty();
-                $('.teamname').html(data.employees[0].strTeamName);
-                $('#forwardModal').data('id',id);
-                console.log(data)
-                console.log();
-                if((data.employees).length == 0){
-                    // $('#viewTeamCompositionModal').modal('show');
-                }else{
-                    for(var counter=0; counter < (data.employees).length; counter++){
-                        var colorString;
-                        if(data.employees[counter].strPositionName == 'Captain'){
-                            colorString = 'primary';
-                        }else if(data.employees[counter].strPositionName == 'Chief Engineer'){
-                            colorString = 'info';
-                        }else if(data.employees[counter].strPositionName == 'Crew'){
-                            colorString = 'dark';
-                        }else{
-                            colorString = 'success';
-                        }
-                        console.log(data.employees[counter]);
-                        var appendData = 
-                        `
-                            <div class="col-auto">
-                                <div class="card bg-${colorString}">
-                                    <div class="card-body">
-                                        <p class="card-text text-center ml-2">${data.employees[counter].strLName},&nbsp;${data.employees[counter].strFName}</p>
-                                        <small class="text-center float-left" style="text-transform: uppercase;">
-                                            ${data.employees[counter].strPositionName}
-                                        </small>    
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-                        $(appendData).appendTo('.viewTeamInfo');
-                        $('#forwardModal').modal('show');
-                    }
-                }
-            },
-            error : function(error){
-                throw error;
-            }
-        })
-    });
-});
-
-// Forward Team
-$('.forwardTeamButton').on('click',function(){
-    console.log($('#forwardModal').data('id'));
-    id = $('#forwardModal').data('id');
-    company = $('#selectForwardCompany').val();
-
-    console.log(id, company);
-    // return false;
-    $.ajax({
-        url : `${url}/forwardteam`,
-        type : 'POST',
-        data : { 
-            "_token" : $('meta[name="csrf-token"]').attr('content'),    
-            teamID : id, 
-            companyID : company,
-        }, 
-        beforeSend: function (request) {
-            return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-        },
-        success : function(data, response){
-            console.log('success pota');
-            console.log(data);
-            console.log(response);
-            swal({
-                title: "Success",
-                text: "Team Forwarded",
-                type: "success",
-                showCancelButton: false,
-                confirmButtonClass: "btn-success",
-                confirmButtonText: "Ok",
-                closeOnConfirm: true,
-                timer : 1500
-            },
-            function(){
-                window.location = url;
-            });                       
-        },
-        error : function(error){
-            throw error;
-        }
-
-    });
-});
-
-// Return Team 
-$('.returnTeam').on('click',function(){
-    console.log('heyaaaa');
-    console.log($(this).data('id'));
-    var id = $(this).data('id')
-    swal({
-        title: "Are you Sure?",
-        text: "Return This Team?",
-        type: "info",
-        showCancelButton: true,
-        confirmButtonClass: "btn-info waves-effect",
-        confirmButtonText: "Ok",
-        closeOnConfirm: true
-    },(isConfirm)=>{
-        // return false;
-        $.ajax({
-            url : `${url}/returnteam`,
-            type : 'POST',
-            data : { 
-                "_token" : $('meta[name="csrf-token"]').attr('content'),    
-                teamID : id,
-            }, 
-            beforeSend:  (request)=>{
-                return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-            },
-            success : (data, response)=>{
-                console.log('success pota');
-                console.log(data);
-                console.log(response);
-                swal({
-                    title: "Success",
-                    text: "Team Returned",
-                    type: "success",
-                    showCancelButton: false,
-                    confirmButtonClass: "btn-success",
-                    confirmButtonText: "Ok",
-                    closeOnConfirm: true,
-                    timer : 1500
-                },(isConfirm)=>{
-                    if(isConfirm){
-                        window.location = url;
-                    }
-                });                       
-            },
-            error : (error)=>{
-                throw error;
-            }
-    
-        });
-    
-    });
-});
+//     swal({
+//         title: "Are you Sure?",
+//         text: "Return This Team?",
+//         type: "info",
+//         showCancelButton: true,
+//         confirmButtonClass: "btn-info waves-effect",
+//         confirmButtonText: "Ok",
+//         closeOnConfirm: true
+//     },(isConfirm)=>{
+//         // return false;
+//         $.ajax({
+//             url : `${url}/returntugboat`,
+//             type : 'POST',
+//             data : { 
+//                 "_token" : $('meta[name="csrf-token"]').attr('content'),    
+//                 tugboatassignID : id,
+//             }, 
+//             beforeSend:  (request)=>{
+//                 return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+//             },
+//             success : (data, response)=>{
+//                 console.log('success pota');
+//                 console.log(data);
+//                 console.log(response);
+//                 swal({
+//                     title: "Success",
+//                     text: "Team Returned",
+//                     type: "success",
+//                     showCancelButton: false,
+//                     confirmButtonClass: "btn-success",
+//                     confirmButtonText: "Ok",
+//                     closeOnConfirm: true,
+//                     timer : 1500
+//                 },(isConfirm)=>{
+//                     if(isConfirm){
+//                         window.location = url;
+//                     }
+//                 });                       
+//             },
+//             error : (error)=>{
+//                 throw error;
+//             }
+//         });
+//     });
+// });
 
 function showTeamAssignment(teamID){
     var clone = $('.clonedTry').clone();

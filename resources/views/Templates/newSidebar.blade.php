@@ -102,7 +102,7 @@
                                         <li id="menuForwardReq"><a href="/administrator/transactions/forwardrequests"><i class="ion-ios-upload"></i>Forward Requests</a></li>
                                         <li id="menuJobOrder"><a class="waves-effect" href="/administrator/transactions/joborders"><i class="ion ion-ios-list"></i>Job Order</a></li>
                                         <li id="menuTugboatAssignment"><a class="waves-effect" href="/administrator/transactions/tugboatassignment"><i class="ion ion-android-boat"></i>Tugboat Assignment</a></li>
-                                        <li id="menuTeamBuilder"><a class="waves-effect" href="/administrator/transactions/teamassignment"><i class="ion ion-ios-people"></i>Team Builder</a></li>
+                                        <li id="menuTeamBuilder"><a class="waves-effect" href="/administrator/transactions/dispatchandhauling/teamassignment"><i class="ion ion-ios-people"></i>Team Builder</a></li>
                                         <li id="menuScheduling"><a href="/administrator/transactions/scheduling"><i class="fas fa-calendar-alt"></i>Schedule</a></li>
                                         <li id="menuHauling"><a href="/administrator/transactions/hauling"><i class="fas fa-link"></i>Hauling</a></li>
                                         {{-- <li id="menuScheduling"><a class="waves-effect" href=""><i class="ion ion-ios-time"></i>Scheduling</a></li> --}}

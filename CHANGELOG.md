@@ -3,6 +3,16 @@
 
 &nbsp;
 
+# 1.0.0 - 2018-09-17 α
+
+`new`
+
+### Payment and Billing Module
+- [x] Dispatch Ticket
+- [x] Invoice
+- [x] Post Billing Ticket 
+- [x] Payment
+
 # 0.0.11 - 2018-09-15 α
 
 - [x] Added Forward Requests Page under /administrator/transactions/forwardrequests

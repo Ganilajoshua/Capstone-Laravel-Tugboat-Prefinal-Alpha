@@ -75,7 +75,7 @@
                                         @endif
                                         </div>
                                         <div class="tab-pane fade" id="pillsReceivedTugboat" role="tabpanel" aria-labelledby="pillsReceivedTugboat-tab">
-                                            <button class="float-right btn btn-block btn-primary waves-effect mb-3 btnRequestTeam"><i class="fas fa-plus mr-2"></i>Request Team</button>
+                                            {{-- <button class="float-right btn btn-block btn-primary waves-effect mb-3 btnRequestTeam"><i class="fas fa-plus mr-2"></i>Request Team</button> --}}
                                         </div>
                                     </div>
                                 </div>

@@ -1,8 +1,8 @@
-<div class="modal fade " id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg tugboatInfoModal" role="document">
+<div class="modal fade " id="tugboatInfoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg tugboatInfoInfoModal" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="infoModalLabel"><i class="fas fa-ship"></i>    Energy Sun</h5>
+                <h5 class="modal-title" id="infoModalLabel"><i class="fas fa-ship"></i><span id="titleTugboatInfoName"></span></h5>
                 <button type="button" class="close modalClose"></button>
                 <span aria-hidden="true"><i class="ion-close-round"></i></span>
                 </button>
@@ -40,8 +40,8 @@
                     <div class="row">
                         <div class="col align-self-center">
                             <table class="table table-striped">
-                                <thead class="bg-primary">
-                                    <tr>
+                                <thead class="bg-primary text-white">
+                                    <tr class="text-white">
                                         <th scope="col">Main Information</th>
                                         <th scope="col"></th>
                                     </tr>
@@ -49,51 +49,51 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row">Name</th>
-                                        <td id="tugboatName"></td>
+                                        <td id="tugboatInfoName"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Length</th>
-                                        <td id="tugboatLength"></td>
+                                        <td id="tugboatInfoLength"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Breadth</th>
-                                        <td id="tugboatBreadth"></td>
+                                        <td id="tugboatInfoBreadth"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Depth</th>
-                                        <td id="tugboatDepth"></td>
+                                        <td id="tugboatInfoDepth"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Horse Power</th>
-                                        <td id="tugboatHorsePower"></td>
+                                        <td id="tugboatInfoHorsePower"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Maximum Speed</th>
-                                        <td id="tugboatMaxSpeed"></td>
+                                        <td id="tugboatInfoMaxSpeed"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Bollard Pull</th>
-                                        <td id="tugboatBollardPull"></td>
+                                        <td id="tugboatInfoBollardPull"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Gross Tonnage</th>
-                                        <td id="tugboatGrossTonnage"></td>
+                                        <td id="tugboatInfoGrossTonnage"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Net Tonnage</th>
-                                        <td id="tugboatNetTonnage"></td>
+                                        <td id="tugboatInfoNetTonnage"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Last Dry Docked</th>
-                                        <td id="tugboatDryDocked"></td>
+                                        <td id="tugboatInfoDryDocked"></td>
                                     </tr>
                                     {{-- <tr>
                                         <th scope="row">License Number</th>
-                                        <td id="tugboatLicenseNum"></td>
+                                        <td id="tugboatInfoLicenseNum"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">License Expiration Date</th>
-                                        <td id="tugboatLicenseExp"></td>
+                                        <td id="tugboatInfoLicenseExp"></td>
                                     </tr> --}}
                                 </tbody>
                             </table>
@@ -113,35 +113,35 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row">Location Built</th>
-                                        <td id="tugboatLocationBuilt"></td>
+                                        <td id="tugboatInfoLocationBuilt"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Date Built</th>
-                                        <td id="tugboatDateBuilt"></td>
+                                        <td id="tugboatInfoDateBuilt"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Builder</th>
-                                        <td id="tugboatBuilder"></td>
+                                        <td id="tugboatInfoBuilder"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Maker Power</th>
-                                        <td id="tugboatMakerPower"></td>
+                                        <td id="tugboatInfoMakerPower"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Hull Material</th>
-                                        <td id="tugboatHullMaterial"></td>
+                                        <td id="tugboatInfoHullMaterial"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Drive</th>
-                                        <td id="tugboatDrive"></td>
+                                        <td id="tugboatInfoDrive"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Cylinder per Cycle</th>
-                                        <td id="tugboatCylCycle"></td>
+                                        <td id="tugboatInfoCylCycle"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Auxiliary Engine</th>
-                                        <td id="tugboatAuxEngine"></td>
+                                        <td id="tugboatInfoAuxEngine"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -157,57 +157,57 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row">Classification Number</th>
-                                        <td id="tugboatClassNum"></td>
+                                        <td id="tugboatInfoClassNum"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Official Number</th>
-                                        <td id="tugboatOfficialNum"></td>
+                                        <td id="tugboatInfoOfficialNum"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">IMO Number</th>
-                                        <td id="tugboatIMONum"></td>
+                                        <td id="tugboatInfoIMONum"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Flag</th>
-                                        <td id="tugboatFlag"></td>
+                                        <td id="tugboatInfoFlag"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Type</th>
-                                        <td id="tugboatType"></td>
+                                        <td id="tugboatInfoType"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Trading Area</th>
-                                        <td id="tugboatTradingArea"></td>
+                                        <td id="tugboatInfoTradingArea"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Home Port</th>
-                                        <td id="tugboatHomePort"></td>
+                                        <td id="tugboatInfoHomePort"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">ISPS Code Compliance</th>
-                                        <td id="tugboatISPSCode"></td>
+                                        <td id="tugboatInfoISPSCode"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">ISM Code Standard</th>
-                                        <td id="tugboatISMCode"></td>
+                                        <td id="tugboatInfoISMCode"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">AIS,GPS,VHF,Radar</th>
-                                        <td id="tugboatNavEquipments"></td>
+                                        <td id="tugboatInfoNavEquipments"></td>
                                     </tr>
                                     <tr>
                                         <th scope="row">Insurances</th>
-                                        <td id="tugboatInsurances"></td>
+                                        <td id="tugboatInfoInsurances"></td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <input type="hidden" id="tugboatID">
+                            <input type="hidden" id="tugboatInfoID">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button onclick="infoEdit()" role="button" class="btn btn-primary">Edit Information</button>
+                <button role="button" class="btn btn-primary">Close</button>
             </div>
         </div>
     </div>
