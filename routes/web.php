@@ -82,13 +82,21 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::get('/tugboat/{intTugboatMainID}/please','TugboatController@please');
         Route::get('/tugboat/{intTugboatMainID}/delete','TugboatController@delete');
         Route::get('/tugboat/{intTugboatMainID}/destroy','TugboatController@destroy');
+
+        Route::resource('/vesseltype','VesselTypeController');
+        Route::post('/vesseltype/store','VesselTypeController@store');
+        Route::post('/vesseltype/update','VesselTypeController@update');
+        Route::post('/vesseltype/activate','VesselTypeController@activate');
+        Route::get('/vesseltype/{intVesselTypeID}/edit','VesselTypeController@edit');
+        Route::get('/vesseltype/{intVesselTypeID}/delete','VesselTypeController@delete');
+        Route::get('/vesseltype/{intVesselTypeID}/destroy','VesselTypeController@destroy');
         
-        Route::resource('/quotations','QuotationsController');
-        Route::post('/quotations/store','QuotationsController@store');
-        Route::post('/quotations/update','QuotationsController@update');
-        Route::get('/quotations/{intQuotationID}/show','QuotationsController@show');
-        Route::get('/quotations/{intQuotationID}/edit','QuotationsController@edit');
-        Route::get('/quotations/{intQuotationID}/delete','QuotationsController@delete');
+        // Route::resource('/quotations','QuotationsController');
+        // Route::post('/quotations/store','QuotationsController@store');
+        // Route::post('/quotations/update','QuotationsController@update');
+        // Route::get('/quotations/{intQuotationID}/show','QuotationsController@show');
+        // Route::get('/quotations/{intQuotationID}/edit','QuotationsController@edit');
+        // Route::get('/quotations/{intQuotationID}/delete','QuotationsController@delete');
     });
     //Transactions Routes
     Route::group(['prefix'=>'transactions/'],function(){
@@ -155,6 +163,7 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::post('/joborders/store','JobOrderController@store');
         //Dispatch and Hauling - Tugboat Assignment
         Route::resource('/tugboatassignment','TugboatAssignmentController');
+        Route::get('/tugboatassignment/{intJobOrderID}/showjoborder','TugboatAssignmentController@showjoborder');
         Route::post('/tugboatassignment/create','TugboatAssignmentController@create');
         Route::post('/tugboatassignment/hauling','TugboatAssignmentController@hauling');
         Route::post('/tugboatassignment/available','TugboatAssignmentController@available');

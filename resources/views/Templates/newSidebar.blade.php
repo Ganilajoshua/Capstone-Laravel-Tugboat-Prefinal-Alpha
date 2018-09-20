@@ -44,6 +44,7 @@
                                 <li id="goodsMenu"><a href="/administrator/maintenance/goods"><i class="fas fa-cube"></i>Goods</a></li>
                                 <li id="tugboatTypeMenu"><a href="/administrator/maintenance/tugboattype"><i class="ion ion-android-boat"></i>Tugboat Type</a></li>
                                 <li id="tugboatMenu"><a href="/administrator/maintenance/tugboat"><i class="ion ion-android-boat"></i>Tugboats</a></li>
+                                <li id="vesselTypeMenu"><a href="/administrator/maintenance/vesseltype"><i class="ion ion-android-boat"></i>Vessel Type</a></li>
                             @elseif(Auth::user()->enumUserType == 'Affiliates')
                                 <li id="positionMenu"><a href="/affiliates/maintenance/position"><i class="fas fa-sitemap"></i>Position</a></li>
                                 <li id="employeesMenu"><a href="/affiliates/maintenance/employees"><i class="ion ion-person"></i> Employee</a></li>

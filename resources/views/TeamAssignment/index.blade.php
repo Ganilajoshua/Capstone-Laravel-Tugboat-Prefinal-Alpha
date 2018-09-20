@@ -38,10 +38,10 @@
                                     <div class="col">
                                         <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
                                             <li class="nav-item">
-                                                <a class="nav-link active" id="pillsCreatedTeam-tab" data-toggle="pill" href="#pillsCreatedTeam" role="tab" aria-controls="pillsCreatedTeam" aria-selected="true">Created</a>
+                                                <a class="nav-link active border border-primary" id="pillsCreatedTeam-tab" data-toggle="pill" href="#pillsCreatedTeam" role="tab" aria-controls="pillsCreatedTeam" aria-selected="true">Created</a>
                                             </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" id="pillsReceivedTeam-tab" data-toggle="pill" href="#pillsReceivedTeam" role="tab" aria-controls="pillsReceivedTeam" aria-selected="false">Received</a>
+                                            <li class="nav-item ml-1">
+                                                <a class="nav-link border border-primary" id="pillsReceivedTeam-tab" data-toggle="pill" href="#pillsReceivedTeam" role="tab" aria-controls="pillsReceivedTeam" aria-selected="false">Received</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -247,7 +247,9 @@
                                                 @else
                                                     <div class="card-body">
                                                         <div class="alert alert-danger text-center">
-                                                            <i class="fas fa-exclamation-triangle mr-2"></i>NO OWNED OCCUPIED TUGBOATS FOUND!
+                                                            <i class="fas fa-exclamation-triangle mr-2"></i><h4>
+                                                                NO OWNED OCCUPIED TUGBOATS FOUND!
+                                                            </h4>
                                                         </div>
                                                     </div>
                                                 @endif

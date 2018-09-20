@@ -205,6 +205,21 @@ class TugboatAssignmentController extends Controller
         }
 
     }
+    public function showjoborder($intJobOrderID){
+        // Find Job Order ID
+        $joborder = JobOrder::findOrFail($intJobOrderID);
+        
+        // Get All Tugboats Available 
+        $tugboats = DB::table('tbltugboat as tugboat')
+        ->join('tbltugboatmain as main','tugboat.intTugboatID','main.intTugboatMainID')
+        ->join('tbltugboatassign as assign','tugboat.intTugboatID','assign.intTATugboatID')
+        ->where('assign.boolDeleted',0)
+        ->where('assign.enumStatus','Available')
+        ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
+        ->get();
+        return response()->json(['joborder'=>$joborder,'tugboats'=>$tugboats]);
+        
+    }
     public function available(Request $request)
     {
         $available = DB::table('tbltugboat as tugboat')
