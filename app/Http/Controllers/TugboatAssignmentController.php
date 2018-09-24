@@ -102,16 +102,18 @@ class TugboatAssignmentController extends Controller
             $schedule = new Schedules;
             $schedule->timestamps = false;
             $schedule->intScheduleID = $schedID;
+            $schedule->intScheduleCompanyID = Auth::user()->intUCompanyID;
             $schedule->strScheduleDesc = $joborder->strJODesc;
-            $schedule->dttmETA = $joborder->dtmETA;
-            $schedule->dttmETD = $joborder->dtmETD;
+            $schedule->dateStart = $joborder->datStartDate;
+            $schedule->dateEnd = $joborder->datEndDate;
+            $schedule->tmStart = $joborder->tmStart;
+            $schedule->tmEnd = $joborder->tmEnd;
             $schedule->save();
             
             for($count=0; $count < count($request->tugboatsID); $count++){
                 
                 $tugboatassign = TeamAssignment::findOrFail($request->tugboatsID[$count]);
                 $tugboatassign->timestamps = false;
-                $tugboatassign->enumStatus = 'Occupied';
                 $tugboatassign->save();
                 
                 $jobsched = new JobSchedule;

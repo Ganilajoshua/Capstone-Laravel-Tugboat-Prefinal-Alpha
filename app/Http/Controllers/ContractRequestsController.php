@@ -128,7 +128,7 @@ class ContractRequestsController extends Controller
         $quotation->fltMinDamageFee = $request->contractMinDamage;
         $quotation->fltMaxDamageFee = $request->contractMaxDamage;
         $quotation->fltStandardRate = $request->contractStandardFee;
-        $quotation->intDiscount = $request->discount;
+        $quotation->intDiscount = $request->contractDiscount;
         $quotation->intQContractListID = $quotationID;
         
         $quotation->save();

@@ -29,6 +29,7 @@ class HaulingController extends Controller
         ->get();
         $ongoingjob = DB::table('tbljoborder as joborder')
         ->join('tblcompany as company','company.intCompanyID','joborder.intJOCompanyID')
+        ->join('tbljobsched as jobsched','jobsched.intJSJobOrderID','intJobOrderID')
         ->where('joborder.enumStatus','Ongoing')
         ->where('joborder.boolDeleted',0)
         ->get();
@@ -128,7 +129,8 @@ class HaulingController extends Controller
         for($count = 0; $count < count ($jobsched); $count++){
             $jobschedule = JobSchedule::findOrFail($jobsched[$count]->intJobSchedID);
             $jobschedule->timestamps = false;
-            $jobschedule->datTimeStarted = $request->haulingStart;
+            $jobschedule->dateStarted = $request->startDate;
+            $jobschedule->tmStarted = $request->startTime;
             $jobschedule->enumStatus = 'Ongoing';
             $jobschedule->save();
         }
@@ -148,7 +150,8 @@ class HaulingController extends Controller
         for($count = 0; $count < count ($jobsched); $count++){
             $jobschedule = JobSchedule::findOrFail($jobsched[$count]->intJobSchedID);
             $jobschedule->timestamps = false;
-            $jobschedule->datTimeTerminated = $request->haulingEnd;
+            $jobschedule->dateEnded = $request->endDate;
+            $jobschedule->tmEnded = $request->endTime;
             $jobschedule->enumStatus = 'Finished';
             $jobschedule->save();
         }

@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 /*
 |--------------------------------------------------------------------------
@@ -217,6 +217,7 @@ Route::group(['prefix'=>'consignee/'],function(){
     Route::resource('/joborders','ConsigneeControllers\JobOrdersController');
     Route::post('/joborders/create','ConsigneeControllers\JobOrdersController@create');
     Route::post('/joborders/{intJobOrderID}/store','ConsigneeControllers\JobOrdersController@store');
+    Route::post('/joborders/haulingservice','ConsigneeControllers\JobOrdersController@haulingservice');
     Route::post('/joborders/update','ConsigneeControllers\JobOrdersController@update');
     Route::get('/joborders/{intJobOrderID}/show','ConsigneeControllers\JobOrdersController@show');
 

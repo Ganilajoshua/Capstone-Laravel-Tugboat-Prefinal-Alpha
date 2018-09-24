@@ -5,10 +5,10 @@ $(document).ready(function(){
     $('#tDispatch').addClass('active');
     $('#menuForwardReq').addClass('inactive');
     $('#menuTugboatAssignment').addClass('active');
-    $('#menuJobOrder').removeClass('active');
-    $('#menuTeamBuilder').removeClass('active');
-    $('#menuScheduling').removeClass('active');
-    $('#menuHauling').removeClass('active');
+    $('#menuJobOrder').addClass('inactive');
+    $('#menuTeamBuilder').addClass('inactive');
+    $('#menuScheduling').addClass('inactive');
+    $('#menuHauling').addClass('inactive');
     // $('#assignTugboatButton').on('click',function(){
     //     $('#assignTugboatModal').modal('show');
     // });
@@ -97,7 +97,7 @@ function showTugboatModal(jobOrderID){
 $('.createTugboatAssignment').on('click',function(){
     console.clear();
     var joborderID = $(this).data('id');
-
+    $('.createTugboatAssignSubmit').data('id',joborderID);
     $('.suggestedTugboatsContainer').empty();
     var appendBestTugContainer =
     `<div class="row">
@@ -122,7 +122,7 @@ $('.createTugboatAssignment').on('click',function(){
             tugboatcombination = tugboatcombinations(data.tugboats,data.joborder);
             console.log(tugboatcombination.best.length);
             $('.suggestedTugboats').empty();
-            $('.joborder-weight').html(data.joborder.fltWeight);
+            $('.joborder-weight').html(data.joborder.fltWeight + " tons");
             console.log(tugboatcombination.best[0].strName , tugboatcombination.best[0].strBollardPull);
             for(var count = 0; count < (tugboatcombination.best).length; count++){
                 var appendBestTug = `
@@ -145,7 +145,7 @@ $('.createTugboatAssignment').on('click',function(){
                         <div class="card bg-success">
                             <div class="card-body">
                                 <div class="custom-control custom-checkbox custom-control-inline">
-                                    <input type="checkbox" id="availableTugboat${data.tugboats[counter].intTAssignID}" name="teamlist[]" class="custom-control-input tugboatCheckbox">
+                                    <input type="checkbox" id="availableTugboat${data.tugboats[counter].intTAssignID}" data-id="${data.tugboats[counter].intTAssignID}" name="tugboatlist[]" class="custom-control-input tugboatCheckbox">
                                     <label class="custom-control-label" for="availableTugboat${data.tugboats[counter].intTAssignID}">
                                         <p class="card-text text-center ml-2">${data.tugboats[counter].strName}</p>
                                     </label>
@@ -162,16 +162,18 @@ $('.createTugboatAssignment').on('click',function(){
         }
     });
 }); 
-
-function createTugboatAssignment(){
+// function
+$('.createTugboatAssignSubmit').on('click',function(){
     console.log($('#jobOrderID').val());
-    var id = $('#jobOrderID').val();
+    $(this).data('id');
+    var id = $(this).data('id');
     var tugboatsID = [];
     $('.tugboatCheckbox:checkbox:checked').each(function(checked){
-        tugboatsID[checked] = parseInt($(this).val());
+        tugboatsID[checked] = parseInt($(this).data('id'));
         // parseInt($(this).val());
     }); 
     console.log(tugboatsID);
+    console.log(id);
     // return false;
     $.ajax({
         url : url + '/create',
@@ -210,7 +212,8 @@ function createTugboatAssignment(){
 
     });
 
-}
+});
+
 function proceedToHauling(jobOrderID){
 
     swal({

@@ -215,13 +215,35 @@ class JobOrderController extends Controller
         return response()->json(['forward'=>$forward]);
     }
     public function viewdetails($intJobOrderID){
-        $joborder = DB::table('tbljoborder as joborder')
-        ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
-        ->join('tblpier as pier','berth.intBPierID','intPierID')
-        ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
-        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-        ->where('jobOrder.intJobOrderID',$intJobOrderID)
-        ->get();
+        // Find The Job Order First 
+        $job = JobOrder::findOrFail($intJobOrderID);
+
+        // Compare if the BerthID is Null and if It is Not
+        if($job->enumServiceType == 'Hauling'){
+            if($job->intJOBerthID == null){
+                $joborder = DB::table('tbljoborder as joborder')
+                ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+                ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+                ->where('joborder.intJobOrderID',$intJobOrderID)
+                ->get();
+            }else{
+                $joborder = DB::table('tbljoborder as joborder')
+                ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
+                ->join('tblpier as pier','berth.intBPierID','intPierID')
+                ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+                ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+                ->where('joborder.intJobOrderID',$intJobOrderID)
+                ->get();
+            }
+        }else if($job->enumServiceType == 'Tug Assist'){
+            $joborder = DB::table('tbljoborder as joborder')
+            ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
+            ->join('tblpier as pier','berth.intBPierID','intPierID')
+            // ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+            ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+            ->where('joborder.intJobOrderID',$intJobOrderID)
+            ->get();   
+        }
 
         return response()->json(['joborder'=>$joborder]);
     }

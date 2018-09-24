@@ -1,7 +1,7 @@
 .haulingTab ,.tugAssistTab ,.salvageTab,.btnGoToChoices{
     display:none;
 }
-.PierLoc ,.LocLoc{
+.LocPier ,.LocLoc{
     display:none;
 }
 .card-deck .card .card-img-top{

@@ -49,7 +49,7 @@ $(document).ready(function(){
         async: true,
         success : function(data){
             $('#contractsID').val(data.contract[0].intContractListID);
-            console.log('aak');
+            console.log('pwet mo may rocket');
             console.log('standard ID :', data.contract[0].intCStandardID);
             console.log('quotation ID : ', data.contract[0].intCQuotationID);
             $('#contractDetails').html(data.contract[0].strContractListDesc);
@@ -59,7 +59,7 @@ $(document).ready(function(){
             $('#consigneeLateFee').html(peso + data.contract[0].fltQuotationConsigneeLateFee);
             $('#minDamageFee').html(peso + data.contract[0].fltMinDamageFee);
             $('#maxDamageFee').html(peso + data.contract[0].fltMaxDamageFee);
-            $('#discount').html(data.contract[0].intDiscount + percent);
+            $('#discount').html(data.contract[0].intDiscount + percent);    
         },
         error : function(error){
             throw error;

@@ -42,12 +42,38 @@ class PositionController extends Controller
      */
     public function store(Request $request)
     {
-        $position = new Position;
-        $position->timestamps = false;
-        $position->intPCompanyID = Auth::user()->intUCompanyID;
-        $position->strPositionName = $request->Name;
-        $position->boolDeleted = 0;
-        $position->save();
+        if($request->Name == 'Captain' || $request->Name == 'captain'){
+            $position = new Position;
+            $position->timestamps = false;
+            $position->intPCompanyID = Auth::user()->intUCompanyID;
+            $position->strPositionName = $request->Name;
+            $position->boolDeleted = 0;
+            $position->intPositionCompNum = 1;
+            $position->save();
+        }else if($request->Name == 'Chief Engineer' || $request->Name == 'chief engineer'){
+            $position = new Position;
+            $position->timestamps = false;
+            $position->intPCompanyID = Auth::user()->intUCompanyID;
+            $position->strPositionName = $request->Name;
+            $position->boolDeleted = 0;
+            $position->intPositionCompNum = 1;
+            $position->save();
+        }else if($request->Name == 'Crew' || $request->Name == 'crew'){
+            $position = new Position;
+            $position->timestamps = false;
+            $position->intPCompanyID = Auth::user()->intUCompanyID;
+            $position->strPositionName = $request->Name;
+            $position->boolDeleted = 0;
+            $position->intPositionCompNum = 2;
+            $position->save();
+        }else{
+            $position = new Position;
+            $position->timestamps = false;
+            $position->intPCompanyID = Auth::user()->intUCompanyID;
+            $position->strPositionName = $request->Name;
+            $position->boolDeleted = 0;
+            $position->save();
+        }
         
     }
 

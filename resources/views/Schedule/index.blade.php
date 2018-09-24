@@ -30,7 +30,7 @@
                             <div class="card-body">
                                 <!-- the events -->
                                 <div id="external-events">
-                                    <input type="hidden" value="{{$schedules}}" id="sched">
+                                    <input type="hidden" data-id="{{$schedules}}" value="{{$schedules}}" id="sched">
                                     @if(count($schedules)>0)
                                         @foreach($schedules as $schedules)
                                             <div class="external-event text-white" style="background-color:{{$schedules->strColor}};">{{$schedules->strScheduleDesc}}</div>

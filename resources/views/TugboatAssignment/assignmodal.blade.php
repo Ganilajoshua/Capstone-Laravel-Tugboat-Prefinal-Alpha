@@ -23,8 +23,13 @@
                             </div>
                             <div class="collapse show" id="addEmployeeCard">
                                 <div class="card-body">
-                                    <div class="row joborder-weight">
-
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card border-primary">
+                                                <div class="card-header bg-primary text-white">Job Order Vessel Weight</div>
+                                                <div class="card-body"><h6 class="joborder-weight"></h6></div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row" id="addTeamCard">
                                         {{-- Team List --}}
@@ -58,7 +63,8 @@
             </div>
             <input type="hidden" id="jobOrderID">
             <div class="modal-footer">
-                <button onclick="createTugboatAssignment()" type="button" class="btn btn-primary waves-effect">Add</button>
+                {{-- onclick="createTugboatAssignment()" --}}
+                <button  type="button" class="createTugboatAssignSubmit btn btn-primary waves-effect">Add</button>
             </div>
         </div>
     </div>
@@ -68,8 +74,8 @@
 {{-- <div class="col-auto">
     ${tugboatcombination.best[count].strName} : ${tugboatcombination.best[count].strBollardPull}
 </div> --}}
-<div class="border border-success text-center">
+{{-- <div class="border border-success text-center">
     <div class="card">
         ${tugboatcombination.best[count].strName} : ${tugboatcombination.best[count].strBollardPull}
     </div>
-</div>
+</div> --}}

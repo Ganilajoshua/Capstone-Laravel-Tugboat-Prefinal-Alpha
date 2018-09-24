@@ -9,19 +9,27 @@ class JobOrder extends Model
     protected $table = 'tbljoborder';
     protected $primaryKey = 'intJobOrderID';
     protected $fillable = [
-        'intJOBerthID',
+        'intJobOrderID', 
+        'intJOBerthID', 
+        'strJOStartPoint',
+        'strJODestination',
         'intJOBargeID',
-        'intJOVesselID',
-        'intJOCompanyID',
         'intJOGoodsID',
-        'intJOAttachmentsID',
+        'intJOCompanyID',
+        'intJOttachmentsID',
         'strJODesc',
+        'strJOVesselName',
         'dtmETA',
         'dtmETD',
-        'dtTransaction',
-        'fltWeight',
         'enumStatus',
+        'fltWeight',
         'boolDeleted',
+        'intJOVesselTypeID',
+        'enumServiceType',
+        'datStartDate',
+        'datEndDate',
+        'tmStart',
+        'tmEnd',
     ];
 
     public function company()

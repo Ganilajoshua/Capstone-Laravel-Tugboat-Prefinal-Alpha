@@ -66,6 +66,12 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <h5>{{$ongoingjob->strCompanyName}}</h5>
+                                                    <h6>Time Started : 
+                                                        <small>
+                                                            {{$ongoingjob->dateStarted}} - {{$ongoingjob->tmStarted}}
+
+                                                        </small> 
+                                                    </h6>
                                                 </div>
                                                 <div class="card-footer mt-2">
                                                     <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>

@@ -1,5 +1,5 @@
 <div class="modal animated bounceIn fast" id="moreInfoModal" tabindex="-1" role="dialog" aria-labelledby="moreInfoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" style="max-width: 63%;"role="document">
         <div class="modal-content">
             <div class="modal-header joborderheader ">
 

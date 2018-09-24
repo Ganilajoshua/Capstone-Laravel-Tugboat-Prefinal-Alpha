@@ -105,8 +105,7 @@ function postPosition(e)
                     showCancelButton: false,
                     confirmButtonClass: "btn-success",
                     confirmButtonText: "Ok",
-                    closeOnConfirm: true,
-                    timer : 1500
+                    closeOnConfirm: false,
                 },
                 function(isConfirm){
                     if(isConfirm){

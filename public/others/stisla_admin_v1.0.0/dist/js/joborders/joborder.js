@@ -18,77 +18,168 @@ $(document).ready(function(){
 var url = '/administrator/transactions/joborders';
 
 $('.joborderMoreInfoButton').on('click',function(event){
+    event.preventDefault();
     console.log($(this).data('id'));
     var id = $(this).data('id');
 
+    var sLocation;
+    var dLocation;
     // return false;
     $.ajax({
         url : `${url}/${id}/viewdetails`,
         type : 'GET',
         dataType : 'JSON',
         success : (data , response)=>{
+            console.log(data);
             $('.joborderinfo').empty();
             $('.joborderheader').empty();
-            var appendHeader = 
-                `<div class="modal-title" id="moreInfoModalLabel">Job Order #&nbsp;${data.joborder[0].intJobOrderID}
-                    <h4>${data.joborder[0].strCompanyName}</h4>
-                </div>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>`;
-            var appendBody = 
-                `<div class="row mt-2">
-                    <div class="col-6">
-                        <ul class="list-inline">
-                            <li class="list-inline-item text-primary">
-                                <h6>Date of Transaction : </h6></li>
-                            <li class="list-inline-item">
-                                <h6> ${data.joborder[0].dtmETA} </h6></li>
-                        </ul>
-                        <ul class="list-inline">
-                            <li class="list-inline-item text-primary">
-                                <h6>Estimated Time of Hauling : </h6></li>
-                            <li class="list-inline-item">
-                                <h6>0730 HRS</h6></li>
-                        </ul>
+            if((data.joborder[0].enumServiceType) == 'Tug Assist'){
+                console.log('hey');
+                var appendHeader = 
+                    `<div class="modal-title" id="moreInfoModalLabel">Job Order #&nbsp ${data.joborder[0].intJobOrderID}; 
+                        <h4>${data.joborder[0].strCompanyName}</h4>
                     </div>
-                    <div class="col-6">
-                        <ul class="list-inline">
-                            <li class="list-inline-item text-primary">
-                                <h6>Starting Location : </h6></li>
-                            <li class="list-inline-item">
-                                <h6>${data.joborder[0].strPierName} - ${data.joborder[0].strBerthName}</h6></li>
-                        </ul>
-                        <ul class="list-inline">
-                            <li class="list-inline-item text-primary">
-                                <h6>Destination : </h6></li>
-                            <li class="list-inline-item">
-                                <h6>${data.joborder[0].strJODestination}</h6></li>
-                        </ul>
-                        <ul class="list-inline">
-                            <li class="list-inline-item text-primary">
-                                <h6>Goods to be delivered : </h6></li>
-                            <li class="list-inline-item">
-                                <h6>${data.joborder[0].strGoodsName}</h6></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 mt-2 text-center">
-                        <div class="text-primary mb-2">
-                            <h4>Extra Details</h4></div>
-                        <div class="border-primary">
-                            <div class="mr-2 ml-2 mt-2 mb-2">
-                                <p>
-                                    ${data.joborder[0].strJODesc}
-                                </p>
-                            </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>`;
+                var appendBody = 
+                    `<div class="row mt-2">
+                        <div class="col-6">
+                            <ul class="list-inline">
+                                <li class="list-inline-item text-primary">
+                                    <h6>Service Type :&nbsp;</h6></li>
+                                <li class="list-inline-item">
+                                    <h6> ${data.joborder[0].enumServiceType}</h6>
+                                </li>
+                            </ul>
+                            <ul class="list-inline">
+                                <li class="list-inline-item text-primary">
+                                    <h6>Date of Transaction : </h6></li>
+                                <li class="list-inline-item">
+                                    <h6> ${data.joborder[0].datStartDate}</h6></li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul class="list-inline">
+                                <li class="list-inline-item text-primary">
+                                    <h6>Estimated Time of Berthing & Unberthing : </h6></li>
+                                <li class="list-inline-item">
+                                    <h6>0730 HRS</h6></li>
+                            </ul>
+                            <ul class="list-inline">
+                                <li class="list-inline-item text-primary">
+                                    <h6>Pier Location : </h6></li>
+                                <li class="list-inline-item">
+                                    <h6>${data.joborder[0].strPierName} - ${data.joborder[0].strBerthName}</h6></li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
                         </div>
                     </div>
-                </div>`;
-            $(appendHeader).appendTo('.joborderheader');
-            $(appendBody).appendTo('.joborderinfo');
+                    <div class="row">
+                        <div class="col-12 mt-2 text-center">
+                            <div class="text-primary mb-2">
+                                <h4>Extra Details</h4></div>
+                            <div class="border-primary">
+                                <div class="mr-2 ml-2 mt-2 mb-2">
+                                    <p>
+                                        ${data.joborder[0].strJODesc}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                $(appendHeader).appendTo('.joborderheader');
+                $(appendBody).appendTo('.joborderinfo');
+
+            }
+            else if((data.joborder[0].enumServiceType) == 'Hauling'){
+                if((data.joborder[0].intJOBerthID) == null){
+                    sLocation = data.joborder[0].strJOStartPoint;
+                    dLocation = data.joborder[0].strJODestination;
+                }
+                else if((data.joborder[0].strJOStartPoint) == null){
+                    sLocation = `${data.joborder[0].strPierName} - ${data.joborder[0].strBerthName}`;
+                    dLocation = data.joborder[0].strJODestination;
+                }
+                else if((data.joborder[0].strJODestination) == null){
+                    sLocation = data.joborder[0].strJOStartPoint;
+                    dLocation = `${data.joborder[0].strPierName} - ${data.joborder[0].strBerthName}`;
+                }
+            
+                var appendHeader = 
+                    `<div class="modal-title" id="moreInfoModalLabel">Job Order #&nbsp ${data.joborder[0].intJobOrderID}; 
+                        <h4>${data.joborder[0].strCompanyName}</h4>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>`;
+                var appendBody = 
+                    `<div class="row mt-2">
+                        <div class="col-6">
+                            <ul class="list-inline">
+                                <li class="list-inline-item text-primary">
+                                    <h6>Service Type :&nbsp;</h6></li>
+                                <li class="list-inline-item">
+                                    <h6> ${data.joborder[0].enumServiceType}</h6>
+                                </li>
+                            </ul>
+                            <ul class="list-inline">
+                                <li class="list-inline-item text-primary">
+                                    <h6>Date of Transaction : </h6></li>
+                                <li class="list-inline-item">
+                                    <h6> ${data.joborder[0].datStartDate}</h6></li>
+                            </ul>
+                            <ul class="list-inline">
+                                <li class="list-inline-item text-primary">
+                                    <h6>Estimated Time of Hauling : </h6></li>
+                                <li class="list-inline-item">
+                                    <h6>0730 HRS</h6></li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul class="list-inline">
+                                <li class="list-inline-item text-primary">
+                                    <h6>Starting Location : </h6></li>
+                                <li class="list-inline-item">
+                                    <h6>${sLocation}</h6></li>
+                            </ul>
+                            <ul class="list-inline">
+                                <li class="list-inline-item text-primary">
+                                    <h6>Destination : </h6></li>
+                                <li class="list-inline-item">
+                                    <h6>${dLocation}</h6></li>
+                            </ul>
+                            <ul class="list-inline">
+                                <li class="list-inline-item text-primary">
+                                    <h6>Goods to be delivered : </h6></li>
+                                <li class="list-inline-item">
+                                    <h6>${data.joborder[0].strGoodsName}</h6></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mt-2 text-center">
+                            <div class="text-primary mb-2">
+                                <h4>Extra Details</h4></div>
+                            <div class="border-primary">
+                                <div class="mr-2 ml-2 mt-2 mb-2">
+                                    <p>
+                                        ${data.joborder[0].strJODesc}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+                $(appendHeader).appendTo('.joborderheader');
+                $(appendBody).appendTo('.joborderinfo');
+
+            }
+            // if*()
             console.log(data);
+            // console.log(data.joborder[0].intJobOrderID);
+
+            
             $('#moreInfoModal').modal('show');
         },
         error : (error)=>{

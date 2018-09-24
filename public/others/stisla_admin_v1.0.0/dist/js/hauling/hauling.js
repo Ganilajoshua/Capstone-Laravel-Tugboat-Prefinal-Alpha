@@ -69,7 +69,8 @@ function prepareHauling(joborderID){
 function startHauling(joborderID){
     console.log(joborderID);
     console.log(moment().format("Y-MM-D HH:mm"));
-    var startTime = moment().format("Y-MM-D HH:mm");
+    var startDate = moment().format("Y-MM-D");
+    var startTime = moment().format("HH:mm");
     // return false;
     swal({
         title: "Start Hauling?",
@@ -93,7 +94,8 @@ function startHauling(joborderID){
             data : {
                 "_token" : $('meta[name="csrf-token"]').attr('content'),
                 joborderID : joborderID,
-                haulingStart : startTime,
+                startDate : startDate,
+                startTime : startTime,
             },
             success : function(data,response){
                 console.log(data);
@@ -124,7 +126,8 @@ function terminateHauling(joborderID){
     console.log(joborderID);
     console.log(moment().format("Y-MM-D HH:mm"));
 
-    var terminateTime = moment().format("Y-MM-D HH:mm");
+    var endDate = moment().format("Y-MM-D");
+    var endTime = moment().format("HH:mm");
     // return false;
     swal({
         title: "Terminate Hauling?",
@@ -148,7 +151,8 @@ function terminateHauling(joborderID){
             data : {
                 "_token" : $('meta[name="csrf-token"]').attr('content'),
                 joborderID : joborderID,
-                haulingEnd : terminateTime,
+                endDate : endDate,
+                endTime : endTime,
             },
             success : function(data,response){
                 console.log(data);

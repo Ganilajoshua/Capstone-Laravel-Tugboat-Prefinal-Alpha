@@ -1,12 +1,21 @@
 <div class="haulingTab">
     <form class="needs-validation" novalidate="">
         <div class="row">
+            <div class="col-12 col-sm-12 col-lg-12">
+                <div class="form-group">
+                    <label for="addHaulingTitle">Job Order Title<sup class="text-primary">&#10033;</sup></label>
+                    <input id="addHaulingTitle" type="text" class="form-control" placeholder="Job Order Title" required>
+                    <div class="invalid-feedback">
+                        Please Type Job Order Title
+                    </div>
+                </div>
+            </div>
             <div class="col-12 col-sm-12 col-lg-6">
                 <div class="form-group">
-                    <label for="addHaulingDate">Hauling Date<sup class="text-primary">&#10033;</sup></label>
-                    <div class="input-group date" id="addHaulingDate" data-target-input="nearest">
-                        <input type="text" class="addHaulingDate form-control datetimepicker-input" data-target="#addHaulingDate" placeholder="MM/DD/YYYY" required>
-                        <div class="input-group-append" data-target="#addHaulingDate" data-toggle="datetimepicker">
+                    <label for="addHaulingStartDate">Hauling Start Date<sup class="text-primary">&#10033;</sup></label>
+                    <div class="input-group date" id="addHaulingStartDate" data-target-input="nearest">
+                        <input type="text" class="addHaulingStartDate form-control datetimepicker-input" data-target="#addHaulingStartDate" placeholder="MM/DD/YYYY" required>
+                        <div class="input-group-append" data-target="#addHaulingStartDate" data-toggle="datetimepicker">
                             <button type="button" class="btn btn-outline-primary waves-effect"><i class="fa fa-calendar"></i></button>
                         </div>
                         <div class="invalid-feedback">
@@ -17,10 +26,10 @@
             </div>
             <div class="col-12 col-sm-12 col-lg-6">
                 <div class="form-group">
-                    <label for="addHaulingTime">Hauling Time<sup class="text-primary">&#10033;</sup></label>
-                    <div class="input-group date" id="addHaulingTime" data-target-input="nearest">
-                        <input type="text" class="addHaulingTime form-control datetimepicker-input" data-target="#addHaulingTime" placeholder="21:00" required>
-                        <div class="input-group-append" data-target="#addHaulingTime" data-toggle="datetimepicker">
+                    <label for="addHaulingStartTime">Hauling Start Time<sup class="text-primary">&#10033;</sup></label>
+                    <div class="input-group date" id="addHaulingStartTime" data-target-input="nearest">
+                        <input type="text" class="addHaulingStartTime form-control datetimepicker-input" data-target="#addHaulingStartTime" placeholder="21:00" required>
+                        <div class="input-group-append" data-target="#addHaulingStartTime" data-toggle="datetimepicker">
                             <button type="button" class="btn btn-outline-primary waves-effect"><i class="fa fa-clock"></i></button>
                         </div>
                         <div class="invalid-feedback">
@@ -30,11 +39,41 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12 col-sm-12 col-lg-6">
+                <div class="form-group">
+                    <label for="addHaulingEndDate">Hauling End Date<sup class="text-primary">&#10033;</sup></label>
+                    <div class="input-group date" id="addHaulingEndDate" data-target-input="nearest">
+                        <input type="text" class="addHaulingEndDate form-control datetimepicker-input" data-target="#addHaulingEndDate" placeholder="MM/DD/YYYY" required>
+                        <div class="input-group-append" data-target="#addHaulingEndDate" data-toggle="datetimepicker">
+                            <button type="button" class="btn btn-outline-primary waves-effect"><i class="fa fa-calendar"></i></button>
+                        </div>
+                        <div class="invalid-feedback">
+                            Please fill in the Ending Transaction Date.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-lg-6">
+                <div class="form-group">
+                    <label for="addHaulingEndTime">Hauling End Time<sup class="text-primary">&#10033;</sup></label>
+                    <div class="input-group date" id="addHaulingEndTime" data-target-input="nearest">
+                        <input type="text" class="addHaulingEndTime form-control datetimepicker-input" data-target="#addHaulingEndTime" placeholder="21:00" required>
+                        <div class="input-group-append" data-target="#addHaulingEndTime" data-toggle="datetimepicker">
+                            <button type="button" class="btn btn-outline-primary waves-effect"><i class="fa fa-clock"></i></button>
+                        </div>
+                        <div class="invalid-feedback">
+                            Please fill in the Estimated End Time of Tug Assist.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row" id="firstRow">
             <div class="col-12 col-sm-12 col-lg-6">
                 <div class="form-group">
-                    <label for="cargoName1">Cargo Name 1<sup class="text-primary">&#10033;</sup></label>
-                    <input type="text" class="form-control" id="cargoName1" placeholder="Energy Moon" required>
+                    <label for="addHaulingVesselName">Vessel Name<sup class="text-primary">&#10033;</sup></label>
+                    <input type="text" class="form-control" id="addHaulingVesselName" placeholder="Energy Moon" required>
                     <div class="invalid-feedback">
                         Please fill in the Cargo Name.
                     </div>
@@ -42,9 +81,9 @@
             </div>
             <div class="col-12 col-sm-12 col-lg-6">
                 <div class="form-group">
-                    <label for="cargoWeight1">Cargo Weight 1<sup class="text-primary">&#10033;</sup></label>
+                    <label for="addHaulingVesselWeight">Vessel Weight<sup class="text-primary">&#10033;</sup></label>
                     <div class="input-group">
-                        <input id="cargoWeight1" type="number" class="form-control" placeholder="20" required>
+                        <input id="addHaulingVesselWeight" type="number" class="form-control" placeholder="20" required>
                         <div class="input-group-append">
                             <span class="input-group-text">Tons</span>
                         </div>
@@ -68,9 +107,9 @@
         <div class="row">
             <div class="col-12 col-sm-12 col-lg-6">
                 <div class="form-group">
-                    <label for="addGoods1">Goods to be delivered<sup class="text-primary">&#10033;</sup></label>
-                    {{-- <input type="text" class="form-control" id="addGoods1" placeholder="Very Good" required> --}}
-                    <select id="addGoods1" name="addGoods1" class="form-control">
+                    <label for="addHaulingGoods">Goods to be delivered<sup class="text-primary">&#10033;</sup></label>
+                    {{-- <input type="text" class="form-control" id="addHaulingGoods" placeholder="Very Good" required> --}}
+                    <select id="addHaulingGoods" name="addHaulingGoods" class="form-control">
                         <option>Select Goods</option>
                         @foreach($goods as $goods)
                             <option value="{{$goods->intGoodsID}}">{{$goods->strGoodsName}}</option>
@@ -86,19 +125,19 @@
                     <label for="addHaulingRoute">Select Route<sup class="text-primary">&#10033;</sup></label>
                     {{-- <input type="text" class="form-control" id="addHaulingRoute" placeholder="Route" required> --}}
                     <select id="addHaulingRoute" name="addHaulingRoute" class="form-control">
-                        <option value="LocPier">Location to Pier</option>
                         <option value="PierLoc">Pier to Location</option>
+                        <option value="LocPier">Location to Pier</option>
                         <option value="LocLoc">Location to Location</option>
                     </select>
-                </div>
+                </div> 
             </div>
         </div>
         <div class="LocPier">
             <div class="row">
                 <div class="col-12 col-sm-12 col-lg-6">
                     <div class="form-group">
-                        <label for="startingLocation">Starting Location<sup class="text-primary">&#10033;</sup></label>
-                        <input id="startingLocation" type="text" class="form-control" placeholder="Pandacan, Manila" required>
+                        <label for="#startingLocationLP">Starting Location<sup class="text-primary">&#10033;</sup></label>
+                        <input id="startingLocationLP" type="text" class="form-control" placeholder="Pandacan, Manila" required>
                         <div class="invalid-feedback">
                             Please Type The Starting Location
                         </div>
@@ -106,7 +145,8 @@
                 </div>
                 <div class="col-12 col-sm-12 col-lg-6">
                     <div class="form-group">
-                        <label for="addBerth">Select Berth<sup class="text-primary">&#10033;</sup></label><select id="addBerth" name="addBerth" class="form-control">
+                        <label for="addBerthLP">Select Berth<sup class="text-primary">&#10033;</sup></label>
+                        <select id="addBerthLP" name="addBerthLP" class="form-control">
                             <option>Select Berth</option>
                             @foreach($berth as $berths)
                                 <option value="{{$berths->intBerthID}}">{{$berths->strPierName}} - {{$berths->strBerthName}}</option>
@@ -123,8 +163,8 @@
             <div class="row">
                 <div class="col-12 col-sm-12 col-lg-6">
                     <div class="form-group">
-                        <label for="addBerth">Select Berth<sup class="text-primary">&#10033;</sup></label>
-                        <select id="addBerth" name="addBerth" class="form-control">
+                        <label for="addBerthPL">Select Berth<sup class="text-primary">&#10033;</sup></label>
+                        <select id="addBerthPL" name="addBerthPL" class="form-control">
                             <option>Select Berth</option>
                             @foreach($berth as $berth)
                                 <option value="{{$berth->intBerthID}}">{{$berth->strPierName}} - {{$berth->strBerthName}}</option>
@@ -137,8 +177,8 @@
                 </div>
                 <div class="col-12 col-sm-12 col-lg-6">
                     <div class="form-group">
-                        <label for="destinationLocation">Destination Location<sup class="text-primary">&#10033;</sup></label>
-                        <input id="destinationLocation" type="text" class="form-control" placeholder="Pandacan, Manila" required>
+                        <label for="destinationLocationPL">Destination Location<sup class="text-primary">&#10033;</sup></label>
+                        <input id="destinationLocationPL" type="text" class="form-control" placeholder="Pandacan, Manila" required>
                         <div class="invalid-feedback">
                             Please Type The Destination Location
                         </div>
@@ -150,8 +190,8 @@
             <div class="row">
                 <div class="col-12 col-sm-12 col-lg-6">
                     <div class="form-group">
-                        <label for="startingLocation">Starting Location<sup class="text-primary">&#10033;</sup></label>
-                        <input id="startingLocation" type="text" class="form-control" placeholder="Pandacan, Manila" required>
+                        <label for="startingLocationLL">Starting Location<sup class="text-primary">&#10033;</sup></label>
+                        <input id="startingLocationLL" type="text" class="form-control" placeholder="Pandacan, Manila" required>
                         <div class="invalid-feedback">
                             Please Type The Starting Location
                         </div>
@@ -159,8 +199,8 @@
                 </div>
                 <div class="col-12 col-sm-12 col-lg-6">
                     <div class="form-group">
-                        <label for="destinationLocation">Destination Location<sup class="text-primary">&#10033;</sup></label>
-                        <input id="destinationLocation" type="text" class="form-control" placeholder="Pandacan, Manila" required>
+                        <label for="destinationLocationLL">Destination Location<sup class="text-primary">&#10033;</sup></label>
+                        <input id="destinationLocationLL" type="text" class="form-control" placeholder="Pandacan, Manila" required>
                         <div class="invalid-feedback">
                             Please Type The Destination Location
                         </div>
@@ -169,9 +209,9 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="addExDetails">Extra Details</label>
-            <textarea class="form-control" id="addExDetails" rows="5"></textarea>
+            <label for="addExHaulingDetails">Extra Details</label>
+            <textarea class="form-control" id="addExHaulingDetails" rows="5"></textarea>
         </div>
-        <button id="submitJob" class="btn btn-primary float-right waves-effect" onclick="createJobOrder()">Submit</button>
+        <button id="submitJob" type="button" class="submitJobOrderHauling btn btn-primary float-right waves-effect" data-service="Hauling">Submit</button>
     </form>
 </div>

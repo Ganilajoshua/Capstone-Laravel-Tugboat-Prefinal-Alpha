@@ -44,19 +44,19 @@
                                         <div class="col-lg-4">
                                             <div class="form-group helpDelayFee">
                                                 <label for="addStandardRate">Standard Rate(&#8369;)</label>
-                                                <input type="text" name="addStandardRate" id="addStandardRate" class="form-control">
+                                                <input type="number" name="addStandardRate" id="addStandardRate" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group helpDelayFee">
                                                 <label for="addDelayFee">Tugboat Delay Fee (&#8369;)</label>
-                                                <input type="text" name="addDelayFee" id="addDelayFee" class="form-control">
+                                                <input type="number" name="addDelayFee" id="addDelayFee" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group helpViolationFee">
                                                 <label for="addViolationFee">Violation Fee (&#8369;)</label>
-                                                <input type="text" name="addViolationFee" id="addViolationFee" class="form-control">
+                                                <input type="number" name="addViolationFee" id="addViolationFee" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -64,18 +64,18 @@
                                         <div class="col-lg-4">
                                             <div class="form-group helpLateFee">
                                                 <label for="addLateFee">Consignee Late Fee (&#8369;)</label>
-                                                <input type="text" name="addLateFee" id="addLateFee" class="form-control">
+                                                <input type="number" name="addLateFee" id="addLateFee" class="form-control">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group helpDamageFee">
                                                 <label for="addDamageFee">Damage Fee (&#8369;)</label>
                                                 <div class="input-group">
-                                                    <input type="text" id="minDamageFee" class="form-control" placeholder="Minimum">
+                                                    <input type="number" id="minDamageFee" class="form-control" placeholder="Minimum">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="">&amp;</span>
                                                     </div>
-                                                    <input type="text" id="maxDamageFee" class="form-control" placeholder="Maximum">
+                                                    <input type="number" id="maxDamageFee" class="form-control" placeholder="Maximum">
                                                 </div>
                                             </div>
                                         </div>
