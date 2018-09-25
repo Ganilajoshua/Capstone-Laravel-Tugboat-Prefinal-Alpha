@@ -2,6 +2,22 @@
 ### `Pre Final Repository Monday August 27,2018`
 
 &nbsp;
+#1.0.2 09-25-2018
+
+updates
+-Dispatch Ticket with Signature
+-Billing (only view)
+
+new Controller
+-CPaymentController
+-CPayment
+
+new js file
+-consignee\payment\consignee-payment.js
+
+new css file
+-consignee-billing
+-consignee-payment
 
 # 1.0.0 - 2018-09-17 α
 
@@ -207,3 +223,4 @@ Removed Models
 - TermsandConditon
 - Standard
 - UserType
+

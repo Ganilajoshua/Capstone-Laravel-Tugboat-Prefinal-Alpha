@@ -12,7 +12,7 @@ $(function () {
         }
         var map = new google.maps.Map(mapCanvas, mapOptions);
 
-        var markerImage = '../dist/img/marker.png';
+        var markerImage = '/others/stisla_admin_v1.0.0/dist/img/marker.png';
 
         var marker = new google.maps.Marker({
             position: location,

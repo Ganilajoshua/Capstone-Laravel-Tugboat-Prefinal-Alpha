@@ -11,9 +11,7 @@
         <script src="/others/stisla_admin_v1.0.0/dist/modules/isotope/isotope.pkgd.min.js"></script>
         <script src="/others/stisla_admin_v1.0.0/dist/modules/lightbox/js/lightbox.min.js"></script>
         <script src="/others/stisla_admin_v1.0.0/dist/js/gmaps.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ" async defer></script>
-        <script src="https://maps.googleapis.com/maps/api/js" async defer></script>
-        
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAl6r3aNZl7Fsgr4HgAwDLwRNow5C6GKco" type="text/javascript"></script>
         <script src="/others/stisla_admin_v1.0.0/dist/modules/pace/pace.min.js"></script>
         <script src="/others/stisla_admin_v1.0.0/dist/modules/touchSwipe/jquery.touchSwipe.min.js"></script>
         <!-- Template Main Javascript File -->

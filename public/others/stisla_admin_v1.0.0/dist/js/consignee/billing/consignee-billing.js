@@ -8,7 +8,6 @@ $(document).ready(function(){
     $('#breadPB').show();
     $('#breadSlash').show();
     $('#breadCurrent').text('Billing');
-
     (function ($) {
         // USE STRICT
         "use strict";
@@ -33,7 +32,7 @@ $(document).ready(function(){
         e.preventDefault();
         var ck_box = $('input[type="checkbox"]:checked').length;
         if(ck_box > 0){
-            $('#chequeDetModal').modal('show');
+          window.location = "/consignee/paymentbilling/payment"
         }else if(ck_box == 0){
             toastr.error('You must select atleast one bill to proceed.', 'No Bill Selected!', {
                 closeButton: true,

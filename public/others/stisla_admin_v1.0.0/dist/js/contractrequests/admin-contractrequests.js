@@ -3,7 +3,13 @@ $(document).ready(function(){
         var sig = $('.signCanvas').signature();
         $('.clearCanvas').click(function() {
             sig.signature('clear');
+            $('.btnFInalizeContract').attr('disabled',true);
+            $('.btnFInalizeContract').css('cursor','not-allowed');
         });
+    });
+    $('.signCanvas').mouseup(function() {
+        $('.btnFInalizeContract').attr('disabled',false);
+        $('.btnFInalizeContract').css('cursor','pointer');
     });
     $('.btnButtons').on('click',function(e){
         e.preventDefault();

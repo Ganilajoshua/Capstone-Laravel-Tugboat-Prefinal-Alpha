@@ -83,14 +83,26 @@
                     </table>
                 </div>
             </div>
+            <div class="col-12 col-sm-12 col-lg-6">
+                    <div class="card card-primary">
+                        <div class="card-header"><h4 class="text-center">Consignee Signature</h4></div>
+                        <div class="card-body rowOverflow">
+                            <div class="signConsigneeCanvasDisplay"></div>
+                            <textarea id="signatureJSON"
+                            hidden rows="5"
+                            ></textarea>
+                        </div>
+                        <button class="clearConsigneeCanvas btn btn-secondary btn-sm waves-effect">Clear</button>
+                    </div>
+                </div>
                 <div>
-
-
                         <select name="" class="d-none" id="id">
                             <option id="dispatch3"></option>
                         </select>
                         <br>
-                        <button onclick="Accept()" class="btn btn-primary waves-effect float-right"> Consignee ACCEPT</button>
+                        <button onclick="ValidateCAccept()" class="btn btn-primary waves-effect float-right" id="finalize">Approve</button>
+                        <button class="btn btn-secondary float-right disabled" id="wait"> Wait for the Response</button>
+                        <button onclick="ValidateCAccept()" class="btn btn-primary float-right" id="submit">Submit</button>
                     </div>
         </div>
     </div>
