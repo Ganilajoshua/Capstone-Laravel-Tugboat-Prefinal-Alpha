@@ -1,0 +1,19 @@
+.cashDetails{
+    display: none ;
+}
+.border-secondary2{
+    border: 1.5px solid #6c757d !important;
+}
+.border-primary2{
+    border: 1.5px solid #00aeff !important;
+}
+.bigIconP{
+    font-size:80px;
+}
+.tdBorderLeft{
+    border-right: 1px solid #00aeff !important;
+}
+.signChequeCanvas{
+    margin-left:8px;
+    width:450px;
+  }

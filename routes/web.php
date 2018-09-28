@@ -183,7 +183,9 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::get('/dispatchticket','DispatchTicketController@index');
         Route::get('/dispatchticket/{intDispatchTicketID}/info','DispatchTicketController@info');
         Route::post('/dispatchticket/AdminAccept','DispatchTicketController@AdminAccept');
-        
+        Route::post('/dispatchticket/Void','DispatchTicketController@Void');
+        Route::post('/dispatchticket/store','DispatchTicketController@store');
+        Route::post('/dispatchticket/finalize','DispatchTicketController@finalize');
         //Scheduling
         Route::post('/scheduling/tugboatsavailable','SchedulingController@tugboatsavailable');
         
@@ -221,10 +223,16 @@ Route::group(['prefix'=>'consignee/'],function(){
     Route::post('/joborders/update','ConsigneeControllers\JobOrdersController@update');
     Route::get('/joborders/{intJobOrderID}/show','ConsigneeControllers\JobOrdersController@show');
 
-    Route::resource('/dispatchticket','ConsigneeControllers\ConsigneeControllerDispatch');
-    Route::get('/dispatchticket','ConsigneeControllers\ConsigneeControllerDispatch@index');
-    Route::get('/dispatchticket/{intDispatchTicketID}/info','ConsigneeControllers\ConsigneeControllerDispatch@info');
-    Route::post('/dispatchticket/store','ConsigneeControllers\ConsigneeControllerDispatch@store');
+    Route::resource('/dispatchticket','ConsigneeControllers\CDispatchTicketController');
+    Route::get('/dispatchticket','ConsigneeControllers\CDispatchTicketController@index');
+    Route::get('/dispatchticket/{intDispatchTicketID}/info','ConsigneeControllers\CDispatchTicketController@info');
+    Route::post('/dispatchticket/store','ConsigneeControllers\CDispatchTicketController@store');
+
+    
+    Route::group(['prefix'=>'paymentbilling/'],function(){
+        Route::resource('/billing','ConsigneeControllers\CBillingController');
+        Route::resource('/payment','ConsigneeControllers\CPaymentController');
+    });
     // Route::get('/consignee/login','LoginControllers\UserLoginController@index')
 });
 Route::group(['prefix'=>'affiliates/'],function(){

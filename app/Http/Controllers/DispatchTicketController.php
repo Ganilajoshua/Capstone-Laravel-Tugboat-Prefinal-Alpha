@@ -7,6 +7,7 @@ use Illuminate\Response;
 use App\Http\Controllers\Controller;
 use Auth;
 use DB;
+use App\Invoice;
 use App\DispatchTicket;
 class DispatchTicketController extends Controller
 {
@@ -30,8 +31,11 @@ class DispatchTicketController extends Controller
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
         ->join('tbldispatchticket as dispatch','dispatch.intDTTugboatAssignID','tugboatassign.intTAssignID')
+        ->leftjoin('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
+        ->where('invoice.intIDispatchTicketID',null)
         ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
         ->where('jobsched.enumstatus','Finished')
+        // ->where('invoice.enumstatus','Finished')
         ->get(); 
         return view('DispatchTicket.index')
         ->with('dispatch',$dispatch);
@@ -55,7 +59,14 @@ class DispatchTicketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $Dispatch = DispatchTicket::find($request->dispatch);
+            error_log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+            error_log($request->dispatch);
+            $Dispatch->timestamps = false;
+            $Dispatch->boolCApprovedby = 1;
+            $Dispatch->strConsigneeSign = $request->signature;
+            // return response()->json(['dispatch'=>$dispatch]);    
+            $Dispatch->save();
     }
 
     /**
@@ -119,7 +130,7 @@ class DispatchTicketController extends Controller
         ->join('tbldispatchticket as dispatch','dispatch.intDTTugboatAssignID','tugboatassign.intTAssignID')
         ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
         ->where('jobsched.enumstatus','Finished')
-        ->where('dispatch.intDispatchTicketID',$intDispatchTicketID)
+        ->where('dispatch.intDispatchTicketID',$id)
         ->get(); 
         // return view('DispatchTicket.index')
         // ->with('dispatch',$dispatch);
@@ -131,7 +142,28 @@ class DispatchTicketController extends Controller
         $Dispatch = DispatchTicket::find($request->dispatch);
         $Dispatch->timestamps = false;
         $Dispatch->boolAApprovedby = 1;
+        $Dispatch->strAdminSign = $request->signature;
         // return response()->json(['dispatch'=>$dispatch]);    
         $Dispatch->save();
         }
+        public function finalize(Request $request)
+    {
+        $Invoice = new Invoice;
+        $Invoice->timestamps = false;
+        $Invoice->intDTCompanyID = $request->finalize;
+        $Invoice->intIDispatchTicketID = $request->dispatch;
+        $Invoice->timestamps = false;
+        $Invoice->strInvoiceDesc = 'processed';
+        $Invoice->boolDeleted = 0;
+        $Invoice->save();
+    }
+    public function Void(Request $request)
+    {
+        $Dispatch = DispatchTicket::find($request->dispatch);
+        $Dispatch->timestamps = false;
+        $Dispatch->boolCApprovedby = 0;
+        $Dispatch->strConsigneeSign = null;
+        // return response()->json(['dispatch'=>$dispatch]);    
+        $Dispatch->save();
+    }
 }

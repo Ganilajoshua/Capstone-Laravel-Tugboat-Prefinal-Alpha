@@ -1,5 +1,5 @@
 <input type="hidden">
-            <section class="au-breadcrumb2">
+            <section class="au-breadcrumb2 breadTemplate">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">

@@ -1,6 +1,9 @@
 var url = '/administrator/transactions/contractrequests';
 
 $(document).ready(function(){
+    $('.btnFInalizeContract').attr('disabled',true);
+    $('.btnFInalizeContract').css('cursor','not-allowed');
+    
     $('#transactionTree').addClass("active");
     $('#tConsignee').addClass("active");
     $('#activeconsigneeMenu').addClass("inactive");
@@ -227,19 +230,6 @@ function createActiveContract(){
     console.log($('#addSignatureButton').data('id'));
 
     var contractID = $('#addSignatureButton').data('id')
-    if ($('.signCanvas').signature('isEmpty')) {
-        toastr.error('Please provide a signature first.', 'Signature Pad Empty!', {
-            closeButton: true,
-            debug: false,
-            timeOut: 2000,
-            positionClass: "toast-bottom-right",
-            preventDuplicates: true,
-            showDuration: 300,
-            hideDuration: 300,
-            showMethod: "slideDown",
-            hideMethod: "slideUp"
-        });
-    }else {
         $('#applySignatureModal').modal('hide');
         $.ajax({
             url : url + '/' + contractID + '/getactive',
@@ -292,8 +282,8 @@ function createActiveContract(){
                             success : function(data,response){
                                 console.log(data);
                                 swal({
-                                    title: "Success",
-                                    text: "Contract Activate",
+                                    title: "Success!",
+                                    text: "Contract Finalized and is now Active.",
                                     type: "success",
                                     showCancelButton: false,
                                     confirmButtonClass: "btn-success",
@@ -321,7 +311,6 @@ function createActiveContract(){
                 throw error;
             }
         });
-    }
 }
 function requestingForChanges(contractID){
     console.log(contractID);
