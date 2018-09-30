@@ -126,6 +126,13 @@ Route::group(['prefix'=>'administrator/'],function(){
             Route::post('/teamassignment/returnteam','TugboatTeamAssignmentController@returnteam');
             Route::post('/teamassignment/returntugboat','TugboatTeamAssignmentController@returntugboat');
             Route::post('/teamassignment/notifications','TugboatTeamAssignmentController@notifications');
+            
+            Route::group(['prefix'=>'hauling/'],function(){
+                Route::get('/{intJobOrderID}/show','HaulingController@show');
+                Route::post('/showteam','HaulingController@showteam');
+                Route::post('/start','HaulingController@start');
+                Route::post('/terminate','HaulingController@terminate');
+            });
         });
 
         //Payment and Billing Module
@@ -173,9 +180,6 @@ Route::group(['prefix'=>'administrator/'],function(){
         //Dispatch and Hauling - Hauling
         Route::resource('/hauling','HaulingController');
         // Route::post('/hauling/prepare','HaulingController@prepare');
-        Route::post('/hauling/start','HaulingController@start');
-        Route::post('/hauling/terminate','HaulingController@terminate');
-        
         // Payment And Billing Routes
 
         //Dispatch Ticket

@@ -115,28 +115,29 @@ $('.createTugboatAssignment').on('click',function(){
         url : `${url}/${joborderID}/showjoborder`,
         type : 'GET',
         success : (data, response)=>{
+            console.log(data);
             $('.availableTugboats').empty();
-            console.log(data.joborder.fltWeight);
-            console.log(data.tugboats);
-            var tugboatcombination = []; 
-            tugboatcombination = tugboatcombinations(data.tugboats,data.joborder);
-            console.log(tugboatcombination.best.length);
-            $('.suggestedTugboats').empty();
-            $('.joborder-weight').html(data.joborder.fltWeight + " tons");
-            console.log(tugboatcombination.best[0].strName , tugboatcombination.best[0].strBollardPull);
-            for(var count = 0; count < (tugboatcombination.best).length; count++){
-                var appendBestTug = `
-                <div class="col-auto mt-4">
-                    <div class="card bg-success">
-                        <div class="card-body mb-1">
-                        <h6>${tugboatcombination.best[count].strName}</h6>
-                        ${tugboatcombination.best[count].strBollardPull}
-                        ${tugboatcombination.best.total}
-                        </div>
-                    </div>
-                </div>`;
-                $(appendBestTug).appendTo('.suggestedTugboats');
-            }
+            // console.log(data.joborder.fltWeight);
+            // console.log(data.tugboats);
+            // var tugboatcombination = []; 
+            // tugboatcombination = tugboatcombinations(data.tugboats,data.joborder);
+            // console.log(tugboatcombination.best.length);
+            // $('.suggestedTugboats').empty();
+            // $('.joborder-weight').html(data.joborder.fltWeight + " tons");
+            // console.log(tugboatcombination.best[0].strName , tugboatcombination.best[0].strBollardPull);
+            // for(var count = 0; count < (tugboatcombination.best).length; count++){
+            //     var appendBestTug = `
+            //     <div class="col-auto mt-4">
+            //         <div class="card bg-success">
+            //             <div class="card-body mb-1">
+            //             <h6>${tugboatcombination.best[count].strName}</h6>
+            //             ${tugboatcombination.best[count].strBollardPull}
+            //             ${tugboatcombination.best.total}
+            //             </div>
+            //         </div>
+            //     </div>`;
+            //     $(appendBestTug).appendTo('.suggestedTugboats');
+            // }
 
             for(var counter = 0; counter < (data.tugboats.length); counter++){
 
@@ -148,6 +149,7 @@ $('.createTugboatAssignment').on('click',function(){
                                     <input type="checkbox" id="availableTugboat${data.tugboats[counter].intTAssignID}" data-id="${data.tugboats[counter].intTAssignID}" name="tugboatlist[]" class="custom-control-input tugboatCheckbox">
                                     <label class="custom-control-label" for="availableTugboat${data.tugboats[counter].intTAssignID}">
                                         <p class="card-text text-center ml-2">${data.tugboats[counter].strName}</p>
+                                        <small>${data.tugboats[counter].strHorsePower}HP</small>
                                     </label>
                                 </div>
                             </div>

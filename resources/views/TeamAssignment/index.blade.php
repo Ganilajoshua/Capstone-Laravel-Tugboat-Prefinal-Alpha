@@ -247,9 +247,8 @@
                                                 @else
                                                     <div class="card-body">
                                                         <div class="alert alert-danger text-center">
-                                                            <i class="fas fa-exclamation-triangle mr-2"></i><h4>
-                                                                NO OWNED OCCUPIED TUGBOATS FOUND!
-                                                            </h4>
+                                                            <i class="fas fa-exclamation-triangle mr-2"></i>
+                                                            No Tugboats Found!
                                                         </div>
                                                     </div>
                                                 @endif
@@ -265,7 +264,7 @@
                                             <div class="collapse show" id="ownedUnderRepairT">
                                                 <div class="card-body">
                                                         <div class="alert alert-danger text-center">
-                                                            <i class="fas fa-exclamation-triangle mr-2"></i>NO DISABLED TUGBOATS FOUND!
+                                                            <i class="fas fa-exclamation-triangle mr-2"></i>No Tugboats Found!
                                                         </div>
                                                 </div>
                                             </div>

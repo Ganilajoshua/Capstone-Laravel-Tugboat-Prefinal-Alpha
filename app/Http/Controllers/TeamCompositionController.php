@@ -17,6 +17,7 @@ class TeamCompositionController extends Controller
     public function index()
     {
         $teamcomp = Position::where('intPCompanyID',Auth::user()->intUCompanyID)
+        ->where('boolDeleted',0)
         ->get();
         return view('Utilities.TeamComposition.index',compact('teamcomp'));
     }

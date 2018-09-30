@@ -132,7 +132,9 @@
                     <li>
                         <a href="#" class="has-dropdown"><i class="fas fa-wrench"></i><span>Utilities</span></a>
                         <ul class="menu-dropdown">
-                            <li><a href="/contracts"><i class="ion ion-ios-paper"></i> Contracts</a></li>
+                            {{-- <li><a href="/contracts"><i class="ion ion-ios-paper"></i> Contracts</a></li> --}}
+                            <li><a href="/contracts"><i class="fas fa-table"></i> Tugboat Matrix</a></li>
+                            <li><a href="/administrator/utilities/teamcomposition"><i class="fas fa-users"></i> Team Composition</a></li>
                         </ul>
                     </li>
                     {{-- if --}}
