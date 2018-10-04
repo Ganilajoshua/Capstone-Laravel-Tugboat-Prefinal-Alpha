@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 /*
 |--------------------------------------------------------------------------
@@ -84,13 +84,21 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::get('/tugboat/{intTugboatMainID}/please','TugboatController@please');
         Route::get('/tugboat/{intTugboatMainID}/delete','TugboatController@delete');
         Route::get('/tugboat/{intTugboatMainID}/destroy','TugboatController@destroy');
+
+        Route::resource('/vesseltype','VesselTypeController');
+        Route::post('/vesseltype/store','VesselTypeController@store');
+        Route::post('/vesseltype/update','VesselTypeController@update');
+        Route::post('/vesseltype/activate','VesselTypeController@activate');
+        Route::get('/vesseltype/{intVesselTypeID}/edit','VesselTypeController@edit');
+        Route::get('/vesseltype/{intVesselTypeID}/delete','VesselTypeController@delete');
+        Route::get('/vesseltype/{intVesselTypeID}/destroy','VesselTypeController@destroy');
         
-        Route::resource('/quotations','QuotationsController');
-        Route::post('/quotations/store','QuotationsController@store');
-        Route::post('/quotations/update','QuotationsController@update');
-        Route::get('/quotations/{intQuotationID}/show','QuotationsController@show');
-        Route::get('/quotations/{intQuotationID}/edit','QuotationsController@edit');
-        Route::get('/quotations/{intQuotationID}/delete','QuotationsController@delete');
+        // Route::resource('/quotations','QuotationsController');
+        // Route::post('/quotations/store','QuotationsController@store');
+        // Route::post('/quotations/update','QuotationsController@update');
+        // Route::get('/quotations/{intQuotationID}/show','QuotationsController@show');
+        // Route::get('/quotations/{intQuotationID}/edit','QuotationsController@edit');
+        // Route::get('/quotations/{intQuotationID}/delete','QuotationsController@delete');
     });
     //Transactions Routes
     Route::group(['prefix'=>'transactions/'],function(){
@@ -120,6 +128,13 @@ Route::group(['prefix'=>'administrator/'],function(){
             Route::post('/teamassignment/returnteam','TugboatTeamAssignmentController@returnteam');
             Route::post('/teamassignment/returntugboat','TugboatTeamAssignmentController@returntugboat');
             Route::post('/teamassignment/notifications','TugboatTeamAssignmentController@notifications');
+            
+            Route::group(['prefix'=>'hauling/'],function(){
+                Route::get('/{intJobOrderID}/show','HaulingController@show');
+                Route::post('/showteam','HaulingController@showteam');
+                Route::post('/start','HaulingController@start');
+                Route::post('/terminate','HaulingController@terminate');
+            });
         });
 
         //Payment and Billing Module
@@ -157,6 +172,7 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::post('/joborders/store','JobOrderController@store');
         //Dispatch and Hauling - Tugboat Assignment
         Route::resource('/tugboatassignment','TugboatAssignmentController');
+        Route::get('/tugboatassignment/{intJobOrderID}/showjoborder','TugboatAssignmentController@showjoborder');
         Route::post('/tugboatassignment/create','TugboatAssignmentController@create');
         Route::post('/tugboatassignment/hauling','TugboatAssignmentController@hauling');
         Route::post('/tugboatassignment/available','TugboatAssignmentController@available');
@@ -166,9 +182,6 @@ Route::group(['prefix'=>'administrator/'],function(){
         //Dispatch and Hauling - Hauling
         Route::resource('/hauling','HaulingController');
         // Route::post('/hauling/prepare','HaulingController@prepare');
-        Route::post('/hauling/start','HaulingController@start');
-        Route::post('/hauling/terminate','HaulingController@terminate');
-        
         // Payment And Billing Routes
 
         //Dispatch Ticket
@@ -176,7 +189,9 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::get('/dispatchticket','DispatchTicketController@index');
         Route::get('/dispatchticket/{intDispatchTicketID}/info','DispatchTicketController@info');
         Route::post('/dispatchticket/AdminAccept','DispatchTicketController@AdminAccept');
-        
+        Route::post('/dispatchticket/Void','DispatchTicketController@Void');
+        Route::post('/dispatchticket/store','DispatchTicketController@store');
+        Route::post('/dispatchticket/finalize','DispatchTicketController@finalize');
         //Scheduling
         Route::post('/scheduling/tugboatsavailable','SchedulingController@tugboatsavailable');
         
@@ -210,18 +225,23 @@ Route::group(['prefix'=>'consignee/'],function(){
     Route::resource('/joborders','ConsigneeControllers\JobOrdersController');
     Route::post('/joborders/create','ConsigneeControllers\JobOrdersController@create');
     Route::post('/joborders/{intJobOrderID}/store','ConsigneeControllers\JobOrdersController@store');
+    Route::post('/joborders/haulingservice','ConsigneeControllers\JobOrdersController@haulingservice');
     Route::post('/joborders/update','ConsigneeControllers\JobOrdersController@update');
     Route::get('/joborders/{intJobOrderID}/show','ConsigneeControllers\JobOrdersController@show');
 
-    Route::resource('/dispatchticket','ConsigneeControllers\ConsigneeControllerDispatch');
-    Route::get('/dispatchticket','ConsigneeControllers\ConsigneeControllerDispatch@index');
-    Route::get('/dispatchticket/{intDispatchTicketID}/info','ConsigneeControllers\ConsigneeControllerDispatch@info');
-    Route::post('/dispatchticket/store','ConsigneeControllers\ConsigneeControllerDispatch@store');
+    Route::resource('/dispatchticket','ConsigneeControllers\CDispatchTicketController');
+    Route::get('/dispatchticket','ConsigneeControllers\CDispatchTicketController@index');
+    Route::get('/dispatchticket/{intDispatchTicketID}/info','ConsigneeControllers\CDispatchTicketController@info');
+    Route::post('/dispatchticket/store','ConsigneeControllers\CDispatchTicketController@store');
 
     
     Route::group(['prefix'=>'paymentbilling/'],function(){
         Route::resource('/billing','ConsigneeControllers\CBillingController');
+        Route::post('/billing/store','ConsigneeControllers\CBillingController@store');
         Route::resource('/payment','ConsigneeControllers\CPaymentController');
+        Route::get('/payment/{intBillID}/info','ConsigneeControllers\CPaymentController@info');
+        Route::post('/payment/store','ConsigneeControllers\CPaymentController@store');
+        // Route::get('/payment','ConsigneeControllers\CPaymentController@index');
     });
     // Route::get('/consignee/login','LoginControllers\UserLoginController@index')
 });

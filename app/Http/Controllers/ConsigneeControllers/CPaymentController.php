@@ -4,7 +4,20 @@ namespace App\Http\Controllers\ConsigneeControllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use App\Tugboat;
+use App\TugboatMainSpecifications;
+use App\TeamAssignment;
+use App\JobOrder;
+use App\JobSchedule;
+use App\Schedules;
+use App\Bill;
+use App\Company;
+use App\Invoice;
+use Redirect;
+use Auth;
+use DB;
 class CPaymentController extends Controller
 {
     /**
@@ -12,9 +25,41 @@ class CPaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('Consignee.Payment.index');
+        $Bill = Bill::max('intBillID')+1;
+        $dispatch = DB::table('tbljoborder as joborder')
+        ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
+        ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
+        ->join('tblpier as pier','berth.intBPierID','pier.intPierID')
+        // ->join('tblbarge as barge','joborder.intJOBargeID','barge.intBargeID')
+        ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+        // ->join('tblvessel as vessel','joborder.intJOeVesselID','vessel.intVesselID')
+        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
+        ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
+        ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
+        ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
+        ->where('company.intCompanyID',Auth::user()->intUCompanyID)
+        ->where('invoice.intIBillID',$Bill)
+        ->get();
+
+        $Company = Company::findOrFail(Auth::user()->intUCompanyID);
+        $amount = DB::table('tblinvoice')
+        ->where('intIBillID',$Bill)
+        ->sum('fltBalanceRemain');
+
+        return view('Consignee.Payment.index')
+        ->with('Bill',$Bill)
+        ->with('dispatch',$dispatch)
+        ->with('Company',$Company)
+        ->with('amount',$amount);
+        
+        // return response()->json(['dispatch'=>$dispatch, 'dispatch2'=>$dispatch2]);  
+        
+        // return response()->json(['dispatch'=>$dispatch]);  
     }
 
     /**
@@ -35,7 +80,22 @@ class CPaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $Bill = new Bill;
+        error_log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
+        error_log($request->BillID);
+        $Bill->intBillID = $request->BillID;
+        $Bill->intChequeID = $request->ChequeNum;
+        $Bill->dtPayment = Carbon::parse($request->ChequeDate)->format('Y/m/d');
+        $Bill->intABANum = $request->AbaNum;
+        $Bill->intAmount = $request->ChequeAmount;
+        $Bill->intRouteNum = $request->RouteNum;
+        $Bill->intAccountNum = $request->RouteNum;
+        $Bill->strMemo = $request->ChequeMemo;
+        $Bill->enumStatus = 'Pending';
+        $Bill->timestamps = false;
+        $Bill->save();
+        
+        return response()->json(['Bill'=>$Bill]);  
     }
 
     /**
@@ -81,5 +141,42 @@ class CPaymentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function info($intBillID)
+    {
+        $Bill = Invoice::findOrFail($intBillID);
+        $JOAmount = DB::table('tblinvoice as invoice')
+        ->join('tblcharges as charges','invoice.intInvoiceID','charges.intChargeID')
+        ->where('intIBillID',$intBillID)
+        ->sum('fltJOAmount');
+        $TBDelayFee = DB::table('tblinvoice as invoice')
+        ->join('tblcharges as charges','invoice.intInvoiceID','charges.intChargeID')
+        ->where('intIBillID',$intBillID)
+        ->sum('fltTugboatDelayFee');
+        $ViolationFee = DB::table('tblinvoice as invoice')
+        ->join('tblcharges as charges','invoice.intInvoiceID','charges.intChargeID')
+        ->where('intIBillID',$intBillID)
+        ->sum('fltViolationFee');
+        $CLateFee = DB::table('tblinvoice as invoice')
+        ->join('tblcharges as charges','invoice.intInvoiceID','charges.intChargeID')
+        ->where('intIBillID',$intBillID)
+        ->sum('fltConsigneeLateFee');
+        $DamageFee = DB::table('tblinvoice as invoice')
+        ->join('tblcharges as charges','invoice.intInvoiceID','charges.intChargeID')
+        ->where('intIBillID',$intBillID)
+        ->sum('fltDamageFee');
+        $Total = DB::table('tblinvoice as invoice')
+        ->join('tblcharges as charges','invoice.intInvoiceID','charges.intChargeID')
+        ->where('intIBillID',$intBillID)
+        ->sum('fltBalanceRemain');
+        return response()->json(['Bill'=>$Bill,
+        'JOAmount'=>$JOAmount,
+        'TBDelayFee'=>$TBDelayFee
+        ,'ViolationFee'=>$ViolationFee
+        ,'CLateFee'=>$CLateFee
+        ,'DamageFee'=>$DamageFee
+        ,'Total'=>$Total
+        ,'intBillID'=>$intBillID]);    
     }
 }

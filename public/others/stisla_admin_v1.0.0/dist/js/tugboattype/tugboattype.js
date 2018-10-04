@@ -188,11 +188,9 @@ function deleteTugboatType(deleteID){
                             confirmButtonClass: "btn-success",
                             confirmButtonText: "Ok",
                             closeOnConfirm: true,
-                            timer : 1000
-                        },
-                        function(isConfirm){
+                        },(isConfirm)=>{
                             if(isConfirm){
-                                window.location = url ;
+                                location.reload();
                             }
                         })
                     },

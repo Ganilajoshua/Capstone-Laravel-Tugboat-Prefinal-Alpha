@@ -20,8 +20,8 @@ class Hauling extends Model
         'enumStatus', 
         'strPermitsAttachments', 
         'datPreparationStart', 
-        'datHaulingStart', 
-        'datHaulingEnd'
+        'dateStarted', 
+        'datHaulingEnd',
         'boolDeleted', 
     ];
 }

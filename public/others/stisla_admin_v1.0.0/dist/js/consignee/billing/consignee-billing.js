@@ -1,3 +1,4 @@
+var url = '/consignee/paymentbilling/billing';
 $(document).ready(function(){
     $('.btnSubmitSign').attr('disabled', true);
     $('.btnSubmitSign').css('cursor', 'not-allowed');
@@ -98,3 +99,34 @@ $(document).ready(function(){
     });
       
 });
+
+function payselected(){
+//   console.log($('#jobOrderID').val());
+//   var id = $('#jobOrderID').val();
+  var bill = [];
+  $('.billcheckbox:checkbox:checked').each(function(checked){
+      bill[checked] = parseInt($(this).val());
+      // parseInt($(this).val());
+      console.log(bill);
+  }); 
+
+//   return false;
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+$.ajax({
+    url : url + '/store',
+    type : 'POST',
+    data : { 
+        "_token" : $('meta[name="csrf-token"]').attr('content'),
+        bill : bill, 
+    }, 
+    beforeSend: function (request) {
+        return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+    },
+
+});
+}

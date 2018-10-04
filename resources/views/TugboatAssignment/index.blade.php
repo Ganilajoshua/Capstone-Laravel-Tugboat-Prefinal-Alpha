@@ -118,7 +118,8 @@
                                                                     </div>
                                                                     <div class="card-footer mt-2">
                                                                         <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
-                                                                        <button data-id="{{$notugboat->intJobOrderID}}" data-date="{{$notugboat->dtmETA}}" onclick="showTugboatModal({{$notugboat->intJobOrderID}})" class="assignTugboatButton btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Assign Tugboat</button>
+                                                                        <button data-id="{{$notugboat->intJobOrderID}}" data-date="{{$notugboat->dtmETA}}" class="createTugboatAssignment btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Assign Tugboat</button>
+                                                                        {{-- onclick="showTugboatModal({{$notugboat->intJobOrderID}})" --}}
                                                                         {{-- onclick="showTugboatModal({{$notugboat->intJobOrderID}})" --}}
                                                                     </div>
                                                                 </div>

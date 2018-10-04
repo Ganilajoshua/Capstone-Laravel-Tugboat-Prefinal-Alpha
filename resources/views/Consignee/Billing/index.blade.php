@@ -30,7 +30,7 @@
 									<div class="card card-primary">
 										<div class="card-header">
 											<div class="float-right">
-												<button id="btnPaySelected" class="btn btn-primary waves-effect animated zoomIn faster">
+												<button id="btnPaySelected" onclick="payselected()" class="btn btn-primary waves-effect animated zoomIn faster">
 													Pay Selected
 												</button>
 											</div>
@@ -49,24 +49,28 @@
 															<th>#</th>
 															<th>Date of Transaction</th>
 															<th>status</th>
-															<th>Total Amount (&#8369;)</th>
+															<th>Total Amount
+																{{-- (&#8369;) --}}
+															</th>
 															<th>Actions</th>
 														</tr>
 													</thead>
 													<tbody>
+													@if(count($dispatch)>0)    
+															@foreach($dispatch as $dispatch)
 														<tr class="tr-shadow">
 															<td>
 																<label class="au-checkbox">
-																	<input type="checkbox" class="checkbox">
+																	<input type="checkbox" value="{{$dispatch->intInvoiceID}}" id="" class="checkbox billcheckbox">
 																	<span class="au-checkmark"></span>
 																</label>
 															</td>
-															<td>0001</td>
-															<td>2018-09-27 02:12</td>
+															<td>{{$dispatch->intInvoiceID}}</td>
+															<td>{{$dispatch->dtmETA}}</td>
 															<td>
-																<div class="badge badge-success">Processed</div>
+																<div class="badge badge-success">{{$dispatch->enumStatus}}</div>
 															</td>
-															<td>₱6790.00</td>
+															<td>{{$dispatch->fltBalanceRemain}}</td>
 															<td>
 																<div class="table-data-feature">
 																	<button class="item waves-effect btnView" data-toggle="tooltip" data-placement="top" title="More">
@@ -79,81 +83,8 @@
 															</td>
 														</tr>
 														<tr class="spacer"></tr>
-														<tr class="tr-shadow">
-															<td>
-																<label class="au-checkbox">
-																	<input type="checkbox" class="checkbox">
-																	<span class="au-checkmark"></span>
-																</label>
-															</td>
-															<td>0002</td>
-															<td>2018-09-29 05:57</td>
-															<td>
-																<div class="badge badge-success">Processed</div>
-															</td>
-															<td>$999.00</td>
-															<td>
-																<div class="table-data-feature">
-																	<button class="item waves-effect btnView" data-toggle="tooltip" data-placement="top" title="More">
-																		<i class="zmdi zmdi-more"></i>
-																	</button>
-																	<button class="item waves-effect" data-toggle="tooltip" data-placement="top" title="Print">
-																		<i class="miniIcon fa fa-print"></i>
-																	</button>
-																</div>
-															</td>
-														</tr>
-														<tr class="spacer"></tr>
-														<tr class="tr-shadow">
-															<td>
-																<label class="au-checkbox">
-																	<input type="checkbox" class="checkbox">
-																	<span class="au-checkmark"></span>
-																</label>
-															</td>
-															<td>0003</td>
-															<td>2018-09-25 19:03</td>
-															<td>
-																<div class="badge badge-danger">Denied</div>
-															</td>
-															<td>$1199.00</td>
-															<td>
-																<div class="table-data-feature">
-																	<button class="item waves-effect btnView" data-toggle="tooltip" data-placement="top" title="More">
-																		<i class="zmdi zmdi-more"></i>
-																	</button>
-																	<button class="item waves-effect" data-toggle="tooltip" data-placement="top" title="Print">
-																		<i class="miniIcon fa fa-print"></i>
-																	</button>
-																</div>
-															</td>
-														</tr>
-														<tr class="spacer"></tr>
-														<tr class="tr-shadow">
-															<td>
-																<label class="au-checkbox">
-																	<input type="checkbox" class="checkbox">
-																	<span class="au-checkmark"></span>
-																</label>
-															</td>
-															<td>0004</td>
-															<td>2018-09-24 19:10</td>
-															<td>
-																<div class="badge badge-success">Processed</div>
-															</td>
-															<td>$699.00</td>
-															<td>
-																<div class="table-data-feature">
-																	<button class="item waves-effect btnView" data-toggle="tooltip" data-placement="top" title="More">
-																		<i class="zmdi zmdi-more"></i>
-																	</button>
-																	<button class="item waves-effect" data-toggle="tooltip" data-placement="top" title="Print">
-																		<i class="miniIcon fa fa-print"></i>
-																	</button>
-																</div>
-															</td>
-														</tr>
-
+														@endforeach
+													@endif
 													</tbody>
 												</table>
 											</div>

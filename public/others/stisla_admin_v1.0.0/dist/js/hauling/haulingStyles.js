@@ -45,9 +45,9 @@ $(document).ready(function(){
     $('#moreInfoModal').modal('hide');
   });
   
-  $('#timeUpdated').datetimepicker({
-    format:'HH:mm'
-  });
+  // $('#timeUpdated').datetimepicker({
+  //   format:'HH:mm'
+  // });
   // Sweet Alerts
   $('.btnUpdateLoc').on('click',function(){
     swal({
@@ -86,4 +86,9 @@ $(document).ready(function(){
         swal("Ended!", "Hauling of Job Order # 17 has been ended.", "success");
     });
   });
+//   $('.startHauling').on('click',function(event){
+// 	  event.preventDefault();
+// 	$('.startHaulingContainer').css('display','block');
+// 	$('.jobOrderList').css('display','none');
+//   });
 });

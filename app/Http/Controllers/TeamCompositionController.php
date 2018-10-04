@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\TeamComposition;
+use App\Position;
 use Auth;
 
 class TeamCompositionController extends Controller
@@ -16,9 +16,10 @@ class TeamCompositionController extends Controller
      */
     public function index()
     {
-        $teamcomp = TeamComposition::where('intTCCompanyID',Auth::user()->intUCompanyID)
+        $teamcomp = Position::where('intPCompanyID',Auth::user()->intUCompanyID)
+        ->where('boolDeleted',0)
         ->get();
-        return view('TeamComposition.index',compact('teamcomp'));
+        return view('Utilities.TeamComposition.index',compact('teamcomp'));
     }
 
     /**

@@ -95,6 +95,10 @@ function storeContracts(){
     var minDamage = $('#minDamageFee').val();
     var maxDamage= $('#maxDamageFee').val();
     var discount = $('#discountRange').val();
+    console.log(discount);
+
+
+    // return false;
     console.log(id);
     console.log(title, details);
     $.ajaxSetup({

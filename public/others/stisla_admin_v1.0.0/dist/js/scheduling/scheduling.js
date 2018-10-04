@@ -6,6 +6,5 @@ $(document).ready(function(){
     $('#menuTeamBuilder').addClass('inactive');
     $('#menuScheduling').addClass('active');
     $('#menuHauling').addClass('inactive');;
-    
     console.log('HI');
 });

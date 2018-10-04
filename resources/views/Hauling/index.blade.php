@@ -20,6 +20,7 @@
         <!--Job Schedule List-->
         @if(Auth::user()->enumUserType == 'Admin')
             @include('Hauling.list')
+            @include('Hauling.startHauling')
         @elseif(Auth::user()->enumUserType == 'Affiliates')
             @include('Hauling.forwardlist')
         @endif
@@ -28,6 +29,7 @@
     @include('Hauling.location')
     <!--More Info Modal-->
     @include('Hauling.info')
+    @include('Hauling.jobschedinfo')
 @endsection
 
 @section('outside')

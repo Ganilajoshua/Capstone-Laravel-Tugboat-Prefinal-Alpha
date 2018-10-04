@@ -80,7 +80,7 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="tab-content">
-                                                <!-- Add Job Order -->
+                                                <!-- Add Job Order Choose Service-->
                                                 @include('Consignee.Joborders.chooseservice')
                                                 <!-- Created Job Orders -->
                                                 @include('Consignee.Joborders.createdjoborders')

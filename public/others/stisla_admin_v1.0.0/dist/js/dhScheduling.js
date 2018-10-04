@@ -47,64 +47,37 @@ $(document).ready(()=>{
             m = date.getMonth(),
             y = date.getFullYear()
 
-        var a = $('#sched').val()
+        var a = $('#sched').val();
+        console.log($('#sched').data('id'));
         var schedules = JSON.parse(a);
         // console.log(schedules);
         var eventsSched = [];
         for(var count=0; count<schedules.length; count++){
-            schedStartDate = schedules[count].dttmETA;
-            schedEndDate = schedules[count].dttmETD;
-            // console.log('start time : ', schedStartDate);
-            // console.log('end time : ', schedEndDate);
+            schedStartDate = schedules[count].dateStart;
+            schedEndDate = schedules[count].dateEnd;
 
-            //First split on receive remove spaces
-            //Start Date
-            var ssched = schedStartDate.split(' ');
-            var sdate = ssched[0];
-            var stime = ssched[1];
-            //End Date
-            var esched = schedEndDate.split(' ');
-            var edate = esched[0];
-            var etime = esched[1];
-            //Log Start Time
-            // console.log(ssched); console.log(sdate); console.log(stime);
-            //Log End Time
-            // console.log(esched); console.log(edate); console.log(etime);
+            schedStartTime = schedules[count].tmStart;
+            schedEndTime = schedules[count].tmEnd;
 
-            //Second Split remove colon from time and hyphen from date
-            //Start Date and Time
-            var sDate = sdate.split('-');
-            var sTime = stime.split(':');
-            //Log Start Time Second Split
-            // console.log(sDate); console.log(sTime);
-            var eDate = edate.split('-');
-            var eTime = etime.split(':');
+            var startDate = schedStartDate.split('-');
+            var endDate = schedEndDate.split('-');
+            var startTime = schedStartTime.split(':');
+            var endTime = schedStartTime.split(':');
+            console.log('startDate', startDate);
+            console.log('endDate', endDate);
+            console.log('startTime', startTime);
+            console.log('endTime',endTime);
 
-            //Assign final Start Time Splitted Variables
-            var startYear = parseInt(sDate[0]);
-            var startMonth = parseInt(sDate[1]) - 1;
-            var startDay = parseInt(sDate[2]);
-            var startHour = parseInt(sTime[0]);
-            var startMin = parseInt(sTime[1]);
-            var startSec = parseInt(sTime[2]);
-            //Assign final End TIme Splitted Variables
-            var endYear = parseInt(eDate[0]);
-            var endMonth = parseInt(eDate[1]) -1;
-            var endDay = parseInt(eDate[2]);
-            var endHour = parseInt(eTime[0]);
-            var endMin = parseInt(eTime[1]);
-            var endSec = parseInt(eTime[2]);
-            
             //push to the array rendering variable
 
             eventsSched.push({
                 title : schedules[count].strScheduleDesc,
-                start : new Date (startYear, startMonth, startDay, startHour, startMin, startSec),
-                end : new Date (endYear, endMonth, endDay, endHour, endMin, endSec),
+                start : new Date (startDate[0], startDate[1] - 1, startDate[2], startTime[0], startTime[1], startTime[2]),
+                end : new Date (endDate[0], endDate[1] - 1, endDate[2], endTime[0], endTime[1], endTime[2]),
                 allDay : false,
                 displayEventTime : true,
-                backgroundColor: schedules[count].strColor, //yellow
-                borderColor: schedules[count].strColor, //yellow
+                backgroundColor: `#00a65a`, //yellow
+                borderColor: `#00a65a`, //yellow
                 className: 'text-left',
  
             });
