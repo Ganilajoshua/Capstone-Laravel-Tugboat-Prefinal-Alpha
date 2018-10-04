@@ -51,7 +51,7 @@
 												<h5>Name : </h5>
 											</li>
 											<li class="list-inline-item">
-												<h5 class="text-primary">John Carlos Pagaduan</h5>
+												<h5 class="text-primary">{{$Company->strCompanyName}}</h5>
 											</li>
 										</ul>
 										<ul class="list-inline">
@@ -59,7 +59,7 @@
 												<h5>Address : </h5>
 											</li>
 											<li class="list-inline-item">
-												<h5 class="text-primary">554 Paltoc St. Sampaloc Manila</h5>
+												<h5 class="text-primary">{{$Company->strCompanyAddress}}</h5>
 											</li>
 										</ul>
 									</div>
@@ -91,7 +91,7 @@
 									<div class="col-12 col-sm-12 col-lg-8">
 										<div class="form-group">
 											<label for="payeeLine">Pay to the Order Of<sup class="text-primary">&#10033;</sup></label>
-											<input type="text" class="form-control" id="payeeLine" placeholder="Tugmaster Bargepool" required>
+											<input type="text" class="form-control" id="payeeLine" value="Tugmaster Bargepool" placeholder="Tugmaster Bargepool" required>
 											<div class="invalid-feedback">
 												Please fill in the Payee.
 											</div>
@@ -186,14 +186,14 @@
 										<th>Amount</th>
 									</thead>
 									<tbody class="text-black" >
-										<td class="tdBorderLeft"><a href="#" class="btnBillInfo">17</a></td>
-										<td>&#8369; 24000</td>
+									<td class="tdBorderLeft"><a href="#" class="btnBillInfo" onclick="billinfo({{$Bill}})">{{$Bill}}</a></td>
+										<td>&#8369; {{$amount}}</td>
 									</tbody>
 								</table>
 							</div>
 						</div>
 						<div class="card-footer"style="background:#fff;border-top: 0px;">
-							<button class="btn btn-primary waves-effect float-right">PLACE PAYMENT</button>
+							<button class="btn btn-primary waves-effect float-right" onclick="Finalize({{$Bill}})">PLACE PAYMENT</button>
 						</div>
 					</div>
 				</div>

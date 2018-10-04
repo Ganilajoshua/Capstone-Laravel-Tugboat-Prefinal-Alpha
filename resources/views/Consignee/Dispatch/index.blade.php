@@ -37,29 +37,29 @@
 								</tr>
 							</thead>
 							<tbody>
-					@if(count($dispatch)>0)
-						@foreach($dispatch as $dispatch)
+					@if(count($accept)>0)
+						@foreach($accept as $accept)
 								<tr>
 									<td>
-                                        {{$dispatch->intDispatchTicketID}}
+                                        {{$accept->intDispatchTicketID}}
                                     </td>
 									<td>
-                                        {{$dispatch->strName}}
+                                        {{$accept->strName}}
                                     </td>
 									<td>
-                                        {{$dispatch->strJOStartPoint}}
+                                        {{$accept->strJOStartPoint}}
                                     </td>
 									<td>
-                                        {{$dispatch->strJODestination}}
+                                        {{$accept->strJODestination}}
                                     </td>
 									<td>san kukunin?</td>
 									<td>
-                                        {{$dispatch->strServicesName}}
+                                        {{$accept->strServicesName}}
                                     </td>
 									<td style="width:15%">
 										<span data-target="#infoModal">
 										<div class="ml-1 mr-1">
-											<button  onclick="get({{$dispatch->intDispatchTicketID}})" class="btnView btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
+											<button  onclick="get({{$accept->intDispatchTicketID}})" class="btnView btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
 												<i class="bigIcon ion ion-ios-eye"></i>
 											</button>
 											<button class="btn btn-sm btn-success waves-circle waves-effect" data-toggle="tooltip" title="Print" role="button">

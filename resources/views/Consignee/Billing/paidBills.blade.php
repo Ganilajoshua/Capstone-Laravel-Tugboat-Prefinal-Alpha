@@ -11,11 +11,12 @@
             </tr>
         </thead>
         <tbody>
+            {{-- @foreach($dispatch2 as $dispatch2)
             <tr>
-                <td>72286</td>
+                <td>{{$dispatch2->intBillID}}</td>
                 <td>09/14/2018</td>
                 <td><div class="badge badge-success">Paid</div></td>
-                <td>24000</td>
+                <td>{{$dispatch2->fltBalanceRemain}}</td>
                 <td style="width:15%">
                     <div class="ml-1 mr-1">
                         <button class="btnView btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
@@ -27,22 +28,7 @@
                     </div>
                 </td>
             </tr>
-            <tr>
-                <td>21313</td>
-                <td>09/04/2018</td>
-                <td><div class="badge badge-success">Paid</div></td>
-                <td>12000</td>
-                <td style="width:15%">
-                    <div class="ml-1 mr-1">
-                        <button class="btnView btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
-                            <i class="ion ion-ios-eye" style="font-size:25px;margin-top:2px;"></i>
-                        </button>
-                        <button class="btn btn-sm btn-success waves-circle waves-effect" data-toggle="tooltip" title="Print" role="button">
-                            <i class="fa fa-print" style="font-size:18px;margin-top:2px;"></i>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+            @endforeach --}}
         </tbody>
     </table>
 </div>

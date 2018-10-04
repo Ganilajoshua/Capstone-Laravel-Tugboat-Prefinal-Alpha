@@ -273,7 +273,11 @@ Route::group(['prefix'=>'consignee/'],function(){
     
     Route::group(['prefix'=>'paymentbilling/'],function(){
         Route::resource('/billing','ConsigneeControllers\CBillingController');
+        Route::post('/billing/store','ConsigneeControllers\CBillingController@store');
         Route::resource('/payment','ConsigneeControllers\CPaymentController');
+        Route::get('/payment/{intBillID}/info','ConsigneeControllers\CPaymentController@info');
+        Route::post('/payment/store','ConsigneeControllers\CPaymentController@store');
+        // Route::get('/payment','ConsigneeControllers\CPaymentController@index');
     });
     // Route::get('/consignee/login','LoginControllers\UserLoginController@index')
 });
