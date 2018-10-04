@@ -16,6 +16,16 @@
         <div class="row">
             <div class="col-12">
                 <div class="card">
+                    <div class="card-header bg-primary text-white">Weather Forecast</div>
+                    <div class="card-body">
+                        <div id="weather"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
                     <div class="card-header p-0 bg-primary">
                         <div class="card card-sm-3 p-0 bg-primary m-0">
                             <div class="card-icon bg-white">

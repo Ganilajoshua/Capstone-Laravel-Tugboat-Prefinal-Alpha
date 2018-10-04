@@ -49,7 +49,7 @@
 															<th>#</th>
 															<th>Date of Transaction</th>
 															<th>status</th>
-															<th>Transaction Amount (&#8369;)</th>
+															<th>Total Amount (&#8369;)</th>
 															<th>Actions</th>
 														</tr>
 													</thead>
@@ -161,7 +161,9 @@
 									</div>
 								</div>
 							</div>
-							<div class="tab-pane fade" id="pillsPaid" role="tabpanel" aria-labelledby="pillsPaid-tab"></div>
+							<div class="tab-pane fade" id="pillsPaid" role="tabpanel" aria-labelledby="pillsPaid-tab">
+								@include('Consignee.Billing.paidBills')
+							</div>
 						</div>
 					</div>
 				</div>
@@ -169,5 +171,4 @@
 		</div>
 	</section>
 	@include('Consignee.Billing.info')
-	@include('Consignee.Billing.infoModal')
 @endsection

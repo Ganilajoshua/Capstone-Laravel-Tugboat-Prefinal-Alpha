@@ -302,98 +302,35 @@ $(function(){
           editfPicReader.readAsDataURL(input.files[0]);
       }
     }
-    function editsPictureUpload(input) {
-      if (input.files && input.files[0]) {
-          var editsPicReader = new FileReader();
-
-          editsPicReader.onload = function (e) {
-              $('#editsPic').attr('src', e.target.result).fadeIn('slow');
-          }
-          editsPicReader.readAsDataURL(input.files[0]);
-      }
-    }
-    function edittPictureUpload(input) {
-      if (input.files && input.files[0]) {
-          var edittPicReader = new FileReader();
-
-          edittPicReader.onload = function (e) {
-              $('#edittPic').attr('src', e.target.result).fadeIn('slow');
-          }
-          edittPicReader.readAsDataURL(input.files[0]);
-      }
-    }
 
     // Prepare the preview for profile picture
   $("#AddfirstPic").change(function(){
     addfPictureUpload(this);
   });
-
-  $("#AddsecPic").change(function(){
-      addsPictureUpload(this);
-  });
-
-  $("#AddthirdPic").change(function(){
-      addtPictureUpload(this);
-  });
-
   // Get Image Name 
   $('#AddfirstPic').change(function(e){
       var fileName = e.target.files[0].name;
       $('#AddfirstFileChosen').text(fileName);
+      $('#addLblfirstPic').text(fileName);
   });
-  $('#AddsecPic').change(function(e){
-      var fileName = e.target.files[0].name;
-      $('#AddsecFileChosen').text(fileName);
-  });
-  $('#AddthirdPic').change(function(e){
-      var fileName = e.target.files[0].name;
-      $('#AddthirdFileChosen').text(fileName);
-  });
-
 
   // Prepare the preview for profile picture
   $("#editFirstPic").change(function(){
     editfPictureUpload(this);
     });
-
-    $("#editSecPic").change(function(){
-        editsPictureUpload(this);
-    });
-
-    $("#editThirdPic").change(function(){
-        edittPictureUpload(this);
-    });
-
     // Get Image Name 
     $('#editFirstPic').change(function(e){
       var fileName = e.target.files[0].name;
       $('#editFirstFileChosen').text(fileName);
   });
-  $('#editSecPic').change(function(e){
-      var fileName = e.target.files[0].name;
-      $('#editSecFileChosen').text(fileName);
-  });
-  $('#editThirdPic').change(function(e){
-      var fileName = e.target.files[0].name;
-      $('#editThirdFileChosen').text(fileName);
-  });
-
   //Sweet Alerts!!!
 // Go back
 $('.btnBack').on('click',function(s) {
   s.preventDefault();
-  swal({
-      title: "You haven't saved your changes",
-      text: "Are you sure you want to go back?",
-      type: "error",
-      showCancelButton: true,
-      confirmButtonClass: "btn-danger waves-effect",
-      confirmButtonText: "Ok",
-      closeOnConfirm: false
-  },
-  function(){
-      window.location = "/administrator/maintenance/tugboat"
-  });
+      $('.addLayout').css('display','none');
+      $('.editLayout').css('display','none');
+      $('.selectViews').css('display','block');
+      $('.cardLayout').css('display','block');
 });
 
 // Add button for all add views
@@ -589,27 +526,6 @@ function editfPictureUpload(input) {
       editfPicReader.readAsDataURL(input.files[0]);
   }
 }
-function editsPictureUpload(input) {
-  if (input.files && input.files[0]) {
-      var editsPicReader = new FileReader();
-
-      editsPicReader.onload = function (e) {
-          $('#editsPic').attr('src', e.target.result).fadeIn('slow');
-      }
-      editsPicReader.readAsDataURL(input.files[0]);
-  }
-}
-function edittPictureUpload(input) {
-  if (input.files && input.files[0]) {
-      var edittPicReader = new FileReader();
-
-      edittPicReader.onload = function (e) {
-          $('#edittPic').attr('src', e.target.result).fadeIn('slow');
-      }
-      edittPicReader.readAsDataURL(input.files[0]);
-  }
-}
-
 //Function to show image before upload
 function addfPictureUpload(input) {
   if (input.files && input.files[0]) {
@@ -619,25 +535,5 @@ function addfPictureUpload(input) {
           $('#AddfPic').attr('src', e.target.result).fadeIn('slow');
       }
       addfPicReader.readAsDataURL(input.files[0]);
-  }
-}
-function addsPictureUpload(input) {
-  if (input.files && input.files[0]) {
-      var addsPicReader = new FileReader();
-
-      addsPicReader.onload = function (e) {
-          $('#AddsPic').attr('src', e.target.result).fadeIn('slow');
-      }
-      addsPicReader.readAsDataURL(input.files[0]);
-  }
-}
-function addtPictureUpload(input) {
-  if (input.files && input.files[0]) {
-      var addtPicReader = new FileReader();
-
-      addtPicReader.onload = function (e) {
-          $('#AddtPic').attr('src', e.target.result).fadeIn('slow');
-      }
-      addtPicReader.readAsDataURL(input.files[0]);
   }
 }

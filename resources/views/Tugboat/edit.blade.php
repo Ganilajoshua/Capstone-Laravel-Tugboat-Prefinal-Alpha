@@ -1,11 +1,11 @@
 <div class="editLayout">
     <div class="card animated bounceInLeft">
-        <div class="card-header">
-            <span style="height:50px;">
-                <a href="tugboat.html" class="btnBack btn btn-lg btn-link float-left mt-2" data-toggle="tooltip"  title="Back" role="button">
+        <div class="card-header bg-primary">
+            <span>
+                <a href="#" class="btnBack btn btn-lg btn-link float-left mt-2 text-white" data-toggle="tooltip"  title="Back" role="button">
                     <i class="ion-chevron-left"></i>
                 </a>
-                <h3 class="text-center mr-5 mt-2">EDIT</h3>
+                <h3 class="text-center mr-5 mt-2 text-white">EDIT</h3>
             </span>
         </div>  
         <div class="card-body">
@@ -13,10 +13,7 @@
                 <div class="col-12 col-sm-12 col-md-4">
                     <ul class="nav nav-pills flex-column" id="editTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active tabEdit" id="navFirstTab" data-toggle="tab" href="#firstTab" role="tab" aria-controls="picAControl" aria-selected="true">Pictures</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link tabEdit" id="navSecondTab" data-toggle="tab" href="#secondTab" role="tab" aria-controls="minfoAControl" aria-selected="false">Main Information</a>
+                            <a class="nav-link active tabEdit" id="navSecondTab" data-toggle="tab" href="#secondTab" role="tab" aria-controls="minfoAControl" aria-selected="true">Main Information</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link tabEdit" id="navThirdTab" data-toggle="tab" href="#thirdTab" role="tab" aria-controls="tSpecAControl" aria-selected="false">Tugboat Specification</a>
@@ -24,59 +21,15 @@
                         <li class="nav-item">
                             <a class="nav-link tabEdit" id="navFourthTab" data-toggle="tab" href="#fourthTab" role="tab" aria-controls="tClassAControl" aria-selected="false">Tugboat Classification</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link tabEdit" id="navFirstTab" data-toggle="tab" href="#firstTab" role="tab" aria-controls="picAControl" aria-selected="false">Tugboat Picture</a>
+                        </li>
                     </ul>
                 </div>
-
                 <div class="col-12 col-sm-12 col-md-8">
                     <div class="tab-content" id="editTabContent">
-                        <!-- Picture tab -->
-                        <div class="tab-pane fade show active" id="firstTab" role="tabpanel" aria-labelledby="navFirstTab">
-                            <form>
-                                <div class="row">
-                                    <div class="col-12 col-sm-12 col-lg-4">
-                                        <div class="form-group">
-                                            <img src="../dist/img/example-image.jpeg" class="img-thumbnail" id="editfPic">
-                                            <br>
-                                            <br>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" accept='image/*' id="editFirstPic" onchange="ValidateSingleInput(this);">
-                                                <label class="custom-file-label" for="editFirstPic" id="editLblfirstPic">First Picture<sup class="text-primary">&#10033;</sup></label>
-                                                <small id="editFirstFileChosen" class="form-text text-muted">No First Picture chosen.</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-12 col-lg-4">
-                                        <div class="form-group">
-                                            <img src="../dist/img/example-image.jpeg" class="img-thumbnail" id="editsPic">
-                                            <br>
-                                            <br>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" accept='image/*' id="editSecPic" onchange="ValidateSingleInput(this);">
-                                                <label class="custom-file-label" for="editSecPic" id="editLblsecPic">Second Picture<sup class="text-primary">&#10033;</sup></label>
-                                                <small id="editSecFileChosen" class="form-text text-muted">No Second Picture chosen.</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-sm-12 col-lg-4">
-                                        <div class="form-group">
-                                            <img src="../dist/img/example-image.jpeg" class="img-thumbnail" id="edittPic">
-                                            <br>
-                                            <br>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" accept='image/*' id="editThirdPic" onchange="ValidateSingleInput(this);">
-                                                <label class="custom-file-label" for="editThirdPic" id="editLblthirdPic">Third Picture<sup class="text-primary">&#10033;</sup></label>
-                                                <small id="editThirdFileChosen" class="form-text text-muted">No Third Picture chosen.</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <br>
-                                <button id="btnEItemPics" type="submit" class="btn btn-primary float-right font-weight-bold waves-effect">Save Changes</button>
-                                <br>
-                            </form>
-                        </div>
                         <!-- Main Info Tab -->
-                        <div class="tab-pane fade" id="secondTab" role="tabpanel" aria-labelledby="navSecondTab">
+                        <div class="tab-pane fade active show" id="secondTab" role="tabpanel" aria-labelledby="navSecondTab">
                             <form id="editFormInfo" class="needs-validation" novalidate>
                                 <!-- First Row w/ 2 Columns-->
                                 <div class="row">
@@ -408,6 +361,30 @@
                                 <button onclick="editClassificationSubmit()" type="button" class="btn btn-primary float-right font-weight-bold waves-effect">Save Changes</button>
                                 {{-- editClassificationSubmit --}}
                                 {{-- <button type="submit" id="btnETClassSubmit" class="btn btn-primary float-right font-weight-bold waves-effect mt-3">Save Changes</button> --}}
+                            </form>
+                        </div>
+                        <!-- Picture tab -->
+                        <div class="tab-pane fade " id="firstTab" role="tabpanel" aria-labelledby="navFirstTab">
+                            <form>
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-lg-6">
+                                        <div class="form-group">
+                                            <img src="/others/stisla_admin_v1.0.0/dist/img/example-image.jpeg" class="img-thumbnail" id="editfPic">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-lg-6">
+                                        <div class="form-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" accept='image/*' id="editFirstPic" onchange="ValidateSingleInput(this);">
+                                                <label class="custom-file-label" for="editFirstPic" id="editLblfirstPic">Tugboat Picture</label>
+                                                <small id="editFirstFileChosen" class="form-text text-muted">No Picture chosen.</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <button id="btnEItemPics" type="submit" class="btn btn-primary float-right font-weight-bold waves-effect">Save Changes</button>
+                                <br>
                             </form>
                         </div>
                     </div>

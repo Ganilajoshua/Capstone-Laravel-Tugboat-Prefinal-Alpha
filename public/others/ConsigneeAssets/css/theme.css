@@ -40,6 +40,10 @@ Notes:	decreasing heading by 0.4em with every subsequent heading level
 /*                   GENERIC                           */
 /*-----------------------------------------------------*/
 /* ----- Normalize ----- */
+html{
+    width:100%;
+    height:100%;
+}
 .header__logo img{
     height:50px; 
     width:auto;

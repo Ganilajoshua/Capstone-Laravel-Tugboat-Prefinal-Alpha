@@ -3,7 +3,7 @@
     <link href="/others/ConsigneeAssets/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
     <link href="/others/ConsigneeAssets/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
     <link href="/others/ConsigneeAssets/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <!-- Bootstrap CSS-->
     <link href="/others/ConsigneeAssets/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
 

@@ -22,6 +22,8 @@ Route::group(['prefix'=>'administrator/'],function(){
         // Route::get('/register','LoginControllers\AdminLoginController@showRegister');
         // Route::post('/register','LoginControllers\AdminLoginController@register');
     //Maintenance Routes
+    Route::resource('/queries','QueriesController');
+    Route::resource('/reports','ReportsController');
     Route::group(['prefix'=>'maintenance/'],function(){
         //Dashboard Components
         //Maintenance Resource
@@ -215,6 +217,12 @@ Route::group(['prefix'=>'consignee/'],function(){
     Route::get('/dispatchticket','ConsigneeControllers\ConsigneeControllerDispatch@index');
     Route::get('/dispatchticket/{intDispatchTicketID}/info','ConsigneeControllers\ConsigneeControllerDispatch@info');
     Route::post('/dispatchticket/store','ConsigneeControllers\ConsigneeControllerDispatch@store');
+
+    
+    Route::group(['prefix'=>'paymentbilling/'],function(){
+        Route::resource('/billing','ConsigneeControllers\CBillingController');
+        Route::resource('/payment','ConsigneeControllers\CPaymentController');
+    });
     // Route::get('/consignee/login','LoginControllers\UserLoginController@index')
 });
 Route::group(['prefix'=>'affiliates/'],function(){
