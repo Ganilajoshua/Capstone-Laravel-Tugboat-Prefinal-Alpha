@@ -80,7 +80,7 @@
                                         <li id="menuTugboatAssignment"><a class="waves-effect" href="/administrator/transactions/tugboatassignment"><i class="ion ion-android-boat"></i>Tugboat Assignment</a></li>
                                         <li id="menuTeamBuilder"><a class="waves-effect" href="/administrator/transactions/dispatchandhauling/teamassignment"><i class="ion ion-ios-people"></i>Team Builder</a></li>
                                         <li id="menuScheduling"><a href="/administrator/transactions/scheduling"><i class="fas fa-calendar-alt"></i>Schedule</a></li>
-                                        <li id="menuHauling"><a href="/administrator/transactions/hauling"><i class="fas fa-link"></i>Hauling</a></li>
+                                        <li id="menuHauling"><a href="/administrator/transactions/dispatchandhauling/hauling"><i class="fas fa-link"></i>Hauling</a></li>
                                         
                                         {{-- <li id="menuScheduling"><a class="waves-effect" href=""><i class="ion ion-ios-time"></i>Scheduling</a></li> --}}
                                     </ul>
@@ -105,7 +105,7 @@
                                         <li id="menuTugboatAssignment"><a class="waves-effect" href="/administrator/transactions/tugboatassignment"><i class="ion ion-android-boat"></i>Tugboat Assignment</a></li>
                                         <li id="menuTeamBuilder"><a class="waves-effect" href="/administrator/transactions/dispatchandhauling/teamassignment"><i class="ion ion-ios-people"></i>Team Builder</a></li>
                                         <li id="menuScheduling"><a href="/administrator/transactions/scheduling"><i class="fas fa-calendar-alt"></i>Schedule</a></li>
-                                        <li id="menuHauling"><a href="/administrator/transactions/hauling"><i class="fas fa-link"></i>Hauling</a></li>
+                                        <li id="menuHauling"><a href="/administrator/transactions/dispatchandhauling/hauling"><i class="fas fa-link"></i>Hauling</a></li>
                                         {{-- <li id="menuScheduling"><a class="waves-effect" href=""><i class="ion ion-ios-time"></i>Scheduling</a></li> --}}
                                     </ul>
                                 </li>
@@ -134,6 +134,7 @@
                         <ul class="menu-dropdown">
                             {{-- <li><a href="/contracts"><i class="ion ion-ios-paper"></i> Contracts</a></li> --}}
                             <li><a href="/contracts"><i class="fas fa-table"></i> Tugboat Matrix</a></li>
+                            <li><a href="/administrator/utilities/teamcomposition"><i class="fas fa-money-bill-alt"></i> Contract Fees Matrix</a></li>
                             <li><a href="/administrator/utilities/teamcomposition"><i class="fas fa-users"></i> Team Composition</a></li>
                         </ul>
                     </li>

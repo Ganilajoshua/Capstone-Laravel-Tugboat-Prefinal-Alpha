@@ -1,4 +1,4 @@
-var url = '/administrator/transactions/dispatchandhauling/teamassignment';
+var url = '/affiliates/transactions/dispatchandhauling/teamassignment';
 
 $(document).ready(function(){
     $('#transactionTree').addClass('active');
@@ -54,24 +54,7 @@ $(document).ready(function(){
         }
     });
 });
-$('.addNewTeamButton').on('click',function(){
-    $.ajax({
-        url : `${url}/getteamcompositions`,
-        type : 'POST',
-        data : {
-            "_token" : $('meta[name="csrf-token"]').attr('content')
-        },
-        success : (data,response)=>{
-            console.log(data);
-            appendTeamComposition(data.positions);
-            
-            $('#addTeam').modal('show');
-        },
-        error : (error)=>{
 
-        }
-    });
-});
 var checkbox = $('.employeesCheckbox:checkbox');
 
 // // Return Tugboats

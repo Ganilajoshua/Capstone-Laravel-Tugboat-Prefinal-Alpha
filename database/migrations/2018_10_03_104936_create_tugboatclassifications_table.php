@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCDispatchTicketsTable extends Migration
+class CreateTugboatclassificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCDispatchTicketsTable extends Migration
      */
     public function up()
     {
-        Schema::create('c_dispatch_tickets', function (Blueprint $table) {
+        Schema::create('tbltugboatclass', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateCDispatchTicketsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('c_dispatch_tickets');
+        Schema::dropIfExists('tbltugboatclass');
     }
 }

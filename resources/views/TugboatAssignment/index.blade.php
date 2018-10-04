@@ -2,7 +2,7 @@
 
 {{-- Local Styles --}}
 @section('assets')
-
+    @include('TugboatAssignment.styles')
 @endsection
 
 {{-- Local Scripts --}}
@@ -206,4 +206,5 @@
         </h1>
     </section>
     @include('TugboatAssignment.assignmodal')
+    @include('TugboatAssignment.assignTugboat')
 @endsection

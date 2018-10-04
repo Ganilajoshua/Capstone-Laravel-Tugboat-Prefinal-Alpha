@@ -108,6 +108,7 @@ class TugboatAssignmentController extends Controller
             $schedule->dateEnd = $joborder->datEndDate;
             $schedule->tmStart = $joborder->tmStart;
             $schedule->tmEnd = $joborder->tmEnd;
+            $schedule->strColor = $request->colorIndicator;
             $schedule->save();
             
             for($count=0; $count < count($request->tugboatsID); $count++){
@@ -217,14 +218,38 @@ class TugboatAssignmentController extends Controller
     }
     public function showjoborder($intJobOrderID){
         // Find Job Order ID
-        $joborder = JobOrder::findOrFail($intJobOrderID);
-        
+        $job = JobOrder::findOrFail($intJobOrderID);
+        if($job->enumServiceType == 'Hauling'){
+            if($job->intJOBerthID == null){
+                $joborder = DB::table('tbljoborder as joborder')
+                ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+                ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+                ->where('joborder.intJobOrderID',$intJobOrderID)
+                ->get();
+            }else{
+                $joborder = DB::table('tbljoborder as joborder')
+                ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
+                ->join('tblpier as pier','berth.intBPierID','intPierID')
+                ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+                ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+                ->where('joborder.intJobOrderID',$intJobOrderID)
+                ->get();
+            }
+        }else if($job->enumServiceType == 'Tug Assist'){
+            $joborder = DB::table('tbljoborder as joborder')
+            ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
+            ->join('tblpier as pier','berth.intBPierID','intPierID')
+            // ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+            ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+            ->where('joborder.intJobOrderID',$intJobOrderID)
+            ->get();    
+        }
         // Get All Tugboats Available 
         $tugboats = DB::table('tbltugboat as tugboat')
         ->join('tbltugboatmain as main','tugboat.intTugboatID','main.intTugboatMainID')
         ->join('tbltugboatassign as assign','tugboat.intTugboatID','assign.intTATugboatID')
         ->where('assign.boolDeleted',0)
-        ->where('assign.enumStatus','Available')
+        // ->where('assign.enumStatus')
         ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
         ->get();
         return response()->json(['joborder'=>$joborder,'tugboats'=>$tugboats]);

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCPaymentsTable extends Migration
+class CreatePaymentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCPaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('c_payments', function (Blueprint $table) {
+        Schema::create('tblpayment', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateCPaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('c_payments');
+        Schema::dropIfExists('tblpayment');
     }
 }

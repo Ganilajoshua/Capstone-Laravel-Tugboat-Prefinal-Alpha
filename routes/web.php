@@ -25,78 +25,95 @@ Route::group(['prefix'=>'administrator/'],function(){
     Route::group(['prefix'=>'maintenance/'],function(){
         //Dashboard Components
         //Maintenance Resource
-        Route::resource('/berth','BerthController');
-        Route::post('/berth/store','BerthController@store');
-        Route::post('/berth/update','BerthController@update');
-        Route::post('/berth/activate','BerthController@activate');
-        Route::get('/berth/{intBerthID}/edit','BerthController@edit');
-        Route::get('/berth/{intBerthID}/delete','BerthController@delete');
-        Route::get('/berth/{intBerthID}/destroy','BerthController@destroy');
-        
-        Route::resource('/pier','PierController');
-        Route::post('/pier/store','PierController@store');
-        Route::post('/pier/update','PierController@update');
-        Route::post('/pier/activate','PierController@activate');
-        Route::get('/pier/{intPierID}/edit','PierController@edit');
-        Route::get('/pier/{intPierID}/delete','PierController@delete');
-        Route::get('/pier/{intPierID}/destroy','PierController@destroy');
-        
-        Route::resource('/position','PositionController');
-        Route::post('/position/store','PositionController@store');
-        Route::post('/position/update','PositionController@update');
-        Route::post('/position/activate','PositionController@activate');
-        Route::get('/position/{intPositionID}/get','PositionController@get');
-        Route::get('/position/{intPositionID}/delete','PositionController@delete');
-        Route::get('/position/{intPositionID}/destroy','PositionController@destroy');
-        
-        Route::resource('/employees','EmployeesController');
-        Route::post('/employees/store','EmployeesController@store');
-        Route::post('/employees/update','EmployeesController@update');
-        Route::post('/employees/activate','EmployeesController@activate');
-        Route::get('/employees/{intEmployeeID}/edit','EmployeesController@edit');
-        Route::get('/employees/{intEmployeeID}/delete','EmployeesController@delete');
-        Route::get('/employees/{intEmployeeID}/destroy','EmployeesController@destroy');
-        
-        Route::resource('/goods','GoodsController');
-        Route::post('/goods/store','GoodsController@store');
-        Route::post('/goods/update','GoodsController@update');
-        Route::post('/goods/activate','GoodsController@activate');
-        Route::get('/goods/{intGoodsID}/edit','GoodsController@edit');
-        Route::get('/goods/{intGoodsID}/delete','GoodsController@delete');
-        Route::get('/goods/{intGoodsID}/destroy','GoodsController@destroy');
 
-        Route::resource('/tugboattype','TugboatTypeController');
-        Route::post('/tugboattype/store','TugboatTypeController@store');
-        Route::post('/tugboattype/update','TugboatTypeController@update');
-        Route::post('/tugboattype/activate','TugboatTypeController@activate');
-        Route::get('/tugboattype/{intTugboatTypeID}/edit','TugboatTypeController@edit');
-        Route::get('/tugboattype/{intTugboatTypeID}/delete','TugboatTypeController@delete');
-        Route::get('/tugboattype/{intTugboatTypeID}/destroy','TugboatTypeController@destroy');
-        
-        Route::resource('/tugboat','TugboatController');
-        Route::post('/tugboat/store','TugboatController@store');
-        Route::post('/tugboat/pictures','TugboatController@updatePictures');
-        Route::post('/tugboat/maininfo','TugboatController@updateMain');
-        Route::post('/tugboat/specifications','TugboatController@updateSpecs');
-        Route::post('/tugboat/classification','TugboatController@updateClass');
-        Route::get('/tugboat/{intTugboatMainID}/please','TugboatController@please');
-        Route::get('/tugboat/{intTugboatMainID}/delete','TugboatController@delete');
-        Route::get('/tugboat/{intTugboatMainID}/destroy','TugboatController@destroy');
+        // Berth Maintenance Route Group
+        Route::group(['prefix'=>'berth/'],function(){
+            Route::resource('/','BerthController');
+            Route::post('/store','BerthController@store');
+            Route::post('/update','BerthController@update');
+            Route::post('/activate','BerthController@activate');
+            Route::get('/{intBerthID}/edit','BerthController@edit');
+            Route::get('/{intBerthID}/delete','BerthController@delete');
+            Route::get('/{intBerthID}/destroy','BerthController@destroy');
+        });
 
-        Route::resource('/vesseltype','VesselTypeController');
-        Route::post('/vesseltype/store','VesselTypeController@store');
-        Route::post('/vesseltype/update','VesselTypeController@update');
-        Route::post('/vesseltype/activate','VesselTypeController@activate');
-        Route::get('/vesseltype/{intVesselTypeID}/edit','VesselTypeController@edit');
-        Route::get('/vesseltype/{intVesselTypeID}/delete','VesselTypeController@delete');
-        Route::get('/vesseltype/{intVesselTypeID}/destroy','VesselTypeController@destroy');
+        // Pier Maintenance Route Group
+        Route::group(['prefix'=>'pier/'],function(){
+            Route::resource('/','PierController');
+            Route::post('/store','PierController@store');
+            Route::post('/update','PierController@update');
+            Route::post('/activate','PierController@activate');
+            Route::get('/{intPierID}/edit','PierController@edit');
+            Route::get('/{intPierID}/delete','PierController@delete');
+            Route::get('/{intPierID}/destroy','PierController@destroy');
+        });
+
+        // Position Maintenance Route Group
+        Route::group(['prefix'=>'position/'],function(){
+            Route::resource('/','PositionController');
+            Route::post('/store','PositionController@store');
+            Route::post('/update','PositionController@update');
+            Route::post('/activate','PositionController@activate');
+            Route::get('/{intPositionID}/get','PositionController@get');
+            Route::get('/{intPositionID}/delete','PositionController@delete');
+            Route::get('/{intPositionID}/destroy','PositionController@destroy');
+        });
         
-        // Route::resource('/quotations','QuotationsController');
-        // Route::post('/quotations/store','QuotationsController@store');
-        // Route::post('/quotations/update','QuotationsController@update');
-        // Route::get('/quotations/{intQuotationID}/show','QuotationsController@show');
-        // Route::get('/quotations/{intQuotationID}/edit','QuotationsController@edit');
-        // Route::get('/quotations/{intQuotationID}/delete','QuotationsController@delete');
+        // Employees Maintenance Route Group
+        Route::group(['prefix'=>'employees/'],function(){
+            Route::resource('/','EmployeesController');
+            Route::post('/store','EmployeesController@store');
+            Route::post('/update','EmployeesController@update');
+            Route::post('/activate','EmployeesController@activate');
+            Route::get('/{intEmployeeID}/edit','EmployeesController@edit');
+            Route::get('/{intEmployeeID}/delete','EmployeesController@delete');
+            Route::get('/{intEmployeeID}/destroy','EmployeesController@destroy');
+        });
+        
+        // Goods Maintenance Route Group
+        Route::group(['prefix'=>'goods/'],function(){
+            Route::resource('/','GoodsController');
+            Route::post('/store','GoodsController@store');
+            Route::post('/update','GoodsController@update');
+            Route::post('/activate','GoodsController@activate');
+            Route::get('/{intGoodsID}/edit','GoodsController@edit');
+            Route::get('/{intGoodsID}/delete','GoodsController@delete');
+            Route::get('/{intGoodsID}/destroy','GoodsController@destroy');
+        });
+
+        // Tugboat Type Maintenance Route Group
+        Route::group(['prefix'=>'tugboattype/'],function(){
+            Route::resource('/','TugboatTypeController');
+            Route::post('/store','TugboatTypeController@store');
+            Route::post('/update','TugboatTypeController@update');
+            Route::post('/activate','TugboatTypeController@activate');
+            Route::get('/{intTugboatTypeID}/edit','TugboatTypeController@edit');
+            Route::get('/{intTugboatTypeID}/delete','TugboatTypeController@delete');
+            Route::get('/{intTugboatTypeID}/destroy','TugboatTypeController@destroy');
+        });
+        
+        // Tugboat Maintenance Route Group
+        Route::group(['prefix'=>'tugboat/'],function(){
+            Route::resource('/','TugboatController');
+            Route::post('/store','TugboatController@store');
+            Route::post('/pictures','TugboatController@updatePictures');
+            Route::post('/maininfo','TugboatController@updateMain');
+            Route::post('/specifications','TugboatController@updateSpecs');
+            Route::post('/classification','TugboatController@updateClass');
+            Route::get('/{intTugboatMainID}/please','TugboatController@please');
+            Route::get('/{intTugboatMainID}/delete','TugboatController@delete');
+            Route::get('/{intTugboatMainID}/destroy','TugboatController@destroy');
+        });
+
+        Route::group(['prefix'=>'vesseltype/'],function(){
+            Route::resource('/','VesselTypeController');
+            Route::post('/store','VesselTypeController@store');
+            Route::post('/update','VesselTypeController@update');
+            Route::post('/activate','VesselTypeController@activate');
+            Route::get('/{intVesselTypeID}/edit','VesselTypeController@edit');
+            Route::get('/{intVesselTypeID}/delete','VesselTypeController@delete');
+            Route::get('/{intVesselTypeID}/destroy','VesselTypeController@destroy');
+        });
     });
     //Transactions Routes
     Route::group(['prefix'=>'transactions/'],function(){
@@ -104,30 +121,54 @@ Route::group(['prefix'=>'administrator/'],function(){
         
         //Consignee Module
         Route::group(['prefix'=>'consignee/'],function(){
-
+            //Consignee Accounts
+            Route::resource('/','ConsigneeAccountsController');
+            Route::post('/verify','ConsigneeAccountsController@verify');
+            Route::post('/activate','ConsigneeAccountsController@activate');
+            Route::get('/{intCompanyID}/show','ConsigneeAccountsController@show');
         });
 
-        //Dispatch and Hauling Module
+        //Dispatch and Hauling Module Route Group
         Route::group(['prefix'=>'dispatchandhauling/'],function(){
-            //Team Builder (Team Assignment)
-            Route::resource('/teamassignment','TugboatTeamAssignmentController');
-            Route::get('/teamassignment/{intTeamID}/show','TugboatTeamAssignmentController@show');
-            Route::get('/teamassignment/{intTeamID}/viewteam','TugboatTeamAssignmentController@viewteam');
-            Route::get('/teamassignment/{intTATeamID}/viewtugboatteam','TugboatTeamAssignmentController@viewtugboatteam');
-            Route::get('/teamassignment/{intTATugboatID}/showtugboatinformation','TugboatTeamAssignmentController@showtugboatinformation');
-            Route::post('/teamassignment/store','TugboatTeamAssignmentController@store');
-            Route::post('/teamassignment/teamassignment','TugboatTeamAssignmentController@teamassignment');
-            Route::post('/teamassignment/cleartugboatteam','TugboatTeamAssignmentController@cleartugboatteam');
-            Route::post('/teamassignment/removeteamemployees','TugboatTeamAssignmentController@removeteamemployees');
-            Route::post('/teamassignment/requestteam','TugboatTeamAssignmentController@requestteam');
-            Route::post('/teamassignment/requesttugboat','TugboatTeamAssignmentController@requesttugboat');
-            Route::post('/teamassignment/forwardteam','TugboatTeamAssignmentController@forwardteam');
-            Route::post('/teamassignment/forwardtugboat','TugboatTeamAssignmentController@forwardtugboat');
-            Route::post('/teamassignment/returnteam','TugboatTeamAssignmentController@returnteam');
-            Route::post('/teamassignment/returntugboat','TugboatTeamAssignmentController@returntugboat');
-            Route::post('/teamassignment/notifications','TugboatTeamAssignmentController@notifications');
+
+            // Dispatch and Hauling - Job Orders Route Group
+            Route::group(['prefix'=>'joborders/'],function(){
+
+            });
+
+            // Dispatch and Hauling - Team Assignment Route Group
+            Route::group(['prefix'=>'teamassignment/'],function(){
+                Route::resource('/','TugboatTeamAssignmentController');
+                Route::get('/{intTeamID}/show','TugboatTeamAssignmentController@show');
+                Route::get('/{intTeamID}/viewteam','TugboatTeamAssignmentController@viewteam');
+                Route::get('/{intTATeamID}/viewtugboatteam','TugboatTeamAssignmentController@viewtugboatteam');
+                Route::get('/{intTATugboatID}/showtugboatinformation','TugboatTeamAssignmentController@showtugboatinformation');
+                Route::post('/store','TugboatTeamAssignmentController@store');
+                Route::post('/teamassignment','TugboatTeamAssignmentController@teamassignment');
+                Route::post('/cleartugboatteam','TugboatTeamAssignmentController@cleartugboatteam');
+                Route::post('/removeteamemployees','TugboatTeamAssignmentController@removeteamemployees');
+                Route::post('/requestteam','TugboatTeamAssignmentController@requestteam');
+                Route::post('/requesttugboat','TugboatTeamAssignmentController@requesttugboat');
+                Route::post('/forwardteam','TugboatTeamAssignmentController@forwardteam');
+                Route::post('/forwardtugboat','TugboatTeamAssignmentController@forwardtugboat');
+                Route::post('/returnteam','TugboatTeamAssignmentController@returnteam');
+                Route::post('/returntugboat','TugboatTeamAssignmentController@returntugboat');
+                Route::post('/notifications','TugboatTeamAssignmentController@notifications');
+                Route::post('/getteamcompositions','TugboatTeamAssignmentController@getteamcompositions');
+            });
+
+            // Dispatch and Hauling - Tugboat Assignment Route Group
+            Route::group(['prefix'=>'tugboatassignment/'],function(){
+
+            });
+
+            // Dispatch and Hauling - Scheduling Route Group
+            Route::group(['prefix'=>'scheduling/'],function(){
+            });
             
+            // Dispatch and Hauling - Hauling Route Group
             Route::group(['prefix'=>'hauling/'],function(){
+                Route::resource('/','HaulingController');
                 Route::get('/{intJobOrderID}/show','HaulingController@show');
                 Route::post('/showteam','HaulingController@showteam');
                 Route::post('/start','HaulingController@start');
@@ -140,11 +181,6 @@ Route::group(['prefix'=>'administrator/'],function(){
 
         });
         
-        //Consignee Accounts
-        Route::resource('/consignee','ConsigneeAccountsController');
-        Route::post('/consignee/verify','ConsigneeAccountsController@verify');
-        Route::post('/consignee/activate','ConsigneeAccountsController@activate');
-        Route::get('/consignee/{intCompanyID}/show','ConsigneeAccountsController@show');
         //Consignee Contracts Requests
         Route::resource('/contractrequests','ContractRequestsController');
         Route::get('/contractrequests/{intContractID}/create','ContractRequestsController@create');
@@ -178,7 +214,7 @@ Route::group(['prefix'=>'administrator/'],function(){
         //Scheduling Controller
         Route::resource('/scheduling','SchedulingController');
         //Dispatch and Hauling - Hauling
-        Route::resource('/hauling','HaulingController');
+        
         // Route::post('/hauling/prepare','HaulingController@prepare');
         // Payment And Billing Routes
 
@@ -203,6 +239,8 @@ Route::group(['prefix'=>'administrator/'],function(){
     //Utitlities Routes
     Route::group(['prefix'=>'utilities/'],function(){
         Route::resource('/teamcomposition','TeamCompositionController');
+        Route::post('/teamcomposition/update','TeamCompositionController@update');
+        
     });
     Route::post('/Adminlogout','LoginControllers\AdminLoginController@logout');
 
@@ -270,7 +308,35 @@ Route::group(['prefix'=>'affiliates/'],function(){
 
     });
     Route::group(['prefix'=>'transactions/'],function(){
-            //Dispatch and Hauling Job Orders
+            // Dispatch and Hauling Module Route Group
+            Route::group(['prefix'=>'dispatchandhauling/'],function(){
+                // Dispatch and Hauling - Job Orders Route Group
+                Route::group(['prefix'=>'joborders/'],function(){
+
+                });
+
+                // Dispatch and Hauling - Tugboat Assignment Route Group
+                Route::group(['prefix'=>'tugboatassignment/'],function(){
+
+                });
+
+                // Dispatch and Hauling - Team Assignment Route Group
+                Route::group(['prefix'=>'teamassignment/'],function(){
+
+                });
+
+                // Dispatch and Hauling - Scheduling Route Group
+                Route::group(['prefix'=>'scheduling/'],function(){
+
+                });
+
+                // Dispatch and Hauling - Hauling Route Group
+                Route::group(['prefix'=>'hauling/'],function(){
+
+                });
+            });
+
+
             Route::resource('/joborders','JobOrderController');
             Route::get('/joborders/{intJobOrderID}/accept','JobOrderController@accept');
             Route::get('/joborders/{intJobOrderID}/forwardrequest','JobOrderController@forwardrequest');
@@ -349,16 +415,5 @@ Route::get('/contracts/{intContractListID}/delete','ContractsController@delete')
 // });
 
 
-// Auth::routes();
 
-// Route::get('/administrator/login','AuthController\AdminController@showLogin');
-// Route::post('/administrator/login','AuthController\AdminController@login')->name('admin.login.submit');
-// Route::get('/home', 'HomeController@index')->name('home');
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/','WebpagesController@index');

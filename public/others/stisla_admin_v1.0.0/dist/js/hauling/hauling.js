@@ -66,8 +66,9 @@ function prepareHauling(joborderID){
                     }
                 });           
             },
-            error : function(error){
-    
+            error : function(data,error){
+                console.log(data);
+                console.log(error);
             }
         });
     });
@@ -112,11 +113,12 @@ $('.viewStartHauling').on('click',function(event){
         dataType : 'JSON',
         success : (data, response)=>{
             console.log(data);
+            console.log(data.joborder);
             $('.startHaulingHeader').empty();
             $('.startHaulingBody').empty();
             $('.startHaulingProcess').data('id',data.joborder[0].intJobOrderID)
-            var dLocation ;
-            var sLocation ;
+            // var dLocation ;
+            // var sLocation ;
             var team = [];
 
             // Get Starting and Ending Location

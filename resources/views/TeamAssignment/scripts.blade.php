@@ -1,6 +1,11 @@
     <script src="/others/stisla_admin_v1.0.0/dist/js/teamassignment/teamBuilder.js"></script>
 
-    <script src="/others/stisla_admin_v1.0.0/dist/js/teamassignment/teamassignment.js"></script>
+    @if((Auth::user()->enumUserType) == 'Admin')
+        <script src="/others/stisla_admin_v1.0.0/dist/js/teamassignment/teamassignment.js"></script>
+    @elseif((Auth::user()->enumUserType) == 'Affiliates')
+        <script src="/others/stisla_admin_v1.0.0/dist/js/teamassignment/teamassignmentAffiliates.js"></script>
+    @endif
+    <script src="/others/stisla_admin_v1.0.0/dist/js/teamassignment/appendFunctions.js"></script>
     <script src="/others/stisla_admin_v1.0.0/dist/js/teamassignment/teamassignmentMisc.js"></script>
     <script src="/others/stisla_admin_v1.0.0/dist/js/teamassignment/teamassignmentTeamList.js"></script>
     <script src="/others/stisla_admin_v1.0.0/dist/js/teamassignment/teamassignmentTugboatList.js"></script>

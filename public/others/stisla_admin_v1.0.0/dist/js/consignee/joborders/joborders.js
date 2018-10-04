@@ -70,7 +70,7 @@ $('.submitJobOrderHauling').on('click',function(){
     console.log('Vessel Name', vesselName);
     console.log('Vessel Weight', vesselWeight);
     console.log('Goods', goods);
-
+    
     if($('#addHaulingRoute').val() == "LocPier"){
         console.log('Kiyuuuuub');
         sLocation = $('#startingLocationLP').val();
@@ -94,7 +94,7 @@ $('.submitJobOrderHauling').on('click',function(){
     console.log(berth);
     console.log(sLocation);
     console.log(dLocation);
-
+    // return false;
     $.ajax({
         url : `${url}/haulingservice`,
         type : 'POST',
@@ -133,10 +133,47 @@ $('.submitJobOrderHauling').on('click',function(){
                 }
             });
         },
-        error : (error, response)=>{
+        error : (error)=>{
+            // toastr.error({
+            //     "closeButton": false,
+            //     "debug": false,
+            //     "newestOnTop": false,
+            //     "progressBar": false,
+            //     "positionClass": "toast-top-right",
+            //     "preventDuplicates": false,
+            //     "onclick": null,
+            //     "showDuration": "300",
+            //     "hideDuration": "1000",
+            //     "timeOut": "5000",
+            //     "extendedTimeOut": "1000",
+            //     "showEasing": "swing",
+            //     "hideEasing": "linear",
+            //     "showMethod": "fadeIn",
+            //     "hideMethod": "fadeOut"
+            //   });
+            // toastr.error(`${error.statusText}`,`Error ${error.status}`, { 
+            //     positionClass : 'toast-bottom-right', 
+            //     preventDuplicates : true, 
+            //     showDuration : "2000",
+            //     hideDuration : "1000",
+            //     timeOut : "5000",
+            //     extendedTimeOut : "1000",
+            //     showEasing : "swing",
+            //     hideEasing : "swing",
+            //     showMethod : "fadeIn",
+            //     hideMethod : "fadeOut"
+            // });
+            swal({
+                title: `Error ${error.status}`,
+                text: `${error.statusText}`,
+                type: "error",
+                showCancelButton: false,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Ok",
+                closeOnConfirm: true,
+            });
+            console.log(error);
             throw error;
-            var errors = data.responseJSON;
-            console.log(errors);        
         },
     });
 

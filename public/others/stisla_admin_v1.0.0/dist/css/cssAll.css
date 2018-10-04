@@ -74,6 +74,10 @@ font-size:15px;
 .bigIcon{
 font-size:20px;
 }
+.extremelyHugeIcon{
+  font-size: 49px;
+}
+
 #footerLogo{
   height:100px; 
   width:auto;

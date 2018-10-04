@@ -1,3 +1,5 @@
+var url = '/administrator/transactions/joborders';
+
 $(document).ready(function(){
     $('#transactionTree').addClass('active');
     $('#tDispatch').addClass('active');
@@ -15,7 +17,6 @@ $(document).ready(function(){
     });
 
 });
-var url = '/administrator/transactions/joborders';
 
 $('.joborderMoreInfoButton').on('click',function(event){
     event.preventDefault();

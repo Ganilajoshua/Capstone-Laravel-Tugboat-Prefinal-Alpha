@@ -15,6 +15,24 @@
                     <label for="addTeamName">Team Name<sup class="text-primary">&#10033;</sup></label>
                     <input type="text" class="form-control" id="addTeamName" placeholder="Team 1">
                 </form>
+                <div class="row">
+                    <div class="col">
+                        <div class="card text center">
+                            <div class="card-header bg-info text-white text-center">
+                                <h4>
+                                    <i class="fas fa-exclamation-triangle mr-2 bigIcon"></i>
+                                    <span class="ml-3" style="font-size: 12px;">
+                                        You Need a Team Composing of :
+                                    </span>
+                                </h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row teamcompositionContainer">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {{-- <div class="form-group">
                     <label for="pierSelect">Pier<sup class="text-primary">&#10033;</sup></label>
                     <select id="pierSelect" name="pierSelect" class="form-control form-control-lg">
