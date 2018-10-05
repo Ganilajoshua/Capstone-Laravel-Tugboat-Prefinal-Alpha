@@ -142,15 +142,14 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::group(['prefix'=>'dispatchandhauling/'],function(){
 
             // Dispatch and Hauling - Job Orders Route Group
-            Route::group(['prefix'=>'joborders/'],function(){
-                Route::resource('/','JobOrderController');
-                Route::get('/{intJobOrderID}/accept','JobOrderController@accept');
-                Route::get('/{intJobOrderID}/forwardrequest','JobOrderController@forwardrequest');
-                Route::get('/{intJobOrderID}/decline','JobOrderController@decline');
-                Route::get('/{intJobOrderID}/viewdetails','JobOrderController@viewdetails');
-                Route::post('/forward','JobOrderController@forward');
-                Route::post('/store','JobOrderController@store');
-            });
+            // Route::group(['prefix'=>'joborders/'],function(){
+            //     Route::resource('/','ConsigneeControllers\JobOrdersController');
+            //     Route::post('/create','ConsigneeControllers\JobOrdersController@create');
+            //     Route::post('/{intJobOrderID}/store','ConsigneeControllers\JobOrdersController@store');
+            //     Route::post('/haulingservice','ConsigneeControllers\JobOrdersController@haulingservice');
+            //     Route::post('/update','ConsigneeControllers\JobOrdersController@update');
+            //     Route::get('/{intJobOrderID}/show','ConsigneeControllers\JobOrdersController@show');            
+            // });
             
             // Dispatch and Hauling - Team Assignment Route Group
             Route::group(['prefix'=>'teamassignment/'],function(){
@@ -201,6 +200,15 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::group(['prefix'=>'paymentandbilling/'],function(){
             
         });
+        
+        //Dispatch and Hauling - Job Orders
+        Route::resource('/joborders','JobOrderController');
+        Route::get('/joborders/{intJobOrderID}/accept','JobOrderController@accept');
+        Route::get('/joborders/{intJobOrderID}/forwardrequest','JobOrderController@forwardrequest');
+        Route::get('/joborders/{intJobOrderID}/decline','JobOrderController@decline');
+        Route::get('/joborders/{intJobOrderID}/viewdetails','JobOrderController@viewdetails');
+        Route::post('/joborders/forward','JobOrderController@forward');
+        Route::post('/joborders/store','JobOrderController@store');
         
         //Consignee Contracts Requests
         Route::resource('/contractrequests','ContractRequestsController');

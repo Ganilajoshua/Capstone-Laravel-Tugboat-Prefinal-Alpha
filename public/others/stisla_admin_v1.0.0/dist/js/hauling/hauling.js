@@ -1,5 +1,4 @@
 var url = '/administrator/transactions/dispatchandhauling/hauling';
-var url2 = '/administrator/transactions/dispatchandhauling/hauling'
 $(document).ready(function(){
     $('#transactionTree').addClass('active');
     $('#tDispatch').addClass('active');

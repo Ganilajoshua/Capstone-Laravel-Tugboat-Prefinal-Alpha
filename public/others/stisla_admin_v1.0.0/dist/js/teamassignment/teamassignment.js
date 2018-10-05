@@ -64,7 +64,7 @@ $('.addNewTeamButton').on('click',function(){
         success : (data,response)=>{
             console.log(data);
             appendTeamComposition(data.positions);
-            
+
             $('#addTeam').modal('show');
         },
         error : (error)=>{
@@ -234,8 +234,7 @@ function submitTeam(){
     var chiefengineer = []; 
     var crew = [];
     $('.captCheckbox:checkbox:checked').each(function(checked){
-        captains[checked] = parseInt($(this).val());
-
+        captains[checked] = parseInt($(this).val());    
     });
     $('.chiefCheckbox:checkbox:checked').each(function(checked){
         chiefengineer[checked] = $(this).val();

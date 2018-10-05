@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\View;
+
 
 use App\Company;
 use App\ForwardRequest;
@@ -152,7 +154,9 @@ class JobOrderController extends Controller
     {
         //
     }
-
+    public function declined(){
+        return view('Joborder.pending');    
+    }
     public function accept($intJobOrderID)
     {
         if(Auth::user()->enumUserType == 'Admin'){
