@@ -77,7 +77,7 @@ function get(id){
                     $('#wait').removeClass("d-none");
                     $('#submit').addClass("d-none");
                 }
-                else if(data.dispatch[0].boolCApprovedby==0){
+                else if(data.dispatch[0].boolCApprovedby==0 || data.dispatch[0].boolCApprovedby==null){
                     $('#finalize').removeClass("d-none");
                     $('#wait').addClass("d-none");
                     $('#submit').addClass("d-none");

@@ -30,7 +30,7 @@
 									<div class="card card-primary">
 										<div class="card-header">
 											<div class="float-right">
-												<button id="btnPaySelected" class="btn btn-primary waves-effect animated zoomIn faster">
+												<button id="btnPaySelected" onclick="payselected()" class="btn btn-primary waves-effect animated zoomIn faster">
 													Pay Selected
 												</button>
 											</div>
@@ -61,16 +61,16 @@
 														<tr class="tr-shadow">
 															<td>
 																<label class="au-checkbox">
-																	<input type="checkbox" class="checkbox">
+																	<input type="checkbox" value="{{$dispatch->intInvoiceID}}" id="" class="checkbox billcheckbox">
 																	<span class="au-checkmark"></span>
 																</label>
 															</td>
 															<td>{{$dispatch->intInvoiceID}}</td>
-															<td>2018-09-27 02:12</td>
+															<td>{{$dispatch->dtmETA}}</td>
 															<td>
 																<div class="badge badge-success">{{$dispatch->enumStatus}}</div>
 															</td>
-															<td>24000</td>
+															<td>{{$dispatch->fltBalanceRemain}}</td>
 															<td>
 																<div class="table-data-feature">
 																	<button class="item waves-effect btnView" data-toggle="tooltip" data-placement="top" title="More">

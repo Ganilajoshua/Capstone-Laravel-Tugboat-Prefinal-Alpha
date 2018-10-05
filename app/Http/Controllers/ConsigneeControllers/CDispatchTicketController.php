@@ -31,14 +31,14 @@ class CDispatchTicketController extends Controller
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTTugboatAssignID','tugboatassign.intTAssignID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
         ->where('company.intCompanyID',Auth::user()->intUCompanyID)
         ->where('dispatch.boolAApprovedby',1)
         ->where('jobsched.enumstatus','Finished')
         ->get(); 
 
         return view('Consignee.Dispatch.index')
-        ->with('dispatch',$dispatch);
+        ->with('accept',$dispatch);
     }
 
     /**
@@ -127,7 +127,7 @@ class CDispatchTicketController extends Controller
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTTugboatAssignID','tugboatassign.intTAssignID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
         ->where('company.intCompanyID',Auth::user()->intUCompanyID)
         ->where('jobsched.enumstatus','Finished')
         ->where('dispatch.intDispatchTicketID',$intDispatchTicketID)
