@@ -137,6 +137,9 @@ return array(
     'CreateLocationsTable' => $baseDir . '/database/migrations/2018_10_03_104758_create_locations_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b06c3dfee940809bae2bff5251b30811c0ff092a
     'CreatePaymentsTable' => $baseDir . '/database/migrations/2018_10_03_104806_create_payments_table.php',
     'CreatePiersTable' => $baseDir . '/database/migrations/2018_10_03_104814_create_piers_table.php',
     'CreatePositionsTable' => $baseDir . '/database/migrations/2018_10_03_104819_create_positions_table.php',
@@ -155,9 +158,13 @@ return array(
     'CreateTugboatsTable' => $baseDir . '/database/migrations/2018_10_03_104920_create_tugboats_table.php',
     'CreateTugboatspecificationsTable' => $baseDir . '/database/migrations/2018_10_03_105020_create_tugboatspecifications_table.php',
     'CreateTugboattypesTable' => $baseDir . '/database/migrations/2018_10_03_105026_create_tugboattypes_table.php',
+<<<<<<< HEAD
 =======
     'CreateQueriesTable' => $baseDir . '/database/migrations/2018_09_30_150603_create_queries_table.php',
 >>>>>>> 710dcc70e93bf72863516e10be1100591ed2f08e
+=======
+    'CreateQueriesTable' => $baseDir . '/database/migrations/2018_09_30_150603_create_queries_table.php',
+>>>>>>> b06c3dfee940809bae2bff5251b30811c0ff092a
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'CreateVesseltypesTable' => $baseDir . '/database/migrations/2018_10_03_105032_create_vesseltypes_table.php',
     'Cron\\AbstractField' => $vendorDir . '/mtdowling/cron-expression/src/Cron/AbstractField.php',
