@@ -128,14 +128,25 @@ Route::group(['prefix'=>'administrator/'],function(){
             Route::post('/verify','ConsigneeAccountsController@verify');
             Route::post('/activate','ConsigneeAccountsController@activate');
             Route::get('/{intCompanyID}/show','ConsigneeAccountsController@show');
+            
+            Route::group(['prefix'=>'contracts/'],function(){
+                Route::resource('/','ContractsController');
+            });
         });
-
+        
         //Dispatch and Hauling Module Route Group
         Route::group(['prefix'=>'dispatchandhauling/'],function(){
-
+            
             // Dispatch and Hauling - Job Orders Route Group
             Route::group(['prefix'=>'joborders/'],function(){
-
+                //Dispatch and Hauling - Job Orders
+                Route::resource('/','JobOrderController');
+                Route::get('/{intJobOrderID}/accept','JobOrderController@accept');
+                Route::get('/{intJobOrderID}/forwardrequest','JobOrderController@forwardrequest');
+                Route::get('/{intJobOrderID}/decline','JobOrderController@decline');
+                Route::get('/{intJobOrderID}/viewdetails','JobOrderController@viewdetails');
+                Route::post('/forward','JobOrderController@forward');
+                Route::post('/store','JobOrderController@store');
             });
 
             // Dispatch and Hauling - Team Assignment Route Group
@@ -161,7 +172,12 @@ Route::group(['prefix'=>'administrator/'],function(){
 
             // Dispatch and Hauling - Tugboat Assignment Route Group
             Route::group(['prefix'=>'tugboatassignment/'],function(){
-
+                Route::resource('/','TugboatAssignmentController');
+                Route::get('/{intJobOrderID}/showjoborder','TugboatAssignmentController@showjoborder');
+                Route::post('/create','TugboatAssignmentController@create');
+                Route::post('/hauling','TugboatAssignmentController@hauling');
+                Route::post('/available','TugboatAssignmentController@available');
+                Route::post('/tugboatsavailable','TugboatAssignmentController@tugboatsavailable');
             });
 
             // Dispatch and Hauling - Scheduling Route Group
@@ -194,30 +210,11 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::post('/contractrequests/getnotifs','ContractRequestsController@getnotifs');
         Route::post('/contractrequests/saverequestchanges','ContractRequestsController@saverequestchanges');
         //Final Contracts
-        Route::resource('/contracts','ContractsController');
         
         //Dispatch and Hauling - Forward Requests
         Route::resource('/forwardrequests','ForwardRequestsController');
-        //Dispatch and Hauling - Job Orders
-        Route::resource('/joborders','JobOrderController');
-        Route::get('/joborders/{intJobOrderID}/accept','JobOrderController@accept');
-        Route::get('/joborders/{intJobOrderID}/forwardrequest','JobOrderController@forwardrequest');
-        Route::get('/joborders/{intJobOrderID}/decline','JobOrderController@decline');
-        Route::get('/joborders/{intJobOrderID}/viewdetails','JobOrderController@viewdetails');
-        Route::post('/joborders/forward','JobOrderController@forward');
-        Route::post('/joborders/store','JobOrderController@store');
-        //Dispatch and Hauling - Tugboat Assignment
-        Route::resource('/tugboatassignment','TugboatAssignmentController');
-        Route::get('/tugboatassignment/{intJobOrderID}/showjoborder','TugboatAssignmentController@showjoborder');
-        Route::post('/tugboatassignment/create','TugboatAssignmentController@create');
-        Route::post('/tugboatassignment/hauling','TugboatAssignmentController@hauling');
-        Route::post('/tugboatassignment/available','TugboatAssignmentController@available');
-        Route::post('/tugboatassignment/tugboatsavailable','TugboatAssignmentController@tugboatsavailable');
         //Scheduling Controller
         Route::resource('/scheduling','SchedulingController');
-        //Dispatch and Hauling - Hauling
-        
-        // Route::post('/hauling/prepare','HaulingController@prepare');
         // Payment And Billing Routes
 
         //Dispatch Ticket

@@ -1,4 +1,4 @@
-var url = '/administrator/transactions/joborders';
+var url = '/administrator/transactions/dispatchandhauling/joborders';
 
 $(document).ready(function(){
     $('#transactionTree').addClass('active');
