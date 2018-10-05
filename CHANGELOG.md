@@ -1,6 +1,8 @@
 # Changelog Capstone-Laravel-tugboat-dev-PreFinal α
 ### `Pre Final Repository Monday August 27,2018`
 
+### Contracts Module
+- [x] UI For Contract Page
 &nbsp;
 #1.0.2 09-25-2018
 

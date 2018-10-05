@@ -1,3 +1,4 @@
+var url = '/administrator/transactions/contracts';
 $(document).ready(function(){
     $('#transactionTree').addClass("active");
     $('#tConsignee').addClass("active");
@@ -8,24 +9,24 @@ $(document).ready(function(){
     $('.btnadd2').on('click',function(){
         $('.addModal2').modal('show');
     });
-    $.ajax({
-        url : url + '/store',
-        type : 'POST',
-        data : { 
-            "_token" : $('meta[name="csrf-token"]').attr('content'),    
-            companyID : companyID,
-        }, 
-        beforeSend: function (request) {
-            return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-        },
-        success : function(data){
-            console.log('success pota');
-            console.log(data);
-        },
-        error : function(error){
-            throw error;
-        }
-    });
+    // $.ajax({
+    //     url : url + '/store',
+    //     type : 'POST',
+    //     data : { 
+    //         "_token" : $('meta[name="csrf-token"]').attr('content'),    
+    //         companyID : companyID,
+    //     }, 
+    //     beforeSend: function (request) {
+    //         return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+    //     },
+    //     success : function(data){
+    //         console.log('success pota');
+    //         console.log(data);
+    //     },
+    //     error : function(error){
+    //         throw error;
+    //     }
+    // });
 });
 
 function tryfunc(){
