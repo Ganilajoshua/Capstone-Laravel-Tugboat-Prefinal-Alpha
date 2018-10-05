@@ -1,4 +1,4 @@
-var url = '/administrator/transactions/tugboatassignment';
+var url = '/administrator/transactions/dispatchandhauling/tugboatassignment';
 
 $(document).ready(function(){
     $('#transactionTree').addClass('active');
