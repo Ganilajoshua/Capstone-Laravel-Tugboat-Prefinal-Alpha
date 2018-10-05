@@ -43,6 +43,19 @@ $(document).ready(function(){
       $('.LocPier').hide();
     }
   });
+  $('input[name="matrixChoices"]').on('click',function(){
+    if($('#quoteMatrix').is(':checked')){
+      $('.customMatrix').hide();
+      $('.lblquoteCustom').removeClass('text-primary');
+      $('.lblquoteMatrix').addClass('text-primary');
+      $('.matrixBased').show().addClass('animated fadeIn fast');
+    }else{
+      $('.matrixBased').hide();
+      $('.lblquoteMatrix').removeClass('text-primary');
+      $('.lblquoteCustom').addClass('text-primary');
+      $('.customMatrix').show().addClass('animated fadeIn fast');
+    }
+  });
   $(".summernoteQuote").summernote({
     minHeight: 350,
     disableDragAndDrop: true,

@@ -1,6 +1,11 @@
 # Changelog Capstone-Laravel-tugboat-dev-PreFinal α
 ### `Pre Final Repository Monday August 27,2018 v.1.0.0`
 
+### Consignee Contract Request Page Edited
+- [x] Added matrix table and custom matrix suggestion fields
+
+### Contracts Module
+- [x] UI For Contract Page
 &nbsp;
 
 #1.0.2 10-01-2018 α
