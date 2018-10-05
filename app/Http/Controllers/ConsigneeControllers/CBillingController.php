@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Auth;
+use App\Invoice;
+use App\Bill;
 class CBillingController extends Controller
 {
     /**
@@ -27,12 +29,29 @@ class CBillingController extends Controller
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTTugboatAssignID','tugboatassign.intTAssignID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
         ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
         ->where('company.intCompanyID',Auth::user()->intUCompanyID)
         ->where('jobsched.enumstatus','Finished')
+        ->where('invoice.enumstatus','Pending')
         ->get();
-        return view('Consignee.Billing.index')->with('dispatch',$dispatch);
+        // $dispatch2 = DB::table('tbldispatchticket as dispatch')
+        // ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
+        // ->join('tblcompany as company','company.intCompanyID','invoice.intDTCompanyID')
+        // ->join('tblbill as bill','bill.intBillID','invoice.intInvoiceID')
+        // ->where('company.intCompanyID',Auth::user()->intUCompanyID)
+        // ->where('invoice.enumstatus','Paid')
+        // ->groupBy('intIBillID')
+        // ->sum('fltBalanceRemain');
+        // $dispatch2 = DB::table('tblinvoice as invoice')
+        // ->join('tblcharges as charges','invoice.intInvoiceID','charges.intChargeID')
+        // ->join('tblbill as bill','bill.intBillID','invoice.intInvoiceID') 
+        // ->groupBy('intIBillID')
+        // ->sum('fltBalanceRemain');
+        // error_log($dispatch2);
+        return view('Consignee.Billing.index')
+        // ->with('dispatch2',$dispatch2)
+        ->with('dispatch',$dispatch);
         
         // return response()->json(['dispatch'=>$dispatch]);  
     }
@@ -54,8 +73,24 @@ class CBillingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {       
+
+        $Bill = Bill::max('intBillID')+1;
+        error_log($Bill);
+
+        if(!empty($request->bill))
+            {        
+                for($count=0;$count < count($request->bill); $count++)
+                {
+                    $Invoice = Invoice::findOrFail($request->bill[$count]);
+                    error_log($Invoice);
+                    $Invoice->timestamps = false;
+                    $Invoice->enumStatus = 'Paid';
+                    $Invoice->intIBillID = $Bill;
+                    $Invoice->save();
+                }
+            }
+        return response()->json(['Bill'=>$Bill,'Invoice'=>$Invoice]);  
     }
 
     /**
@@ -101,5 +136,9 @@ class CBillingController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function cheque()
+    {
+  
     }
 }

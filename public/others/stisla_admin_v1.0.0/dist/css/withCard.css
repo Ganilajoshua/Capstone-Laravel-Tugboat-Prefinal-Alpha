@@ -18,8 +18,11 @@
 .modal {
   max-width: 100%;
 }
-#EditsecPic, #EditfirstPic, #EditthirdPic,#AddsecPic, #AddfirstPic, #AddthirdPic{
+#EditfirstPic, #AddfirstPic{
   cursor:pointer;
+}
+#AddfPic{
+  min-height:400px !important;
 }
 .addCard{
   margin-top:3px;

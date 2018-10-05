@@ -39,7 +39,7 @@
                                 </a>
                                 <ul class="header3-sub-list list-unstyled">
                                     <li id="menuDispatchTicketD">
-                                        <a href="/consignee/paymentbilling/dispatchticket">Dispatch Ticket</a>
+                                        <a href="/consignee/dispatchticket">Dispatch Ticket</a>
                                     </li>
                                     <li id="menuBillingD">
                                         <a href="/consignee/paymentbilling/billing">Billing</a>

@@ -1,4 +1,6 @@
 $(document).ready(function(){
+  $('.PierLoc').hide();
+  $('.LocLoc').hide();
   $(function() {
     var sig = $('.signCanvas').signature();
     $('.clearCanvas').click(function() {
@@ -19,6 +21,27 @@ $(document).ready(function(){
         showConfirmButton: false,
         timer:1500
     });
+  });
+  $('#addHaulingDate').datetimepicker({
+    format: 'L'
+  }); 
+  $('#addHaulingTime').datetimepicker({
+    format: 'LT'
+  });
+  $('#addHaulingRoute').change(function(){
+    if(this.value == "LocPier"){
+      $('.LocPier').show().addClass('animated fadeIn fast');
+      $('.PierLoc').hide();
+      $('.LocLoc').hide();
+    }else if(this.value == "PierLoc"){
+      $('.PierLoc').show().addClass('animated fadeIn fast');
+      $('.LocPier').hide();
+      $('.LocLoc').hide();
+    }else if(this.value == "LocLoc"){
+      $('.LocLoc').show().addClass('animated fadeIn fast');
+      $('.PierLoc').hide();
+      $('.LocPier').hide();
+    }
   });
   $(".summernoteQuote").summernote({
     minHeight: 350,

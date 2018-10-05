@@ -55,6 +55,8 @@ return array(
     'App\\Http\\Controllers\\LoginControllers\\UserLoginController' => $baseDir . '/app/Http/Controllers/LoginControllers/UserLoginController.php',
     'App\\Http\\Controllers\\PierController' => $baseDir . '/app/Http/Controllers/PierController.php',
     'App\\Http\\Controllers\\PositionController' => $baseDir . '/app/Http/Controllers/PositionController.php',
+    'App\\Http\\Controllers\\QueriesController' => $baseDir . '/app/Http/Controllers/QueriesController.php',
+    'App\\Http\\Controllers\\QuotationsController' => $baseDir . '/app/Http/Controllers/QuotationsController.php',
     'App\\Http\\Controllers\\SchedulesController' => $baseDir . '/app/Http/Controllers/SchedulesController.php',
     'App\\Http\\Controllers\\SchedulingController' => $baseDir . '/app/Http/Controllers/SchedulingController.php',
     'App\\Http\\Controllers\\TeamCompositionController' => $baseDir . '/app/Http/Controllers/TeamCompositionController.php',
@@ -87,6 +89,7 @@ return array(
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
+    'App\\Queries' => $baseDir . '/app/Queries.php',
     'App\\Quotations' => $baseDir . '/app/Quotations.php',
     'App\\Request' => $baseDir . '/app/Request.php',
     'App\\Schedules' => $baseDir . '/app/Schedules.php',
@@ -133,6 +136,7 @@ return array(
     'CreateJobschedulesTable' => $baseDir . '/database/migrations/2018_10_03_104752_create_jobschedules_table.php',
     'CreateLocationsTable' => $baseDir . '/database/migrations/2018_10_03_104758_create_locations_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+<<<<<<< HEAD
     'CreatePaymentsTable' => $baseDir . '/database/migrations/2018_10_03_104806_create_payments_table.php',
     'CreatePiersTable' => $baseDir . '/database/migrations/2018_10_03_104814_create_piers_table.php',
     'CreatePositionsTable' => $baseDir . '/database/migrations/2018_10_03_104819_create_positions_table.php',
@@ -151,6 +155,9 @@ return array(
     'CreateTugboatsTable' => $baseDir . '/database/migrations/2018_10_03_104920_create_tugboats_table.php',
     'CreateTugboatspecificationsTable' => $baseDir . '/database/migrations/2018_10_03_105020_create_tugboatspecifications_table.php',
     'CreateTugboattypesTable' => $baseDir . '/database/migrations/2018_10_03_105026_create_tugboattypes_table.php',
+=======
+    'CreateQueriesTable' => $baseDir . '/database/migrations/2018_09_30_150603_create_queries_table.php',
+>>>>>>> 710dcc70e93bf72863516e10be1100591ed2f08e
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'CreateVesseltypesTable' => $baseDir . '/database/migrations/2018_10_03_105032_create_vesseltypes_table.php',
     'Cron\\AbstractField' => $vendorDir . '/mtdowling/cron-expression/src/Cron/AbstractField.php',
