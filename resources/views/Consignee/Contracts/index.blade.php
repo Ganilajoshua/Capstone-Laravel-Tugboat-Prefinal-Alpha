@@ -12,6 +12,7 @@
     <section>
         @if(count($contract) == 0 || null)
             <div class="container">
+                <div id="forecast"></div>
                 <div class="col-12 col-sm-12 col-lg">
                     <div class="card card-sm-2 card-primary border-primary">
                         <div class="card-icon">
@@ -21,11 +22,11 @@
                             <h4 class="text-primary mb-2"> {{Auth::user()->name}} </h4>
                         </div>
                         <div class="card-body">
-                            <h3>YOU DON'T HAVE ANY CONTRACTS</h3>
-                            <span><a href="#" onclick="requestContracts({{$company[0]->intCompanyID}})" id="requestContracts" class="mt-3">
-                                    Request Contract<span><i class="fas fa-chevron-right ml-2 mt-2"></i></span>
-                            </a></span>
-
+                            <h3 class="text-danger text-center">YOU DON'T HAVE A CONTRACT!</h3>
+                            <hr>
+                            <a href="#" onclick="requestContracts({{$company[0]->intCompanyID}})" id="requestContracts" class="mt-3 btn btn-primary float-right">
+                                Request Contract
+                            </a>
                         </div>
                     </div>
                 </div>

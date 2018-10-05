@@ -1,3 +1,42 @@
+#weather li {
+  border: 2px #924444 solid !important;
+}
+.daterangepicker td.active, .daterangepicker td.active:hover {
+  background-color: #924444 !important;
+}
+.ranges li {
+	color: #800000 !important;
+}
+.ranges li:hover {
+	background-color: #924444 !important;
+	border: 1px solid #924444 !important;
+	color: #fff !important; 
+}
+.ranges li.active {
+	background-color: #800000 !important;
+	border: 1px solid #800000 !important;
+	color: #fff !important; 
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected]{
+	background-color:#924444 !important;
+    outline: none !important;
+}
+.select2-container--classic .select2-selection--single{
+	border:1px solid #924444 !important;
+    outline: none !important;
+}
+.select2-search--dropdown .select2-search__field{
+	border:1px solid #924444 !important;
+    outline: none !important;
+}
+.select2-container--classic.select2-container--open .select2-selection--single{
+	border:1px solid #924444 !important;
+    outline: none !important;
+}
+.select2-container--classic.select2-container--open .select2-dropdown{
+	border-color:#924444 !important;
+    outline: none !important;
+}
 .demo-settings .demo-settings-toggle {
   background-color:#924444!important;
 }

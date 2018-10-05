@@ -1,63 +1,33 @@
 <div class="addLayout">
     <div class="card animated bounceInLeft">
-        <div class="card-header">
+        <div class="card-header bg-primary">
             <span>
-                  <a href="" class="btnBack btn btn-lg btn-link float-left mt-2" data-toggle="tooltip"  title="Back" role="button">
+                  <a href="#" class="btnBack btn btn-lg btn-link float-left mt-2 text-white" data-toggle="tooltip"  title="Back" role="button">
                     <i class="ion-chevron-left"></i>
                   </a>
-                  <h3 class="text-center mr-5 mt-2">ADD</h3>
+                  <h3 class="text-center mr-5 mt-2 text-white">ADD</h3>
                 </span>
         </div>
         <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <strong> Fields with <sup class="text-white">&#10033;</sup> are required.</strong>
+                        <button type="button" class="close text-white" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
             <div class="smartwizard">
                 <ul>
-                    <li><a href="#step-1">Tugboat Pictures<br /><small>First Step</small></a></li>                    
-                    <li><a href="#step-2">Main Information<br /><small>Second Step</small></a></li>
-                    <li><a href="#step-3">Tugboat Specification<br /><small>Third Step</small></a></li>
-                    <li><a href="#step-4">Tugboat Classification<br /><small>Fourth Step</small></a></li>
+                    <li><a href="#step-1">Main Information<br/><small>First Step</small></a></li>                    
+                    <li><a href="#step-2">Tugboat Specification<br/><small>Second Step</small></a></li>
+                    <li><a href="#step-3">Tugboat Classification<br/><small>Third Step</small></a></li>
+                    <li><a href="#step-4">Tugboat Picture<br/><small>Fourth Step</small></a></li>
                 </ul>
-                <div>
+                <div> 
                     <div id="step-1" class="ml-3 mt-3 mr-3">
-                        <div class="row">
-                            <div class="col-12 col-sm-12 col-lg-4">
-                                <div class="form-group">
-                                    <img src="/others/stisla_admin_v1.0.0/dist/img/example-image.jpeg" class="img-thumbnail" id="AddfPic">
-                                    <br>
-                                    <br>
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" accept='image/*' id="AddfirstPic" onchange="ValidateSingleInput(this);">
-                                        <label class="custom-file-label" for="AddfirstPic" id="addLblfirstPic">First Picture<sup class="text-primary">&#10033;</sup></label>
-                                        <small id="AddfirstFileChosen" class="form-text text-muted lblifValid">No First Picture chosen.</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-lg-4">
-                                <div class="form-group">
-                                    <img src="/others/stisla_admin_v1.0.0/dist/img/example-image.jpeg" class="img-thumbnail" id="AddsPic">
-                                    <br>
-                                    <br>
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" accept='image/*' id="AddsecPic" onchange="ValidateSingleInput(this);">
-                                        <label class="custom-file-label" for="AddsecPic" id="addLblsecPic">Second Picture<sup class="text-primary">&#10033;</sup></label>
-                                        <small id="AddsecFileChosen" class="form-text text-muted lblifValid">No Second Picture chosen.</small>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-12 col-lg-4">
-                                <div class="form-group">
-                                    <img src="/others/stisla_admin_v1.0.0/dist/img/example-image.jpeg" class="img-thumbnail" id="AddtPic">
-                                    <br>
-                                    <br>
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" accept='image/*' id="AddthirdPic" onchange="ValidateSingleInput(this);">
-                                        <label class="custom-file-label" for="AddthirdPic" id="addLblthirdPic">Third Picture<sup class="text-primary">&#10033;</sup></label>
-                                        <small id="AddthirdFileChosen" class="form-text text-muted lblifValid">No Third Picture chosen.</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="step-2" class="ml-3 mt-3 mr-3">
                         <form id="AddformInfo">
                             <!-- First Row w/ 2 Columns-->
                             <div class="row">
@@ -71,7 +41,7 @@
                                     <div class="form-group">
                                         <label for="AddLength">Length<sup class="text-primary">&#10033;</sup></label>
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" id="AddLength" name="AddLength" placeholder="Tugboat Length">
+                                            <input type="number" class="form-control" id="AddLength" name="AddLength" placeholder="Tugboat Length">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">m</span>
                                             </div>
@@ -85,7 +55,7 @@
                                     <div class="form-group">
                                         <label for="AddBreadth">Breadth<sup class="text-primary">&#10033;</sup></label>
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" id="AddBreadth" name="AddBreadth" placeholder="Tugboat Breadth">
+                                            <input type="number" class="form-control" id="AddBreadth" name="AddBreadth" placeholder="Tugboat Breadth">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">m</span>
                                             </div>
@@ -96,7 +66,7 @@
                                     <div class="form-group">
                                         <label for="AddDepth">Depth<sup class="text-primary">&#10033;</sup></label>
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" id="AddDepth" name="AddDepth" placeholder="Tugboat Depth">
+                                            <input type="number" class="form-control" id="AddDepth" name="AddDepth" placeholder="Tugboat Depth">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">m</span>
                                             </div>
@@ -110,7 +80,7 @@
                                     <div class="form-group">
                                         <label for="AddHorsePower">Horse Power<sup class="text-primary">&#10033;</sup></label>
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" id="AddHorsePower" name="AddHorsePower" placeholder="Tugboat Horse Power">
+                                            <input type="number" class="form-control" id="AddHorsePower" name="AddHorsePower" placeholder="Tugboat Horse Power">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">HP</span>
                                             </div>
@@ -121,7 +91,7 @@
                                     <div class="form-group">
                                         <label for="AddMaxSpeed">Maximum Speed<sup class="text-primary">&#10033;</sup></label>
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" id="AddMaxSpeed" name="AddMaxSpeed" placeholder="Tugboat Max Speed">
+                                            <input type="number" class="form-control" id="AddMaxSpeed" name="AddMaxSpeed" placeholder="Tugboat Max Speed">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">knots</span>
                                             </div>
@@ -135,7 +105,7 @@
                                     <div class="form-group">
                                         <label for="AddBollardPull">Bollard Pull<sup class="text-primary">&#10033;</sup></label>
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" id="AddBollardPull" name="AddBollardPull" placeholder="Tugboat Bollard Pull">
+                                            <input type="number" class="form-control" id="AddBollardPull" name="AddBollardPull" placeholder="Tugboat Bollard Pull">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">tons</span>
                                             </div>
@@ -146,7 +116,7 @@
                                     <div class="form-group">
                                         <label for="AddGrossTonnage">Gross Tonnage<sup class="text-primary">&#10033;</sup></label>
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" id="AddGTonnage" name="AddGTonnage" placeholder="Tugboat Gross Tonnage">
+                                            <input type="number" class="form-control" id="AddGTonnage" name="AddGTonnage" placeholder="Tugboat Gross Tonnage">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">tons</span>
                                             </div>
@@ -160,7 +130,7 @@
                                     <div class="form-group">
                                         <label for="AddNetTonnage">Net Tonnage<sup class="text-primary">&#10033;</sup></label>
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" id="AddNTonnage" name="AddNTonnage" placeholder="Tugboat Net Tonnage">
+                                            <input type="number" class="form-control" id="AddNTonnage" name="AddNTonnage" placeholder="Tugboat Net Tonnage">
                                             <div class="input-group-append">
                                                 <span class="input-group-text">tons</span>
                                             </div>
@@ -171,7 +141,7 @@
                                     <div class="form-group">
                                         <label for="AddLastDryDocked">Last Dry Docked<sup class="text-primary">&#10033;</sup></label>
                                         <div class="input-group date" id="AddLastDryDocked" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" id="AddDryDocked" data-target="#AddLastDryDocked" placeholder="MM-DD-YYYY">
+                                            <input type="number" class="form-control datetimepicker-input" id="AddDryDocked" data-target="#AddLastDryDocked" placeholder="MM-DD-YYYY">
                                             <div class="input-group-append" data-target="#AddLastDryDocked" data-toggle="datetimepicker">
                                                 <button type="button" class="btn btn-outline-primary waves-effect"><i class="fa fa-calendar"></i></button>
                                             </div>
@@ -181,7 +151,7 @@
                             </div>
                         </form>
                     </div>
-                    <div id="step-3" class="ml-3 mt-3 mr-3">
+                    <div id="step-2" class="ml-3 mt-3 mr-3">
                         <form id="AddformSpec">
                             <!-- First Row w/ 4 Columns-->
                             <div class="row">
@@ -256,7 +226,7 @@
                             </div>
                         </form>
                     </div>
-                    <div id="step-4" class="ml-3 mt-3 mr-3">
+                    <div id="step-3" class="ml-3 mt-3 mr-3">
                         <form id="AddformClass">
                             <!-- First Row w/ 3 Columns-->
                             <div class="row">
@@ -387,6 +357,24 @@
                                 </div>
                             </div>
                         </form>
+                    </div>
+                    <div id="step-4" class="ml-3 mt-3 mr-3">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-lg-6">
+                                <div class="form-group">
+                                    <img src="/others/stisla_admin_v1.0.0/dist/img/example-image.jpeg" class="img-thumbnail" id="AddfPic">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-lg-6">
+                                <div class="form-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" accept='image/*' id="AddfirstPic" onchange="ValidateSingleInput(this);">
+                                        <label class="custom-file-label" for="AddfirstPic" id="addLblfirstPic">Tugboat Picture</label>
+                                        <small id="AddfirstFileChosen" class="form-text text-muted lblifValid">No Picture chosen.</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

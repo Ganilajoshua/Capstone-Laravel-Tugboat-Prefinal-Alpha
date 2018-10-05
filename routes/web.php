@@ -22,6 +22,8 @@ Route::group(['prefix'=>'administrator/'],function(){
         // Route::get('/register','LoginControllers\AdminLoginController@showRegister');
         // Route::post('/register','LoginControllers\AdminLoginController@register');
     //Maintenance Routes
+    Route::resource('/queries','QueriesController');
+    Route::resource('/reports','ReportsController');
     Route::group(['prefix'=>'maintenance/'],function(){
         //Dashboard Components
         //Maintenance Resource
