@@ -45,6 +45,7 @@
                                         <thead class="bg-primary">
                                             <tr>
                                                 <th>Company Name</th>
+                                                <th>Contract Expiry</th>
                                                 <th class="noSortAction">Action</th>
                                             </tr>
                                         </thead>  
@@ -52,13 +53,11 @@
                                             @foreach($company as $company)
                                                 <tr>
                                                     <td>{{$company->strCompanyName}}</td>
+                                                    <td>date here</td>
                                                     <td>
                                                         <div class="ml-1 mr-1">
-                                                            <button onclick="getBerth({{$company->intCompanyID}})" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Edit" role="button">
-                                                                <i class="miniIcon fas fa-edit custSize"></i>
-                                                            </button>
-                                                            <button onclick="deleteBerth({{$company->intCompanyID}})" class="btn btn-sm btn btn-danger" data-toggle="tooltip" title="Delete">
-                                                                <i class="miniIcon fas fa-trash custSize"></i>
+                                                            <button class="btn btn-sm btn btn-primary waves-effect waves-circle" data-toggle="tooltip" title="View Details">
+                                                                <i class="fas fa-eye"></i>
                                                             </button>
                                                         </div>
                                                     </td>

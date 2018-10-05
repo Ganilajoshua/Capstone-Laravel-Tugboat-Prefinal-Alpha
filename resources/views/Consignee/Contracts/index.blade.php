@@ -21,9 +21,178 @@
                         <div class="card-header">
                             <h4 class="text-primary mb-2"> {{Auth::user()->name}} </h4>
                         </div>
+                        <h3 class="text-danger text-center">YOU DON'T HAVE A CONTRACT!</h3>
+                        <hr>
+                        <div class="row ml-4 mr-4">
+                            <div class="col-12">
+                                <div class="card card-primary text-center">
+                                    <div class="card-header"><h4 class="text-black">Tugboat Services Matrix</h4></div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table-hover table-bordered" style="width:100%;">
+                                                <thead class="bg-primary text-white thHeight" style="font-size:15px;">
+                                                    <tr>
+                                                        <th>Service Type</th>
+                                                        <th>Standard Rate</th>
+                                                        <th>Delay Fee</th>
+                                                        <th>Violation Fee</th>
+                                                        <th>Minimum Damage Free</th>
+                                                        <th>Maximum Damage Fee</th>
+                                                        <th>Maximum Discount (&#37;)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="tbodyTD" style="font-size:13px;">
+                                                    <tr>
+                                                        <td>Hauling Service</td>
+                                                        <td>2000</td>
+                                                        <td>2000</td>
+                                                        <td>250</td>
+                                                        <td>1500</td>
+                                                        <td>3000</td>
+                                                        <td>20</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tug Assist Service</td>
+                                                        <td>3000</td>
+                                                        <td>2500</td>
+                                                        <td>3000</td>
+                                                        <td>2000</td>
+                                                        <td>3000</td>
+                                                        <td>20</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="list-inline text-center text-black">
+                                    <li class="list-inline-item">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input radioMatrix" id="quoteMatrix" name="matrixChoices" checked>
+                                            <label class="custom-control-label lblquoteMatrix text-primary" for="quoteMatrix">Make quotations based on Matrix</label>
+                                        </div>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input radioMatrix" id="quoteCustom" name="matrixChoices">
+                                            <label class="custom-control-label lblquoteCustom" for="quoteCustom">Create quotation suggestions</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                         <div class="card-body">
-                            <h3 class="text-danger text-center">YOU DON'T HAVE A CONTRACT!</h3>
-                            <hr>
+                            <div class="row matrixBased">
+                                <div class="col-12">
+                                    <div class="alert alert-primary"><h4 class="text-white">Make Quotations based on the Matrix above.</h4></div>
+                                </div>
+                            </div>
+                            <div class="row customMatrix">
+                                <div class="col-12">
+                                    <form class="needs-validation" novalidate="">
+                                        <div class="card border-primary">
+                                            <div class="card-header bg-primary"><h4 class="text-white text-center mb-2">Hauling Service Custom Matrix</h4></div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="addHStandardRate">Hauling Standard Rate(&#8369;)</label>
+                                                            <input type="number" name="addHStandardRate" id="addHStandardRate" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="addHDelayFee">Hauling Tugboat Delay Fee (&#8369;)</label>
+                                                            <input type="number" name="addHDelayFee" id="addHDelayFee" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="addHViolationFee">Hauling Violation Fee (&#8369;)</label>
+                                                            <input type="number" name="addHViolationFee" id="addHViolationFee" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="addHLateFee">Hauling Consignee Late Fee (&#8369;)</label>
+                                                            <input type="number" name="addHLateFee" id="addHLateFee" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="addHMinDamageFee">Hauling Minimum Damage Fee (&#8369;)</label>
+                                                            <input type="number" name="addHMinDamageFee" id="addHMinDamageFee" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="addHMaxDamageFee">Hauling Maximum Damage Fee (&#8369;)</label>
+                                                            <input type="number" name="addHMaxDamageFee" id="addHMaxDamageFee" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" id="hideCompanyID">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-12">
+                                    <form class="needs-validation" novalidate="">
+                                        <div class="card border-primary">
+                                            <div class="card-header bg-primary"><h4 class="text-white text-center mb-2">Tug Assist Service Custom Matrix</h4></div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="addTAStandardRate">Tug Assist Standard Rate(&#8369;)</label>
+                                                            <input type="number" name="addTAStandardRate" id="addTAStandardRate" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="addTADelayFee">Tug Assist Tugboat Delay Fee (&#8369;)</label>
+                                                            <input type="number" name="addTADelayFee" id="addTADelayFee" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="addTAViolationFee">Tug Assist Violation Fee (&#8369;)</label>
+                                                            <input type="number" name="addTAViolationFee" id="addTAViolationFee" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="addTALateFee">Tug Assist Consignee Late Fee (&#8369;)</label>
+                                                            <input type="number" name="addTALateFee" id="addTALateFee" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="addTAMinDamageFee">Tug Assist Minimum Damage Fee (&#8369;)</label>
+                                                            <input type="number" name="addTAMinDamageFee" id="addTAMinDamageFee" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label for="addTAMaxDamageFee">Tug Assist Maximum Damage Fee (&#8369;)</label>
+                                                            <input type="number" name="addTAMaxDamageFee" id="addTAMaxDamageFee" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" id="hideCompanyID">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                             <a href="#" onclick="requestContracts({{$company[0]->intCompanyID}})" id="requestContracts" class="mt-3 btn btn-primary float-right">
                                 Request Contract
                             </a>
