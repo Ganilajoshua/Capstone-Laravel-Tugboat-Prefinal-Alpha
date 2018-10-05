@@ -424,10 +424,6 @@ class ComposerStaticInit03fdbf8ca42cc01612abc47940c5de76
         'CreateJobschedulesTable' => __DIR__ . '/../..' . '/database/migrations/2018_10_03_104752_create_jobschedules_table.php',
         'CreateLocationsTable' => __DIR__ . '/../..' . '/database/migrations/2018_10_03_104758_create_locations_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> b06c3dfee940809bae2bff5251b30811c0ff092a
         'CreatePaymentsTable' => __DIR__ . '/../..' . '/database/migrations/2018_10_03_104806_create_payments_table.php',
         'CreatePiersTable' => __DIR__ . '/../..' . '/database/migrations/2018_10_03_104814_create_piers_table.php',
         'CreatePositionsTable' => __DIR__ . '/../..' . '/database/migrations/2018_10_03_104819_create_positions_table.php',
@@ -446,12 +442,7 @@ class ComposerStaticInit03fdbf8ca42cc01612abc47940c5de76
         'CreateTugboatsTable' => __DIR__ . '/../..' . '/database/migrations/2018_10_03_104920_create_tugboats_table.php',
         'CreateTugboatspecificationsTable' => __DIR__ . '/../..' . '/database/migrations/2018_10_03_105020_create_tugboatspecifications_table.php',
         'CreateTugboattypesTable' => __DIR__ . '/../..' . '/database/migrations/2018_10_03_105026_create_tugboattypes_table.php',
-<<<<<<< HEAD
-=======
-=======
         'CreateQueriesTable' => __DIR__ . '/../..' . '/database/migrations/2018_09_30_150603_create_queries_table.php',
->>>>>>> 710dcc70e93bf72863516e10be1100591ed2f08e
->>>>>>> b06c3dfee940809bae2bff5251b30811c0ff092a
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'CreateVesseltypesTable' => __DIR__ . '/../..' . '/database/migrations/2018_10_03_105032_create_vesseltypes_table.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/AbstractField.php',
