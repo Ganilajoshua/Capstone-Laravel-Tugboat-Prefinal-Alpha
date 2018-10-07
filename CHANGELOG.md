@@ -2,6 +2,9 @@
 ### `Pre Final Repository Monday August 27,2018`
 
 ### Consignee Contract Request Page Edited
+- [x] Added request changes modal
+
+### Consignee Contract Request Page Edited
 - [x] Added matrix table and custom matrix suggestion fields
 
 ### Contracts Module

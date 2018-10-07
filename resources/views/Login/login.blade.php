@@ -69,14 +69,6 @@
                                         </div>
                                         {{ csrf_field() }}
                                     </form>
-                                    <div class="text-center">
-                                        <strong class="text-muted">&mdash; OR &mdash;</strong>
-                                        <div class="text-center mt-3">
-                                            <a class="btn btn-google btn-block text-center text-white waves-effect">
-                                                <i class="fab fa-google"></i>&nbsp;&nbsp; Sign in with Google
-                                            </a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="text-muted text-center">
