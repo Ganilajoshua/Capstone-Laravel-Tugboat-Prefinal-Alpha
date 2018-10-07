@@ -11,6 +11,7 @@ use App\Company;
 use App\Contract;
 use App\Quotations;
 use App\QuotationFees;
+use App\ContractFeesMatrix;
 
 use Auth;
 use DB;
@@ -121,6 +122,10 @@ class ContractsController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function getdefaultmatrix(Request $request){
+        $contractfees = ContractFeesMatrix::all();
+        return response()->json(['contractfees'=>$contractfees]);
     }
     public function requestchanges(Request $request){
         $contract = Contract::findOrFail($request->contractID);

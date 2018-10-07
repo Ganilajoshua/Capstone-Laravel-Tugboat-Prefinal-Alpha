@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Company;
 use App\ForwardRequest;
 use App\JobOrder;
+use App\JoborderForwardRequests;
 use App\JobSchedule;
 use App\Schedules;
 
@@ -36,27 +37,42 @@ class JobOrderController extends Controller
         ->where('joborder.enumstatus','Pending')
         ->where('joborder.boolDeleted',0)
         ->get();
+        // old forward query
+        // $forwarded = DB::table('tbljoborder as joborder')
+        // ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        // ->where('joborder.enumstatus','Forward Pending')
+        // ->where('joborder.boolDeleted',0)
+        // ->get();
         $forwarded = DB::table('tbljoborder as joborder')
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-        ->where('joborder.enumstatus','Forward Pending')
+        ->where('joborder.enumstatus','Forwarded')
         ->where('joborder.boolDeleted',0)
         ->get();
-        $forwardp = DB::table('tbljoborder as joborder')
+        // $forwardp = DB::table('tbljoborder as joborder')
+        // ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        // ->where('joborder.enumstatus','Forward Pending')
+        // ->where('joborder.boolDeleted',0)
+        // ->get();
+        $forwardrequest = DB::table('tbljoborderforwardrequests as requests')
+        ->join('tbljoborder as joborder','requests.intJOFRJobOrderID','joborder.intJobOrderID')
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-        ->where('joborder.enumstatus','Forward Pending')
-        ->where('joborder.boolDeleted',0)
+        ->where('requests.enumStatus','Pending')
         ->get();
-        $forwardrequest = DB::table('tblrequest as request')
-        ->join('tbljoborder as joborder','request.intRJobOrderID','joborder.intJobOrderID')
-        ->join('tblcompany as company','request.intRCompanyID','company.intCompanyID')
-        ->join('tblcompany as comp','comp.intCompanyID','joborder.intJOCompanyID')
-        ->where('request.intRForwardCompanyID',Auth::user()->intUCompanyID)
-        ->get();
-        $forwarda = DB::table('tbljoborder as joborder')
+        // JobOrderForwardRequests::where('intJOFRForwardCompanyID',Auth::user()->intUCompanyID)
+        // ->where('enumStatus','Pending')->get();
+
+        // $forwardrequest = DB::table('tblrequest as request')
+        // ->join('tbljoborder as joborder','request.intRJobOrderID','joborder.intJobOrderID')
+        // ->join('tblcompany as company','request.intRCompanyID','company.intCompanyID')
+        // ->join('tblcompany as comp','comp.intCompanyID','joborder.intJOCompanyID')
+        // ->where('request.intRForwardCompanyID',Auth::user()->intUCompanyID)
+        // ->get();
+        $forwarda = DB::table('tbljoborderforwardrequests as requests')
+        ->join('tbljoborder as joborder','requests.intJOFRJobOrderID','joborder.intJobOrderID')
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-        ->where('joborder.enumstatus','Forward Accepted')
-        ->where('joborder.boolDeleted',0)
+        ->where('requests.enumStatus','Accepted')
         ->get();
+
         $declined = DB::table('tbljoborder as joborder')
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
         ->where('joborder.enumstatus','Declined')
@@ -71,7 +87,7 @@ class JobOrderController extends Controller
         return view('Joborder.index',compact('accepted','forwarded','joborders','declined','forwardp','forwarda','affiliates','forwardrequest'));
         // ->with('joborders',$joborder)
         // ->with('forwarded',$forwarded);
-        // return response()->json(['job'=>$accepted]);    
+        // return response()->json([$forwarded]);    
     }
 
     /**
@@ -99,9 +115,9 @@ class JobOrderController extends Controller
             $job->enumStatus = 'Scheduled';
             $job->save();
         }elseif(Auth::user()->enumUserType == 'Affiliates'){
-            $job = JobOrder::findOrFail($request->joborderID);
+            $job = JobOrderForwardRequests::findOrFail($request->joborderID);
             $job->timestamps = false;
-            $job->enumStatus = 'Forward Scheduled';
+            $job->enumStatus = 'Scheduled';
             $job->save();
         }
         
@@ -163,11 +179,12 @@ class JobOrderController extends Controller
             return response()->json(['joborder'=>$joborder]);
 
         }elseif(Auth::user()->enumUserType == 'Affiliates'){
-            $joborder = JobOrder::findOrFail($intJobOrderID);
+            $joborder = JoborderForwardRequests::findOrFail($intJobOrderID);
             $joborder->timestamps = false;
-            $joborder->enumStatus = 'Forward Accepted';
+            $joborder->enumStatus = 'Accepted';
             $joborder->save();
-            return response()->json(['joborder'=>$joborder]);
+            $job = JobOrder::findOrFail($joborder->intJOFRJobOrderID);
+            return response()->json(['joborder'=>$job]);
         }
         
     }
@@ -198,14 +215,19 @@ class JobOrderController extends Controller
         try{
             DB::beginTransaction();
 
-            $forward = new ForwardRequest;
-            $forward->strRequestDescription = $request->joborderDetails;
-            $forward->enumRequestType = 'Forward JobOrder';
-            $forward->intRJobOrderID = $request->joborderID;
-            $forward->intRCompanyID = Auth::user()->intUCompanyID;
-            $forward->intRForwardCompanyID = $request->joborderForwardCompany;
+            $company = Company::findOrFail(Auth::user()->intUCompanyID);
+            
+            $joborder = JobOrder::findOrFail($request->joborderID);
+            $joborder->enumStatus = 'Forwarded';
+            $joborder->save();
+            
+            $forward = new JobOrderForwardRequests;
+            $forward->timestamps = false;
+            $forward->intJOFRJobOrderID = $request->joborderID;
+            $forward->strJOFRDescription = $request->joborderDetails;
+            $forward->strRequestCompanyName = $company->strCompanyName;
+            $forward->intJOFRForwardCompanyID = $request->joborderForwardCompany;
             $forward->save();
-
             DB::commit();
         }catch(\Illuminate\Database\QueryException $errors){
             DB::rollback();

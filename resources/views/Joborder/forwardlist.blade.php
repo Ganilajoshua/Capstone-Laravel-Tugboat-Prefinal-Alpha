@@ -57,7 +57,7 @@
                                         <div class="card-footer mt-2">
                                             <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
                                             <button class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect" data-toggle="modal" data-target="#forwardModal">Forward</button>
-                                            <button onclick="createFJobsched({{$forwarda->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right waves-effect">Make Job Schedule</button>
+                                            <button onclick="createFJobsched({{$forwarda->intJOForwardRequestsID}})" class="btn btn-primary btn-sm text-center float-right waves-effect">Make Job Schedule</button>
                                         </div>
                                     </div>
                                 </div>
@@ -90,7 +90,7 @@
                         @endif
                         {{-- pending cards  --}}
                         @if(count($forwardrequest)>0)
-                            <div>{{$forwardrequest}}</div>
+                            {{-- <div>{{$forwardrequest}}</div> --}}
                             @foreach($forwardrequest as $forwardrequest)
                                 <div class="col-12 col-sm-12 col-lg-6 pendingCards">
                                     <div class="card card-sm-2 card-primary border-primary active">
@@ -108,7 +108,7 @@
                                         <div class="card-footer mt-2">
                                             <a href="#" onclick="forwardRequest({{$forwardrequest->intJobOrderID}})" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
                                             <button onclick="declineJobOrder({{$forwardrequest->intJobOrderID}})" class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect">Decline</button>
-                                            <button onclick="acceptJobOrder({{$forwardrequest->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right waves-effect">Accept</button>
+                                            <button onclick="acceptJobOrder({{$forwardrequest->intJOForwardRequestsID}})" class="btn btn-primary btn-sm text-center float-right waves-effect">Accept</button>
                                         </div>
                                     </div>
                                 </div>

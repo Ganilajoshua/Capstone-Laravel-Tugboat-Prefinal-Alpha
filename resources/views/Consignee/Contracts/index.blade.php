@@ -78,7 +78,7 @@
                                     </li>
                                     <li class="list-inline-item">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input radioMatrix" id="quoteCustom" name="matrixChoices">
+                                            <input type="radio" class="custom-control-input radioMatrix" id="quoteCustom" class="suggestionsButton" name="matrixChoices">
                                             <label class="custom-control-label lblquoteCustom" for="quoteCustom">Create quotation suggestions</label>
                                         </div>
                                     </li>
