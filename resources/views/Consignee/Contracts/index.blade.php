@@ -36,7 +36,7 @@
                                                         <th>Standard Rate</th>
                                                         <th>Delay Fee</th>
                                                         <th>Violation Fee</th>
-                                                        <th>Minimum Damage Free</th>
+                                                        <th>Minimum Damage Fee</th>
                                                         <th>Maximum Damage Fee</th>
                                                         <th>Maximum Discount (&#37;)</th>
                                                     </tr>
@@ -235,57 +235,91 @@
                                 </div>
                                 <hr>
                                 <div class="row">
-                                    <div class="col-6">
-                                        <ul class="list-inline">
+                                    <div class="col-12">
+                                        <ul class="list-inline" style="font-size:15px;">
                                             <li class="list-inline-item text-primary">
-                                                <p class="font-weight-bold">Standard Rate : </p></li>
+                                                <p class="font-weight-bold">Legend : </p>
+                                            </li>
                                             <li class="list-inline-item">
-                                                <p class="text-black" id="standardRate"></p></li>
-                                        </ul>
-                                        <ul class="list-inline">
-                                            <li class="list-inline-item text-primary">
-                                                <p class="font-weight-bold">Tugboat Delay Fee : </p></li>
-                                            <li class="list-inline-item">
-                                                <p class="text-black" id="tugboatDelayFee"></p></li>
-                                        </ul>
-                                        <ul class="list-inline">
-                                            <li class="list-inline-item text-primary">
-                                                <p class="font-weight-bold">Violation Fee : </p></li>
-                                            <li class="list-inline-item"> 
-                                                <p class="text-black" id="violationFee"></p></li>
-                                        </ul>
-                                        <ul class="list-inline">
-                                            <li class="list-inline-item text-primary">
-                                                <p class="font-weight-bold">Consignee Late Fee : </p></li>
-                                            <li class="list-inline-item">
-                                            <p class="text-black" id="consigneeLateFee"></p></li>
+                                                <div class="badge badge-light badgeLegend border-primary">
+                                                    <h6 class="text-primary">Same Amount</h6>
+                                                </div>
+                                                <div class="badge badge-light badgeLegend border-primary">
+                                                    <h6 class="text-success font-weight-bold">New Amount is Lower</h6>
+                                                </div>
+                                                <div class="badge badge-light badgeLegend border-primary">
+                                                    <h6 class="text-danger">New Amount is Higher</h6>
+                                                </div>
+                                            </li>
                                         </ul>
                                     </div>
-                                    <div class="col-6">
-                                        <ul class="list-inline">
-                                            <li class="list-inline-item text-primary">
-                                                <p class="font-weight-bold">Minimum Damage Fee : </p></li>
-                                            <li class="list-inline-item">
-                                            <p class="text-black" id="minDamageFee"></p></li>
-                                        </ul>
-                                        <ul class="list-inline">
-                                            <li class="list-inline-item text-primary">
-                                                <p class="font-weight-bold">Maximum Damage Fee : </p></li>
-                                            <li class="list-inline-item">
-                                                <p class="text-black" id="maxDamageFee"></p></li>
-                                        </ul>
-                                        <ul class="list-inline">
-                                            <li class="list-inline-item text-primary">
-                                                <p class="font-weight-bold">Discount : </p></li>
-                                            <li class="list-inline-item">
-                                                <p class="text-black" id="discount"></p></li>
-                                        </ul>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card card-primary text-center border-primary">
+                                            <div class="card-header"><h4 class="text-black">Quotation Changes Comparison</h4></div>
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table-hover table-bordered" style="width:100%;">
+                                                        <thead class="bg-primary thHeight text-white" style="font-size:15px;">
+                                                            <tr>
+                                                                <th style="width:20%;"></th>
+                                                                <th style="width:40%;">Previous Quotation</th>
+                                                                <th style="width:40%;">New Quotation</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="tbodyTD" style="font-size:13px;">
+                                                            <tr>
+                                                                <td class="text-black font-weight-bold">Standard Rate (&#8369;)</td>
+                                                                <td class="text-black">2000</td>
+                                                                <td class="text-primary font-weight-bold" id="standardRate">2000</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-black font-weight-bold">Delay Fee (&#8369;)</td>
+                                                                <td class="text-black">3000</td>
+                                                                <td class="text-success font-weight-bold" id="tugboatDelayFee">2500</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-black font-weight-bold">Violation Fee (&#8369;)</td>
+                                                                <td class="text-black">3000</td>
+                                                                <td class="text-danger font-weight-bold" id="violationFee">3500</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-black font-weight-bold">Late Fee (&#8369;)</td>
+                                                                <td class="text-black">3000</td>
+                                                                <td class="text-danger font-weight-bold" id="consigneeLateFee">3500</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-black font-weight-bold">Minimum Damage Fee (&#8369;)</td>
+                                                                <td class="text-black">2000</td>
+                                                                <td class="text-success font-weight-bold" id="minDamageFee">1500</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-black font-weight-bold">Maximum Damage Fee (&#8369;)</td>
+                                                                <td class="text-black">4000</td>
+                                                                <td class="text-primary font-weight-bold" id="maxDamageFee">4000</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-black font-weight-bold">Maximum Discount (&#37;)</td>
+                                                                <td class="text-black">8</td>
+                                                                <td class="text-danger font-weight-bold" id="discount">12</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-black font-weight-bold">Author</td>
+                                                                <td class="text-black font-weight-bold">Hi-Energy</td>
+                                                                <td class="text-black font-weight-bold">Tugmaster</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
                                 <input type="hidden" id="contractsID">
-                                <button onclick="requestForChanges()" class="btn btn-primary waves-effect">Request for Changes</button>
+                                <button class="btn btn-primary waves-effect" data-toggle="modal" data-target="#requestChangesModal">Request for Changes</button>
                                 <button id="applySignatureButton" class="btn btn-success waves-effect" data-toggle="modal" data-target="#applySignatureModal">Sign and Accept Contract</button>
                             </div>
                         </div>
@@ -415,4 +449,5 @@
     </section>
     @include('Consignee.Contracts.finalcontract')
     @include('Consignee.Contracts.info')
+    @include('Consignee.Contracts.infoRChanges')
 @endsection

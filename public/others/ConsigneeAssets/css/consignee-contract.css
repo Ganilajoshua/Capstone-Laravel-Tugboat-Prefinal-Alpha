@@ -8,6 +8,9 @@
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */
 }
+.badgeLegend h6{
+  font-size:15px;
+}
 .desc a > i{
   font-size:12px;
   margin-bottom:12px;
