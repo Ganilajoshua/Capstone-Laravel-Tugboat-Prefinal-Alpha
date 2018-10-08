@@ -8,6 +8,12 @@
     height: 44px !important;
 }
 
-.rowDisabledTugboats,.rowJobOrderReport,.rowSalesReport,.rowSOA,.rowServiceReport{
+.rowDisabledTugboats,.rowJobOrderReport,.rowSalesReport,.rowSOA,.rowServiceReport, .viewChoice{
     display:none;
+}
+.disabledTChartRow,.joReportChartRow,.salesReportChartRow,.SOAReportChartRow,.serviceReportChartRow{
+    display:none;
+}
+.viewChoice{
+    margin-bottom:60px !important;
 }
