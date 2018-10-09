@@ -1,6 +1,10 @@
 # Changelog Capstone-Laravel-tugboat-dev-PreFinal α
 ### `Pre Final Repository Monday August 27,2018 v.1.0.0`
 
+### Administrator Reports Page Edited
+- [x] Added Changes views for reports
+    - Table View & Chart View
+
 ### Consignee Contract Request Page Edited
 - [x] Added request changes modal
 
