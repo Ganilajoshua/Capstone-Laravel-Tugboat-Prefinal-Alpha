@@ -114,7 +114,7 @@ Route::group(['prefix'=>'administrator/'],function(){
             Route::post('/activate','VesselTypeController@activate');
             Route::get('/{intVesselTypeID}/edit','VesselTypeController@edit');
             Route::get('/{intVesselTypeID}/delete','VesselTypeController@delete');
-            Route::get('/{intVesselTypeID}/destroy','VesselTypeController@destroy');
+            Route::get('/{intVesselTypeID}/destaroy','VesselTypeController@destroy');
         });
     });
     //Transactions Routes
@@ -330,13 +330,23 @@ Route::group(['prefix'=>'affiliates/'],function(){
 
                 // Dispatch and Hauling - Job Orders Route Group
                 Route::group(['prefix'=>'joborders/'],function(){
-                    Route::resource('/','JobOrderController');
-                    Route::get('/{intJobOrderID}/accept','JobOrderController@accept');
-                    Route::get('/{intJobOrderID}/forwardrequest','JobOrderController@forwardrequest');
-                    Route::get('/{intJobOrderID}/decline','JobOrderController@decline');
+                    // Route::get('/{intJobOrderID}/forwardrequest','JobOrderController@forwardrequest');
+                    // Route::get('/{intJobOrderID}/decline','JobOrderController@decline');
                     Route::get('/{intJobOrderID}/viewdetails','JobOrderController@viewdetails');
-                    Route::post('/forward','JobOrderController@forward');
-                    Route::post('/store','JobOrderController@store');
+                    // Route::post('/forward','JobOrderController@forward');
+                    // Route::post('/store','JobOrderController@store');
+                    
+                    Route::resource('/','AffiliatesControllers\JobOrderController');
+                    Route::get('/{intJobOrderID}/accept','AffiliatesControllers\JobOrderController@accept');
+                    // Route::get('/{intJobOrderID}/viewdetails','AffiliatesControllers\JobOrderController@viewdetails');
+                    Route::post('/store','AffiliatesControllers\JobOrderController@store');
+
+                    // Route::get('/{intJobOrderID}/accept','AffiliatesControllers\JobOrderController@accept');
+                    // Route::get('/{intJobOrderID}/forwardrequest','AffiliatesControllers\JobOrderController@forwardrequest');
+                    // Route::get('/{intJobOrderID}/decline','AffiliatesControllers\JobOrderController@decline');
+                    // Route::get('/{intJobOrderID}/viewdetails','AffiliatesControllers\JobOrderController@viewdetails');
+                    // Route::post('/forward','AffiliatesControllers\JobOrderController@forward');
+                    // Route::post('/store','AffiliatesControllers\JobOrderController@store');
                 });
 
                 // Dispatch and Hauling - Tugboat Assignment Route Group

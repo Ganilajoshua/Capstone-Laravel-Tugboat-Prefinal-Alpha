@@ -16,12 +16,7 @@
             </small>
             </div>
         </h1>
-        @if(Auth::user()->enumUserType == 'Admin')
-            @include('Joborder.list')
-        @elseif(Auth::user()->enumUserType == 'Affiliates')
-            @include('Joborder.forwardlist')
-        @endif
-            {{-- @include('Joborder.create') --}}
+        @include('Joborder.list')
     </section>
 @endsection
 
