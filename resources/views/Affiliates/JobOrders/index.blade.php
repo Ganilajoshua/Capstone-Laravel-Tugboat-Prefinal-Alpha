@@ -1,10 +1,10 @@
 @extends('Templates.newTemplate')
 
 @section('assets')
-    @include('Joborder.styles')
+    @include('Affiliates.JobOrders.styles')
 @endsection
 @section('scripted')
-    @include('Joborder.scripts')
+    @include('Affiliates.JobOrders.scripts')
 @endsection
 @section('content')
     <section id="mainSection" class="section">
@@ -16,12 +16,12 @@
             </small>
             </div>
         </h1>
-        @include('Joborder.list')
+        @include('Affiliates.JobOrders.list')
     </section>
 @endsection
 
 @section('outside')
-    @include('Joborder.info')
-    @include('Joborder.forward')
+    @include('Affiliates.JobOrders.info')
+    {{-- @include('Joborder.forward') --}}
     {{-- @include('Joborder.declined') --}}
 @endsection

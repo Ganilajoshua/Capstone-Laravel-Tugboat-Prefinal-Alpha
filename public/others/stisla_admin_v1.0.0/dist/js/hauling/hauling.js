@@ -98,8 +98,10 @@ $('.joborderHaulingInfo').on('click',function(event){
     });
 });
 $('.backButton').on('click',function(){
-    $('.startHaulingContainer').css('display','none');
-    $('.jobOrderList').css('display','block');
+    // $('.startHaulingContainer').css('display','none');
+    // $('.jobOrderList').css('display','block');
+    // $('.tugbot')
+    // $('.tugboatInformationTab').css('display','block');
 });
 
 $('.viewStartHauling').on('click',function(event){

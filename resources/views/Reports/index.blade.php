@@ -21,13 +21,13 @@
         <div class="row">
             <div class="col-lg-12 col-12">
                 <div class="card border-primary card-primary">
-                    <div class="card-header text-center"style="border-bottom:1px solid !important;">
-                            <div class="float-right">
-                                <div class="btn-group">
-                                    <a href="#" class="btn active waves-effect">Generate PDF</a>
-                                </div>
+                    <div class="card-header text-center">
+                        <div class="float-right">
+                            <div class="btn-group">
+                                <a href="#" class="btn active waves-effect">Generate PDF</a>
                             </div>
-                            <h4 class="ml-5">Select Report</h4>
+                        </div>
+                        <h4 class="ml-5">Select Report</h4>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -57,7 +57,18 @@
                                 <button class="submitReports btn btn-primary waves-effect float-right">Submit</button>
                             </div>
                         </div>
-                        <div class="row mt-3 rowDisabledTugboats animated fadeIn fast">
+                        <div class="row viewChoice mb-5 animated fadeIn fast">
+                            <div class="col-12">
+                                <div class="float-left">
+                                    <div class="btn-group btn-group-toggle" role="group" aria-label="Button group with nested dropdown">
+                                        <button type="button" class="tableView btn btn-secondary active waves-effect"><i class="fas fa-table mr-1"></i>Table View</button>
+                                        <button type="button" class="chartView btn btn-secondary waves-effect"><i class="fas fa-chart-area mr-1"></i>Chart View</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @include('Reports.charts')
+                        <div class="row mt-5 rowDisabledTugboats animated fadeIn fast">
                             <div class="col-12">
                                 <table class="detailedTable table table-striped text-center border-primary" style="width:100%">
                                     <thead class="bg-primary">
@@ -75,7 +86,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="row mt-3 rowJobOrderReport animated fadeIn fast">
+                        <div class="row mt-5 rowJobOrderReport animated fadeIn fast">
                             <div class="col-12">
                                 <table class="detailedTable table table-striped border-primary" style="width:100%">
                                     <thead class="bg-primary">
@@ -139,7 +150,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="row mt-3 rowSalesReport animated fadeIn fast">
+                        <div class="row mt-5 rowSalesReport animated fadeIn fast">
                             <div class="col-12">
                                 <table class="detailedTable table table-striped text-center border-primary" style="width:100%">
                                     <thead class="bg-primary">
@@ -171,7 +182,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="row mt-3 rowSOA animated fadeIn fast">
+                        <div class="row mt-5 rowSOA animated fadeIn fast">
                             <div class="col-12">
                                 <table class="detailedTable table table-striped text-center border-primary" style="width:100%">
                                     <thead class="bg-primary">
@@ -215,7 +226,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="row mt-3 rowServiceReport animated fadeIn fast">
+                        <div class="row mt-5 rowServiceReport animated fadeIn fast">
                             <div class="col-12">
                                 <table class="detailedTable table table-striped text-center border-primary" style="width:100%">
                                     <thead class="bg-primary">

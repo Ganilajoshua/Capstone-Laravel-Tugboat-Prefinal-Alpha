@@ -1,6 +1,6 @@
 
 <div class="detLayout mt-3">
-    <table class="detailedTable table table-striped fadeIn animated" style="width:100%">
+    <table class="detailedTable table table-hover fadeIn animated" style="width:100%">
         <thead class="bg-primary">
             <tr>
                 <th class="text-center">Classification Number</th>

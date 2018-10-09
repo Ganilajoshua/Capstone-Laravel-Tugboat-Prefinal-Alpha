@@ -10,6 +10,7 @@ use App\Tugboat;
 use App\TugboatMainSpecifications;
 use App\TeamAssignment;
 use App\JobOrder;
+use App\JoborderForwardRequests;
 use App\JobSchedule;
 use App\Schedules;
 use Redirect;
@@ -51,28 +52,48 @@ class TugboatAssignmentController extends Controller
         ->leftjoin('tbljobsched as sched','sched.intJSJobOrderID','joborder.intJobOrderID')
         ->join('tblcompany as company','company.intCompanyID','joborder.intJOCompanyID')
         ->where('joborder.enumStatus','Scheduled')
-        ->where('sched.intJobSchedID',null)
+        // ->where('joborder.enumStatus','Scheduled')
+        ->where('sched.intJobSchedID',null) 
         ->get();
-        $noftugboat = DB::table('tbljoborder as joborder')
+        // $noftugboat = DB::table('tbljoborder as joborder')
+        // ->get();
+        $noftugboat = DB::table('tbljoborderforwardrequests as requests')
+        ->join('tbljoborder as joborder','requests.intJOFRJobOrderID','joborder.intJobOrderID')
         ->leftjoin('tbljobsched as sched','sched.intJSJobOrderID','joborder.intJobOrderID')
         ->join('tblcompany as company','company.intCompanyID','joborder.intJOCompanyID')
-        ->where('joborder.enumStatus','Forward Scheduled')
         ->where('sched.intJobSchedID',null)
+        ->where('requests.enumStatus','Scheduled')
+        // ->leftjoin('tbljobsched as sched','sched.intJSJobOrderID','joborder.intJobOrderID')
         ->get();
+
+        // = DB::table('tbljoborder as joborder')
+        // ->leftjoin('tbljobsched as sched','sched.intJSJobOrderID','joborder.intJobOrderID')
+        // ->join('tbljoborderforwardrequests as requests','requests.intJOFRJobOrderID','joborder.intJobOrderID')
+        // ->join('tblcompany as company','company.intCompanyID','joborder.intJOCompanyID')
+        // ->where('requests.enumStatus','Scheduled')
+        // ->where('sched.intJobSchedID',null)
+        // ->get();
         $joborder = DB::table('tbljobsched as sched')
         ->join('tbljoborder as joborder','sched.intJSJobOrderID','joborder.intJobOrderID')
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
         ->where('sched.intJSTugboatAssignID', null)
         ->get();
         // $jobschedule = JobOrder::where('enumStatus','Ready')->get();
-        $jobschedule = DB::table('tbljoborder as joborder','sched.intJSJobOrderID','joborder.intJobOrderID')
+        $jobschedule = DB::table('tbljoborder as joborder')
+        ->join('tbljobsched as sched','sched.intJSJobOrderID','joborder.intJobOrderID')
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-        // ->select('joborder.')
         ->where('joborder.enumStatus','Ready')
         ->get(); 
+        $jobschedulef = DB::table('tbljoborder as joborder')
+        ->join('tbljobsched as sched','sched.intJSJobOrderID','joborder.intJobOrderID')
+        ->join('tbljoborderforwardrequests as requests','joborder.intJobOrderID','requests.intJOFRJobOrderID')
+        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->where('requests.enumStatus','Ready')
+        ->groupBy('requests.intJOFRJobOrderID')
+        ->get(); 
         return view('TugboatAssignment.index',
-        compact('tugboat','available','joborder','scheduledjob','jobschedule','notugboat','noftugboat'));
-        // return response()->json([$notugboat]);
+        compact('tugboat','available','joborder','scheduledjob','jobschedule','notugboat','noftugboat','jobschedulef'));
+        // return response()->json([$jobschedulef]);
     }
 
     /**
@@ -85,16 +106,21 @@ class TugboatAssignmentController extends Controller
     {
         try{
             DB::beginTransaction();
-            $joborder = JobOrder::findOrFail($request->jobOrderID);
-            $jobID = $joborder->intJobOrderID;
-            
-            $joborder->timestamps = false;
             if(Auth::user()->enumUserType == 'Admin'){
+                $joborder = JobOrder::findOrFail($request->jobOrderID);
+                $jobID = $joborder->intJobOrderID;    
+                $joborder->timestamps = false;
                 $joborder->enumStatus = 'Ready';
+                $joborder->save();
             }elseif(Auth::user()->enumUserType == 'Affiliates'){
-                $joborder->enumStatus = 'Forward Ready';
+                $joborder = JobOrder::findOrFail($request->jobOrderID);
+                $getjoborder = JoborderForwardRequests::where('intJOFRJobOrderID',$request->jobOrderID)->get();
+                $joborders = JoborderForwardRequests::findOrFail($getjoborder[0]->intJOForwardRequestsID);
+                $jobID = $getjoborder[0]->intJOFRJobOrderID; 
+                $joborders->timestamps = false;
+                $joborders->enumStatus = 'Ready';
+                $joborders->save();
             }
-            $joborder->save();
     
             $scheduleID = Schedules::max('intScheduleID') + 1 ;
             $schedID = $scheduleID;     
