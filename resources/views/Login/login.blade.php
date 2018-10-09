@@ -29,7 +29,7 @@
                                 </a>
                             </div>
                             <div class="card card-primary">
-                                <div class="card-header">
+                                <div class="card-header bg-primary text-white">
                                     <h4>Log-in</h4>
                                 </div>
                                 <div class="card-body">

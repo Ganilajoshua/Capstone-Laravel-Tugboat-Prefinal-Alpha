@@ -45,13 +45,14 @@ $(document).ready(function(){
       
         var ctxDTReport = document.getElementById("disabledTugboatChart").getContext('2d');
         var disabledTugboatChart = new Chart(ctxDTReport, {
-            type: 'line',
+            type: 'bar',
             data: {
             labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
             datasets: [{
                 label: 'DISABLED TUGBOAT TO',
                 data: [460, 458, 330, 502, 430, 610, 488],
                 borderWidth: 2,
+                backgroundColor: 'rgb(87,75,144)',
                 borderColor: 'rgb(87,75,144)',
                 borderWidth: 2.5,
                 pointBackgroundColor: '#ffffff',
@@ -61,6 +62,7 @@ $(document).ready(function(){
                 label: 'MT Energy Star',
                 data: [1000, 200, 300, 200, 150, 25, 700],
                 borderWidth: 2,
+                backgroundColor: 'rgb(61, 199, 190)',
                 borderColor: 'rgb(61, 199, 190)',
                 borderWidth: 2.5,
                 pointBackgroundColor: '#ffffff',
