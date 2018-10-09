@@ -31,7 +31,7 @@
                                 </a>
                             </div>
                             <div class="card card-primary">
-                                <div class="card-header">
+                                <div class="card-header bg-primary text-white">
                                     <span class="float-left">
                                         <h4>Register</h4>
                                     </span>
