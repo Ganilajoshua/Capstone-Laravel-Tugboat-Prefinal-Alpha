@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use PDF;
 
 class ReportsController extends Controller
 {
@@ -81,5 +82,30 @@ class ReportsController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function printPDF1()
+    {
+        $pdf = PDF::loadView('Reports.disabledTReportPDF');
+        return $pdf->download('disabledtugboatreport.pdf');
+    }
+    public function printPDF2()
+    {
+        $pdf = PDF::loadView('Reports.jobOrderReportPDF');
+        return $pdf->download('jobOrderReport.pdf');
+    }
+    public function printPDF3()
+    {
+        $pdf = PDF::loadView('Reports.salesReportPDF');
+        return $pdf->download('salesReport.pdf');
+    }
+    public function printPDF4()
+    {
+        $pdf = PDF::loadView('Reports.soaPDF');
+        return $pdf->download('soa.pdf');
+    }
+    public function printPDF5()
+    {
+        $pdf = PDF::loadView('Reports.serviceReportPDF');
+        return $pdf->download('serviceReport.pdf');
     }
 }

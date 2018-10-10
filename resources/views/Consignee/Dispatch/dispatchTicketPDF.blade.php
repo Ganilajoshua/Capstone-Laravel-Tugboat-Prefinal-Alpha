@@ -1,4 +1,5 @@
-\<div class="row">
+
+<div class="row">
     <div class="col-12 col-sm-4 col-lg-4">
         <h5 class="mb-2">From</h5>
         <div class="mb-1 font-weight-bold">
