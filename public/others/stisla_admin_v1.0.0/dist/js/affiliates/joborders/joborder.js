@@ -1,14 +1,14 @@
-var url = '/administrator/transactions/dispatchandhauling/joborders';
+var url = '/affiliates/transactions/dispatchandhauling/joborders';
 
 $(document).ready(function(){
     $('#transactionTree').addClass('active');
     $('#tDispatch').addClass('active');
-    $('#menuTugboatAssignment').addClass('inactive');
-    $('#menuJobOrder').addClass('active');
-    $('#menuForwardReq').addClass('inactive');
-    $('#menuTeamBuilder').addClass('inactive');
-    $('#menuScheduling').addClass('inactive');
-    $('#menuHauling').addClass('inactive');
+    $('.menuTugboatAssignment').addClass('inactive');
+    $('.menuJobOrder').addClass('active');
+    $('.menuForwardReq').addClass('inactive');
+    $('.menuTeamBuilder').addClass('inactive');
+    $('.menuScheduling').addClass('inactive');
+    $('.menuHauling').addClass('inactive');
 
     $.ajaxSetup({
         headers: {
@@ -18,11 +18,14 @@ $(document).ready(function(){
 
 });
 
+// View Joborder Details
 $('.joborderMoreInfoButton').on('click',function(event){
     event.preventDefault();
     console.log($(this).data('id'));
     var id = $(this).data('id');
 
+    var sLocation;
+    var dLocation;
     // return false;
     $.ajax({
         url : `${url}/${id}/viewdetails`,
@@ -32,8 +35,9 @@ $('.joborderMoreInfoButton').on('click',function(event){
             console.log(data);
             $('.joborderinfo').empty();
             $('.joborderheader').empty();
+
             getServiceType(data.joborder);
-            console.log(data);       
+            
             $('#moreInfoModal').modal('show');
         },
         error : (error)=>{
@@ -45,13 +49,14 @@ $('.joborderMoreInfoButton').on('click',function(event){
 
 //Accept Job Order
 $('.acceptJoborder').on('click',function(){
-    console.log('HI ',$(this).data('id'));
     var acceptID = $(this).data('id');
+    console.log(acceptID);
     $.ajax({
-        url : `${url}/${acceptID}/acceptjoborder`,
+        url : url + '/' + acceptID + '/accept',
         type : 'GET',
         dataType : 'JSON',
         success : function(data, response){
+            console.log(data);
             swal({
                 title: "Success",
                 text: `Job Order # ${data.joborder.intJobOrderID} Accepted`,
@@ -65,8 +70,6 @@ $('.acceptJoborder').on('click',function(){
                     location.reload();
                 }
             });
-            // toastr.success('Accepted!','Job Order #'+ data.joborder.intJobOrderID,{ closeButton: true, preventDuplicates: true });
-            // setTimeout(function(){window.location = url},2500);   
         },
         error : function(error){
             throw error;
@@ -74,27 +77,17 @@ $('.acceptJoborder').on('click',function(){
     });
 });
 
+
+
 //View Forward Request Modal
 $('.forwardJoborder').on('click',function(){
     console.log('Hi CacaOOOOOOO');
     console.log($(this).data('id'));
     var joborderID = $(this).data('id');
     console.log(joborderID);
-    swal({
-        title: "Are You Sure?",
-        text: "Forward This Job Order?",
-        type: "info",
-        showCancelButton: true,
-        confirmButtonClass: "btn-info",
-        confirmButtonText: "Ok",
-        closeOnConfirm: true,
-    },(isConfirm)=>{
-        if(isConfirm){
-            $('.forwardRequestButton').data('id',joborderID);
-            $('#forwardModal').modal('show');
-        }
-    });
+    $('.forwardRequestButton').data('id',joborderID);
 });
+
 
 function forwardRequest(forwardID){
     console.log(forwardID);
@@ -188,14 +181,13 @@ function forwardRequest(forwardID){
         }
     });
 }
-
-//Forward Job Order Submit Button
+//Forward Job Order
 $('.forwardRequestButton').on('click',function(){
     var id = $(this).data('id');
     var company = $('#selectCompany').val();
     var details = $('#exDetails').val();
 
-    console.log(id, company, details, 'Kikyaw Kachooow');
+    console.log(id, company, details, 'Kikyaw');
     // return false;
     $.ajax({
         url : `${url}/forward`,
@@ -291,10 +283,48 @@ function forwardJobOrder()
     
 }
 //Decline Job Order
-function declineJobOrder()
-{
-
-}
+$('.declineJoborder').on('click',function(){
+    console.log($(this).data('id'));
+    var joborderID = $(this).data('id');
+    swal({
+        title: "Are You Sure?",
+        text: "Decline This Job Order?",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonClass: "btn-info",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true,
+    },(isConfirm)=>{
+        if(isConfirm){
+            $.ajax({
+                url : `${url}/${joborderID}/decline`,
+                type : 'GET',
+                dataType : 'JSON', 
+                success : (data)=>{
+                    console.log('success pota');
+                    console.log(data);
+                    swal({
+                        title: "Success",
+                        text: "Job Order Succesfully Declined",
+                        type: "success",
+                        showCancelButton: false,
+                        confirmButtonClass: "btn-success",
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: true,
+                    },(isConfirm)=>{
+                        if(isConfirm){
+                            location.reload();
+                        }
+                    });  
+                                  
+                },
+                error : (error)=>{
+                    throw error;
+                }
+            });
+        }
+    });
+});
 //Create Job Schedule
 function createJobsched(id){
     console.log(id);

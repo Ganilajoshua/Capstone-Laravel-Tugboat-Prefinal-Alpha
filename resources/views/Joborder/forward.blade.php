@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg" style="max-width: 68%;"role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="forwardModalLabel">Forward Team</h5>
+                <h5 class="modal-title" id="forwardModalLabel">Forward Job Order</h5>
                 <button type="button" class="close modalClose" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

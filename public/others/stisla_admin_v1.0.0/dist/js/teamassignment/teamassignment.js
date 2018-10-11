@@ -54,6 +54,73 @@ $(document).ready(function(){
         }
     });
 });
+$('.backButton').on('click',function(){
+    $('.teamAssignment').css('display','block');
+    $('.teamAssignment').addClass('animated fadeIn');
+    $('.assignTeamCard').css('display','none');
+});
+
+$('.assignTeam').on('click',function(){
+    console.log($(this).data('id'));
+    var joborderID = $(this).data('id')
+    $.ajax({
+        url : `${url}/${joborderID}/getjoborder`,
+        type : 'GET',
+        dataType : 'JSON',
+        success : (data,response)=>{
+            console.log(data);
+            var location = getLocation(data.joborder);
+            appendTugboatTeamDefaults(data.jobsched);
+            appendJoborderHeader(data.joborder);
+            appendJoborderBody(data.joborder,location);
+            appendJoborderTeams(data.jobsched,data.teams);
+            $('.assignDefaultTeams').data('id',`${data.jobsched[0].intJSJobOrderID}`);
+            $('.teamAssignment').css('display','none');
+            $('.assignTeamCard').css('display','block');
+            // $('.assignTeamCard').addClass('animated fadeIn');
+        },error : (error)=>{
+            throw error;
+        }
+    })
+});
+
+$('.viewDefaultTeamsButton').on('click',function(event){
+    event.preventDefault();
+    console.log('Hey');
+    console.log($(this).data('id'));
+});
+
+$('.assignDefaultTeams').on('click',function(){
+    console.log('HI');
+    console.log($(this).data('id'));
+    var joborderID = $(this).data('id');
+    swal({
+        title: "Are you Sure?",
+        text: "Assign The Default Teams",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonClass: "btn-info waves-effect",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true
+    },(isConfirm)=>{
+        if(isConfirm){
+            console.log('heyyyyyaaaa');
+            $('#defaultTeamsModal').modal('show');
+            $.ajax({
+                url : `${url}/${joborderID}/showdefaultteams`,
+                type : 'GET',
+                dataType : 'JSON',
+                success : (data,response)=>{
+                    console.log(data);
+                },
+                error : (error)=>{
+                    throw error;    
+                }
+            });
+        }
+    });
+});
+
 $('.addNewTeamButton').on('click',function(){
     $.ajax({
         url : `${url}/getteamcompositions`,

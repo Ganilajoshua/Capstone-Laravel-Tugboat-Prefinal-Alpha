@@ -5,7 +5,7 @@ namespace App\Http\Controllers\AffiliatesControllers;
 use Illuminate\Http\Request;
 use Illuminate\Response;
 use Illuminate\Http\JsonResponse;
-
+use Illuminate\Supports\Facades\View;
 use App\Http\Controllers\Controller;
 
 use App\Company;
@@ -49,6 +49,18 @@ class JobOrderController extends Controller
         return view('Affiliates.JobOrders.index',compact('forwardrequest','forwarda','forwarded'));
     }
 
+    public function accepted(){
+        $accepted = DB::table('tbljoborderforwardrequests as requests')
+        ->join('tbljoborder as joborder','requests.intJOFRJobOrderID','joborder.intJobOrderID')
+        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->where('requests.enumStatus','Accepted')
+        ->get();
+
+        return view('Affiliates.JobOrders.accepted',compact('accepted'));
+    }
+    public function declined(){
+
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -67,7 +79,7 @@ class JobOrderController extends Controller
      */
     public function store(Request $request)
     {
-        $job = JobOrderForwardRequests::findOrFail($request->joborderID);
+        $job = JoborderForwardRequests::findOrFail($request->joborderID);
         $job->timestamps = false;
         $job->enumStatus = 'Scheduled';
         $job->save();
@@ -127,17 +139,20 @@ class JobOrderController extends Controller
         $job = JobOrder::findOrFail($joborder->intJOFRJobOrderID);
         return response()->json(['joborder'=>$job]);
     }
-    public function viewdetails($intJobOrderID){
-        // Find The Job Order First 
-        $job = JobOrder::findOrFail($intJobOrderID);
 
+    public function viewdetails($intJobOrderID){
+        // Find The Job Order First in Forwarded JobOrders
+        $jobforward = JoborderForwardRequests::findOrFail($intJobOrderID);
+        // Find The Original Job Order
+        $job = JobOrder::findOrFail($jobforward->intJOFRJobOrderID);
+        
         // Compare if the BerthID is Null and if It is Not
         if($job->enumServiceType == 'Hauling'){
             if($job->intJOBerthID == null){
                 $joborder = DB::table('tbljoborder as joborder')
                 ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
                 ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-                ->where('joborder.intJobOrderID',$intJobOrderID)
+                ->where('joborder.intJobOrderID',$job->intJobOrderID)
                 ->get();
             }else{
                 $joborder = DB::table('tbljoborder as joborder')
@@ -145,19 +160,27 @@ class JobOrderController extends Controller
                 ->join('tblpier as pier','berth.intBPierID','intPierID')
                 ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
                 ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-                ->where('joborder.intJobOrderID',$intJobOrderID)
+                ->where('joborder.intJobOrderID',$job->intJobOrderID)
                 ->get();
             }
         }else if($job->enumServiceType == 'Tug Assist'){
             $joborder = DB::table('tbljoborder as joborder')
             ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
             ->join('tblpier as pier','berth.intBPierID','intPierID')
-            // ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
             ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-            ->where('joborder.intJobOrderID',$intJobOrderID)
+            ->where('joborder.intJobOrderID',$job->intJobOrderID)
             ->get();   
         }
 
         return response()->json(['joborder'=>$joborder]);   
+    }
+
+    public function decline($intJobOrderID){
+        $joborder = JoborderForwardRequests::findOrFail($intJobOrderID);
+        $joborder->timestamps = false;
+        $joborder->enumStatus = 'Declined';
+        $joborder->save();
+
+        return response()->json(['joborder'=>$joborder]);
     }
 }

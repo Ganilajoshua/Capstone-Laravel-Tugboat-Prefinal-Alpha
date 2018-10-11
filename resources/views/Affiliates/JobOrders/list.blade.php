@@ -55,7 +55,7 @@
                                             <h5>{{$forwarda->strCompanyName}}</h5>
                                         </div>
                                         <div class="card-footer mt-2">
-                                            <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
+                                            <a href="#" class="joborderMoreInfoButton" data-id="{{$forwarda->intJOForwardRequestsID}}">More Info <i class="ion ion-ios-arrow-right"></i></a>
                                             <button class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect" data-toggle="modal" data-target="#forwardModal">Forward</button>
                                             <button onclick="createFJobsched({{$forwarda->intJOForwardRequestsID}})" class="btn btn-primary btn-sm text-center float-right waves-effect">Make Job Schedule</button>
                                         </div>
@@ -78,7 +78,7 @@
                                             <h5>{{$forwarded->strCompanyName}}</h5>
                                         </div>
                                         <div class="card-footer mt-2">
-                                            <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
+                                            <a href="#">More Info <i class="ion ion-ios-arrow-right"></i></a>
                                             <button class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect btnDeclineJO">Cancel</button>
                                             {{-- <button class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect" data-toggle="modal" data-target="#forwardModal">Forward</button>
                                             <button class="btn btn-primary btn-sm text-center float-right waves-effect btnAcceptJO">Accept</button> --}}
@@ -106,9 +106,9 @@
                                             <h6>{{$forwardrequest->strCompanyName}}</h6>
                                         </div>
                                         <div class="card-footer mt-2">
-                                            <a href="#" onclick="forwardRequest({{$forwardrequest->intJobOrderID}})" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
-                                            <button onclick="declineJobOrder({{$forwardrequest->intJobOrderID}})" class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect">Decline</button>
-                                            <button onclick="acceptJobOrder({{$forwardrequest->intJOForwardRequestsID}})" class="btn btn-primary btn-sm text-center float-right waves-effect">Accept</button>
+                                            <a href="#" class="joborderMoreInfoButton" data-id="{{$forwardrequest->intJOForwardRequestsID}}">More Info <i class="ion ion-ios-arrow-right"></i></a>
+                                            <button data-id="{{$forwardrequest->intJOForwardRequestsID}}" class="declineJoborder btn btn-danger btn-sm text-center float-right ml-2 waves-effect">Decline</button>
+                                            <button data-id="{{$forwardrequest->intJOForwardRequestsID}}" class="acceptJoborder btn btn-primary btn-sm text-center float-right waves-effect">Accept</button>
                                         </div>
                                     </div>
                                 </div>

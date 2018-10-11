@@ -3,12 +3,12 @@ var url = '/affiliates/transactions/dispatchandhauling/joborders';
 $(document).ready(function(){
     $('#transactionTree').addClass('active');
     $('#tDispatch').addClass('active');
-    $('#menuTugboatAssignment').addClass('inactive');
-    $('#menuJobOrder').addClass('active');
-    $('#menuForwardReq').addClass('inactive');
-    $('#menuTeamBuilder').addClass('inactive');
-    $('#menuScheduling').addClass('inactive');
-    $('#menuHauling').addClass('inactive');
+    $('.menuTugboatAssignment').addClass('inactive');
+    $('.menuJobOrder').addClass('active');
+    $('.menuForwardReq').addClass('inactive');
+    $('.menuTeamBuilder').addClass('inactive');
+    $('.menuScheduling').addClass('inactive');
+    $('.menuHauling').addClass('inactive');
 
     $.ajaxSetup({
         headers: {
