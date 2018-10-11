@@ -11,10 +11,12 @@
         <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css">
         <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/pace/pace-theme-flash.css">
         <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/css/demo.css">
+        <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/css/sweetalert.css">
         <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/css/style.css">
+        <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/css/register.css">
         <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/css/font.css">
         <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/modules/waves/waves.css">
-        <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/css/bootstrap-social.css">
+        <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/css/animate.min.css">
         <link rel="stylesheet" href="/others/stisla_admin_v1.0.0/dist/css/cssAll.css">
         <link rel="shortcut icon" href="/others/stisla_admin_v1.0.0/dist/img/tbLogo.png">
     </head>
@@ -35,104 +37,110 @@
                                     <h4>Register</h4>
                                 </div>
                                 <div class="card-body">
-                                    <form action="/consignee/register" method="POST">          
-                                        <div class="form-group">
-                                            <label for="companyname">Company Name</label>
-                                            <input id="companyname" type="text" class="form-control" name="companyname" autofocus>
+                                    <div class="row mb-3">
+                                        <div class="col-6">
+                                            <button class="btn btn-block btn-primary step1 active">Company Details <small>Step 1</small></button>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="address">Address</label>
-                                            <input id="address" type="text" class="form-control" name="address" autofocus>
+                                        <div class="col-6">
+                                            <button class="btn btn-block btn-primary step2" disabled>Account Details <small>Step 2</small></button>
                                         </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                        <label for="email">Email</label>
-                                                        <input id="email" type="email" class="form-control" name="email">
-                                                        <div class="invalid-feedback">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                                <strong> Fields with <sup class="text-white">&#10033;</sup> are required.</strong>
+                                                <button type="button" class="close text-white" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form action="/consignee/register" method="POST">
+                                        <div class="companyDet fadeIn ">
+                                            <div class="form-group">
+                                                <label for="companyname">Company Name<sup class="text-primary">&#10033;</sup></label>
+                                                <input id="companyname" type="text" class="form-control" name="companyname" autofocus>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="address">Address<sup class="text-primary">&#10033;</sup></label>
+                                                <input id="address" type="text" class="form-control" name="address" autofocus>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12 col-sm-12 col-lg-6">
+                                                    <div class="form-group">
+                                                        <h6 style="font-size:12px;">DTI Permit<sup class="text-primary">&#10033;</sup></h6>
+                                                        <div class="custom-file">
+                                                            <label class="custom-file-label" for="dtiPermit" id="dtiPermitLabel">DTI Permit</label>
+                                                            <input type="file" class="custom-file-input" accept='image/*' id="dtiPermit" onchange="ValidateSingleInput(this);">
                                                         </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-12 col-lg-6">
+                                                        <h6 style="font-size:12px;" class="text-center">Preview</h6>
+                                                    <div class="form-group">
+                                                        <img src="/others/stisla_admin_v1.0.0/dist/img/example-image.jpeg" class="img-thumbnail" id="dtiPermitPic">
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn-primary float-right waves-effect btnNext">Next    <i class="fas fa-arrow-right"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="accountDet fadeIn ">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                            <label for="email">Email<sup class="text-primary">&#10033;</sup></label>
+                                                            <input id="email" type="email" class="form-control" name="email">
+                                                            <div class="invalid-feedback">
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="username">Username<sup class="text-primary">&#10033;</sup></label>
+                                                        <input id="username" type="text" class="form-control" name="username">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="username">Username</label>
-                                                    <input id="username" type="text" class="form-control" name="username">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                            <label for="telnum">Telephone Number<sup class="text-primary">&#10033;</sup></label>
+                                                            <input id="telnum" type="number" class="form-control" name="telnum">
+                                                            <div class="invalid-feedback">
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group">
+                                                        <label for="mobilenum">Mobile Number<sup class="text-primary">&#10033;</sup></label>
+                                                        <input id="mobilenum" type="number" class="form-control" name="mobilenum">
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="form-group">
-                                                        <label for="telnum">Telephone Number</label>
-                                                        <input id="telnum" type="number" class="form-control" name="telnum">
-                                                        <div class="invalid-feedback">
-                                                        </div>
+                                            <div class="row">
+                                                <div class="form-group col-6">
+                                                    <label for="password" class="d-block">Password<sup class="text-primary">&#10033;</sup></label>
+                                                    <input id="password" type="password" class="form-control" name="password">
+                                                </div>
+                                                <div class="form-group col-6">
+                                                    <label for="password2" class="d-block">Password Confirmation<sup class="text-primary">&#10033;</sup></label>
+                                                    <input id="password2" type="password" class="form-control" name="password-confirm">
                                                 </div>
                                             </div>
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <label for="mobilenum">Mobile Number</label>
-                                                    <input id="mobilenum" type="number" class="form-control" name="mobilenum">
+                                            <div class="form-group">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" name="agree" class="custom-control-input" id="agree">
+                                                    <label class="custom-control-label" for="agree">I agree with the <a href="#">terms and conditions</a><sup class="text-primary">&#10033;</sup></label>
                                                 </div>
                                             </div>
+                                            <div class="form-group">
+                                                <button type="button" class="btn btn-primary float-left waves-effect btnBack"><i class="fas fa-arrow-left mr-2"></i>Back</button>
+                                                <button type="submit" class="btn btn-primary float-right waves-effect"><i class="far fa-circle mr-2"></i>Register</button>
+                                            </div>
+                                            {{ csrf_field() }}
                                         </div>
-                                        <div class="row">
-                                            <div class="form-group col-6">
-                                                <label for="password" class="d-block">Password</label>
-                                                <input id="password" type="password" class="form-control" name="password">
-                                            </div>
-                                            <div class="form-group col-6">
-                                                <label for="password2" class="d-block">Password Confirmation</label>
-                                                <input id="password2" type="password" class="form-control" name="password-confirm">
-                                            </div>
-                                        </div>
-
-                                        {{-- <div class="form-divider">
-                                            Your Home
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-6">
-                                                <label>Country</label>
-                                                <select class="form-control">
-                                                    <option>Indonesia</option>
-                                                    <option>Palestine</option>
-                                                    <option>Syria</option>
-                                                    <option>Malaysia</option>
-                                                    <option>Thailand</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group col-6">
-                                                <label>Province</label>
-                                                <select class="form-control">
-                                                    <option>West Java</option>
-                                                    <option>East Java</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="form-group col-6">
-                                                <label>City</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                            <div class="form-group col-6">
-                                                <label>Postal Code</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div> --}}
-
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" name="agree" class="custom-control-input" id="agree">
-                                                <label class="custom-control-label" for="agree">I agree with the terms and conditions</label>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-block waves-effect">
-                                                Register
-                                            </button>
-                                        </div>
-                                        {{ csrf_field() }}
                                     </form>
                                 </div>
                             </div>
@@ -159,8 +167,9 @@
         <script src="/others/stisla_admin_v1.0.0/dist/js/sa-functions.js"></script>
         <script src="/others/stisla_admin_v1.0.0/dist/modules/waves/waves.js"></script>
         <script src="/others/stisla_admin_v1.0.0/dist/js/scripts.js"></script>
-        <script src="/others/stisla_admin_v1.0.0/dist/js/custom.js"></script>
+        <script src="/others/stisla_admin_v1.0.0/dist/js/sweetalert.min.js"></script>
         <script src="/others/stisla_admin_v1.0.0/dist/js/demo.js"></script>
+        <script type="text/javascript" src="/others/stisla_admin_v1.0.0/dist/js/register/register.js"></script>
         <script src="/others/stisla_admin_v1.0.0/dist/modules/pace/pace.min.js"></script>
     </body>
 

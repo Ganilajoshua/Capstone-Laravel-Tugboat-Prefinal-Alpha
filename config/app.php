@@ -179,7 +179,10 @@ return [
         App\Providers\RouteServiceProvider::class,
         //Full Calendar Additions
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
-
+        // domPDF
+        Barryvdh\DomPDF\ServiceProvider::class,
+        // Snappy
+        Barryvdh\Snappy\ServiceProvider::class,
     ],
 
     /*
@@ -230,7 +233,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-
+        'PDF' =>  Barryvdh\DomPDF\Facade::class,
+        'PDF2' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
     ],
 
 ];

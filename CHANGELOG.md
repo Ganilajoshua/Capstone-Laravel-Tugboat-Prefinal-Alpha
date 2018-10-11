@@ -1,6 +1,10 @@
 # Changelog Capstone-Laravel-tugboat-dev-PreFinal α
 ### `Pre Final Repository Monday August 27,2018 v.1.0.0`
 
+### PDF Reports Generation
+- [x] Can now generate pdf reports
+    - initial pdf templates are added
+
 ### Administrator Reports Page Edited
 - [x] Added Changes views for reports
     - Table View & Chart View

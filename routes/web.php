@@ -255,6 +255,31 @@ Route::group(['prefix'=>'administrator/'],function(){
     //Reports Routes
     Route::group(['prefix'=>'reports/'],function(){
         Route::resource('/','ReportsController');
+        // Disabled Tugboat Report
+        Route::get('/disabledTReport', function(){
+            return view('Reports.disabledTReportPDF');
+        });
+        Route::get('/disabledTReport','ReportsController@printPDF1');
+        // Job Order Report
+        Route::get('/jobOrderReport', function(){
+            return view('Reports.jobOrderReportPDF');
+        });
+        Route::get('/jobOrderReport','ReportsController@printPDF2');
+        // Sales Report
+        Route::get('/salesReport', function(){
+            return view('Reports.salesReportPDF');
+        });
+        Route::get('/salesReport','ReportsController@printPDF3');
+        // SOA Report
+        Route::get('/soaReport', function(){
+            return view('Reports.soaPDF');
+        });
+        Route::get('/soaReport','ReportsController@printPDF4');
+        // Service Report
+        Route::get('/serviceReport', function(){
+            return view('Reports.serviceReportPDF');
+        });
+        Route::get('/serviceReport','ReportsController@printPDF5');
     });
     //Queries Routes
     Route::group(['prefix'=>'queries/'],function(){
