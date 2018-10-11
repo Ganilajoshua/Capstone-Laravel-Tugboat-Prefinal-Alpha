@@ -53,7 +53,6 @@
                                         </tr>
                                     </thead>  
                                     <tbody>
-<<<<<<< HEAD
                                 @if(count($mtugboat)>0)    
                                     @foreach($mtugboat as $mtugboat)
                                         <tr>
@@ -62,12 +61,6 @@
                                         </tr>
                                     @endforeach
                                 @endif
-=======
-                                        <tr>
-                                            <td>Energy Master</td>
-                                            <td>10</td>
-                                        </tr>
->>>>>>> 25900b2f885af6227a7322e1336a15b6fbfd4e01
                                     </tbody>
                                 </table>
                             </div>
@@ -82,7 +75,6 @@
                                         </tr>
                                     </thead>  
                                     <tbody>
-<<<<<<< HEAD
                                         @if(count($joborder)>0)    
                                             @foreach($joborder as $joborder)
                                                 <tr>
@@ -91,16 +83,6 @@
                                                 </tr>
                                             @endforeach
                                         @endif
-=======
-                                        <tr>
-                                            <td>Hauling Service</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tug Assist Service</td>
-                                            <td>5</td>
-                                        </tr>
->>>>>>> 25900b2f885af6227a7322e1336a15b6fbfd4e01
                                     </tbody>
                                 </table>
                             </div>
@@ -115,7 +97,6 @@
                                         </tr>
                                     </thead>  
                                     <tbody>
-<<<<<<< HEAD
                                             @if(count($cpending)>0)    
                                             @foreach($cpending as $cpending)
                                                 <tr>
@@ -124,12 +105,6 @@
                                                 </tr>
                                             @endforeach
                                         @endif
-=======
-                                        <tr>
-                                            <td>Akari</td>
-                                            <td>22000</td>
-                                        </tr>
->>>>>>> 25900b2f885af6227a7322e1336a15b6fbfd4e01
                                     </tbody>
                                 </table>
                             </div>
@@ -144,7 +119,6 @@
                                         </tr>
                                     </thead>  
                                     <tbody>
-<<<<<<< HEAD
                                             @if(count($activeconsignee)>0)    
                                             @foreach($activeconsignee as $activeconsignee)
                                                 <tr>
@@ -153,16 +127,6 @@
                                                 </tr>
                                             @endforeach
                                         @endif
-=======
-                                        <tr>
-                                            <td>Akari</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bootsy</td>
-                                            <td>5</td>
-                                        </tr>
->>>>>>> 25900b2f885af6227a7322e1336a15b6fbfd4e01
                                     </tbody>
                                 </table>
                             </div>
@@ -177,7 +141,6 @@
                                         </tr>
                                     </thead>  
                                     <tbody>
-<<<<<<< HEAD
                                         @if(count($renew)>0)    
                                             @foreach($renew as $renew)
                                                 <tr>
@@ -186,12 +149,6 @@
                                                 </tr>
                                             @endforeach
                                         @endif
-=======
-                                        <tr>
-                                            <td>Akari</td>
-                                            <td>2</td>
-                                        </tr>
->>>>>>> 25900b2f885af6227a7322e1336a15b6fbfd4e01
                                     </tbody>
                                 </table>
                             </div>
@@ -207,11 +164,7 @@
                                     </thead>  
                                     <tbody>
                                         <tr>
-<<<<<<< HEAD
                                             <td>None</td>
-=======
-                                            <td>Hi-Energy</td>
->>>>>>> 25900b2f885af6227a7322e1336a15b6fbfd4e01
                                             <td>10</td>
                                         </tr>
                                         <tr>
@@ -233,11 +186,7 @@
                                         </thead>  
                                         <tbody>
                                             <tr>
-<<<<<<< HEAD
                                                 <td>None</td>
-=======
-                                                <td>Hi-Energy</td>
->>>>>>> 25900b2f885af6227a7322e1336a15b6fbfd4e01
                                                 <td>10</td>
                                             </tr>
                                             <tr>
@@ -259,11 +208,7 @@
                                         </thead>  
                                         <tbody>
                                             <tr>
-<<<<<<< HEAD
                                                 <td>None</td>
-=======
-                                                <td>Hi-Energy</td>
->>>>>>> 25900b2f885af6227a7322e1336a15b6fbfd4e01
                                                 <td>10</td>
                                             </tr>
                                             <tr>
@@ -283,7 +228,6 @@
                                             <th>Consignee Name</th>
                                             <th>Service Type</th>
                                             <th class="noSortAction">Amount</th>
-<<<<<<< HEAD
                                         </tr>
                                     </thead>  
                                     <tbody>
@@ -297,29 +241,6 @@
                                                 </tr>
                                             @endforeach
                                         @endif
-=======
-                                            <th class="noSortAction">Mode of Payment</th>
-                                            <th>Reference #</th>
-                                        </tr>
-                                    </thead>  
-                                    <tbody>
-                                        <tr>
-                                            <td>10</td>
-                                            <td>Akari</td>
-                                            <td>Tug Assist</td>
-                                            <td class="text-success">20000</td>
-                                            <td>Cash</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>20</td>
-                                            <td>Bootsy</td>
-                                            <td>Hauling</td>
-                                            <td class="text-success">20000</td>
-                                            <td>Cheque</td>
-                                            <td><a href="#">011279466</a></td>
-                                        </tr>
->>>>>>> 25900b2f885af6227a7322e1336a15b6fbfd4e01
                                     </tbody>
                                 </table>
                             </div>
@@ -329,7 +250,6 @@
                                 <table class="detailedTable table table-striped text-center" style="width:100%">
                                     <thead class="bg-primary">
                                         <tr>
-<<<<<<< HEAD
                                             <th>Job Order #</th>
                                             <th>Consignee Name</th>
                                             <th>Service Type</th>
@@ -347,21 +267,6 @@
                                                 </tr>
                                             @endforeach
                                         @endif
-=======
-                                            <th>Service Name</th>
-                                            <th class="width40">Number of Job Orders Catered</th>
-                                        </tr>
-                                    </thead>  
-                                    <tbody>
-                                        <tr>
-                                            <td>Hauling Service</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tug Assist Service</td>
-                                            <td>5</td>
-                                        </tr>
->>>>>>> 25900b2f885af6227a7322e1336a15b6fbfd4e01
                                     </tbody>
                                 </table>
                             </div>
@@ -376,7 +281,6 @@
                                         </tr>
                                     </thead>  
                                     <tbody>
-<<<<<<< HEAD
                                         @if(count($balance)>0)    
                                             @foreach($balance as $balance)
                                                 <tr>
@@ -385,12 +289,6 @@
                                                 </tr>
                                             @endforeach
                                         @endif
-=======
-                                        <tr>
-                                            <td>Akari</td>
-                                            <td>1000</td>
-                                        </tr>
->>>>>>> 25900b2f885af6227a7322e1336a15b6fbfd4e01
                                     </tbody>
                                 </table>
                             </div>

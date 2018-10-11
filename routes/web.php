@@ -17,7 +17,7 @@
 Auth::routes();
 //must use this route prefixes to be more organized
 Route::group(['prefix'=>'administrator/'],function(){
-    Route::resource('/queries','QueriesController');
+    // Route::resource('/queries','QueriesController');
     Route::resource('/dashboard','AdminDashboardController');
         // Route::get('/register','LoginControllers\AdminLoginController@showRegister');
         // Route::post('/register','LoginControllers\AdminLoginController@register');
