@@ -20,7 +20,7 @@ class CDispatchTicketController extends Controller
     public function index()
     {   
         $dispatch = DB::table('tbljoborder as joborder')
-        ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
+        // ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
         ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
         ->join('tblpier as pier','berth.intBPierID','pier.intPierID')
         // ->join('tblbarge as barge','joborder.intJOBargeID','barge.intBargeID')
@@ -34,11 +34,55 @@ class CDispatchTicketController extends Controller
         ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
         ->where('company.intCompanyID',Auth::user()->intUCompanyID)
         ->where('dispatch.boolAApprovedby',1)
+        ->where('dispatch.boolCApprovedby',0)
         ->where('jobsched.enumstatus','Finished')
         ->get(); 
 
+        $dispatch2 = DB::table('tbljoborder as joborder')
+        // ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
+        ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
+        ->join('tblpier as pier','berth.intBPierID','pier.intPierID')
+        // ->join('tblbarge as barge','joborder.intJOBargeID','barge.intBargeID')
+        ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+        // ->join('tblvessel as vessel','joborder.intJOeVesselID','vessel.intVesselID')
+        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
+        ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
+        ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
+        ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->leftjoin('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
+        ->where('company.intCompanyID',Auth::user()->intUCompanyID)
+        ->where('dispatch.boolAApprovedby',1)
+        ->where('dispatch.boolCApprovedby',1)
+        ->where('jobsched.enumstatus','Finished')
+        ->where('invoice.intIDispatchTicketID',null)
+        ->get(); 
+
+        $dispatch3 = DB::table('tbljoborder as joborder')
+        // ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
+        ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
+        ->join('tblpier as pier','berth.intBPierID','pier.intPierID')
+        // ->join('tblbarge as barge','joborder.intJOBargeID','barge.intBargeID')
+        ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+        // ->join('tblvessel as vessel','joborder.intJOeVesselID','vessel.intVesselID')
+        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
+        ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
+        ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
+        ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
+        ->where('company.intCompanyID',Auth::user()->intUCompanyID)
+        ->where('dispatch.boolAApprovedby',1)
+        ->where('dispatch.boolCApprovedby',1)
+        ->where('jobsched.enumstatus','Finished')
+        ->where('invoice.intIDispatchTicketID','!=',null)
+        ->get(); 
         return view('Consignee.Dispatch.index')
-        ->with('accept',$dispatch);
+        ->with('accept',$dispatch)
+        ->with('dispatch2',$dispatch2)
+        ->with('dispatch3',$dispatch3);
     }
 
     /**
@@ -116,12 +160,9 @@ class CDispatchTicketController extends Controller
     public function info($intDispatchTicketID)
     {
         $Dispatch = DB::table('tbljoborder as joborder')
-        ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
         ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
         ->join('tblpier as pier','berth.intBPierID','pier.intPierID')
-        // ->join('tblbarge as barge','joborder.intJOBargeID','barge.intBargeID')
         ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
-        // ->join('tblvessel as vessel','joborder.intJOeVesselID','vessel.intVesselID')
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
         ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')

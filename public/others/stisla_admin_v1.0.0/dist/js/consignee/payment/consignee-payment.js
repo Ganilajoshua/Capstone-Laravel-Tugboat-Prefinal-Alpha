@@ -1,4 +1,3 @@
-var url = '/consignee/paymentbilling/payment';
 $(document).ready(function(){
     $('.btnApplySign').attr('disabled',true);
     $('.btnApplySign').css('cursor','not-allowed');
@@ -6,7 +5,7 @@ $(document).ready(function(){
     $('.cardCash').css('cursor','pointer');
     $('.breadTemplate').hide();
     $('#chequeDate').datetimepicker({
-      format: 'L'
+        format: 'L'
     });
     $(function() {
         var sig = $('.signChequeCanvas').signature();
@@ -64,40 +63,45 @@ $(document).ready(function(){
         $('.cashDetails').show();
     });
     // $('.btnBillInfo').on('click',function(e){
-    //     e.preventDefault();
-    //     $('#billInfoModal').modal('show');
-    // });
-    $('.btnChequeSign').on('click',function(e){
-        e.preventDefault();
-        $('#applyChequeSign').modal('show');
+        //     e.preventDefault();
+        //     $('#billInfoModal').modal('show');
+        // });
+        $('.btnChequeSign').on('click',function(e){
+            e.preventDefault();
+            $('#applyChequeSign').modal('show');
+        });
+        $('.modalClose').on('click',function(){
+            $('#billInfoModal').modal('hide');
+            $('#applyChequeSign').modal('hide');
+        });
     });
-    $('.modalClose').on('click',function(){
-        $('#billInfoModal').modal('hide');
-        $('#applyChequeSign').modal('hide');
-    });
-});
-
-
-function billinfo(id){
-    console.log('hi');
-    console.log(id); 
-
-    $.ajax({
-        url : '/consignee/paymentbilling/payment/' + id + '/info',
-        type : 'GET',
+    var url = '/consignee/paymentbilling/payment';
+    
+    
+    function billinfo(id){
+        console.log('hi');
+        console.log(id); 
+        
+        $.ajax({
+            url : '/consignee/paymentbilling/payment/' + id + '/info',
+            type : 'GET',
         dataType : 'JSON',
         aysnc : true,
         success : function(data){
             console.log('success', data);
-                $('#JOAmount').html(data.JOAmount);
-                $('#TBDelayFee').html(data.TBDelayFee);
-                $('#ViolationFee').html(data.ViolationFee);
-                $('#CLateFee').html(data.CLateFee);
-                $('#DamageFee').html(data.DamageFee);
-                $('#intBillID').html(data.intBillID);
-                $('#Total').html(data.Total);
-                $('#billInfoModal').modal('show');           
-                                }
+            var counter = (data.Results[0]);
+            
+            $('#amount').html(data.Results[0].fltJOAmount);
+            $('#delayfee').html(data.Results[0].fltTugboatDelayFee);
+            $('#conviolationfee').html(data.Results[0].fltConsigneeViolationFee);
+            $('#conlatefee').html(data.Results[0].fltConsigneeLateFee);
+            $('#condamagefee').html(data.Results[0].fltConsigneeDamageFee);
+            $('#comdamagefee').html(data.Results[0].fltCompanyDamageFee);
+            $('#comviolationfee').html(data.Results[0].fltCompanyViolationFee);
+            $('#discount').html(data.Results[0].intDiscount);
+            $('#total').html(data.Results[0].fltBalanceRemain);
+            $('#billInfoModal').modal('show');  
+        }
         });
   }
 

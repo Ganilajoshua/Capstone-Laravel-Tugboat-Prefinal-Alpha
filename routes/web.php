@@ -17,7 +17,7 @@
 Auth::routes();
 //must use this route prefixes to be more organized
 Route::group(['prefix'=>'administrator/'],function(){
-    
+    Route::resource('/queries','QueriesController');
     Route::resource('/dashboard','AdminDashboardController');
         // Route::get('/register','LoginControllers\AdminLoginController@showRegister');
         // Route::post('/register','LoginControllers\AdminLoginController@register');
@@ -101,7 +101,12 @@ Route::group(['prefix'=>'administrator/'],function(){
     //Transactions Routes
     Route::group(['prefix'=>'transactions/'],function(){
         //Transaction Resources
-        
+        Route::resource('/payment','PaymentController');
+        // Route::post('/payment/validate','PaymentController@validate');
+        Route::get('/payment/{intInvoiceID}/infopayment','PaymentController@infopayment');
+        Route::post('/payment/reject','PaymentController@reject');
+        Route::post('/payment/store','PaymentController@store');
+
         //Consignee Module
         Route::group(['prefix'=>'consignee/'],function(){
 
@@ -185,11 +190,14 @@ Route::group(['prefix'=>'administrator/'],function(){
         //Dispatch Ticket
         Route::resource('/dispatchticket','DispatchTicketController');
         Route::get('/dispatchticket','DispatchTicketController@index');
+        Route::get('/charges','DispatchTicketController@charges');
         Route::get('/dispatchticket/{intDispatchTicketID}/info','DispatchTicketController@info');
+        Route::get('/dispatchticket/{intDispatchTicketID}','DispatchTicketController@show');
         Route::post('/dispatchticket/AdminAccept','DispatchTicketController@AdminAccept');
         Route::post('/dispatchticket/Void','DispatchTicketController@Void');
         Route::post('/dispatchticket/store','DispatchTicketController@store');
         Route::post('/dispatchticket/finalize','DispatchTicketController@finalize');
+        Route::post('/dispatchticket/charges','DispatchTicketController@charges');
         //Scheduling
         Route::post('/scheduling/tugboatsavailable','SchedulingController@tugboatsavailable');
         
@@ -236,6 +244,7 @@ Route::group(['prefix'=>'consignee/'],function(){
     Route::group(['prefix'=>'paymentbilling/'],function(){
         Route::resource('/billing','ConsigneeControllers\CBillingController');
         Route::post('/billing/store','ConsigneeControllers\CBillingController@store');
+        Route::get('/billing/pending','ConsigneeControllers\CBillingController@pending');
         Route::resource('/payment','ConsigneeControllers\CPaymentController');
         Route::get('/payment/{intBillID}/info','ConsigneeControllers\CPaymentController@info');
         Route::post('/payment/store','ConsigneeControllers\CPaymentController@store');

@@ -11,7 +11,7 @@
                 <div class="col-12 col-sm-4 col-lg-4">
                     <h5 class="mb-2">From</h5>
                     <div class="mb-1 font-weight-bold">
-                        Tugmasters Bargepool INC.
+                        ek
                     </div>
                     <div class="mb-1">
                         404 San Fernando St.

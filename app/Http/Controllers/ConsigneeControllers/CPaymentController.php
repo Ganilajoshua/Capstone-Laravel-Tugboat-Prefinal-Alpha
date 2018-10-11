@@ -29,7 +29,7 @@ class CPaymentController extends Controller
     {
         $Bill = Bill::max('intBillID')+1;
         $dispatch = DB::table('tbljoborder as joborder')
-        ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
+        // ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
         ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
         ->join('tblpier as pier','berth.intBPierID','pier.intPierID')
         // ->join('tblbarge as barge','joborder.intJOBargeID','barge.intBargeID')
@@ -51,11 +51,24 @@ class CPaymentController extends Controller
         ->where('intIBillID',$Bill)
         ->sum('fltBalanceRemain');
 
+        // $Bill = Invoice::findOrFail($intBillID);
+        $Results = DB::table('tblinvoice as invoice')
+        ->join('tblcharges as charges','invoice.intInvoiceID','charges.intChargeID')
+        ->where('intIBillID',$Bill)
+        ->get();
+        $Counter = DB::table('tblinvoice as invoice')
+        ->select(DB::raw('count(intIBillID) as counter'))
+        ->join('tblcharges as charges','invoice.intInvoiceID','charges.intChargeID')
+        ->where('intIBillID',$Bill)
+        ->get();
+
         return view('Consignee.Payment.index')
         ->with('Bill',$Bill)
         ->with('dispatch',$dispatch)
         ->with('Company',$Company)
-        ->with('amount',$amount);
+        ->with('amount',$amount)
+        ->with('Counter',$Counter)
+        ->with('Results',$Results);
         
         // return response()->json(['dispatch'=>$dispatch, 'dispatch2'=>$dispatch2]);  
         
@@ -81,11 +94,11 @@ class CPaymentController extends Controller
     public function store(Request $request)
     {
         $Bill = new Bill;
-        error_log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
         error_log($request->BillID);
         $Bill->intBillID = $request->BillID;
         $Bill->intChequeID = $request->ChequeNum;
-        $Bill->dtPayment = Carbon::parse($request->ChequeDate)->format('Y/m/d');
+        $Bill->dtPayment = $request->ChequeDate;
+        // Carbon::parse($request->ChequeDate)->format('Y/m/d');
         $Bill->intABANum = $request->AbaNum;
         $Bill->intAmount = $request->ChequeAmount;
         $Bill->intRouteNum = $request->RouteNum;
@@ -146,37 +159,23 @@ class CPaymentController extends Controller
     public function info($intBillID)
     {
         $Bill = Invoice::findOrFail($intBillID);
-        $JOAmount = DB::table('tblinvoice as invoice')
+        $Results = DB::table('tblinvoice as invoice')
         ->join('tblcharges as charges','invoice.intInvoiceID','charges.intChargeID')
-        ->where('intIBillID',$intBillID)
-        ->sum('fltJOAmount');
-        $TBDelayFee = DB::table('tblinvoice as invoice')
-        ->join('tblcharges as charges','invoice.intInvoiceID','charges.intChargeID')
-        ->where('intIBillID',$intBillID)
-        ->sum('fltTugboatDelayFee');
-        $ViolationFee = DB::table('tblinvoice as invoice')
-        ->join('tblcharges as charges','invoice.intInvoiceID','charges.intChargeID')
-        ->where('intIBillID',$intBillID)
-        ->sum('fltViolationFee');
-        $CLateFee = DB::table('tblinvoice as invoice')
-        ->join('tblcharges as charges','invoice.intInvoiceID','charges.intChargeID')
-        ->where('intIBillID',$intBillID)
-        ->sum('fltConsigneeLateFee');
-        $DamageFee = DB::table('tblinvoice as invoice')
-        ->join('tblcharges as charges','invoice.intInvoiceID','charges.intChargeID')
-        ->where('intIBillID',$intBillID)
-        ->sum('fltDamageFee');
-        $Total = DB::table('tblinvoice as invoice')
-        ->join('tblcharges as charges','invoice.intInvoiceID','charges.intChargeID')
-        ->where('intIBillID',$intBillID)
-        ->sum('fltBalanceRemain');
-        return response()->json(['Bill'=>$Bill,
-        'JOAmount'=>$JOAmount,
-        'TBDelayFee'=>$TBDelayFee
-        ,'ViolationFee'=>$ViolationFee
-        ,'CLateFee'=>$CLateFee
-        ,'DamageFee'=>$DamageFee
-        ,'Total'=>$Total
-        ,'intBillID'=>$intBillID]);    
+        ->where('intChargeID',$intBillID)
+        ->get();
+        // $Counter = DB::table('tblinvoice as invoice')
+        // ->select(DB::raw('count(intIBillID) as counter'))
+        // ->join('tblcharges as charges','invoice.intInvoiceID','charges.intChargeID')
+        // ->where('intIBillID',$intBillID)
+        // ->get();
+
+        // $JOAmount = DB::table('tblinvoice as invoice')
+        // ->join('tblcharges as charges','invoice.intInvoiceID','charges.intChargeID')
+        // ->where('intIBillID',$intBillID)
+        // ->sum('fltJOAmount');
+
+        return response()->json(['Bill'=>$Bill, 
+        'Results'=>$Results]);    
+        
     }
 }

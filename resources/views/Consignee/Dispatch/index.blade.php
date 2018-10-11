@@ -17,12 +17,22 @@
 		</h1>
 		<div class="dispatchTicketTable zoomIn animated fast">
 			<div class="card card-primary">
-				<div class="card-header">
-						<h4> Dispatch Ticket List</h4> <small class="ml-1 smCat">
-								To be accepted
-							</small>
-					</div>
-				<div class="card-body">
+			<div class="card-header">
+				<ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" id="pendingDispatch-tab" data-toggle="pill" href="#pendingDispatch" role="tab" aria-controls="pendingDispatch" aria-selected="true">Pending Dispatch Ticket</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="signed-tab" data-toggle="pill" href="#signed" role="tab" aria-controls="signed" aria-selected="true">Signed Dispatch Ticket</a>
+					</li>
+					<li class="nav-item">
+							<a class="nav-link" id="doneDispatch-tab" data-toggle="pill" href="#doneDispatch" role="tab" aria-controls="doneDispatch" aria-selected="false">Finalized Dispatch Ticket</a>
+					</li>
+				</ul>
+			</div>
+		<div class="card-body">
+			<div class="tab-content" id="pills-tabContent">
+				<div class="tab-pane fade show active" id="pendingDispatch" role="tabpanel" aria-labelledby="pendingDispatch-tab">
 					<div class="table-responsive">
 						<table class="detailedTable text-center table table-striped" style="width:100%">
 							<thead class="bg-primary">
@@ -54,7 +64,7 @@
                                     </td>
 									<td>san kukunin?</td>
 									<td>
-                                        {{$accept->strServicesName}}
+                                        {{$accept->enumServiceType}}
                                     </td>
 									<td style="width:15%">
 										<span data-target="#infoModal">
@@ -80,7 +90,15 @@
 						</table>
 					</div>
 				</div>
+				<div class="tab-pane fade show" id="signed" role="tabpanel" aria-labelledby="signed-tab">
+					@include('Consignee.Dispatch.signed')
+				</div>
+				<div class="tab-pane fade show" id="doneDispatch" role="tabpanel" aria-labelledby="doneDispatch-tab">
+					@include('Consignee.Dispatch.finalized')
+				</div>
 			</div>
+		</div>
+	</div>
 		</div>
 		@include('Consignee.Dispatch.info')
     </section>

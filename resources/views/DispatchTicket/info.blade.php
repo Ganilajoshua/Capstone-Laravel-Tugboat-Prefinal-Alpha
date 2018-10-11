@@ -112,21 +112,55 @@
                     </div>
                 </div>
                 <div>
-                        <button id="Consignee" onclick="Void()" class="btn btn-primary waves-effect float-right" >Return</button>
+                        {{-- <button id="Consignee" onclick="Void()" class="btn btn-primary waves-effect float-right" >Return</button> --}}
                         <select name="" class="d-none" id="id">
                             <option id="dispatch3"></option>
                         </select>
                         <select name="" class="d-none" id="compid">
                                 <option id="company"></option>
                             </select>
+                        <div class="temp">
+
+                        </div>
                         <button id="forAdmin" onclick="ValidateAAccept()" class="btn btn-primary waves-effect float-left" >Submit to Consignee</button>
                         {{-- <button id="forConsignee" class="btnFinalizeDT btn btn-primary waves-effect float-right"> Consignee ACCEPT</button> --}}
                     </div>
         </div>
         <div class="card-footer">
             {{-- <button onclick="finalizeDispatch()" id="finalize" class="btnFinalizeDT btn btn-primary waves-effect float-right">Finalize Dispatch Ticket</button> --}}
-            <button onclick="finalize()" class="btnFinalizeDT btn btn-primary waves-effect float-right">Finalize Dispatch Ticket</button>
+            {{-- <button onclick="finalize()" class="btnFinalizeDT btn btn-primary waves-effect float-right">Finalize Dispatch Ticket</button> --}}
+            {{-- <button class="btnFinalizeDT finalize btn btn-primary waves-effect float-right">Finalize Dispatch Ticket</button> --}}
+            <button class="finalize btnFinalizeDT btn btn-primary waves-effect float-right">Dispatch Ticket</button>
+            
         </div>
     </div>
 </div>
 
+
+
+        <div class="temp">
+                
+        <script>
+            (function() {
+            'use strict';
+            window.addEventListener('load', function()
+            {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                else{
+                    return finalize(); 
+                }
+                form.classList.add('was-validated');
+            }, false);
+                });
+            }, false);
+                })();
+        </script>
+        </div>

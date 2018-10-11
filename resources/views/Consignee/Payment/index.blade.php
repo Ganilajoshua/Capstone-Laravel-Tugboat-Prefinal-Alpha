@@ -186,8 +186,18 @@
 										<th>Amount</th>
 									</thead>
 									<tbody class="text-black" >
-									<td class="tdBorderLeft"><a href="#" class="btnBillInfo" onclick="billinfo({{$Bill}})">{{$Bill}}</a></td>
-										<td>&#8369; {{$amount}}</td>
+							{{-- ekk --}}
+							@foreach ($dispatch as $dispatch)
+								<tr>
+									<td class="tdBorderLeft"><a href="#" class="btnBillInfo" onclick="billinfo({{$dispatch->intInvoiceID}})">{{$dispatch->intInvoiceID}}</a></td>
+									<td>&#8369; {{$dispatch->fltBalanceRemain}}</td>
+								</tr>
+							@endforeach
+								<tr>
+									<td class="tdBorderLeft ">Total</td>
+									<td>&#8369; {{$amount}}</td>
+								</tr>
+							{{-- ekk --}}	
 									</tbody>
 								</table>
 							</div>
