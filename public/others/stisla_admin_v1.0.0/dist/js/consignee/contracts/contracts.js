@@ -15,28 +15,81 @@ $(document).ready(function(){
     // yung data id nilagyan ko din ng comment sa blade
     
     //PS ikaw nalang magbago ulit ng UI thankies
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     var peso = ` &#8369; `;
     var percent = ` &#37;`;
     var activeContractID = $('#activeContract').data('id');
     var createdContractID = $('#createdContract').data('id');
+    // $.ajax({
+    //     url : url + '/' + activeContractID + '/show',
+    //     type : 'GET',
+    //     dataType : 'JSON',
+    //     async: true,
+    //     success : function(data){
+    //         $('#contractsID').val(data.contract[0].intContractListID);
+    //         console.log('aak');
+    //         console.log('standard ID :', data.contract[0].intCStandardID);
+    //         console.log('quotation ID : ', data.contract[0].intCQuotationID);
+    //         $('#contractDetails').html(data.contract[0].strContractListDesc);
+    //         $('#standardRate').html(peso + data.contract[0].fltStandardRate);
+    //         $('#tugboatDelayFee').html(peso + data.contract[0].fltQuotationTDelayFee);
+    //         $('#violationFee').html(peso + data.contract[0].fltQuotationViolationFee);
+    //         $('#consigneeLateFee').html(peso + data.contract[0].fltQuotationConsigneeLateFee);
+    //         $('#minDamageFee').html(peso + data.contract[0].fltMinDamageFee);
+    //         $('#maxDamageFee').html(peso + data.contract[0].fltMaxDamageFee);
+    //         $('#discount').html(data.contract[0].intDiscount + percent);
+    //     },
+    //     error : function(error){
+    //         throw error;
+    //     }
+    // });
+    // $.ajax({
+    //     url : url + '/' + createdContractID + '/show',
+    //     type : 'GET',
+    //     dataType : 'JSON',
+    //     async: true,
+    //     success : function(data){
+    //         $('#contractsID').val(data.contract[0].intContractListID);
+    //         console.log('pwet mo may rocket');
+    //         console.log('standard ID :', data.contract[0].intCStandardID);
+    //         console.log('quotation ID : ', data.contract[0].intCQuotationID);
+    //         $('#contractDetails').html(data.contract[0].strContractListDesc);
+    //         $('#standardRate').html(peso + data.contract[0].fltStandardRate);
+    //         $('#tugboatDelayFee').html(peso + data.contract[0].fltQuotationTDelayFee);
+    //         $('#violationFee').html(peso + data.contract[0].fltQuotationViolationFee);
+    //         $('#consigneeLateFee').html(peso + data.contract[0].fltQuotationConsigneeLateFee);
+    //         $('#minDamageFee').html(peso + data.contract[0].fltMinDamageFee);
+    //         $('#maxDamageFee').html(peso + data.contract[0].fltMaxDamageFee);
+    //         $('#discount').html(data.contract[0].intDiscount + percent);    
+    //     },
+    //     error : function(error){
+    //         throw error;
+    //     }
+    // });
+    // $('.signCanvas').mouseup(function(){
+    //     if ($('.signCanvas').signature('isEmpty')) {
+    //         $('.btnAcceptContract').attr('disabled', true);
+    //         $('.btnAcceptContract').css('cursor', 'not-allowed');
+    //       } else {
+    //         $('.btnAcceptContract').attr('disabled', false);
+    //         $('.btnAcceptContract').css('cursor', 'pointer');
+    //       }
+    // });
+});
+
+$('#quoteCustom').on('click',function(){
+    console.log('hey barbara');
     $.ajax({
-        url : url + '/' + activeContractID + '/show',
-        type : 'GET',
-        dataType : 'JSON',
-        async: true,
-        success : function(data){
-            $('#contractsID').val(data.contract[0].intContractListID);
-            console.log('aak');
-            console.log('standard ID :', data.contract[0].intCStandardID);
-            console.log('quotation ID : ', data.contract[0].intCQuotationID);
-            $('#contractDetails').html(data.contract[0].strContractListDesc);
-            $('#standardRate').html(peso + data.contract[0].fltStandardRate);
-            $('#tugboatDelayFee').html(peso + data.contract[0].fltQuotationTDelayFee);
-            $('#violationFee').html(peso + data.contract[0].fltQuotationViolationFee);
-            $('#consigneeLateFee').html(peso + data.contract[0].fltQuotationConsigneeLateFee);
-            $('#minDamageFee').html(peso + data.contract[0].fltMinDamageFee);
-            $('#maxDamageFee').html(peso + data.contract[0].fltMaxDamageFee);
-            $('#discount').html(data.contract[0].intDiscount + percent);
+        url : `${url}/getdefaultmatrix`,
+        type : 'POST',
+        data : {
+            "_token" : $('meta[name="csrf-token"]').attr('content'), 
         },
         error : function(error){
             throw error;
@@ -53,26 +106,17 @@ $(document).ready(function(){
             console.log('standard ID :', data.contract[0].intCStandardID);
             console.log('quotation ID : ', data.contract[0].intCQuotationID);
             $('#contractDetails').html(data.contract[0].strContractListDesc);
-            $('#standardRate').html(peso + data.contract[0].fltStandardRate);
-            $('#tugboatDelayFee').html(peso + data.contract[0].fltQuotationTDelayFee);
-            $('#violationFee').html(peso + data.contract[0].fltQuotationViolationFee);
-            $('#consigneeLateFee').html(peso + data.contract[0].fltQuotationConsigneeLateFee);
-            $('#minDamageFee').html(peso + data.contract[0].fltMinDamageFee);
-            $('#maxDamageFee').html(peso + data.contract[0].fltMaxDamageFee);
-            $('#discount').html(data.contract[0].intDiscount + percent);    
+            $('#standardRate').html(data.contract[0].fltStandardRate);
+            $('#tugboatDelayFee').html(data.contract[0].fltQuotationTDelayFee);
+            $('#violationFee').html(data.contract[0].fltQuotationViolationFee);
+            $('#consigneeLateFee').html(data.contract[0].fltQuotationConsigneeLateFee);
+            $('#minDamageFee').html(data.contract[0].fltMinDamageFee);
+            $('#maxDamageFee').html(data.contract[0].fltMaxDamageFee);
+            $('#discount').html(data.contract[0].intDiscount);    
         },
-        error : function(error){
+        error : (error)=>{
             throw error;
         }
-    });
-    $('.signCanvas').mouseup(function(){
-        if ($('.signCanvas').signature('isEmpty')) {
-            $('.btnAcceptContract').attr('disabled', true);
-            $('.btnAcceptContract').css('cursor', 'not-allowed');
-          } else {
-            $('.btnAcceptContract').attr('disabled', false);
-            $('.btnAcceptContract').css('cursor', 'pointer');
-          }
     });
 });
 
@@ -127,6 +171,7 @@ function requestContracts(companyID){
 }
 function requestForChanges(){
     var contractID = $('#contractsID').val();
+    $('#requestChangesModal').modal('hide');
     console.log(contractID);
     swal({
         title: "Request for Change?",
@@ -135,7 +180,8 @@ function requestForChanges(){
         showCancelButton: true,
         confirmButtonClass: "btn-info",
         confirmButtonText: "Ok",
-    },function(){
+    },function(isConfirm){
+        if(isConfirm){
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -173,6 +219,9 @@ function requestForChanges(){
                 }
     
             });
+        }else{
+            $('#requestChangesModal').modal('show');
+        }
     });
 }
 function showContract(showID){

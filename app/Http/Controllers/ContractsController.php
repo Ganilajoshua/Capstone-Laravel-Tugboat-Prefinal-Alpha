@@ -21,7 +21,6 @@ class ContractsController extends Controller
         $company = DB::table('tblcontractlist as contracts')
         ->join('tblcompany as company','contracts.intCCompanyID','company.intCompanyID')
         ->where('contracts.boolDeleted', 0)
-        ->where('contracts.intCTermsConditionID', !null)
         ->get();
         return view ('Contracts.index')->with('company',$company);
     }

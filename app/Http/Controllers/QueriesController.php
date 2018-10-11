@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+<<<<<<< HEAD
 use DB;
+=======
+
+>>>>>>> 25900b2f885af6227a7322e1336a15b6fbfd4e01
 class QueriesController extends Controller
 {
     /**
@@ -14,6 +18,7 @@ class QueriesController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         $mtugboat = DB::table('tbltugboatmain as m')
         ->select(array('m.strName', DB::raw('COUNT(j.intJobOrderID) as counter')))
         ->join('tbltugboat as t', 'm.intTugboatMainID', 't.intTTugboatMainID')
@@ -97,6 +102,9 @@ class QueriesController extends Controller
         ->with('cpaid',$cpaid)
         ->with('cunpaid',$cunpaid)
         ->with('joborder',$joborder);
+=======
+        return view('Queries.index');
+>>>>>>> 25900b2f885af6227a7322e1336a15b6fbfd4e01
     }
 
     /**

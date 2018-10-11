@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Position;
+
 use Auth;
+use DB;
 
 class TeamCompositionController extends Controller
 {
@@ -40,7 +42,7 @@ class TeamCompositionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -72,9 +74,22 @@ class TeamCompositionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        try{
+            DB::beginTransaction();
+            for($counter = 0; $counter < count($request->teamcompID); $counter++){
+                $teamcomp = Position::findOrFail($request->teamcompID[$counter]);
+                $teamcomp->timestamps = false;
+                $teamcomp->intPositionCompNum = $request->teamcompnumber[$counter];
+                $teamcomp->save();
+            }
+            DB::commit();
+        }catch(\Illuminate\Database\QueryException $errors){
+            DB::rollback();
+            $errorMessage = $errors->getMessage();
+            return Redirect::back()->withErrors($errorMessage);
+        }
     }
 
     /**

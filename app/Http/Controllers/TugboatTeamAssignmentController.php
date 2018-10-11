@@ -11,6 +11,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Carbon\Carbon;
 
 use App\Employees;
+use App\Position;
 use App\ForwardRequest;
 use App\Team;
 use App\TeamAssignment;
@@ -506,6 +507,10 @@ class TugboatTeamAssignmentController extends Controller
         ->get();
 
         return response()->json(['teamsreceived'=>$teamsreceived,'tugboatsreceived'=>$tugboatsreceived]);
+    }
+    public function getteamcompositions(Request $request){
+        $positions = Position::where('intPCompanyID',Auth::user()->intUCompanyID)->get();
+        return response()->json(['positions'=>$positions]);
     }
 
 }

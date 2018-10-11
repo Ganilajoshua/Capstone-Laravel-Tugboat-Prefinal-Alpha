@@ -1,3 +1,42 @@
+#weather li {
+  border: 2px #39065A solid !important;
+}
+.daterangepicker td.active, .daterangepicker td.active:hover {
+    background-color: #39065A !important;
+}
+.ranges li {
+	color: #574B90 !important;
+}
+.ranges li:hover {
+	background-color: #39065A !important;
+	border: 1px solid #39065A !important;
+	color: #fff !important; 
+}
+.ranges li.active {
+	background-color: rgb(32, 28, 56) !important;
+	border: 1px solid rgb(32, 28, 56) !important;
+	color: #fff !important; 
+}
+.select2-container--default .select2-results__option--highlighted[aria-selected]{
+	background-color:#39065A !important;
+    outline: none !important;
+}
+.select2-container--classic .select2-selection--single{
+	border:1px solid #39065A !important;
+    outline: none !important;
+}
+.select2-search--dropdown .select2-search__field{
+	border:1px solid #39065A !important;
+    outline: none !important;
+}
+.select2-container--classic.select2-container--open .select2-selection--single{
+	border:1px solid #39065A !important;
+    outline: none !important;
+}
+.select2-container--classic.select2-container--open .select2-dropdown{
+	border-color:#39065A !important;
+    outline: none !important;
+}
 .niceCountryInputMenuDropdownContent a:hover {
 	background-color: #39065A !important;
 }

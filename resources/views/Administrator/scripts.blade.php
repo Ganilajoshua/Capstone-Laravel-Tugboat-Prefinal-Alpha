@@ -1,1 +1,2 @@
 <script type="text/javascript" src="/others/stisla_admin_v1.0.0/dist/js/administrator/administrator.js"></script>
+<script type="text/javascript" src="/others/stisla_admin_v1.0.0/dist/js/jquery.simpleWeather.min.js"></script>

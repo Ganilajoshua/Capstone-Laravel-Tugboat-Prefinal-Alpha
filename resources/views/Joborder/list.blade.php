@@ -89,9 +89,13 @@
                                         </div>
                                         <div class="card-footer mt-2">
                                             <a href="#" data-id="{{$joborders->intJobOrderID}}" class="joborderMoreInfoButton" >More Info <i class="ion ion-ios-arrow-right"></i></a>
-                                            <button onclick="declineJobOrder({{$joborders->intJobOrderID}})" class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect">Decline</button>
-                                            <button onclick="forwardRequest({{$joborders->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect" data-toggle="modal" data-target="#forwardModal">Forward</button>
-                                            <button onclick="acceptJobOrder({{$joborders->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right waves-effect">Accept</button>
+                                            
+                                            <button data-id="{{$joborders->intJobOrderID}} "class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect declineJoborder">Decline</button> 
+                                            {{-- onclick="declineJobOrder({{$joborders->intJobOrderID}})" --}}
+                                            <button data-id="{{$joborders->intJobOrderID}} "class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect forwardJoborder" data-toggle="modal" data-target="#forwardModal">Forward</button>
+                                            {{-- onclick="forwardRequest({{$joborders->intJobOrderID}})" --}}
+                                            <button data-id="{{$joborders->intJobOrderID}}" onclick="acceptJobOrder({{$joborders->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right waves-effect acceptJoborder">Accept</button>
+                                            
                                         </div>
                                     </div>
                                 </div>

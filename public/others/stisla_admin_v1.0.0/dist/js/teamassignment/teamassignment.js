@@ -54,7 +54,24 @@ $(document).ready(function(){
         }
     });
 });
+$('.addNewTeamButton').on('click',function(){
+    $.ajax({
+        url : `${url}/getteamcompositions`,
+        type : 'POST',
+        data : {
+            "_token" : $('meta[name="csrf-token"]').attr('content')
+        },
+        success : (data,response)=>{
+            console.log(data);
+            appendTeamComposition(data.positions);
 
+            $('#addTeam').modal('show');
+        },
+        error : (error)=>{
+
+        }
+    });
+});
 var checkbox = $('.employeesCheckbox:checkbox');
 
 // // Return Tugboats
@@ -217,8 +234,7 @@ function submitTeam(){
     var chiefengineer = []; 
     var crew = [];
     $('.captCheckbox:checkbox:checked').each(function(checked){
-        captains[checked] = parseInt($(this).val());
-
+        captains[checked] = parseInt($(this).val());    
     });
     $('.chiefCheckbox:checkbox:checked').each(function(checked){
         chiefengineer[checked] = $(this).val();

@@ -28,7 +28,7 @@
                             <div class="container">
                                 <h5 class="section-header text-center" style="text-transform: uppercase;">
                                 Team List 
-                                <button class="float-right btn-sm btn btn-primary waves-effect" data-toggle="modal" data-target="#addTeam" data-tooltip="tooltip" title="Add New Team">
+                                <button class="float-right btn-sm btn btn-primary waves-effect addNewTeamButton" data-tooltip="tooltip" title="Add New Team">
                                   <i class="fas fa-plus"></i>
                                 </button>
                               </h5>

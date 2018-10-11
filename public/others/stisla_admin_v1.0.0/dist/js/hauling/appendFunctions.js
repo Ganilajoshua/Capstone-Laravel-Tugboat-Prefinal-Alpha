@@ -1,6 +1,11 @@
+
+
 var url = '/administrator/transactions/dispatchandhauling/hauling';
 function getLocation(joborders){
     console.log(joborders);
+    var sLocation = [];
+    var dLocation = [];
+
     if((joborders[0].intJOBerthID) == null){
         sLocation = joborders[0].strJOStartPoint;
         dLocation = joborders[0].strJODestination;
@@ -13,12 +18,11 @@ function getLocation(joborders){
         sLocation = joborders[0].strJOStartPoint;
         dLocation = `${joborders[0].strPierName} - ${joborders[0].strBerthName}`;
     }
-    var location = [
+    var locations = [
         {sLocation,dLocation}
     ];
-    // return sLocation;
-    // return dLocation;
-    return location;
+    console.log(locations);
+    return locations;
 }
 
 // Append Data To Header

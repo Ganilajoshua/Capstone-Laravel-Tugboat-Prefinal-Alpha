@@ -91,50 +91,58 @@ class JobOrdersController extends Controller
             $joborder->enumStatus = 'Created';
             $joborder->save();
             DB::commit();
-        }catch(\Illuminate\Database\QueryException $errors){
-            DB::rollback();
-            $errorMessage = $errors->getMessage();
-            return response()->json(['message'=>$errorMessage,'inputs'=>$request->all()]);
-            // return Redirect::back()->withErrors($errorMessage);
-        }
-        return response()->json(['joborder'=>'joborder','message']);
-    
-
-    }
-    public function haulingservice(Request $request){
-        try{
-            DB::beginTransaction();
-            $joborder = new JobOrder;
-            $joborder->strJOTitle = $request->title;
-            $joborder->strJODesc = $request->details;
-            $joborder->intJOCompanyID = Auth::user()->intUCompanyID;
-            $joborder->datStartDate = Carbon::parse($request->startDate)->format('Y/m/d');
-            $joborder->datEndDate = Carbon::parse($request->EndDate)->format('Y/m/d');
-            $joborder->tmStart = Carbon::parse($request->startTime);
-            $joborder->tmEnd = Carbon::parse($request->endTime);
-            $joborder->intJOGoodsID = $request->goods;
-            if(!empty($request->berth)){
-                $joborder->intJOBerthID = $request->berth;
-            }
-            if(!empty($request->sLocation)){
-                $joborder->strJOStartPoint = $request->sLocation;
-            }
-            if(!empty($request->dLocation)){
-                $joborder->strJODestination = $request->dLocation;
-            }
-            $joborder->strJOVesselName = $request->vesselName;
-            // $joborder->intJOVesselTypeID = $request->vesselType;
-            $joborder->fltWeight = $request->vesselWeight;
-            $joborder->enumServiceType = $request->serviceType;
-            $joborder->enumStatus = 'Created';
-            $joborder->save();
-            DB::commit();
             return response()->json(['joborder'=>$joborder]);
         }catch(\Illuminate\Database\QueryException $errors){
             DB::rollback();
             $errorMessage = $errors->getMessage();
             return response()->json(['message'=>$errorMessage,'inputs'=>$request->all()]);
             // return Redirect::back()->withErrors($errorMessage);
+        }
+    
+
+    }
+    public function haulingservice(Request $request){
+        $id = JobOrder::max('intJobOrderID');
+        if(count($request->all()) == null){
+            return response()->json([],204);
+        }else{
+            try{
+                DB::beginTransaction();
+                $joborder = new JobOrder;
+                $joborder->strJOTitle = $request->title;
+                $joborder->strJODesc = $request->details;
+                $joborder->intJOCompanyID = Auth::user()->intUCompanyID;
+                $joborder->datStartDate = Carbon::parse($request->startDate)->format('Y/m/d');
+                $joborder->datEndDate = Carbon::parse($request->endDate)->format('Y/m/d');
+                $joborder->tmStart = Carbon::parse($request->startTime);
+                $joborder->tmEnd = Carbon::parse($request->endTime);
+                $joborder->intJOGoodsID = $request->goods;
+                if(!empty($request->berth)){
+                    $joborder->intJOBerthID = $request->berth;
+                }
+                if(!empty($request->sLocation)){
+                    $joborder->strJOStartPoint = $request->sLocation;
+                }
+                if(!empty($request->dLocation)){
+                    $joborder->strJODestination = $request->dLocation;
+                }
+                $joborder->strJOVesselName = $request->vesselName;
+                // $joborder->intJOVesselTypeID = $request->vesselType;
+                $joborder->fltWeight = $request->vesselWeight;
+                $joborder->enumServiceType = $request->serviceType;
+                $joborder->enumStatus = 'Created';
+                $joborder->save();
+                DB::commit();
+                return response()->json(['joborder'=>$joborder]);
+            }catch(\Illuminate\Database\QueryException $errors){
+                // DB::statement('ALTER TABLE tbljoborder AUTO_INCREMENT=:$id');
+                // DB::commit();
+                DB::rollBack();
+                $errorMessage = $errors->getMessage();
+                return response()->json(['errorMessage'=>$errorMessage,'inputs'=>$request->all()],500);
+                // return response()->json('hi');
+                // return Redirect::back()->withErrors($errorMessage);
+            }
         }
     }
 

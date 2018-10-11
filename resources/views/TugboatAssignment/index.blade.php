@@ -2,7 +2,7 @@
 
 {{-- Local Styles --}}
 @section('assets')
-
+    @include('TugboatAssignment.styles')
 @endsection
 
 {{-- Local Scripts --}}
@@ -141,8 +141,10 @@
                                                                         <h5>{{$noftugboat->strCompanyName}}</h5>
                                                                     </div>
                                                                     <div class="card-footer mt-2">
-                                                                        <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
-                                                                        <button onclick="showTugboatModal({{$noftugboat->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Assign Tugboat</button>
+                                                                            <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
+                                                                            <button data-id="{{$noftugboat->intJOFRJobOrderID}}" data-date="{{$noftugboat->dtmETA}}" class="createTugboatAssignment btn btn-primary btn-sm text-center float-right ml-2 waves8-effect">Assign Tugboat</button>
+                                                                        {{-- <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
+                                                                        <button onclick="showTugboatModal({{$noftugboat->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Assign Tugboat</button> --}}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -151,30 +153,52 @@
                                                 @endif
                                         </div>
                                         <div class="tab-pane fade" id="pillsProceedH" role="tabpanel" aria-labelledby="pillsProceedH-tab">
-                                            @if(count($jobschedule) > 0)
-                                                @foreach($jobschedule as $jobschedule)
+                                            @if(Auth::user()->enumUserType == 'Admin')
+                                                @if(count($jobschedule) > 0)
+                                                    @foreach($jobschedule as $jobschedule)
+                                                        <div class="col-lg-12">
+                                                            <div class="card card-sm-2 card-primary border-primary">
+                                                                <div class="card-icon">
+                                                                    <i class="ion ion-android-boat text-primary"></i>
+                                                                </div>
+                                                                <div class="card-header">
+                                                                    <h4 class="text-primary mb-2">Job Order # {{$jobschedule->intJobOrderID}}</h4>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <h5>{{$jobschedule->strCompanyName}}</h5>
+                                                                </div>
+                                                                <div class="card-footer mt-2">
+                                                                    <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
+                                                                    <button onclick="proceedToHauling({{$jobschedule->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Proceed To Hauling</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @else
+                                                    <div class="alert alert-danger text-center">
+                                                        <i class="fas fa-exclamation-triangle mr-2"></i>NO RESULTS FOUND!
+                                                    </div>
+                                                @endif
+                                            @elseif(Auth::user()->enumUserType == 'Affiliates')
+                                                @foreach($jobschedulef as $jobschedulef)
                                                     <div class="col-lg-12">
                                                         <div class="card card-sm-2 card-primary border-primary">
                                                             <div class="card-icon">
                                                                 <i class="ion ion-android-boat text-primary"></i>
                                                             </div>
                                                             <div class="card-header">
-                                                                <h4 class="text-primary mb-2">Job Order # {{$jobschedule->intJobOrderID}}</h4>
+                                                                <h4 class="text-primary mb-2">Job Order # {{$jobschedulef->intJobOrderID}}</h4>
                                                             </div>
                                                             <div class="card-body">
-                                                                <h5>{{$jobschedule->strCompanyName}}</h5>
+                                                                <h5>{{$jobschedulef->strCompanyName}}</h5>
                                                             </div>
                                                             <div class="card-footer mt-2">
                                                                 <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
-                                                                <button onclick="proceedToHauling({{$jobschedule->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Proceed To Hauling</button>
+                                                                <button onclick="proceedToHauling({{$jobschedulef->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Proceed To Hauling</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 @endforeach
-                                            @else
-                                                <div class="alert alert-danger text-center">
-                                                    <i class="fas fa-exclamation-triangle mr-2"></i>NO RESULTS FOUND!
-                                                </div>
                                             @endif
                                         </div>
                                     </div>    
@@ -206,4 +230,5 @@
         </h1>
     </section>
     @include('TugboatAssignment.assignmodal')
+    @include('TugboatAssignment.assignTugboat')
 @endsection

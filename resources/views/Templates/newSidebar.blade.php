@@ -76,11 +76,11 @@
                                 <li id="tDispatch"><a href="#" class="has-dropdown waves-effect"><i class="ion ion-android-boat"></i>Dispatch &amp; Hauling</a>
                                     <ul class="menu-dropdown">
                                         <li id="menuForwardReq"><a href="/administrator/transactions/forwardrequests"><i class="ion-ios-upload"></i>Forward Requests</a></li>
-                                        <li id="menuJobOrder"><a class="waves-effect" href="/administrator/transactions/joborders"><i class="ion ion-ios-list"></i>Job Order</a></li>
-                                        <li id="menuTugboatAssignment"><a class="waves-effect" href="/administrator/transactions/tugboatassignment"><i class="ion ion-android-boat"></i>Tugboat Assignment</a></li>
+                                        <li id="menuJobOrder"><a class="waves-effect" href="/administrator/transactions/dispatchandhauling/joborders"><i class="ion ion-ios-list"></i>Job Order</a></li>
+                                        <li id="menuTugboatAssignment"><a class="waves-effect" href="/administrator/transactions/dispatchandhauling/tugboatassignment"><i class="ion ion-android-boat"></i>Tugboat Assignment</a></li>
                                         <li id="menuTeamBuilder"><a class="waves-effect" href="/administrator/transactions/dispatchandhauling/teamassignment"><i class="ion ion-ios-people"></i>Team Builder</a></li>
-                                        <li id="menuScheduling"><a href="/administrator/transactions/scheduling"><i class="fas fa-calendar-alt"></i>Schedule</a></li>
-                                        <li id="menuHauling"><a href="/administrator/transactions/hauling"><i class="fas fa-link"></i>Hauling</a></li>
+                                        <li id="menuScheduling"><a href="/administrator/transactions/dispatchandhauling/scheduling"><i class="fas fa-calendar-alt"></i>Schedule</a></li>
+                                        <li id="menuHauling"><a href="/administrator/transactions/dispatchandhauling/hauling"><i class="fas fa-link"></i>Hauling</a></li>
                                         
                                         {{-- <li id="menuScheduling"><a class="waves-effect" href=""><i class="ion ion-ios-time"></i>Scheduling</a></li> --}}
                                     </ul>
@@ -101,11 +101,11 @@
                                 <li><a href="#" class="has-dropdown waves-effect"><i class="ion ion-android-boat"></i>Dispatch &amp; Hauling</a>
                                     <ul class="menu-dropdown">
                                         <li id="menuForwardReq"><a href="/administrator/transactions/forwardrequests"><i class="ion-ios-upload"></i>Forward Requests</a></li>
-                                        <li id="menuJobOrder"><a class="waves-effect" href="/administrator/transactions/joborders"><i class="ion ion-ios-list"></i>Job Order</a></li>
-                                        <li id="menuTugboatAssignment"><a class="waves-effect" href="/administrator/transactions/tugboatassignment"><i class="ion ion-android-boat"></i>Tugboat Assignment</a></li>
-                                        <li id="menuTeamBuilder"><a class="waves-effect" href="/administrator/transactions/dispatchandhauling/teamassignment"><i class="ion ion-ios-people"></i>Team Builder</a></li>
+                                        <li id="menuJobOrder"><a class="waves-effect" href="/affiliates/transactions/dispatchandhauling/joborders"><i class="ion ion-ios-list"></i>Job Order</a></li>
+                                        <li id="menuTugboatAssignment"><a class="waves-effect" href="/affiliates/transactions/tugboatassignment"><i class="ion ion-android-boat"></i>Tugboat Assignment</a></li>
+                                        <li id="menuTeamBuilder"><a class="waves-effect" href="/affiliates/transactions/dispatchandhauling/teamassignment"><i class="ion ion-ios-people"></i>Team Builder</a></li>
                                         <li id="menuScheduling"><a href="/administrator/transactions/scheduling"><i class="fas fa-calendar-alt"></i>Schedule</a></li>
-                                        <li id="menuHauling"><a href="/administrator/transactions/hauling"><i class="fas fa-link"></i>Hauling</a></li>
+                                        <li id="menuHauling"><a href="/administrator/transactions/dispatchandhauling/hauling"><i class="fas fa-link"></i>Hauling</a></li>
                                         {{-- <li id="menuScheduling"><a class="waves-effect" href=""><i class="ion ion-ios-time"></i>Scheduling</a></li> --}}
                                     </ul>
                                 </li>
@@ -117,23 +117,18 @@
                             </ul>
                         @endif
                     </li>
-                    <li>
-                        <a href="#" class="has-dropdown"><i class="ion ion-stats-bars"></i><span>Reports</span></a>
-                        <ul class="menu-dropdown">
-                            <li><a href="general.html"><i class="fas fa-life-ring"></i>Berth</a></li>
-                            <li><a href="components.html"><i class="ion ion-ios-paper"></i> Contracts</a></li>
-                            <li><a href="buttons.html"><i class="ion ion-person"></i> Employee</a></li>
-                            <li><a href="toastr.html"><i class="fas fa-anchor"></i> Equipment</a></li>
-                            <li><a href="general.html"><i class="fas fa-life-ring"></i> Pier</a></li>
-                            <li><a href="components.html"><i class="fas fa-sitemap"></i>Position</a></li>
-                            <li><a href="toastr.html"><i class="ion ion-android-boat"></i> Tugboat</a></li>
-                        </ul>
+                    <li id="queriesTree">
+                        <a href="/administrator/queries" ><i class="fas fa-database"></i><span>Queries</span></a>
+                    </li>
+                    <li id="reportsTree">
+                        <a href="/administrator/reports" ><i class="fas fa-chart-bar"></i><span>Reports</span></a>
                     </li>
                     <li>
                         <a href="#" class="has-dropdown"><i class="fas fa-wrench"></i><span>Utilities</span></a>
                         <ul class="menu-dropdown">
                             {{-- <li><a href="/contracts"><i class="ion ion-ios-paper"></i> Contracts</a></li> --}}
                             <li><a href="/contracts"><i class="fas fa-table"></i> Tugboat Matrix</a></li>
+                            <li><a href="/administrator/utilities/teamcomposition"><i class="fas fa-money-bill-alt"></i> Contract Fees Matrix</a></li>
                             <li><a href="/administrator/utilities/teamcomposition"><i class="fas fa-users"></i> Team Composition</a></li>
                         </ul>
                     </li>

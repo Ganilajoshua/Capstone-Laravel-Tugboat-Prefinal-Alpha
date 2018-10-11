@@ -1,0 +1,64 @@
+.btn-red {
+  background-color: #dd4b39 !important;
+  color : #fff;
+}
+.btn-yellow {
+  background-color: #f39c12 !important;
+  color : #fff;
+}
+.btn-aqua {
+  background-color: #00c0ef !important;
+  color : #fff;
+}
+.btn-blue {
+  background-color: #0073b7 !important;
+  color : #fff;
+}
+.btn-black {
+  background-color: #111111 !important;
+  color : #fff;
+}
+.btn-light-blue {
+  background-color: #3c8dbc !important;
+  color : #fff;
+}
+.btn-green {
+  background-color: #00a65a !important;
+  color : #fff;
+}
+.btn-gray {
+  background-color: #d2d6de !important;
+  color : #fff;
+}
+.btn-navy {
+  background-color: #001f3f !important;
+  color : #fff;
+}
+.btn-teal {
+  background-color: #39cccc !important;
+  color : #fff;
+}
+.btn-olive {
+  background-color: #3d9970 !important;
+  color : #fff;
+}
+.btn-lime {
+  background-color: #01ff70 !important;
+  color : #fff;
+}
+.btn-orange {
+  background-color: #ff851b !important;
+  color : #fff;
+}
+.btn-fuchsia {
+  background-color: #f012be !important;
+  color : #fff;
+}
+.btn-purple {
+  background-color: #605ca8 !important;
+  color : #fff;
+}
+.btn-maroon {
+  background-color: #d81b60 !important;
+  color : #fff;
+}

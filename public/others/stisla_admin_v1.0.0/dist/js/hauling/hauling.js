@@ -1,5 +1,4 @@
 var url = '/administrator/transactions/dispatchandhauling/hauling';
-var url2 = '/administrator/transactions/dispatchandhauling/hauling'
 $(document).ready(function(){
     $('#transactionTree').addClass('active');
     $('#tDispatch').addClass('active');
@@ -66,8 +65,9 @@ function prepareHauling(joborderID){
                     }
                 });           
             },
-            error : function(error){
-    
+            error : function(data,error){
+                console.log(data);
+                console.log(error);
             }
         });
     });
@@ -98,8 +98,10 @@ $('.joborderHaulingInfo').on('click',function(event){
     });
 });
 $('.backButton').on('click',function(){
-    $('.startHaulingContainer').css('display','none');
-    $('.jobOrderList').css('display','block');
+    // $('.startHaulingContainer').css('display','none');
+    // $('.jobOrderList').css('display','block');
+    // $('.tugbot')
+    // $('.tugboatInformationTab').css('display','block');
 });
 
 $('.viewStartHauling').on('click',function(event){
@@ -112,11 +114,12 @@ $('.viewStartHauling').on('click',function(event){
         dataType : 'JSON',
         success : (data, response)=>{
             console.log(data);
+            console.log(data.joborder);
             $('.startHaulingHeader').empty();
             $('.startHaulingBody').empty();
             $('.startHaulingProcess').data('id',data.joborder[0].intJobOrderID)
-            var dLocation ;
-            var sLocation ;
+            // var dLocation ;
+            // var sLocation ;
             var team = [];
 
             // Get Starting and Ending Location

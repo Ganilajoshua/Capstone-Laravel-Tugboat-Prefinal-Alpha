@@ -58,26 +58,34 @@ $(document).ready(()=>{
 
             schedStartTime = schedules[count].tmStart;
             schedEndTime = schedules[count].tmEnd;
+            
+            console.log(moment(schedules[count].tmStart,'HH:mm:ss').format('hh:mm:ss'));
+            console.log(moment(schedules[count].tmEnd,'HH:mm:ss').format('hh:mm:ss'));
 
+            // return false;
             var startDate = schedStartDate.split('-');
             var endDate = schedEndDate.split('-');
             var startTime = schedStartTime.split(':');
-            var endTime = schedStartTime.split(':');
-            console.log('startDate', startDate);
-            console.log('endDate', endDate);
+            var endTime = schedEndTime.split(':');
             console.log('startTime', startTime);
             console.log('endTime',endTime);
-
+            // return false;
+            console.log('startDate', startDate);
+            console.log('endDate', endDate);
+            console.log(endDate[1], endDate[1] - 1);
             //push to the array rendering variable
-
+            var start = `${schedules[count].dateStart} ${schedules[count].tmStart}`;
+            var end = `${schedules[count].dateEnd} ${schedules[count].tmEnd}`;
+            console.log(start);
+            console.log(end);
             eventsSched.push({
                 title : schedules[count].strScheduleDesc,
-                start : new Date (startDate[0], startDate[1] - 1, startDate[2], startTime[0], startTime[1], startTime[2]),
-                end : new Date (endDate[0], endDate[1] - 1, endDate[2], endTime[0], endTime[1], endTime[2]),
+                start : start,
+                end : end,
                 allDay : false,
                 displayEventTime : true,
-                backgroundColor: `#00a65a`, //yellow
-                borderColor: `#00a65a`, //yellow
+                backgroundColor: schedules[count].strColor, //yellow
+                borderColor: schedules[count].strColor, //yellow
                 className: 'text-left',
  
             });
@@ -206,6 +214,7 @@ $(document).ready(()=>{
                 // $('#viewTugboatsModal').modal('show');
                 
             },
+            nextDayThreshold : "00:00:00",
             // dayClick: function(date) {
             //     alert('clicked ' + date.format());
             // },
@@ -219,7 +228,8 @@ $(document).ready(()=>{
                 month: 'month',
                 week: 'week',
                 day: 'day'
-            },events : eventsSched,
+            },
+            events : eventsSched,
             // events : [eventsSched],
                 //Random default events
             // events: [{
@@ -230,7 +240,7 @@ $(document).ready(()=>{
             //     borderColor: '#f39c12' //yellow1
             // }, {
             //     title: schedules[1].strSchedDesc,
-            //     start: new Date(y, m, d, b, c),
+            //     start: new Date(y, m, d - 6),
             //     allDay: false,
             //     backgroundColor: '#0073b7', //Blue
             //     borderColor: '#0073b7' //Blue

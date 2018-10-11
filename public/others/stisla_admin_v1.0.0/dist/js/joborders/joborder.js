@@ -1,3 +1,5 @@
+var url = '/administrator/transactions/dispatchandhauling/joborders';
+
 $(document).ready(function(){
     $('#transactionTree').addClass('active');
     $('#tDispatch').addClass('active');
@@ -15,7 +17,6 @@ $(document).ready(function(){
     });
 
 });
-var url = '/administrator/transactions/joborders';
 
 $('.joborderMoreInfoButton').on('click',function(event){
     event.preventDefault();
@@ -207,6 +208,15 @@ function acceptJobOrder(acceptID)
 
 }
 //View Forward Request Modal
+$('.forwardJoborder').on('click',function(){
+    console.log('Hi CacaOOOOOOO');
+    console.log($(this).data('id'));
+    var joborderID = $(this).data('id');
+    console.log(joborderID);
+    $('.forwardRequestButton').data('id',joborderID);
+});
+
+
 function forwardRequest(forwardID){
     console.log(forwardID);
     $.ajax({
@@ -301,11 +311,11 @@ function forwardRequest(forwardID){
 }
 //Forward Job Order
 $('.forwardRequestButton').on('click',function(){
-    var id = $('#forwardModal').data('id');
+    var id = $(this).data('id');
     var company = $('#selectCompany').val();
     var details = $('#exDetails').val();
 
-    console.log(id, company, details);
+    console.log(id, company, details, 'Kikyaw');
     // return false;
     $.ajax({
         url : `${url}/forward`,

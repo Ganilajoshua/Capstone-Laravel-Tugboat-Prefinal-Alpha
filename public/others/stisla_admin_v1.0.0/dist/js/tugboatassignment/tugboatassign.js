@@ -1,4 +1,4 @@
-var url = '/administrator/transactions/tugboatassignment';
+var url = '/administrator/transactions/dispatchandhauling/tugboatassignment';
 
 $(document).ready(function(){
     $('#transactionTree').addClass('active');
@@ -63,29 +63,51 @@ $(document).ready(function(){
         }
 
     });
+
+    $('.backButton').on('click',function(){
+        $('.assignTugboat').css('display','none');
+        $('.tugboatAssignment').css('display','block');
+    });
+});
+
+$('.colorIndicator').on('click',function(event){
+    event.preventDefault();
+    console.log('hi');
+    var color = $(this).data('color');
+    console.log(color);
+    console.log($('.colorIndicatorButton').attr('class'));
+    $('.colorIndicatorButton').css(`background-color`,color);
+    $('.colorIndicatorButton').css(`color`,'#fff');
+    $('.colorIndicatorButton').css('border','none');
+    // $('.colorIndicatorButton').empty();
+    $('.colorIndicatorButton').html("");
+    $('.colorIndicatorButton').data('color',color);
+    $('.colorIndicatorButton').html($(this).data('colortext'));
 });
 
 $('.assignTugboatButton').on('click', function(){    
     console.log($(this).data('id'));
     console.log($(this).data('date'));
     var date = moment($(this).data('date')).format('YYYY-MM-DD');
-    console.log(date);
-    $('#assignTugboatModal').modal('show');
-    $.ajax({
-        url : url + '/tugboatsavailable',
-        type : 'POST',
-        data : {
-            "_token" : $('meta[name="csrf-token"]').attr('content'),
-            date : date,
-        },
-        success : (data)=>{
-            console.log(data);
+    $('.assignTugboat').css('display','block');
+    $('.tugboatAssignment').css('display','none');
+    // console.log(date);   
+    // $('#assignTugboatModal').modal('show');
+    // $.ajax({
+    //     url : url + '/tugboatsavailable',
+    //     type : 'POST',
+    //     data : {
+    //         "_token" : $('meta[name="csrf-token"]').attr('content'),
+    //         date : date,
+    //     },
+    //     success : (data)=>{
+    //         console.log(data);
             
-        },error : (error)=>{
-            throw error;
-        },
+    //     },error : (error)=>{
+    //         throw error;
+    //     },
 
-    });
+    // });
 });
 
 function showTugboatModal(jobOrderID){
@@ -96,8 +118,11 @@ function showTugboatModal(jobOrderID){
 
 $('.createTugboatAssignment').on('click',function(){
     console.clear();
+    // return false;
+    console.log('hi');
     var joborderID = $(this).data('id');
-    $('.createTugboatAssignSubmit').data('id',joborderID);
+    console.log(joborderID);
+    $('.assignTugboatsButton').data('id',joborderID);
     $('.suggestedTugboatsContainer').empty();
     var appendBestTugContainer =
     `<div class="row">
@@ -117,6 +142,14 @@ $('.createTugboatAssignment').on('click',function(){
         success : (data, response)=>{
             console.log(data);
             $('.availableTugboats').empty();
+            // Get Locations of Joborder
+            var location = getLocation(data.joborder);
+            console.log(location);
+            // Append Job Order Header
+            appendJoborderHeader(data.joborder);
+            // Append Job Order Content(Body);
+            appendJoborderBody(data.joborder,location);
+            // 
             // console.log(data.joborder.fltWeight);
             // console.log(data.tugboats);
             // var tugboatcombination = []; 
@@ -138,7 +171,23 @@ $('.createTugboatAssignment').on('click',function(){
             //     </div>`;
             //     $(appendBestTug).appendTo('.suggestedTugboats');
             // }
-
+            // var appendAvailableTugboats = 
+            //     `<div class="col-auto">
+            //         <div class="card bg-success">
+            //             <div class="card-body">
+            //                 <div class="custom-control custom-checkbox custom-control-inline">
+            //                     <input type="checkbox" id="availableTugboatList" data-id="" name="tugboatlist[]" class="custom-control-input tugboatsCheckbox">
+            //                     <label class="custom-control-label" for="availableTugboat">
+            //                         <p class="card-text text-center ml-2">Heya</p>
+            //                         <small>HP</small>
+            //                     </label>
+            //                 </div>
+            //             </div>
+            //         </div>
+            //     </div>`;
+            // $(appendAvailableTugboats).appendTo('.availableTugboats');
+               
+            
             for(var counter = 0; counter < (data.tugboats.length); counter++){
 
                 var appendAvailableTugboats = 
@@ -146,7 +195,7 @@ $('.createTugboatAssignment').on('click',function(){
                         <div class="card bg-success">
                             <div class="card-body">
                                 <div class="custom-control custom-checkbox custom-control-inline">
-                                    <input type="checkbox" id="availableTugboat${data.tugboats[counter].intTAssignID}" data-id="${data.tugboats[counter].intTAssignID}" name="tugboatlist[]" class="custom-control-input tugboatCheckbox">
+                                    <input type="checkbox" id="availableTugboat${data.tugboats[counter].intTAssignID}" data-id="${data.tugboats[counter].intTAssignID}" name="tugboatlist[]" class="custom-control-input tugboatsCheckbox">
                                     <label class="custom-control-label" for="availableTugboat${data.tugboats[counter].intTAssignID}">
                                         <p class="card-text text-center ml-2">${data.tugboats[counter].strName}</p>
                                         <small>${data.tugboats[counter].strHorsePower}HP</small>
@@ -155,9 +204,11 @@ $('.createTugboatAssignment').on('click',function(){
                             </div>
                         </div>
                     </div>`;
-                $(appendAvailableTugboats).appendTo('.availableTugboats');    
+                $(appendAvailableTugboats).appendTo('.availableTugboatsContainer');    
             }
-            $('#assignTugboatModal').modal('show');
+            // $('#assignTugboatModal').modal('show');
+            $('.assignTugboat').css('display','block');
+            $('.tugboatAssignment').css('display','none');
         },
         error : (error)=>{
             throw error;
@@ -165,18 +216,70 @@ $('.createTugboatAssignment').on('click',function(){
     });
 }); 
 // function
+$('.assignTugboatsButton').on('click',function(){
+    console.log($(this).data('id'));
+    $(this).data('id');
+    var id = $(this).data('id');
+    var colorIndicator = $('.colorIndicatorButton').data('color');
+    var tugboatsID = [];
+    $('.tugboatsCheckbox:checkbox:checked').each(function(checked){
+        tugboatsID[checked] = parseInt($(this).data('id'));
+        // parseInt($(this).val());
+    }); 
+    console.log(colorIndicator);
+    console.log(tugboatsID);
+    console.log(id);
+    // return false;    
+    $.ajax({
+        url : url + '/create',
+        type : 'POST',
+        data : { 
+            "_token" : $('meta[name="csrf-token"]').attr('content'), 
+            jobOrderID : id,
+            tugboatsID : tugboatsID,
+            colorIndicator : colorIndicator,
+        }, 
+        beforeSend: function (request) {
+            return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+        },
+        success : function(data, response){
+            console.log('success pota');
+            console.log(data);
+            console.log(response);
+            swal({
+                title: "Success",
+                text: "Tugboat Assigned",
+                type: "success",
+                showCancelButton: false,
+                confirmButtonClass: "btn-success",
+                confirmButtonText: "Ok",
+                closeOnConfirm: true,
+                timer : 1500
+            },
+            function(isConfirm){
+                if(isConfirm){
+                    window.location = url;
+                }
+            });                       
+        },
+        error : function(error){
+            throw error;
+        }
+
+    });
+});
 $('.createTugboatAssignSubmit').on('click',function(){
     console.log($('#jobOrderID').val());
     $(this).data('id');
     var id = $(this).data('id');
     var tugboatsID = [];
-    $('.tugboatCheckbox:checkbox:checked').each(function(checked){
+    $('.tugboatsCheckbox:checkbox:checked').each(function(checked){
         tugboatsID[checked] = parseInt($(this).data('id'));
         // parseInt($(this).val());
     }); 
     console.log(tugboatsID);
     console.log(id);
-    // return false;
+    return false;
     $.ajax({
         url : url + '/create',
         type : 'POST',

@@ -165,7 +165,7 @@
 .alert-error,
 .label-danger,
 .modal-danger .modal-body {
-  background-color: #dd4b39 !important;
+  background-color: #dc3545 !important;
 }
 .bg-yellow,
 .callout.callout-warning,
@@ -284,7 +284,8 @@
   filter: alpha(opacity=65);
 }
 .text-red {
-  color: #dd4b39 !important;
+  color: #f01c00 !important;
+  /* color: #dd4b39 !important; */
 }
 .text-yellow {
   color: #f39c12 !important;
@@ -308,7 +309,7 @@
   color: #d2d6de !important;
 }
 .text-navy {
-  color: #001f3f !important;
+  color: #003366 !important;
 }
 .text-teal {
   color: #39cccc !important;
@@ -317,10 +318,11 @@
   color: #3d9970 !important;
 }
 .text-lime {
-  color: #01ff70 !important;
+  color: #28db76 !important;
 }
 .text-orange {
-  color: #ff851b !important;
+  /* color: #ff851b !important; */
+  color: #f88724 !important;
 }
 .text-fuchsia {
   color: #f012be !important;
@@ -329,7 +331,29 @@
   color: #605ca8 !important;
 }
 .text-maroon {
-  color: #d81b60 !important;
+  color: #cc1616 !important;
+  /* color: #d81b60 !important; */
+}
+.text-sapphire{
+  color: #0F52BA !important;
+}
+.text-ruby{
+  color: #E0115F !important;
+}
+.text-bluebell{
+  color: #A2A2D0 !important;
+}
+.text-goldenrod{
+  color: #DAA520 !important;
+}
+.text-tangerineorange{
+  color: #F28500 !important;
+}
+.text-tomato{
+  color: #FF6347 !important;
+}
+.text-chestnut{
+  color: #954535 !important;
 }
 .link-muted {
   color: #7a869d;
