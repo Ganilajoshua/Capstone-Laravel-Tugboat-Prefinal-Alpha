@@ -98,10 +98,9 @@ $('.joborderHaulingInfo').on('click',function(event){
     });
 });
 $('.backButton').on('click',function(){
-    // $('.startHaulingContainer').css('display','none');
-    // $('.jobOrderList').css('display','block');
-    // $('.tugbot')
-    // $('.tugboatInformationTab').css('display','block');
+    $('.startHaulingContainer').css('display','none');
+    $('.jobOrderList').css('display','block');
+    $('.tugboatInformationTab').css('display','block');
 });
 
 $('.viewStartHauling').on('click',function(event){
@@ -133,12 +132,12 @@ $('.viewStartHauling').on('click',function(event){
             appendContainer();
             // Append Tugboat Assignments
             appendBody(data.jobsched);
-            // Get Empty Teams
+            // Get Empty Teams  
             getEmptyTeams(data.jobsched);
             // Get Teams
-            team = getTeam(data.jobsched);
-            console.log(team);
-            appendEmployees(team);
+            // team = getTeam(data.jobsched);
+            // console.log(team);
+            // appendEmployees(team);
 
             // $('.startHaulingContainer').css('display','block');
 	        // $('.jobOrderList').css('display','none');

@@ -173,6 +173,8 @@ function getEmptyTeams(jobsched){
         // 'Cannot Start the Hauling Process');
         $('.startHaulingProcess').prop('disabled', true);
     }
+    $('.startHaulingContainer').css('display','block');
+    $('.jobOrderList').css('display','none');
 }
 
 // function 

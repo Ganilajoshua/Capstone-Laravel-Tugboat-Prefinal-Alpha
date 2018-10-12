@@ -83,12 +83,21 @@
                                         </div>
                                     </li>
                                 </ul>
+                                {{-- <a href="#" onclick="requestContracts({{$company[0]->intCompanyID}})" id="requestContractsButton" class="defaultMatrixButton mt-3 btn btn-primary float-right">
+                                    Request Contract
+                                </a> --}}
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="row matrixBased">
                                 <div class="col-12">
                                     <div class="alert alert-primary"><h4 class="text-white">Make Quotations based on the Matrix above.</h4></div>
+                                </div>
+                                <div class="col-12">
+                                    <a href="#" id="requestContractsButton" data-id="{{$company[0]->intCompanyID}}" class="defaultMatrixButton mt-3 btn btn-primary float-right">
+                                            {{-- onclick="requestContracts({{$company[0]->intCompanyID}})" --}}
+                                        Request Contract
+                                    </a>
                                 </div>
                             </div>
                             <div class="row customMatrix">
@@ -191,11 +200,15 @@
                                             <input type="hidden" id="hideCompanyID">
                                         </div>
                                     </form>
+                                    <a href="#" id="requestContractsButton" data-id="{{$company[0]->intCompanyID}}" class="customMatrixButton mt-3 btn btn-primary float-right">
+                                            {{-- onclick="requestContracts({{$company[0]->intCompanyID}})"   --}}
+                                        Request Contract
+                                    </a>
                                 </div>
                             </div>
-                            <a href="#" onclick="requestContracts({{$company[0]->intCompanyID}})" id="requestContracts" class="mt-3 btn btn-primary float-right">
+                            {{-- <a href="#" onclick="requestContracts({{$company[0]->intCompanyID}})" id="requestContractsButton" class="defaultMatrixButton mt-3 btn btn-primary float-right">
                                 Request Contract
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                 </div>
@@ -395,25 +408,25 @@
                                             <li class="list-inline-item text-primary">
                                                 <p class="font-weight-bold">Standard Rate : </p></li>
                                             <li class="list-inline-item">
-                                                <p class="text-black" id="standardRate"></p></li>
+                                                <p class="text-black" id="standardRate"> 2000 </p></li>
                                         </ul>
                                         <ul class="list-inline">
                                             <li class="list-inline-item text-primary">
                                                 <p class="font-weight-bold">Tugboat Delay Fee : </p></li>
                                             <li class="list-inline-item">
-                                                <p class="text-black" id="tugboatDelayFee"></p></li>
+                                                <p class="text-black" id="tugboatDelayFee">3000</p></li>
                                         </ul>
                                         <ul class="list-inline">
                                             <li class="list-inline-item text-primary">
                                                 <p class="font-weight-bold">Violation Fee : </p></li>
                                             <li class="list-inline-item"> 
-                                                <p class="text-black" id="violationFee"></p></li>
+                                                <p class="text-black" id="violationFee">2000</p></li>
                                         </ul>
                                         <ul class="list-inline">
                                             <li class="list-inline-item text-primary">
                                                 <p class="font-weight-bold">Consignee Late Fee : </p></li>
                                             <li class="list-inline-item">
-                                            <p class="text-black" id="consigneeLateFee"></p></li>
+                                            <p class="text-black" id="consigneeLateFee">1000</p></li>
                                         </ul>
                                     </div>
                                     <div class="col-6">
@@ -421,19 +434,19 @@
                                             <li class="list-inline-item text-primary">
                                                 <p class="font-weight-bold">Minimum Damage Fee : </p></li>
                                             <li class="list-inline-item">
-                                            <p class="text-black" id="minDamageFee"></p></li>
+                                            <p class="text-black" id="minDamageFee">2000</p></li>
                                         </ul>
                                         <ul class="list-inline">
                                             <li class="list-inline-item text-primary">
                                                 <p class="font-weight-bold">Maximum Damage Fee : </p></li>
                                             <li class="list-inline-item">
-                                                <p class="text-black" id="maxDamageFee"></p></li>
+                                                <p class="text-black" id="maxDamageFee">5000</p></li>
                                         </ul>
                                         <ul class="list-inline">
                                             <li class="list-inline-item text-primary">
                                                 <p class="font-weight-bold">Discount : </p></li>
                                             <li class="list-inline-item">
-                                                <p class="text-black" id="discount"></p></li>
+                                                <p class="text-black" id="discount">20</p></li>
                                         </ul>
                                     </div>
                                 </div>

@@ -37,6 +37,7 @@
                                         <tr>
                                             <th>Consignee</th>
                                             <th>Email</th>
+                                            <th>Verification Status</th>
                                             <th class="noSortAction">Status</th>
                                             <th class="noSortAction">Action</th>
                                         </tr>
@@ -46,6 +47,17 @@
                                             <tr>
                                                 <td>{{$inactiveuser->strCompanyName}}</td>
                                                 <td><span class="block-email"><a href="mailto:{{$inactiveuser->email}}">{{$inactiveuser->email}}</a></span></td>
+                                                <td>
+                                                    @if($inactiveuser->token === null)
+                                                        <div class="badge badge-success">
+                                                            Verified
+                                                        </div>
+                                                    @else
+                                                    <div class="badge badge-danger">
+                                                            Not Verified
+                                                        </div>
+                                                    @endif
+                                                </td>
                                                 <td> 
                                                     <div class="checkbox ml-3" data-id="{{$inactiveuser->id}}">
                                                         <label>

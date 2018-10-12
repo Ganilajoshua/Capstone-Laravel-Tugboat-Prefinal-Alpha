@@ -85,38 +85,133 @@ $(document).ready(function(){
 
 $('#quoteCustom').on('click',function(){
     console.log('hey barbara');
+    $('#requestContractsButton').removeClass('defaultMatrixButton');
+    $('#requestContractsButton').addClass('customMatrixButton');
     $.ajax({
         url : `${url}/getdefaultmatrix`,
         type : 'POST',
         data : {
             "_token" : $('meta[name="csrf-token"]').attr('content'), 
         },
+        success : (data, response)=>{
+            console.log(data);
+            // $('#contractDetails').html(data.contractfees [0].strContractListDesc);
+            $('#addHStandardRate').attr('placeholder',data.contractfees[0].fltCFStandardRate);
+            $('#addHDelayFee').attr('placeholder',data.contractfees[0].fltCFTugboatDelayFee);
+            $('#addHViolationFee').attr('placeholder',data.contractfees[0].fltCFViolationFee);
+            $('#addHLateFee').attr('placeholder',data.contractfees[0].fltCFConsigneeLateFee);
+            $('#addHMinDamageFee').attr('placeholder',data.contractfees[0].fltCFMinDamageFee);
+            $('#addHMaxDamageFee').attr('placeholder',data.contractfees[0].fltCFMaxDamageFee);
+            
+            $('#addTAStandardRate').attr('placeholder',data.contractfees[1].fltCFStandardRate);
+            $('#addTADelayFee').attr('placeholder',data.contractfees[1].fltCFTugboatDelayFee);
+            $('#addTAViolationFee').attr('placeholder',data.contractfees[1].fltCFViolationFee);
+            $('#addTALateFee').attr('placeholder',data.contractfees[1].fltCFConsigneeLateFee);
+            $('#addTAMinDamageFee').attr('placeholder',data.contractfees[1].fltCFMinDamageFee);
+            $('#addTAMaxDamageFee').attr('placeholder',data.contractfees[1].fltCFMaxDamageFee);
+
+            // $('#addTAStandardRate').attr('placeholder',data.contractfees[0].);
+            // $('#addTADelayFee').attr('placeholder',data.contractfees[0].);
+            // $('#addTAViolationFee').attr('placeholder',data.contractfees[0].);
+            // $('#addTALateFee').attr('placeholder',data.contractfees[0].);
+            // $('#addTAMinDamageFee').attr('placeholder',data.contractfees[0].);
+            // $('#addTAMaxDamageFee').attr('placeholder',data.contractfees[0].);
+            
+            // $('#standardRate').html(data.contractfees[0].fltStandardRate);
+            // $('#tugboatDelayFee').html(data.contractfees [0].fltQuotationTDelayFee);
+            // $('#violationFee').html(data.contractfees[0].fltQuotationViolationFee);
+            // $('#consigneeLateFee').html(data.contractfees[0].fltQuotationConsigneeLateFee);
+            // $('#minDamageFee').html(data.contractfees[0].fltMinDamageFee);
+            // $('#maxDamageFee').html(data.contractfees[0].fltMaxDamageFee);
+            // $('#discount').html(data.contractfees[0].intDiscount);    
+        },
         error : function(error){
             throw error;
         }
     });
-    $.ajax({
-        url : url + '/' + createdContractID + '/show',
-        type : 'GET',
-        dataType : 'JSON',
-        async: true,
-        success : function(data){
-            $('#contractsID').val(data.contract[0].intContractListID);
-            console.log('pwet mo may rocket');
-            console.log('standard ID :', data.contract[0].intCStandardID);
-            console.log('quotation ID : ', data.contract[0].intCQuotationID);
-            $('#contractDetails').html(data.contract[0].strContractListDesc);
-            $('#standardRate').html(data.contract[0].fltStandardRate);
-            $('#tugboatDelayFee').html(data.contract[0].fltQuotationTDelayFee);
-            $('#violationFee').html(data.contract[0].fltQuotationViolationFee);
-            $('#consigneeLateFee').html(data.contract[0].fltQuotationConsigneeLateFee);
-            $('#minDamageFee').html(data.contract[0].fltMinDamageFee);
-            $('#maxDamageFee').html(data.contract[0].fltMaxDamageFee);
-            $('#discount').html(data.contract[0].intDiscount);    
-        },
-        error : (error)=>{
-            throw error;
-        }
+    // $.ajax({
+    //     url : url + '/' + createdContractID + '/show',
+    //     type : 'GET',
+    //     dataType : 'JSON',
+    //     async: true,
+    //     success : function(data){
+    //         $('#contractsID').val(data.contract[0].intContractListID);
+    //         console.log('pwet mo may rocket');
+    //         console.log('standard ID :', data.contract[0].intCStandardID);
+    //         console.log('quotation ID : ', data.contract[0].intCQuotationID);
+    //         $('#contractDetails').html(data.contract[0].strContractListDesc);
+    //         $('#standardRate').html(data.contract[0].fltStandardRate);
+    //         $('#tugboatDelayFee').html(data.contract[0].fltQuotationTDelayFee);
+    //         $('#violationFee').html(data.contract[0].fltQuotationViolationFee);
+    //         $('#consigneeLateFee').html(data.contract[0].fltQuotationConsigneeLateFee);
+    //         $('#minDamageFee').html(data.contract[0].fltMinDamageFee);
+    //         $('#maxDamageFee').html(data.contract[0].fltMaxDamageFee);
+    //         $('#discount').html(data.contract[0].intDiscount);    
+    //     },
+    //     error : (error)=>{
+    //         throw error;
+    //     }
+    // });
+});
+
+$('.defaultMatrixButton').on('click',function(event){
+    event.preventDefault();
+    console.log('defaultMatrix');
+    var companyID = $(this).data('id');
+    swal({
+        title: "Are You Sure?",
+        text : "Request Contract Based on The Matrix?",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonClass: "btn-info",
+        confirmButtonText: "Ok",
+    },(isConfirm)=>{
+        console.log('Ohyoohyo');
+        $.ajax({
+            url : `${url}/store`,
+            type : 'POST',
+            data : { 
+                "_token" : $('meta[name="csrf-token"]').attr('content'),    
+                companyID : companyID,
+            }, 
+            beforeSend: function (request) {
+                return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+            },
+            success : function(data){
+                console.log('success pota');
+                console.log(data);
+                swal({
+                    title: "Success",
+                    text: "Contract Requested",
+                    type: "success",
+                    showCancelButton: false,
+                    confirmButtonClass: "btn-success",
+                    confirmButtonText: "Ok",
+                    closeOnConfirm: true,
+                },
+                function(){
+                    window.location = url;
+                });                       
+            },
+            error : function(error){
+                throw error;
+            }
+    
+        });
+    });
+});
+
+$('.customMatrixButton').on('click',function(event){
+    event.preventDefault();
+    console.log('customMatrix');
+    swal({
+        title: "Submit These Suggestions?",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonClass: "btn-info",
+        confirmButtonText: "Ok",
+    },(isConfirm)=>{
+        console.log('Hey');
     });
 });
 
