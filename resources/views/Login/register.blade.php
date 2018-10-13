@@ -55,7 +55,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <form action="/consignee/register" method="POST">
+                                    <form action="/consignee/register" method="POST" enctype="multipart/form-data">
                                         <div class="companyDet fadeIn ">
                                             <div class="form-group">
                                                 <label for="companyname">Company Name<sup class="text-primary">&#10033;</sup></label>
@@ -66,15 +66,17 @@
                                                 <input id="address" type="text" class="form-control" name="address" autofocus>
                                             </div>
                                             <div class="row">
+                                                {{-- <form action=""></form> --}}
                                                 <div class="col-12 col-sm-12 col-lg-6">
                                                     <div class="form-group">
                                                         <h6 style="font-size:12px;">DTI Permit<sup class="text-primary">&#10033;</sup></h6>
                                                         <div class="custom-file">
                                                             <label class="custom-file-label" for="dtiPermit" id="dtiPermitLabel">DTI Permit</label>
-                                                            <input type="file" class="custom-file-input" accept='image/*' id="dtiPermit" onchange="ValidateSingleInput(this);">
+                                                            <input type="file" name="file" class="custom-file-input" accept='image/*' id="dtiPermit" onchange="ValidateSingleInput(this);">
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
                                                 <div class="col-12 col-sm-12 col-lg-6">
                                                         <h6 style="font-size:12px;" class="text-center">Preview</h6>
                                                     <div class="form-group">

@@ -178,6 +178,7 @@ Route::group(['prefix'=>'administrator/'],function(){
                 Route::post('/returntugboat','TugboatTeamAssignmentController@returntugboat');
                 Route::post('/notifications','TugboatTeamAssignmentController@notifications');
                 Route::post('/getteamcompositions','TugboatTeamAssignmentController@getteamcompositions');
+                Route::post('/assigndefaultteams','TugboatTeamAssignmentController@assigndefaultteams');
             
             });
             
@@ -482,6 +483,7 @@ Route::post('/affiliates/login','LoginControllers\AffiliatesLoginController@logi
 Route::get('/affiliates/register','LoginControllers\AffiliatesLoginController@showRegister');
 Route::post('/affiliates/register','LoginControllers\AffiliatesLoginController@register');
 
+Route::get('/verify/{token}','LoginControllers\UserLoginController@verifyemail')->name('verifyEmail');
 
 //Login
 // Route::get('/register','LoginControllers\UserLoginController@register');

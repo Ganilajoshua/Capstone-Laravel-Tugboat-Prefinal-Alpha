@@ -93,30 +93,64 @@ $('.viewDefaultTeamsButton').on('click',function(event){
 $('.assignDefaultTeams').on('click',function(){
     console.log('HI');
     console.log($(this).data('id'));
+    var jobschedID = [];
+    var tugboatID = [];
     var joborderID = $(this).data('id');
-    swal({
-        title: "Are you Sure?",
-        text: "Assign The Default Teams",
-        type: "info",
-        showCancelButton: true,
-        confirmButtonClass: "btn-info waves-effect",
-        confirmButtonText: "Ok",
-        closeOnConfirm: true
-    },(isConfirm)=>{
-        if(isConfirm){
-            console.log('heyyyyyaaaa');
-            $('#defaultTeamsModal').modal('show');
-            $.ajax({
-                url : `${url}/${joborderID}/showdefaultteams`,
-                type : 'GET',
-                dataType : 'JSON',
-                success : (data,response)=>{
-                    console.log(data);
-                },
-                error : (error)=>{
-                    throw error;    
+    $.ajax({
+        url : `${url}/${joborderID}/showdefaultteams`,
+        type : 'GET',
+        dataType : 'JSON',
+        success : (data,response)=>{
+            console.log(data);
+            for(var counter = 0; counter < data.jobsched.length; counter++){
+                jobschedID[counter] = data.jobsched[counter].intJobSchedID;
+                tugboatID[counter] = data.jobsched[counter].intTugboatID;
+            }
+            swal({
+                title: "Are you Sure?",
+                text: "Assign The Default Teams",
+                type: "info",
+                showCancelButton: true,
+                confirmButtonClass: "btn-info waves-effect",
+                confirmButtonText: "Ok",
+                closeOnConfirm: true
+            },(isConfirm)=>{
+                if(isConfirm){
+                    console.log('heyyyyyaaaa');
+                    // $('#defaultTeamsModal').modal('show');
+                    $.ajax({
+                        url : `${url}/assigndefaultteams`,
+                        type : 'POST',
+                        data : {
+                            "_token" : $('meta[name="csrf-token"]').attr('content'),
+                            tugboatID : tugboatID,
+                            jobschedID : jobschedID,
+                        }, 
+                        success : (data,response)=>{
+                            console.log(data);
+                            swal({
+                                title: "Success",
+                                text: "Teams Assigned",
+                                type: "success",
+                                showCancelButton: true,
+                                confirmButtonClass: "btn-success waves-effect",
+                                confirmButtonText: "Ok",
+                                closeOnConfirm: true
+                            },(isConfirm)=>{
+                                if(isConfirm);{
+                                    location.reload();
+                                }
+                            });
+                        },
+                        error : (error)=>{
+                            throw error;    
+                        }
+                    });
                 }
             });
+        },
+        error : (error)=>{
+            throw error;    
         }
     });
 });

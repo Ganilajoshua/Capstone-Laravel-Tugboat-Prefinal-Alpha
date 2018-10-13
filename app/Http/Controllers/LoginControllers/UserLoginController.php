@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\LoginControllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+use App\Notifications\VerifyEmail;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Company;
@@ -31,6 +34,7 @@ class UserLoginController extends Controller
 
     }
     public function register(Request $request){
+        // return $request->all();
         $comp = Company::max('intCompanyID')+1;
         $ID = $comp;
         $company = new Company;
@@ -41,6 +45,17 @@ class UserLoginController extends Controller
         $company->strCompanyEmail = $request->input('email');
         $company->strCompanyContactPNum = $request->input('mobilenum');
         $company->strCompanyContactTNum = $request->input('telnum');
+        if($request->hasFile('file')){
+            // return $request->all();
+            $image = $request->file('file');
+            $filename = $request->file->getClientOriginalName();
+            $company->strCompanyPermit = $filename;
+            $destinationPath = public_path('/pictures/consignee/permits');
+            $image->move($destinationPath,$filename);
+            
+
+            // $request->file->storeAs('public/stisla_admin_v1.0.0/dist/img/Consignee/Permits',$filename);
+        }
         $company->save();
         // return response(['username'=>$request->input('username')]);
         $user = User::create([
@@ -49,7 +64,12 @@ class UserLoginController extends Controller
             'password' => bcrypt($request->input('password')),
             'intUCompanyID' => $ID,
             'enumUserType' => '4',
+            'token' => Str::random(25)
         ]);
+
+        // Verify Email
+        $user->notify(new VerifyEmail($user));
+        // return $user;
         // return response(['success']);
         return redirect('/consignee/login');
     }
@@ -59,5 +79,11 @@ class UserLoginController extends Controller
         $request->session()->flush();
         $request->session()->regenerate();
         return redirect('/');
+    }
+
+    public function verifyemail($token){
+        $user = User::where('token',$token)->firstOrFail();
+        $user->update(['token' => null]);
+        return redirect('/consignee/login');
     }
 }

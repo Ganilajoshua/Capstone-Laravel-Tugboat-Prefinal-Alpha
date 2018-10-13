@@ -122,13 +122,26 @@ function viewConsigneeDetails(companyID){
         dataType: 'JSON',
         success : function(data){
             console.log('Data Recieved', data);
-            $('#consigneeDetails').empty();     
-            var imageVar = (data.user[0].strCompanyName).charAt(0);
+            $('#consigneeDetails').empty();
+            if(data.user[0].strCompanyPermit == null){
+                var permitVar = `${(data.user[0].strCompanyName).charAt(0)}tbLogo.png`;
+                var permitfilepath = '/others/stisla_admin_v1.0.0/dist/img/Alphabet/';
+            }else{
+                var permitVar = data.user[0].strCompanyPermit;
+                var permitfilepath = '/pictures/consignee/permits';
+            }
+            if(data.user[0].strCompanyPicture == null){
+                var imageVar = `${(data.user[0].strCompanyName).charAt(0)}tbLogo.png`;
+                var filepath = '/others/stisla_admin_v1.0.0/dist/img/Alphabet/';
+            }else{
+                var imageVar = data.user[0].strCompanyPermit;
+                var filepath = '/pictures/consignee/profilepictures';
+            }
             console.log(imageVar);
             var appendProfile = 
             `<div class="box-body box-profile">
                 <div class="text-center">
-                    <img class="img-responsive" src="/others/stisla_admin_v1.0.0/dist/img/Alphabet/`+imageVar+`tbLogo.png" height="150px" width="150px" alt="User profile picture">
+                    <img class="img-responsive" src="${filepath}/${imageVar}" height="150px" width="150px" alt="User profile picture">
                 </div>
             
                 <h3 class="profile-username text-center mt-4">` + data.user[0].strCompanyName + `</h3>
@@ -152,7 +165,10 @@ function viewConsigneeDetails(companyID){
                         <b>Mobile Number : </b><a class="pull-right">`+ data.user[0].strCompanyContactPNum +`</a>
                     </li>
                 </ul>
-            </div>`
+            </div>
+            <div class="text-center mt-2">
+                <img class="img-responsive" src="${permitfilepath}/${permitVar}" style="max-height:1000px; max-width:500px;" alt="User profile picture">
+            </div>`;
             $(appendProfile).appendTo('#consigneeDetails');
             $('#accountInfoModal').modal('show');
         },

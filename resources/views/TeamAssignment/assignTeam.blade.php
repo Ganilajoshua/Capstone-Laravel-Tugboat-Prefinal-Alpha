@@ -40,10 +40,15 @@
   
                     </div>
                     <div class="card-footer startHaulingFooter">
+
                         <div class="float-right mr-1 mb-3">
-                            <button type="button" class="btn btn-primary waves-effect mr-2 backButton">Back</button>
-                            <button type="button" class="btn btn-primary waves-effect assignDefaultTeams">Assign Default Teams</button>
-                            <button type="button" class="btn btn-primary waves-effect assignTeams">Assign Selected Teams</button>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-primary waves-effect mr-2 backButton">Back</button>
+                                    <button type="button" class="btn btn-primary waves-effect assignDefaultTeams mr-2">Assign Default Teams</button>
+                                    <button type="button" class="btn btn-primary waves-effect assignTeams">Assign Selected Teams</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

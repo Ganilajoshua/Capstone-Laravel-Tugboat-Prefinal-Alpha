@@ -33,7 +33,7 @@
                     </div>
                     <input type="hidden" id="editIDhide">
                     <!-- <button type="Submit" onclick="postBerth()" class="btnAdd btn btn-primary waves-effect float-right">Add</button> -->
-                    <button type="Submit" onclick="postBerth()" class="btnAdd btn btn-primary waves-effect float-right">Add</button>
+                    <button type="Submit" class="btnAdd btn btn-primary waves-effect float-right">Add</button>
                 </form>
             </div>
         </div>
@@ -54,6 +54,9 @@
         if (form.checkValidity() === false) {
           event.preventDefault();
           event.stopPropagation();
+        }
+        else{
+            return postBerth();
         }
         form.classList.add('was-validated');
       }, false);

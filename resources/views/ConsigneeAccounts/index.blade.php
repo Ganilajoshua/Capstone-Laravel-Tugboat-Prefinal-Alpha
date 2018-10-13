@@ -47,18 +47,21 @@
                                             <tr>
                                                 <td>{{$inactiveuser->strCompanyName}}</td>
                                                 <td><span class="block-email"><a href="mailto:{{$inactiveuser->email}}">{{$inactiveuser->email}}</a></span></td>
-                                                <td>
-                                                    @if($inactiveuser->token === null)
+                                                @if($inactiveuser->token == null)
+                                                    <td>
                                                         <div class="badge badge-success">
                                                             Verified
                                                         </div>
-                                                    @else
-                                                    <div class="badge badge-danger">
+                                                    </td>
+                                                @else
+                                                    <td>
+                                                        <div class="badge badge-danger">
                                                             Not Verified
                                                         </div>
-                                                    @endif
-                                                </td>
+                                                    </td>
+                                                @endif
                                                 <td> 
+                                                
                                                     <div class="checkbox ml-3" data-id="{{$inactiveuser->id}}">
                                                         <label>
                                                             <input type="checkbox" id="checkboxStatuss" data-size="small" data-width="" data-toggle="toggle"data-onstyle="success"data-offstyle="danger" data-on="Active" data-off="Inactive" data-id="{{$inactiveuser->id}}">

@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use App\Employees;
 use App\Position;
 use App\JobOrder;
+use App\JobSchedule;
 use App\ForwardRequest;
 use App\Team;
 use App\TeamAssignment;
@@ -21,7 +22,7 @@ use App\TugboatClass;
 use App\TugboatMainSpecifications;
 use App\TugboatSpecifications;
 use App\TugboatAssignment;
-use App\TugboatInsurances;  
+use App\TugboatInsurances; 
 
 use Redirect;
 use Auth;
@@ -174,6 +175,7 @@ class TugboatTeamAssignmentController extends Controller
         ->where('jobsched.intJSTeamID',null)
         ->groupBy('jobsched.intJSJobOrderID')
         ->get();
+
         return view('TeamAssignment.index',
         compact('tugboatassign','employee','captains','chiefengineers','crew','others','nocompliance','compliance','requestteam',
         'available','teamavailable','availtug','teamlist','teamList','tugboatnoAvail','tugboatAvail','affiliates','teamsreceived','tugboatsreceived','notugboatteam'));
@@ -571,7 +573,7 @@ class TugboatTeamAssignmentController extends Controller
 
     public function showdefaultteams($intJobOrderID){
         $teams = [];
-
+        $employees = [];
         $jobsched = DB::table('tbljobsched as jobsched')
         ->join('tbljoborder as joborder','jobsched.intJSJobOrderID','joborder.intJobOrderID')
         ->join('tbltugboat as tugboat','jobsched.intJSTugboatID','tugboat.intTugboatID')
@@ -581,12 +583,39 @@ class TugboatTeamAssignmentController extends Controller
         ->where('jobsched.intJSJobOrderID',$intJobOrderID)
         ->get();
 
-        for($count=0;$count < count($jobsched); $count++){
-            $tugboatassign = Team::findOrFail($jobsched[$count]->intTAssignID);
-            $teams[$count] = $tugboatassign;
+        for($count = 0; $count < count($jobsched); $count++){
+            $employee[$count] = Employees::where('intETeamID',$jobsched[$count]->intTeamID)->get();
+            for($counter = 0; $counter < count($employee); $counter++){
+                $employees[$counter] = $employee[$counter];
+            }
         }
+        // for($count=0;$count < count($jobsched); $count++){
+        //     $tugboatassign = DB::table('tbltugboatassign as assign')
+        //     ->join('tblteam as team','assign.intTATeamID','team.intTeamID')
+        //     ->join('tblemployee as employee','team.intTeamID','employee.intETeamID')
+        //     ->where('intTAssignID',$jobsched[$count]->intTAssignID) 
+        //     ->get();
+        //     Team::findOrFail($jobsched[$count]->intTAssignID);
+        //     $teams[$count] = ['tugboatassign' => $tugboatassign];
+        // }
 
-        return response()->json(['jobsched'=>$jobsched,'teams'=>$teams]);
+        return response()->json(['jobsched'=>$jobsched,'teams'=>$teams,'employees'=>$employees]);
+    }
+
+    public function assigndefaultteams(Request $request){
+        $teams = [];
+        for($counter = 0; $counter < count($request->tugboatID); $counter++){
+            $team = TeamAssignment::findOrFail($request->tugboatID[$counter]);
+            $teams[$counter] = $team->intTATeamID;
+        }
+        
+        for($count = 0; $count < count($request->jobschedID); $count++){
+            $jobsched = JobSchedule::findOrFail($request->jobschedID[$count]);
+            $jobsched->timestamps = false;
+            $jobsched->intJSTeamID = $teams[$count];
+            $jobsched->save();
+        }
+        return response()->json(['teams'=>$teams]);
     }
 
 }

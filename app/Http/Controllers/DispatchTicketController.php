@@ -19,7 +19,7 @@ class DispatchTicketController extends Controller
     public function index()
     {
         $dispatch = DB::table('tbljoborder as joborder')
-        ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
+        // ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
         ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
         ->join('tblpier as pier','berth.intBPierID','pier.intPierID')
         // ->join('tblbarge as barge','joborder.intJOBargeID','barge.intBargeID')
@@ -30,7 +30,7 @@ class DispatchTicketController extends Controller
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->leftjoin('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
         // ->where('invoice.intIDispatchTicketID',null)
         // ->where('dispatch.boolAApprovedby',0)
@@ -43,7 +43,7 @@ class DispatchTicketController extends Controller
         ->get(); 
 
         $accept = DB::table('tbljoborder as joborder')
-        ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
+        // ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
         ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
         ->join('tblpier as pier','berth.intBPierID','pier.intPierID')
         // ->join('tblbarge as barge','joborder.intJOBargeID','barge.intBargeID')
@@ -54,7 +54,7 @@ class DispatchTicketController extends Controller
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->leftjoin('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
         ->where('invoice.intIDispatchTicketID',null)
         ->where('dispatch.boolAApprovedby',1)
@@ -66,7 +66,7 @@ class DispatchTicketController extends Controller
         ->get();
 
         $final = DB::table('tbljoborder as joborder')
-        ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
+        // ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
         ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
         ->join('tblpier as pier','berth.intBPierID','pier.intPierID')
         // ->join('tblbarge as barge','joborder.intJOBargeID','barge.intBargeID')
@@ -77,7 +77,8 @@ class DispatchTicketController extends Controller
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
+        // ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
         ->leftjoin('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
         ->where('invoice.intIDispatchTicketID',null)
         ->where('dispatch.boolAApprovedby',1)
@@ -108,7 +109,7 @@ class DispatchTicketController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) 
     {
         $Dispatch = DispatchTicket::find($request->dispatch);
             error_log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
@@ -167,7 +168,7 @@ class DispatchTicketController extends Controller
     public function info($id)
         {
         $dispatch = DB::table('tbljoborder as joborder')
-        ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
+        // ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
         ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
         ->join('tblpier as pier','berth.intBPierID','pier.intPierID')
         // ->join('tblbarge as barge','joborder.intJOBargeID','barge.intBargeID')
@@ -178,7 +179,8 @@ class DispatchTicketController extends Controller
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
+        // ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
         ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
         ->where('jobsched.enumstatus','Finished')
         ->where('dispatch.intDispatchTicketID',$id)
