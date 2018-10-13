@@ -29,11 +29,12 @@ class PaymentController extends Controller
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
         ->join('tblbill as bill','invoice.intIBillID','bill.intBillID')
         ->join('tblcharges as charges','charges.intChargeID','invoice.intInvoiceID')
         ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
+        ->groupby('dispatch.intDispatchTicketID')
         ->get(); 
 
         error_log($bill);
@@ -44,17 +45,18 @@ class PaymentController extends Controller
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
         // ->where('company.intCompanyID',Auth::user()->intUCompanyID)
         ->where('jobsched.enumstatus','Finished')
         ->where('invoice.enumstatus','Processing')
+        ->groupby('dispatch.intDispatchTicketID')
         ->get();
 
         $pending = DB::table('tbljoborder as joborder')
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
         ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
         ->join('tblbill as bill','bill.intBillID','invoice.intIBillID')
         ->join('tblcheque as cheque','bill.intBillID','cheque.intCBillID')
@@ -67,7 +69,7 @@ class PaymentController extends Controller
         $paid = DB::table('tbljoborder as joborder')
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
         ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
         ->join('tblbill as bill','bill.intBillID','invoice.intIBillID')
         ->join('tblcheque as cheque','bill.intBillID','cheque.intCBillID')
@@ -80,7 +82,7 @@ class PaymentController extends Controller
         $rejected = DB::table('tbljoborder as joborder')
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
         ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
         ->join('tblbill as bill','bill.intBillID','invoice.intIBillID')
         ->join('tblcheque as cheque','bill.intBillID','cheque.intCBillID')
@@ -211,12 +213,13 @@ class PaymentController extends Controller
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
         // ->join('tblbill as bill','invoice.intIBillID','bill.intBillID')
-        // ->join('tblcharges as charges','charges.intChargeID','invoice.intInvoiceID')
+        ->join('tblcharges as charges','charges.intChargeID','invoice.intInvoiceID')
         ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
         ->where('invoice.intInvoiceID',$id)
+        ->groupby('dispatch.intDispatchTicketID')
         ->get(); 
         error_log($dispatch);
         return response()->json(['dispatch'=>$dispatch]);   

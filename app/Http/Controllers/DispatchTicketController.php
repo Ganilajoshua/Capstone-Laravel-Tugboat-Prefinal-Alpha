@@ -33,12 +33,12 @@ class DispatchTicketController extends Controller
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->leftjoin('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->leftjoin('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
         ->join('tblcontractlist as contract','company.intCompanyID','contract.intCCompanyID')
         ->join('tblfinalcontractfeesmatrix as finalmatrix','finalmatrix.intFCFContractListID','contract.intContractListID')
         ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
-        ->where('jobsched.enumstatus','Finished')
+        // ->where('jobsched.enumstatus','Finished')
         ->where('dispatch.boolCApprovedby',0)
         ->where('dispatch.boolAApprovedby',0)
         ->where('dispatch.boolDeleted',0)
@@ -58,9 +58,9 @@ class DispatchTicketController extends Controller
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->leftjoin('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->join('tblcontractlist as contract','company.intCompanyID','contract.intCCompanyID')
-        ->join('tblfinalcontractfeesmatrix as finalmatrix','finalmatrix.intFCFContractListID','contract.intContractListID')
+        // ->join('tblfinalcontractfeesmatrix as finalmatrix','finalmatrix.intFCFContractListID','contract.intContractListID')
         ->leftjoin('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
         ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
         ->where('jobsched.enumstatus','Finished')
@@ -83,10 +83,10 @@ class DispatchTicketController extends Controller
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->join('tblcontractlist as contract','company.intCompanyID','contract.intCCompanyID')
         ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
-        ->join('tblfinalcontractfeesmatrix as finalmatrix','finalmatrix.intFCFContractListID','contract.intContractListID')
+        // ->join('tblfinalcontractfeesmatrix as finalmatrix','finalmatrix.intFCFContractListID','contract.intContractListID')
         ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
         ->where('jobsched.enumstatus','Finished')
         ->where('dispatch.boolCApprovedby',1)
@@ -108,9 +108,9 @@ class DispatchTicketController extends Controller
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->join('tblcontractlist as contract','company.intCompanyID','contract.intCCompanyID')
-        ->join('tblfinalcontractfeesmatrix as finalmatrix','finalmatrix.intFCFContractListID','contract.intContractListID')
+        // ->join('tblfinalcontractfeesmatrix as finalmatrix','finalmatrix.intFCFContractListID','contract.intContractListID')
         ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
         ->where('jobsched.enumstatus','Finished')
         ->where('dispatch.boolCApprovedby',0)
@@ -173,12 +173,13 @@ class DispatchTicketController extends Controller
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->join('tblcontractlist as contract','company.intCompanyID','contract.intCCompanyID')
-        ->join('tblfinalcontractfeesmatrix as finalmatrix','finalmatrix.intFCFContractListID','contract.intContractListID')
+        // ->join('tblfinalcontractfeesmatrix as finalmatrix','finalmatrix.intFCFContractListID','contract.intContractListID')
         ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
         ->where('jobsched.enumstatus','Finished')
         ->where('dispatch.intDispatchTicketID',$request->$id)
+        ->groupby('dispatch.intDispatchTicketID')
         ->get();
         return view('DispatchTicket.applycharge');  
     }
@@ -228,12 +229,13 @@ class DispatchTicketController extends Controller
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->join('tblcontractlist as contract','company.intCompanyID','contract.intCCompanyID')
         ->join('tblfinalcontractfeesmatrix as finalmatrix','finalmatrix.intFCFContractListID','contract.intContractListID')
         ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
         ->where('jobsched.enumstatus','Finished')
         ->where('dispatch.intDispatchTicketID',$id)
+        ->groupby('dispatch.intDispatchTicketID')
         ->get();
         error_log($dispatch);
         // return view('DispatchTicket.index')
@@ -260,7 +262,7 @@ class DispatchTicketController extends Controller
         $Invoice->intIDispatchTicketID = $request->dispatch;
         $Invoice->timestamps = false;
         $Invoice->strInvoiceDesc = 'processed';
-        $Invoice->enumStatus = 'Pending';
+        $Invoice->enumStatus = 'Processing';
         $Invoice->fltBalanceRemain = $request->total;
         $Invoice->boolDeleted = 0;
         
@@ -275,8 +277,8 @@ class DispatchTicketController extends Controller
         $Charges->fltCompanyDamageFee = $request->companydamagefee;
         $Charges->fltCompanyViolationFee = $request->companyviolation;
         $Charges->intDiscount = $request->discount;
-        // $Invoice->save();
-        // $Charges->save();
+        $Invoice->save();
+        $Charges->save();
 
     }
     public function Void(Request $request)
@@ -299,11 +301,12 @@ class DispatchTicketController extends Controller
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDTJobSchedID','jobsched.intJobSchedID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->join('tblcontractlist as contract','company.intCompanyID','contract.intCCompanyID')
-        ->join('tblfinalcontractfeesmatrix as finalmatrix','finalmatrix.intFCFContractListID','contract.intContractListID')
+        // ->join('tblfinalcontractfeesmatrix as finalmatrix','finalmatrix.intFCFContractListID','contract.intContractListID')
         ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
         ->where('jobsched.enumstatus','Finished')
+        ->groupby('dispatch.intDispatchTicketID')
         ->get();
         return response()->json(['validate'=>$validate]); 
     }

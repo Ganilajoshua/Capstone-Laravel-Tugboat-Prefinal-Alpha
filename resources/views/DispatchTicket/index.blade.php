@@ -106,6 +106,6 @@
 	</div>
     </section>
 	@include('DispatchTicket.info')
-	{{-- @include('DispatchTicket.charges')	 --}}
+	@include('DispatchTicket.charges')	
 @endsection
 

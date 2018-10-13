@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    console.log('eyy')
   $(function() {
       var signConsignee = $('.signConsigneeCanvasDisplay').signature();
       var signAdmin = $('.signAdminCanvas').signature({
@@ -70,11 +71,10 @@ $('#transactionTree').addClass('active');
     });
     
     //finalize
-    $('.finalize').on('click',function() {
-        $('.dispatchTicketTable').css('display','none');
-        $('.viewDetails').css('display','none');
-        $('.viewCharges').css('display','block');
-    });
+    // $('.finalize').on('click',function() {
+    // $('.viewCharges').css('display','block');
+    // $('.viewDetails').css('display','none');
+// });
     
     //finalize - back
     
@@ -120,135 +120,31 @@ function getData(id){
             // <button id="forAdmin" onclick="ValidateAAccept()" class="btn btn-primary waves-effect float-left" >
             // Submit to Consignee
             // </button>
-            `${data.dispatch}`
-            
-            $('.temp').empty();
-            var appendData = 
-            `
-            <div class="viewCharges">
-        <div class="card card-primary animated slideInDown fast">
-            <div class="card-header">
-                    <a href="#" class="btnFinalizeBack btn btn-lg btn-link float-left" data-toggle="tooltip" title="Back" role="button">
-                        <i class="ion-chevron-left"></i>
-                    </a>
-                    <h4 class="float-right">Additional Charges for Bill # ${data.dispatch[0].intDispatchTicketID}</h4>
-                </div>
-        <form class="needs-validation" novalidate>
-            <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label for="amount">Job Order Amount</label>
-                                <div class="input-group">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">&#8369; </span>
-                                    </div>
-                                    <input type="number" name="amount" id="amount" min="0" class="form-control">
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label for="discount">Discount</label>
-                                <div class="input-group">
-                                    <input type="number" name="discount" id="discount" min="0" max="${data.dispatch[0].intFCFDiscountFee}" class="form-control" min="0">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label for="delay">Tugboat Delay Fee</label>
-                                <div class="input-group">
-                                    <input type="number" class="form-control" id="delay" name="delay" placeholder="No. of Hour" min=0>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">x</span>
-                                    </div>
-                                    <input type="number" class="form-control" id="delayrate" name="delayrate"  value="${data.dispatch[0].fltFCFTugboatDelayFee}" disabled>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label for="companydamagefee">Company Damage Fee</label>
-                                <div class="input-group">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">&#8369; </span>
-                                    </div>
-                                    <input type="number" name="companydamagefee" id="companydamagefee" class="form-control" min="${data.dispatch[0].fltFCFMinDamageFee}"  max="${data.dispatch[0].fltFCFMaxDamageFee}">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label for="companyviolation">Company Violation Fee</label>
-                                <div class="input-group">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">&#8369; </span>
-                                    </div>
-                                    <input type="number" name="companyviolation" id="companyviolation" class="form-control" min="0"  max="${data.dispatch[0].fltFCFViolationFee}">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="form-group">
-                                <label for="consigneelatefee">Consignee Late Fee</label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" id="consigneelatefee" name="consigneelatefee" placeholder="No. of Hour" min="0">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">x</span>
-                                </div>
-                                <input type="number" class="form-control" id="" name="" value="${data.dispatch[0].fltFCFConsigneeLateFee}" disabled>
-                            </div>
-                            <div class="invalid-feedback">
-                                    Invalid Input.
-                                </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label for="consigneedamagefee">Consignee Damage Fee</label>
-                            <div class="input-group">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">&#8369; </span>
-                                </div>
-                                <input type="number" name="consigneedamagefee" id="consigneedamagefee"  class="form-control" min="${data.dispatch[0].fltFCFMinDamageFee}" max="${data.dispatch[0].fltFCFMaxDamageFee}">
-                                <div class="invalid-feedback">
-                                    Invalid Input.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="form-group">
-                            <label for="consigneeviolation">Consignee Violation Fee</label>
-                            <div class="input-group">
-                                <div class="input-group-append">
-                                    <span class="input-group-text">&#8369; </span>
-                                </div>
-                                <input type="number" name="consigneeviolation" id="consigneeviolation" class="form-control" min="0" max="${data.dispatch[0].fltFCFViolationFee}">
-                                </div>
-                                <div class="invalid-feedback">
-                                    Invalid Input.
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <button type="Submit" class="btn btn-primary waves-effect float-right">Apply Charges</button>
-            </div>
-            </form>
-            </div>
-        </div>
-            `;
-            $(appendData).appendTo('.temp');
-
+            var delay = Number(data.dispatch[0].fltFCFTugboatDelayFee);
+            var delay2 = Number(data.dispatch[0].fltFCFConsigneeLateFee);
+            $("#delayrate").val(delay);
+            $("#conlatefee").val(delay2);
+            $("#discount").attr({
+                "max" : data.dispatch[0].intFCFDiscountFee,
+                "min" : 0         
+             });
+             $("#companydamagefee").attr({
+                "max" : data.dispatch[0].fltFCFMaxDamageFee,
+                "min" : data.dispatch[0].fltFCFMinDamageFee       
+             });
+             $("#companyviolation").attr({
+                "max" : data.dispatch[0].fltFCFViolationFee,
+                "min" : 0       
+             });
+             $("#consigneedamagefee").attr({
+                "max" : data.dispatch[0].fltFCFMaxDamageFee,
+                "min" : data.dispatch[0].fltFCFMinDamageFee   
+             });
+             $("#consigneeviolation").attr({
+                "max" : data.dispatch[0].fltFCFViolationFee,
+                "min" : 0  
+             });
+            //  console.log(data.dispatch[0].intFCFDiscountFee);
             if(data.dispatch[0].enumServiceType=='Hauling')
             {
                 var amount = 20000;
@@ -325,9 +221,21 @@ function getData(id){
             }
       }
   });
-  
+
+    
+
+
+
+
+
+
   $('.dispatchTicketTable').css('display','none');
   $('.viewDetails').css('display','block');
+  $('.finalize').on('click',function() {
+    $('.viewCharges').css('display','block');
+    $('.viewDetails').css('display','none');
+  });
+  
 }
 
 function ValidateAAccept(){
@@ -441,12 +349,19 @@ function finalize(){
 
     var finalize = $('#compid').val();
 
+    var templatecharge = $('#conlatefee').val();
+    var template = $('#consigneelatefee').val();
+    var consigneelatefee = Number(template) * Number(templatecharge);
+    console.log(consigneelatefee);
+    console.log('x');
     var consigneeviolation = $('#consigneeviolation').val();
-    var consigneelatefee = $('#consigneelatefee').val();
     var consigneedamagefee = $('#consigneedamagefee').val();
     var consigneecharge = (Number(consigneeviolation) + Number(consigneelatefee) + Number(consigneedamagefee));
 
-    var delay = $('#delay').val();
+    var tempdelaycharge = $('#delayrate').val();
+    var tempdelay = $('#delay').val();
+    var delay = Number(tempdelay) * Number(tempdelaycharge);
+    console.log(delay);
     var companydamagefee = $('#companydamagefee').val();
     var companyviolation = $('#companyviolation').val();  
     var companycharges = (Number(delay)+Number(companydamagefee)+Number(companyviolation))
