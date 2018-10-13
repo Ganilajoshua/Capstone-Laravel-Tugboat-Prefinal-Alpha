@@ -9,7 +9,12 @@ class DispatchTicket extends Model
     protected $table = 'tbldispatchticket';
     protected $primaryKey = 'intDispatchTicketID';
     protected $fillable = [
-        'boolAApprovedby'
+        'boolAApprovedby',
+        'boolCApprovedby',
+        'strConsigneeSign',
+        'strAdminSign',
+        'strDispatchTicketDesc',
+        'boolDeleted',
     ];
 
 }

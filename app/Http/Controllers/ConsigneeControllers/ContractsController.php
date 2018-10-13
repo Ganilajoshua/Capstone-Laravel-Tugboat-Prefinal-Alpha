@@ -33,6 +33,7 @@ class ContractsController extends Controller
         $contractList = DB::table('users as users')
         ->leftjoin('tblcompany as company','users.intUCompanyID','company.intCompanyID')
         ->join('tblcontractlist as contracts','company.intCompanyID','contracts.intCCompanyID')
+        
         ->where('contracts.intCCompanyID',Auth::user()->intUCompanyID)
         ->select('company.*','contracts.*','users.*')
         // ->where('contracts.intCQuotationID',null)
