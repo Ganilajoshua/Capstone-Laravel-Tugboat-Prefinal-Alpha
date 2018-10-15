@@ -142,6 +142,7 @@ class ContractsController extends Controller
         $contract->save();
         return response()->json(['contract'=>$contract]);
     }
+
     public function getquoteexchanges($intContractListID){
         $quotations = DB::table('tblquotation as quotation')
         ->leftjoin('tblquotationshistory as history','quotation.intQuotationID','intQHQuotationID')

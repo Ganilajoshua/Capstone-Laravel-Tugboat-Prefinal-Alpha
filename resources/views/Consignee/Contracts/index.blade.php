@@ -409,7 +409,7 @@
                             <div class="card-footer text-center">
                                 <input type="hidden" id="contractsID">
                                 <button class="btn btn-primary waves-effect" data-toggle="modal" data-target="#requestChangesModal">Request for Changes</button>
-                                <button id="applySignatureButton" class="btn btn-success waves-effect" data-toggle="modal" data-target="#applySignatureModal">Sign and Accept Contract</button>
+                                <button id="applySignatureButton" data-id="{{$contract[0]->intContractListID}}" class="applySignatureButton btn btn-success waves-effect">Sign and Accept Contract</button>
                             </div>
                         </div>
                     </div>

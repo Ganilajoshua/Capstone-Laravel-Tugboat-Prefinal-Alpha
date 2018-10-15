@@ -388,8 +388,65 @@ function showFinalContract(showID){
             throw error;
         }
     });
-}function acceptContractQuotation(){
-        $('#applySignatureModal').modal('hide');
+}
+$('.acceptContract').on('click',function(){
+    $('#applySignatureModal').modal('hide');
+    console.log($(this).data('id'));
+    var contractID = $(this).data('id');    
+    swal({
+        title: "Are You Sure?",
+        text: "Accept Contract Quotation?",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonClass: "btn-info",
+        confirmButtonText: "Ok",
+    },function(isConfirm){
+        if(isConfirm){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url : url + '/activate',
+                type : 'POST',
+                data : { 
+                    "_token" : $('meta[name="csrf-token"]').attr('content'),    
+                    contractID : contractID,
+                }, 
+                beforeSend: function (request) {
+                    return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                },
+                success : function(data){
+                    console.log('success pota');
+                    console.log(data);
+                    swal({
+                        title: "Success",
+                        text: "Contract Request Accepted",
+                        type: "success",
+                        showCancelButton: false,
+                        confirmButtonClass: "btn-success",
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: true,
+                        timer : 2000
+                    },
+                    function(isConfirm){
+                        if(isConfirm){
+                            window.location = url; 
+                        }
+                    });                       
+                },
+                error : function(error){
+                    throw error;
+                }
+
+            });
+        }else{
+            $('#applySignatureModal').modal('show');
+        }
+    });
+});
+function acceptContractQuotation(){
         var contractID = $('#contractsID').val();
         swal({
             title: "Are You Sure?",
@@ -467,6 +524,11 @@ $('.viewQuotesMatrix').on('click',function(){
     });
 });
 
+$('.applySignatureButton').on('click',function(){
+    console.log($(this).data('id'));
+    $('.acceptContract').data('id',$(this).data('id'));
+    $('#applySignatureModal').modal('show');
+});
 // function appendQuotes(quotations){
 //     console.log(quotations);
 //     for(var counter = 0; counter < quotations.length; counter++){
