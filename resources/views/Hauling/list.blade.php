@@ -74,8 +74,8 @@
                                                 <div class="card-footer mt-2">
                                                     <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
                                                     <button data-id="{{$ongoingjobs->intJobOrderID}}" class="terminateHauling btn btn-danger btn-sm text-center float-right ml-2 waves-effect">End</button>
-                                                    <button class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect" data-toggle="modal" data-target="#updateLoc">Update Location</button>
-                                                    {{-- <button class="btn btn-primary btn-sm text-center float-right waves-effect">Start</button> --}}
+                                                    <button data-id="{{$ongoingjobs->intJSDispatchTicketID}}" class="updateLocation btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Update Location</button>
+                                                    <button data-id="{{$ongoingjobs->intJSDispatchTicketID}}" class="showUpdates btn btn-primary btn-sm text-center float-right waves-effect">Show Updates</button>
                                                 </div>
                                             </div>
                                         </div>

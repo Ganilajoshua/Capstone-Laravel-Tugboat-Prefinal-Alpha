@@ -11,6 +11,9 @@ use App\JobOrder;
 use App\JobSchedule;
 use App\Schedule;
 use App\Employees;
+use App\DispatchTicket;
+use App\Location;
+
 use DB;
 use Auth;
 
@@ -189,10 +192,18 @@ class HaulingController extends Controller
         }
         $joborder->save();
 
+        $maxID = DispatchTicket::max('intDispatchTicketID')+1;
+
+        $dispatchticket = new DispatchTicket;
+        $dispatchticket->intDispatchTicketID = $maxID;
+        $dispatchticket->timestamps = false;
+        $dispatchticket->save();
+
         $jobsched = JobSchedule::where('intJSJobOrderID',$request->joborderID)->get();
         for($count = 0; $count < count ($jobsched); $count++){
             $jobschedule = JobSchedule::findOrFail($jobsched[$count]->intJobSchedID);
             $jobschedule->timestamps = false;
+            $jobschedule->intJSDispatchTicketID = $maxID;
             $jobschedule->dateStarted = $request->startDate;
             $jobschedule->tmStarted = $request->startTime;
             $jobschedule->enumStatus = 'Ongoing';
@@ -231,5 +242,27 @@ class HaulingController extends Controller
             $teams[$counter] = $employees;
         }
         return response()->json(['teams'=>$teams]);
+    }
+
+    public function updatelocation(Request $request){
+        $location = new Location;
+        $location->timestamps = false;
+        $location->intLDispatchTicketID =  $request->dispatchID;
+        $location->strLocationDesc = $request->remarks; 
+        $location->strLocation = $request->location;
+        $location->tmLocationTime = $request->timeUpdated;
+        $location->save();
+
+        return response()->json(['location'=>$location]);
+    }
+
+    public function locationupdates($intDispatchTicketID){
+        $location = DB::table('tbldispatchticket as ticket')
+        ->leftjoin('tbllocation as location','location.intLDispatchTicketID','ticket.intDispatchTicketID')
+        ->where('location.intLDispatchTicketID',$intDispatchTicketID)
+        ->get();
+        // $location = Location::all();
+
+        return response()->json(['location'=>$location]);
     }
 }

@@ -42,6 +42,7 @@ class VerifyEmail extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+        ->subject('PAKYU')
         ->line('Message From : TSMS (Tugboat Services Management System)')
         ->line('Please Verify Your Account To Continue.')
         ->action('Notification Action', route('verifyEmail',$this->user->token))

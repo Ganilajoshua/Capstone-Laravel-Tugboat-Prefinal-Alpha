@@ -202,9 +202,11 @@ Route::group(['prefix'=>'administrator/'],function(){
             Route::group(['prefix'=>'hauling/'],function(){
                 Route::resource('/','HaulingController');
                 Route::get('/{intJobOrderID}/show','HaulingController@show');
+                Route::get('/{intDispatchTicketID}/locationupdates','HaulingController@locationupdates');
                 Route::post('/showteam','HaulingController@showteam');
                 Route::post('/start','HaulingController@start');
                 Route::post('/terminate','HaulingController@terminate');
+                Route::post('/updatelocation','HaulingController@updatelocation');
             });
         });
         

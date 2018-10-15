@@ -26,8 +26,9 @@
         @endif
     </section>
     <!--Location Updates Modal-->
-    @include('Hauling.location')
     <!--More Info Modal-->
+    @include('Hauling.location')
+    @include('Hauling.locationupdates')
     @include('Hauling.info')
     @include('Hauling.jobschedinfo')
 @endsection
