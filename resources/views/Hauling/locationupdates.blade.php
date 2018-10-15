@@ -18,10 +18,8 @@
                                     <th>Time</th>
                                     <th>Remarks</th>
                                 </thead>
-                                <tbody>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                <tbody class="locationUpdatesBody">
+                                    
                                 </tbody>
                             </table>
                         </div>

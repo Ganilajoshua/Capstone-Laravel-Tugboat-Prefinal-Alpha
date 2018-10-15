@@ -314,9 +314,11 @@ Route::group(['prefix'=>'consignee/'],function(){
     });
     Route::resource('/contracts','ConsigneeControllers\ContractsController');
     Route::get('/contracts/{intContractListID}/show','ConsigneeControllers\ContractsController@show');
+    Route::get('/contracts/{intContractListID}/getquoteexchanges','ConsigneeControllers\ContractsController@getquoteexchanges');
     Route::post('/contracts/requestchanges','ConsigneeControllers\ContractsController@requestchanges');
     Route::post('/contracts/activate','ConsigneeControllers\ContractsController@activate');
     Route::post('/contracts/store','ConsigneeControllers\ContractsController@store');
+
     Route::post('/contracts/getnotifs','ConsigneeControllers\ContractsController@getnotifs');
     //Job Orders
     Route::resource('/joborders','ConsigneeControllers\JobOrdersController');

@@ -432,8 +432,28 @@ $('.showUpdates').on('click',function(){
             console.log(data);
             if(data.location.length == 0){
                 console.log('0 yung Length');
+                appendTable = 
+                    `
+                    <tr>
+                        <td>No Updates To Show </td>
+                    </tr>`;
+
+                    $(appendTable).appendTo('.locationUpdatesBody');
             }else{
                 console.log('greater than 0 yun length');
+                $('.locationUpdatesBody').empty();
+                for(var counter = 0; counter < data.location.length; counter++){
+                    
+                    appendTable = 
+                    `
+                    <tr>
+                        <th>${data.location[counter].strLocation}</th>
+                        <th>${data.location[counter].tmLocationTime}</th>
+                        <th>${data.location[counter].strLocationDesc}</th>
+                    </tr>`;
+
+                    $(appendTable).appendTo('.locationUpdatesBody');
+                }
             }
         },
         error : (error)=>{

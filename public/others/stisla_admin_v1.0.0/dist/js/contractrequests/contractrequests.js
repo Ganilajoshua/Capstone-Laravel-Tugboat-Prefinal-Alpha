@@ -455,3 +455,7 @@ function saveContracts(){
         }
     });
 }
+
+$('.viewQuotesMatrix').on('click',function(){
+    console.log('hi');
+});

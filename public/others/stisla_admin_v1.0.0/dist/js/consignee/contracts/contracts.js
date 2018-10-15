@@ -72,15 +72,16 @@ $(document).ready(function(){
     //         throw error;
     //     }
     // });
-    // $('.signCanvas').mouseup(function(){
-    //     if ($('.signCanvas').signature('isEmpty')) {
-    //         $('.btnAcceptContract').attr('disabled', true);
-    //         $('.btnAcceptContract').css('cursor', 'not-allowed');
-    //       } else {
-    //         $('.btnAcceptContract').attr('disabled', false);
-    //         $('.btnAcceptContract').css('cursor', 'pointer');
-    //       }
-    // });
+
+    $('.signCanvas').mouseup(function(){
+        if ($('.signCanvas').signature('isEmpty')) {
+            $('.btnAcceptContract').attr('disabled', true);
+            $('.btnAcceptContract').css('cursor', 'not-allowed');
+          } else {
+            $('.btnAcceptContract').attr('disabled', false);
+            $('.btnAcceptContract').css('cursor', 'pointer');
+          }
+    });
 });
 
 $('#quoteCustom').on('click',function(){
@@ -444,3 +445,35 @@ function showFinalContract(showID){
         }
     });
 }
+
+$('.viewQuotesMatrix').on('click',function(){
+    $('.contractRequestsMatrix').css('display','block');
+    $('.contractRequestsQuotes').css('display','none');
+    console.log('depppiii');
+    console.log($(this).data('id'));
+    var id = $(this).data('id');
+    $.ajax({
+        url : `${url}/${id}/getquoteexchanges`,
+        type : 'GET',
+        dataType : 'JSON',
+        success : (data)=>{
+            console.log(data);
+            console.log('heyyyyy');
+            appendQuotes(data.quotations);
+        },
+        error : (error)=>{
+            throw error;
+        },
+    });
+});
+
+// function appendQuotes(quotations){
+//     console.log(quotations);
+//     for(var counter = 0; counter < quotations.length; counter++){
+//         if(quotations[counter].enumServiceType == 'Hauling'){
+//             console.log('Hauling');
+//         }else if(quotations[counter].enumServiceType == 'Tug Assist'){
+//             console.log('Tug Assist');
+//         }
+//     }
+// }
