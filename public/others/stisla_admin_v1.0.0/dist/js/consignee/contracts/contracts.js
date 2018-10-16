@@ -10,6 +10,10 @@ $(document).ready(function(){
     $('.btnRequest').on('click',function(e){
         e.preventDefault();
     });
+    var signCanvas = $('.signAdminCanvas').signature({
+        syncField: '#signatureJSON'
+});
+
     // para makuha mo yung value ng contract na kukunin 
     // nagdedefine ng || data-id="" || kasi wala namang click event
     // yung data id nilagyan ko din ng comment sa blade
@@ -205,6 +209,30 @@ $('.defaultMatrixButton').on('click',function(event){
 $('.customMatrixButton').on('click',function(event){
     event.preventDefault();
     console.log('customMatrix');
+    var serviceType = ['Hauling','Tug Assist'];
+    var standardRate = [];
+    var delayFee = [];
+    var violationFee = [];
+    var lateFee = [];
+    var minDamage = [];
+    var maxDamage = [];
+
+    standardRate[0] = $('#addHStandardRate').val();
+    delayFee[0] = $('#addHDelayFee').val();
+    violationFee[0] = $('#addHViolationFee').val();
+    lateFee[0] = $('#addHLateFee').val();
+    minDamage[0] = $('#addHMinDamageFee').val();
+    maxDamage[0] = $('#addHMaxDamageFee').val();
+    
+    standardRate[1] = $('#addTAStandardRate').val();
+    delayFee[1] = $('#addTADelayFee').val();
+    violationFee[1] = $('#addTAViolationFee').val();
+    lateFee[1] = $('#addTALateFee').val();
+    minDamage[1] = $('#addTAMinDamageFee').val();
+    maxDamage[1] = $('#addTAMaxDamageFee').val();
+
+        // console.log(hStandardRate, hDelayFee, hViolationFee, hLateFee, hMinDamage, hMaxDamage);
+        // console.log(tStandardRate, tDelayFee, tViolationFee, tLateFee, tMinDamage, tMaxDamage);
     swal({
         title: "Submit These Suggestions?",
         type: "info",
@@ -213,6 +241,34 @@ $('.customMatrixButton').on('click',function(event){
         confirmButtonText: "Ok",
     },(isConfirm)=>{
         console.log('Hey');
+        $.ajax({
+            url : `${url}/custommatrix`,
+            type : 'POST',
+            data : {
+                "_token" : $('meta[name="csrf-token"]').attr('content'),
+                // Hauling
+                standardRate : standardRate,
+                delayFee : delayFee,
+                violationFee : violationFee,
+                lateFee : lateFee,
+                minDamage : minDamage,
+                maxDamage : maxDamage,
+                serviceType : serviceType,
+                // Tug Assist
+                // tStandardRate : tStandardRate,
+                // tDelayFee : tDelayFee,
+                // tViolationFee : tViolationFee,
+                // tLateFee : tLateFee,
+                // tMinDamage : tMinDamage,
+                // tMaxDamage : tMaxDamage
+            },
+            success : (data, response)=>{
+                console.log(data);
+            },
+            error : (error)=>{
+                throw error;
+            }
+        })
     });
 });
 
@@ -383,6 +439,7 @@ function showFinalContract(showID){
                 $(appendData).appendTo('.viewfinalcontractmodalBody');
                 $('#finalContractInfo').modal('show');
                 
+                $('#signatureJSON').html(data.contract[0].strAdminSign);
         },
         error : function(error){
             throw error;
@@ -393,6 +450,7 @@ $('.acceptContract').on('click',function(){
     $('#applySignatureModal').modal('hide');
     console.log($(this).data('id'));
     var contractID = $(this).data('id');    
+    var sign = $('#signatureJSON').val();
     swal({
         title: "Are You Sure?",
         text: "Accept Contract Quotation?",
@@ -413,6 +471,7 @@ $('.acceptContract').on('click',function(){
                 data : { 
                     "_token" : $('meta[name="csrf-token"]').attr('content'),    
                     contractID : contractID,
+                    sign : sign,
                 }, 
                 beforeSend: function (request) {
                     return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
@@ -539,3 +598,4 @@ $('.applySignatureButton').on('click',function(){
 //         }
 //     }
 // }
+

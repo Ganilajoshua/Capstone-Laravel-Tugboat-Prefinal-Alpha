@@ -562,11 +562,7 @@ class TugboatTeamAssignmentController extends Controller
         ->join('tblteam as team','assign.intTATeamID','team.intTeamID')
         ->where('jobsched.intJSJobOrderID',$intJobOrderID)
         ->get();
-        // $jobsched = DB::table('tbljobsched as jobsched')
-        // ->get();
-        // for($counter = 0; $counter count($jobsched); $count++){
-        //     $job$jobsched[$count]->intJSTugboatID;
-        // }
+
         $team = DB::table('tblteam as team')
         ->where('team.intTCompanyID', Auth::user()->intUCompanyID)
         ->orWhere('team.intTForwardCompanyID', Auth::user()->intUCompanyID)

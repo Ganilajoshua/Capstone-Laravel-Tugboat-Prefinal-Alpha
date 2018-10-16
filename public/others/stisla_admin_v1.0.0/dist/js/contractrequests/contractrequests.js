@@ -29,6 +29,11 @@ $(document).ready(function(){
             ['help']
         ]
     });
+
+    var signCanvas = $('.signCanvas').signature({
+        syncField: '#signatureJSON'
+    });
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -100,6 +105,13 @@ function createContracts(contractID){
                 // $('#discountRange').val();
 
             }
+            // else{
+            //     var appendWarning = 
+            //     `<div style="font-size: 15px; border-radius: 0px !important;" class="mt-3 ml-4 badge badge-warning text-black">
+            //         This 
+            //     </div>`;
+            //     $(appendWarning).appendTo('.defaultMatrix');
+            // }
         },
         error : function(error){
             throw error;
@@ -227,18 +239,18 @@ function showContracts(){
     $('.modalContractDetails').empty();
 
             // if(data.standard == null){
-                var appendData =
-                "<h2>"+ title +"</h2>" +
-                "<p>"+ details +"</p>" + 
-                "<p> Standard Rate : "+ standardFee +"</p>" +
-                "<p> Consignee Late Fee : "+ lateFee +"</p>" +
-                "<p> Tugboat Delay Fee : "+ delayFee +"</p>" +
-                "<p> Violation Fee : "+ violationFee +"</p>" +
-                "<p> Minimum Damage Fee(s) : "+ minDamage +"</p>" +
-                "<p> Maximum Damage Fee(s) : "+ maxDamage +"</p>" +
-                "<p> Maximum Discount : "+ discount +"</p>";
-                $(appendData).appendTo('.modalContractDetails');
-                $('#viewContractInfo').modal('show');
+            var appendData =
+            "<h2>"+ title +"</h2>" +
+            "<p>"+ details +"</p>" + 
+            "<p> Standard Rate : "+ standardFee +"</p>" +
+            "<p> Consignee Late Fee : "+ lateFee +"</p>" +
+            "<p> Tugboat Delay Fee : "+ delayFee +"</p>" +
+            "<p> Violation Fee : "+ violationFee +"</p>" +
+            "<p> Minimum Damage Fee(s) : "+ minDamage +"</p>" +
+            "<p> Maximum Damage Fee(s) : "+ maxDamage +"</p>" +
+            "<p> Maximum Discount : "+ discount +"</p>";
+            $(appendData).appendTo('.modalContractDetails');
+            $('#viewContractInfo').modal('show');
                 
             //     console.log((data.quotationfees).length);
             //     $(appendData).appendTo('.modalContractDetails');
@@ -283,7 +295,7 @@ function createActiveContract(){
     // Tinanggal ko yung contractID nag eerror yun kasi bag empty yung table sa DB
     // Ginawa ko nalang data ID
     console.log($('#addSignatureButton').data('id'));
-
+    var sign = $('#signatureJSON').val();
     var contractID = $('#addSignatureButton').data('id')
         $('#applySignatureModal').modal('hide');
         $.ajax({
@@ -333,6 +345,7 @@ function createActiveContract(){
                                 contractID : id,
                                 contractActive : currDate,
                                 contractExpire : expireContract,
+                                sign : sign,
                             },
                             success : function(data,response){
                                 console.log(data);

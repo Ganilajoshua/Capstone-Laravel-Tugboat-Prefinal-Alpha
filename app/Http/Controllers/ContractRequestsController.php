@@ -214,6 +214,7 @@ class ContractRequestsController extends Controller
     }
     public function activate(Request $request){
         $contract = Contract::findOrFail($request->contractID);
+        $contract->strAdminSign = $request->sign;
         $contract->timestamps = false;
         $contract->enumStatus = 'Active';
         $contract->datContractActive = $request->contractActive;

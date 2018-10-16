@@ -35,6 +35,7 @@
                                                         <th>Service Type</th>
                                                         <th>Standard Rate</th>
                                                         <th>Delay Fee</th>
+                                                        <th>Consignee Late Fee</th>
                                                         <th>Violation Fee</th>
                                                         <th>Minimum Damage Fee</th>
                                                         <th>Maximum Damage Fee</th>
@@ -42,24 +43,29 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody class="tbodyTD" style="font-size:13px;">
-                                                    <tr>
-                                                        <td>Hauling Service</td>
-                                                        <td>2000</td>
-                                                        <td>2000</td>
-                                                        <td>250</td>
-                                                        <td>1500</td>
-                                                        <td>3000</td>
-                                                        <td>20</td>
-                                                    </tr>
-                                                    <tr>
+                                                    @if(count($fees) > 0)
+                                                        @foreach($fees as $fees)
+                                                            <tr>
+                                                                <td>{{$fees->enumServiceType}}</td>
+                                                                <td>{{$fees->fltCFStandardRate}}</td>
+                                                                <td>{{$fees->fltCFTugboatDelayFee}}</td>
+                                                                <td>{{$fees->fltCFConsigneeLateFee}}</td>
+                                                                <td>{{$fees->fltCFViolationFee}}</td>
+                                                                <td>{{$fees->fltCFMinDamageFee}}</td>
+                                                                <td>{{$fees->fltCFMaxDamageFee}}</td>
+                                                                <td>{{$fees->intCFDiscount}}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @endif
+                                                    {{-- <tr>
                                                         <td>Tug Assist Service</td>
                                                         <td>3000</td>
                                                         <td>2500</td>
-                                                        <td>3000</td>
+                                                        <td>3000</td>a
                                                         <td>2000</td>
                                                         <td>3000</td>
                                                         <td>20</td>
-                                                    </tr>
+                                                    </tr> --}}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -69,7 +75,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <ul class="list-inline text-center text-black">
+                                {{-- <ul class="list-inline text-center text-black">
                                     <li class="list-inline-item">
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input radioMatrix" id="quoteMatrix" name="matrixChoices" checked>
@@ -82,7 +88,7 @@
                                             <label class="custom-control-label lblquoteCustom" for="quoteCustom">Create quotation suggestions</label>
                                         </div>
                                     </li>
-                                </ul>
+                                </ul> --}}
                                 {{-- <a href="#" onclick="requestContracts({{$company[0]->intCompanyID}})" id="requestContractsButton" class="defaultMatrixButton mt-3 btn btn-primary float-right">
                                     Request Contract
                                 </a> --}}
@@ -257,15 +263,15 @@
                                     <div class="col">
                                         <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
                                             <li class="nav-item">
-                                                <a class="nav-link active" id="pillsHauling-tab" data-toggle="pill" href="#pillsHauling" role="tab" aria-controls="pillsHauling" aria-selected="true">Pending</a>
+                                                <a class="nav-link active" id="pillsHauling-tab" data-toggle="pill" href="#pillsHauling" role="tab" aria-controls="pillsHauling" aria-selected="true">Hauling</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" id="pillsTugAssist-tab" data-toggle="pill" href="#pillsTugAssist" role="tab" aria-controls="pillsTugAssist" aria-selected="false">Active</a>
+                                                <a class="nav-link" id="pillsTugAssist-tab" data-toggle="pill" href="#pillsTugAssist" role="tab" aria-controls="pillsTugAssist" aria-selected="false">Tug Assist</a>
                                             </li>
                                         </ul>
                                         <div class="row mt-5 text-center">
                                             <div class="col-12">
-                                                <ul class="list-inline" style="font-size:15px;">
+                                                {{-- <ul class="list-inline" style="font-size:15px;">
                                                     <li class="list-inline-item text-primary">
                                                         <p class="font-weight-bold">Legend : </p>
                                                     </li>
@@ -280,7 +286,7 @@
                                                             <h6 class="text-danger">New Amount is Higher</h6>
                                                         </div>
                                                     </li>
-                                                </ul>
+                                                </ul> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -290,7 +296,7 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="card card-primary text-center border-primary">
-                                                    <div class="card-header"><h4 class="text-black">Quotation Changes Comparison</h4></div>
+                                                    <div class="card-header"><h4 class="text-black">Hauling Rates</h4></div>
                                                     <div class="card-body">
                                                         <div class="table-responsive">
                                                             <table class="table-hover table-bordered haulingTable" style="width:100%;">
@@ -305,7 +311,7 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="card card-primary text-center border-primary">
-                                                    <div class="card-header"><h4 class="text-black">Quotation Changes Comparison</h4></div>
+                                                    <div class="card-header"><h4 class="text-black">Tug Assist Rates</h4></div>
                                                     <div class="card-body">
                                                         <div class="table-responsive">
                                                             <table class="table-hover table-bordered tugAssistTable" style="width:100%;">
@@ -320,7 +326,7 @@
                             </div>
                             <div class="card-footer text-center">
                                 <input type="hidden" id="contractsID">
-                                <button class="btn btn-primary waves-effect" data-toggle="modal" data-target="#requestChangesModal">Request for Changes</button>
+                                {{-- <button class="btn btn-primary waves-effect" data-toggle="modal" data-target="#requestChangesModal">Request for Changes</button> --}}
                                 <button id="applySignatureButton" data-id="{{$contract[0]->intContractListID}}" class="applySignatureButton btn btn-success waves-effect">Sign and Accept Contract</button>
                             </div>
                         </div>
@@ -436,6 +442,11 @@
                                             <li class="list-inline-item">
                                                 <p class="text-black" id="discount">20</p></li>
                                         </ul>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="signAdminCanvas"></div>
+                                        <div class="signConsigneeCanvas"></div>
+                                        {{-- <textarea name="" id="signatureJSON" rows="5"></textarea> --}}
                                     </div>
                                 </div>
                             </div>

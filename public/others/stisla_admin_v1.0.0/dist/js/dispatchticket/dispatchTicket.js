@@ -54,7 +54,7 @@ $(document).ready(function(){
       $('.signAdminCanvasDisplay').signature('enable'). 
         signature('draw', $('#signatureJSON').val());
     }); 
-   
+0   
     $('.modalClose').on('click',function() {
       $('#applyAdminSignModal').modal('hide');
     });

@@ -15,6 +15,7 @@
                             Sign in the canvas before finalizing the contract.
                         </div>
                         <div class="signCanvas"></div>
+                        <textarea id="signatureJSON" hidden rows="5"></textarea>
                     </div>
                 </div>
                 <button class="clearCanvas btn btn-primary btn-sm waves-effect float-left">Clear Canvas</button> 
