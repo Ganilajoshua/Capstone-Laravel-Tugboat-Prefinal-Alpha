@@ -11,6 +11,7 @@ use App\TermsandCondition;
 use App\Agreements;
 use App\Standard;
 use App\QuotationFees;
+use App\ContractFeesMatrix;
 
 class ContractRequestsController extends Controller
 {
@@ -99,7 +100,8 @@ class ContractRequestsController extends Controller
         $contract = Contract::findOrFail($intContractID);
         $contracts = $contract->intCCompanyID;
         $company = Company::findOrFail($contracts);
-        return response()->json(['company'=>$company,'contract'=>$contract]);
+        $contractsfees = ContractFeesMatrix::all();
+        return response()->json(['company'=>$company,'contract'=>$contract,'contractfees'=>$contractsfees]);
     }
 
     /**
@@ -120,16 +122,30 @@ class ContractRequestsController extends Controller
         $contract->enumStatus = 'Created';
         $contract->save();
 
-        $quotation = new Quotations; 
-        $quotation->timestamps = false;
-        $quotation->fltQuotationTDelayFee = $request->contractDelayFee;
-        $quotation->fltQuotationViolationFee = $request->contractViolationFee;
-        $quotation->fltQuotationConsigneeLateFee = $request->contractLateFee;
-        $quotation->fltMinDamageFee = $request->contractMinDamage;
-        $quotation->fltMaxDamageFee = $request->contractMaxDamage;
-        $quotation->fltStandardRate = $request->contractStandardFee;
-        $quotation->intDiscount = $request->contractDiscount;
-        $quotation->intQContractListID = $quotationID;
+        for($count = 0; $count < count($request->servicetype); $count++){
+            $quotation = new Quotations;
+            $quotation->timestamps = false;
+            $quotation->enumServiceType = $request->servicetype[$count];
+            $quotation->intQContractListID = $quotationID;
+            $quotation->fltStandardRate = $request->standardFee[$count];
+            $quotation->fltQuotationTDelayFee = $request->delayFee[$count];
+            $quotation->fltQuotationViolationFee = $request->violationFee[$count];
+            $quotation->fltQuotationConsigneeLateFee = $request->latefee[$count];
+            $quotation->fltMinDamageFee = $request->minDamage[$count];
+            $quotation->fltMaxDamageFee = $request->maxDamage[$count];
+            $quotation->intDiscount = $request->discount[$count];
+            $quotation->save();
+        }
+        // $quotation = new Quotations; 
+        // $quotation->timestamps = false;
+        // $quotation->fltQuotationTDelayFee = $request->contractDelayFee;
+        // $quotation->fltQuotationViolationFee = $request->contractViolationFee;
+        // $quotation->fltQuotationConsigneeLateFee = $request->contractLateFee;
+        // $quotation->fltMinDamageFee = $request->contractMinDamage;
+        // $quotation->fltMaxDamageFee = $request->contractMaxDamage;
+        // $quotation->fltStandardRate = $request->contractStandardFee;
+        // $quotation->intDiscount = $request->contractDiscount;
+        // $quotation->intQContractListID = $quotationID;
         
         $quotation->save();
         return response()->json(['contract'=>$contract]);

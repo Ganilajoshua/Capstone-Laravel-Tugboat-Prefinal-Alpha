@@ -66,17 +66,40 @@ function createContracts(contractID){
     console.log(contractID);
     $.ajax({
         url : url + '/' + contractID + '/create',
-        type : 'GET',
+        type : 'GET',   
         dataType : 'JSON',
         success : function(data, response){
             console.log(data);
-            $('.companyNameHolder').html(data.company.strCompanyName);
-            console.log(data.company.intCompanyID);
-            $('#hideCompanyID').val(data.contract.intContractListID);
-            $('#hideCompanyID').val(data.contract.intContractListID);
-            $('.consigneeTable').css('display','none');
-            $('.createContracts').css('display','block');
-            $('.createContracts').addClass('animated fadeIn');
+            if(data.contract.isDefault == 'Yes'){
+                console.log('YEY');
+                var appendWarning = `<div style="font-size: 15px; border-radius: 0px !important;" class="mt-3 ml-4 badge badge-warning text-black">
+                    This Consignee Wants the Default Matrix To Be Applied in The Contract
+                </div>`;
+                $(appendWarning).appendTo('.defaultMatrix');
+                $('.companyNameHolder').html(data.company.strCompanyName);
+                console.log(data.company.intCompanyID);
+                $('#hideCompanyID').val(data.contract.intContractListID);
+                $('#hideCompanyID').val(data.contract.intContractListID);
+                $('.consigneeTable').css('display','none');
+                $('.createContracts').css('display','block');
+                $('.createContracts').addClass('animated fadeIn');
+
+                $('#addHStandardRate').val(data.contractfees[0].fltCFStandardRate);
+                $('#addHDelayFee').val(data.contractfees[0].fltCFTugboatDelayFee);
+                $('#addHViolationFee').val(data.contractfees[0].fltCFViolationFee);
+                $('#addHLateFee').val(data.contractfees[0].fltCFConsigneeLateFee);
+                $('#minHDamageFee').val(data.contractfees[0].fltCFMinDamageFee);
+                $('#maxHDamageFee').val(data.contractfees[0].fltCFMaxDamageFee);
+
+                $('#addTAStandardRate').val(data.contractfees[1].fltCFStandardRate);
+                $('#addTADelayFee').val(data.contractfees[1].fltCFTugboatDelayFee);
+                $('#addTAViolationFee').val(data.contractfees[1].fltCFViolationFee);
+                $('#addTALateFee').val(data.contractfees[1].fltCFConsigneeLateFee);
+                $('#minTADamageFee').val(data.contractfees[1].fltCFMinDamageFee);
+                $('#maxTADamageFee').val(data.contractfees[1].fltCFMaxDamageFee);
+                // $('#discountRange').val();
+
+            }
         },
         error : function(error){
             throw error;
@@ -88,16 +111,38 @@ function storeContracts(){
     var validity = $('#contractValidity').val();
     var title = $('#addContractTitle').val();
     var details = $('#addContractDetails').val();
-    var delayFee = $('#addDelayFee').val();
-    var violationFee = $('#addViolationFee').val();
-    var lateFee = $('#addLateFee').val();
-    var standardFee = $('#addStandardRate').val();
-    var minDamage = $('#minDamageFee').val();
-    var maxDamage= $('#maxDamageFee').val();
-    var discount = $('#discountRange').val();
+    var servicetype = ["Hauling","Tug Assist"];
+    var standardFee = [];
+    var delayFee = [];
+    var violationFee = [];
+    var latefee = [];
+    var minDamage = [];
+    var maxDamage = [];
+    var discount = [];
+
+    standardFee[0] = $('#addHStandardRate').val();
+    delayFee[0] = $('#addHDelayFee').val();
+    violationFee[0] = $('#addHViolationFee').val();
+    latefee[0] = $('#addHLateFee').val();
+    minDamage[0] = $('#minHDamageFee').val();
+    maxDamage[0] = $('#maxHDamageFee').val();
+    discount[0] = $('#discountRange').val();
+
+    standardFee[1] = $('#addTAStandardRate').val();
+    delayFee[1] = $('#addTADelayFee').val();
+    violationFee[1] = $('#addTAViolationFee').val();
+    latefee[1] = $('#addTALateFee').val();
+    minDamage[1] = $('#minTADamageFee').val();
+    maxDamage[1] = $('#maxTADamageFee').val();
+    discount[1] = $('#discountRange').val();
+
+     
     console.log(discount);
 
-
+    console.log(servicetype, standardFee, delayFee);
+    console.log(violationFee, latefee);
+    console.log(minDamage, maxDamage);
+    
     // return false;
     console.log(id);
     console.log(title, details);
@@ -111,16 +156,24 @@ function storeContracts(){
         type : 'POST',
         data : {
             "_token" : $('meta[name="csrf-token"]').attr('content'),
-            contractID : id,
             contractTitle : title,
             contractDetails : details,
             contractValidity : validity,
-            contractDelayFee : delayFee,
-            contractViolationFee : violationFee,
-            contractLateFee : lateFee,
-            contractStandardFee : standardFee,
-            contractMinDamage : minDamage,
-            contractMaxDamage : maxDamage,
+            contractID : id,
+            servicetype : servicetype,
+            standardFee : standardFee,
+            delayFee : delayFee,
+            violationFee : violationFee,
+            latefee : latefee,
+            minDamage : minDamage,
+            maxDamage : maxDamage,
+            discount : discount,
+            // contractDelayFee : delayFee,
+            // contractViolationFee : violationFee,
+            // contractLateFee : lateFee,
+            // contractStandardFee : standardFee,
+            // contractMinDamage : minDamage,
+            // contractMaxDamage : maxDamage,
             contractDiscount : discount,
         },
         success : function(data,response){

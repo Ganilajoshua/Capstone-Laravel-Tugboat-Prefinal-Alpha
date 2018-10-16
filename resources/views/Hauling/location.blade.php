@@ -1,5 +1,5 @@
 <!-- Update Location Modal -->
-<div class="modal fade" id="updateLoc" tabindex="-1" role="dialog" aria-labelledby="updateLocLabel" aria-hidden="true">
+<div class="modal fade" id="updateLocationModal" tabindex="-1" role="dialog" aria-labelledby="updateLocLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -14,10 +14,16 @@
                         <div class="col-lg-6 col-md-12 col-12">
                             <div class="form-group">
                                 <label>Location<sup class="text-primary">&#10033;</sup></label>
-                                <input type="text" class="form-control" placeholder="Location">
+                                <input type="text" id="location" class="form-control" placeholder="Location">
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-lg-6">
+                        <div class="col-lg-6 col-md-12 col-12">
+                            <div class="form-group">
+                                <label>Remarks<sup class="text-primary">&#10033;</sup></label>
+                                <input type="text" id="remarks" class="form-control" placeholder="Location">
+                            </div>
+                        </div>
+                        {{-- <div class="col-12 col-sm-12 col-lg-6">
                             <div class="form-group">
                                 <label for="timeUpdated">Time Updated<sup class="text-primary">&#10033;</sup></label>
                                 <div class="input-group date" id="timeUpdated" data-target-input="nearest">
@@ -27,12 +33,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btnUpdateLoc btn btn-primary waves-effect">Update Location</button>
+                <button type="button" class="updateLocationSubmit btnUpdateLoc btn btn-primary waves-effect">Update Location</button>
             </div>
         </div>
     </div>

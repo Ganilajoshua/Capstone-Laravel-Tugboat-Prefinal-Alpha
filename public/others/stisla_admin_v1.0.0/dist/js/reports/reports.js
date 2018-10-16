@@ -272,6 +272,11 @@ $(document).ready(function(){
 
     $('.submitReports').on('click',function(){
         if($('.selectReport').val() == "disabledTugboats"){
+            $('.btnGeneratePDF2').hide();
+            $('.btnGeneratePDF3').hide();
+            $('.btnGeneratePDF4').hide();
+            $('.btnGeneratePDF5').hide();
+            $('.btnGeneratePDF1').show();
             $('.viewChoice').show();
             $('.rowJobOrderReport').hide();
             $('.rowSalesReport').hide();
@@ -289,6 +294,11 @@ $(document).ready(function(){
                 $('.disabledTChartRow').show();
             }
         }else if($('.selectReport').val() == "jobOrderReport"){
+            $('.btnGeneratePDF1').hide();
+            $('.btnGeneratePDF3').hide();
+            $('.btnGeneratePDF4').hide();
+            $('.btnGeneratePDF5').hide();
+            $('.btnGeneratePDF2').show();
             $('.viewChoice').show();
             $('.rowDisabledTugboats').hide();
             $('.rowSalesReport').hide();
@@ -305,6 +315,11 @@ $(document).ready(function(){
                 $('.joReportChartRow').show();
             }
         }else if($('.selectReport').val() == "salesReport"){
+            $('.btnGeneratePDF1').hide();
+            $('.btnGeneratePDF2').hide();
+            $('.btnGeneratePDF4').hide();
+            $('.btnGeneratePDF5').hide();
+            $('.btnGeneratePDF3').show();
             $('.viewChoice').show();
             $('.rowJobOrderReport').hide();
             $('.rowDisabledTugboats').hide();
@@ -322,6 +337,11 @@ $(document).ready(function(){
                 $('.salesReportChartRow').show();
             }
         }else if($('.selectReport').val() == "statementOfAccount"){
+            $('.btnGeneratePDF1').hide();
+            $('.btnGeneratePDF2').hide();
+            $('.btnGeneratePDF3').hide();
+            $('.btnGeneratePDF5').hide();
+            $('.btnGeneratePDF4').show();
             $('.viewChoice').show();
             $('.rowJobOrderReport').hide();
             $('.rowSalesReport').hide();
@@ -339,6 +359,11 @@ $(document).ready(function(){
                 $('.SOAReportChartRow').show();
             }
         }else if($('.selectReport').val() == "serviceReport"){
+            $('.btnGeneratePDF1').hide();
+            $('.btnGeneratePDF2').hide();
+            $('.btnGeneratePDF3').hide();
+            $('.btnGeneratePDF4').hide();
+            $('.btnGeneratePDF5').show();
             $('.rowJobOrderReport').hide();
             $('.rowSalesReport').hide();
             $('.rowSOA').hide();
@@ -355,6 +380,11 @@ $(document).ready(function(){
                 $('.serviceReportChartRow').show();
             }
         }else{
+            $('.btnGeneratePDF1').hide();
+            $('.btnGeneratePDF2').hide();
+            $('.btnGeneratePDF3').hide();
+            $('.btnGeneratePDF4').hide();
+            $('.btnGeneratePDF5').hide();
             $('.viewChoice').hide();
             toastr.error('Please select a report first.', 'Select A Report!', {
                 closeButton: true,

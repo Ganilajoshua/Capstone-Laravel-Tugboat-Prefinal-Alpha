@@ -137,5 +137,19 @@ $(document).ready(function(){
         swal("Deleted!", "Team has been deleted.", "success");
     });
   });
-
+  $('#pillsJobOrder-tab').on('click',function(){
+    $('.tugboatListTitle').empty();
+    $('.tugboatListTitle').html('Job Order List');
+    $('.tugboatListTitle').addClass('animated fadeIn');
+  }); 
+  $('#pillsOwnedTugboat-tab').on('click',function(){
+    $('.tugboatListTitle').empty();
+    $('.tugboatListTitle').html('Tugboat List');
+    $('.tugboatListTitle').addClass('animated fadeIn');
+  }); 
+  $('#pillsReceivedTugboat-tab').on('click',function(){
+    $('.tugboatListTitle').empty();
+    $('.tugboatListTitle').html('Tugboat List');
+    $('.tugboatListTitle').addClass('animated fadeIn');
+  });
 });

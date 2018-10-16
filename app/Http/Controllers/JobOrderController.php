@@ -275,6 +275,6 @@ class JobOrderController extends Controller
     }
     public function decline($intJobOrderID)
     {
-
+        $joborder = JobOrder::findOrFail($intJobOrderID);
     }
 }

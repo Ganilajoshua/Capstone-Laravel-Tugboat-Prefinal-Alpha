@@ -154,7 +154,7 @@ Route::group(['prefix'=>'administrator/'],function(){
             // Dispatch and Hauling - Job Orders Route Group
             Route::group(['prefix'=>'joborders/'],function(){
                 Route::resource('/','JobOrderController');
-                Route::get('/{intJobOrderID}/accept','JobOrderController@accept');
+                Route::get('/{intJobOrderID}/acceptjoborder','JobOrderController@accept');
                 Route::get('/{intJobOrderID}/forwardrequest','JobOrderController@forwardrequest');
                 Route::get('/{intJobOrderID}/decline','JobOrderController@decline');
                 Route::get('/{intJobOrderID}/viewdetails','JobOrderController@viewdetails');
@@ -169,6 +169,8 @@ Route::group(['prefix'=>'administrator/'],function(){
                 Route::get('/{intTeamID}/viewteam','TugboatTeamAssignmentController@viewteam');
                 Route::get('/{intTATeamID}/viewtugboatteam','TugboatTeamAssignmentController@viewtugboatteam');
                 Route::get('/{intTATugboatID}/showtugboatinformation','TugboatTeamAssignmentController@showtugboatinformation');
+                Route::get('/{intJobOrderID}/getjoborder','TugboatTeamAssignmentController@getjoborder');
+                Route::get('/{intJobOrderID}/showdefaultteams','TugboatTeamAssignmentController@showdefaultteams');
                 Route::post('/store','TugboatTeamAssignmentController@store');
                 Route::post('/teamassignment','TugboatTeamAssignmentController@teamassignment');
                 Route::post('/cleartugboatteam','TugboatTeamAssignmentController@cleartugboatteam');
@@ -181,12 +183,16 @@ Route::group(['prefix'=>'administrator/'],function(){
                 Route::post('/returntugboat','TugboatTeamAssignmentController@returntugboat');
                 Route::post('/notifications','TugboatTeamAssignmentController@notifications');
                 Route::post('/getteamcompositions','TugboatTeamAssignmentController@getteamcompositions');
+                Route::post('/assigndefaultteams','TugboatTeamAssignmentController@assigndefaultteams');
+            
             });
             
             // Dispatch and Hauling - Tugboat Assignment Route Group
             Route::group(['prefix'=>'tugboatassignment/'],function(){
                 Route::resource('/','TugboatAssignmentController');
                 Route::get('/{intJobOrderID}/showjoborder','TugboatAssignmentController@showjoborder');
+                Route::get('/{intTugboatID}/showassignedjoborders','TugboatAssignmentController@showassignedjoborders');
+                Route::get('/{intTugboatID}/showtugboatinformation','TugboatAssignmentController@showtugboatinformation');
                 Route::post('/create','TugboatAssignmentController@create');
                 Route::post('/hauling','TugboatAssignmentController@hauling');
                 Route::post('/available','TugboatAssignmentController@available');
@@ -201,9 +207,11 @@ Route::group(['prefix'=>'administrator/'],function(){
             Route::group(['prefix'=>'hauling/'],function(){
                 Route::resource('/','HaulingController');
                 Route::get('/{intJobOrderID}/show','HaulingController@show');
+                Route::get('/{intDispatchTicketID}/locationupdates','HaulingController@locationupdates');
                 Route::post('/showteam','HaulingController@showteam');
                 Route::post('/start','HaulingController@start');
                 Route::post('/terminate','HaulingController@terminate');
+                Route::post('/updatelocation','HaulingController@updatelocation');
             });
         });
         
@@ -258,6 +266,31 @@ Route::group(['prefix'=>'administrator/'],function(){
     //Reports Routes
     Route::group(['prefix'=>'reports/'],function(){
         Route::resource('/','ReportsController');
+        // Disabled Tugboat Report
+        Route::get('/disabledTReport', function(){
+            return view('Reports.disabledTReportPDF');
+        });
+        Route::get('/disabledTReport','ReportsController@printPDF1');
+        // Job Order Report
+        Route::get('/jobOrderReport', function(){
+            return view('Reports.jobOrderReportPDF');
+        });
+        Route::get('/jobOrderReport','ReportsController@printPDF2');
+        // Sales Report
+        Route::get('/salesReport', function(){
+            return view('Reports.salesReportPDF');
+        });
+        Route::get('/salesReport','ReportsController@printPDF3');
+        // SOA Report
+        Route::get('/soaReport', function(){
+            return view('Reports.soaPDF');
+        });
+        Route::get('/soaReport','ReportsController@printPDF4');
+        // Service Report
+        Route::get('/serviceReport', function(){
+            return view('Reports.serviceReportPDF');
+        });
+        Route::get('/serviceReport','ReportsController@printPDF5');
     });
     //Queries Routes
     Route::group(['prefix'=>'queries/'],function(){
@@ -368,22 +401,12 @@ Route::group(['prefix'=>'affiliates/'],function(){
                 // Dispatch and Hauling - Job Orders Route Group
                 Route::group(['prefix'=>'joborders/'],function(){
                     // Route::get('/{intJobOrderID}/forwardrequest','JobOrderController@forwardrequest');
-                    // Route::get('/{intJobOrderID}/decline','JobOrderController@decline');
-                    Route::get('/{intJobOrderID}/viewdetails','JobOrderController@viewdetails');
-                    // Route::post('/forward','JobOrderController@forward');
-                    // Route::post('/store','JobOrderController@store');
-                    
+                    Route::get('/{intJobOrderID}/decline','AffiliatesControllers\JobOrderController@decline');
+                    Route::get('/{intJobOrderID}/viewdetails','AffiliatesControllers\JobOrderController@viewdetails');
                     Route::resource('/','AffiliatesControllers\JobOrderController');
+                    Route::get('/accepted','AffiliatesControllers\JobOrderController@accepted');
                     Route::get('/{intJobOrderID}/accept','AffiliatesControllers\JobOrderController@accept');
-                    // Route::get('/{intJobOrderID}/viewdetails','AffiliatesControllers\JobOrderController@viewdetails');
                     Route::post('/store','AffiliatesControllers\JobOrderController@store');
-
-                    // Route::get('/{intJobOrderID}/accept','AffiliatesControllers\JobOrderController@accept');
-                    // Route::get('/{intJobOrderID}/forwardrequest','AffiliatesControllers\JobOrderController@forwardrequest');
-                    // Route::get('/{intJobOrderID}/decline','AffiliatesControllers\JobOrderController@decline');
-                    // Route::get('/{intJobOrderID}/viewdetails','AffiliatesControllers\JobOrderController@viewdetails');
-                    // Route::post('/forward','AffiliatesControllers\JobOrderController@forward');
-                    // Route::post('/store','AffiliatesControllers\JobOrderController@store');
                 });
 
                 // Dispatch and Hauling - Tugboat Assignment Route Group
@@ -393,6 +416,7 @@ Route::group(['prefix'=>'affiliates/'],function(){
                     Route::post('/create','TugboatAssignmentController@create');
                     Route::post('/hauling','TugboatAssignmentController@hauling');
                     Route::post('/available','TugboatAssignmentController@available');
+                    Route::get('/{intTugboatID}/showassignedjoborders','TugboatAssignmentController@showassignedjoborders');
                     Route::post('/tugboatsavailable','TugboatAssignmentController@tugboatsavailable');
                 });
 
@@ -470,6 +494,7 @@ Route::post('/affiliates/login','LoginControllers\AffiliatesLoginController@logi
 Route::get('/affiliates/register','LoginControllers\AffiliatesLoginController@showRegister');
 Route::post('/affiliates/register','LoginControllers\AffiliatesLoginController@register');
 
+Route::get('/verify/{token}','LoginControllers\UserLoginController@verifyemail')->name('verifyEmail');
 
 //Login
 // Route::get('/register','LoginControllers\UserLoginController@register');

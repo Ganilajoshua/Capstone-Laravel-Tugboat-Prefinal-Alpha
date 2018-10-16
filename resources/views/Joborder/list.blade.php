@@ -38,7 +38,7 @@
                                             <h5>{{$accepted->strCompanyName}}</h5>
                                         </div>
                                         <div class="card-footer mt-2">
-                                            <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
+                                            <a href="#" data-id="{{$accepted->intJobOrderID}}" class="joborderMoreInfoButton">More Info <i class="ion ion-ios-arrow-right"></i></a>
                                             <button class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect" data-toggle="modal" data-target="#forwardModal">Forward</button>
                                             <button onclick="createJobsched({{$accepted->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right waves-effect">Make Job Schedule</button>
                                         </div>
@@ -89,12 +89,9 @@
                                         </div>
                                         <div class="card-footer mt-2">
                                             <a href="#" data-id="{{$joborders->intJobOrderID}}" class="joborderMoreInfoButton" >More Info <i class="ion ion-ios-arrow-right"></i></a>
-                                            
                                             <button data-id="{{$joborders->intJobOrderID}} "class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect declineJoborder">Decline</button> 
-                                            {{-- onclick="declineJobOrder({{$joborders->intJobOrderID}})" --}}
-                                            <button data-id="{{$joborders->intJobOrderID}} "class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect forwardJoborder" data-toggle="modal" data-target="#forwardModal">Forward</button>
-                                            {{-- onclick="forwardRequest({{$joborders->intJobOrderID}})" --}}
-                                            <button data-id="{{$joborders->intJobOrderID}}" onclick="acceptJobOrder({{$joborders->intJobOrderID}})" class="btn btn-primary btn-sm text-center float-right waves-effect acceptJoborder">Accept</button>
+                                            <button data-id="{{$joborders->intJobOrderID}} "class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect forwardJoborder">Forward</button>
+                                            <button data-id="{{$joborders->intJobOrderID}}" class="btn btn-primary btn-sm text-center float-right waves-effect acceptJoborder">Accept</button>
                                             
                                         </div>
                                     </div>

@@ -98,10 +98,9 @@ $('.joborderHaulingInfo').on('click',function(event){
     });
 });
 $('.backButton').on('click',function(){
-    // $('.startHaulingContainer').css('display','none');
-    // $('.jobOrderList').css('display','block');
-    // $('.tugbot')
-    // $('.tugboatInformationTab').css('display','block');
+    $('.startHaulingContainer').css('display','none');
+    $('.jobOrderList').css('display','block');
+    $('.tugboatInformationTab').css('display','block');
 });
 
 $('.viewStartHauling').on('click',function(event){
@@ -133,12 +132,12 @@ $('.viewStartHauling').on('click',function(event){
             appendContainer();
             // Append Tugboat Assignments
             appendBody(data.jobsched);
-            // Get Empty Teams
+            // Get Empty Teams  
             getEmptyTeams(data.jobsched);
             // Get Teams
-            team = getTeam(data.jobsched);
-            console.log(team);
-            appendEmployees(team);
+            // team = getTeam(data.jobsched);
+            // console.log(team);
+            // appendEmployees(team);
 
             // $('.startHaulingContainer').css('display','block');
 	        // $('.jobOrderList').css('display','none');
@@ -370,3 +369,75 @@ function terminateHauling(joborderID){
         });
     });
 }
+
+$('.updateLocation').on('click',function(){
+    console.log($(this).data('id'));
+    var dispatchID = $(this).data('id');
+    $('#updateLocationModal').modal('show');
+    $('.updateLocationSubmit').data('id',dispatchID);
+});
+
+$('.updateLocationSubmit').on('click',function(){
+    console.log($(this).data('id'));
+    var dispatchID = $(this).data('id');
+    var location = $('#location').val();
+    var remarks = $('#remarks').val();
+    var timeUpdated = moment().format("HH:mm");
+
+    console.log(location, remarks);
+
+    $.ajax({
+        url : `${url}/updatelocation`,
+        type : 'POST',
+        data : {
+            "_token" : $('meta[name="csrf-token"]').attr('content'),
+            dispatchID : dispatchID,
+            location : location,
+            remarks : remarks,
+            timeUpdated : timeUpdated,
+        },
+        success : function(data,response){
+            console.log(data);
+            swal({
+                title: "Success",
+                text: "Location Updated",
+                type: "success",
+                showCancelButton: false,
+                confirmButtonClass: "btn-success",
+                confirmButtonText: "Ok",
+                closeOnConfirm: true,
+                timer : 1500
+            },
+            function(isConfirm){
+                if(isConfirm){
+                    location.reload();
+                }
+            });           
+        },
+        error : function(error){
+            throw error;
+        }
+    });
+});
+
+$('.showUpdates').on('click',function(){
+    console.log('heyaaaaa', $(this).data('id'));
+    var id = $(this).data('id');
+    $('#locationUpdates').modal('show');
+    $.ajax({
+        url : `${url}/${id}/locationupdates`,
+        type : 'GET',    
+        dataType : 'JSON',
+        success : (data)=>{
+            console.log(data);
+            if(data.location.length == 0){
+                console.log('0 yung Length');
+            }else{
+                console.log('greater than 0 yun length');
+            }
+        },
+        error : (error)=>{
+            throw error;
+        }
+    });
+});

@@ -24,7 +24,11 @@
                     <div class="card-header text-center">
                         <div class="float-right">
                             <div class="btn-group">
-                                <a href="#" class="btn active waves-effect">Generate PDF</a>
+                            <a href="{{ url('/administrator/reports/disabledTReport')}}" class="btnGeneratePDF1 btn active waves-effect">Generate PDF</a>
+                            <a href="{{ url('/administrator/reports/jobOrderReport')}}" class="btnGeneratePDF2 btn active waves-effect">Generate PDF</a>
+                            <a href="{{ url('/administrator/reports/salesReport')}}" class="btnGeneratePDF3 btn active waves-effect">Generate PDF</a>
+                            <a href="{{ url('/administrator/reports/soaReport')}}" class="btnGeneratePDF4 btn active waves-effect">Generate PDF</a>
+                            <a href="{{ url('/administrator/reports/serviceReport')}}" class="btnGeneratePDF5 btn active waves-effect">Generate PDF</a>
                             </div>
                         </div>
                         <h4 class="ml-5">Select Report</h4>

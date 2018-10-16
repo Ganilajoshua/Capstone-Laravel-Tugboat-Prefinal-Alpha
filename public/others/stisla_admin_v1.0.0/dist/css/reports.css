@@ -17,3 +17,6 @@
 .viewChoice{
     margin-bottom:60px !important;
 }
+.btnGeneratePDF1,.btnGeneratePDF2,.btnGeneratePDF3,.btnGeneratePDF4,.btnGeneratePDF5{
+    display:none;
+}

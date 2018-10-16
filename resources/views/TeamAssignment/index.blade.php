@@ -152,16 +152,19 @@
                     <div class="card">
                         <section class="sectionDark">
                             <div class="container">
-                                <h5 class="section-header text-center" style="text-transform: uppercase;">
-                                Tugboat List  
+                                <h5 class="section-header text-center tugboatListTitle" style="text-transform: uppercase;">
+                                Job Order List  
                               </h5>
                             </div>
                             <div class="container">
                                 <div class="row">
                                     <div class="col">
                                         <ul class="nav nav-pills nav-fill mb-3 border-radius-x text-center" id="pills-tab" role="tablist">
+                                            <li class="nav-item mr-1">
+                                                <a class="nav-link mt-2 border border-primary active" id="pillsJobOrder-tab" data-toggle="pill" href="#pillsJobOrder" role="tab" aria-controls="pillsJobOrder" aria-selected="false">Job Order List</a>
+                                            </li>
                                             <li class="nav-item">
-                                                <a class="nav-link active mt-2 border border-primary" id="pillsOwnedTugboat-tab" data-toggle="pill" href="#pillsOwnedTugboat" role="tab" aria-controls="pillsOwnedTugboat" aria-selected="true">Owned</a>
+                                                <a class="nav-link mt-2 border border-primary" id="pillsOwnedTugboat-tab" data-toggle="pill" href="#pillsOwnedTugboat" role="tab" aria-controls="pillsOwnedTugboat" aria-selected="true">Owned</a>
                                             </li>
                                             <li class="nav-item pillsReceivedTugboatBadge ml-1">
                                                 <a class="nav-link mt-2 border border-primary" id="pillsReceivedTugboat-tab" data-toggle="pill" href="#pillsReceivedTugboat" role="tab" aria-controls="pillsReceivedTugboat" aria-selected="false">Received</a>
@@ -170,7 +173,7 @@
                                     </div>
                                 </div>
                                 <div class="tab-content" id="pills-tabContent">
-                                    <div class="tab-pane fade show active" id="pillsOwnedTugboat" role="tabpanel" aria-labelledby="pillsOwnedTugboat-tab">
+                                    <div class="tab-pane fade" id="pillsOwnedTugboat" role="tabpanel" aria-labelledby="pillsOwnedTugboat-tab">
                                         <div class="card">
                                             <div class="card-header bg-success text-white">
                                                 <div class="float-right">
@@ -328,6 +331,31 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="tab-pane fade show active" id="pillsJobOrder" role="tabpanel" aria-labelledby="pillsJobOrder-tab">
+                                        @if(count($notugboatteam) > 0)
+                                            @foreach($notugboatteam as $notugboatteam)
+                                                <div class="col-lg-12 joborder" data-id="{{$notugboatteam->intJobOrderID}}">
+                                                    <div class="card card-sm-2 card-primary border-primary">
+                                                        <div class="card-icon">
+                                                            <i class="ion ion-android-boat text-primary"></i>
+                                                        </div>
+                                                        <div class="card-header">
+                                                            <h4 class="text-primary mb-2">Job Order # {{$notugboatteam->intJobOrderID}}</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <h5>{{$notugboatteam->strCompanyName}}</h5>
+                                                        </div>
+                                                        <div class="card-footer mt-2">
+                                                            <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
+                                                            <button data-id="{{$notugboatteam->intJobOrderID}}" data-date="{{$notugboatteam->dtmETA}}" class="assignTeam btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Assign Team</button>
+                                                            {{-- onclick="showTugboatModal({{$notugboat->intJobOrderID}})" --}}
+                                                            {{-- onclick="showTugboatModal({{$notugboat->intJobOrderID}})" --}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -346,4 +374,6 @@
     @include('TeamAssignment.forwardTeamModal')
     @include('TeamAssignment.forwardTugboatModal')
     @include('TeamAssignment.tugboatInfoModal')
+    @include('TeamAssignment.assignTeam')
+    @include('TeamAssignment.defaultTeamsModal')
 @endsection

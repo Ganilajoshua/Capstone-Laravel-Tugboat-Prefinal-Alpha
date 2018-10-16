@@ -12,7 +12,8 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Tugmaster Services Management System'),
+    // 'name' => 'Tugmaster Services Management System',
 
     /*
     |--------------------------------------------------------------------------
@@ -179,7 +180,10 @@ return [
         App\Providers\RouteServiceProvider::class,
         //Full Calendar Additions
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
-
+        // domPDF
+        Barryvdh\DomPDF\ServiceProvider::class,
+        // Snappy
+        Barryvdh\Snappy\ServiceProvider::class,
     ],
 
     /*
@@ -230,7 +234,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
-
+        'PDF' =>  Barryvdh\DomPDF\Facade::class,
+        'PDF2' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
     ],
 
 ];

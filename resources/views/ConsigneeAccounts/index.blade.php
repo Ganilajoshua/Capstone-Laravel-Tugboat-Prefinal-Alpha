@@ -37,6 +37,7 @@
                                         <tr>
                                             <th>Consignee</th>
                                             <th>Email</th>
+                                            <th>Verification Status</th>
                                             <th class="noSortAction">Status</th>
                                             <th class="noSortAction">Action</th>
                                         </tr>
@@ -46,7 +47,21 @@
                                             <tr>
                                                 <td>{{$inactiveuser->strCompanyName}}</td>
                                                 <td><span class="block-email"><a href="mailto:{{$inactiveuser->email}}">{{$inactiveuser->email}}</a></span></td>
+                                                @if($inactiveuser->token == null)
+                                                    <td>
+                                                        <div class="badge badge-success">
+                                                            Verified
+                                                        </div>
+                                                    </td>
+                                                @else
+                                                    <td>
+                                                        <div class="badge badge-danger">
+                                                            Not Verified
+                                                        </div>
+                                                    </td>
+                                                @endif
                                                 <td> 
+                                                
                                                     <div class="checkbox ml-3" data-id="{{$inactiveuser->id}}">
                                                         <label>
                                                             <input type="checkbox" id="checkboxStatuss" data-size="small" data-width="" data-toggle="toggle"data-onstyle="success"data-offstyle="danger" data-on="Active" data-off="Inactive" data-id="{{$inactiveuser->id}}">

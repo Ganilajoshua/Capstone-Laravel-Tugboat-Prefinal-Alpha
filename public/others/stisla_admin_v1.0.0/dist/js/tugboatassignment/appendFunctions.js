@@ -25,6 +25,7 @@ function getLocation(joborders){
 
 // Append Joborder Header
 function appendJoborderHeader(joborders){
+    $('.joborderHeader').empty();
     var appendHeader = 
     `<div class="modal-title mt-2" id="moreInfoModalLabel"><b style="font-size: 16px;">Job Order # ${joborders[0].intJobOrderID}</b>
         <h3 class="mt-2" style="font-size: 14px;">${joborders[0].strCompanyName}</h3>
@@ -34,6 +35,7 @@ function appendJoborderHeader(joborders){
 
 // Append Joborder Body
 function appendJoborderBody(joborders,location){
+    $('.joborderBody').empty();
     console.log(location);
     var appendBody =
     `<div class="row joborderDetailsContainer">
@@ -88,4 +90,68 @@ function appendJoborderBody(joborders,location){
         </div>
     </div>`;
     $(appendBody).appendTo('.joborderBody');
+}
+
+// Append Assigned Job Orders 
+
+function appendAssignedJobOrders(joborders){
+    console.log(joborders.length);
+    $('.appendJobOrderContainer').empty();
+    if(joborders.length == 0){
+        console.log('hi');
+
+    }else{
+        console.log('greater than 1');
+
+        for(var counter = 0; counter < joborders.length; counter++){
+            appendJobOrder = 
+            `
+            <div class="col-6">
+                <div class="card card-sm-2 card-primary border-primary">
+                    <div class="card-icon">
+                        <i class="ion ion-android-boat text-primary"></i>
+                    </div>
+                    <div class="card-header">
+                        <h4 class="text-primary mb-2">Job Order # ${joborders[counter].intJobOrderID}</h4>
+                    </div>
+                    <div class="card-body">
+                        <h5>${joborders[counter].strCompanyName}</h5>
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="list-inline">
+                                    <li class="list-inline-item text-primary">
+                                        <h6 style="font-size: 14px;">Service Type : </h6></li>
+                                    <li class="list-inline-item">
+                                        <h6 style="font-size: 14px;">
+                                            ${joborders[counter].enumServiceType}
+                                        </h6>
+                                    </li>
+                                </ul>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item text-primary">
+                                        <h6 style="font-size: 14px;">Date of Transaction : </h6></li>
+                                    <li class="list-inline-item">
+                                        <h6 style="font-size: 14px;">
+                                            ${moment(joborders[counter].datStartDate).format('MMMM D, YYYY')} - ${moment(joborders[counter].datEndDate).format('MMMM D, YYYY')}
+                                        </h6>
+                                    </li>
+                                </ul>
+                                <ul class="list-inline">
+                                    <li class="list-inline-item text-primary">
+                                        <h6 style="font-size: 14px;">Estimated Time of Hauling : </h6></li>
+                                    <li class="list-inline-item">
+                                        <h6 style="font-size: 14px;">
+                                        ${joborders[counter].tmStart} HRS - ${joborders[counter].tmEnd} HRS 
+                                        </h6>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div>`;
+            
+            $(appendJobOrder).appendTo('.appendJobOrderContainer');
+        }
+    }
 }

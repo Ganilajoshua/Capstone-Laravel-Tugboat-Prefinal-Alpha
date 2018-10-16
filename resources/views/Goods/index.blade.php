@@ -30,7 +30,7 @@
                     <thead class="bg-primary">
                         <tr>
                             <th>Goods</th>
-                            <th>Rate per Ton</th>
+
                             <th>Status</th>
                             <th class="noSortAction">Action</th>
                         </tr>
@@ -39,7 +39,6 @@
                         @foreach($goods as $goods)
                             <tr>
                                 <td>{{$goods->strGoodsName}}</td>
-                                <td>&#8369; {{$goods->fltRateperTon}}</td>
                                 <td>
                                     @if($goods->isActive == 1)
                                         <div class="goodsCheckbox" data-id="{{$goods->intGoodsID}}">
