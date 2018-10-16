@@ -9,7 +9,8 @@
 @endsection
 
 @section('content')
-	<section class="section" style="margin-top:25px;">
+<section class="section" style="margin-top:25px;">
+	<form action="">
 		<div class="container">
 			<div class="row">
 				<div class="cardPayChoices col-12 col-sm-12 col-lg-8">
@@ -73,7 +74,7 @@
 									<div class="col-12 col-sm-12 col-lg-8">
 										<div class="form-group">
 											<label for="">Cheuqe Number</label>
-											<input type="number" class="form-control" name="chequeNum[]" id="chequeNum" placeholder="0790" required>
+											<input type="number" class="form-control" name="chequeNum[]" id="chequeNum" placeholder="0790">
 											<label for="payeeLine">Pay to the Order Of<sup class="text-primary">&#10033;</sup></label>
 											<input type="text" class="form-control" id="payeeLine" value="Tugmaster Bargepool" placeholder="Tugmaster Bargepool" disabled>
 											<div class="invalid-feedback">
@@ -176,14 +177,15 @@
 						<input type="text" id="idBill" value="{{$Bill}}" hidden>
 						<input type="text" id="fee" value="{{$amount}}" hidden>
 						<div class="card-footer"style="background:#fff;border-top: 0px;">
-							<button class="btn btn-primary waves-effect float-right" onclick="validate({{$amount}})">PLACE PAYMENT</button>
+							<button type="submit" class="btn btn-primary waves-effect float-right" onclick="validate({{$amount}})">PLACE PAYMENT</button>
 							{{-- <button class="btn btn-primary waves-effect float-right" onclick="Finalize({{$Bill}})">PLACE PAYMENT</button> --}}
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
+	</form>
+</section>
 	@include('Consignee.Payment.info')
 	@include('Consignee.Payment.applysign')
 @endsection

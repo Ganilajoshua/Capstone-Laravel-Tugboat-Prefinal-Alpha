@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
+use DB;
+use Auth;
 use App\Invoice;
+use App\DispatchTicket;
+use App\Charges;
+use App\Bill;
 class InvoiceController extends Controller
 {
     /**
@@ -14,8 +17,21 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $employee = Employees::all();
-        return view('Invoice.index')->with('employees',$employee);
+        $invoice = DB::table('tbljoborder as joborder')
+        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
+        ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
+        ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
+        ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
+        ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
+        // ->where('company.intCompanyID',Auth::user()->intUCompanyID)
+        ->where('jobsched.enumstatus','Finished')
+        ->where('invoice.enumstatus','Processing')
+        ->groupby('dispatch.intDispatchTicketID')
+        ->get();
+
+        return view('Invoice.index')->with('invoice',$invoice);
     }
 
     /**
@@ -48,7 +64,29 @@ class InvoiceController extends Controller
      */
     public function show($id)
     {
-        return 'show';
+        $dispatch = DB::table('tbljoborder as joborder')
+        // ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
+        ->leftjoin('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
+        ->leftjoin('tblpier as pier','berth.intBPierID','pier.intPierID')
+        // ->join('tblbarge as barge','joborder.intJOBargeID','barge.intBargeID')
+        // ->leftjoin('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+        // ->join('tblvessel as vessel','joborder.intJOeVesselID','vessel.intVesselID')
+        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
+        ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
+        ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
+        ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
+        ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
+        // ->join('tblbill as bill','invoice.intIBillID','bill.intBillID')
+        ->join('tblcharges as charges','charges.intChargeID','invoice.intInvoiceID')
+        ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
+        ->where('invoice.intInvoiceID',$id)
+        ->groupby('dispatch.intDispatchTicketID')
+        ->get(); 
+        error_log($dispatch);
+        return response()->json(['dispatch'=>$dispatch]);   
+    
     }
 
     /**

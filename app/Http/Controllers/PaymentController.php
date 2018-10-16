@@ -11,7 +11,6 @@ use App\Invoice;
 use App\DispatchTicket;
 use App\Charges;
 use App\Bill;
-$a=0;
 class PaymentController extends Controller
 {
     /**
@@ -220,8 +219,7 @@ class PaymentController extends Controller
         ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
         ->where('invoice.intInvoiceID',$id)
         ->groupby('dispatch.intDispatchTicketID')
-        ->get(); 
-        error_log($dispatch);
+        ->get();
         return response()->json(['dispatch'=>$dispatch]);   
     }
     

@@ -124,8 +124,10 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::get('/payment/{intInvoiceID}/infopayment','PaymentController@infopayment');
         Route::post('/payment/reject','PaymentController@reject');
         Route::post('/payment/store','PaymentController@store');
-
-        //Consignee Module
+        
+        Route::resource('/invoice','InvoiceController');
+        Route::get('/invoice/{intInvoiceID}/show','InvoiceController@show');
+        
         Route::group(['prefix'=>'consignee/'],function(){
             //Consignee Accounts
             Route::group(['prefix'=>'accounts'],function(){
