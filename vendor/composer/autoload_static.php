@@ -548,6 +548,8 @@ class ComposerStaticInit03fdbf8ca42cc01612abc47940c5de76
         'App\\JobOrder' => __DIR__ . '/../..' . '/app/JobOrder.php',
         'App\\JobSchedule' => __DIR__ . '/../..' . '/app/JobSchedule.php',
         'App\\JoborderForwardRequests' => __DIR__ . '/../..' . '/app/JoborderForwardRequests.php',
+        'App\\Location' => __DIR__ . '/../..' . '/app/Location.php',
+        'App\\Notifications\\VerifyEmail' => __DIR__ . '/../..' . '/app/Notifications/VerifyEmail.php',
         'App\\Pier' => __DIR__ . '/../..' . '/app/Pier.php',
         'App\\Position' => __DIR__ . '/../..' . '/app/Position.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',

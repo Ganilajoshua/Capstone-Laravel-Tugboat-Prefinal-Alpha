@@ -13,6 +13,7 @@ use App\Company;
 use App\JobOrder;
 use App\JobSchedule;
 use App\User;
+use PDF;
 use Redirect;
 
 class ReportsController extends Controller
@@ -181,7 +182,14 @@ class ReportsController extends Controller
 
     public function printPDF1()
     {
-        $pdf = PDF::loadView('Reports.disabledTReportPDF')->setPaper('letter', 'landscape');;
+        $admintbs = DB::table('tbltugboat as tugboat')
+        ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+        ->join('tblcompany as company','tugboat.intTCompanyID','company.intCompanyID')
+        ->where('tugboat.boolDeleted',0)
+        ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
+        ->get();  
+
+        $pdf = PDF::loadView('Reports.disabledTReportPDF', $admintbs)->setPaper('letter', 'landscape');;
         return $pdf->download('disabledtugboatreport.pdf');
     }
     public function printPDF2()
