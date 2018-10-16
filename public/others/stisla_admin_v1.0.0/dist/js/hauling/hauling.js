@@ -403,15 +403,11 @@ $('.updateLocationSubmit').on('click',function(){
                 text: "Location Updated",
                 type: "success",
                 showCancelButton: false,
-                confirmButtonClass: "btn-success",
+                confirmButtonClass: "btn-success waves-effect",
                 confirmButtonText: "Ok",
-                closeOnConfirm: true,
-                timer : 1500
             },
-            function(isConfirm){
-                if(isConfirm){
-                    location.reload();
-                }
+            function(){
+                window.location = url;
             });           
         },
         error : function(error){
@@ -435,7 +431,7 @@ $('.showUpdates').on('click',function(){
                 appendTable = 
                     `
                     <tr>
-                        <td>No Updates To Show </td>
+                        <td colspan =3>No Updates To Show </td>
                     </tr>`;
 
                     $(appendTable).appendTo('.locationUpdatesBody');

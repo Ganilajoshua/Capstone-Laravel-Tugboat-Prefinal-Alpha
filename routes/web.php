@@ -318,7 +318,6 @@ Route::group(['prefix'=>'consignee/'],function(){
     Route::post('/contracts/requestchanges','ConsigneeControllers\ContractsController@requestchanges');
     Route::post('/contracts/activate','ConsigneeControllers\ContractsController@activate');
     Route::post('/contracts/store','ConsigneeControllers\ContractsController@store');
-
     Route::post('/contracts/getnotifs','ConsigneeControllers\ContractsController@getnotifs');
     //Job Orders
     Route::resource('/joborders','ConsigneeControllers\JobOrdersController');

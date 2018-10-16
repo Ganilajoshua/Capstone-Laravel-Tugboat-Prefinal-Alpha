@@ -88,7 +88,7 @@ class TugboatAssignmentController extends Controller
         ->leftjoin('tbljobsched as sched','sched.intJSJobOrderID','joborder.intJobOrderID')
         ->join('tblcompany as company','company.intCompanyID','joborder.intJOCompanyID')
         ->where('joborder.enumStatus','Scheduled')
-        ->groupBy('sched.intJSJobOrderID')
+        ->groupBy('joborder.intJobOrderID')
         ->get();
         // $noftugboat = DB::table('tbljoborder as joborder')
         // ->get();
@@ -185,8 +185,8 @@ class TugboatAssignmentController extends Controller
                 $jobsched->timestamps = false;
                 $jobsched->intJSSchedID = $schedID;
                 $jobsched->intJSJobOrderID = $jobID;
+                $jobsched->intJSTugboatAssignID = $request->tugboatsID[$count];
                 $jobsched->intJSTugboatID = $request->tugboatsID[$count];
-                // $jobsched->intJSTugboatAssignID = $request->tugboatsID[$count];
                 $jobsched->enumStatus = 'Pending';
                 $jobsched->save();
             }

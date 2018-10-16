@@ -153,7 +153,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label>Content<sup class="text-primary">&#10033;</sup></label>
+                                        <label>Content</label>
                                         <textarea class="summernoteContract" id="addContractDetails"></textarea>
                                     </div>
                                 </div>

@@ -324,7 +324,7 @@ function appendJoborderTeams(jobsched,teams){
                 <div class="form-group">
                     <label for="tugboatName${jobsched[counter].intJobSchedID}">Assigned Tugboat # ${counter + 1}</sup></label>
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" id="tugboatName${jobsched[counter].intJobSchedID}" name="tugboatName[]" placeholder="${jobsched[counter].strName}">
+                        <input type="text" class="jobschedTugboats form-control" data-id="${jobsched[counter].intJobSchedID}" id="tugboatName${jobsched[counter].intJobSchedID}" name="tugboatName[]" placeholder="${jobsched[counter].strName}" readonly>
                     </div>
                 </div>
             </div>
@@ -335,7 +335,7 @@ function appendJoborderTeams(jobsched,teams){
         `<div class="col-12 col-sm-12 col-lg-6">
             <div class="form-group">
                 <label for="addTeamSelect">Select Team # ${counter + 1}</sup></label>
-                <select id="addTeamSelect" name="addTeam[]" class="addTeamSelect${counter + 1} form-control form-control input-lg wide">
+                <select id="addTeamSelect" style="background-color:transparent !important;" name="addTeam[]" class="addTeamSelect${counter + 1} teamAssignmentSelect form-control form-control input-lg wide">
                     <option data-display="" value="0">Select Team</option>
                 </select> 
             </div>

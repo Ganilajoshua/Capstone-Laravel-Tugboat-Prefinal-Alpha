@@ -145,7 +145,9 @@ function storeContracts(){
     
     // return false;
     console.log(id);
+    console.log(validity);
     console.log(title, details);
+    // return false;
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -456,6 +458,6 @@ function saveContracts(){
     });
 }
 
-$('.viewQuotesMatrix').on('click',function(){
-    console.log('hi');
-});
+    $('.viewQuotesMatrix').on('click',function(){
+        console.log('hi');
+    });
