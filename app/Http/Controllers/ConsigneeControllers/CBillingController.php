@@ -25,6 +25,7 @@ class CBillingController extends Controller
         ->where('company.intCompanyID',Auth::user()->intUCompanyID)
         ->where('jobsched.enumstatus','Finished')
         ->where('invoice.enumstatus','Processing')
+        ->groupby('dispatch.intDispatchTicketID')
         ->get();
 
         $pending = DB::table('tbljoborder as joborder')
@@ -106,7 +107,7 @@ class CBillingController extends Controller
                     $Invoice = Invoice::findOrFail($request->bill[$count]);
                     error_log($Invoice);
                     $Invoice->timestamps = false;
-                    $Invoice->enumStatus = 'Pending';
+                    $Invoice->enumStatus = 'Processing';
                     $Invoice->intIBillID = $Bill;
                     $Invoice->save();
                 }

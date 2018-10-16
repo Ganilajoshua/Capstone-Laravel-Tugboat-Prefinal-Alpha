@@ -74,6 +74,79 @@ $(document).ready(function(){
             $('#billInfoModal').modal('hide');
             $('#applyChequeSign').modal('hide');
         });
+
+        $('#addCheque').on('click',function(){
+            var append = 
+                `
+                <br>
+                <hr>
+                <br>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12 col-sm-12 col-lg-8">
+                        <div class="form-group">
+                            <label for="">Cheuqe Number</label>
+                            <input type="number" name="chequeNum[]"class="form-control" id="chequeNum" placeholder="0790" required>
+                            <label for="payeeLine">Pay to the Order Of<sup class="text-primary">&#10033;</sup></label>
+                            <input type="text" class="form-control" id="payeeLine" value="Tugmaster Bargepool" placeholder="Tugmaster Bargepool" disabled>
+                            <div class="invalid-feedback">
+                                Please fill in the Payee.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-lg-4">
+                        <div class="form-group">
+                            <label for="chequeAmount">Amount<sup class="text-primary">&#10033;</sup></label>
+                            <div class="input-group">
+                                <input id="chequeAmount" name="chequeAmount[]" type="number" class="form-control" placeholder="12000" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text">&#8369;</span>
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please fill in the Amount.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="amountWords" placeholder="Twelve Thousand" required readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <h6 class="text-primary">Bank of the Philippine Islands</h6>
+                            </li>
+                        </ul>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <h6>Bank Location</h6>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-6 col-sm-6 col-lg-6">
+                        <ul class="list-inline">
+                            <li class="list-inline-item text-primary">
+                                <h5>Memo : </h5>
+                            </li>
+                            <li class="list-inline-item">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="chequeMemo[]" id="chequeMemo">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>`;
+            console.log('append');
+            $(append).appendTo('#append');
+        });
     });
     var url = '/consignee/paymentbilling/payment';
     
@@ -105,15 +178,62 @@ $(document).ready(function(){
         });
   }
 
-  function Finalize(id){
+  function validate(amount){
+      console.log(amount);
+      var counter = 0;
+      var balance = $('#balance').val();
+      var ChequeAmount = [];
+        $("input[name='chequeAmount[]']").each(function(ctr){
+            ChequeAmount[ctr] = $(this).val();
+            ctr++;
+            counter = Number(counter) + Number($(this).val());
+        })
+        counter = Number(counter) + Number(balance);
+        console.log(counter);
+        if(amount > counter){
+            toastr.error('KULANG!!', 'DAGDAGAN MO PA!', {
+                closeButton: true,
+                debug: false,
+                timeOut: 2000,
+                positionClass: "toast-bottom-right",
+                preventDuplicates: true,
+                showDuration: 300,
+                hideDuration: 300,
+                showMethod: "slideDown",
+                hideMethod: "slideUp"
+            });
+        }
+        else
+        {
+            return Finalize();
+        }
     
-    var ChequeNum = $('#chequeNum').val();
+  }
+  function Finalize(){
+    var Fee = $('#fee').val();
+    var Balance = $('#balance').val();
     var ChequeDate = $('#cDate').val();
-    var AbaNum = $('#abaNum').val();
-    var ChequeAmount = $('#chequeAmount').val();
-    var RouteNum = $('#routeNum').val();
-    var ChequeMemo = $('#chequeMemo').val();
+    var id = $('#idBill').val();
+        
+    var ChequeMemo = [];
+    $("input[name='chequeMemo[]").each(function(memo){
+        ChequeMemo[memo] = $(this).val();
+        memo++;
+    })
 
+    var ChequeNum = [];
+        $("input[name='chequeNum[]").each(function(num){
+            ChequeNum[num] = $(this).val();
+            num++;
+        })
+    var counter;
+    var ChequeAmount = [];
+        $("input[name='chequeAmount[]").each(function(amount){
+            ChequeAmount[amount] = $(this).val();
+            amount++;
+        counter = Number(counter) + Number($(this).val() + Number(balance));
+        console.log(counter);
+        })
     console.log(ChequeDate);
     console.log(id);
     $.ajaxSetup({
@@ -121,17 +241,18 @@ $(document).ready(function(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    
     $.ajax({
         url : '/consignee/paymentbilling/payment/store',
         type : 'POST',
         data : { "_token" : $('meta[name="csrf-token"]').attr('content'),
             ChequeNum : ChequeNum,
             ChequeDate : ChequeDate,
-            AbaNum : AbaNum,
             ChequeAmount : ChequeAmount,
-            RouteNum : RouteNum,
             ChequeMemo : ChequeMemo,
             BillID : id,
+            Balance : Balance,
+            Fee : Fee,
 
         },
         beforeSend: function (request) {
@@ -154,7 +275,21 @@ $(document).ready(function(){
             });                       
         },
         error : function(error){
-            throw error;
+            console.log(error)
+            swal({
+                title: "The Billing has been Finalize",
+                text: "Sent",
+                type: "success",
+                showCancelButton: false,
+                confirmButtonClass: "btn-success",
+                confirmButtonText: "Ok",
+                closeOnConfirm: true,
+            },
+            function(isConfirm){
+                if(isConfirm){
+                    window.location = '/consignee/paymentbilling/billing';
+                }
+            });        
         } 
     });
 }

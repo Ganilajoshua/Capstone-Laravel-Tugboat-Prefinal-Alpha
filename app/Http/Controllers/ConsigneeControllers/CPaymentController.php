@@ -14,7 +14,9 @@ use App\JobSchedule;
 use App\Schedules;
 use App\Bill;
 use App\Company;
+use App\Balance;
 use App\Invoice;
+use App\Cheque;
 use Redirect;
 use Auth;
 use DB;
@@ -30,12 +32,13 @@ class CPaymentController extends Controller
         $Bill = Bill::max('intBillID')+1;
         $dispatch = DB::table('tbljoborder as joborder')
         // ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
-        ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
-        ->join('tblpier as pier','berth.intBPierID','pier.intPierID')
+        ->leftjoin('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
+        ->leftjoin('tblpier as pier','berth.intBPierID','pier.intPierID')
         // ->join('tblbarge as barge','joborder.intJOBargeID','barge.intBargeID')
-        ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+        ->leftjoin('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
         // ->join('tblvessel as vessel','joborder.intJOeVesselID','vessel.intVesselID')
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->join('tblbalance as balance','balance.intBalanceID','company.intCompanyID')
         ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
@@ -44,9 +47,16 @@ class CPaymentController extends Controller
         ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
         ->where('company.intCompanyID',Auth::user()->intUCompanyID)
         ->where('invoice.intIBillID',$Bill)
+        ->groupby('dispatch.intDispatchTicketID')
         ->get();
 
-        $Company = Company::findOrFail(Auth::user()->intUCompanyID);
+        // $Company = Company::findOrFail(Auth::user()->intUCompanyID);
+        $Company = DB::table('tblcompany as company')
+        ->join('tblbalance as balance','company.intCompanyID','balance.intBalanceID')
+        ->where('company.intCompanyID',Auth::user()->intUCompanyID)
+        ->get();
+        error_log($Company);
+
         $amount = DB::table('tblinvoice')
         ->where('intIBillID',$Bill)
         ->sum('fltBalanceRemain');
@@ -94,21 +104,44 @@ class CPaymentController extends Controller
     public function store(Request $request)
     {
         $Bill = new Bill;
-        error_log($request->BillID);
+        // $Bill = Bill::findOrFail($request->BillID);
         $Bill->intBillID = $request->BillID;
-        $Bill->intChequeID = $request->ChequeNum;
-        $Bill->dtPayment = $request->ChequeDate;
-        // Carbon::parse($request->ChequeDate)->format('Y/m/d');
-        $Bill->intABANum = $request->AbaNum;
-        $Bill->intAmount = $request->ChequeAmount;
-        $Bill->intRouteNum = $request->RouteNum;
-        $Bill->intAccountNum = $request->RouteNum;
-        $Bill->strMemo = $request->ChequeMemo;
         $Bill->enumStatus = 'Pending';
         $Bill->timestamps = false;
+        // Carbon::parse($request->ChequeDate)->format('Y/m/d');
+        // $counter = $request->ChequeNum;
+        // $counter = (array)$request->ChequeNum;
+
         $Bill->save();
-        
-        return response()->json(['Bill'=>$Bill]);  
+        $a = $request->Balance;
+        error_log(count($request->ChequeNum));
+        for($count = 0; $count <= count($request->ChequeNum); $count++){
+                
+                $Cheque = new Cheque;
+                $Cheque->timestamps = false;
+                $Cheque->strChequeNum = $request->ChequeNum[$count];
+                
+                error_log($request->ChequeNum[$count]);  
+                // $Cheque->strTugboatInsuranceDesc = $request->insurances[$count];
+                $Cheque->intCBillID = $request->BillID;
+                error_log($request->BillID);
+                $Cheque->dtPayment = $request->ChequeDate;
+                error_log($request->ChequeDate);
+                $Cheque->intAmount = $request->ChequeAmount[$count];
+                error_log($request->ChequeAmount[$count]);
+                $Cheque->strMemo = $request->ChequeMemo[$count];
+                // $a = $a + $request->ChequeAmount[$count];
+                $Cheque->save();
+            }
+            
+            // $remains = $a - $request->Fee;
+            // $Balance = Balance::findOrFail(Auth::user()->intUCompanyID);
+            // $Balance->fltBalance = $remains;
+            // $Balance->timestamps = false;
+            // error_log($Balance);
+            // $Balance->save();
+        // $Balance = 
+        return response()->json(['Bill'=>$Bill,'Cheque'=>$Cheque,'Balance'=>$Balance]);  
     }
 
     /**
