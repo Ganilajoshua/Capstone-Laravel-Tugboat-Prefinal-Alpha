@@ -108,7 +108,6 @@ function postPier(){
                     confirmButtonClass: "btn-success",
                     confirmButtonText: "Ok",
                     closeOnConfirm: true,
-                    timer : 1500
                 },
                 function(isConfirm){
                     if(isConfirm){

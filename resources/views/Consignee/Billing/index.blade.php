@@ -19,7 +19,13 @@
 								<a class="nav-link active" id="pillsPendingforPayment-tab" data-toggle="pill" href="#pillsPendingforPayment" role="tab" aria-controls="pillsPendingforPayment" aria-selected="true">Pending for Payment</a>
 							</li>
 							<li class="nav-item">
+								<a class="nav-link" id="pillsPending-tab" data-toggle="pill" href="#pillsPending" role="tab" aria-controls="pillsPending" aria-selected="false">Pending Bills</a>
+							</li>
+							<li class="nav-item">
 								<a class="nav-link" id="pillsPaid-tab" data-toggle="pill" href="#pillsPaid" role="tab" aria-controls="pillsPaid" aria-selected="false">Paid Bills</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="pillsRejected-tab" data-toggle="pill" href="#pillsRejected" role="tab" aria-controls="pillsRejected" aria-selected="false">Rejected Bills</a>
 							</li>
 						</ul>
 					</div>
@@ -48,7 +54,6 @@
 															</th>
 															<th>#</th>
 															<th>Date of Transaction</th>
-															<th>status</th>
 															<th>Total Amount
 																{{-- (&#8369;) --}}
 															</th>
@@ -67,9 +72,6 @@
 															</td>
 															<td>{{$dispatch->intInvoiceID}}</td>
 															<td>{{$dispatch->dtmETA}}</td>
-															<td>
-																<div class="badge badge-success">{{$dispatch->enumStatus}}</div>
-															</td>
 															<td>{{$dispatch->fltBalanceRemain}}</td>
 															<td>
 																<div class="table-data-feature">
@@ -94,6 +96,12 @@
 							</div>
 							<div class="tab-pane fade" id="pillsPaid" role="tabpanel" aria-labelledby="pillsPaid-tab">
 								@include('Consignee.Billing.paidBills')
+							</div>
+							<div class="tab-pane fade" id="pillsPending" role="tabpanel" aria-labelledby="pillsPending-tab">
+								@include('Consignee.Billing.pendingBills')
+							</div>
+							<div class="tab-pane fade" id="pillsRejected" role="tabpanel" aria-labelledby="pillsRejected-tab">
+									@include('Consignee.Billing.RejectedBills')
 							</div>
 						</div>
 					</div>

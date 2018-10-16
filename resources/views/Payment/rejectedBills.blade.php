@@ -11,24 +11,23 @@
             </tr>
         </thead>
         <tbody>
-            @if(count($paid)>0)    
-                @foreach($paid as $paid)
+            @if(count($rejected)>0)    
+                @foreach($rejected as $rejected)
                     <tr class="tr-shadow">
-                        <td>{{$paid->intChequeID}}</td>
-                        <td></td>
+                        <td>{{$rejected->intChequeID}}</td>
+                        <td>{{$rejected->strCompanyName}}</td>
                         <td>
-                            <div class="badge badge-success">{{$paid->enumStatus}}</div>
+                            {{$rejected->dtPayment}}
                         </td>
-                        <td>{{$paid->intAmount}}</td>
+                        <td>{{$rejected->intAmount}}</td>
                         <td>
                             <div class="ml-1 mr-1">
-                                {{-- <button onclick="validate({{$paid->intBillID}})" class="btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
+                                <button onclick="pendinginfo({{$rejected->intBillID}})" class="rejects btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
                                     <i class="bigIcon ion ion-ios-approve"></i>
-                                </button> --}}
+                                </button>
                             </div>
                         </td>
-                    </tr>
-                    <tr class="spacer"></tr>
+                    </tr>   
                 @endforeach
             @endif
         </tbody>

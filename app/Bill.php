@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Bill extends Model
 {
     protected $table = 'tblbill';
-    protected $primaryKey = 'intChequeID';
+    protected $primaryKey = 'intBillID';
 }

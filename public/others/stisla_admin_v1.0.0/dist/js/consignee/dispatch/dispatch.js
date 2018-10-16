@@ -1,49 +1,49 @@
-var url = '/consignee/dispatchticket';
 $(document).ready(function(){
     $('.btnView').on('click',function() {
         $('.dispatchTicketTable').css('display','none');
         $('.viewDetails').css('display','block');
-});
+    });
     $('.modalClose').on('click',function() {
-      $('#applyAdminSignModal').modal('hide');
+        $('#applyAdminSignModal').modal('hide');
     });
     // Back 
     $('.btnBack').on('click',function() {
-      $('.dispatchTicketTable').css('display','block');
-      $('.viewDetails').css('display','none');
+        $('.dispatchTicketTable').css('display','block');
+        $('.viewDetails').css('display','none');
     });
-
+    
     var signConsignee = $('.signConsigneeCanvasDisplay').signature({
-    syncField: '#signatureJSON'
+        syncField: '#signatureJSON'
     });
     
     $('.clearConsigneeCanvas').on('click',function(){
-    signConsignee.signature('clear');
+        signConsignee.signature('clear');
     });
-        
+    
     // $('.signConsigneeCanvasDisplay').signature(this ? 'disable' : 'disable'); 
     // if ($('.signConsigneeCanvasDisplay').signature('isEmpty')) {
-    // $('.btnFinalizeDT').attr('disabled', true);
-    // $('.btnFinalizeDT').css('cursor', 'not-allowed');
-
-    // }else {
-    //     $('.btnFinalizeDT').attr('disabled', false);
-    //     $('.btnFinalizeDT').css('cursor', 'pointer');
-    // }
-});
-function get(id){
-    console.log('hi');
+        // $('.btnFinalizeDT').attr('disabled', true);
+        // $('.btnFinalizeDT').css('cursor', 'not-allowed');
+        
+        // }else {
+            //     $('.btnFinalizeDT').attr('disabled', false);
+            //     $('.btnFinalizeDT').css('cursor', 'pointer');
+            // }
+        });
+        var url = '/consignee/dispatchticket';
+        function get(id){
+            console.log('hi');
     $.ajax({
         url : url + '/' + id + '/info',
         type : 'GET',
         dataType : 'JSON',
         aysnc : true,
         success : function(data){
-
+            
             console.log('success', data);
             $('#viewDetails').empty();
-                $('#tugboat').html(data.dispatch[0].strName);
-                $('#to').html(data.dispatch[0].strCompanyName);
+            // $('#tugboat').html(data.dispatch[0].strName);
+            $('#to').html(data.dispatch[0].strCompanyName);
                 $('#address').html(data.dispatch[0].strCompanyAddress);
                 $('#dispatch').html(data.dispatch[0].intDispatchTicketID);
                 $('#dispatch2').html(data.dispatch[0].intDispatchTicketID);
@@ -52,7 +52,7 @@ function get(id){
                 //date
                 $('#start').html(data.dispatch[0].strJOStartPoint);
                 $('#destination').html(data.dispatch[0].strJODestination);
-                $('#service').html(data.dispatch[0].strServicesName);
+                $('#service').html(data.dispatch[0].enumServiceType);
                 $('#pNum').html(data.dispatch[0].strCompanyContactPNum);
                 $('#eMail').html(data.dispatch[0].strCompanyEmail);
                 $('#ID').html(data.dispatch[0].intCompanyID);

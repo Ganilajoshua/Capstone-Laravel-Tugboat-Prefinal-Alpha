@@ -53,10 +53,14 @@
                                         </tr>
                                     </thead>  
                                     <tbody>
+                                @if(count($mtugboat)>0)    
+                                    @foreach($mtugboat as $mtugboat)
                                         <tr>
-                                            <td>Energy Master</td>
-                                            <td>10</td>
+                                            <td>{{$mtugboat->strName}}</td>
+                                            <td>{{$mtugboat->counter}}</td>
                                         </tr>
+                                    @endforeach
+                                @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -71,14 +75,14 @@
                                         </tr>
                                     </thead>  
                                     <tbody>
-                                        <tr>
-                                            <td>Hauling Service</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tug Assist Service</td>
-                                            <td>5</td>
-                                        </tr>
+                                        @if(count($joborder)>0)    
+                                            @foreach($joborder as $joborder)
+                                                <tr>
+                                                    <td>{{$joborder->enumServiceType}}</td>
+                                                    <td>{{$joborder->counter}}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -93,10 +97,14 @@
                                         </tr>
                                     </thead>  
                                     <tbody>
-                                        <tr>
-                                            <td>Akari</td>
-                                            <td>22000</td>
-                                        </tr>
+                                            @if(count($cpending)>0)    
+                                            @foreach($cpending as $cpending)
+                                                <tr>
+                                                    <td>{{$cpending->strCompanyName}}</td>
+                                                    <td>{{$cpending->counter}}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -111,14 +119,14 @@
                                         </tr>
                                     </thead>  
                                     <tbody>
-                                        <tr>
-                                            <td>Akari</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bootsy</td>
-                                            <td>5</td>
-                                        </tr>
+                                            @if(count($activeconsignee)>0)    
+                                            @foreach($activeconsignee as $activeconsignee)
+                                                <tr>
+                                                    <td>{{$activeconsignee->strCompanyName}}</td>
+                                                    <td>{{$activeconsignee->counter}}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -133,10 +141,14 @@
                                         </tr>
                                     </thead>  
                                     <tbody>
-                                        <tr>
-                                            <td>Akari</td>
-                                            <td>2</td>
-                                        </tr>
+                                        @if(count($renew)>0)    
+                                            @foreach($renew as $renew)
+                                                <tr>
+                                                    <td>{{$renew->strCompanyName}}</td>
+                                                    <td>{{$renew->counter}}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -152,7 +164,7 @@
                                     </thead>  
                                     <tbody>
                                         <tr>
-                                            <td>Hi-Energy</td>
+                                            <td>None</td>
                                             <td>10</td>
                                         </tr>
                                         <tr>
@@ -174,7 +186,7 @@
                                         </thead>  
                                         <tbody>
                                             <tr>
-                                                <td>Hi-Energy</td>
+                                                <td>None</td>
                                                 <td>10</td>
                                             </tr>
                                             <tr>
@@ -196,7 +208,7 @@
                                         </thead>  
                                         <tbody>
                                             <tr>
-                                                <td>Hi-Energy</td>
+                                                <td>None</td>
                                                 <td>10</td>
                                             </tr>
                                             <tr>
@@ -216,27 +228,19 @@
                                             <th>Consignee Name</th>
                                             <th>Service Type</th>
                                             <th class="noSortAction">Amount</th>
-                                            <th class="noSortAction">Mode of Payment</th>
-                                            <th>Reference #</th>
                                         </tr>
                                     </thead>  
                                     <tbody>
-                                        <tr>
-                                            <td>10</td>
-                                            <td>Akari</td>
-                                            <td>Tug Assist</td>
-                                            <td class="text-success">20000</td>
-                                            <td>Cash</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>20</td>
-                                            <td>Bootsy</td>
-                                            <td>Hauling</td>
-                                            <td class="text-success">20000</td>
-                                            <td>Cheque</td>
-                                            <td><a href="#">011279466</a></td>
-                                        </tr>
+                                            @if(count($cpaid)>0)    
+                                            @foreach($cpaid as $cpaid)
+                                                <tr>
+                                                    <td>{{$cpaid->intJobOrderID}}</td>
+                                                    <td>{{$cpaid->strCompanyName}}</td>
+                                                    <td>{{$cpaid->enumServiceType}}</td>
+                                                    <td>{{$cpaid->fltBalanceRemain}}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -246,19 +250,23 @@
                                 <table class="detailedTable table table-striped text-center" style="width:100%">
                                     <thead class="bg-primary">
                                         <tr>
-                                            <th>Service Name</th>
-                                            <th class="width40">Number of Job Orders Catered</th>
+                                            <th>Job Order #</th>
+                                            <th>Consignee Name</th>
+                                            <th>Service Type</th>
+                                            <th class="noSortAction">Amount</th>
                                         </tr>
                                     </thead>  
                                     <tbody>
-                                        <tr>
-                                            <td>Hauling Service</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tug Assist Service</td>
-                                            <td>5</td>
-                                        </tr>
+                                            @if(count($cunpaid)>0)    
+                                            @foreach($cunpaid as $cunpaid)
+                                                <tr>
+                                                    <td>{{$cunpaid->intJobOrderID}}</td>
+                                                    <td>{{$cunpaid->strCompanyName}}</td>
+                                                    <td>{{$cunpaid->enumServiceType}}</td>
+                                                    <td>{{$cunpaid->fltBalanceRemain}}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -273,10 +281,14 @@
                                         </tr>
                                     </thead>  
                                     <tbody>
-                                        <tr>
-                                            <td>Akari</td>
-                                            <td>1000</td>
-                                        </tr>
+                                        @if(count($balance)>0)    
+                                            @foreach($balance as $balance)
+                                                <tr>
+                                                    <td>{{$balance->strCompanyName}}</td>
+                                                    <td>{{$balance->fltBalance}}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>

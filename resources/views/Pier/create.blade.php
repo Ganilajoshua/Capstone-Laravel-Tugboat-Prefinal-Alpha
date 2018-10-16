@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <input   type="hidden" id="editIDhide">
-                    <button type="submit" class="btnAdd btn btn-primary waves-effect float-right">Add</button>
+                    <button type="submit" onclick="postPier()"class="btnAdd btn btn-primary waves-effect float-right">Add</button>
                        <!-- <button type="submit" class="btnAdd btn btn-primary waves-effect float-right">Add</button> -->
                 </form>
             </div>

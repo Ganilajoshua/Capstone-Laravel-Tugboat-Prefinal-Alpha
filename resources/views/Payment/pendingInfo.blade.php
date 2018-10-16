@@ -1,5 +1,6 @@
-<div class="viewDetails">
-        <div class="card card-primary animated slideInDown fast">
+
+<div class="viewPendingInfo">
+    <div class="card card-primary animated slideInDown fast">
             <div class="card-header">
                 <a href="#" class="btnBack btn btn-lg btn-link float-left" data-toggle="tooltip" title="Back" role="button">
                     <i class="ion-chevron-left"></i>
@@ -27,32 +28,29 @@
                     </div>
                     <div class="col-12 col-sm-4 col-lg-4">
                         <h5 class="mb-2">To</h5>
-                        <div id="to" class="mb-1 font-weight-bold">
+                        <div id="to1" class="mb-1 font-weight-bold">
                             {{-- <p id="to"></p> --}}
                         </div>
-                        <div id="address" class="mb-1">
+                        <div id="address1" class="mb-1">
                         </div>
                         <div class="mb-1">
                         </div>
                         <div class="mb-1">
-                            Phone: <span id="pNum"></span>
+                            Phone: <span id="pNum1"></span>
                         </div>
                         <div class="mb-1">
-                            Email: <span id="eMail"></span>
+                            Email: <span id="eMail1"></span>
                         </div>
                     </div>
                     <div class="col-12 col-sm-4 col-lg-4">
                         <div class="mb-1 font-weight-bold">
-                            Ticket # <span id="dispatch"></span>
+                            Ticket # <span id="dispatch1"></span>
                         </div>
                         <div class="mb-1">
-                            <strong>Towed:</strong> <span id="towed"></span>
+                            <strong>Towed:</strong> <span id="towed1"></span>
                         </div>
                         <div class="mb-1">
-                            <strong>Date:</strong> ????
-                        </div>
-                        <div class="mb-1">
-                            <strong>Account:</strong> <span id="ID"></span>
+                            <strong>Account:</strong> <span id="ID1"></span>
                         </div>
                     </div>
                 </div>
@@ -71,12 +69,12 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td id="dispatch2"></td>
-                                    <td id="tugboat"></td>
-                                    <td id="start"></td>
-                                    <td id="destination"></td>
+                                    <td id="dispatch21"></td>
+                                    <td id="tugboat1"></td>
+                                    <td id="start1"></td>
+                                    <td id="destination1"></td>
                                     <td>??</td>
-                                    <td id="service"></td>
+                                    <td id="service1"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -95,42 +93,62 @@
         
                                 <tr>
                                     <td class="tdBorderLeft">Job Order Amount</td>
-                                    <td class="tdBorderLeft" id="amount"></td>
+                                    <td class="tdBorderLeft" id="amount1"></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td class="tdBorderLeft">Tugboat Delay Fee</td>
                                     <td class="tdBorderLeft"></td>
-                                    <td id="delayfee"></td>
+                                    <td id="delayfee1"></td>
                                 </tr>
                                 <tr>
                                     <td class="tdBorderLeft">Violation Fee</td>
-                                    <td class="tdBorderLeft" id="conviolationfee"></td>
-                                    <td id="comviolationfee"></td>
+                                    <td class="tdBorderLeft" id="conviolationfee1"></td>
+                                    <td id="comviolationfee1"></td>
                                 </tr>
                                 <tr>
                                     <td class="tdBorderLeft">Late Fee</td>
-                                    <td class="tdBorderLeft" id="conlatefee"></td>
+                                    <td class="tdBorderLeft" id="conlatefee1"></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td class="tdBorderLeft">Damage Fee</td>
-                                    <td class="tdBorderLeft" id="condamagefee"></td>
-                                    <td id="comdamagefee"></td>
+                                    <td class="tdBorderLeft" id="condamagefee1"></td>
+                                    <td id="comdamagefee1"></td>
                                 </tr>
                                 <tr>
                                         <td class="tdBorderLeft">Discounts</td>
-                                        <td class="tdBorderLeft" ><span id="discount"></span>%</td>
+                                        <td class="tdBorderLeft" ><span id="discount1"></span>%</td>
                                         <td></td>
                                     </tr>
                                     <tr style="background:white;">
                                             <td class="tdBorderLeft"><h6>TOTAL ( &#8369; )</h6></td>
-                                            <td colspan="2" id="total"></td>
+                                            <td colspan="2" id="total1"></td>
                                         </tr>
                                     </tbody>
                                 </table>
                         </div>
-            </div>
+            </div class="float-right">
+            <select name="" id="new" hidden>
+                <option id="bill"></option>
+            </select>
+            <select name="" id="sum" hidden>
+                <option id="total2"></option>
+            </select>
+            <select name="" id="bal" hidden>
+                    <option id="balance"></option>
+                </select>
+            <select name="" id="bal" hidden>
+                <option id="balance"></option>
+            </select>
+            <button onclick="validate()" class="app btn-sm btn-primary waves-effect" data-toggle="tooltip" title="Accept" role="button">
+                    Approve
+            </button>
+            <button onclick="reject()" class="rem btn-sm btn-primary waves-effect" data-toggle="tooltip" title="Reject" role="button">
+                    Reject
+            </button>  
+            
         </div>
     </div>
-    </div>
+</div>
+</div>

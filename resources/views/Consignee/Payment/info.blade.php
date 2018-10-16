@@ -10,6 +10,7 @@
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
+                    {{-- @foreach(count($Counter)>0) --}}
                     <table class="table table-striped border-primary text-center">
                         <thead class="bg-primary text-white">
                             <th>Particulars</th>
@@ -17,44 +18,46 @@
                             <th>Less ( &#8369; )</th>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="tdBorderLeft">Job Order Amount</td>
-                                <td class="tdBorderLeft" id="JOAmount"></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td class="tdBorderLeft">Tugboat Delay Fee</td>
-                                <td class="tdBorderLeft"></td>
-                                <td id="TBDelayFee"></td>
-                            </tr>
-                            <tr>
-                                <td class="tdBorderLeft">Violation Fee</td>
-                                <td class="tdBorderLeft" id="ViolationFee"></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td class="tdBorderLeft">Consignee Late Fee</td>
-                                <td class="tdBorderLeft" id="CLateFee"></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td class="tdBorderLeft">Damage Fee</td>
-                                <td class="tdBorderLeft" id="DamageFee"></td>
-                                <td></td>
-                            </tr>
-                            <tr>
+
+                        <tr>
+                            <td class="tdBorderLeft">Job Order Amount</td>
+                            <td class="tdBorderLeft" id="amount"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="tdBorderLeft">Tugboat Delay Fee</td>
+                            <td class="tdBorderLeft"></td>
+                            <td id="delayfee"></td>
+                        </tr>
+                        <tr>
+                            <td class="tdBorderLeft">Violation Fee</td>
+                            <td class="tdBorderLeft" id="conviolationfee"></td>
+                            <td id="comviolationfee"></td>
+                        </tr>
+                        <tr>
+                            <td class="tdBorderLeft">Late Fee</td>
+                            <td class="tdBorderLeft" id="conlatefee"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="tdBorderLeft">Damage Fee</td>
+                            <td class="tdBorderLeft" id="condamagefee"></td>
+                            <td id="comdamagefee"></td>
+                        </tr>
+                        <tr>
                                 <td class="tdBorderLeft">Discounts</td>
-                                <td class="tdBorderLeft"></td>
+                                <td class="tdBorderLeft" ><span id="discount"></span>%</td>
                                 <td></td>
                             </tr>
                             <tr style="background:white;">
-                                <td class="tdBorderLeft"><h4>TOTAL ( &#8369; )</h4></td>
-                                <td colspan="2" id="Total"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                    <td class="tdBorderLeft"><h4>TOTAL ( &#8369; )</h4></td>
+                                    <td colspan="2" id="total"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                {{-- @endforeach --}}
+                    </div>
                 </div>
-            </div>
         </div>
     </div>
 </div>
