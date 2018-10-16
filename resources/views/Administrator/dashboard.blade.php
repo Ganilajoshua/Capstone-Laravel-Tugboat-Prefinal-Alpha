@@ -37,62 +37,39 @@
                                     <h4 class="text-white" style="color:#fff !important;">Ongoing Job Orders</h4>
                                 </div>
                                 <div class="card-body mt-1 text-white" style="font-size:25px;">
-                                    10
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="collapse show" id="ongoingJOCard">
                         <div class="card-body m-0">
-                            <div class="col-lg-4 col-md-6 col-12">
-                                <div class="card card-sm-2 card-primary border-primary activeCards">
-                                    <div class="card-icon">
-                                        <i class="ion ion-android-boat text-primary"></i>
-                                    </div>
-                                    <div class="card-header">
-                                        <h4 class="text-primary mb-2">Job Order</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <h5>Consignee</h5>
-                                    </div>
-                                    <div class="card-footer">
-                                        <p class="card-text">Location Update: safasfasfasf</p>
-                                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            <div class="row">
+                                @foreach($ongoing as $ongoing)
+                                <div class="col-12 col-sm-12 col-lg-4 pendingCards">
+                                    <div class="card card-sm-2 card-primary border-primary">
+                                        <div class="card-icon">
+                                            <i class="ion ion-android-boat text-primary"></i>
+                                        </div>
+                                        <div class="card-header">
+                                            <h4 class="text-primary mb-2">Job Order # {{$ongoing->intJobOrderID}}</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <h3><a href="/administrator/transactions/dispatchandhauling/hauling">{{$ongoing->strJODesc}}</a></h3>
+                                            <small style="font-size:20px;" class="float-left mt-2 font-weight-bold"> {{$ongoing->strCompanyName}} </small>
+                                            <h3 class="float-right mt-1" style="font-size: 15px;">
+                                                <span class="">STATUS : </span>
+                                                <button type="button" tab-index="-1" class="text-white btn btn-success btn-sm disabled" style="font-size: 12px; border-radius: 3px; font-weight:bold; pointer-events: none;" aria-disabled="true">ONGOING</button>
+                                            </h3>
+                                        </div>
+                                        <div class="card-footer mt-2">
+                                            <small style="font-size:15px;" class="float-left mt-2 text-black"> {{$ongoing->dateStarted}} &nbsp;</small>
+                                            <small style="font-size:15px;" class="float-left mt-2 text-black ml-1"> {{$ongoing->tmStarted}} </small>
+                                            <small style="font-size:15px;" class="float-right mt-2"> {{$ongoing->enumServiceType}} </small>
+                                        </div>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="card card-sm-4">
-                    <div class="card-icon bg-danger">
-                        <i class="ion ion-ios-paper-outline"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>News</h4>
-                        </div>
-                        <div class="card-body">
-                            1
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-12">
-                <div class="card card-sm-3">
-                    <div class="card-icon bg-warning">
-                        <i class="ion ion-paper-airplane"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Reports</h4>
-                        </div>
-                        <div class="card-body">
-                            1,201
                         </div>
                     </div>
                 </div>
@@ -161,79 +138,50 @@
         <div class="row">
             <div class="col-lg-8 col-md-12 col-12 col-sm-12">
                 <div class="card">
-                    <div class="card-header">
-                        <div class="float-right">
-                            <div class="btn-group">
-                                <a href="#" class="btn active">Week</a>
-                                <a href="#" class="btn">Month</a>
-                                <a href="#" class="btn">Year</a>
-                            </div>
-                        </div>
-                        <h4>Statistics</h4>
+                    <div class="card-header bg-primary">
+                        <h4 class="text-center text-white">Sales Report</h4>
                     </div>
                     <div class="card-body">
                         <canvas id="myChart" height="158"></canvas>
-                        <div class="statistic-details mt-sm-4">
-                            <div class="statistic-details-item">
-                                <small class="text-muted"><span class="text-primary"><i class="ion-arrow-up-b"></i></span> 7%</small>
-                                <div class="detail-value">$243</div>
-                                <div class="detail-name">Today's Sales</div>
-                            </div>
-                            <div class="statistic-details-item">
-                                <small class="text-muted"><span class="text-danger"><i class="ion-arrow-down-b"></i></span> 23%</small>
-                                <div class="detail-value">$2,902</div>
-                                <div class="detail-name">This Week's Sales</div>
-                            </div>
-                            <div class="statistic-details-item">
-                                <small class="text-muted"><span class="text-primary"><i class="ion-arrow-up-b"></i></span>9%</small>
-                                <div class="detail-value">$12,821</div>
-                                <div class="detail-name">This Month's Sales</div>
-                            </div>
-                            <div class="statistic-details-item">
-                                <small class="text-muted"><span class="text-primary"><i class="ion-arrow-up-b"></i></span> 19%</small>
-                                <div class="detail-value">$92,142</div>
-                                <div class="detail-name">This Year's Sales</div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4 col-md-12 col-12 col-sm-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h4>Activity Log</h4>
+                    <div class="card-header bg-primary">
+                        <h4 class="text-center text-white">Activity Log</h4>
                     </div>
                     <div class="card-body">
                         <ul class="list-unstyled list-unstyled-border">
                             <li class="media">
-                                <img class="mr-3 rounded-circle" width="50" src="../dist/img/avatar/avatar-1.jpeg" alt="avatar">
+                                <img class="mr-3 rounded-circle" width="50" src="/others/stisla_admin_v1.0.0/dist/img/tbLogo.png" alt="avatar">
                                 <div class="media-body">
                                     <div class="float-right"><small>10m</small></div>
-                                    <div class="media-title">Farhan A Mujib</div>
+                                    <div class="media-title">Administrator</div>
                                     <small>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</small>
                                 </div>
                             </li>
                             <li class="media">
-                                <img class="mr-3 rounded-circle" width="50" src="../dist/img/avatar/avatar-2.jpeg" alt="avatar">
+                                <img class="mr-3 rounded-circle" width="50" src="/others/stisla_admin_v1.0.0/dist/img/tbLogo.png" alt="avatar">
                                 <div class="media-body">
                                     <div class="float-right"><small>10m</small></div>
-                                    <div class="media-title">Ujang Maman</div>
+                                    <div class="media-title">Administrator</div>
                                     <small>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</small>
                                 </div>
                             </li>
                             <li class="media">
-                                <img class="mr-3 rounded-circle" width="50" src="../dist/img/avatar/avatar-3.jpeg" alt="avatar">
+                                <img class="mr-3 rounded-circle" width="50" src="/others/stisla_admin_v1.0.0/dist/img/tbLogo.png" alt="avatar">
                                 <div class="media-body">
                                     <div class="float-right"><small>10m</small></div>
-                                    <div class="media-title">Rizal Fakhri</div>
+                                    <div class="media-title">Administrator</div>
                                     <small>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</small>
                                 </div>
                             </li>
                             <li class="media">
-                                <img class="mr-3 rounded-circle" width="50" src="../dist/img/avatar/avatar-4.jpeg" alt="avatar">
+                                <img class="mr-3 rounded-circle" width="50" src="/others/stisla_admin_v1.0.0/dist/img/tbLogo.png" alt="avatar">
                                 <div class="media-body">
                                     <div class="float-right"><small>10m</small></div>
-                                    <div class="media-title">Alfa Zulkarnain</div>
+                                    <div class="media-title">Administrator</div>
                                     <small>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</small>
                                 </div>
                             </li>

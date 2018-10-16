@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
+use App\JobOrder;
 use App\Contracts;
 
 use Auth;
@@ -24,7 +25,22 @@ class AdminDashboardController extends Controller
      */
     public function index()
     {
-        return view('Administrator.dashboard');
+        JobOrder::where('boolDeleted', 0)
+        ->where('enumStatus','Ongoing')
+        ->groupby('intJobOrderID')
+        ->get();
+        $ongoing = DB::table('tbljoborder as joborder')
+        ->join('tblcompany as company', 'joborder.intJOCompanyID', 'company.intCompanyID')
+        ->join('tbljobsched as jobsched', 'jobsched.intJSJobOrderID', 'joborder.intJobOrderID')
+        ->where('joborder.enumStatus','Ongoing')
+        ->groupby('intJobOrderID')
+        ->get();
+
+        return view('Administrator.dashboard',compact('ongoing'));
+        // $ongoing = JobOrder::where('boolDeleted',0)
+        // ->where('enumStatus','Ongoing')
+        // ->get();
+        // return view('Administrator.dashboard',compact('ongoing'));
     }
 
     /**
