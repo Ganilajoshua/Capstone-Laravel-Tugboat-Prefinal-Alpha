@@ -1,5 +1,4 @@
 $(document).ready(function(){
-    console.log('eyy')
   $(function() {
       var signConsignee = $('.signConsigneeCanvasDisplay').signature();
       var signAdmin = $('.signAdminCanvas').signature({
@@ -120,6 +119,30 @@ function getData(id){
             // <button id="forAdmin" onclick="ValidateAAccept()" class="btn btn-primary waves-effect float-left" >
             // Submit to Consignee
             // </button>
+            if(data.dispatch[0].enumServiceType=='Hauling')
+            {
+                var amount = 20000;
+                // $('#amount1') = amount;
+                $('#standard1').html(data.dispatch[0].fltFCFStandardRate);
+                $('#delay1').html(data.dispatch[0].fltFCFTugboatDelayFee);
+                $('#violation1').html(data.dispatch[0].fltFCFViolationFee);
+                $('#conlatefee1').html(data.dispatch[0].fltFCFConsigneeLateFee);
+                $('#minDamage1').html(data.dispatch[0].fltFCFMinDamageFee);
+                $('#maxDamage1').html(data.dispatch[0].fltFCFMaxDamageFee);
+                $('#discount1').html(data.dispatch[0].intFCFDiscountFee);
+            }
+            else if(data.dispatch[0].enumServiceType=='Tug Assist')
+            {
+                var amount = 20000;
+                // $('#amount1') = amount;
+                $('#standard1').html(data.dispatch[1].fltFCFStandardRate);
+                $('#delay1').html(data.dispatch[1].fltFCFTugboatDelayFee);
+                $('#violation1').html(data.dispatch[1].fltFCFViolationFee);
+                $('#conlatefee1').html(data.dispatch[1].fltFCFConsigneeLateFee);
+                $('#minDamage1').html(data.dispatch[1].fltFCFMinDamageFee);
+                $('#maxDamage1').html(data.dispatch[1].fltFCFMaxDamageFee);
+                $('#discount1').html(data.dispatch[1].intFCFDiscountFee);
+            }
             var delay = Number(data.dispatch[0].fltFCFTugboatDelayFee);
             var delay2 = Number(data.dispatch[0].fltFCFConsigneeLateFee);
             $("#delayrate").val(delay);
@@ -145,30 +168,7 @@ function getData(id){
                 "min" : 0  
              });
             //  console.log(data.dispatch[0].intFCFDiscountFee);
-            if(data.dispatch[0].enumServiceType=='Hauling')
-            {
-                var amount = 20000;
-                // $('#amount1') = amount;
-                $('#standard1').html(data.dispatch[0].fltFCFStandardRate);
-                $('#delay1').html(data.dispatch[0].fltFCFTugboatDelayFee);
-                $('#violation1').html(data.dispatch[0].fltFCFViolationFee);
-                $('#conlatefee1').html(data.dispatch[0].fltFCFConsigneeLateFee);
-                $('#minDamage1').html(data.dispatch[0].fltFCFMinDamageFee);
-                $('#maxDamage1').html(data.dispatch[0].fltFCFMaxDamageFee);
-                $('#discount1').html(data.dispatch[0].intFCFDiscountFee);
-            }
-            else if(data.dispatch[0].enumServiceType=='Tug Assist')
-            {
-                var amount = 20000;
-                // $('#amount1') = amount;
-                $('#standard1').html(data.dispatch[1].fltFCFStandardRate);
-                $('#delay1').html(data.dispatch[1].fltFCFTugboatDelayFee);
-                $('#violation1').html(data.dispatch[1].fltFCFViolationFee);
-                $('#conlatefee1').html(data.dispatch[1].fltFCFConsigneeLateFee);
-                $('#minDamage1').html(data.dispatch[1].fltFCFMinDamageFee);
-                $('#maxDamage1').html(data.dispatch[1].fltFCFMaxDamageFee);
-                $('#discount1').html(data.dispatch[1].intFCFDiscountFee);
-            }
+            
 
             if(data.dispatch[0].strAdminSign!=null){
             $('.signAdminCanvas').signature('enable').signature('draw', data.dispatch[0].strAdminSign).signature('disable'); 
@@ -263,7 +263,6 @@ function AdminAccept(){
     var id = $('#id').val();
     var sign = $('#signatureJSON').val();
     console.log(id);
-    console.log(sign);
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -334,7 +333,8 @@ function Void(){
                 if(isConfirm){
                     window.location = url;
                 }
-            });                       
+            });      
+                          
         },
         error : function(error){
             throw error;
@@ -405,11 +405,12 @@ function finalize(){
                 confirmButtonText: "Ok",
                 closeOnConfirm: true,
             },
+            
             function(isConfirm){
                 if(isConfirm){
                     window.location = url;
                 }
-            });                       
+            });             
         },
         error : function(error){
             throw error;

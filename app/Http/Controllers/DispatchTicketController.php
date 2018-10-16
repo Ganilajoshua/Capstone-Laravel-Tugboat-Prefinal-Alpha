@@ -162,8 +162,6 @@ class DispatchTicketController extends Controller
      */
     public function show($id)
     {
-        $this->AdminAccept();
-        dd($this->var);
         $validate = DB::table('tbljoborder as joborder')
         ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
         ->join('tblpier as pier','berth.intBPierID','pier.intPierID')
@@ -221,9 +219,9 @@ class DispatchTicketController extends Controller
         {
         
         $dispatch = DB::table('tbljoborder as joborder')
-        ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
-        ->join('tblpier as pier','berth.intBPierID','pier.intPierID')
-        ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+        ->leftjoin('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
+        ->leftjoin('tblpier as pier','berth.intBPierID','pier.intPierID')
+        ->leftjoin('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
         ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')

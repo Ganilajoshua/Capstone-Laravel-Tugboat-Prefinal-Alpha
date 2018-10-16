@@ -1,11 +1,10 @@
-
 $(document).ready(function(){
+
     $('#transactionTree').addClass('active');
     $('#tPaymentBilling').addClass('active');
     $('#menuPayment').addClass('active');
     $('#menuDispatchTicket').addClass('inactive');
     $('#menuInvoice').addClass('inactive');
-    console.log('a');
     
     // Initialize Datatable
     $('.detailedTable').DataTable( {
@@ -24,7 +23,6 @@ $(document).ready(function(){
       '</select> records'},
     });
 });
-var url = '/administrator/transactions/payment';
 
 $('.btnView').on('click',function(){
     $('.billingTable').hide();
@@ -35,6 +33,7 @@ $('.btnBack').on('click',function(){
     $('.viewDetails').hide();
     $('.billingTable').show();
 });
+var url = '/administrator/transactions/payment';
 function validate(id){
     // var id = document.getElementById("dispatch3").value;
     // var id = $('#id').val();

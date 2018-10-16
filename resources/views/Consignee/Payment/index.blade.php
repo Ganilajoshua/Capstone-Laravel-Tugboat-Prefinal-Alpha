@@ -27,23 +27,8 @@
 								</div>
 							</div>
 							<hr>
+							
 							<div class="chequeDetails animated fadeIn fast">
-								<div class="row">
-									<div class="col-12">
-										<div class="float-right" data-toggle="tooltip" title="Cheque Number">
-											<ul class="list-inline">
-												<li class="list-inline-item text-primary">
-													<h5># </h5>
-												</li>
-												<li class="list-inline-item">
-													<div class="form-group">
-														<input type="number" class="form-control" id="chequeNum" placeholder="0790" required>
-													</div>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
 								<div class="row mt-2">
 									<div class="col-6">
 										<ul class="list-inline">
@@ -77,21 +62,14 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-12 col-sm-12 col-lg-3">
-										<div class="form-group">
-											<label for="abaNum">ABA Number<sup class="text-primary">&#10033;</sup></label>
-											<input type="number" class="form-control" id="abaNum" placeholder="8901" required>
-											<div class="invalid-feedback">
-												Please fill in the ABA Number.
-											</div>
-										</div>
-									</div>
 								</div>
 								<div class="row mt-2">
 									<div class="col-12 col-sm-12 col-lg-8">
 										<div class="form-group">
+											<label for="">Cheuqe Number</label>
+											<input type="number" class="form-control" name="chequeNum[]" id="chequeNum" placeholder="0790" required>
 											<label for="payeeLine">Pay to the Order Of<sup class="text-primary">&#10033;</sup></label>
-											<input type="text" class="form-control" id="payeeLine" value="Tugmaster Bargepool" placeholder="Tugmaster Bargepool" required>
+											<input type="text" class="form-control" id="payeeLine" value="Tugmaster Bargepool" placeholder="Tugmaster Bargepool" disabled>
 											<div class="invalid-feedback">
 												Please fill in the Payee.
 											</div>
@@ -101,7 +79,7 @@
 										<div class="form-group">
 											<label for="chequeAmount">Amount<sup class="text-primary">&#10033;</sup></label>
 											<div class="input-group">
-												<input id="chequeAmount" type="number" class="form-control" placeholder="12000" required>
+												<input id="chequeAmount" type="number" name="chequeAmount[]" class="form-control" placeholder="12000" required>
 												<div class="input-group-append">
 													<span class="input-group-text">&#8369;</span>
 												</div>
@@ -140,34 +118,21 @@
 												<h5>Memo : </h5>
 											</li>
 											<li class="list-inline-item">
-												<div class="form-group">
-													<input type="text" class="form-control" id="chequeMemo">
+												<div class="form-group">`
+													<input type="text" class="form-control" name="chequeMemo[]" id="chequeMemo">
 												</div>
 											</li>
 										</ul>
 									</div>
-									<div class="col-6 col-sm-6 col-lg-6 text-center">
-										<a href="#" class="btnChequeSign">Apply Signature</a>
-									</div>
 								</div>
-								<div class="row mt-2">
-									<div class="col-12 col-sm-12 col-lg-4">
-										<div class="form-group" data-toggle="tooltip" title="Route Number">
-											<input type="number" class="form-control" id="routeNum" placeholder="0790" required>
-										</div>
-									</div>
-									<div class="col-12 col-sm-12 col-lg-4">
-										<div class="form-group" data-toggle="tooltip" title="Account Number">
-											<input type="number" class="form-control" id="accountNum" readonly>
-										</div>
-									</div>
-									<div class="col-12 col-sm-12 col-lg-4">
-										<div class="form-group" data-toggle="tooltip" title="Cheque Number">
-											<input type="number" class="form-control" id="chequeNum" placeholder="0790" readonly>
-										</div>
-									</div>
-								</div>
+							
+							<div id="append">
+
 							</div>
+
+							<button id="addCheque" class="btn-primary waves-effect float-right">New Cheque</button>
+							</div>
+							
 							<div class="cashDetails animated fadeIn fast">
 								<h5>Pay to Tugmaster Personally</h5>
 							</div>
@@ -202,8 +167,10 @@
 								</table>
 							</div>
 						</div>
+						<input type="text" id="idBill" value="{{$Bill}}" hidden>
 						<div class="card-footer"style="background:#fff;border-top: 0px;">
-							<button class="btn btn-primary waves-effect float-right" onclick="Finalize({{$Bill}})">PLACE PAYMENT</button>
+							<button class="btn btn-primary waves-effect float-right" onclick="validate({{$amount}})">PLACE PAYMENT</button>
+							{{-- <button class="btn btn-primary waves-effect float-right" onclick="Finalize({{$Bill}})">PLACE PAYMENT</button> --}}
 						</div>
 					</div>
 				</div>

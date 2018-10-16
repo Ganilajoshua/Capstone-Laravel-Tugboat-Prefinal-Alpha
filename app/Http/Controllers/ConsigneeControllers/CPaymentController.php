@@ -15,6 +15,7 @@ use App\Schedules;
 use App\Bill;
 use App\Company;
 use App\Invoice;
+use App\Cheque;
 use Redirect;
 use Auth;
 use DB;
@@ -44,6 +45,7 @@ class CPaymentController extends Controller
         ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
         ->where('company.intCompanyID',Auth::user()->intUCompanyID)
         ->where('invoice.intIBillID',$Bill)
+        ->groupby('dispatch.intDispatchTicketID')
         ->get();
 
         $Company = Company::findOrFail(Auth::user()->intUCompanyID);
@@ -94,21 +96,29 @@ class CPaymentController extends Controller
     public function store(Request $request)
     {
         $Bill = new Bill;
+        // $Bill = Bill::findOrFail($request->BillID);
         error_log($request->BillID);
         $Bill->intBillID = $request->BillID;
-        $Bill->intChequeID = $request->ChequeNum;
-        $Bill->dtPayment = $request->ChequeDate;
-        // Carbon::parse($request->ChequeDate)->format('Y/m/d');
-        $Bill->intABANum = $request->AbaNum;
-        $Bill->intAmount = $request->ChequeAmount;
-        $Bill->intRouteNum = $request->RouteNum;
-        $Bill->intAccountNum = $request->RouteNum;
-        $Bill->strMemo = $request->ChequeMemo;
         $Bill->enumStatus = 'Pending';
         $Bill->timestamps = false;
+        // Carbon::parse($request->ChequeDate)->format('Y/m/d');
+        // $counter = $request->ChequeNum;
+        // $counter = (array)$request->ChequeNum;
         $Bill->save();
+        for($count = 0; $count < (array)$request->ChequeNum; $count++){
+            $Cheque = new Cheque;
+            $Cheque->timestamps = false;
+            $Cheque->intChequeNum = $request->ChequeNum[$count];
+            // $Cheque->strTugboatInsuranceDesc = $request->insurances[$count];
+            $Cheque->intCBillID = $request->BillID;
+            $Cheque->dtPayment = $request->ChequeDate;
+            $Cheque->intAmount = $request->ChequeAmount[$count];
+            // $Cheque->strMemo = $request->ChequeMemo[$count];
+            $Cheque->save();
+            print_r($request->ChequeNum[$count]);
+        }
         
-        return response()->json(['Bill'=>$Bill]);  
+        return response()->json(['Bill'=>$Bill,'Cheque'=>$Cheque]);  
     }
 
     /**
