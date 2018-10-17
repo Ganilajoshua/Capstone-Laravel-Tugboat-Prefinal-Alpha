@@ -3,8 +3,7 @@
         <div class="card-header">
             <a href="#" class="btnBack btn btn-lg btn-link float-left" data-toggle="tooltip" title="Back" role="button">
                 <i class="ion-chevron-left"></i>
-            </a>
-            <h4 class="float-right">Date: ????</h4>
+            </a>]
         </div>
         <div class="card-body">
             <div class="row">
@@ -50,7 +49,7 @@
                         <strong>Towed:</strong> <span id="towed"></span>
                     </div>
                     <div class="mb-1">
-                        <strong>Date:</strong> ????
+                        <strong>Date:</strong> <span id="date"></span>
                     </div>
                     <div class="mb-1">
                         <strong>Account:</strong> <span id="ID"></span>
@@ -76,7 +75,7 @@
                                 <td id="tugboat"></td>
                                 <td id="start"></td>
                                 <td id="destination"></td>
-                                <td>??</td>
+                                <td id="arrive"></td>
                                 <td id="service"></td>
                             </tr>
                         </tbody>
