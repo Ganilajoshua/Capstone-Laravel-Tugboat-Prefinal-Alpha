@@ -25,9 +25,6 @@
                             <a class="nav-link showPending active" data-toggle="pill" href="#" role="tab" aria-controls="pills-home" aria-selected="true">Pending</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link showRChanges" data-toggle="pill" href="#" role="tab" aria-selected="false">Request Changes</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link showAccepted" data-toggle="pill" href="#" role="tab">Accepted</a>
                         </li>
                     </ul>
@@ -52,9 +49,9 @@
                                                         <button onclick="createContracts({{$companyPending->intContractListID}})" class="createContract btn btn-sm btn-success" data-toggle="tooltip" title="Add" role="button">
                                                             <i class="miniIcon fas fa-plus custSize"></i>
                                                         </button>
-                                                        <button onclick="deleteBerth({{$companyPending->intContractListID}})" class="btn btn-sm btn btn-danger" data-toggle="tooltip" title="Delete">
+                                                        {{-- <button onclick="deleteBerth({{$companyPending->intContractListID}})" class="btn btn-sm btn btn-danger" data-toggle="tooltip" title="Delete">
                                                             <i class="miniIcon fas fa-trash custSize"></i>
-                                                        </button>
+                                                        </button> --}}
                                                     </div>
                                                 </td>
                                             </tr>

@@ -38,10 +38,10 @@
                             <div class="col-12 col-lg-6">
                                 <select class="selectReport js-states form-control" style="width:100%;">
                                     <option></option>
-                                    <option value="disabledTugboats">Disabled Tugboat Reports</option>
+                                    <option value="disabledTugboats">Tugboat Details Reports</option>
                                     <option value="jobOrderReport">Job Order Report</option>
                                     <option value="salesReport">Sales Report</option>
-                                    <option value="statementOfAccount">Statement of Account</option>
+                                    <option value="statementOfAccount">Consignee Details Report</option>
                                     <option value="serviceReport">Service Report</option>
                                 </select>
                             </div>
@@ -82,10 +82,14 @@
                                         </tr>
                                     </thead>  
                                     <tbody>
-                                        <tr>
-                                            <td>Energy Master</td>
-                                            <td>Under Repair</td>
-                                        </tr>
+                                        @if(count($admintbs)>0)
+                                            @foreach($admintbs as $admintb)
+                                                <tr>
+                                                    <td>{{$admintb->strName}}</td>
+                                                    <td>{{$admintb->enumTStatus}}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -96,61 +100,23 @@
                                     <thead class="bg-primary">
                                         <tr class="text-center">
                                             <th>Date &amp; Time</th>
+                                            <th>Job Order No.</th>
                                             <th>Consignee Name</th>
-                                            <th>Tugboats Used</th>
-                                            <th>Paid</th>
-                                            <th>Unpaid</th>
-                                            <th>Subtotal (&#8369;)</th>
+                                            <th>Total Amount(&#8369;)</th>
                                         </tr>
                                     </thead>  
                                     <tbody>
-                                        <tr>
-                                            <td class="text-center">05-04-2018 17:00</td>
-                                            <td class="text-center">Akari</td>
-                                            <td>
-                                                <ul>
-                                                    <li>Energy Master</li>
-                                                    <li>Energy Sun</li>
-                                                    <li>MT Moon</li>
-                                                </ul>
-                                            </td>
-                                            <td class="text-center text-success">25000</td>
-                                            <td class="text-center text-danger">10000</td>
-                                            <td class="text-center">35000</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">05-04-2018 17:00</td>
-                                            <td class="text-center">Bootsy</td>
-                                            <td>
-                                                <ul>
-                                                    <li>Energy Moon</li>
-                                                    <li>Energy Jupiter</li>
-                                                    <li>MT Mars</li>
-                                                </ul>
-                                            </td>
-                                            <td class="text-center text-success">25000</td>
-                                            <td class="text-center text-danger">0</td>
-                                            <td class="text-center ">25000</td>
-                                        </tr>
+                                        @if(count($joborders)>0)
+                                            @foreach($joborders as $joborder)
+                                                <tr>
+                                                <td class="text-center">{{$joborder->datStartDate}} {{$joborder->tmStart}}</td>
+                                                <td class="text-center">JO-{{$joborder->intJobOrderID}} </td>
+                                                <td class="text-center">{{$joborder->strCompanyName}}</td>
+                                                <td class="text-center">{{$joborder->totaljo}}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </tbody>
-                                    <tfoot>
-                                        <tr class="border-primary">
-                                            <td><h6>Subtotal (&#8369;)</h6></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td class="text-center">50000</td>
-                                            <td class="text-center">10000</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr class="border-primary">
-                                            <td><h5>Total Amount (&#8369;)</h5></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td class="text-center"><h5 class="text-primary font-weight-bold">65000</h5></td>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -159,30 +125,22 @@
                                 <table class="detailedTable table table-striped text-center border-primary" style="width:100%">
                                     <thead class="bg-primary">
                                         <tr>
+                                            <th>Invoice No.</th>
                                             <th>Consignee Name</th>
-                                            <th>Total Number of Job Orders</th>
-                                            <th>Amount (&#8369;)</th>
+                                            <th>Status</th>
+                                            <th>Total(&#8369;)</th>
                                         </tr>
                                     </thead>  
                                     <tbody>
-                                        <tr>
-                                            <td>Akari</td>
-                                            <td>6</td>
-                                            <td>166000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Bootsy</td>
-                                            <td>3</td>
-                                            <td>90000</td>
-                                        </tr>
+                                            @foreach ($sales as $sale)
+                                                <tr>
+                                                    <td>INV-{{$sale->intInvoiceID}}</td>
+                                                    <td>{{$sale->strCompanyName}}</td>
+                                                    <td>{{$sale->enumStatus}}</td>
+                                                    <td>{{$sale->salessum}}</td>
+                                                </tr>
+                                            @endforeach
                                     </tbody>
-                                    <tfoot>
-                                        <tr class="border-primary">
-                                            <td><h5>Total Amount (&#8369;)</h5></td>
-                                            <td></td>
-                                            <td class="text-center"><h5 class="text-primary font-weight-bold">55000</h5></td>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>
@@ -191,42 +149,37 @@
                                 <table class="detailedTable table table-striped text-center border-primary" style="width:100%">
                                     <thead class="bg-primary">
                                         <tr>
-                                            <th>Date &amp; Time</th>
                                             <th>Consignee Name</th>
-                                            <th>Original Amount</th>
-                                            <th>Amount Added</th>
-                                            <th>Amount Refunded</th>
-                                            <th>Subtotal (&#8369;)</th>
+                                            <th>Start of Contract</th>
+                                            <th>End of Contract</th>
+                                            <th>Contract Validity</th>
+                                            <th>Contract Status</th>
+                                            <th>Current Fund</th>
                                         </tr>
                                     </thead>  
                                     <tbody>
+                                            @if(count($consignees)>0)
+                                            @foreach($consignees as $consignee)
                                         <tr>
-                                            <td>01-03-2018 17:00</td>
-                                            <td>Akari</td>
-                                            <td class="text-primary font-weight-bold">11000</td>
-                                            <td class="text-success">10000</td>
-                                            <td>0</td>
-                                            <td>21000</td>
+                                                
+                                                <td class="text-center">{{$consignee->strCompanyName}}</td>
+                                                <td class="text-center">{{$consignee->datContractActive}}</td>
+                                                <td class="text-center">{{$consignee->datContractExpire}}</td>
+                                                @if($consignee->enumConValidity == '1')
+                                                    <td class="text-center">{{$consignee->enumConValidity}} year</td>
+                                                @else
+                                                    <td class="text-center">{{$consignee->enumConValidity}} months</td>
+                                                @endif
+                                                <td class="text-center">{{$consignee->enumStatus}}</td>
+                                                @if(($consignee->fund)!=null)
+                                                <td class="text-center">{{$consignee->fund}}</td>
+                                                @else
+                                                <td class="text-center">0</td>
+                                                @endif
                                         </tr>
-                                        <tr>
-                                            <td>05-04-2018 17:00</td>
-                                            <td>Bootsy</td>
-                                            <td class="text-primary font-weight-bold">21000</td>
-                                            <td>0</td>
-                                            <td class="text-danger">5000</td>
-                                            <td>16000</td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr class="border-primary">
-                                            <td class="text-center"><h5>Total Amount (&#8369;)</h5></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td class="text-center"><h5 class="text-primary font-weight-bold">37000</h5></td>
-                                        </tr>
-                                    </tfoot>
+                                            @endforeach
+                                            @endif
+                                    </tbody> 
                                 </table>
                             </div>
                         </div>
@@ -241,24 +194,20 @@
                                         </tr>
                                     </thead>  
                                     <tbody>
-                                        <tr>
-                                            <td>Hauling Service</td>
-                                            <td>3</td>
-                                            <td>45000</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Tug Assist Service</td>
-                                            <td>1</td>
-                                            <td>10000</td>
-                                        </tr>
+                                        @if(count($services)>0)
+                                            @foreach($services as $services)
+                                                <tr>
+                                                        <td>{{$services->enumServiceType}}</td>
+                                                        <td>{{$services->Service_Count}}</td>
+                                                        @if(($services->servicesum)!= null)
+                                                            <td>{{$services->servicesum}}</td>
+                                                        @else
+                                                            <td class="text-center">0</td>
+                                                        @endif
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </tbody>
-                                    <tfoot>
-                                        <tr class="border-primary">
-                                            <td class="text-center"><h5>Total Amount (&#8369;)</h5></td>
-                                            <td></td>
-                                            <td class="text-center"><h5 class="text-primary font-weight-bold">55000</h5></td>
-                                        </tr>
-                                    </tfoot>
                                 </table>
                             </div>
                         </div>

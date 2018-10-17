@@ -100,6 +100,19 @@ function getData(id){
             console.log(id);
             $('#viewDetails').empty();
             $('#viewCharges').empty();
+            console.log(data.sign[0].strAdminSign);
+            if(data.sign[0].strAdminSign!=null){
+                $('.signAdminCanvas').signature('enable').signature('draw', data.sign[0].strAdminSign).signature('disable'); 
+            }
+            else{
+            }
+            if(data.sign[0].strConsigneeSign!=null){
+                $('.signConsigneeCanvasDisplay').signature('enable').signature('draw', data.sign[0].strConsigneeSign).signature('disable'); 
+                $('.alertConsigneeSign').addClass("d-none");
+            }
+            else{
+                $('.alertConsigneeSign').removeClass("d-none");
+            }
             $('#tugboat').html(data.dispatch[0].strName);
             $('#to').html(data.dispatch[0].strCompanyName);
             $('#address').html(data.dispatch[0].strCompanyAddress);
@@ -107,7 +120,7 @@ function getData(id){
             $('#dispatch2').html(data.dispatch[0].intDispatchTicketID);
             $('#dispatch3').html(data.dispatch[0].intDispatchTicketID);
             $('#towed').html(data.dispatch[0].strJOVesselName);
-            //date
+            $('#date').html(data.dispatch[0].dateEnded);
             $('#start').html(data.dispatch[0].strJOStartPoint);
             $('#destination').html(data.dispatch[0].strJODestination);
             $('#service').html(data.dispatch[0].enumServiceType);
@@ -115,10 +128,8 @@ function getData(id){
             $('#eMail').html(data.dispatch[0].strCompanyEmail);
             $('#ID').html(data.dispatch[0].intCompanyID);
             $('#company').html(data.dispatch[0].intCompanyID);
-            
-            // <button id="forAdmin" onclick="ValidateAAccept()" class="btn btn-primary waves-effect float-left" >
-            // Submit to Consignee
-            // </button>
+            $('#arrive').html(data.dispatch[0].timeEnded);
+
             if(data.dispatch[0].enumServiceType=='Hauling')
             {
                 var amount = 20000;
@@ -145,6 +156,10 @@ function getData(id){
             }
             var delay = Number(data.dispatch[0].fltFCFTugboatDelayFee);
             var delay2 = Number(data.dispatch[0].fltFCFConsigneeLateFee);
+
+
+
+
             $("#delayrate").val(delay);
             $("#conlatefee").val(delay2);
             $("#discount").attr({
@@ -170,18 +185,7 @@ function getData(id){
             //  console.log(data.dispatch[0].intFCFDiscountFee);
             
 
-            if(data.dispatch[0].strAdminSign!=null){
-            $('.signAdminCanvas').signature('enable').signature('draw', data.dispatch[0].strAdminSign).signature('disable'); 
-            }
-            else{
-            }
-            if(data.dispatch[0].strConsigneeSign!=null){
-            $('.signConsigneeCanvasDisplay').signature('enable').signature('draw', data.dispatch[0].strConsigneeSign).signature('disable'); 
-            $('.alertConsigneeSign').addClass("d-none");
-            }
-            else{
-                $('.alertConsigneeSign').removeClass("d-none");
-            }
+            
             var signConsignee = $('.signConsigneeCanvasDisplay').signature({
             syncField: '#signatureJSON'
             });

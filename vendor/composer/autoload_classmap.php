@@ -89,6 +89,8 @@ return array(
     'App\\JobOrder' => $baseDir . '/app/JobOrder.php',
     'App\\JobSchedule' => $baseDir . '/app/JobSchedule.php',
     'App\\JoborderForwardRequests' => $baseDir . '/app/JoborderForwardRequests.php',
+    'App\\Location' => $baseDir . '/app/Location.php',
+    'App\\Notifications\\VerifyEmail' => $baseDir . '/app/Notifications/VerifyEmail.php',
     'App\\Pier' => $baseDir . '/app/Pier.php',
     'App\\Position' => $baseDir . '/app/Position.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',

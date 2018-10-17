@@ -98,6 +98,10 @@ class ConsigneeController extends Controller
     }
     public function getnotifs(Request $request){
         $contract = Contract::where('intCCompanyID',Auth::user()->intUCompanyID)->get();
+        $contractexpire = Contract::findOrFail($contract[0]->intContractListID);
+        $contractexpire->timestamps = false;
+        $contractexpire->enumStatus = 'Expired';
+        $contractexpire->save();
         return response()->json(['contract'=>$contract]);
     }
 }

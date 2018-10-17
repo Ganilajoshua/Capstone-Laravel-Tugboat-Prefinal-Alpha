@@ -116,6 +116,35 @@
                     </div>
                 </div>
             </section>
+    @elseif($contract[0]->enumStatus == 'Expired')
+        <section class="statistic statistic2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-lg-8" style="margin-left: auto; margin-right:auto;">
+                        <div class="overview-item overview-item--c1">
+                            <div class="overview__inner">
+                                <div class="overview-box clearfix mt-4">
+                                    <div class="icon">
+                                        <i class="fas fa-clipboard-list"></i>
+                                    </div>
+                                    <div class="text">
+                                        <h2>Section Disabled At The Moment</h2>
+                                        <span>You have no Contracts</span>
+                                        <div class="mb-5">
+                                            <a href="/consignee/contracts" class="text-white mt-5">
+                                                    Request a Contract now
+                                                <i class="fas fa-chevron-right"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     @else
         <div class="container">
             <div class="col">
