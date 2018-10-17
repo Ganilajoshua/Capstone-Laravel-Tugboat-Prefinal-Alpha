@@ -526,13 +526,14 @@ class TugboatTeamAssignmentController extends Controller
 
     public function getjoborder($intJobOrderID){
         $job = JobOrder::findOrFail($intJobOrderID);
+        $tugboats = [];
 
         if($job->enumServiceType == 'Hauling'){
             if($job->intJOBerthID == null){
                 $joborder = DB::table('tbljoborder as joborder')
                 ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
                 ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-                ->where('joborder.intJobOrderID',$intJobOrderID)
+                ->where('joborder.intJobOrderID',$job->intJobOrderID)
                 ->get();
             }else{
                 $joborder = DB::table('tbljoborder as joborder')
@@ -540,7 +541,7 @@ class TugboatTeamAssignmentController extends Controller
                 ->join('tblpier as pier','berth.intBPierID','intPierID')
                 ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
                 ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-                ->where('joborder.intJobOrderID',$intJobOrderID)
+                ->where('joborder.intJobOrderID',$job->intJobOrderID)
                 ->get();
             }
         }else if($job->enumServiceType == 'Tug Assist'){
@@ -549,7 +550,7 @@ class TugboatTeamAssignmentController extends Controller
             ->join('tblpier as pier','berth.intBPierID','intPierID')
             // ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
             ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-            ->where('joborder.intJobOrderID',$intJobOrderID)
+            ->where('joborder.intJobOrderID',$job->intJobOrderID)
             ->get();    
         }
 
@@ -558,7 +559,7 @@ class TugboatTeamAssignmentController extends Controller
         ->join('tbltugboat as tugboat','jobsched.intJSTugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
         ->join('tbltugboatassign as assign','jobsched.intJSTugboatAssignID','assign.intTAssignID')
-        ->leftjoin('tblteam as team','assign.intTATeamID','team.intTeamID')
+        ->join('tblteam as team','assign.intTATeamID','team.intTeamID')
         ->where('jobsched.intJSJobOrderID',$intJobOrderID)
         ->get();
 
@@ -568,7 +569,7 @@ class TugboatTeamAssignmentController extends Controller
         ->get();
         // $tugboatassign = DB::table('tbltugboatassign as assign')
         // ->join('tbltugboat as tugboat','tugboat s')
-        return response()->json(['joborder'=>$joborder,'jobsched'=>$jobsched,'teams'=>$team]);
+        return response()->json(['joborder'=>$joborder,'jobsched'=>$jobsched,'teams'=>$team,$intJobOrderID]);
     }
 
     public function showdefaultteams($intJobOrderID){
@@ -578,26 +579,25 @@ class TugboatTeamAssignmentController extends Controller
         ->join('tbljoborder as joborder','jobsched.intJSJobOrderID','joborder.intJobOrderID')
         ->join('tbltugboat as tugboat','jobsched.intJSTugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbltugboatassign as assign','jobsched.intJSTugboatAssignID','assign.intTAssignID')
-        ->leftjoin('tblteam as team','assign.intTATeamID','team.intTeamID')
+        // ->join('tbltugboatassign as assign','jobsched.intJSTugboatAssignID','assign.intTAssignID')
+        // ->leftjoin('tblteam as team','assign.intTATeamID','team.intTeamID')
         ->where('jobsched.intJSJobOrderID',$intJobOrderID)
         ->get();
 
         for($count = 0; $count < count($jobsched); $count++){
-            $employee[$count] = Employees::where('intETeamID',$jobsched[$count]->intTeamID)->get();
-            for($counter = 0; $counter < count($employee); $counter++){
-                $employees[$counter] = $employee[$counter];
-            }
+            
+            $tugboatassign = DB::table('tbltugboatassign as assign')
+            ->join('tbltugboat as tugboat','jobsched.intJSTugboatID','tugboat.intTugboatID')
+            ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+            ->join('tbltugboatassign as assign','jobsched.intJSTugboatAssignID','assign.intTAssignID')
+            ->leftjoin('tblteam as team','assign.intTATeamID','team.intTeamID')
+            ;
+            // $employee[$count] = Employees::where('intETeamID',$jobsched[$count]->intTeamID)->get();
+            // for($counter = 0; $counter < count($employee); $counter++){
+            //     $employees[$counter] = $employee[$counter];
+            // }
         }
-        // for($count=0;$count < count($jobsched); $count++){
-        //     $tugboatassign = DB::table('tbltugboatassign as assign')
-        //     ->join('tblteam as team','assign.intTATeamID','team.intTeamID')
-        //     ->join('tblemployee as employee','team.intTeamID','employee.intETeamID')
-        //     ->where('intTAssignID',$jobsched[$count]->intTAssignID) 
-        //     ->get();
-        //     Team::findOrFail($jobsched[$count]->intTAssignID);
-        //     $teams[$count] = ['tugboatassign' => $tugboatassign];
-        // }
+        
 
         return response()->json(['jobsched'=>$jobsched,'teams'=>$teams,'employees'=>$employees]);
     }

@@ -2,9 +2,9 @@
 <div class="modal fade" id="locationUpdates" tabindex="-1" role="dialog" aria-labelledby="updateLocLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title" id="updateLocLabel">Update Location</h5>
-                <button type="button" class="close modalClose" aria-label="Close">
+                <button type="button" class="close modalClose text-white" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -14,14 +14,12 @@
                         <div class="col">
                             <table class="appendLocationsTable table table-striped text-center">
                                 <thead class="bg-primary">
-                                    <th>Location</th>
-                                    <th>Time</th>
-                                    <th>Remarks</th>
+                                    <th class="text-white">Location</th>
+                                    <th class="text-white">Time</th>
+                                    <th class="text-white">Remarks</th>
                                 </thead>
-                                <tbody>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                <tbody class="locationUpdatesBody">
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -38,9 +36,6 @@
                         </div> --}}
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="updateLocationSubmit btnUpdateLoc btn btn-primary waves-effect">Update Location</button>
             </div>
         </div>
     </div>

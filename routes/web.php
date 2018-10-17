@@ -118,6 +118,8 @@ Route::group(['prefix'=>'administrator/'],function(){
     //Transactions Routes
     Route::group(['prefix'=>'transactions/'],function(){
         Route::resource('/contracts','ContractsController');
+        Route::get('/contracts/show','ContractsController@show');
+        
         //Transaction Resources
         Route::resource('/payment','PaymentController');
         // Route::post('/payment/validate','PaymentController@validate');
@@ -302,8 +304,11 @@ Route::group(['prefix'=>'administrator/'],function(){
 
     //Utitlities Routes
     Route::group(['prefix'=>'utilities/'],function(){
+        // Team Composition
         Route::resource('/teamcomposition','TeamCompositionController');
         Route::post('/teamcomposition/update','TeamCompositionController@update');
+        // Contract Fees Matrix 
+        Route::resource('/contractfeesmatrix','ContractFeesMatrixController');
         
     });
     Route::post('/Adminlogout','LoginControllers\AdminLoginController@logout');
@@ -322,9 +327,11 @@ Route::group(['prefix'=>'consignee/'],function(){
     //Contract Request
     Route::group(['prefix'=>'contracts/'],function(){
         Route::post('/getdefaultmatrix','ConsigneeControllers\ContractsController@getdefaultmatrix');
+        Route::post('/custommatrix','ConsigneeControllers\ContractsController@custommatrix');
     });
     Route::resource('/contracts','ConsigneeControllers\ContractsController');
-    Route::get('/contracts/{intContractListID}/show','ConsigneeControllers\ContractsController@show');
+    Route::get('/contracts/show','ConsigneeControllers\ContractsController@show');
+    Route::get('/contracts/{intContractListID}/getquoteexchanges','ConsigneeControllers\ContractsController@getquoteexchanges');
     Route::post('/contracts/requestchanges','ConsigneeControllers\ContractsController@requestchanges');
     Route::post('/contracts/activate','ConsigneeControllers\ContractsController@activate');
     Route::post('/contracts/store','ConsigneeControllers\ContractsController@store');

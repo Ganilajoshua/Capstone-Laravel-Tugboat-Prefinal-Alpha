@@ -35,6 +35,7 @@
                                                         <th>Service Type</th>
                                                         <th>Standard Rate</th>
                                                         <th>Delay Fee</th>
+                                                        <th>Consignee Late Fee</th>
                                                         <th>Violation Fee</th>
                                                         <th>Minimum Damage Fee</th>
                                                         <th>Maximum Damage Fee</th>
@@ -42,24 +43,29 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody class="tbodyTD" style="font-size:13px;">
-                                                    <tr>
-                                                        <td>Hauling Service</td>
-                                                        <td>2000</td>
-                                                        <td>2000</td>
-                                                        <td>250</td>
-                                                        <td>1500</td>
-                                                        <td>3000</td>
-                                                        <td>20</td>
-                                                    </tr>
-                                                    <tr>
+                                                    @if(count($fees) > 0)
+                                                        @foreach($fees as $fees)
+                                                            <tr>
+                                                                <td>{{$fees->enumServiceType}}</td>
+                                                                <td>{{$fees->fltCFStandardRate}}</td>
+                                                                <td>{{$fees->fltCFTugboatDelayFee}}</td>
+                                                                <td>{{$fees->fltCFConsigneeLateFee}}</td>
+                                                                <td>{{$fees->fltCFViolationFee}}</td>
+                                                                <td>{{$fees->fltCFMinDamageFee}}</td>
+                                                                <td>{{$fees->fltCFMaxDamageFee}}</td>
+                                                                <td>{{$fees->intCFDiscount}}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    @endif
+                                                    {{-- <tr>
                                                         <td>Tug Assist Service</td>
                                                         <td>3000</td>
                                                         <td>2500</td>
-                                                        <td>3000</td>
+                                                        <td>3000</td>a
                                                         <td>2000</td>
                                                         <td>3000</td>
                                                         <td>20</td>
-                                                    </tr>
+                                                    </tr> --}}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -69,7 +75,7 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <ul class="list-inline text-center text-black">
+                                {{-- <ul class="list-inline text-center text-black">
                                     <li class="list-inline-item">
                                         <div class="custom-control custom-radio">
                                             <input type="radio" class="custom-control-input radioMatrix" id="quoteMatrix" name="matrixChoices" checked>
@@ -82,7 +88,7 @@
                                             <label class="custom-control-label lblquoteCustom" for="quoteCustom">Create quotation suggestions</label>
                                         </div>
                                     </li>
-                                </ul>
+                                </ul> --}}
                                 {{-- <a href="#" onclick="requestContracts({{$company[0]->intCompanyID}})" id="requestContractsButton" class="defaultMatrixButton mt-3 btn btn-primary float-right">
                                     Request Contract
                                 </a> --}}
@@ -236,104 +242,92 @@
             <div class="container" id="createdContract" data-id="{{$contract[0]->intContractListID}}">
                 <div class="row">
                     <div class="col">
-                        <div class="card text-center">
-                            <div class="card-header bg-primary" style="border-radius:0px;">
+                        <div class="card">
+                            <div class="card-header bg-primary text-center" style="border-radius:0px;">
                                 <h4 class=" text-white"><span>{{$contract[0]->strContractListTitle}}</span><span><div class="badge badge-warning ml-2">NOT YET FINALIZED</div></h4>
                             </div>
-                            <div class="card-body">
-                                <div class="row">
+                            <div class="card-body contractRequestsQuotes">
+                                <h3>You Have Received an Initial Quote</h3>
+                                {{-- <div style="font-size: 18px;" class="mt-4 badge badge-warning text-black">
+                                </div>     --}}
+                                <div class="row mt-4">
                                     <div class="col-12">
-                                        <p class="text-black text-center" id="contractDetails"></p>
+                                        <button class="btn btn-primary viewQuotesMatrix" data-id="{{$contract[0]->intContractListID}}">
+                                            View Details
+                                        </button>
                                     </div>
                                 </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <ul class="list-inline" style="font-size:15px;">
-                                            <li class="list-inline-item text-primary">
-                                                <p class="font-weight-bold">Legend : </p>
+                            </div>
+                            <div class="card-body contractRequestsMatrix">
+                                <div class="row mt-2">
+                                    <div class="col">
+                                        <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="pillsHauling-tab" data-toggle="pill" href="#pillsHauling" role="tab" aria-controls="pillsHauling" aria-selected="true">Hauling</a>
                                             </li>
-                                            <li class="list-inline-item">
-                                                <div class="badge badge-light badgeLegend border-primary">
-                                                    <h6 class="text-primary">Same Amount</h6>
-                                                </div>
-                                                <div class="badge badge-light badgeLegend border-primary">
-                                                    <h6 class="text-success font-weight-bold">New Amount is Lower</h6>
-                                                </div>
-                                                <div class="badge badge-light badgeLegend border-primary">
-                                                    <h6 class="text-danger">New Amount is Higher</h6>
-                                                </div>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="pillsTugAssist-tab" data-toggle="pill" href="#pillsTugAssist" role="tab" aria-controls="pillsTugAssist" aria-selected="false">Tug Assist</a>
                                             </li>
                                         </ul>
+                                        <div class="row mt-5 text-center">
+                                            <div class="col-12">
+                                                {{-- <ul class="list-inline" style="font-size:15px;">
+                                                    <li class="list-inline-item text-primary">
+                                                        <p class="font-weight-bold">Legend : </p>
+                                                    </li>
+                                                    <li class="list-inline-item">
+                                                        <div class="badge badge-light badgeLegend border-primary">
+                                                            <h6 class="text-primary">Same Amount</h6>
+                                                        </div>
+                                                        <div class="badge badge-light badgeLegend border-primary">
+                                                            <h6 class="text-success font-weight-bold">New Amount is Lower</h6>
+                                                        </div>
+                                                        <div class="badge badge-light badgeLegend border-primary">
+                                                            <h6 class="text-danger">New Amount is Higher</h6>
+                                                        </div>
+                                                    </li>
+                                                </ul> --}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="card card-primary text-center border-primary">
-                                            <div class="card-header"><h4 class="text-black">Quotation Changes Comparison</h4></div>
-                                            <div class="card-body">
-                                                <div class="table-responsive">
-                                                    <table class="table-hover table-bordered" style="width:100%;">
-                                                        <thead class="bg-primary thHeight text-white" style="font-size:15px;">
-                                                            <tr>
-                                                                <th style="width:20%;"></th>
-                                                                <th style="width:40%;">Previous Quotation</th>
-                                                                <th style="width:40%;">New Quotation</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody class="tbodyTD" style="font-size:13px;">
-                                                            <tr>
-                                                                <td class="text-black font-weight-bold">Standard Rate (&#8369;)</td>
-                                                                <td class="text-black">2000</td>
-                                                                <td class="text-primary font-weight-bold" id="standardRate">2000</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-black font-weight-bold">Delay Fee (&#8369;)</td>
-                                                                <td class="text-black">3000</td>
-                                                                <td class="text-success font-weight-bold" id="tugboatDelayFee">2500</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-black font-weight-bold">Violation Fee (&#8369;)</td>
-                                                                <td class="text-black">3000</td>
-                                                                <td class="text-danger font-weight-bold" id="violationFee">3500</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-black font-weight-bold">Late Fee (&#8369;)</td>
-                                                                <td class="text-black">3000</td>
-                                                                <td class="text-danger font-weight-bold" id="consigneeLateFee">3500</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-black font-weight-bold">Minimum Damage Fee (&#8369;)</td>
-                                                                <td class="text-black">2000</td>
-                                                                <td class="text-success font-weight-bold" id="minDamageFee">1500</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-black font-weight-bold">Maximum Damage Fee (&#8369;)</td>
-                                                                <td class="text-black">4000</td>
-                                                                <td class="text-primary font-weight-bold" id="maxDamageFee">4000</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-black font-weight-bold">Maximum Discount (&#37;)</td>
-                                                                <td class="text-black">8</td>
-                                                                <td class="text-danger font-weight-bold" id="discount">12</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="text-black font-weight-bold">Author</td>
-                                                                <td class="text-black font-weight-bold">Hi-Energy</td>
-                                                                <td class="text-black font-weight-bold">Tugmaster</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                <div class="tab-content" id="pills-tabContent">
+                                    <div class="tab-pane fade show active" id="pillsHauling" role="tabpanel" aria-labelledby="pillsHauling-tab">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="card card-primary text-center border-primary">
+                                                    <div class="card-header"><h4 class="text-black">Hauling Rates</h4></div>
+                                                    <div class="card-body">
+                                                        <div class="table-responsive">
+                                                            <table class="table-hover table-bordered haulingTable" style="width:100%;">
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade show" id="pillsTugAssist" role="tabpanel" aria-labelledby="pillsTugAssist-tab">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="card card-primary text-center border-primary">
+                                                    <div class="card-header"><h4 class="text-black">Tug Assist Rates</h4></div>
+                                                    <div class="card-body">
+                                                        <div class="table-responsive">
+                                                            <table class="table-hover table-bordered tugAssistTable" style="width:100%;">
+                                                            </table>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer">
+                            <div class="card-footer text-center">
                                 <input type="hidden" id="contractsID">
-                                <button class="btn btn-primary waves-effect" data-toggle="modal" data-target="#requestChangesModal">Request for Changes</button>
-                                <button id="applySignatureButton" class="btn btn-success waves-effect" data-toggle="modal" data-target="#applySignatureModal">Sign and Accept Contract</button>
+                                {{-- <button class="btn btn-primary waves-effect" data-toggle="modal" data-target="#requestChangesModal">Request for Changes</button> --}}
+                                <button id="applySignatureButton" data-id="{{$contract[0]->intContractListID}}" class="applySignatureButton btn btn-success waves-effect">Sign and Accept Contract</button>
                             </div>
                         </div>
                     </div>
@@ -448,6 +442,11 @@
                                             <li class="list-inline-item">
                                                 <p class="text-black" id="discount">20</p></li>
                                         </ul>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="signAdminCanvas"></div>
+                                        <div class="signConsigneeCanvas"></div>
+                                        {{-- <textarea name="" id="signatureJSON" rows="5"></textarea> --}}
                                     </div>
                                 </div>
                             </div>

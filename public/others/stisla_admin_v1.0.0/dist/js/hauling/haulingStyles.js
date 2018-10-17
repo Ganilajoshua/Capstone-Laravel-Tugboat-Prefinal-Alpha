@@ -48,19 +48,19 @@ $(document).ready(function(){
   // $('#timeUpdated').datetimepicker({
   //   format:'HH:mm'
   // });
-  // Sweet Alerts
-  $('.btnUpdateLoc').on('click',function(){
-    swal({
-      title: "Location Update Added!",
-      text: "Successfully added the Location Update.",
-      type: "success",
-      showCancelButton: false,
-      confirmButtonClass: "btn-primary waves-effect",
-      confirmButtonText: "Ok",
-      closeOnConfirm: true
-    });
-    $('#updateLoc').modal('hide');
-  });
+  // // Sweet Alerts
+  // $('.btnUpdateLoc').on('click',function(){
+  //   swal({
+  //     title: "Location Update Added!",
+  //     text: "Successfully added the Location Update.",
+  //     type: "success",
+  //     showCancelButton: false,
+  //     confirmButtonClass: "btn-primary waves-effect",
+  //     confirmButtonText: "Ok",
+  //     closeOnConfirm: true
+  //   });
+  //   $('#updateLoc').modal('hide');
+  // });
   $('.btnStart').on('click',function(){
     swal({
       title: "Hauling Started!",

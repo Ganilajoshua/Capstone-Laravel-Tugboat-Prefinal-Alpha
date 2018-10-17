@@ -123,13 +123,13 @@
                     <li id="reportsTree">
                         <a href="/administrator/reports" ><i class="fas fa-chart-bar"></i><span>Reports</span></a>
                     </li>
-                    <li>
+                    <li id="utilitiesTree">
                         <a href="#" class="has-dropdown"><i class="fas fa-wrench"></i><span>Utilities</span></a>
                         <ul class="menu-dropdown">
                             {{-- <li><a href="/contracts"><i class="ion ion-ios-paper"></i> Contracts</a></li> --}}
-                            <li><a href="/contracts"><i class="fas fa-table"></i> Tugboat Matrix</a></li>
-                            <li><a href="/administrator/utilities/teamcomposition"><i class="fas fa-money-bill-alt"></i> Contract Fees Matrix</a></li>
-                            <li><a href="/administrator/utilities/teamcomposition"><i class="fas fa-users"></i> Team Composition</a></li>
+                            <li id="menuTugboatMatrix"><a href="/contracts"><i class="fas fa-table"></i> Tugboat Matrix</a></li>
+                            <li id="menuContractFeesMatrix"><a href="/administrator/utilities/contractfeesmatrix"><i class="fas fa-money-bill-alt"></i> Contract Fees Matrix</a></li>
+                            <li id="menuTeamComp"><a href="/administrator/utilities/teamcomposition"><i class="fas fa-users"></i> Team Composition</a></li>
                         </ul>
                     </li>
                     {{-- if --}}

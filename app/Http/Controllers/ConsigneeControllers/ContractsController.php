@@ -38,10 +38,11 @@ class ContractsController extends Controller
         ->select('company.*','contracts.*','users.*')
         // ->where('contracts.intCQuotationID',null)
         ->get();
-        return view('Consignee.Contracts.index')
-        ->with('company',$company)
-        ->with('contract',$contract)
-        ->with('contractList',$contractList);
+        $fees = ContractFeesMatrix::all();
+        return view('Consignee.Contracts.index',compact('company','contract','contractList','fees'));
+        // ->with('company',$company)
+        // ->with('contract',$contract)
+        // ->with('contractList',$contractList);
         // undefined offset[0] pag walang company na connected sa user
         // return response()->json(['contract'=>$contract,'list'=>$contractList]);
     }
@@ -77,16 +78,15 @@ class ContractsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($intContractListID)
+    public function show()
     {
-        $contractList = Contract::findOrFail($intContractListID);    
-        $quotation = Quotations::where('intQContractListID',$intContractListID)->get();
-        $contract = DB::table('tblcontractlist as contract')
-        ->join('tblquotation as quotation','contract.intContractListID','quotation.intQContractListID')
-        ->where('contract.intContractListID',$intContractListID)
-        ->where('quotation.intQContractListID',$intContractListID)
-        ->get();
-        return response()->json(['contract'=>$contract,'quotation'=>$quotation]);
+        $contract = Company::where('intCompanyID', Auth::user()->intUCompanyID)->get();
+        // $contract = DB::table('tblcontractlist as contract');
+
+        // ->join('tblquotation as quotation','contract.intContractListID','quotation.intQContractListID')
+        // ->where('contracts.intCCompanyID',Auth::user()->intUCompanyID)
+        // ->get();
+        return response()->json(['contract'=>$contract]);
         
 
     }
@@ -137,9 +137,44 @@ class ContractsController extends Controller
     }
     public function activate(Request $request){
         $contract = Contract::findOrFail($request->contractID);
+        $contract->strConsigneeSign = $request->sign;
         $contract->timestamps = false;
         $contract->enumStatus = 'Accepted';
         $contract->save();
         return response()->json(['contract'=>$contract]);
+    }
+
+    public function getquoteexchanges($intContractListID){
+        $quotations = DB::table('tblquotation as quotation')
+        ->leftjoin('tblquotationshistory as history','quotation.intQuotationID','intQHQuotationID')
+        ->where('quotation.intQContractListID',$intContractListID)
+        ->get();
+
+        return response()->json(['quotations'=>$quotations]);
+    }
+
+    public function custommatrix(Request $request){
+        $contract = new Contract;
+        $contract->timestamps = false;
+        $contract->intCCompanyID = Auth::user()->intUCompanyID;
+        $contract->isDefault = 'No';
+        $contract->save();
+        // return response()->json(['contract'=>$contract]);
+
+        for($count = 0; $count < count($request->serviceType); $count++){
+            $quotation = new Quotations;
+            $quotation->timestamps = false;
+            $quotation->enumServiceType = $request->serviceType[$count];
+            $quotation->intQContractListID = Contract::max('intContractListID');
+            $quotation->fltStandardRate = $request->standardRate[$count];
+            $quotation->fltQuotationTDelayFee = $request->delayFee[$count];
+            $quotation->fltQuotationViolationFee = $request->violationFee[$count];
+            $quotation->fltQuotationConsigneeLateFee = $request->lateFee[$count];
+            $quotation->fltMinDamageFee = $request->minDamage[$count];
+            $quotation->fltMaxDamageFee = $request->maxDamage[$count];
+            $quotation->intDiscount = $request->discount[$count];
+            $quotation->save();
+        }
+        return response()->json([$request->all()]);
     }
 }

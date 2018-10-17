@@ -90,6 +90,17 @@ $('.viewDefaultTeamsButton').on('click',function(event){
     console.log($(this).data('id'));
 });
 
+$('.assignTeams').on('click',function(){
+    selected = [];
+    tugboatID = [];
+    $(".jobschedTugboats").each(function(key){
+        tugboatID[key] = $(this).data('id');
+    });
+    $(".teamAssignmentSelect option:selected").each(function(select){
+        selected[select ] = parseInt($(this).val());    
+    });
+    console.log(selected, tugboatID);
+});
 $('.assignDefaultTeams').on('click',function(){
     console.log('HI');
     console.log($(this).data('id'));

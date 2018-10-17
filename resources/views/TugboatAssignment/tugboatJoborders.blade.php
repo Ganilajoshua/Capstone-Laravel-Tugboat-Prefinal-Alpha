@@ -51,8 +51,7 @@
             </div>
             <input type="hidden" id="jobOrderID">
             <div class="modal-footer">
-                {{-- onclick="createTugboatAssignment()" --}}
-                <button  type="button" class="createTugboatAssignSubmit btn btn-primary waves-effect">Add</button>
+                <button  type="button" class="closeTugboat btn btn-primary waves-effect">Close</button>
             </div>
         </div>
     </div>

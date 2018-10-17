@@ -1,0 +1,9 @@
+.contractFeeMatrixTable th{
+    height:50px !important;
+}
+.contractFeeMatrixTable td{
+    height:40px !important;
+}
+.cardHaulingFee, .cardTugAssistFee{
+    display:none;
+}
