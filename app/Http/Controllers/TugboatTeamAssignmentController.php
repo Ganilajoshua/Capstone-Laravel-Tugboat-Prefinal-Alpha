@@ -374,11 +374,8 @@ class TugboatTeamAssignmentController extends Controller
         ->join('tblteam as team','team.intTeamID','assign.intTATeamID')
         ->join('tblemployee as employee','employee.intETeamID','team.intTeamID')
         ->join('tblposition as position','position.intPositionID','employee.intEPositionID')
-        // ->join('tbltugboat as tugboat','assign.intTATugboatID','tugboat.intTugboatID')
-        // ->join('tbltugboatmain as main','tugboat.intTugboatID','main.intTugboatMainID')
         ->where('employee.intETeamID',$intTATeamID)
-
-        ->get();
+        ->get();    
 
         return response()->json(['team'=>$team]);
     }

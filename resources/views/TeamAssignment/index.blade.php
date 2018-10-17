@@ -230,6 +230,7 @@
                                             </div>
                                             <div class="collapse show" id="ownedOccupiedT">
                                                 @if(count($tugboatAvail)>0)
+                                                    {{$tugboatAvail}}
                                                     <div class="card-body text-white">
                                                         @foreach($tugboatAvail as $tugboatAvail)
                                                             <div class="card mb-2 border border-info text-center">
