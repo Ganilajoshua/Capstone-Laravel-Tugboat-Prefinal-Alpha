@@ -213,7 +213,7 @@
                                                 @else
                                                     <div class="card-body">
                                                         <div class="alert alert-danger text-center">
-                                                            <i class="fas fa-exclamation-triangle mr-2"></i>NO AVAIABLE OWNED TUGBOATS FOUND!
+                                                            <i class="fas fa-exclamation-triangle mr-2"></i>No Available Tugboats Found!
                                                         </div>
                                                     </div>
                                                 @endif
@@ -295,7 +295,7 @@
                                                                             <a href="#" data-id="{{$tugboatsreceived->intTAssignID}}" class="occupiedTugboats float-left text-black mt-2 mb-2 ml-4">
                                                                                 {{$tugboatsreceived->strName}}
                                                                             </a>
-                                                                            <button type="button" data-id="{{$tugboatsreceived->intTAssignID}}" class="returnTugboat btn btn-sm btn-info waves-effect waves-circle float-right mr-4" data-tooltip="tooltip" title="Return Tugboat">
+                                                                            <button type="button" data-id="{{$tugboatsreceived->intTAssignID}}" class="returnTugboats tugboatsReturn btn btn-sm btn-info waves-effect waves-circle float-right mr-4" data-tooltip="tooltip" title="Return Tugboat">
                                                                                 </span>
                                                                                     <i class="ultraminicon fas fa-undo"></i>
                                                                                 <span>

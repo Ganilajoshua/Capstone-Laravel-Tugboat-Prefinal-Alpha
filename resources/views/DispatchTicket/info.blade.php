@@ -154,7 +154,7 @@
                                         <div class="input-group-append">
                                             <span class="input-group-text">&#8369; </span>
                                         </div>
-                                        <input type="number" name="amount" id="amount" min="0" class="form-control">
+                                        <input type="number" name="amount" id="amount" min="0" class="form-control" required>
                                     </div>
                                     
                                 </div>

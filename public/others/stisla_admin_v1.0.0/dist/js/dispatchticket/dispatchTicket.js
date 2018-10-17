@@ -97,7 +97,6 @@ function getData(id){
           //clear canvas
 
             console.log('success', data);
-            console.log(id);
             $('#viewDetails').empty();
             $('#viewCharges').empty();
             console.log(data.sign[0].strAdminSign);
@@ -157,9 +156,23 @@ function getData(id){
             var delay = Number(data.dispatch[0].fltFCFTugboatDelayFee);
             var delay2 = Number(data.dispatch[0].fltFCFConsigneeLateFee);
 
+            var starttm = data.dispatch[0].tmStarted;
+            var endtm = data.dispatch[0].tmEnded;
 
+            var tm = starttm - endtm;
 
-
+            var startdt = data.dispatch[0].dateStarted;
+            var enddt = data.dispatch[0].dateEnded;
+            console.log(tm);
+            console.log(enddt);
+            console.log(startdt);
+            var startdt = data.dispatch[0].tmStarted;
+            
+            $("#discount").attr({
+                "value" : data.dispatch[0].intFCFDiscountFee,         
+             });
+            
+            
             $("#delayrate").val(delay);
             $("#conlatefee").val(delay2);
             $("#discount").attr({

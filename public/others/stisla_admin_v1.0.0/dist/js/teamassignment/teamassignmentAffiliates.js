@@ -54,60 +54,193 @@ $(document).ready(function(){
         }
     });
 });
+$('.backButton').on('click',function(){
+    $('.teamAssignment').css('display','block');
+    $('.teamAssignment').addClass('animated fadeIn');
+    $('.assignTeamCard').css('display','none');
+});
 
+$('.assignTeam').on('click',function(){
+    console.log($(this).data('id'));
+    var joborderID = $(this).data('id')
+    $.ajax({
+        url : `${url}/${joborderID}/getjoborder`,
+        type : 'GET',
+        dataType : 'JSON',
+        success : (data,response)=>{
+            console.log(data);
+            var location = getLocation(data.joborder);
+            appendTugboatTeamDefaults(data.jobsched);
+            appendJoborderHeader(data.joborder);
+            appendJoborderBody(data.joborder,location);
+            appendJoborderTeams(data.jobsched,data.teams);
+            $('.assignDefaultTeams').data('id',`${data.jobsched[0].intJSJobOrderID}`);
+            $('.teamAssignment').css('display','none');
+            $('.assignTeamCard').css('display','block');
+            // $('.assignTeamCard').addClass('animated fadeIn');
+        },error : (error)=>{
+            throw error;
+        }
+    })
+});
+
+$('.viewDefaultTeamsButton').on('click',function(event){
+    event.preventDefault();
+    console.log('Hey');
+    console.log($(this).data('id'));
+});
+
+$('.assignTeams').on('click',function(){
+    selected = [];
+    tugboatID = [];
+    $(".jobschedTugboats").each(function(key){
+        tugboatID[key] = $(this).data('id');
+    });
+    $(".teamAssignmentSelect option:selected").each(function(select){
+        selected[select ] = parseInt($(this).val());    
+    });
+    console.log(selected, tugboatID);
+});
+$('.assignDefaultTeams').on('click',function(){
+    console.log('HI');
+    console.log($(this).data('id'));
+    var jobschedID = [];
+    var tugboatID = [];
+    var joborderID = $(this).data('id');
+    $.ajax({
+        url : `${url}/${joborderID}/showdefaultteams`,
+        type : 'GET',
+        dataType : 'JSON',
+        success : (data,response)=>{
+            console.log(data);
+            for(var counter = 0; counter < data.jobsched.length; counter++){
+                jobschedID[counter] = data.jobsched[counter].intJobSchedID;
+                tugboatID[counter] = data.jobsched[counter].intTugboatID;
+            }
+            swal({
+                title: "Are you Sure?",
+                text: "Assign The Default Teams",
+                type: "info",
+                showCancelButton: true,
+                confirmButtonClass: "btn-info waves-effect",
+                confirmButtonText: "Ok",
+                closeOnConfirm: true
+            },(isConfirm)=>{
+                if(isConfirm){
+                    console.log('heyyyyyaaaa');
+                    // $('#defaultTeamsModal').modal('show');
+                    $.ajax({
+                        url : `${url}/assigndefaultteams`,
+                        type : 'POST',
+                        data : {
+                            "_token" : $('meta[name="csrf-token"]').attr('content'),
+                            tugboatID : tugboatID,
+                            jobschedID : jobschedID,
+                        }, 
+                        success : (data,response)=>{
+                            console.log(data);
+                            swal({
+                                title: "Success",
+                                text: "Teams Assigned",
+                                type: "success",
+                                showCancelButton: true,
+                                confirmButtonClass: "btn-success waves-effect",
+                                confirmButtonText: "Ok",
+                                closeOnConfirm: true
+                            },(isConfirm)=>{
+                                if(isConfirm);{
+                                    location.reload();
+                                }
+                            });
+                        },
+                        error : (error)=>{
+                            throw error;    
+                        }
+                    });
+                }
+            });
+        },
+        error : (error)=>{
+            throw error;    
+        }
+    });
+});
+
+$('.addNewTeamButton').on('click',function(){
+    $.ajax({
+        url : `${url}/getteamcompositions`,
+        type : 'POST',
+        data : {
+            "_token" : $('meta[name="csrf-token"]').attr('content')
+        },
+        success : (data,response)=>{
+            console.log(data);
+            appendTeamComposition(data.positions);
+
+            $('#addTeam').modal('show');
+        },
+        error : (error)=>{
+
+        }
+    });
+});
 var checkbox = $('.employeesCheckbox:checkbox');
 
-// // Return Tugboats
-// $('.returnTugboat').on('click',function(){
-//     console.log('HI');
-//     console.log($(this).data('id'));
-//     var id = $(this).data('id');
-
-//     swal({
-//         title: "Are you Sure?",
-//         text: "Return This Team?",
-//         type: "info",
-//         showCancelButton: true,
-//         confirmButtonClass: "btn-info waves-effect",
-//         confirmButtonText: "Ok",
-//         closeOnConfirm: true
-//     },(isConfirm)=>{
-//         // return false;
-//         $.ajax({
-//             url : `${url}/returntugboat`,
-//             type : 'POST',
-//             data : { 
-//                 "_token" : $('meta[name="csrf-token"]').attr('content'),    
-//                 tugboatassignID : id,
-//             }, 
-//             beforeSend:  (request)=>{
-//                 return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-//             },
-//             success : (data, response)=>{
-//                 console.log('success pota');
-//                 console.log(data);
-//                 console.log(response);
-//                 swal({
-//                     title: "Success",
-//                     text: "Team Returned",
-//                     type: "success",
-//                     showCancelButton: false,
-//                     confirmButtonClass: "btn-success",
-//                     confirmButtonText: "Ok",
-//                     closeOnConfirm: true,
-//                     timer : 1500
-//                 },(isConfirm)=>{
-//                     if(isConfirm){
-//                         window.location = url;
-//                     }
-//                 });                       
-//             },
-//             error : (error)=>{
-//                 throw error;
-//             }
-//         });
-//     });
+// Return Tugboats
+// $('.tugboatsReturn').on('click',function(){
+//     console.log('heyaaa');
 // });
+
+$('.returnTugboats').on('click',function(){
+    console.log('HI');
+    console.log($(this).data('id'));
+    var id = $(this).data('id');
+
+    swal({
+        title: "Are you Sure?",
+        text: "Return This Team?",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonClass: "btn-info waves-effect",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true
+    },(isConfirm)=>{
+        // return false;
+        $.ajax({
+            url : `${url}/returntugboat`,
+            type : 'POST',
+            data : { 
+                "_token" : $('meta[name="csrf-token"]').attr('content'),    
+                tugboatassignID : id,
+            }, 
+            beforeSend:  (request)=>{
+                return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+            },
+            success : (data, response)=>{
+                console.log('success pota');
+                console.log(data);
+                console.log(response);
+                swal({
+                    title: "Success",
+                    text: "Team Returned",
+                    type: "success",
+                    showCancelButton: false,
+                    confirmButtonClass: "btn-success",
+                    confirmButtonText: "Ok",
+                    closeOnConfirm: true,
+                    timer : 1500
+                },(isConfirm)=>{
+                    if(isConfirm){
+                        window.location = url;
+                    }
+                });                       
+            },
+            error : (error)=>{
+                throw error;
+            }
+        });
+    });
+});
 
 function showTeamAssignment(teamID){
     var clone = $('.clonedTry').clone();
@@ -217,8 +350,7 @@ function submitTeam(){
     var chiefengineer = []; 
     var crew = [];
     $('.captCheckbox:checkbox:checked').each(function(checked){
-        captains[checked] = parseInt($(this).val());
-
+        captains[checked] = parseInt($(this).val());    
     });
     $('.chiefCheckbox:checkbox:checked').each(function(checked){
         chiefengineer[checked] = $(this).val();

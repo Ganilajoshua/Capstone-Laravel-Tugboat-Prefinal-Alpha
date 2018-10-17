@@ -186,57 +186,61 @@ $('.addNewTeamButton').on('click',function(){
 });
 var checkbox = $('.employeesCheckbox:checkbox');
 
-// // Return Tugboats
-// $('.returnTugboat').on('click',function(){
-//     console.log('HI');
-//     console.log($(this).data('id'));
-//     var id = $(this).data('id');
-
-//     swal({
-//         title: "Are you Sure?",
-//         text: "Return This Team?",
-//         type: "info",
-//         showCancelButton: true,
-//         confirmButtonClass: "btn-info waves-effect",
-//         confirmButtonText: "Ok",
-//         closeOnConfirm: true
-//     },(isConfirm)=>{
-//         // return false;
-//         $.ajax({
-//             url : `${url}/returntugboat`,
-//             type : 'POST',
-//             data : { 
-//                 "_token" : $('meta[name="csrf-token"]').attr('content'),    
-//                 tugboatassignID : id,
-//             }, 
-//             beforeSend:  (request)=>{
-//                 return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-//             },
-//             success : (data, response)=>{
-//                 console.log('success pota');
-//                 console.log(data);
-//                 console.log(response);
-//                 swal({
-//                     title: "Success",
-//                     text: "Team Returned",
-//                     type: "success",
-//                     showCancelButton: false,
-//                     confirmButtonClass: "btn-success",
-//                     confirmButtonText: "Ok",
-//                     closeOnConfirm: true,
-//                     timer : 1500
-//                 },(isConfirm)=>{
-//                     if(isConfirm){
-//                         window.location = url;
-//                     }
-//                 });                       
-//             },
-//             error : (error)=>{
-//                 throw error;
-//             }
-//         });
-//     });
+// Return Tugboats
+// $('.tugboatsReturn').on('click',function(){
+//     console.log('heyaaa');
 // });
+
+$('.returnTugboats').on('click',function(){
+    console.log('HI');
+    console.log($(this).data('id'));
+    var id = $(this).data('id');
+
+    swal({
+        title: "Are you Sure?",
+        text: "Return This Team?",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonClass: "btn-info waves-effect",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true
+    },(isConfirm)=>{
+        // return false;
+        $.ajax({
+            url : `${url}/returntugboat`,
+            type : 'POST',
+            data : { 
+                "_token" : $('meta[name="csrf-token"]').attr('content'),    
+                tugboatassignID : id,
+            }, 
+            beforeSend:  (request)=>{
+                return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+            },
+            success : (data, response)=>{
+                console.log('success pota');
+                console.log(data);
+                console.log(response);
+                swal({
+                    title: "Success",
+                    text: "Team Returned",
+                    type: "success",
+                    showCancelButton: false,
+                    confirmButtonClass: "btn-success",
+                    confirmButtonText: "Ok",
+                    closeOnConfirm: true,
+                    timer : 1500
+                },(isConfirm)=>{
+                    if(isConfirm){
+                        window.location = url;
+                    }
+                });                       
+            },
+            error : (error)=>{
+                throw error;
+            }
+        });
+    });
+});
 
 function showTeamAssignment(teamID){
     var clone = $('.clonedTry').clone();
