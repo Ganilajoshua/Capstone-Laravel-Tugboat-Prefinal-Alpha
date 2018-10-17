@@ -1,3 +1,10 @@
 .viewDetails{
     display:none;
 }
+
+.viewPendingInfo{
+    display:none;
+}
+.val{
+    display:none;
+}

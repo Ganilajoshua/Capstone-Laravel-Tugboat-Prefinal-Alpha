@@ -33,12 +33,43 @@ $('.btnBack').on('click',function(){
     $('.viewDetails').hide();
     $('.billingTable').show();
 });
+$('.info').on('click',function(){
+    $('.billingTable').hide();
+    $('.val').show();
+    $('.viewPendingInfo').show();
+});
+$('.paidss').on('click',function(){
+    $('.billingTable').hide();
+    $('.app').hide();
+    $('.rem').hide();
+    $('.val').show();
+    $('.viewPendingInfo').show();
+});
+$('.rejects').on('click',function(){
+    $('.billingTable').hide();
+    $('.app').hide();
+    $('.rem').hide();
+    $('.val').show();
+    $('.viewPendingInfo').show();
+});
+$('.btnBack').on('click',function(){
+    $('.viewPendingInfo').hide();
+    $('.val').hide();
+    $('.billingTable').show();
+});
 var url = '/administrator/transactions/payment';
-function validate(id){
+function validate(){
     // var id = document.getElementById("dispatch3").value;
-    // var id = $('#id').val();
-    // console.log(id);
+    var id = $('#new').val();
+    var sum = $('#total2').val();
+    var bal = $('#bal').val();
+    
+    console.log(id);
 
+    console.log(sum);
+    
+    console.log(bal);
+// return false;
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -49,6 +80,8 @@ function validate(id){
         type : 'POST',
         data : { "_token" : $('meta[name="csrf-token"]').attr('content'),
             bill : id,
+            sum : sum,
+            bal : bal,    
         },
         beforeSend: function (request) {
             return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
@@ -78,11 +111,11 @@ function validate(id){
 }
 
 
-function reject(id){
+function reject(){
     // var id = document.getElementById("dispatch3").value;
-    // var id = $('#id').val();
+    var id = $('#new').val();
     // console.log(id);
-    console.log('reject');
+    console.log(id);
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -157,8 +190,52 @@ function infopayment(id){
                 $('#comviolationfee').html(data.dispatch[0].fltCompanyViolationFee);
                 $('#discount').html(data.dispatch[0].intDiscount);
                 $('#total').html(data.dispatch[0].fltBalanceRemain);
+                $('#bill').html(data.dispatch[0].intBillID)
                 
                 $('#viewDetails').modal('show');
+        }
+    });
+  }
+
+  function pendinginfo(id){
+      console.log('1');
+    $.ajax({
+        url : url + '/' + id + '/pendinginfo',
+        type : 'GET',
+        dataType : 'JSON',
+        aysnc : true,
+        success : function(data){
+            //clear canvas
+  
+                console.log('success', data);
+                console.log(id);
+                $('#tugboat1').html(data.dispatch[0].strName);
+                $('#to1').html(data.dispatch[0].strCompanyName);
+                $('#address1').html(data.dispatch[0].strCompanyAddress);
+                $('#dispatch1').html(data.dispatch[0].intDispatchTicketID);
+                $('#dispatch21').html(data.dispatch[0].intDispatchTicketID);
+                $('#dispatch31').html(data.dispatch[0].intDispatchTicketID);
+                $('#towed1').html(data.dispatch[0].strJOVesselName);
+                $('#start1').html(data.dispatch[0].strJOStartPoint);
+                $('#destination1').html(data.dispatch[0].strJODestination);
+                $('#service1').html(data.dispatch[0].enumServiceType);
+                $('#pNum1').html(data.dispatch[0].strCompanyContactPNum);
+                $('#eMail1').html(data.dispatch[0].strCompanyEmail);
+                $('#ID1').html(data.dispatch[0].intCompanyID);
+                $('#company1').html(data.dispatch[0].intCompanyID);
+                $('#amount1').html(data.dispatch[0].fltJOAmount);
+                $('#delayfee1').html(data.dispatch[0].fltTugboatDelayFee);
+                $('#conviolationfee1').html(data.dispatch[0].fltConsigneeViolationFee);
+                $('#conlatefee1').html(data.dispatch[0].fltConsigneeLateFee);
+                $('#condamagefee1').html(data.dispatch[0].fltConsigneeDamageFee);
+                $('#comdamagefee1').html(data.dispatch[0].fltCompanyDamageFee);
+                $('#comviolationfee1').html(data.dispatch[0].fltCompanyViolationFee);
+                $('#discount1').html(data.dispatch[0].intDiscount);
+                $('#total2').html(data.dispatch[0].fltBalanceRemain);
+                $('#total1').html(data.dispatch[0].fltBalanceRemain);
+                $('#bill').html(data.dispatch[0].intBillID)
+                $('#balance').html(data.dispatch[0].fltBalance)
+                $('#viewPendingInfo').modal('show');
         }
     });
   }

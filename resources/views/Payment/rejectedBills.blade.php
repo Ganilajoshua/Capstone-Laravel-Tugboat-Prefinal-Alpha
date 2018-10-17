@@ -15,16 +15,16 @@
                 @foreach($rejected as $rejected)
                     <tr class="tr-shadow">
                         <td>{{$rejected->intChequeID}}</td>
-                        <td></td>
+                        <td>{{$rejected->strCompanyName}}</td>
                         <td>
-                            <div class="badge badge-danger">{{$rejected->enumStatus}}</div>
+                            {{$rejected->dtPayment}}
                         </td>
                         <td>{{$rejected->intAmount}}</td>
                         <td>
                             <div class="ml-1 mr-1">
-                                {{-- <button onclick="validate({{$rejected->intBillID}})" class="btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
+                                <button onclick="pendinginfo({{$rejected->intBillID}})" class="rejects btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
                                     <i class="bigIcon ion ion-ios-approve"></i>
-                                </button> --}}
+                                </button>
                             </div>
                         </td>
                     </tr>   

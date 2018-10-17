@@ -9,6 +9,21 @@ $('.btnBack').on('click',function(){
     $('.viewDetails').hide();
     $('.billingTable').show();
 });
+$('.detailedTable').DataTable( {
+    columnDefs: [
+    { targets: 'noSortAction', orderable: false }
+], 
+fade:true,
+"language": {
+  "lengthMenu": 'Display <select class="custom-select custom-select form-control form-control">'+
+  '<option hidden>1000</option>'+
+  '<option value="-1">All</option>'+
+  '<option value="10">10</option>'+
+  '<option value="20">25</option>'+
+  '<option value="50">50</option>'+
+  '<option value="100">100</option>'+
+  '</select> records'},
+});
 
 function infopayment(id){
 console.log(id);
@@ -53,3 +68,48 @@ console.log(id);
         }
     });
   }
+
+ 
+function pay(id){
+    // var id = document.getElementById("dispatch3").value;
+    // console.log(id);
+
+    var id2 = id;
+    console.log(id);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url : url + '/pay',
+        type : 'POST',
+        data : { "_token" : $('meta[name="csrf-token"]').attr('content'),
+            id3 : id2,
+        },
+        beforeSend: function (request) {
+            return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+        },
+        success : function(data){
+            swal({
+                title: "Paid",
+                text: "",
+                type: "success",
+                showCancelButton: false,
+                confirmButtonClass: "btn-success",
+                confirmButtonText: "Ok",
+                closeOnConfirm: true,
+            },
+            function(isConfirm){
+                if(isConfirm){
+                    window.location = '/administrator/transactions/invoice';
+                }
+            });                       
+        },
+        error : function(error){
+            throw error;
+            console.log('title', error.errors.title);
+            console.log('body', error.errors.body);
+        } 
+    });
+}

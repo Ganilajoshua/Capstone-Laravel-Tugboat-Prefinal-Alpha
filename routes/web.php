@@ -122,12 +122,14 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::resource('/payment','PaymentController');
         // Route::post('/payment/validate','PaymentController@validate');
         Route::get('/payment/{intInvoiceID}/infopayment','PaymentController@infopayment');
+        Route::get('/payment/{intInvoiceID}/pendinginfo','PaymentController@pendinginfo');
         Route::post('/payment/reject','PaymentController@reject');
         Route::post('/payment/store','PaymentController@store');
         
         Route::resource('/invoice','InvoiceController');
         Route::get('/invoice/{intInvoiceID}/show','InvoiceController@show');
-        
+        Route::post('/invoice/pay','InvoiceController@pay');
+
         Route::group(['prefix'=>'consignee/'],function(){
             //Consignee Accounts
             Route::group(['prefix'=>'accounts'],function(){
@@ -263,7 +265,6 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::post('/dispatchticket/charges','DispatchTicketController@charges');
         //Scheduling
         Route::post('/scheduling/tugboatsavailable','SchedulingController@tugboatsavailable');
-        
     });
     //Reports Routes
     Route::group(['prefix'=>'reports/'],function(){

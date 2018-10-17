@@ -15,17 +15,17 @@
                 @foreach($paid as $paid)
                     <tr class="tr-shadow">
                         <td>{{$paid->intChequeID}}</td>
-                        <td></td>
-                        <td></td>
+                        <td>{{$paid->strCompanyName}}</td>
+                        <td>{{$paid->dtPayment}}</td>
                         <td>
                             <div class="badge badge-success">{{$paid->enumStatus}}</div>
                         </td>
                         <td>{{$paid->intAmount}}</td>
                         <td>
                             <div class="ml-1 mr-1">
-                                {{-- <button onclick="validate({{$paid->intBillID}})" class="btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
-                                    <i class="bigIcon ion ion-ios-approve"></i>
-                                </button> --}}
+                                <button onclick="pendinginfo({{$paid->intBillID}})" class="paidss btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
+                                    <i class="bigIcon ion ion-ios-eye"></i>
+                                </button>
                             </div>
                         </td>
                     </tr>

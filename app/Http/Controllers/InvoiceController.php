@@ -26,8 +26,8 @@ class InvoiceController extends Controller
         ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
         // ->where('company.intCompanyID',Auth::user()->intUCompanyID)
-        ->where('jobsched.enumstatus','Finished')
         ->where('invoice.enumstatus','Processing')
+        ->where('jobsched.enumstatus','Finished')
         ->groupby('dispatch.intDispatchTicketID')
         ->get();
 
@@ -87,6 +87,24 @@ class InvoiceController extends Controller
         error_log($dispatch);
         return response()->json(['dispatch'=>$dispatch]);   
     
+    }
+
+    public function pay()
+    {
+        $Count = Bill::max('intBillID')+1;
+        $Invoice = Invoice::where('intInvoiceID',$request->id3);
+        $Invoice->enumStatus = 'Paid';
+        $Invoice->intIBillID = $Count;
+        $Invoice->timestamps = false;
+        $Invoice->save();
+
+        $Bill = new Bill;
+        $Bill->intBillID = $Count;
+        $Bill->enumStatus = 'Accepted';
+        $Bill->timestamps = false;
+        $Bill->save();
+
+        // return response()->json(['Invoice'=>$Invoice,'Bill'=>$Bill]); 
     }
 
     /**

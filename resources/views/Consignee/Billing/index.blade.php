@@ -54,7 +54,6 @@
 															</th>
 															<th>#</th>
 															<th>Date of Transaction</th>
-															<th>status</th>
 															<th>Total Amount
 																{{-- (&#8369;) --}}
 															</th>
@@ -73,9 +72,6 @@
 															</td>
 															<td>{{$dispatch->intInvoiceID}}</td>
 															<td>{{$dispatch->dtmETA}}</td>
-															<td>
-																<div class="badge badge-success">{{$dispatch->enumStatus}}</div>
-															</td>
 															<td>{{$dispatch->fltBalanceRemain}}</td>
 															<td>
 																<div class="table-data-feature">

@@ -72,7 +72,7 @@
                         <tbody>
                             <tr>
                                 <td id="dispatch2"></td>
-                                <td id="tugboat"></td>
+                                <td id="1tugboat"></td>
                                 <td id="start"></td>
                                 <td id="destination"></td>
                                 <td>??</td>

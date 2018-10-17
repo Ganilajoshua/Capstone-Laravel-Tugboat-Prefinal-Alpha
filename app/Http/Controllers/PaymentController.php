@@ -36,8 +36,6 @@ class PaymentController extends Controller
         ->groupby('dispatch.intDispatchTicketID')
         ->get(); 
 
-        error_log($bill);
-
         $invoice = DB::table('tbljoborder as joborder')
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
         ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
@@ -60,7 +58,6 @@ class PaymentController extends Controller
         ->join('tblbill as bill','bill.intBillID','invoice.intIBillID')
         ->join('tblcheque as cheque','bill.intBillID','cheque.intCBillID')
         ->where('jobsched.enumstatus','Finished')
-        ->where('invoice.enumstatus','Pending')
         ->where('bill.enumStatus','Pending')
         ->groupby('intBillID') 
         ->get();
@@ -73,7 +70,6 @@ class PaymentController extends Controller
         ->join('tblbill as bill','bill.intBillID','invoice.intIBillID')
         ->join('tblcheque as cheque','bill.intBillID','cheque.intCBillID')
         ->where('jobsched.enumstatus','Finished')
-        ->where('invoice.enumstatus','Pending')
         ->where('bill.enumStatus','Accepted')
         ->groupby('intBillID') 
         ->get();
@@ -86,7 +82,6 @@ class PaymentController extends Controller
         ->join('tblbill as bill','bill.intBillID','invoice.intIBillID')
         ->join('tblcheque as cheque','bill.intBillID','cheque.intCBillID')
         ->where('jobsched.enumstatus','Finished')
-        ->where('invoice.enumstatus','Pending')
         ->where('bill.enumStatus','Rejected')
         ->groupby('intBillID') 
         ->get();
@@ -117,35 +112,22 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
+
+        // $a = $request->bill;
+        // // $sum = $request->sum;
+        // $balance = $request->bal;
+        // $balance = $balance + $total;
+        // $balance = $balance - $sum;
+
+        $Invoice = Invoice::find($request->bill);
+        $Invoice->enumStatus = 'Paid';
+        $Invoice->save();
         $Bill = Bill::find($request->bill);
         $Bill->timestamps = false;
         $Bill->enumStatus = 'Accepted';
         $Bill->save();
 
-        // $Invoice = Invoice::where('intIBillID',$request->bill);
-        // $Invoice->enumStatus = 'Paid';
-        // $Invoice->timestamps = false;
-        // $Invoice->save();
-
     }
-    // public function validate(Request $request, $id)
-    // {
-        // $Bill = Bill::find($bill);
-        // $Bill->timestamps = false;
-        // $Bill->enumStatus = 'Accepted';
-
-        // $pending = DB::table('tblinvoice')
-        // ->where('intIBillID',$request->bill);
-        // $Invoice = Invoice::find()
-        // ->where('intIBillID',$request->bill);
-        // $Invoice->timestamps = false;
-        // $Invoice->enumStatus = 'Accepted';
-        
-        // return response()->json(['Bill'=>$Bill]);    
-        
-        // $Invoice->save();
-        // $Bill->save();
-    // }
     public function reject(Request $request)
     {
         $Bill = Bill::find($request->bill);
@@ -196,7 +178,7 @@ class PaymentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
     public function infopayment($id)
     {
@@ -214,13 +196,38 @@ class PaymentController extends Controller
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
         ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
-        // ->join('tblbill as bill','invoice.intIBillID','bill.intBillID')
+        ->join('tblbill as bill','invoice.intIBillID','bill.intBillID')
         ->join('tblcharges as charges','charges.intChargeID','invoice.intInvoiceID')
+        ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
+        ->where('invoice.intInvoiceID',$id)
+        ->groupby('dispatch.intDispatchTicketID')
+        ->get();
+
+        
+        return response()->json(['dispatch'=>$dispatch]);   
+    }
+    public function pendinginfo($id)
+    {
+
+        $dispatch = DB::table('tbljoborder as joborder')
+        ->leftjoin('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
+        ->leftjoin('tblpier as pier','berth.intBPierID','pier.intPierID')
+        ->leftjoin('tblbarge as barge','joborder.intJOBargeID','barge.intBargeID')
+        ->leftjoin('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
+        ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
+        ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
+        ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
+        ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
+        ->join('tblbill as bill','invoice.intIBillID','bill.intBillID')
+        ->join('tblcharges as charges','charges.intChargeID','invoice.intInvoiceID')
+        ->join('tblbalance as balance','balance.intBalanceID','company.intCompanyID')
         ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
         ->where('invoice.intInvoiceID',$id)
         ->groupby('dispatch.intDispatchTicketID')
         ->get();
         return response()->json(['dispatch'=>$dispatch]);   
     }
-    
 }

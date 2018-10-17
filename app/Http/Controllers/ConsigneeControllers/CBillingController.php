@@ -22,9 +22,12 @@ class CBillingController extends Controller
         ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
         ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
+        ->leftjoin('tblbill as bill','invoice.intIBillID','bill.intBillID')
         ->where('company.intCompanyID',Auth::user()->intUCompanyID)
         ->where('jobsched.enumstatus','Finished')
         ->where('invoice.enumstatus','Processing')
+        ->where('bill.intBillID',null)
+        
         ->groupby('dispatch.intDispatchTicketID')
         ->get();
 
@@ -37,7 +40,6 @@ class CBillingController extends Controller
         ->join('tblcheque as cheque','bill.intBillID','cheque.intCBillID')
         ->where('company.intCompanyID',Auth::user()->intUCompanyID)
         ->where('jobsched.enumstatus','Finished')
-        ->where('invoice.enumstatus','Pending')
         ->where('bill.enumStatus','Pending')
         ->groupby('intBillID')
         ->get();
