@@ -46,15 +46,11 @@
                                 </select>
                             </div>
                             <div class="col-12 col-lg-5">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <button type="button" class="btn btn-primary pull-right" id="daterange-btn">
-                                            <span>
-                                                <i class="fa fa-calendar"></i> Date range picker
-                                            </span>
-                                            <i class="fa fa-caret-down"></i>
-                                        </button>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                     </div>
+                                    <input type="text" class="form-control pull-right" id="dateRangePicker">
                                 </div>
                             </div>
                             <div class="col-lg-1 col-12">
