@@ -210,6 +210,11 @@ Route::group(['prefix'=>'administrator/'],function(){
         
         //Payment and Billing Module
         Route::group(['prefix'=>'paymentandbilling/'],function(){
+            // Dispatch Ticket Print
+            Route::get('/printDispatch', function(){
+                return view('DispatchTicket.dispatchTicketPDF');
+            });
+            Route::get('/printDispatch','DispatchTicket@printDispatch');
             
         });
         
@@ -336,6 +341,10 @@ Route::group(['prefix'=>'consignee/'],function(){
         Route::resource('/payment','ConsigneeControllers\CPaymentController');
         Route::get('/payment/{intBillID}/info','ConsigneeControllers\CPaymentController@info');
         Route::post('/payment/store','ConsigneeControllers\CPaymentController@store');
+        Route::get('/billing/print', function(){
+            return view('Consignee.Billing.billPDF');
+        });
+        Route::get('/billing/print','ReportsController@printBill');
         // Route::get('/payment','ConsigneeControllers\CPaymentController@index');
     });
     // Route::get('/consignee/login','LoginControllers\UserLoginController@index')

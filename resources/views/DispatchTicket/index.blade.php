@@ -52,9 +52,9 @@
 											<button  onclick="getData({{$dispatch->intDispatchTicketID}})" class="btnView btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
 												<i class="bigIcon ion ion-ios-eye"></i>
 											</button>
-											<button class="btn btn-sm btn-success waves-circle waves-effect" data-toggle="tooltip" title="Print" role="button">
+											<a href="{{ url('/administrator/transactions/dispatchandhauling/printDispatch')}}" class="btn btn-sm btn-success waves-circle waves-effect">
 												<i class="miniIcon fa fa-print"></i>
-											</button>
+											</a>
 										</div>
 										</span>
 									</td>
@@ -62,7 +62,7 @@
 						@endforeach
 					@else
 								<tr>
-									<td>no dispatch ticket found</td>
+									<td colspan=7>NO DISPATCH TICKET FOUND</td>
 								</tr>
 					@endif
 							</tbody>

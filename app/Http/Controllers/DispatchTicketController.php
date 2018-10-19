@@ -9,6 +9,7 @@ use Auth;
 use DB;
 use App\Invoice;
 use App\DispatchTicket;
+use PDF;
 class DispatchTicketController extends Controller
 {
     /**
@@ -218,5 +219,10 @@ class DispatchTicketController extends Controller
         $Dispatch->strConsigneeSign = null;
         // return response()->json(['dispatch'=>$dispatch]);    
         $Dispatch->save();
+    }
+    public function printDispatch()
+    {
+        $pdf = PDF::loadView('DispatchTicket.dispatchTicketPDF')->setPaper('letter', 'portrait');
+        return $pdf->download('dispatchTicket.pdf');
     }
 }

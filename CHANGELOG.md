@@ -1,5 +1,7 @@
 # Changelog Capstone-Laravel-tugboat-dev-PreFinal α
 ### `Pre Final Repository Monday August 27,2018 v.1.0.0`
+### Dispatch Ticket and Bill PDF Generate
+- [x] Can now generate dispatch ticket and bill
 
 ### PDF Reports Generation
 - [x] Can now generate pdf reports

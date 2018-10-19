@@ -45,7 +45,7 @@
                                     <option value="serviceReport">Service Report</option>
                                 </select>
                             </div>
-                            <div class="col-12 col-lg-5">
+                            <div class="col-12 col-lg-5 mb-3">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fa fa-calendar"></i></span>

@@ -72,15 +72,15 @@ $(document).ready(function(){
     //         throw error;
     //     }
     // });
-    // $('.signCanvas').mouseup(function(){
-    //     if ($('.signCanvas').signature('isEmpty')) {
-    //         $('.btnAcceptContract').attr('disabled', true);
-    //         $('.btnAcceptContract').css('cursor', 'not-allowed');
-    //       } else {
-    //         $('.btnAcceptContract').attr('disabled', false);
-    //         $('.btnAcceptContract').css('cursor', 'pointer');
-    //       }
-    // });
+    $('.signCanvas').mouseup(function(){
+        if ($('.signCanvas').signature('isEmpty')) {
+            $('.btnAcceptContract').attr('disabled', true);
+            $('.btnAcceptContract').css('cursor', 'not-allowed');
+          } else {
+            $('.btnAcceptContract').attr('disabled', false);
+            $('.btnAcceptContract').css('cursor', 'pointer');
+          }
+    });
 });
 
 $('#quoteCustom').on('click',function(){

@@ -85,17 +85,27 @@ class ReportsController extends Controller
     }
     public function printPDF1()
     {
-        $pdf = PDF::loadView('Reports.disabledTReportPDF')->setPaper('letter', 'landscape');;
+        $pdf = PDF::loadView('Reports.disabledTReportPDF')->setPaper('letter', 'landscape');
         return $pdf->download('disabledtugboatreport.pdf');
     }
+    // public function printPDF1()
+    // {
+    //     $pdf = PDF::loadView('DispatchTicket.dispatchTicketPDF')->setPaper('letter', 'portrait');
+    //     return $pdf->download('dispatchTicket.pdf');
+    // }
+    // public function printPDF1()
+    // {
+    //     $pdf = PDF::loadView('Consignee.Billing.billPDF')->setPaper('letter', 'portrait');
+    //     return $pdf->download('bill.pdf');
+    // }
     public function printPDF2()
     {
-        $pdf = PDF::loadView('Reports.jobOrderReportPDF')->setPaper('letter', 'landscape');;
+        $pdf = PDF::loadView('Reports.jobOrderReportPDF')->setPaper('letter', 'landscape');
         return $pdf->download('jobOrderReport.pdf');
     }
     public function printPDF3()
     {
-        $pdf = PDF::loadView('Reports.salesReportPDF')->setPaper('letter', 'landscape');;
+        $pdf = PDF::loadView('Reports.salesReportPDF')->setPaper('letter', 'landscape');
         return $pdf->download('salesReport.pdf');
     }
     public function printPDF4()
@@ -105,7 +115,7 @@ class ReportsController extends Controller
     }
     public function printPDF5()
     {
-        $pdf = PDF::loadView('Reports.serviceReportPDF')->setPaper('letter', 'landscape');;
+        $pdf = PDF::loadView('Reports.serviceReportPDF')->setPaper('letter', 'landscape');
         return $pdf->download('serviceReport.pdf');
     }
 }

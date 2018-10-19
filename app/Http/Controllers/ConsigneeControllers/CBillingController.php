@@ -8,6 +8,7 @@ use DB;
 use Auth;
 use App\Invoice;
 use App\Bill;
+use PDF;
 class CBillingController extends Controller
 {
     /**
@@ -140,5 +141,10 @@ class CBillingController extends Controller
     public function cheque()
     {
   
+    }
+    public function printBill()
+    {
+        $pdf = PDF::loadView('Consignee.Billing.billingPDF')->setPaper('letter', 'portrait');
+        return $pdf->download('bill.pdf');
     }
 }

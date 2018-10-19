@@ -76,9 +76,9 @@
 																	<button class="item waves-effect btnView" data-toggle="tooltip" data-placement="top" title="More">
 																		<i class="zmdi zmdi-more"></i>
 																	</button>
-																	<button class="item waves-effect" data-toggle="tooltip" data-placement="top" title="Print">
+																	<a href="{{ url('/consignee/paymentbilling/billing/print')}}" class="item waves-effect" data-toggle="tooltip" data-placement="top" title="Print">
 																		<i class="miniIcon fa fa-print"></i>
-																	</button>
+																	</a>
 																</div>
 															</td>
 														</tr>
