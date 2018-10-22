@@ -231,16 +231,17 @@ $('.createTugboatAssignment').on('click',function(){
             $('.availableTugboats').empty();
             // Get Locations of Joborder
             var location = getLocation(data.joborder);
-            console.log(location);
+            console.log(location,'heyaaaaaaaaaaaa');
             // Append Job Order Header
             appendJoborderHeader(data.joborder);
             // Append Job Order Content(Body);
             appendJoborderBody(data.joborder,location);
+            
+            // tugboatcombinations = tugboatcombinations(data.tugboats,data.joborder);
             // 
             // console.log(data.joborder.fltWeight);
             // console.log(data.tugboats);
             // var tugboatcombination = []; 
-            // tugboatcombination = tugboatcombinations(data.tugboats,data.joborder);
             // console.log(tugboatcombination.best.length);
             // $('.suggestedTugboats').empty();
             // $('.joborder-weight').html(data.joborder.fltWeight + " tons");
@@ -355,6 +356,7 @@ $('.assignTugboatsButton').on('click',function(){
 
     });
 });
+
 $('.createTugboatAssignSubmit').on('click',function(){
     console.log($('#jobOrderID').val());
     $(this).data('id');

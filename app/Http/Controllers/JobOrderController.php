@@ -80,6 +80,7 @@ class JobOrderController extends Controller
         ->where('joborder.enumstatus','Declined')
         ->where('joborder.boolDeleted',0)
         ->get();
+
         $affiliates = DB::table('users as user')
         ->join('tblcompany as company','user.intUCompanyID','company.intCompanyID')
         ->where('user.enumUserType','Affiliates')
@@ -89,7 +90,8 @@ class JobOrderController extends Controller
         return view('Joborder.index',compact('accepted','forwarded','joborders','declined','forwardp','forwarda','affiliates','forwardrequest'));
         // ->with('joborders',$joborder)
         // ->with('forwarded',$forwarded);
-        // return response()->json([$forwarded]);    
+
+        // return response()->json([$declined]);    
     }
 
     /**
@@ -273,8 +275,14 @@ class JobOrderController extends Controller
 
         return response()->json(['joborder'=>$joborder]);
     }
-    public function decline($intJobOrderID)
+    public function declinejoborder(Request $request)
     {
-        $joborder = JobOrder::findOrFail($intJobOrderID);
+        $joborder = JobOrder::findOrFail($request->joborderID);
+        $joborder->timestamps = false;
+        $joborder->enumStatus = 'Declined';
+        $joborder->strRemarks = $request->reason;
+        $joborder->save();
+
+        return response()->json(['joborder'=>$joborder]);
     }
 }

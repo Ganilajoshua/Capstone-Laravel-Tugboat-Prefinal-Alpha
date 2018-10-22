@@ -37,59 +37,117 @@ function appendJoborderHeader(joborders){
 function appendJoborderBody(joborders,location){
     $('.joborderBody').empty();
     console.log(location);
-    var appendBody =
-    `<div class="row joborderDetailsContainer">
-        <div class="col-6">
-            <ul class="list-inline">
-                <li class="list-inline-item text-primary">
-                    <h6 style="font-size: 15.5px;">Service Type : </h6></li>
-                <li class="list-inline-item">
-                    <h6 style="font-size: 15.5px;">
-                        ${joborders[0].enumServiceType}
-                    </h6>
-                </li>
-            </ul>
-            <ul class="list-inline">
-                <li class="list-inline-item text-primary">
-                    <h6 style="font-size: 15.5px;">Date of Transaction : </h6></li>
-                <li class="list-inline-item">
-                    <h6 style="font-size: 15.5px;">
-                        ${moment(joborders[0].datStartDate).format('MMMM D, YYYY')} - ${moment(joborders[0].datEndDate).format('MMMM D, YYYY')}
-                    </h6>
-                </li>
-            </ul>
-            <ul class="list-inline">
-                <li class="list-inline-item text-primary">
-                    <h6 style="font-size: 15.5px;">Estimated Time of Hauling : </h6></li>
-                <li class="list-inline-item">
-                    <h6 style="font-size: 15.5px;">
-                    ${joborders[0].tmStart} HRS - ${joborders[0].tmEnd} HRS 
-                    </h6>
-                </li>
-            </ul>
-        </div>
-        <div class="col-6">
-            <ul class="list-inline">
-                <li class="list-inline-item text-primary">
-                    <h6 style="font-size: 15.5px;">Starting Location : </h6></li>
-                <li class="list-inline-item">
-                    <h6 style="font-size: 15.5px;">${location[0].sLocation}</h6></li>
-            </ul>
-            <ul class="list-inline">
-                <li class="list-inline-item text-primary">
-                    <h6 style="font-size: 15.5px;">Destination : </h6></li>
-                <li class="list-inline-item">
-                    <h6 style="font-size: 15.5px;">${location[0].dLocation}</h6></li>
-            </ul>
-            <ul class="list-inline">
-                <li class="list-inline-item text-primary">
-                    <h6 style="font-size: 15.5px;">Goods to be delivered : </h6></li>
-                <li class="list-inline-item">
-                    <h6 style="font-size: 15.5px;">${joborders[0].strGoodsName}</h6></li>
-            </ul>
-        </div>
-    </div>`;
-    $(appendBody).appendTo('.joborderBody');
+    if(joborders[0].enumServiceType == 'Tug Assist'){
+        var appendBody =
+        `<div class="row joborderDetailsContainer">
+            <div class="col-6">
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Service Type : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">
+                            ${joborders[0].enumServiceType}
+                        </h6>
+                    </li>
+                </ul>
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Date of Transaction : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">
+                            ${moment(joborders[0].datStartDate).format('MMMM D, YYYY')} - ${moment(joborders[0].datEndDate).format('MMMM D, YYYY')}
+                        </h6>
+                    </li>
+                </ul>
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Estimated Time of Hauling : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">
+                        ${joborders[0].tmStart} HRS - ${joborders[0].tmEnd} HRS 
+                        </h6>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6">
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Location : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">${location[0].sLocation}</h6></li>
+                </ul>
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Total Weight : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">${joborders[0].fltWeight} Tons</h6></li>
+                </ul>
+            </div>
+        </div>`;
+        $(appendBody).appendTo('.joborderBody');
+
+    }
+    else if(joborders[0].enumServiceType == 'Hauling'){
+        var appendBody =
+        `<div class="row joborderDetailsContainer">
+            <div class="col-6">
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Service Type : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">
+                            ${joborders[0].enumServiceType}
+                        </h6>
+                    </li>
+                </ul>
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Date of Transaction : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">
+                            ${moment(joborders[0].datStartDate).format('MMMM D, YYYY')} - ${moment(joborders[0].datEndDate).format('MMMM D, YYYY')}
+                        </h6>
+                    </li>
+                </ul>
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Estimated Time of Hauling : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">
+                        ${joborders[0].tmStart} HRS - ${joborders[0].tmEnd} HRS 
+                        </h6>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6">
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Starting Location : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">${location[0].sLocation}</h6></li>
+                </ul>
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Destination : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">${location[0].dLocation}</h6></li>
+                </ul>
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Goods to be delivered : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">${joborders[0].strGoodsName}</h6></li>
+                </ul>
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Total Weight : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">${joborders[0].fltWeight} Tons</h6></li>
+                </ul>
+            </div>
+        </div>`;
+        $(appendBody).appendTo('.joborderBody');
+    }
 }
 
 // Append Assigned Job Orders 

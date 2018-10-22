@@ -71,6 +71,7 @@
                                 </div>
                             @endforeach
                         @elseif(count($forwarded) == 'null' || 0)
+                            
                         @endif
                         {{-- pending cards  --}}
                         @if(count($joborders)>0)
@@ -91,38 +92,38 @@
                                             <a href="#" data-id="{{$joborders->intJobOrderID}}" class="joborderMoreInfoButton" >More Info <i class="ion ion-ios-arrow-right"></i></a>
                                             <button data-id="{{$joborders->intJobOrderID}} "class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect declineJoborder">Decline</button> 
                                             <button data-id="{{$joborders->intJobOrderID}} "class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect forwardJoborder">Forward</button>
-                                            <button data-id="{{$joborders->intJobOrderID}}" class="btn btn-primary btn-sm text-center float-right waves-effect acceptJoborder">Accept</button>
-                                            
+                                            <button data-id="{{$joborders->intJobOrderID}}" class="btn btn-primary btn-sm text-center float-right waves-effect acceptJoborder">Accept</button>         
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
-                        @elseif(count($joborders) == 'null' || 0)
-                            
+                        @elseif(count($joborders) == 0)
                         @endif
-
-                        
-                        {{-- @if(count($forwarded)>0)
-                            @foreach($forwarded as $forwarded) --}}
-                        {{-- <div class="col-12 col-sm-12 col-lg-6 forwardedCards">
-                            <div class="card card-sm-2 card-primary border-primary">
-                                <div class="card-icon">
-                                    <i class="ion ion-android-boat text-primary"></i>
+                        @if(count($declined)>0)
+                            @foreach($declined as $declined)
+                                <div class="col-12 col-sm-12 col-lg-6 declinedCards">
+                                    <div class="card card-sm-2 card-primary border-primary active">
+                                        <div class="card-icon">
+                                            <i class="ion ion-android-boat text-primary"></i>
+                                        </div>
+                                        <div class="card-header">
+                                            <h4 class="text-primary mb-2">Job Order #{{$declined->intJobOrderID}}</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <h4 class="mt-2">{{$declined->strJOTitle}}</h4>
+                                            <h6 class="mt-3">{{$declined->strCompanyName}}</h6>
+                                        </div>
+                                        <div class="card-footer mt-2">
+                                            <a href="#" data-id="{{$declined->intJobOrderID}}" class="joborderMoreInfoButton" >More Info <i class="ion ion-ios-arrow-right"></i></a>
+                                            {{-- <button data-id="{{$declined->intJobOrderID}} "class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect declineJoborder">Decline</button> 
+                                            <button data-id="{{$declined->intJobOrderID}} "class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect forwardJoborder">Forward</button>
+                                            <button data-id="{{$declined->intJobOrderID}}" class="btn btn-primary btn-sm text-center float-right waves-effect acceptJoborder">Accept</button>          --}}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-header">
-                                    <h4 class="text-primary mb-2">Job Order # 17</h4>
-                                </div>
-                                <div class="card-body">
-                                    <h5>Consignee Name</h5>
-                                </div>
-                                <div class="card-footer mt-2">
-                                    <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
-                                    <button class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect btnDeclineJO">Decline</button>
-                                    <button class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect" data-toggle="modal" data-target="#forwardModal">Forward</button>
-                                    <button class="btn btn-primary btn-sm text-center float-right waves-effect btnAcceptJO">Accept</button>
-                                </div>
-                            </div>
-                        </div> --}}
+                            @endforeach
+                        @elseif(count($declined) == 0)
+                        @endif
                     </div>
                     <div class="card-footer text-right">
                         <nav class="d-inline-block">

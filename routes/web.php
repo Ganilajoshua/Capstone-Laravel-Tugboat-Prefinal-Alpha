@@ -162,8 +162,8 @@ Route::group(['prefix'=>'administrator/'],function(){
                 Route::resource('/','JobOrderController');
                 Route::get('/{intJobOrderID}/acceptjoborder','JobOrderController@accept');
                 Route::get('/{intJobOrderID}/forwardrequest','JobOrderController@forwardrequest');
-                Route::get('/{intJobOrderID}/decline','JobOrderController@decline');
                 Route::get('/{intJobOrderID}/viewdetails','JobOrderController@viewdetails');
+                Route::post('/decline','JobOrderController@declinejoborder');
                 Route::post('/forward','JobOrderController@forward');
                 Route::post('/store','JobOrderController@store');
             });

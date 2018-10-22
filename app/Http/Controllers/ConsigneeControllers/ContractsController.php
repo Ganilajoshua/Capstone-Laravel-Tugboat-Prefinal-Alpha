@@ -26,9 +26,9 @@ class ContractsController extends Controller
     public function index()
     {
         $company = Company::where('intCompanyID', Auth::user()->intUCompanyID)->get();
-        $contract = DB::table('tblcontractlist as contract')
+        // $contract = DB::table('tblcontractlist as contract')
         // ->join('tblquotation as quotation','contract.intCQuotationID','quotation.intQuotationID')
-        ->where('contract.intCCompanyID',Auth::user()->intUCompanyID)->get();
+        // ->where('contract.intCCompanyID',Auth::user()->intUCompanyID)->get();
         // Contract::where('intCCompanyID',Auth::user()->intUCompanyID)->get();
         $contractList = DB::table('users as users')
         ->leftjoin('tblcompany as company','users.intUCompanyID','company.intCompanyID')
@@ -36,6 +36,14 @@ class ContractsController extends Controller
         ->where('contracts.intCCompanyID',Auth::user()->intUCompanyID)
         ->select('company.*','contracts.*','users.*')
         // ->where('contracts.intCQuotationID',null)
+        ->get();
+
+        $contractlist = DB::table('tblcompany as company')
+        ->leftjoin('tblcontractlist as contracts','contracts.intCCompanyID','company.intCompanyID')
+        ->join('users as user','user.intUCompanyID','company.intCompanyID')
+        ->where('user.intUCompanyID',Auth::user()->intUCompanyID)
+        ->orderBy('contracts.intContractListID','DESC')
+        ->limit('1')
         ->get();
         
         $contractListFinal = DB::table('users as users')
@@ -47,12 +55,12 @@ class ContractsController extends Controller
         // ->where('contracts.intCQuotationID',null)
         ->get();
         $fees = ContractFeesMatrix::all();
-        return view('Consignee.Contracts.index',compact('company','contract','contractList','fees','contractListFinal'));
+        return view('Consignee.Contracts.newindex',compact('company','contract','contractList','fees','contractListFinal','contractlist'));
         // ->with('company',$company)
         // ->with('contract',$contract)
         // ->with('contractList',$contractList);
         // undefined offset[0] pag walang company na connected sa user
-        return response()->json(['list'=>$contractList]);
+        return response()->json(['list'=>$contractlist]);
     }
 
     /**

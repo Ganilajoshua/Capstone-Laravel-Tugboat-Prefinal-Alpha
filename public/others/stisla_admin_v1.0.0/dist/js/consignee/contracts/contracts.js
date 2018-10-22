@@ -86,6 +86,8 @@ $(document).ready(function(){
             $('.btnAcceptContract').css('cursor', 'pointer');
           }
     });
+
+    pulseEffect();  
 });
 
 $('#quoteCustom').on('click',function(){
