@@ -83,20 +83,25 @@ class ReportsController extends Controller
     {
         //
     }
-    public function printPDF1()
-    {
-        $pdf = PDF::loadView('Reports.disabledTReportPDF')->setPaper('letter', 'landscape');
-        return $pdf->download('disabledtugboatreport.pdf');
-    }
+    // public function printPDF1()
+    // {
+    //     $pdf = PDF::loadView('Reports.disabledTReportPDF')->setPaper('letter', 'landscape');
+    //     return $pdf->download('disabledtugboatreport.pdf');
+    // }
     // public function printPDF1()
     // {
     //     $pdf = PDF::loadView('DispatchTicket.dispatchTicketPDF')->setPaper('letter', 'portrait');
     //     return $pdf->download('dispatchTicket.pdf');
     // }
+    public function printPDF1()
+    {
+        $pdf = PDF::loadView('Consignee.Billing.billPDF')->setPaper('letter', 'portrait');
+        return $pdf->download('bill.pdf');
+    }
     // public function printPDF1()
     // {
-    //     $pdf = PDF::loadView('Consignee.Billing.billPDF')->setPaper('letter', 'portrait');
-    //     return $pdf->download('bill.pdf');
+    //     $pdf = PDF::loadView('Consignee.Billing.receiptPDF')->setPaper('letter', 'portrait');
+    //     return $pdf->download('receipt.pdf');
     // }
     public function printPDF2()
     {

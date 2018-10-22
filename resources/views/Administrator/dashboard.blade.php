@@ -94,7 +94,7 @@
                                                 <ul class="timeline">
                                                     <li>
                                                         <i class="fas fa-map-marker-alt"></i>
-                                                        <h2 class="timelin-title">September 8 ,2018</h2>
+                                                        <h2 class="timelin-title">October 20, 2018</h2>
                                                     </li>
                                                     <li>
                                                         <div class="content-text">
@@ -102,7 +102,7 @@
                                                             <span>
                                                                 <a href="/administrator/transactions/hauling">Job Order # 17</a>
                                                             </span>
-                                                            <p class="line-text float-right">25 hours ago</p>
+                                                            <p class="line-text float-right">12 hours and 44 minutes ago</p>
                                                             <p class="line-text"><i class="fas fa-map-pin text-primary mr-2"></i>Currently at North</p>
                                                         </div>
                                                     </li>
@@ -112,15 +112,15 @@
                                                 <ul class="timeline">
                                                     <li>
                                                         <i class="fas fa-map-marker-alt"></i>
-                                                        <h2 class="timelin-title">September 9 ,2018</h2>
+                                                        <h2 class="timelin-title">October 21, 2018</h2>
                                                     </li>
                                                     <li>
                                                         <div class="content-text">
-                                                            <h3 class="line-title">0130 HRS</h3>
+                                                            <h3 class="line-title">0030 HRS</h3>
                                                             <span>
                                                                 <a href="/administrator/transactions/hauling">Job Order # 17</a>
                                                             </span>
-                                                            <p class="line-text float-right">25 minutes ago</p>
+                                                            <p class="line-text float-right">44 minutes ago</p>
                                                             <p class="line-text"><i class="fas fa-map-pin text-primary mr-2"></i>Currently at Pasig</p>
                                                         </div>
                                                     </li>
@@ -158,7 +158,7 @@
                                 <div class="media-body">
                                     <div class="float-right"><small>10m</small></div>
                                     <div class="media-title">Administrator</div>
-                                    <small>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</small>
+                                    <small>Added Tugboat MT Energy Venus</p></small>
                                 </div>
                             </li>
                             <li class="media">
@@ -166,7 +166,7 @@
                                 <div class="media-body">
                                     <div class="float-right"><small>10m</small></div>
                                     <div class="media-title">Administrator</div>
-                                    <small>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</small>
+                                    <small>Added Tugboat MT Energy Masters</p></small>
                                 </div>
                             </li>
                             <li class="media">
@@ -174,7 +174,7 @@
                                 <div class="media-body">
                                     <div class="float-right"><small>10m</small></div>
                                     <div class="media-title">Administrator</div>
-                                    <small>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</small>
+                                    <small>Added Tugboat MT Super Tugs</p></small>
                                 </div>
                             </li>
                             <li class="media">
@@ -182,15 +182,15 @@
                                 <div class="media-body">
                                     <div class="float-right"><small>10m</small></div>
                                     <div class="media-title">Administrator</div>
-                                    <small>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</small>
+                                    <small>Added Tugboat MT Energy Pacific</p></small>
                                 </div>
                             </li>
                         </ul>
-                        <div class="text-center">
+                        {{-- <div class="text-center">
                             <a href="#" class="btn btn-primary btn-round">
                             View All
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

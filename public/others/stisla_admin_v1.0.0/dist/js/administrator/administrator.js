@@ -6,7 +6,7 @@ $(document).ready(function(){
     data: {
       labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
       datasets: [{
-        label: 'MT Energy Sun',
+        label: 'MT Energy Pacific',
         data: [460, 458, 330, 502, 430, 610, 488],
         borderWidth: 2,
         borderColor: 'rgb(87,75,144)',
@@ -15,10 +15,28 @@ $(document).ready(function(){
         pointRadius: 4
       },
       {
-        label: 'MT Energy Star',
+        label: 'MT Energy Masters',
         data: [1000, 200, 300, 200, 150, 25, 700],
         borderWidth: 2,
+        borderColor: '#00aeff',
+        borderWidth: 2.5,
+        pointBackgroundColor: '#ffffff',
+        pointRadius: 4
+      },
+      {
+        label: 'MT Energy Venus',
+        data: [1231, 223, 2331, 34, 123, 1123, 131],
+        borderWidth: 2,
         borderColor: 'rgb(61, 199, 190)',
+        borderWidth: 2.5,
+        pointBackgroundColor: '#ffffff',
+        pointRadius: 4
+      },
+      {
+        label: 'MT Super Tugs',
+        data: [1000, 988, 655, 945, 1236, 765, 1988],
+        borderWidth: 2,
+        borderColor: 'rgb(61, 120, 178)',
         borderWidth: 2.5,
         pointBackgroundColor: '#ffffff',
         pointRadius: 4

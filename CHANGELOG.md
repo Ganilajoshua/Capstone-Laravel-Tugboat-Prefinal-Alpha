@@ -1,5 +1,10 @@
 # Changelog Capstone-Laravel-tugboat-dev-PreFinal α
 ### `Pre Final Repository Monday August 27,2018 v.1.0.0`
+
+### Added Receipt in Consignee.Billing
+- [x] Can now generate receipts
+
+
 ### Dispatch Ticket and Bill PDF Generate
 - [x] Can now generate dispatch ticket and bill
 

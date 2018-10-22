@@ -8,7 +8,6 @@
                 </button>
             </div>
             <div class="modal-body modalBody">
-                <img class="d-block w-100" src="/others/stisla_admin_v1.0.0/dist/img/example-image.jpeg" alt="First slide">
                 <br>
                 <div class="container">
                     <div class="row">
