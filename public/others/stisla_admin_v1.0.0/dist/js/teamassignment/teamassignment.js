@@ -343,12 +343,120 @@ function submitTeamName(){
     });
 
 }
-function submitTeam(){
+
+$('.submitCreatedTeam').on('click',function(event){
+    event.preventDefault();
+    console.log('clicked');
+    
+    console.log('hi');
+    var title = $('#addTeamName').val(); 
+    var selectedmembers = [];
+
+    $('.employeesCheckbox:checkbox:checked').each(function(checked){
+        selectedmembers[checked] = {positionName : $(this).data('position'), employeeID : parseInt($(this).data('id'))};
+    });
+
+    $.ajax({
+        url : `${url}/getteamcompositions`,
+        type : 'POST',
+        data : {
+            "_token" : $('meta[name="csrf-token"]').attr('content'),    
+        },
+        success : (data)=>{
+            console.log(data);
+            console.log(selectedmembers);
+            var validationrule = [];
+            for(let count = 0; count < (data.positions).length; count++){
+                validationrule[count] = {positionName : data.positions[count].strPositionName, compositionNumber : 0};
+            }
+
+            for(let count = 0; count < selectedmembers.length; count++){
+                for(let counter = 0; counter < validationrule.length; counter++){
+                    if(selectedmembers[count].positionName === validationrule[counter].positionName){
+                        validationrule.splice(counter,1,{positionName : validationrule[counter].positionName, compositionNumber : (validationrule[counter].compositionNumber + 1)});
+                        console.log(validationrule[counter]);
+                    }
+                }
+            }
+            console.log(validationrule);
+            var errorcounter = 0;
+            for(let count=0; count < (data.positions.length); count++){
+                for(let counter=0; counter < (validationrule).length; counter++){
+                    if(data.positions[count].strPositionName === validationrule[counter].positionName){
+                        if(data.positions[count].intPositionCompNum !== validationrule[counter].compositionNumber){
+                            errorcounter =  errorcounter + 1;
+                        }
+                    }
+                }
+            }
+            membersID = [];
+            for(let count=0; count < selectedmembers.length; count++){
+                membersID[count] = parseInt(selectedmembers[count].employeeID);
+            }
+            console.log(parseInt(membersID));
+            
+            if(errorcounter > 0){
+                console.log('dami mong alam');
+                event.stopPropagation();
+
+            }else{
+                console.log(errorcounter);
+                console.log('eeey');
+                console.log('nagpropagate');
+                                
+                $.ajax({
+                    url : `${url}/store`,
+                    type : 'POST',
+                    data : { 
+                        "_token" : $('meta[name="csrf-token"]').attr('content'),    
+                        teamName : title,
+                        membersID : membersID,
+                    }, 
+                    beforeSend:(request)=>{
+                        return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                    },
+                    success : (data, response)=>{
+                        console.log('success pota');
+                        console.log(data);
+                        console.log(response);
+                        swal({
+                            title: "Success",
+                            text: "Employees Assigned",
+                            type: "success",
+                            showCancelButton: false,
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "Ok",
+                            closeOnConfirm: true,
+                            timer : 1500
+                        },
+                        (isConfirm)=>{
+                            if(isConfirm){
+                                window.location = url;
+                            }
+                        });                       
+                    },
+                    error : function(error){
+                        throw error;
+                    }
+            
+                });
+            }
+        },
+        error : (error)=>{
+
+        }
+    });
+})
+    
+function submitTeam(event){
+    event.preventDefault();
     console.log('hi');
     var title = $('#addTeamName').val(); 
     var captains = [];
     var chiefengineer = []; 
     var crew = [];
+    var selectedmembers = [];
+    var validationrule = [];
     $('.captCheckbox:checkbox:checked').each(function(checked){
         captains[checked] = parseInt($(this).val());    
     });
@@ -359,6 +467,93 @@ function submitTeam(){
         crew[checked] = $(this).val();
     });
 
+    $('.employeesCheckbox:checkbox:checked').each(function(checked){
+        selectedmembers[checked] = {positionName : $(this).data('position'), employeeID : $(this).data('id')};
+    });
+    
+    $.ajax({
+        url : `${url}/getteamcompositions`,
+        type : 'POST',
+        data : {
+            "_token" : $('meta[name="csrf-token"]').attr('content'),    
+        },
+        success : (data)=>{
+            console.log(data);
+            console.log(selectedmembers);
+            var validationrule = [];
+            for(let count = 0; count < (data.positions).length; count++){
+                validationrule[count] = {positionName : data.positions[count].strPositionName, compositionNumber : 0};
+            }
+
+            for(let count = 0; count < selectedmembers.length; count++){
+                for(let counter = 0; counter < validationrule.length; counter++){
+                    if(selectedmembers[count].positionName === validationrule[counter].positionName){
+                        validationrule.splice(counter,1,{positionName : validationrule[counter].positionName, compositionNumber : (validationrule[counter].compositionNumber + 1)});
+                        console.log(validationrule[counter]);
+                    }
+                }
+            }
+            console.log(validationrule);
+            var errorcounter = 0;
+            for(let count=0; count < (data.positions.length); count++){
+                for(let counter=0; counter < (validationrule).length; counter++){
+                    if(data.positions[count].strPositionName === validationrule[counter].positionName){
+                        if(data.positions[count].intPositionCompNum !== validationrule[counter].compositionNumber){
+                            errorcounter =  errorcounter + 1;
+                        }
+                    }
+                }
+            }
+            if(errorcounter > 0){
+                console.log('dami mong alam');
+                event.stopPropagation();
+
+            }else{
+                console.log(errorcounter);
+
+                $.ajax({
+                    url : url + '/store',
+                    type : 'POST',
+                    data : { 
+                        "_token" : $('meta[name="csrf-token"]').attr('content'),    
+                        teamName : title,
+                        
+                    }, 
+                    beforeSend:(request)=>{
+                        return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                    },
+                    success : (data, response)=>{
+                        console.log('success pota');
+                        console.log(data);
+                        console.log(response);
+                        swal({
+                            title: "Success",
+                            text: "Employees Assigned",
+                            type: "success",
+                            showCancelButton: false,
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "Ok",
+                            closeOnConfirm: true,
+                            timer : 1500
+                        },
+                        (isConfirm)=>{
+                            if(isConfirm){
+                                window.location = url;
+                            }
+                        });                       
+                    },
+                    error : function(error){
+                        throw error;
+                    }
+            
+                });
+            }
+        },
+        error : (error)=>{
+
+        }
+    })
+    // return false;
     if(captains.length == 0 && chiefengineer.length == 0 && crew.length == 0)
     {
         swal({

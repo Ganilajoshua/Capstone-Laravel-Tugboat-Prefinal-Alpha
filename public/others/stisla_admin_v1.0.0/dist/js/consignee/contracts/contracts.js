@@ -195,9 +195,8 @@ $('.defaultMatrixButton').on('click',function(event){
                     confirmButtonClass: "btn-success",
                     confirmButtonText: "Ok",
                     closeOnConfirm: true,
-                },
-                function(){
-                    window.location = url;
+                },(isConfirm)=>{
+                    location.reload();
                 });                       
             },
             error : function(error){

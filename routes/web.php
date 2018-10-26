@@ -326,6 +326,7 @@ Route::group(['prefix'=>'consignee/'],function(){
     Route::post('/logout','LoginControllers\UserLoginController@logout');
     Route::get('/dashboard','ConsigneeControllers\ConsigneeController@index');
     Route::post('/dashboard/getnotifs','ConsigneeControllers\ConsigneeController@getnotifs');
+    Route::post('/dashboard/setcontractexpired','ConsigneeControllers\ConsigneeController@setcontractexpired');
     //Contract Request
     Route::group(['prefix'=>'contracts/'],function(){
         Route::post('/getdefaultmatrix','ConsigneeControllers\ContractsController@getdefaultmatrix');

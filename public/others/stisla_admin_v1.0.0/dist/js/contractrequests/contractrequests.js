@@ -423,9 +423,9 @@ $('.finalizeContract').on('click',function(){
                 swal({
                     title: "Success",
                     text: "Selected Contract Was Finalized",
-                    type: "info",
+                    type: "success",
                     showCancelButton: true,
-                    confirmButtonClass: "btn-info",
+                    confirmButtonClass: "btn-success",
                     confirmButtonText: "Ok",
                     closeOnConfirm: true,
                 },(isConfirm)=>{

@@ -157,7 +157,7 @@ class ContractsController extends Controller
         $contract->enumStatus = 'Requesting For Changes';
         $contract->save();
         return response()->json(['contract'=>$contract]);
-    }
+    }   
     public function requestforactivation(Request $request){
         $contract = Contract::findOrFail($request->contractID);
         $contract->timestamps = false;

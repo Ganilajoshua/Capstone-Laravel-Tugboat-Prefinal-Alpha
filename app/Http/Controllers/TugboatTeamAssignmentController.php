@@ -200,48 +200,26 @@ class TugboatTeamAssignmentController extends Controller
      */
     public function store(Request $request)
     {
-        try{
-            DB::beginTransaction();
-            $teamID = Team::max('intTeamID')+1;
-            $teamID2 = $teamID;
+    
+        $teamID = Team::max('intTeamID')+1;
+        $teamID2 = $teamID;
+    
+        $team = new Team;
+        $team->timestamps = false;
+        $team->intTeamID = $teamID2;
+        $team->strTeamName = $request->teamName;
+        $team->intTCompanyID = Auth::user()->intUCompanyID;
+        $team->save();
+
+        for($counter = 0; $counter < count($request->membersID); $counter++){
+            $emp = Employees::findOrFail($request->membersID[$counter]);
+            $emp->timestamps = false;
+            $emp->intETeamID = $teamID2;
+            $emp->save();
+        }   
+
+        return response()->json([$emp]);
         
-            $team = new Team;
-            $team->timestamps = false;
-            $team->strTeamName = $request->teamName;
-            $team->intTCompanyID = Auth::user()->intUCompanyID;
-            $team->save();
-            
-            if(!empty($request->teamCaptainID)){        
-                for($count=0;$count < count($request->teamCaptainID); $count++){
-                    $emp = Employees::findOrFail($request->teamCaptainID[$count]);
-                    $emp->timestamps = false;
-                    $emp->intETeamID = $teamID2;
-                    $emp->save();
-                }
-            }
-            if(!empty($request->teamCaptainID)){
-                for($count=0;$count < count($request->teamChiefEngineerID); $count++){
-                    $emp = Employees::findOrFail($request->teamChiefEngineerID[$count]);
-                    $emp->timestamps = false;
-                    $emp->intETeamID = $teamID2;
-                    $emp->save();
-                }
-            }
-            if(!empty($request->teamCrewID)){
-                for($count=0;$count < count($request->teamCrewID); $count++){
-                    $emp = Employees::findOrFail($request->teamCrewID[$count]);
-                    $emp->timestamps = false;
-                    $emp->intETeamID = $teamID2;
-                    $emp->save();
-                }
-            }
-            DB::commit();
-        }catch(\Illuminate\Database\QueryException $errors){
-            DB::rollback();
-            $errorMessage = $errors->getMessage();
-            return Redirect::back()->withErrors($errorMessage);
-        }
-        return response()->json(['crew'=>$emp]);  
         
     }
     /**

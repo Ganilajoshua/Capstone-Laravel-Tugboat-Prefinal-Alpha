@@ -2,6 +2,7 @@ var url = '/administrator/transactions/dispatchandhauling/teamassignment';
 
 function appendTeamComposition(positions){
     console.log(positions);
+    $('.teamcompositionContainer').empty();
     for(var counter = 0; counter < (positions).length; counter++){
 
         var appendIcon = getPositionIcons(positions[counter]);
