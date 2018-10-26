@@ -223,6 +223,100 @@
                     </div>
                 </div>
             @elseif($contractlist->enumStatus == 'Created')
+                <div class="container" id="createdContract" data-id="{{$contract[0]->intContractListID}}">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header bg-primary text-center" style="border-radius:0px;">
+                                    <h4 class=" text-white"><span>{{$contract[0]->strContractListTitle}}</span><span><div class="badge badge-warning ml-2">NOT YET FINALIZED</div></h4>
+                                </div>
+                                <div class="card-body contractRequestsQuotes">
+                                    <h3>You Have Received an Initial Quote</h3>
+                                    {{-- <div style="font-size: 18px;" class="mt-4 badge badge-warning text-black">
+                                    </div>     --}}
+                                    <div class="row mt-4">
+                                        <div class="col-12">
+                                            <button class="btn btn-primary viewQuotesMatrix" data-id="{{$contract[0]->intContractListID}}">
+                                                View Details
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body contractRequestsMatrix">
+                                    <div class="row mt-2">
+                                        <div class="col">
+                                            <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" id="pillsHauling-tab" data-toggle="pill" href="#pillsHauling" role="tab" aria-controls="pillsHauling" aria-selected="true">Hauling</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" id="pillsTugAssist-tab" data-toggle="pill" href="#pillsTugAssist" role="tab" aria-controls="pillsTugAssist" aria-selected="false">Tug Assist</a>
+                                                </li>
+                                            </ul>
+                                            <div class="row mt-5 text-center">
+                                                <div class="col-12">
+                                                    {{-- <ul class="list-inline" style="font-size:15px;">
+                                                        <li class="list-inline-item text-primary">
+                                                            <p class="font-weight-bold">Legend : </p>
+                                                        </li>
+                                                        <li class="list-inline-item">
+                                                            <div class="badge badge-light badgeLegend border-primary">
+                                                                <h6 class="text-primary">Same Amount</h6>
+                                                            </div>
+                                                            <div class="badge badge-light badgeLegend border-primary">
+                                                                <h6 class="text-success font-weight-bold">New Amount is Lower</h6>
+                                                            </div>
+                                                            <div class="badge badge-light badgeLegend border-primary">
+                                                                <h6 class="text-danger">New Amount is Higher</h6>
+                                                            </div>
+                                                        </li>
+                                                    </ul> --}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-content" id="pills-tabContent">
+                                        <div class="tab-pane fade show active" id="pillsHauling" role="tabpanel" aria-labelledby="pillsHauling-tab">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="card card-primary text-center border-primary">
+                                                        <div class="card-header"><h4 class="text-black">Hauling Rates</h4></div>
+                                                        <div class="card-body">
+                                                            <div class="table-responsive">
+                                                                <table class="table-hover table-bordered haulingTable" style="width:100%;">
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade show" id="pillsTugAssist" role="tabpanel" aria-labelledby="pillsTugAssist-tab">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="card card-primary text-center border-primary">
+                                                        <div class="card-header"><h4 class="text-black">Tug Assist Rates</h4></div>
+                                                        <div class="card-body">
+                                                            <div class="table-responsive">
+                                                                <table class="table-hover table-bordered tugAssistTable" style="width:100%;">
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <input type="hidden" id="contractsID">
+                                    {{-- <button class="btn btn-primary waves-effect" data-toggle="modal" data-target="#requestChangesModal">Request for Changes</button> --}}
+                                    <button id="applySignatureButton" data-id="{{$contract[0]->intContractListID}}" class="applySignatureButton btn btn-success waves-effect">Sign and Accept Contract</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @elseif($contractlist->enumStatus == 'Requesting For Changes')
             @elseif($contractlist->enumStatus == 'Finalized')
             @elseif($contractlist->enumStatus == 'Active')
@@ -429,5 +523,8 @@
             @endif
         @endforeach
     </section>
+    @include('Consignee.Contracts.finalcontract')
+    @include('Consignee.Contracts.info')
+    @include('Consignee.Contracts.infoRChanges')
 @endsection
 

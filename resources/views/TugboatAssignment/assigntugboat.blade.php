@@ -54,7 +54,7 @@
         <div class="col-12">
             <div class="card card-primary">
                 <div class="card-header startHaulingHeader">
-                        <h4 class="card-title text-center">Tugboats Available</h4>
+                        <h4 class="card-title text-center">Tugboats List</h4>
                     {{-- <div class="col">
                         <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
                             <li class="nav-item">
@@ -68,7 +68,24 @@
                 </div>
                 <div class="card-body tugboatAssignmentBody">
                     <div class="row availableTugboatsContainer">
-
+                        <div class="col-6">
+                            <div class="card card-success">
+                                <div class="card-header bg-success text-white text-center">
+                                    <h4> Available </h4>
+                                </div>
+                                <div class="card-body availableTugs" style="max-height: 500px; overflow-y: auto;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card card-danger">
+                                <div class="card-header bg-danger text-white text-center">
+                                    <h4> Unavailable </h4>
+                                </div>
+                                <div class="card-body unavailableTugs" style="max-height: 500px; overflow-y: auto;">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-footer startHaulingFooter">

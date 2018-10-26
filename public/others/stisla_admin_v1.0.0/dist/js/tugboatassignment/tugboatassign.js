@@ -9,6 +9,7 @@ $(document).ready(function(){
     $('#menuTeamBuilder').addClass('inactive');
     $('#menuScheduling').addClass('inactive');
     $('#menuHauling').addClass('inactive');
+    $('.tugboatsCheckbox').prop('indeterminate', true);
     // $('#assignTugboatButton').on('click',function(){
     //     $('#assignTugboatModal').modal('show');
     // });
@@ -208,6 +209,8 @@ $('.createTugboatAssignment').on('click',function(){
     // return false;
     console.log('hi');
     var joborderID = $(this).data('id');
+    console.log($(this).data('date'));
+    var compDate = $(this).data('date');
     console.log(joborderID);
     $('.assignTugboatsButton').data('id',joborderID);
     $('.suggestedTugboatsContainer').empty();
@@ -224,11 +227,24 @@ $('.createTugboatAssignment').on('click',function(){
 
     console.log(joborderID);
     $.ajax({
-        url : `${url}/${joborderID}/showjoborder`,
-        type : 'GET',
+        url : `${url}/showjoborder`,
+        type : 'POST',
+        data : {
+            "_token" : $('meta[name="csrf-token"]').attr('content'),
+            joborderID : joborderID,
+            compDate : compDate,
+        },
         success : (data, response)=>{
             console.log(data);
+            console.log(data.joborder);
+            console.table(data.jobsched);
+    
+            tugs = getAvailableTugs(data.jobsched,data.tugboats,data.joborder);
+            
+
+            console.log(tugs);
             $('.availableTugboats').empty();
+
             // Get Locations of Joborder
             var location = getLocation(data.joborder);
             console.log(location,'heyaaaaaaaaaaaa');
@@ -236,7 +252,9 @@ $('.createTugboatAssignment').on('click',function(){
             appendJoborderHeader(data.joborder);
             // Append Job Order Content(Body);
             appendJoborderBody(data.joborder,location);
-            
+            $('.unavailableTugs').empty();
+            $('.availableTugs').empty();
+            var unavailable = ['1'];
             // tugboatcombinations = tugboatcombinations(data.tugboats,data.joborder);
             // 
             // console.log(data.joborder.fltWeight);
@@ -274,25 +292,64 @@ $('.createTugboatAssignment').on('click',function(){
             //         </div>
             //     </div>`;
             // $(appendAvailableTugboats).appendTo('.availableTugboats');
-               
-            
-            for(var counter = 0; counter < (data.tugboats.length); counter++){
+            console.log(tugs[0][0]);
+            if(tugs[0].length == 0){
+                var appendUnavailableTugboats =
+                `<h6>
+                    <div class=" text-danger text-center">
+                        <i class="fas fa-times mr-2 mt-2"></i> No Unavailable Tugboats <i class="fas fa-times ml-2"></i>
+                    </div>
+                </h6>`;
+                $(appendUnavailableTugboats).appendTo('.unavailableTugs');
 
-                var appendAvailableTugboats = 
-                    `<div class="col-auto">
-                        <div class="card bg-success">
-                            <div class="card-body">
-                                <div class="custom-control custom-checkbox custom-control-inline">
-                                    <input type="checkbox" id="availableTugboat${data.tugboats[counter].intTugboatID}" data-id="${data.tugboats[counter].intTugboatID}" name="tugboatlist[]" class="custom-control-input tugboatsCheckbox">
-                                    <label class="custom-control-label" for="availableTugboat${data.tugboats[counter].intTugboatID}">
-                                        <p class="card-text text-center ml-2">${data.tugboats[counter].strName}</p>
-                                        <small>${data.tugboats[counter].strHorsePower}HP</small>
-                                    </label>
-                                </div>
+            }else{
+                for(var counter = 0; counter < (tugs[0].length); counter++){
+                    var appendUnavailableTugboats = 
+                    `<div class="card mb-2 border border-danger">
+                        <div style="margin-top: 13px; margin-bottom: 13px;"> 
+                            <div class="float-left ml-4 mt-2 mb-2">
+                                <span class="customFontsHP">${tugs[0][counter].strName}</span>
+                            </div>
+                            <div class="float-right mt-2 mb-2 mr-4">
+                                <span class="customFontsHP">${tugs[0][counter].strHorsePower} HP</span>
                             </div>
                         </div>
                     </div>`;
-                $(appendAvailableTugboats).appendTo('.availableTugboatsContainer');    
+                    $(appendUnavailableTugboats).appendTo('.unavailableTugs');
+                }
+            }
+            for(var counter = 0; counter < (tugs[1].length); counter++){
+
+                // var appendAvailableTugboats = 
+                //     `<div class="col-lg-12 col-sm-12 col-md-12">
+                //         <div class="card bg-success">
+                //             <div class="card-body">
+                //                 <div class="custom-control custom-checkbox custom-control-inline">
+                //                     <input type="checkbox" id="availableTugboat${data.tugboats[counter].intTugboatID}" data-id="${data.tugboats[counter].intTugboatID}" name="tugboatlist[]" class="custom-control-input tugboatsCheckbox">
+                //                     <label class="custom-control-label" for="availableTugboat${data.tugboats[counter].intTugboatID}">
+                //                         <p class="card-text text-center ml-2">${data.tugboats[counter].strName}<small>${data.tugboats[counter].strHorsePower}HP</small></p>
+                //                     </label>
+                //                 </div>
+                //             </div>
+                //         </div>
+                //     </div>`;
+
+                var appendAvailableTugboats = 
+                    `<div class="card mb-2 border border-success">
+                        <div style="margin-top: 13px; margin-bottom: 13px;"> 
+                            <div class="custom-control custom-checkbox custom-control-inline mt-2 ml-4 mb-2">
+                                <input type="checkbox" id="availableTugboat${tugs[1][counter].intTugboatID}" data-id="${tugs[1][counter].intTugboatID}" name="tugboatlist[]" class="custom-control-input tugboatsCheckbox">
+                                <label class="custom-control-label" for="availableTugboat${tugs[1][counter].intTugboatID}">
+                                    <p class="customFonts ml-3">${tugs[1][counter].strName}</p>
+                                </label>
+                            </div>
+                            <div class="float-right mt-2 mr-4">
+                                <span class="customFontsHP">${tugs[1][counter].strHorsePower} HP</span>
+                            </div>
+                        </div>
+                    </div>`;
+                
+                $(appendAvailableTugboats).appendTo('.availableTugs');    
             }
             // $('#assignTugboatModal').modal('show');
             $('.assignTugboat').css('display','block');

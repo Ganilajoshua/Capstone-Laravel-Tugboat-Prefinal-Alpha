@@ -7,7 +7,8 @@
     @include('Consignee.Joborders.scripts')
 @endsection
 @section('content')
-    @if(count($contract) > 0)
+@if(count($contract) > 0)
+    @foreach($contract as $contract)
         @if($contract->intContractListID == null)
             <section class="statistic statistic2">
                 <div class="container">
@@ -37,9 +38,7 @@
                     </div>
                 </div>
             </section>
-        @endif
-    {{-- @elseif(count($contract->enumStatus) == 'Active')
-        <input type="hidden">
+        @elseif($contract->enumStatus == 'Active')
             <section style="margin-bottom : 80px;">
                 <div class="container" style="">
                     <div class="row">
@@ -118,53 +117,55 @@
                     </div>
                 </div>
             </section>
-    @elseif(count($contract->enumStatus) == 'Expired')
-        <section class="statistic statistic2">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-lg-8" style="margin-left: auto; margin-right:auto;">
-                        <div class="overview-item overview-item--c1">
-                            <div class="overview__inner">
-                                <div class="overview-box clearfix mt-4">
-                                    <div class="icon">
-                                        <i class="fas fa-clipboard-list"></i>
-                                    </div>
-                                    <div class="text">
-                                        <h2>Section Disabled At The Moment</h2>
-                                        <span>You have no Contracts</span>
-                                        <div class="mb-5">
-                                            <a href="/consignee/contracts" class="text-white mt-5">
-                                                    Request a Contract now
-                                                <i class="fas fa-chevron-right"></i>
-                                            </a>
+        @elseif($contract->enumStatus == 'Expired')
+            <section class="statistic statistic2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-lg-8" style="margin-left: auto; margin-right:auto;">
+                            <div class="overview-item overview-item--c1">
+                                <div class="overview__inner">
+                                    <div class="overview-box clearfix mt-4">
+                                        <div class="icon">
+                                            <i class="fas fa-clipboard-list"></i>
+                                        </div>
+                                        <div class="text">
+                                            <h2>Section Disabled At The Moment</h2>
+                                            <span>Your Previous Contract have expire</span>
+                                            <div class="mb-5">
+                                                <a href="/consignee/contracts" class="text-white mt-5">
+                                                        Request a Contract now
+                                                    <i class="fas fa-chevron-right"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
+                                    
                                 </div>
-                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        @else
+            <div class="container">
+                <div class="col">
+                    <div class="card card-sm-2 card-primary border-primary">
+                        <div class="card-icon">
+                            <i class="ion ion-android-boat text-primary"></i>
+                        </div>
+                        <div class="card-header">
+                            <h4 class="text-primary mb-2"> {{Auth::user()->name}} </h4>
+                        </div>
+                        <div class="card-body">
+                            <h3>CONTRACT REQUEST Processing</h3>
+                            <div style="font-size: 18px;" class="mt-4 badge badge-warning text-black disabled">
+                                Waiting for Response . . .
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    @else
-        <div class="container">
-            <div class="col">
-                <div class="card card-sm-2 card-primary border-primary">
-                    <div class="card-icon">
-                        <i class="ion ion-android-boat text-primary"></i>
-                    </div>
-                    <div class="card-header">
-                        <h4 class="text-primary mb-2"> {{Auth::user()->name}} </h4>
-                    </div>
-                    <div class="card-body">
-                        <h3>CONTRACT REQUEST Processing</h3>
-                        <div style="font-size: 18px;" class="mt-4 badge badge-warning text-black disabled">
-                            Waiting for Response . . .
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-    @endif
+        @endif
+    @endforeach
+@endif
 @endsection

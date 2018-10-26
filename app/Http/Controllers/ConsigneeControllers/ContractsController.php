@@ -26,10 +26,23 @@ class ContractsController extends Controller
     public function index()
     {
         $company = Company::where('intCompanyID', Auth::user()->intUCompanyID)->get();
-        // $contract = DB::table('tblcontractlist as contract')
-        // ->join('tblquotation as quotation','contract.intCQuotationID','quotation.intQuotationID')
-        // ->where('contract.intCCompanyID',Auth::user()->intUCompanyID)->get();
-        // Contract::where('intCCompanyID',Auth::user()->intUCompanyID)->get();
+        
+        $contractlist = DB::table('tblcompany as company')
+        ->leftjoin('tblcontractlist as contracts','contracts.intCCompanyID','company.intCompanyID')
+        ->join('users as user','user.intUCompanyID','company.intCompanyID')
+        ->where('user.intUCompanyID',Auth::user()->intUCompanyID)
+        ->orderBy('contracts.intContractListID','DESC')
+        ->limit('1')
+        ->get();
+
+        $contract = DB::table('tblcontractlist as contract')
+        ->join('tblquotation as quotation','contract.intContractListID','quotation.intQContractListID')
+        ->where('contract.intCCompanyID',Auth::user()->intUCompanyID)
+        ->where('contract.intContractListID',$contractlist[0]->intContractListID)
+        // ->where('contract.intContractListID',$contractlist->)
+        ->get();
+
+        Contract::where('intCCompanyID',Auth::user()->intUCompanyID)->get();
         $contractList = DB::table('users as users')
         ->leftjoin('tblcompany as company','users.intUCompanyID','company.intCompanyID')
         ->join('tblcontractlist as contracts','company.intCompanyID','contracts.intCCompanyID')
@@ -38,13 +51,6 @@ class ContractsController extends Controller
         // ->where('contracts.intCQuotationID',null)
         ->get();
 
-        $contractlist = DB::table('tblcompany as company')
-        ->leftjoin('tblcontractlist as contracts','contracts.intCCompanyID','company.intCompanyID')
-        ->join('users as user','user.intUCompanyID','company.intCompanyID')
-        ->where('user.intUCompanyID',Auth::user()->intUCompanyID)
-        ->orderBy('contracts.intContractListID','DESC')
-        ->limit('1')
-        ->get();
         
         $contractListFinal = DB::table('users as users')
         ->leftjoin('tblcompany as company','users.intUCompanyID','company.intCompanyID')
@@ -60,9 +66,9 @@ class ContractsController extends Controller
         // ->with('contract',$contract)
         // ->with('contractList',$contractList);
         // undefined offset[0] pag walang company na connected sa user
-        return response()->json(['list'=>$contractlist]);
+        return response()->json(['list'=>$contract]);
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *

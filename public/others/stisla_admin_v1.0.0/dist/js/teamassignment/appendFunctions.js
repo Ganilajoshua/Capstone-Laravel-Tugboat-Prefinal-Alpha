@@ -336,7 +336,6 @@ function appendJoborderTeams(jobsched,teams){
             <div class="form-group">
                 <label for="addTeamSelect">Select Team # ${counter + 1}</sup></label>
                 <select id="addTeamSelect" style="background-color:transparent !important;" name="addTeam[]" class="addTeamSelect${counter + 1} teamAssignmentSelect form-control form-control input-lg wide">
-                    <option data-display="" value="0">Select Team</option>
                 </select> 
             </div>
         </div>`;
@@ -345,7 +344,7 @@ function appendJoborderTeams(jobsched,teams){
        for(var count =0; count < teams.length; count++){
            console.log(teams[count].strTeamName);
            var appendTeamOption = 
-           `<option value="${teams[count].intTeamID}">${teams[count].strTeamName}</option>`;
+           `<option value="${teams[count].intTeamID}" data-subtext="Available">${teams[count].strTeamName}</option>`;
            $(appendTeamOption).appendTo(`.addTeamSelect${counter + 1}`);
        }
     }
