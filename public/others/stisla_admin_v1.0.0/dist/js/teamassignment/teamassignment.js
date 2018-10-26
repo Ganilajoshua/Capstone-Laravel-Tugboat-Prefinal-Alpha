@@ -398,7 +398,13 @@ $('.submitCreatedTeam').on('click',function(event){
             if(errorcounter > 0){
                 console.log('dami mong alam');
                 event.stopPropagation();
-
+                toastr.error("You did not meet the requirements needed for a team",'Team Creation Failed', { 
+                    positionClass : 'toast-bottom-right', 
+                    preventDuplicates : true, 
+                    showDuration : "2000",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                });
             }else{
                 console.log(errorcounter);
                 console.log('eeey');
