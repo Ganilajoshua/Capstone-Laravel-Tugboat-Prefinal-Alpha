@@ -317,9 +317,67 @@
                         </div>
                     </div>
                 </div>
-            @elseif($contractlist->enumStatus == 'Requesting For Changes')
+            @elseif($contractlist->enumStatus == 'Requesting For Changes') 
+                <div class="container">
+                    <div class="col">
+                        <div class="card card-sm-2 card-primary border-primary">
+                            <div class="card-icon">
+                                <i class="ion ion-android-boat text-primary"></i>
+                            </div>
+                            <div class="card-header">
+                                <h4 class="text-primary mb-2"> {{Auth::user()->name}} </h4>
+                            </div>
+                            <div class="card-body">
+                                <h3>CONTRACT CHANGE REQUEST PENDING</h3>
+                                <div style="font-size: 18px;" class="mt-4 badge badge-warning text-black">
+                                    Waiting for Response . . .
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @elseif($contractlist->enumStatus == 'Accepted')
+                <div class="container">
+                    <div class="col">
+                        <div class="card card-sm-2 card-primary border-primary">
+                            <div class="card-icon">
+                                <i class="ion ion-android-boat text-primary"></i>
+                            </div>
+                            <div class="card-header">
+                                <h4 class="text-primary mb-2"> {{Auth::user()->name}} </h4>
+                            </div>
+                            <div class="card-body">
+                                <h3>WAITING FOR FINALIZATION OF CONTRACT</h3>
+                                <div style="font-size: 18px;" class="mt-4 badge badge-warning text-black">
+                                    Waiting for Response . . .
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @elseif($contractlist->enumStatus == 'Finalized')
+
+            @elseif($contractlist->enumStatus == 'For Activation')
+                <div class="container">
+                    <div class="col">
+                        <div class="card card-sm-2 card-primary border-primary">
+                            <div class="card-icon">
+                                <i class="ion ion-android-boat text-primary"></i>
+                            </div>
+                            <div class="card-header">
+                                <h4 class="text-primary mb-2"> {{Auth::user()->name}} </h4>
+                            </div>
+                            <div class="card-body">
+                                <h3>WAITING FOR CONTRACT ACTIVATION</h3>
+                                <div style="font-size: 18px;" class="mt-4 badge badge-warning text-black">
+                                    Waiting for Response . . .
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @elseif($contractlist->enumStatus == 'Active')
+                Active
             @elseif($contractlist->enumStatus == 'Expired')
             <div class="container">
                 <div id="forecast"></div>

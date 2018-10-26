@@ -26,68 +26,41 @@ class ContractRequestsController extends Controller
         
         $companyPending = DB::table('tblcontractlist as contracts')
         ->join('tblcompany as company','contracts.intCCompanyID','company.intCompanyID')
-        // ->join('tblgoods as goods','company.intCGoodsID','goods.intGoodsID')
-        // ->where('company.boolDeleted', 0)
-        // ->where('contracts.intCQuotationID', null)
         ->where('contracts.boolDeleted',0)
-        // ->where('contracts.enumStatus')
         ->where('contracts.enumStatus','!=','Finalized')
-        // ->groupBy('contracts.enumStatus')  
         ->get();
+
         $companyRChanges = DB::table('tblcontractlist as contracts')
         ->join('tblcompany as company','contracts.intCCompanyID','company.intCompanyID')
-        // ->join('tblgoods as goods','company.intCGoodsID','goods.intGoodsID')
-        // ->where('company.boolDeleted', 0)
-        // ->where('contracts.intCQuotationID', null)
         ->where('contracts.boolDeleted',0)
-        // ->where('contracts.enumStatus')
         ->where('contracts.enumStatus','!=','Finalized')
-        // ->groupBy('contracts.enumStatus')  
         ->get();
+        
         $companyAccepted = DB::table('tblcontractlist as contracts')
         ->join('tblcompany as company','contracts.intCCompanyID','company.intCompanyID')
-        // ->join('tblgoods as goods','company.intCGoodsID','goods.intGoodsID')
-        // ->where('company.boolDeleted', 0)
-        // ->where('contracts.intCQuotationID', null)
         ->where('contracts.boolDeleted',0)
-        // ->where('contracts.enumStatus')
-        ->where('contracts.enumStatus','!=','Finalized')
-        // ->groupBy('contracts.enumStatus')  
+        ->where('contracts.enumStatus','!=','Finalized') 
         ->get();
+        
         $company2 = DB::table('tblcontractlist')
-        ->join('tblcompany',function($join){
-            $join->on('tblcontractlist.intCCompanyID', '=','tblcompany.intCompanyID');
-        })
-        ->join('tblgoods',function($join){
-            $join->on('tblcompany.intCGoodsID', '=','tblgoods.intGoodsID');
-        })
-        // ->join('tblquotation',function($join){
-        //     $join->on('tblquotation.intQuotationID', '=','tblcontractlist.intCQuotationID');
-        // })
-        // ->where('tblcontractlist.intCQuotationID', '!=' ,null)
-        // ->where('tblcontractlist.intCTermsConditionID', '!=' , null)
+        ->join('tblcompany','tblcontractlist.intCCompanyID','tblcompany.intCompanyID')
         ->where('tblcompany.boolDeleted', 0)
         ->get();
+        
+        $activation = DB::table('tblcontractlist as contracts')
+        ->join('tblcompany as company','company.intCompanyID','contracts.intCCompanyID')
+        ->where('contracts.enumStatus','For Activation')
+        ->get();
+
         $quotations = Quotations::where('boolDeleted',0)->get();
        
-
-        // ->join('tblcompany',function($join){
-
-        //     $join->on('tblcontractlist.intCCompanyID', '=','tblcompany.intCompanyID');
-        // })
-        // ->join('tblgoods',function($join){
-        //     $join->on('tblcompany.intCGoodsID', '=','tblgoods.intGoodsID');
-        // })
-        // ->where('tblcompany.boolDeleted', 0)
-        // ->where('tblcontractlist.intCQuotationID', null)
-        // ->where('tblcontractlist.intCTermsConditionID', null)
-        // ->get();
-        return view('ContractsRequests.index')
-        ->with('companyPending',$companyPending)
-        ->with('company2',$company2)
-        ->with('companyRChanges',$companyRChanges)
-        ->with('companyAccepted',$companyAccepted)
-        ->with('quotations',$quotations);
+        return view('ContractsRequests.index',
+        compact('companyPending','company2','companyRChanges','companyAccepted','quotations','activation'));
+        // ->with('companyPending',$companyPending)
+        // ->with('company2',$company2)
+        // ->with('companyRChanges',$companyRChanges)
+        // ->with('companyAccepted',$companyAccepted)
+        // ->with('quotations',$quotations);
         // return response()->json(['company'=>$company]);
     }
 
@@ -222,22 +195,22 @@ class ContractRequestsController extends Controller
         $contract->datContractExpire = $request->contractExpire;
         $contract->save();
 
-        $quotations = Quotations::where('intQContractListID',$contract->intContractListID)->get();
+        // $quotations = Quotations::where('intQContractListID',$contract->intContractListID)->get();
 
-        for($count = 0; $count < count($quotations); $count++){
-            $finalfees = new FinalContractFeesMatrix;
-            $finalfees->timestamps = false;
-            $finalfees->intFCFContractListID = $quotations[$count]->intQContractListID;
-            $finalfees->enumFCFServiceType = $quotations[$count]->enumServiceType;
-            $finalfees->fltFCFStandardRate = $quotations[$count]->fltStandardRate;
-            $finalfees->fltFCFConsigneeLateFee = $quotations[$count]->fltQuotationConsigneeLateFee;
-            $finalfees->fltFCFTugboatDelayFee = $quotations[$count]->fltQuotationTDelayFee;
-            $finalfees->fltFCFViolationFee = $quotations[$count]->fltQuotationViolationFee;
-            $finalfees->fltFCFMinDamageFee = $quotations[$count]->fltMinDamageFee;
-            $finalfees->fltFCFMaxDamageFee = $quotations[$count]->fltMaxDamageFee;
-            $finalfees->intFCFDiscountFee = $quotations[$count]->intDiscount;
-            $finalfees->save();
-        }
+        // for($count = 0; $count < count($quotations); $count++){
+        //     $finalfees = new FinalContractFeesMatrix;
+        //     $finalfees->timestamps = false;
+        //     $finalfees->intFCFContractListID = $quotations[$count]->intQContractListID;
+        //     $finalfees->enumFCFServiceType = $quotations[$count]->enumServiceType;
+        //     $finalfees->fltFCFStandardRate = $quotations[$count]->fltStandardRate;
+        //     $finalfees->fltFCFConsigneeLateFee = $quotations[$count]->fltQuotationConsigneeLateFee;
+        //     $finalfees->fltFCFTugboatDelayFee = $quotations[$count]->fltQuotationTDelayFee;
+        //     $finalfees->fltFCFViolationFee = $quotations[$count]->fltQuotationViolationFee;
+        //     $finalfees->fltFCFMinDamageFee = $quotations[$count]->fltMinDamageFee;
+        //     $finalfees->fltFCFMaxDamageFee = $quotations[$count]->fltMaxDamageFee;
+        //     $finalfees->intFCFDiscountFee = $quotations[$count]->intDiscount;
+        //     $finalfees->save();
+        // }
 
         return response()->json(['contract'=>$contract]);
     }
@@ -261,6 +234,7 @@ class ContractRequestsController extends Controller
         $contract = Contract::findOrFail($intContractListID);
         return response()->json(['contract'=>$contract]);
     }
+
     public function getnotifs(Request $request){
         $contract = Contract::where('enumStatus','!=','Finalized')
         ->where('enumStatus','!=','Created')
