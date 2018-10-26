@@ -117,6 +117,28 @@
                     </div>
                 </div>
             </section>
+        @elseif($contract->enumStatus == 'Finalized')
+            <div class="container">
+                <div class="col">
+                    <div class="card card-sm-2 card-primary border-primary">
+                        <div class="card-icon">
+                            <i class="ion ion-android-boat text-primary"></i>
+                        </div>
+                        <div class="card-header">
+                            <h4 class="text-primary mb-2"> {{Auth::user()->name}} </h4>
+                        </div>
+                        <div class="card-body">
+                            <h3>Your contract must be activated in order to access this section</h3>
+                            <div style="font-size: 16.5px;" class="text-black mt-5">
+                                <a href="/consignee/contracts" class="text-black">
+                                    Click Here To Activate Your Contract
+                                    <i class="fas fa-chevron-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         @elseif($contract->enumStatus == 'Expired')
             <section class="statistic statistic2">
                 <div class="container">

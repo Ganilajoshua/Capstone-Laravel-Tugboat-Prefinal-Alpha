@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 17, 2018 at 04:02 AM
+-- Generation Time: Oct 26, 2018 at 10:11 AM
 -- Server version: 5.7.21
 -- PHP Version: 5.6.35
 
@@ -127,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `tblberth` (
   `boolDeleted` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`intBerthID`),
   KEY `fk_tblBerth_tblPier1_idx` (`intBPierID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tblberth`
@@ -136,13 +136,15 @@ CREATE TABLE IF NOT EXISTS `tblberth` (
 INSERT INTO `tblberth` (`intBerthID`, `intBPierID`, `strBerthName`, `isActive`, `boolDeleted`) VALUES
 (1, 1, 'Berth 3', 1, 0),
 (2, 1, 'Berth 4', 1, 0),
-(3, 3, 'Berth 1', 0, 0),
+(3, 3, 'Berth 1', 1, 0),
 (4, 2, 'Berth 2', 1, 0),
 (5, 4, 'Berth 5', 1, 0),
 (6, 3, 'Berth 6', 1, 0),
 (7, 6, 'Berth 7', 1, 0),
 (8, 3, 'Berth 84', 1, 0),
-(9, 2, 'Berth 100', 1, 1);
+(9, 2, 'Berth 100', 1, 1),
+(10, 10, 'Berth 3', 1, 0),
+(11, 1, 'Berth 5', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -200,7 +202,14 @@ CREATE TABLE IF NOT EXISTS `tblcharges` (
   `fltCompanyViolationFee` float DEFAULT '0',
   `intDiscount` int(11) NOT NULL,
   PRIMARY KEY (`intChargeID`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblcharges`
+--
+
+INSERT INTO `tblcharges` (`intChargeID`, `fltJOAmount`, `fltTugboatDelayFee`, `fltConsigneeViolationFee`, `fltConsigneeLateFee`, `fltConsigneeDamageFee`, `fltCompanyDamageFee`, `fltCompanyViolationFee`, `intDiscount`) VALUES
+(1, 10000, 0, NULL, 0, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -245,7 +254,7 @@ CREATE TABLE IF NOT EXISTS `tblcompany` (
   PRIMARY KEY (`intCompanyID`),
   KEY `fk_tblCompany_tblGoods1_idx` (`intCGoodsID`),
   KEY `fk_tblCompany_tblPostBillingTicket1_idx` (`intCPostBillingTicketID`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tblcompany`
@@ -275,7 +284,24 @@ INSERT INTO `tblcompany` (`intCompanyID`, `intCGoodsID`, `intCPostBillingTicketI
 (21, NULL, NULL, 'Reign Shirley', 'Marikina City', 'reignexdummy@gmail.com', '09206267696', '5593759', 0, 'DTI-Permits.jpg', NULL),
 (22, NULL, NULL, 'Reign Shirley', 'Marikina City', 'reignshirley@gmail.com', '09206267696', '5593759', 0, 'DTI-Permits.jpg', NULL),
 (23, NULL, NULL, 'Seonyo Sidae', 'Seoul South Korea', 'reignshirley@gmail.com', '123131', '231', 0, 'DTI-Permits.jpg', NULL),
-(24, NULL, NULL, 'Seonyo Sidae', 'Seoul South Korea', 'johnpagaduan04@gmail.com', '123131', '231', 0, 'DTI-Permit.jpg', NULL);
+(24, NULL, NULL, 'Seonyo Sidae', 'Seoul South Korea', 'johnpagaduan04@gmail.com', '123131', '231', 0, 'DTI-Permit.jpg', NULL),
+(25, NULL, NULL, 'Testing Company 1', 'Testing Address 1', 'reignshirley@gmail.com', '09286519686', '3681590', 0, 'Permit.png', NULL),
+(26, NULL, NULL, 'Testing Company Final Defense 1', 'Testing Company Final Defense Address 1', 'e_a_austria@yahoo.com', '09286548696', '21224481', 0, 'Permit.png', NULL),
+(27, NULL, NULL, 'Testing Company Final Defense 2', 'Testing Company Final Defense Address 2', 'clumsyreigny@gmail.com', '0928158696', '3685109', 0, 'DTI-Permit.jpg', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblcontractclauses`
+--
+
+DROP TABLE IF EXISTS `tblcontractclauses`;
+CREATE TABLE IF NOT EXISTS `tblcontractclauses` (
+  `intContractClausesID` int(11) NOT NULL AUTO_INCREMENT,
+  `strContractAgreements` text,
+  `strContractTermsAndConditions` text,
+  PRIMARY KEY (`intContractClausesID`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -320,7 +346,7 @@ CREATE TABLE IF NOT EXISTS `tblcontractlist` (
   `strContractListDesc` text,
   `intCAttachmentsID` int(11) DEFAULT NULL,
   `isFinalized` tinyint(1) DEFAULT NULL,
-  `enumStatus` enum('Pending','Created','Requesting For Changes','Accepted','Active','Expired') DEFAULT 'Pending',
+  `enumStatus` enum('Pending','Created','Requesting For Changes','Accepted','Finalized','For Activation','Active','Expired') DEFAULT 'Pending',
   `boolDeleted` tinyint(1) DEFAULT '0',
   `datContractActive` date DEFAULT NULL,
   `datContractExpire` date DEFAULT NULL,
@@ -332,17 +358,14 @@ CREATE TABLE IF NOT EXISTS `tblcontractlist` (
   KEY `fk_tblContractList_tblAgreement1_idx` (`intCQuotationID`),
   KEY `fk_tblContractList_tblWaiver1_idx` (`intCAttachmentsID`),
   KEY `fk_tblContractList_tblCompany1_idx` (`intCCompanyID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tblcontractlist`
 --
 
 INSERT INTO `tblcontractlist` (`intContractListID`, `intCCompanyID`, `intCQuotationID`, `strContractListTitle`, `strContractListDesc`, `intCAttachmentsID`, `isFinalized`, `enumStatus`, `boolDeleted`, `datContractActive`, `datContractExpire`, `enumConValidity`, `strConsigneeSign`, `strAdminSign`, `isDefault`) VALUES
-(1, 10, NULL, 'Sample Contract 1', '<p>Sample Details 1</p>', NULL, NULL, 'Active', 0, '2018-10-17', '2019-04-17', '6', NULL, '{\"lines\":[[[64,107.4],[78,107.4],[109,106.4],[171,103.4],[196,101.4],[209,98.4],[226,91.4],[227,90.4],[227,88.4],[212,85.4],[180,82.4],[162,83.4],[142,87.4],[128,95.4],[125,99.4],[122,105.4],[122,128.4],[130,146.4],[143,165.4],[199,199.4],[243,204.4],[275,201.4],[298,188.4],[304,178.4],[306,149.4],[301,115.4],[282,83.4],[270,73.4],[258,68.4],[243,67.4],[234,68.4],[229,71.4],[222,78.4],[218,88.4],[217,116.4],[223,137.4],[238,161.4],[260,176.4],[307,179.4],[343,167.4],[359,155.4],[374,131.4],[379,89.4],[370,59.4],[361,46.4],[351,37.4],[349,35.4],[346,33.4],[345,33.4],[344,33.4],[339,33.4],[326,36.4],[324,37.4]]]}', 'Yes'),
-(2, 20, NULL, 'Contract for Reign Shirley', '<p>Contract Hauling Rates</p>', NULL, NULL, 'Created', 0, NULL, NULL, '6', NULL, NULL, 'Yes'),
-(3, 3, NULL, 'Contract Sample', '<p>Contract Sample</p>', NULL, NULL, 'Expired', 0, '2018-10-17', '2019-10-17', '1', NULL, '{\"lines\":[[[49,122.4],[63,112.4],[100,89.4],[146,63.4],[172,48.4],[186,40.4],[186,40.4],[186,43.4],[186,43.4],[186,47.4],[179,61.4],[176,70.4],[173,74.4],[173,76.4],[174,75.4],[175,75.4],[193,63.4],[220,50.4],[230,45.4],[233,45.4],[233,46.4],[232,46.4],[229,51.4],[226,56.4],[224,61.4],[224,63.4],[225,63.4],[229,62.4],[233,59.4],[234,59.4],[235,60.4],[234,64.4],[233,71.4],[231,75.4],[231,77.4],[231,78.4],[235,75.4],[253,63.4],[264,56.4],[265,56.4],[265,58.4],[263,65.4],[261,71.4],[259,77.4],[258,84.4],[259,85.4],[270,85.4],[297,82.4],[305,81.4],[307,81.4],[307,82.4],[307,83.4],[306,90.4],[305,96.4],[300,108.4],[298,113.4],[295,115.4],[287,119.4],[275,119.4],[262,119.4],[228,119.4],[210,119.4],[198,119.4],[181,119.4],[174,119.4],[168,120.4],[162,123.4],[159,123.4],[157,123.4],[155,126.4],[154,126.4],[156,126.4],[157,126.4],[163,123.4],[225,107.4],[285,99.4],[362,97.4],[396,99.4],[415,100.4],[424,102.4],[429,103.4],[430,105.4]]]}', 'Yes'),
-(4, 3, NULL, 'Contract Renew', '<p>TRy</p>', NULL, NULL, 'Created', 0, NULL, NULL, '', NULL, NULL, 'Yes');
+(1, 3, NULL, 'Contract Title 1', '<p>Contract Details 2</p>', NULL, NULL, 'Active', 0, '2018-10-26', '2019-04-26', '6', NULL, NULL, 'Yes');
 
 -- --------------------------------------------------------
 
@@ -360,7 +383,7 @@ CREATE TABLE IF NOT EXISTS `tbldispatchticket` (
   `strAdminSign` text,
   `boolDeleted` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`intDispatchTicketID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbldispatchticket`
@@ -369,7 +392,9 @@ CREATE TABLE IF NOT EXISTS `tbldispatchticket` (
 INSERT INTO `tbldispatchticket` (`intDispatchTicketID`, `strDispatchTicketDesc`, `boolCApprovedby`, `boolAApprovedby`, `strConsigneeSign`, `strAdminSign`, `boolDeleted`) VALUES
 (1, NULL, 1, 1, '{\"lines\":[[[24,94.4],[43,90.4],[183,57.4],[333,36.4],[403,31.4],[429,30.4],[445,30.4],[450,30.4],[451,30.4],[451,31.4],[449,32.4],[443,37.4],[427,48.4],[385,73.4],[359,88.4],[335,97.4],[317,107.4],[309,111.4],[305,112.4],[303,114.4],[303,116.4],[301,116.4],[303,116.4],[332,112.4],[352,108.4],[374,104.4],[383,104.4],[385,104.4],[386,104.4]]]}', '{\"lines\":[[[130,180.8],[144,168.8],[213,112.8],[261,64.8],[266,48.8],[262,33.8],[258,32.8],[248,30.8],[234,30.8],[218,44.8],[211,59.8],[209,68.8],[210,75.8],[222,80.8],[247,80.8],[306,75.8],[325,73.8],[335,73.8],[339,73.8],[342,76.8],[342,77.8],[341,91.8],[331,120.8],[325,136.8],[322,143.8],[321,145.8],[319,148.8]]]}', NULL),
 (2, NULL, 0, 0, NULL, NULL, NULL),
-(3, NULL, 0, 0, NULL, NULL, NULL);
+(3, NULL, 0, 0, NULL, NULL, NULL),
+(4, NULL, 0, 0, NULL, NULL, NULL),
+(5, NULL, 1, 1, '{\"lines\":[[[93,125.8],[114,123.8],[167,118.8],[201,114.8],[215,111.8],[215,111.8],[215,107.8],[202,86.8],[181,74.8],[161,68.8],[136,66.8],[127,66.8],[124,69.8],[121,73.8],[122,83.8],[134,94.8],[173,105.8],[227,106.8],[253,104.8],[264,102.8],[271,99.8],[275,98.8],[279,96.8],[280,95.8]],[[274,70.8],[301,74.8],[331,78.8],[351,82.8],[352,82.8],[352,75.8],[341,58.8],[332,53.8],[329,50.8],[326,50.8],[325,50.8],[325,51.8],[326,55.8],[331,68.8],[334,74.8],[335,79.8],[340,83.8],[351,85.8],[355,85.8]]]}', '{\"lines\":[[[134,143.8],[148,130.8],[178,111.8],[218,82.8],[226,74.8],[228,72.8],[230,61.8],[230,55.8],[228,48.8],[224,40.8],[220,38.8],[219,38.8],[217,38.8],[216,38.8],[212,40.8],[206,48.8],[204,65.8],[204,74.8],[207,78.8],[220,84.8],[233,84.8],[248,79.8],[266,73.8],[275,69.8],[285,68.8],[292,68.8],[298,72.8],[300,74.8],[301,76.8],[303,79.8],[304,80.8]],[[112,79.8],[121,75.8],[128,69.8],[145,61.8],[177,45.8],[193,36.8],[204,32.8],[210,28.8],[211,27.8],[212,27.8],[214,28.8],[215,28.8]]]}', NULL);
 
 -- --------------------------------------------------------
 
@@ -393,7 +418,7 @@ CREATE TABLE IF NOT EXISTS `tblemployee` (
   KEY `fk_tblEmployee_tblPosition1_idx` (`intEPositionID`),
   KEY `fk_tblEmployee_tblTeam1_idx` (`intETeamID`),
   KEY `fk_tblemployee_tblcompany1_idx` (`intECompanyID`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tblemployee`
@@ -419,7 +444,11 @@ INSERT INTO `tblemployee` (`intEmployeeID`, `intECompanyID`, `intEPositionID`, `
 (17, 2, 8, 5, 'Regular', 'Sherwin', NULL, 'Aydalla', 1, 0),
 (18, 2, 8, 5, 'Regular', 'Fritz Jerold', NULL, 'Santuico', 1, 0),
 (19, 2, 7, 5, 'Regular', 'Gramar', NULL, 'Lacsina', 1, 0),
-(20, 2, 6, 5, 'Regular', 'Froilan Sam', NULL, 'Malibiran', 1, 0);
+(20, 2, 6, 5, 'Regular', 'Froilan Sam', NULL, 'Malibiran', 1, 0),
+(21, 1, 1, 6, 'Regular', 'Princes Joi', NULL, 'Isaac', 1, 0),
+(22, 1, 2, 6, 'Regular', 'Matthew James', NULL, 'Victore', 1, 0),
+(23, 1, 3, 6, 'Regular', 'Angelito', NULL, 'Casasis', 1, 0),
+(24, 1, 3, 6, 'Regular', 'Reannie Danielle', NULL, 'Exiomo', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -440,7 +469,7 @@ CREATE TABLE IF NOT EXISTS `tblfinalcontractfeesmatrix` (
   `fltFCFMaxDamageFee` float DEFAULT NULL,
   `intFCFDiscountFee` tinyint(3) DEFAULT NULL,
   PRIMARY KEY (`intFinalContractFeesID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tblfinalcontractfeesmatrix`
@@ -448,9 +477,7 @@ CREATE TABLE IF NOT EXISTS `tblfinalcontractfeesmatrix` (
 
 INSERT INTO `tblfinalcontractfeesmatrix` (`intFinalContractFeesID`, `intFCFContractListID`, `enumFCFServiceType`, `fltFCFStandardRate`, `fltFCFTugboatDelayFee`, `fltFCFViolationFee`, `fltFCFConsigneeLateFee`, `fltFCFMinDamageFee`, `fltFCFMaxDamageFee`, `intFCFDiscountFee`) VALUES
 (1, 1, 'Hauling', 2000, 1000, 1000, 1000, 3000, 5000, 20),
-(2, 1, 'Tug Assist', 1000, 2000, 2000, 1000, 2000, 4000, 20),
-(3, 3, 'Hauling', 2000, 1000, 1000, 1000, 3000, 5000, 1),
-(4, 3, 'Tug Assist', 1000, 2000, 2000, 1000, 2000, 4000, 1);
+(2, 1, 'Tug Assist', 1000, 2000, 2000, 1000, 2000, 4000, 20);
 
 -- --------------------------------------------------------
 
@@ -467,7 +494,7 @@ CREATE TABLE IF NOT EXISTS `tblgoods` (
   `isActive` tinyint(1) DEFAULT '1',
   `boolDeleted` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`intGoodsID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tblgoods`
@@ -477,7 +504,8 @@ INSERT INTO `tblgoods` (`intGoodsID`, `strGoodsName`, `fltRateperTon`, `fltGoodW
 (1, 'Cooking Oil', 500, NULL, 1, 0),
 (2, 'Metal Rolls', 500, NULL, 1, 0),
 (3, 'Gravel', 700, NULL, 1, 0),
-(4, 'Diesel', 700, NULL, 1, 0);
+(4, 'Diesel', 700, NULL, 1, 0),
+(5, 'Red Sand', 200, NULL, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -525,6 +553,13 @@ CREATE TABLE IF NOT EXISTS `tblinvoice` (
   KEY `fk_tblInvoice_tblCompany1_idx` (`intDTCompanyID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `tblinvoice`
+--
+
+INSERT INTO `tblinvoice` (`intInvoiceID`, `intIDispatchTicketID`, `intDTCompanyID`, `intIBillID`, `enumStatus`, `strInvoiceDesc`, `fltBalanceRemain`, `boolDeleted`) VALUES
+(1, 1, 3, 0, 'Processing', 'processed', 10000, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -557,6 +592,7 @@ CREATE TABLE IF NOT EXISTS `tbljoborder` (
   `boolDeleted` tinyint(1) DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `strRemarks` text,
   PRIMARY KEY (`intJobOrderID`,`strJOVesselName`),
   KEY `fk_tblSchedule_tblAttachments1_idx` (`intJOttachmentsID`),
   KEY `fk_tblSchedule_tblBarge1_idx` (`intJOBargeID`),
@@ -564,19 +600,29 @@ CREATE TABLE IF NOT EXISTS `tbljoborder` (
   KEY `fk_tblSchedule_tblBerth1` (`intJOBerthID`),
   KEY `fk_tblJoborder_tblGoods1_idx` (`intJOGoodsID`),
   KEY `fk_tblJoborder_tblVesselType1_idx` (`intJOVesselTypeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbljoborder`
 --
 
-INSERT INTO `tbljoborder` (`intJobOrderID`, `strJOTitle`, `strJODesc`, `intJOBerthID`, `strJOStartPoint`, `strJODestination`, `intJOBargeID`, `intJOGoodsID`, `intJOCompanyID`, `intJOttachmentsID`, `strJOVesselName`, `dtmETA`, `dtmETD`, `enumStatus`, `fltWeight`, `intJOVesselTypeID`, `enumServiceType`, `datStartDate`, `datEndDate`, `tmStart`, `tmEnd`, `boolDeleted`, `created_at`, `updated_at`) VALUES
-(1, 'Testing Job Order Hauling 1', 'Testing Hauling Details 1', 2, NULL, 'Sta. Mesa Shipyard, Sta. Mesa Manila', NULL, 1, 14, NULL, 'MT Space Orion', NULL, NULL, '', 3200, NULL, 'Hauling', '2018-10-17', '2018-10-17', '09:00:00', '11:00:00', 0, '2018-10-15 16:06:22', '2018-10-15 16:06:22'),
-(2, 'Testing Job Order Tug Assist 1', 'Testing Tug Assist 1', 1, NULL, NULL, NULL, NULL, 14, NULL, 'MT Space Betelgeuse', NULL, NULL, 'Ongoing', 4000, 2, 'Tug Assist', '2018-10-18', '2018-10-16', '09:00:00', '11:00:00', 0, '2018-10-15 16:08:43', '2018-10-15 16:08:43'),
-(3, 'Hauling Part 2', 'Haul BP Part 2', NULL, 'Pandacan, Manila', 'Makati', NULL, 1, 3, NULL, 'MT Alejandro', NULL, NULL, '', NULL, NULL, 'Hauling', '2018-10-17', '2018-10-18', '10:30:00', '14:30:00', 0, '2018-10-15 18:30:47', '2018-10-15 18:30:47'),
-(4, 'Testing Job Order Tug Assist 1', 'Tug Assist here pls', 2, NULL, NULL, NULL, NULL, 3, NULL, 'MT Everest', NULL, NULL, 'Ready To Haul', 20, 2, 'Tug Assist', '2018-10-17', '2018-10-16', '10:18:00', '23:38:00', 0, '2018-10-15 18:38:58', '2018-10-15 18:38:58'),
-(5, 'Try Hauling Job Order 1', 'Try Hauling Details', 1, NULL, 'Pandacan, Manila', NULL, 1, 3, NULL, 'MT Space Sun', NULL, NULL, '', 3200, NULL, 'Hauling', '2018-10-18', '2018-10-18', '04:00:00', '07:00:00', 0, '2018-10-16 12:39:26', '2018-10-16 12:41:51'),
-(6, 'order title job', 'asd', 5, NULL, 'Manila', NULL, 1, 17, NULL, 'wow', NULL, NULL, '', 20, NULL, 'Hauling', '2018-10-17', '2018-10-18', '05:52:00', '05:52:00', 0, '2018-10-16 13:53:04', '2018-10-16 13:53:04');
+INSERT INTO `tbljoborder` (`intJobOrderID`, `strJOTitle`, `strJODesc`, `intJOBerthID`, `strJOStartPoint`, `strJODestination`, `intJOBargeID`, `intJOGoodsID`, `intJOCompanyID`, `intJOttachmentsID`, `strJOVesselName`, `dtmETA`, `dtmETD`, `enumStatus`, `fltWeight`, `intJOVesselTypeID`, `enumServiceType`, `datStartDate`, `datEndDate`, `tmStart`, `tmEnd`, `boolDeleted`, `created_at`, `updated_at`, `strRemarks`) VALUES
+(1, 'Testing Job Order Hauling 1', 'Testing Hauling Details 1', 2, NULL, 'Sta. Mesa Shipyard, Sta. Mesa Manila', NULL, 1, 3, NULL, 'MT Space Orion', NULL, NULL, 'Ready', 3200, NULL, 'Hauling', '2018-10-17', '2018-10-17', '09:00:00', '11:00:00', 0, '2018-10-15 16:06:22', '2018-10-15 16:06:22', NULL),
+(2, 'Testing Job Order Tug Assist 1', 'Testing Tug Assist 1', 1, NULL, NULL, NULL, NULL, 4, NULL, 'MT Space Betelgeuse', NULL, NULL, 'Ongoing', 4000, 2, 'Tug Assist', '2018-10-18', '2018-10-16', '09:00:00', '11:00:00', 0, '2018-10-15 16:08:43', '2018-10-15 16:08:43', NULL),
+(3, 'Hauling Part 2', 'Haul BP Part 2', NULL, 'Pandacan, Manila', 'Makati', NULL, 1, 3, NULL, 'MT Alejandro', NULL, NULL, 'Ready', NULL, NULL, 'Hauling', '2018-10-17', '2018-10-18', '10:30:00', '14:30:00', 0, '2018-10-15 18:30:47', '2018-10-15 18:30:47', NULL),
+(4, 'Testing Job Order Tug Assist 1', 'Tug Assist here pls', 2, NULL, NULL, NULL, NULL, 4, NULL, 'MT Everest', NULL, NULL, 'Ready To Haul', 20, 2, 'Tug Assist', '2018-10-17', '2018-10-16', '10:18:00', '23:38:00', 0, '2018-10-15 18:38:58', '2018-10-15 18:38:58', NULL),
+(5, 'Try Hauling Job Order 1', 'Try Hauling Details', 1, NULL, 'Pandacan, Manila', NULL, 1, 3, NULL, 'MT Space Sun', NULL, NULL, 'Ongoing', 3200, NULL, 'Hauling', '2018-10-18', '2018-10-18', '04:00:00', '07:00:00', 0, '2018-10-16 12:39:26', '2018-10-16 12:41:51', NULL),
+(6, 'order title job', 'asd', 5, NULL, 'Manila', NULL, 1, 5, NULL, 'wow', NULL, NULL, 'Ready', 20, NULL, 'Hauling', '2018-10-17', '2018-10-18', '05:00:00', '06:30:00', 0, '2018-10-16 13:53:04', '2018-10-16 13:53:04', NULL),
+(7, 'Job Order Testing', 'Text Details', 1, NULL, 'Pandacan Manila', NULL, 1, 3, NULL, 'MT Space Sword', NULL, NULL, 'Forwarded', 3200, NULL, 'Hauling', '2018-10-17', '2018-10-17', '22:00:00', '00:00:00', 0, '2018-10-16 21:07:27', '2018-10-16 21:08:54', NULL),
+(8, 'Heys', 'Tug Assist', 2, NULL, NULL, NULL, NULL, 4, NULL, 'MT Space Betelgeuse', NULL, NULL, 'Scheduled', 3200, 3, 'Tug Assist', '2018-10-18', '2018-10-17', '13:00:00', '15:00:00', 0, '2018-10-16 21:16:31', '2018-10-16 21:16:31', NULL),
+(9, 'Testing Job Order 1', 'Testing Hauling Details 1', 10, NULL, 'Sta. Mesa Shipyard, Sta Mesa Manila', NULL, 5, 4, NULL, 'MT Space Betelgeuse', NULL, NULL, 'Scheduled', 3200, NULL, 'Hauling', '2018-10-18', '2018-10-19', '22:00:00', '03:30:00', 0, '2018-10-16 23:32:42', '2018-10-16 23:32:42', NULL),
+(10, 'Job Order Testing 2', 'Testing Details', 1, NULL, 'Pandacan, Manila', NULL, 1, 5, NULL, 'MT Space Andromeda', NULL, NULL, 'Declined', 3200, NULL, 'Hauling', '2018-10-21', '2018-10-21', '10:00:00', '14:00:00', 0, '2018-10-19 08:29:17', '2018-10-19 08:29:17', 'Schedules are all Full'),
+(11, 'Job Order Title Test 1', 'Details', 1, NULL, 'Pandacan, Manila', NULL, 1, 3, NULL, 'MT Space Sphinx', NULL, NULL, 'Ready', 3500, NULL, 'Hauling', '2018-10-26', '2018-10-26', '11:00:00', '15:00:00', 0, '2018-10-24 19:53:19', '2018-10-24 19:53:19', NULL),
+(12, 'Job Order Testing 2', 'Details 2', 1, NULL, 'Pandacan Manila', NULL, 1, 3, NULL, 'MT Space Sirius', NULL, NULL, 'Scheduled', 4000, NULL, 'Hauling', '2018-10-26', '2018-10-26', '11:00:00', '14:30:00', 0, '2018-10-24 19:54:45', '2018-10-24 19:54:45', NULL),
+(13, 'JO Oct 26 - 28 8AM - 10 AM', 'JO Oct 26 - 27 8AM - 10 AM', 1, 'Manil', NULL, NULL, 1, 3, NULL, 'Vessel 1', NULL, NULL, 'Scheduled', 20, NULL, 'Hauling', '2018-10-26', '2018-10-27', '08:00:00', '10:00:00', 0, '2018-10-24 21:48:41', '2018-10-24 21:48:41', NULL),
+(14, 'JO Oct 27 - 28 8AM - 10 AM', 'JO Oct 27 - 28 8AM - 10 AM', NULL, 'Manila', 'Cebu', NULL, 2, 3, NULL, 'Vessel 2', NULL, NULL, 'Scheduled', 20, NULL, 'Hauling', '2018-10-27', '2018-10-28', '08:00:00', '10:00:00', 0, '2018-10-24 21:49:50', '2018-10-24 21:49:50', NULL),
+(15, 'JO Oct 26 - 27 11AM - 1 PM', 'JO Oct 26 - 27 11AM - 1 PM', 2, 'Manila', NULL, NULL, 3, 3, NULL, 'Vessel 3', NULL, NULL, 'Scheduled', 20, NULL, 'Hauling', '2018-10-26', '2018-10-27', '11:00:00', '01:00:00', 0, '2018-10-24 21:51:27', '2018-10-24 21:51:27', NULL),
+(16, 'JO Oct 26 - 27 9AM - 1 PM', 'JO Oct 26 - 27 9AM - 1 PM', NULL, 'Manila', 'Pandacan', NULL, 2, 3, NULL, 'Vessel 4', NULL, NULL, 'Ready', 20, NULL, 'Hauling', '2018-10-26', '2018-10-27', '09:00:00', '13:00:00', 0, '2018-10-24 21:54:50', '2018-10-24 21:54:50', NULL);
 
 -- --------------------------------------------------------
 
@@ -596,14 +642,15 @@ CREATE TABLE IF NOT EXISTS `tbljoborderforwardrequests` (
   PRIMARY KEY (`intJOForwardRequestsID`),
   KEY `fk_tblJOForwardRequests_tblJobOrder1_idx` (`intJOFRJobOrderID`),
   KEY `fk_tblJOForwardRequests_tblCompany1_idx` (`intJOFRForwardCompanyID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbljoborderforwardrequests`
 --
 
 INSERT INTO `tbljoborderforwardrequests` (`intJOForwardRequestsID`, `intJOFRJobOrderID`, `intJOFRForwardCompanyID`, `strJOFRDescription`, `strRequestCompanyName`, `enumStatus`, `boolDeleted`) VALUES
-(1, 5, 2, 'Forward Please', 'Hi Energy Marine Services INC.', 'Ready', 0);
+(1, 5, 2, 'Forward Please', 'Hi Energy Marine Services INC.', 'Ready', 0),
+(2, 7, 2, 'Heya', 'Hi Energy Marine Services INC.', 'Scheduled', 0);
 
 -- --------------------------------------------------------
 
@@ -626,6 +673,7 @@ CREATE TABLE IF NOT EXISTS `tbljobsched` (
   `dateEnded` date DEFAULT NULL,
   `boolDeleted` tinyint(1) DEFAULT '0',
   `intJSDispatchTicketID` int(11) DEFAULT NULL,
+  `strJSCompanyAssigned` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`intJobSchedID`),
   KEY `fk_tbljobsched_tbljoborder` (`intJSJobOrderID`),
   KEY `fk_tbljobsched_tblschedule` (`intJSSchedID`),
@@ -633,25 +681,22 @@ CREATE TABLE IF NOT EXISTS `tbljobsched` (
   KEY `fk_tbljobsched_tbltugboat_idx` (`intJSTugboatID`),
   KEY `fk_tbljobsched_tblteam_idx` (`intJSTeamID`),
   KEY `fk_tbljobsched_tbldispatchticket1_idx` (`intJSDispatchTicketID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbljobsched`
 --
 
-INSERT INTO `tbljobsched` (`intJobSchedID`, `intJSJobOrderID`, `intJSSchedID`, `intJSTugboatAssignID`, `intJSTugboatID`, `intJSTeamID`, `enumStatus`, `tmStarted`, `tmEnded`, `dateStarted`, `dateEnded`, `boolDeleted`, `intJSDispatchTicketID`) VALUES
-(1, 1, 1, 4, 4, 1, 'Finished', '09:26:00', '09:27:00', '2018-10-17', '2018-10-17', 0, 3),
-(2, 1, 1, 5, 5, 2, 'Finished', '09:26:00', '09:27:00', '2018-10-17', '2018-10-17', 0, 3),
-(3, 2, 2, 3, 2, 2, 'Pending', NULL, NULL, NULL, NULL, 0, NULL),
-(4, 2, 2, 4, 4, 1, 'Pending', NULL, NULL, NULL, NULL, 0, NULL),
-(5, 2, 2, 5, 5, 2, 'Pending', NULL, NULL, NULL, NULL, 0, NULL),
-(6, 3, 3, 5, 5, 2, 'Finished', '10:34:00', '09:20:00', '2018-10-16', '2018-10-17', 0, 1),
-(7, 4, 4, 2, 2, NULL, 'Pending', NULL, NULL, NULL, NULL, 0, NULL),
-(8, 4, 4, 4, 4, NULL, 'Pending', NULL, NULL, NULL, NULL, 0, NULL),
-(9, 5, 5, 3, 3, NULL, 'Pending', NULL, NULL, NULL, NULL, 0, NULL),
-(10, 5, 5, 6, 6, NULL, 'Pending', NULL, NULL, NULL, NULL, 0, NULL),
-(11, 6, 6, 1, 1, NULL, 'Finished', '06:13:00', '06:14:00', '2018-10-17', '2018-10-17', 0, 2),
-(12, 6, 6, 2, 2, NULL, 'Finished', '06:13:00', '06:14:00', '2018-10-17', '2018-10-17', 0, 2);
+INSERT INTO `tbljobsched` (`intJobSchedID`, `intJSJobOrderID`, `intJSSchedID`, `intJSTugboatAssignID`, `intJSTugboatID`, `intJSTeamID`, `enumStatus`, `tmStarted`, `tmEnded`, `dateStarted`, `dateEnded`, `boolDeleted`, `intJSDispatchTicketID`, `strJSCompanyAssigned`) VALUES
+(1, 1, 1, 2, 2, NULL, 'Pending', NULL, NULL, NULL, NULL, 0, NULL, NULL),
+(2, 1, 1, 4, 4, NULL, 'Pending', NULL, NULL, NULL, NULL, 0, NULL, NULL),
+(3, 3, 2, 5, 5, NULL, 'Pending', NULL, NULL, NULL, NULL, 0, NULL, NULL),
+(4, 3, 2, 7, 7, NULL, 'Pending', NULL, NULL, NULL, NULL, 0, NULL, NULL),
+(5, 6, 3, 2, 2, NULL, 'Pending', NULL, NULL, NULL, NULL, 0, NULL, NULL),
+(6, 6, 3, 4, 4, NULL, 'Pending', NULL, NULL, NULL, NULL, 0, NULL, NULL),
+(7, 11, 4, 2, 2, NULL, 'Pending', NULL, NULL, NULL, NULL, 0, NULL, NULL),
+(8, 11, 4, 4, 4, NULL, 'Pending', NULL, NULL, NULL, NULL, 0, NULL, NULL),
+(9, 16, 5, 7, 7, NULL, 'Pending', NULL, NULL, NULL, NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -669,7 +714,7 @@ CREATE TABLE IF NOT EXISTS `tbllocation` (
   `boolDeleted` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`intLocationID`),
   KEY `fk_tbllocation_tbldispatchticket1_idx` (`intLDispatchTicketID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbllocation`
@@ -679,7 +724,8 @@ INSERT INTO `tbllocation` (`intLocationID`, `intLDispatchTicketID`, `strLocation
 (3, 1, 'Waiting For Vessel to Enter the Bay', 'Manila Bay, Break Waters', '10:36:00', NULL),
 (4, 1, 'Arriving to Pier 15', 'Inside South Harbor', '10:37:00', NULL),
 (5, 2, 'asd', 'AAS', '06:14:00', NULL),
-(6, 3, 'qwer', 'qwer', '09:26:00', NULL);
+(6, 3, 'qwer', 'qwer', '09:26:00', NULL),
+(7, 5, 'Waiting for Vessel to enter the bay', 'Manila Bay Break Waters', '15:52:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -726,7 +772,7 @@ CREATE TABLE IF NOT EXISTS `tblpier` (
   `isActive` tinyint(1) DEFAULT '1',
   `boolDeleted` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`intPierID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tblpier`
@@ -741,7 +787,9 @@ INSERT INTO `tblpier` (`intPierID`, `strPierName`, `isActive`, `boolDeleted`) VA
 (6, 'Pier 151', 1, 1),
 (7, 'Pier 10', 1, 0),
 (8, 'Pier 65', 1, 1),
-(9, 'Pier 2', 1, 0);
+(9, 'Pier 2', 1, 0),
+(10, 'Pier 19', 1, 0),
+(11, 'Pier 18', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -773,7 +821,7 @@ CREATE TABLE IF NOT EXISTS `tblposition` (
   `intPositionCompNum` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`intPositionID`),
   KEY `fk_tblPosition_tblCompany1_idx` (`intPCompanyID`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tblposition`
@@ -783,15 +831,18 @@ INSERT INTO `tblposition` (`intPositionID`, `strPositionName`, `intPCompanyID`, 
 (1, 'Captain', 1, 1, 0, 1),
 (2, 'Chief Engineer', 1, 1, 0, 1),
 (3, 'Crew', 1, 1, 0, 2),
-(4, 'First Mate', 1, 1, 0, 0),
-(5, 'Second Mate `', 1, 1, 0, 0),
+(4, 'First Mate', 1, 1, 0, 1),
+(5, 'Second Mate', 1, 1, 0, 1),
 (6, 'Captain', 2, 1, 0, 1),
 (7, 'Chief Engineer', 2, 1, 0, 1),
 (8, 'Crew', 2, 1, 0, 2),
 (9, 'First Mate', 2, 1, 0, 0),
 (10, 'Second Mate', 2, 1, 0, 0),
 (11, 'Marine Engineer', 2, 1, 0, 0),
-(12, 'Chief Marine Engineer', 1, 1, 0, 0);
+(12, 'Chief Marine Engineer', 1, 1, 0, 1),
+(13, 'Marine Engineer', 1, 1, 0, NULL),
+(14, 'Third Mate', 1, 1, 0, NULL),
+(15, NULL, 1, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -844,7 +895,7 @@ CREATE TABLE IF NOT EXISTS `tblquotation` (
   `enumServiceType` enum('Hauling','Tug Assist') DEFAULT NULL,
   PRIMARY KEY (`intQuotationID`),
   KEY `fk_tblQuotation_tblContractList1_idx` (`intQContractListID`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tblquotation`
@@ -852,13 +903,7 @@ CREATE TABLE IF NOT EXISTS `tblquotation` (
 
 INSERT INTO `tblquotation` (`intQuotationID`, `strQuotationTitle`, `strQuotationDesc`, `intQContractListID`, `isAssigned`, `fltQuotationTDelayFee`, `fltQuotationViolationFee`, `fltQuotationConsigneeLateFee`, `fltMinDamageFee`, `fltMaxDamageFee`, `intDiscount`, `fltStandardRate`, `boolDeleted`, `enumServiceType`) VALUES
 (1, NULL, NULL, 1, 0, 1000, 1000, 1000, 3000, 5000, 20, 2000, 0, 'Hauling'),
-(2, NULL, NULL, 1, 0, 2000, 2000, 1000, 2000, 4000, 20, 1000, 0, 'Tug Assist'),
-(3, NULL, NULL, 2, 0, 1000, 1000, 1000, 3000, 5000, 1, 2000, 0, 'Hauling'),
-(4, NULL, NULL, 2, 0, 2000, 2000, 1000, 2000, 4000, 1, 1000, 0, 'Tug Assist'),
-(5, NULL, NULL, 3, 0, 1000, 1000, 1000, 3000, 5000, 1, 2000, 0, 'Hauling'),
-(6, NULL, NULL, 3, 0, 2000, 2000, 1000, 2000, 4000, 1, 1000, 0, 'Tug Assist'),
-(7, NULL, NULL, 4, 0, 1000, 1000, 1000, 3000, 5000, 20, 2000, 0, 'Hauling'),
-(8, NULL, NULL, 4, 0, 2000, 2000, 1000, 2000, 4000, 20, 1000, 0, 'Tug Assist');
+(2, NULL, NULL, 1, 0, 2000, 2000, 1000, 2000, 4000, 20, 1000, 0, 'Tug Assist');
 
 -- --------------------------------------------------------
 
@@ -957,19 +1002,18 @@ CREATE TABLE IF NOT EXISTS `tblschedule` (
   `tmEnd` time DEFAULT NULL,
   `tmStart` time DEFAULT NULL,
   PRIMARY KEY (`intScheduleID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tblschedule`
 --
 
 INSERT INTO `tblschedule` (`intScheduleID`, `strScheduleDesc`, `dttmETA`, `dttmETD`, `strColor`, `boolDeleted`, `datScheduleDate`, `intScheduleCompanyID`, `dateStart`, `dateEnd`, `tmEnd`, `tmStart`) VALUES
-(1, 'Testing Hauling Details 1', NULL, NULL, '#00a65a', 0, NULL, 1, '2018-10-17', '2018-10-17', '11:00:00', '09:00:00'),
-(2, 'Testing Tug Assist 1', NULL, NULL, '#28db76', 0, NULL, 1, '2018-10-18', '2018-10-16', '11:00:00', '09:00:00'),
-(3, 'Haul BP Part 2', NULL, NULL, '#A2A2D0', 0, NULL, 1, '2018-10-17', '2018-10-18', '14:30:00', '10:30:00'),
-(4, 'Tug Assist here pls', NULL, NULL, NULL, 0, NULL, 1, '2018-10-17', '2018-10-16', '23:38:00', '10:18:00'),
-(5, 'Try Hauling Details', NULL, NULL, '#f01c00', 0, NULL, 2, '2018-10-18', '2018-10-18', '07:00:00', '04:00:00'),
-(6, 'asd', NULL, NULL, NULL, 0, NULL, 1, '2018-10-17', '2018-10-18', '05:52:00', '05:52:00');
+(1, 'Testing Hauling Details 1', NULL, NULL, '#0073b7', 0, NULL, 1, '2018-10-17', '2018-10-17', '11:00:00', '09:00:00'),
+(2, 'Haul BP Part 2', NULL, NULL, NULL, 0, NULL, 1, '2018-10-17', '2018-10-18', '14:30:00', '10:30:00'),
+(3, 'asd', NULL, NULL, NULL, 0, NULL, 1, '2018-10-17', '2018-10-18', '06:30:00', '05:00:00'),
+(4, 'Details', NULL, NULL, NULL, 0, NULL, 1, '2018-10-26', '2018-10-26', '15:00:00', '11:00:00'),
+(5, 'JO Oct 26 - 27 9AM - 1 PM', NULL, NULL, NULL, 0, NULL, 1, '2018-10-26', '2018-10-27', '13:00:00', '09:00:00');
 
 -- --------------------------------------------------------
 
@@ -1011,7 +1055,7 @@ CREATE TABLE IF NOT EXISTS `tblteam` (
   PRIMARY KEY (`intTeamID`),
   KEY `fK_tblTeam_tblCompany1_idx` (`intTCompanyID`),
   KEY `fk_tblTeam_tblCompany2_idx` (`intTForwardCompanyID`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tblteam`
@@ -1020,9 +1064,10 @@ CREATE TABLE IF NOT EXISTS `tblteam` (
 INSERT INTO `tblteam` (`intTeamID`, `strTeamName`, `intTCompanyID`, `intTForwardCompanyID`, `boolDeleted`, `enumStatus`) VALUES
 (1, 'Team Energy Master', 1, NULL, 0, 'Available'),
 (2, 'Team Energy Venus', 1, NULL, 0, 'Available'),
-(3, 'Team Tugmaster Aleli', 2, NULL, 0, 'Available'),
+(3, 'Team Tugmaster Aleli', 2, 1, 0, 'Available'),
 (4, 'Team Energy Pacific', 1, NULL, 0, 'Available'),
-(5, 'Team Tugmaster Don Leon', 2, NULL, 0, 'Available');
+(5, 'Team Tugmaster Don Leon', 2, NULL, 0, 'Available'),
+(6, 'Team Energy Andromeda', 1, NULL, 0, 'Available');
 
 -- --------------------------------------------------------
 
@@ -1055,26 +1100,29 @@ CREATE TABLE IF NOT EXISTS `tbltugboat` (
   `intTTugboatSpecsID` int(11) DEFAULT NULL,
   `intTTugboatClassID` int(11) DEFAULT NULL,
   `intTCompanyID` int(11) DEFAULT NULL,
+  `intForwardCompanyID` int(11) DEFAULT NULL,
   `boolDeleted` tinyint(1) DEFAULT '0',
   `enumTStatus` enum('Working','Under Repair') DEFAULT 'Working',
   PRIMARY KEY (`intTugboatID`),
   KEY `fk_tblTugboat_tblTugboatClass1_idx` (`intTTugboatClassID`),
   KEY `fk_tblTugboat_tblTugboatSpecs1_idx` (`intTTugboatSpecsID`),
   KEY `fk_tblTugboat_tblTugboatMain1_idx` (`intTTugboatMainID`),
-  KEY `fk_tblTugboat_tblCompany1_idx` (`intTCompanyID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  KEY `fk_tblTugboat_tblCompany1_idx` (`intTCompanyID`),
+  KEY `fk_tblTugboat_tblCompany2_idx` (`intForwardCompanyID`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbltugboat`
 --
 
-INSERT INTO `tbltugboat` (`intTugboatID`, `intTTugboatMainID`, `intTTugboatSpecsID`, `intTTugboatClassID`, `intTCompanyID`, `boolDeleted`, `enumTStatus`) VALUES
-(1, 1, 1, 1, 1, 0, 'Working'),
-(2, 2, 2, 2, 1, 0, 'Working'),
-(3, 3, 3, 3, 2, 0, 'Working'),
-(4, 4, 4, 4, 1, 0, 'Working'),
-(5, 5, 5, 5, 1, 0, 'Working'),
-(6, 6, 6, 6, 2, 0, 'Working');
+INSERT INTO `tbltugboat` (`intTugboatID`, `intTTugboatMainID`, `intTTugboatSpecsID`, `intTTugboatClassID`, `intTCompanyID`, `intForwardCompanyID`, `boolDeleted`, `enumTStatus`) VALUES
+(1, 1, 1, 1, 1, NULL, 0, 'Working'),
+(2, 2, 2, 2, 1, NULL, 0, 'Working'),
+(3, 3, 3, 3, 2, NULL, 0, 'Working'),
+(4, 4, 4, 4, 1, NULL, 0, 'Working'),
+(5, 5, 5, 5, 1, NULL, 0, 'Working'),
+(6, 6, 6, 6, 2, NULL, 0, 'Working'),
+(7, 7, 7, 7, 1, NULL, 0, 'Working');
 
 -- --------------------------------------------------------
 
@@ -1097,19 +1145,20 @@ CREATE TABLE IF NOT EXISTS `tbltugboatassign` (
   KEY `fk_tblTugboatAssign_tblTeam1_idx` (`intTATeamID`),
   KEY `fk_tblTugboatAssign_tblCompany1_idx` (`intTACompanyID`),
   KEY `fk_tblTugboatAssign_tblCompany2_idx` (`intTAForwardCompanyID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbltugboatassign`
 --
 
 INSERT INTO `tbltugboatassign` (`intTAssignID`, `intTATugboatID`, `intTATeamID`, `strTADesc`, `intTACompanyID`, `intTAForwardCompanyID`, `enumStatus`, `boolDeleted`) VALUES
-(1, 1, 1, 'Team Energy Venus', 1, NULL, 'Occupied', 0),
+(1, 1, NULL, 'Team Energy Venus', 1, NULL, 'Occupied', 0),
 (2, 2, 4, 'Team Energy Pacific', 1, NULL, 'Occupied', 0),
 (3, 3, 3, 'Team Tugmaster Aleli', 2, NULL, 'Occupied', 0),
 (4, 4, 1, 'Team Energy Venus', 1, NULL, 'Occupied', 0),
-(5, 5, 2, NULL, 1, 2, 'Occupied', 0),
-(6, 6, 3, NULL, 2, 1, 'Occupied', 0);
+(5, 5, 6, 'Team Energy New', 1, 2, 'Occupied', 0),
+(6, 6, 5, 'Team Tugmaster Don Leon', 2, 1, 'Occupied', 0),
+(7, 7, 2, 'Team Energy Venus', NULL, NULL, 'Available', 0);
 
 -- --------------------------------------------------------
 
@@ -1133,19 +1182,20 @@ CREATE TABLE IF NOT EXISTS `tbltugboatclass` (
   `boolDeleted` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`intTugboatClassID`),
   KEY `fk_tugboatclass_tugboattype` (`intTCTugboatTypeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbltugboatclass`
 --
 
 INSERT INTO `tbltugboatclass` (`intTugboatClassID`, `strOwner`, `strTugboatFlag`, `intTCTugboatTypeID`, `strClassNum`, `strOfficialNum`, `strIMONum`, `strTradingArea`, `strHomePort`, `enumISPSCodeCompliance`, `enumISMCodeStandard`, `boolDeleted`) VALUES
-(1, 'Hi Energy Marine Services INC.', NULL, 1, 'ORS-12-0804', '10 0000746', '7419573', 'Coastwise', 'Cagayan De Oro', 'Yes', 'Yes', 0),
-(2, 'Hi Energy Marine Services INC.', 'Phillipines', 2, 'ORS-16-0901', '04-0005098', '7912939', 'Coastwise', 'Batangas', 'Yes', 'Yes', 0),
-(3, 'Hi Energy Marine Services INC.', 'Phillipines', 2, 'ORS-16-0903', '04-0005092', '7912934', 'Coastwise', 'Manila', 'Yes', 'Yes', 0),
-(4, 'Hi Energy Marine Services INC.', 'Phillipines', 2, 'ORS-16-0904', '04-0005498', '7912573', 'Coastwise', 'Manila', 'Yes', 'Yes', 0),
-(5, 'Hi Energy Marine Services INC.', 'Phillipines', 1, 'ORS-16-0901', '04-0005098', '7912939', 'Coastwise', 'Batangas', 'Yes', 'Yes', 0),
-(6, 'Tugmaster & Barge Pool Inc.', 'Phillipines', 1, 'ORS-16-0901', '04-0005098', '7912939', 'Coastwise', 'Batangas', 'Yes', 'Yes', 0);
+(1, 'Hi Energy Marine Services INC.', 'Philippines', 1, 'ORS-12-0804', '10 0000746', '7419573', 'Coastwise', 'Cagayan De Oro', 'Yes', 'Yes', 0),
+(2, 'Hi Energy Marine Services INC.', 'Philippines', 2, 'ORS-16-0901', '04-0005098', '7912939', 'Coastwise', 'Batangas', 'Yes', 'Yes', 0),
+(3, 'Hi Energy Marine Services INC.', 'Philippines', 2, 'ORS-16-0903', '04-0005092', '7912934', 'Coastwise', 'Manila', 'Yes', 'Yes', 0),
+(4, 'Hi Energy Marine Services INC.', 'Philippines', 2, 'ORS-16-0904', '04-0005498', '7912573', 'Coastwise', 'Manila', 'Yes', 'Yes', 0),
+(5, 'Hi Energy Marine Services INC.', 'Philippines', 1, 'ORS-16-0901', '04-0005098', '7912939', 'Coastwise', 'Batangas', 'Yes', 'Yes', 0),
+(6, 'Tugmaster & Barge Pool Inc.', 'Philippines', 1, 'ORS-16-0901', '04-0005098', '7912939', 'Coastwise', 'Batangas', 'Yes', 'Yes', 0),
+(7, 'Hi Energy Marine Services INC.', 'Philippines', 4, 'ORS-16-0902', '04-0005075', '04-0000089', 'Coastwise', 'Batangas City', 'Yes', 'Yes', 0);
 
 -- --------------------------------------------------------
 
@@ -1177,7 +1227,7 @@ CREATE TABLE IF NOT EXISTS `tbltugboatinsurance` (
   `boolDeleted` varchar(45) CHARACTER SET latin1 DEFAULT '0',
   PRIMARY KEY (`intTugboatInsuranceID`),
   KEY `fk_tblTugboatInsurance_tbTugboat1l_idx` (`intTITugboatID`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbltugboatinsurance`
@@ -1194,7 +1244,9 @@ INSERT INTO `tbltugboatinsurance` (`intTugboatInsuranceID`, `strTugboatInsurance
 (10, 'Pioneer', 5, '0'),
 (11, 'P & I', 5, '0'),
 (12, 'P & I', 6, '0'),
-(13, 'Pioneer', 6, '0');
+(13, 'Pioneer', 6, '0'),
+(14, 'P & I', 7, '0'),
+(15, 'Pioneer Insurance', 7, '0');
 
 -- --------------------------------------------------------
 
@@ -1217,19 +1269,20 @@ CREATE TABLE IF NOT EXISTS `tbltugboatmain` (
   `datLastDrydocked` date DEFAULT NULL,
   `boolDeleted` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`intTugboatMainID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbltugboatmain`
 --
 
 INSERT INTO `tbltugboatmain` (`intTugboatMainID`, `strName`, `strLength`, `strBreadth`, `strDepth`, `strHorsePower`, `strMaxSpeed`, `strBollardPull`, `strGrossTonnage`, `strNetTonnage`, `datLastDrydocked`, `boolDeleted`) VALUES
-(1, 'MT Energy Masters', '29.43', '8.20', '3.59', '3.59', '13.5', '36.931', '188', '55.79', '2015-08-06', 0),
-(2, 'MT Super Tugs', '20', '20', '20', '20', '20', '20', '20', '20', '2018-06-19', 0),
-(3, 'MT Tugmaster Aleli ', '22', '20', '21', 'Power 1', '200', '200', '200', '200', '2018-06-10', 0),
-(4, 'MT Energy Venus', '15', '15', '3.59 M', '1318.42x2 - 2636.84 HP', '13.40 Knots', '43.63 Tons', '188.00 Tons', '56.00 Tons', '2018-03-12', 0),
-(5, 'MT Energy Pacific', '12.5', '12', '4.00', '1318.42x2 - 2636.84', '15', '45', '188.00', '55.79', '2015-10-20', 0),
-(6, 'MT Tugmaster Don Leon', '12', '12', '4.00', '1318.42x2 - 2636.84', '15', '45', '188.00', '45', '2015-10-01', 0);
+(1, 'MT Energy Masters', '29.43', '8.20', '3.59', '2200.38', '13.5', '36.931', '188', '55.79', '2015-08-06', 0),
+(2, 'MT Energy Galaxy', '20', '9', '4', '3123.00', '20', '20', '20', '20', '2018-06-19', 0),
+(3, 'MT Tugmaster Aleli ', '22', '20', '21', '2636.84', '200', '200', '200', '200', '2018-06-10', 0),
+(4, 'MT Energy Venus', '15', '15', '3.59 M', '2636.84', '13.40 Knots', '43.63 Tons', '188.00 Tons', '56.00 Tons', '2018-03-12', 0),
+(5, 'MT Energy Pacific', '12.5', '12', '4.00', '2403.86', '15', '45', '188.00', '55.79', '2015-10-20', 0),
+(6, 'MT Tugmaster Don Leon', '12', '12', '4.00', '2636.84', '15', '45', '188.00', '45', '2015-10-01', 0),
+(7, 'MT Energy Andromeda', '12.0', '8.00', '4.0', '3200.23', '15.23', '16.54', '155.54', '122.20', '2018-10-17', 0);
 
 -- --------------------------------------------------------
 
@@ -1267,7 +1320,7 @@ CREATE TABLE IF NOT EXISTS `tbltugboatspecs` (
   `enumAISGPSVHFRadar` enum('Yes','No') DEFAULT NULL,
   `boolDeleted` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`intTugboatSpecsID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbltugboatspecs`
@@ -1279,7 +1332,8 @@ INSERT INTO `tbltugboatspecs` (`intTugboatSpecsID`, `strHullMaterial`, `strBuild
 (3, 'Metal', 'Russian', 'Power', 'Drive', '3/2', 'Engine', 'Russia', '2016-12-30', 'Yes', 0),
 (4, 'Steel', 'Kanagahazosen', 'Niigata', 'Niigata ZP-2', '2/4', 'Yanmar', 'Philippines', '2017-11-07', 'Yes', 0),
 (5, 'Steel', 'Kanagahazosen', 'Niigata', 'Niigata ZP-2', '8/4', 'Yanmar', 'Japan', '1970-10-30', 'Yes', 0),
-(6, 'Steel', 'Kanagahazosen', 'Niigata', 'Niigata ZP-2', '8/4', 'Yanmar', 'Japan', '1970-08-10', 'Yes', 0);
+(6, 'Steel', 'Kanagahazosen', 'Niigata', 'Niigata ZP-2', '8/4', 'Yanmar', 'Japan', '1970-08-10', 'Yes', 0),
+(7, 'Steel', 'Kanagahazosen', 'Niigata', '7419573', '8/4', 'Yanmar Auxillary Engine 2', 'Japan', '2018-10-02', 'Yes', 0);
 
 -- --------------------------------------------------------
 
@@ -1294,7 +1348,7 @@ CREATE TABLE IF NOT EXISTS `tbltugboattype` (
   `isActive` tinyint(1) DEFAULT '1',
   `boolDeleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`intTugboatTypeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbltugboattype`
@@ -1304,7 +1358,8 @@ INSERT INTO `tbltugboattype` (`intTugboatTypeID`, `strTugboatTypeName`, `isActiv
 (1, 'Harbor Tug', 1, 0),
 (2, 'River Tug', 1, 0),
 (3, 'Deep Sea Tug', 1, 0),
-(4, 'Harbor Tugs', 1, 0);
+(4, 'Harbor Tugs', 1, 0),
+(5, 'Deep River Tug', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -1337,7 +1392,7 @@ CREATE TABLE IF NOT EXISTS `tblvesseltype` (
   `boolDeleted` tinyint(1) DEFAULT '0',
   `isActive` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`intVesselTypeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tblvesseltype`
@@ -1353,7 +1408,8 @@ INSERT INTO `tblvesseltype` (`intVesselTypeID`, `strVesselTypeName`, `boolDelete
 (7, 'Oil Industry Vessel', 0, 1),
 (8, 'Passenger Ship', 0, 1),
 (9, 'Ferry Boat', 0, 1),
-(10, 'Cruise Ship', 0, 1);
+(10, 'Cruise Ship', 0, 1),
+(11, 'Motor Boat Tanker', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -1378,16 +1434,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `token` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `intUCompanyID`, `remember_token`, `created_at`, `updated_at`, `enumUserType`, `isVerified`, `isActive`, `boolDeleted`, `token`) VALUES
-(1, 'HEMSI', 'hienergymarineservices@gmail.com', '$2y$10$EPf6MLFuhVXXVji1gE.vnONc2PdnoHSEkJ1H8wIPJcLbz2CE6.4de', 1, 'KfA7cUQaZjL5weK55OBrauB5D9AUafRVbHNcSjliwbEULIBpoj8m9JoH3JDk', '2018-08-26 21:39:55', '2018-08-27 02:50:40', 'Admin', 0, 1, 0, NULL),
-(2, 'Tugmasters', 'tugmaster@gmail.com', '$2y$10$uGDjz7KPIoaX5jCw/NN9NOC7AdruGebYbIYuIRn1xuSvss8vwA0l.', 2, 'dWiG0bZYeqQ5b3Q9rT98Qc907FiA42aqjGGTi4J4pKk3OBTxa9HOGgw895BL', '2018-08-26 21:43:36', '2018-08-26 21:43:36', 'Affiliates', 0, 1, 0, NULL),
-(3, 'Black Pink', 'blackpinkyg@gmail.com', '$2y$10$QeUnO0ypzktouf/19X6k3OEJkQ7iryv2Q24xrv7F1v.ohyQyLoYRW', 3, 'YDxppYImnroH5mqVe4aAq6HiOYglYOl1qWP6EEzppv6L146P2xNqw5HhVkHZ', '2018-08-26 22:08:35', '2018-09-30 22:38:43', 'Consignee', 0, 1, 0, NULL),
+(1, 'HEMSI', 'hienergymarineservices@gmail.com', '$2y$10$EPf6MLFuhVXXVji1gE.vnONc2PdnoHSEkJ1H8wIPJcLbz2CE6.4de', 1, 'ZqMfbEldp6Oh6Z68bOM2PGc4vJI9TbsZkrY7F7RurcGQmKYnnDaSApp1pdPO', '2018-08-26 21:39:55', '2018-08-27 02:50:40', 'Admin', 0, 1, 0, NULL),
+(2, 'Tugmasters', 'tugmaster@gmail.com', '$2y$10$uGDjz7KPIoaX5jCw/NN9NOC7AdruGebYbIYuIRn1xuSvss8vwA0l.', 2, 'niIPsGagSNPbRO0Pn1yj5LFRgNQr5tJrsovmokSFLtPDZT0aWWVqorrFEI4D', '2018-08-26 21:43:36', '2018-08-26 21:43:36', 'Affiliates', 0, 1, 0, NULL),
+(3, 'Black Pink', 'blackpinkyg@gmail.com', '$2y$10$QeUnO0ypzktouf/19X6k3OEJkQ7iryv2Q24xrv7F1v.ohyQyLoYRW', 3, 'DuXf3Z9CPgSdYFqDQLmZmc7cDp0KTe0Tkhg4p5JvOFGMRsk1co2I5vt9e7Y9', '2018-08-26 22:08:35', '2018-09-30 22:38:43', 'Consignee', 0, 1, 0, NULL),
 (4, 'TWICE', 'twicejype@gmail.com', '$2y$10$7pFLHptgmpu00ZO534rUE.UVQkVp9Vq.cFfPhzGt9REt4lmrOVTAy', 4, 'eF2aWBHWjDL7i3xgaWEpQWQyAluvtEUUz8GYp2ZvF7krNgIpODBijGCs23zR', '2018-08-27 02:46:55', '2018-10-12 11:15:07', 'Consignee', 0, 1, 0, NULL),
 (5, 'TWICE', 'twicesujype@gmail.com', '$2y$10$q9nlpjUEfEOKVgzmMAuVJeTx4XbYvGBpKth22ZaVlXKnjJRS0gVie', 5, 'xJVLr2FlnEoZUsPTwne6RjTEhF7tJ6Tff607ubCuxhMUuum0tm4x4fRvmt2Y', '2018-08-27 02:47:56', '2018-10-12 11:15:10', 'Consignee', 0, 1, 0, NULL),
 (6, 'Isaac Tailoring Shop', 'isaac@gmail.com', '$2y$10$j8z4HECOGsHqXiBa1J5EueWk/e9PNIapA4TRrKvpPL9I46AelTNRK', 6, '7ZN2sDcHi2QHVevs0Z993JvhTusfB3Of3YC7qZD3dMOzmOsmZIfRZJ7eu4Sr', '2018-08-27 04:41:35', '2018-08-27 05:47:58', 'Consignee', 0, 1, 0, NULL),
@@ -1395,9 +1451,9 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `intUCompanyID`, `rememb
 (13, 'akari', 'akari@gmail.com', '$2y$10$EPf6MLFuhVXXVji1gE.vnONc2PdnoHSEkJ1H8wIPJcLbz2CE6.4de', 8, '7HZA8yZ5BCrUja1oNHsplXQLCBsPLxBTbS91ktVHR6sIKsKpY7XNeeteyBXy', '2018-08-27 20:45:30', '2018-08-27 20:46:38', 'Consignee', 0, 1, 0, NULL),
 (14, 'Timba', 'Timba@gmail.com', '$2y$10$WhBrPXcF/tQBMhnhlcGA7eN8GDNym8AUpIO6J9AfqfY/KQabVXAoW', 9, 'pNZhkUy5qsREel823qsLLJnPBmQD9l8gAsqsennPW7E5ilfIQuehIMS0dTDa', '2018-08-27 22:56:57', '2018-08-27 22:57:19', 'Consignee', 0, 1, 0, NULL),
 (15, 'cmrecto', 'cmrecto@gmail.com', '$2y$10$j4tDnh2dRkk5wfEotn0hkuNuoQQUAfJNkgwLU.P0m.OMfUX9u.uqG', 10, '9RmJ20YflA7dFB4e13zMdRoBvQSXbqIFEueh0oiywVaZgbBBg6qLoMdb3QrF', '2018-09-30 22:35:51', '2018-09-30 22:38:36', 'Consignee', 0, 1, 0, NULL),
-(16, 'Reignyy', 'reignexdummy@gmail.com', '$2y$10$B7N./4USdfvTSSOQEy/ko.YgzFrm6CKeyh9PbGK8VXKLsfogFEJ4q', 20, '7gy5iIXMqzwgKvykvlnVGs4Isz9fkoHrzFwIVAQkW4HvV5QeTKXifTbJlqUC', '2018-10-16 16:17:15', '2018-10-16 16:23:19', 'Consignee', 0, 1, 0, 'ltoOGYqIRGGfQqh8MDoJrWH28'),
-(18, 'Reignyy', 'reignshirley@gmail.com', '$2y$10$CgVlVldTW599paDm0qIypO3dYB4N79irbGB1LWvJmBhbT2rO4HLI2', 22, 'oPPgrezYvVdPLMHIByIR1Eus2oajtIJEgENGIS0CMHWiQoeaLVtAHVDAlhLE', '2018-10-16 16:18:25', '2018-10-16 16:18:25', 'Consignee', 0, 0, 0, 'mI1R8w1MDFzxjJHcMPAE8S4pv'),
-(20, 'Reign', 'johnpagaduan04@gmail.com', '$2y$10$sfBxRWr4pcbHpfXFi3ca9uFKPvc.aPRVvTCf9mE9BLSnwh4EV5WFy', 24, NULL, '2018-10-16 16:32:15', '2018-10-16 16:33:11', 'Consignee', 0, 1, 0, 'AX2eLojCPe5uvrfaQcsodQu96');
+(21, 'Emmanuel', 'reignshirley@gmail.com', '$2y$10$fUgf2R6iPpOmaB6v5b3WseMU69oCxUkDth./.dro4.YPBRePLbYQa', 25, NULL, '2018-10-16 22:32:18', '2018-10-16 22:33:19', 'Consignee', 0, 1, 0, NULL),
+(22, 'Sir Eli', 'e_a_austria@yahoo.com', '$2y$10$QET0Zu5iLvIktPRXdX0LxuwnRgby6JZqRoqnibWDLX72QoZeCsdES', 26, NULL, '2018-10-16 23:16:39', '2018-10-16 23:16:39', 'Consignee', 0, 0, 0, 'mMwOS6htFdUhtmhcZDsDD8SuH'),
+(23, 'EMReign', 'clumsyreigny@gmail.com', '$2y$10$Cxob/uNaW.O6IWEJX/b2gOD1w71b.ARpwnAp61sfwIG6WnJGjF4Aq', 27, '41JWw6kr0daEFudKMb6Tylg5AopTcjCYgp5iMS8rgg5nJXkXPZ3wgg1uTCV1', '2018-10-16 23:18:40', '2018-10-16 23:20:40', 'Consignee', 0, 1, 0, 'mdvavpgrzaX6V2NgqhQnWsqPT');
 
 --
 -- Constraints for dumped tables
@@ -1557,6 +1613,7 @@ ALTER TABLE `tblteamcomp`
 --
 ALTER TABLE `tbltugboat`
   ADD CONSTRAINT `fk_tblTugboat_tblCompany1` FOREIGN KEY (`intTCompanyID`) REFERENCES `tblcompany` (`intCompanyID`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tblTugboat_tblCompany2` FOREIGN KEY (`intForwardCompanyID`) REFERENCES `tblcompany` (`intCompanyID`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tblTugboat_tblTugboatClass1` FOREIGN KEY (`intTTugboatClassID`) REFERENCES `tbltugboatclass` (`intTugboatClassID`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tblTugboat_tblTugboatMain1` FOREIGN KEY (`intTTugboatMainID`) REFERENCES `tbltugboatmain` (`intTugboatMainID`) ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tblTugboat_tblTugboatSpecs1` FOREIGN KEY (`intTTugboatSpecsID`) REFERENCES `tbltugboatspecs` (`intTugboatSpecsID`) ON UPDATE CASCADE;

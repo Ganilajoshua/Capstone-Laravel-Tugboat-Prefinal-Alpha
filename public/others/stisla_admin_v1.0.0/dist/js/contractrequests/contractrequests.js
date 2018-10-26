@@ -61,8 +61,10 @@ $(document).ready(function(){
         }
 
     });
-    $('#addSignatureButton').on('click',function(){
+    $('.addSignatureButton').on('click',function(){
         $('#applySignatureModal').modal('show');
+        $('.finalizeContract').data('id',$(this).data('id'));
+        console.log($(this).data('id'));
     });
 });
 
@@ -303,13 +305,15 @@ function showContracts(){
             // }
             
 }
+
+
 function createActiveContract(){
     //Comment
     // Tinanggal ko yung contractID nag eerror yun kasi bag empty yung table sa DB
     // Ginawa ko nalang data ID
     console.log($('#addSignatureButton').data('id'));
     var sign = $('#signatureJSON').val();
-    var contractID = $('#addSignatureButton').data('id')
+    var contractID = $('#addSignatureButton').data('id');
         $('#applySignatureModal').modal('hide');
         $.ajax({
             url : url + '/' + contractID + '/getactive',
@@ -395,7 +399,46 @@ function createActiveContract(){
 }
 
 $('.finalizeContract').on('click',function(){
-
+    console.log($(this).data('id'));
+    var contractID = $(this).data('id');
+    var sign = $('#signatureJSON').val();
+    swal({
+        title: "Are You Sure?",
+        text: "Finalize This Contract?",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonClass: "btn-info",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true,
+    },(isConfirm)=>{
+        $.ajax({
+            url : `${url}/finalizecontract`,
+            type : 'POST',
+            data : {
+                "_token" : $('meta[name="csrf-token"]').attr('content'),
+                contractID : contractID,
+                sign : sign,
+            },
+            success : (data, response)=>{
+                swal({
+                    title: "Success",
+                    text: "Selected Contract Was Finalized",
+                    type: "info",
+                    showCancelButton: true,
+                    confirmButtonClass: "btn-info",
+                    confirmButtonText: "Ok",
+                    closeOnConfirm: true,
+                },(isConfirm)=>{
+                    if(isConfirm){
+                        location.reload();
+                    }
+                });
+            },
+            error : (error)=>{
+                throw error;
+            }
+        })
+    });
 });
 
 $('.activateContract').on('click',function(){

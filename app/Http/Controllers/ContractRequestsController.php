@@ -84,6 +84,7 @@ class ContractRequestsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         $contract = Contract::findOrFail($request->contractID);
@@ -186,6 +187,34 @@ class ContractRequestsController extends Controller
     {
         //
     }
+    public function finalizecontract(Request $request){
+        $contract = Contract::findOrFail($request->contractID);
+        $contract->strAdminSign = $request->sign;
+        $contract->timestamps = false;
+        $contract->enumStatus = 'Finalized';
+        $contract->save();
+
+        $quotations = Quotations::where('intQContractListID',$request->contractID)->get();
+
+        for($count = 0; $count < count($quotations); $count++){
+            $finalfees = new FinalContractFeesMatrix;
+            $finalfees->timestamps = false;
+            $finalfees->intFCFContractListID = $quotations[$count]->intQContractListID;
+            $finalfees->enumFCFServiceType = $quotations[$count]->enumServiceType;
+            $finalfees->fltFCFStandardRate = $quotations[$count]->fltStandardRate;
+            $finalfees->fltFCFConsigneeLateFee = $quotations[$count]->fltQuotationConsigneeLateFee;
+            $finalfees->fltFCFTugboatDelayFee = $quotations[$count]->fltQuotationTDelayFee;
+            $finalfees->fltFCFViolationFee = $quotations[$count]->fltQuotationViolationFee;
+            $finalfees->fltFCFMinDamageFee = $quotations[$count]->fltMinDamageFee;
+            $finalfees->fltFCFMaxDamageFee = $quotations[$count]->fltMaxDamageFee;
+            $finalfees->intFCFDiscountFee = $quotations[$count]->intDiscount;
+            $finalfees->save();
+        }
+
+        return response()->json(['contract'=>$contract,'finalfees'=>$finalfees]);
+
+    }
+
     public function activate(Request $request){
         $contract = Contract::findOrFail($request->contractID);
         $contract->strAdminSign = $request->sign;
@@ -194,24 +223,7 @@ class ContractRequestsController extends Controller
         $contract->datContractActive = $request->contractActive;
         $contract->datContractExpire = $request->contractExpire;
         $contract->save();
-
-        // $quotations = Quotations::where('intQContractListID',$contract->intContractListID)->get();
-
-        // for($count = 0; $count < count($quotations); $count++){
-        //     $finalfees = new FinalContractFeesMatrix;
-        //     $finalfees->timestamps = false;
-        //     $finalfees->intFCFContractListID = $quotations[$count]->intQContractListID;
-        //     $finalfees->enumFCFServiceType = $quotations[$count]->enumServiceType;
-        //     $finalfees->fltFCFStandardRate = $quotations[$count]->fltStandardRate;
-        //     $finalfees->fltFCFConsigneeLateFee = $quotations[$count]->fltQuotationConsigneeLateFee;
-        //     $finalfees->fltFCFTugboatDelayFee = $quotations[$count]->fltQuotationTDelayFee;
-        //     $finalfees->fltFCFViolationFee = $quotations[$count]->fltQuotationViolationFee;
-        //     $finalfees->fltFCFMinDamageFee = $quotations[$count]->fltMinDamageFee;
-        //     $finalfees->fltFCFMaxDamageFee = $quotations[$count]->fltMaxDamageFee;
-        //     $finalfees->intFCFDiscountFee = $quotations[$count]->intDiscount;
-        //     $finalfees->save();
-        // }
-
+        
         return response()->json(['contract'=>$contract]);
     }
     public function requestchanges($intContractListID)

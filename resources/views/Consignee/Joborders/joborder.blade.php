@@ -8,7 +8,7 @@
 @endsection
 @section('content')
     @if(count($contract) > 0)
-        @if($contract->intContractListID == null)
+
             <section class="statistic statistic2">
                 <div class="container">
                     <div class="row">

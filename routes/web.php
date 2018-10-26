@@ -243,6 +243,7 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::get('/contractrequests/{intContractID}/getactive','ContractRequestsController@getactive');
         Route::post('/contractrequests/show','ContractRequestsController@show');
         Route::post('/contractrequests/store','ContractRequestsController@store');
+        Route::post('/contractrequests/finalizecontract','ContractRequestsController@finalizecontract');
         Route::post('/contractrequests/activate','ContractRequestsController@activate');
         Route::post('/contractrequests/getnotifs','ContractRequestsController@getnotifs');
         Route::post('/contractrequests/saverequestchanges','ContractRequestsController@saverequestchanges');
@@ -337,6 +338,7 @@ Route::group(['prefix'=>'consignee/'],function(){
     Route::post('/contracts/activate','ConsigneeControllers\ContractsController@activate');
     Route::post('/contracts/store','ConsigneeControllers\ContractsController@store');
     Route::post('/contracts/getnotifs','ConsigneeControllers\ContractsController@getnotifs');
+    Route::post('/contracts/requestforactivation','ConsigneeControllers\ContractsController@requestforactivation');
     //Job Orders
     Route::resource('/joborders','ConsigneeControllers\JobOrdersController');
     Route::post('/joborders/create','ConsigneeControllers\JobOrdersController@create');

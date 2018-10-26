@@ -140,7 +140,7 @@
                                                     <td>{{$companyAccepted->strCompanyName}}</td>
                                                     <td>
                                                         <div class="ml-1 mr-1">
-                                                            <button id="addSignatureButton" class="btn btn-sm btn-primary" data-id="{{$companyAccepted->intContractListID}}" role="button">
+                                                            <button class="addSignatureButton btn btn-sm btn-primary" data-id="{{$companyAccepted->intContractListID}}" role="button">
                                                                 Sign
                                                             </button>
                                                         </div>

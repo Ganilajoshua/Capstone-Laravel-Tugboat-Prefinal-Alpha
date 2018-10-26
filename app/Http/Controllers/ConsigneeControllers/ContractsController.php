@@ -60,6 +60,7 @@ class ContractsController extends Controller
         ->select('company.*','contracts.*','users.*','matrix.*')
         // ->where('contracts.intCQuotationID',null)
         ->get();
+        // $contractListFinal = DB::table('tblfinalcontractfeesmatrix');
         $fees = ContractFeesMatrix::all();
         return view('Consignee.Contracts.newindex',compact('company','contract','contractList','fees','contractListFinal','contractlist'));
         // ->with('company',$company)
@@ -157,6 +158,14 @@ class ContractsController extends Controller
         $contract->save();
         return response()->json(['contract'=>$contract]);
     }
+    public function requestforactivation(Request $request){
+        $contract = Contract::findOrFail($request->contractID);
+        $contract->timestamps = false;
+        $contract->enumStatus = 'For Activation';
+        $contract->save();
+        
+        return response()->json(['contract'=>$contract]);
+    } 
     public function activate(Request $request){
         $contract = Contract::findOrFail($request->contractID);
         $contract->strConsigneeSign = $request->sign;
