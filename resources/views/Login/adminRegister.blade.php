@@ -43,17 +43,17 @@
                                     <form action="/administrator/register" method="POST">          
                                         <div class="form-group">
                                             <label for="companyname">Company Name</label>
-                                            <input id="companyname" type="text" class="form-control" name="companyname" autofocus>
+                                            <input id="companyname" type="text" class="form-control" name="companyname" autofocus required>
                                         </div>
                                         <div class="form-group">
                                             <label for="address">Address</label>
-                                            <input id="address" type="text" class="form-control" name="address" autofocus>
+                                            <input id="address" type="text" class="form-control" name="address" autofocus required>
                                         </div>
                                         <div class="row">
                                             <div class="col">
                                                 <div class="form-group">
                                                         <label for="email">Email</label>
-                                                        <input id="email" type="email" class="form-control" name="email">
+                                                        <input id="email" type="email" class="form-control" name="email" required>
                                                         <div class="invalid-feedback">
                                                         </div>
                                                 </div>
@@ -61,7 +61,7 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="username">Username</label>
-                                                    <input id="username" type="text" class="form-control" name="username">
+                                                    <input id="username" type="text" class="form-control" name="username" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -69,7 +69,7 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                         <label for="telnum">Telephone Number</label>
-                                                        <input id="telnum" type="telnum" class="form-control" name="telnum">
+                                                        <input id="telnum" type="telnum" class="form-control" name="telnum" required>
                                                         <div class="invalid-feedback">
                                                         </div>
                                                 </div>
@@ -77,18 +77,18 @@
                                             <div class="col">
                                                 <div class="form-group">
                                                     <label for="mobilenum">Mobile Number</label>
-                                                    <input id="mobilenum" type="text" class="form-control" name="mobilenum">
+                                                    <input id="mobilenum" type="text" class="form-control" name="mobilenum" required>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-6">
                                                 <label for="password" class="d-block">Password</label>
-                                                <input id="password" type="password" class="form-control" name="password">
+                                                <input id="password" type="password" class="form-control" name="password" required>
                                             </div>
                                             <div class="form-group col-6">
                                                 <label for="password2" class="d-block">Password Confirmation</label>
-                                                <input id="password2" type="password" class="form-control" name="password-confirm">
+                                                <input id="password2" type="password" class="form-control" name="password-confirm" required>
                                             </div>
                                         </div>
 
@@ -175,6 +175,7 @@
         <script src="/others/stisla_admin_v1.0.0/dist/js/custom.js"></script>
         <script src="/others/stisla_admin_v1.0.0/dist/js/demo.js"></script>
         <script src="/others/stisla_admin_v1.0.0/dist/modules/pace/pace.min.js"></script>
+        <script type="text/javascript" src="/others/stisla_admin_v1.0.0/dist/js/login/login.js"></script>
     </body>
 
 </html>

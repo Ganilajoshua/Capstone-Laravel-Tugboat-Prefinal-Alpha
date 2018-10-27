@@ -247,6 +247,11 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::post('/contractrequests/activate','ContractRequestsController@activate');
         Route::post('/contractrequests/getnotifs','ContractRequestsController@getnotifs');
         Route::post('/contractrequests/saverequestchanges','ContractRequestsController@saverequestchanges');
+        
+        // Route::get('/contractrequests/saverequestchanges','ContractRequestsController@printPDF');
+        // Route::get('/contractrequests/saverequestchanges', function(){
+        //     return view('Reports.serviceReportPDF');
+        // });
         //Final Contracts
         
         //Dispatch and Hauling - Forward Requests
@@ -267,6 +272,11 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::post('/dispatchticket/store','DispatchTicketController@store');
         Route::post('/dispatchticket/finalize','DispatchTicketController@finalize');
         Route::post('/dispatchticket/charges','DispatchTicketController@charges');
+        // Route::get('/dispatchticket/printPDF','DispatchTicketController@printPDF');
+        Route::get('/dispatchticket/printPDF','DispatchTicketController@printPDF');
+        Route::get('/dispatchticket/printPDF', function(){
+            return view('dispatchticket.printPDF');
+        });
         //Scheduling
         Route::post('/scheduling/tugboatsavailable','SchedulingController@tugboatsavailable');
     });

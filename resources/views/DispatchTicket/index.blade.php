@@ -9,14 +9,15 @@
 @endsection
 @section('content')
     <section class="section">
-        <h1 class="section-header">
-            <div>
-                Dispatch Ticket
+		<h1 class="section-header">
+			<div>
+				Dispatch Ticket
                 <small class="ml-1 smCat">
-                    Transactions
+					Transactions
                 </small>
             </div>
 		</h1>
+		<a href="{{ url('/administrator/transactions/dispatchticket/printPDF')}}" class="btn btn-primary waves-effect">Generate PDF</a>
 		<div class="dispatchTicketTable zoomIn animated fast">
 			<div class="card card-primary">
 				<div class="card-header">
@@ -107,5 +108,7 @@
     </section>
 	@include('DispatchTicket.info')
 	@include('DispatchTicket.charges')	
+	{{-- @include('DispatchTicket.printPDF')	 --}}
+	
 @endsection
 

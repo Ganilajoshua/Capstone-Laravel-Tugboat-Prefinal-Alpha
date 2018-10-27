@@ -247,12 +247,11 @@
                                 <h4 class=" text-white"><span>{{$contract[0]->strContractListTitle}}</span><span><div class="badge badge-warning ml-2">NOT YET FINALIZED</div></h4>
                             </div>
                             <div class="card-body contractRequestsQuotes">
-                                <h3>You Have Received an Initial Quote</h3>
+                                <h3 class="text-center">You Have Received an Initial Quote</h3>
                                 {{-- <div style="font-size: 18px;" class="mt-4 badge badge-warning text-black">
                                 </div>     --}}
                                 <div class="row mt-4">
-                                    <div class="col-12">
-                                        <button class="btn btn-primary viewQuotesMatrix" data-id="{{$contract[0]->intContractListID}}">
+                                    <div class="col-12"><button class="btn btn-secondary viewQuotesMatrix float-left waves-effect" data-id="{{$contract[0]->intContractListID}}">
                                             View Details
                                         </button>
                                     </div>
@@ -323,12 +322,12 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <a id="showTermsConditionButton" href="#" class="btn btn-primary waves-effect mr-3">View Terms &amp; Conditions</a>
+                                    </div>
+                                </div>
                             </div>
-                                            <div>
-                                                {{-- <input type="checkbox" name="checkbox" value="value"><a href="#" id="showTermsConditionButton">nyak</a></label> --}}
-                                                {{-- <button class="btn btn-primary showTermsConditionButton"></button> --}}
-                                                <label class="custom-control-label" for="agree">I agree with the <a id="showTermsConditionButton" href="#">terms and conditions</a><sup class="text-primary">✱</sup></label>
-                                            </div>
                             <div class="card-footer text-center">
                                 <input type="hidden" id="contractsID">
                                 {{-- <button class="btn btn-primary waves-effect" data-toggle="modal" data-target="#requestChangesModal">Request for Changes</button> --}}
@@ -517,7 +516,7 @@
                                         <hr>
                                         <h3>Terms and Condition</h3>
                                         <br>
-                                        <textarea class="summernoteQuote" name="" id="" cols="30" rows="10">
+                                        <textarea class="summernoteQuote" name="" id="" cols="30" rows="10" disabled>
                                         {{-- @foreach($TermsCondition) --}}
                                             {{$TermsCondition[0]->strContractListDesc}}
                                         {{-- @endforeach --}}

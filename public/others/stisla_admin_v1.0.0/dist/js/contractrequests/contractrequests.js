@@ -12,23 +12,7 @@ $(document).ready(function(){
     $('.createContracts').addClass('animated fadeIn');
     // $('select').niceSelect();
     $('#detLayout','.detailedTable').addClass('animated fadeIn');
-    $('.summernoteContract').summernote({
-        minHeight: 350,
-        disableDragAndDrop: true,
-        fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '20', '22', '24', '26', '28', '36', '48', '72'],
-        toolbar: [
-            // [groupName, [list of button]]
-            ['style', ['bold', 'italic', 'underline', 'clear']],
-            ['fontname'],
-            ['font', ['strikethrough', 'superscript', 'subscript']],
-            ['fontsize'],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['height', ['height']],
-            ['insert', [ 'link']],
-            ['help']
-        ]
-    });
+    $('.summernoteContract').summernote('disable');
 
     var signCanvas = $('.signCanvas').signature({
         syncField: '#signatureJSON'
@@ -66,9 +50,32 @@ $(document).ready(function(){
         $('.finalizeContract').data('id',$(this).data('id'));
         console.log($(this).data('id'));
     });
+    
 });
 
-
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          else{
+            //   return postPier(); 
+            event.preventDefault();
+            event.stopPropagation();
+            return storeContracts();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
 function createContracts(contractID){
     console.log(contractID);
     $.ajax({

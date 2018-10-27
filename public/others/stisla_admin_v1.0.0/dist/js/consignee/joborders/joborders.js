@@ -42,9 +42,12 @@ $(document).ready(function(){
     // console.log('PUTANG INA MO BOBO');
 });
 
+  
 var url = '/consignee/joborders';
 
-$('.submitJobOrderHauling').on('click',function(){
+
+function submitJobOrderHauling(){
+// $('.submitJobOrderHauling').on('click',function(){
     console.log('////////////////////////////');
     var title = $('#addHaulingTitle').val();
     var startDate = $('.addHaulingStartDate').val();
@@ -177,9 +180,11 @@ $('.submitJobOrderHauling').on('click',function(){
         },
     });
 
-});
+// });
+};
     // console.log(berth)
-$('.submitJobOrderTugAssist').on('click',function(){
+function submitJobOrderTugAssist(){
+// $('.submitJobOrderTugAssist').on('click',function(){
     console.log($(this).data('service'));
     console.log($('#addTugAssistTitle').val());
     console.log($('.addTugAssistStartDate').val());
@@ -249,7 +254,8 @@ $('.submitJobOrderTugAssist').on('click',function(){
             
         },
     });
-});
+// });
+};
 $('.submitJobOrderSalvage').on('click',function(){
     console.log($(this).data('service'));
 });
