@@ -13,7 +13,13 @@ $(document).ready(function(){
     var signCanvas = $('.signAdminCanvas').signature({
         syncField: '#signatureJSON'
 });
-
+    console.log('edi wow');
+    $('#showTermsConditionButton').on('click',function(){
+        $('#showTermsCondition').modal('show');
+    });
+    $('.modalClose').on('click',function(){
+        $('#showTermsCondition').modal('hide');
+    });
     // para makuha mo yung value ng contract na kukunin 
     // nagdedefine ng || data-id="" || kasi wala namang click event
     // yung data id nilagyan ko din ng comment sa blade
@@ -115,6 +121,7 @@ $('#quoteCustom').on('click',function(){
             $('#addTAMinDamageFee').attr('placeholder',data.contractfees[1].fltCFMinDamageFee);
             $('#addTAMaxDamageFee').attr('placeholder',data.contractfees[1].fltCFMaxDamageFee);
 
+            
             // $('#addTAStandardRate').attr('placeholder',data.contractfees[0].);
             // $('#addTADelayFee').attr('placeholder',data.contractfees[0].);
             // $('#addTAViolationFee').attr('placeholder',data.contractfees[0].);

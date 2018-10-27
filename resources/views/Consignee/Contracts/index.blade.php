@@ -324,6 +324,11 @@
                                     </div>
                                 </div>
                             </div>
+                                            <div>
+                                                {{-- <input type="checkbox" name="checkbox" value="value"><a href="#" id="showTermsConditionButton">nyak</a></label> --}}
+                                                {{-- <button class="btn btn-primary showTermsConditionButton"></button> --}}
+                                                <label class="custom-control-label" for="agree">I agree with the <a id="showTermsConditionButton" href="#">terms and conditions</a><sup class="text-primary">✱</sup></label>
+                                            </div>
                             <div class="card-footer text-center">
                                 <input type="hidden" id="contractsID">
                                 {{-- <button class="btn btn-primary waves-effect" data-toggle="modal" data-target="#requestChangesModal">Request for Changes</button> --}}
@@ -508,6 +513,16 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @if(count($TermsCondition)>0)
+                                        <hr>
+                                        <h3>Terms and Condition</h3>
+                                        <br>
+                                        <textarea class="summernoteQuote" name="" id="" cols="30" rows="10">
+                                        {{-- @foreach($TermsCondition) --}}
+                                            {{$TermsCondition[0]->strContractListDesc}}
+                                        {{-- @endforeach --}}
+                                        </textarea>
+                                        @endif
                                     </div>
                             </div>
                         </div>
@@ -727,6 +742,7 @@
         @endif
 
     </section>
+    @include('Consignee.Contracts.termsandcondition')
     @include('Consignee.Contracts.finalcontract')
     @include('Consignee.Contracts.info')
     @include('Consignee.Contracts.infoRChanges')
