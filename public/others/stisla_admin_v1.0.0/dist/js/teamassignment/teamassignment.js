@@ -62,26 +62,62 @@ $('.backButton').on('click',function(){
 
 $('.assignTeam').on('click',function(){
     console.log($(this).data('id'));
-    var joborderID = $(this).data('id')
+    console.log('date', $(this).data('date'));
+    var compDate = $(this).data('date');
+    var joborderID = $(this).data('id');
     $.ajax({
-        url : `${url}/${joborderID}/getjoborder`,
-        type : 'GET',
-        dataType : 'JSON',
-        success : (data,response)=>{
+        url : `${url}/getjoborderteams`,
+        type : 'POST',
+        data : {
+            "_token" : $('meta[name="csrf-token"]').attr('content'), 
+            joborderID : joborderID,
+            compDate : compDate,
+        },
+        success : (data, response)=>{
             console.log(data);
             var location = getLocation(data.joborder);
+            var teamsavail = getAvailableTeams(data.jobschedules, data.teams, data.joborder);
+
+            console.log('available teams', teamsavail);
+
             appendTugboatTeamDefaults(data.jobsched);
             appendJoborderHeader(data.joborder);
             appendJoborderBody(data.joborder,location);
-            appendJoborderTeams(data.jobsched,data.teams);
+            appendJoborderTeams(data.jobsched, teamsavail);
             $('.assignDefaultTeams').data('id',`${data.jobsched[0].intJSJobOrderID}`);
+            $('.assignTeams').data('id',`${data.jobsched[0].intJSJobOrderID}`);
             $('.teamAssignment').css('display','none');
             $('.assignTeamCard').css('display','block');
             // $('.assignTeamCard').addClass('animated fadeIn');
-        },error : (error)=>{
+        },
+        error : (error)=>{
             throw error;
         }
-    })
+    });
+    // $.ajax({
+    //     url : `${url}/getjoborders`,
+    //     type : 'POST',
+    //     data : {
+    //         "_token" : $('meta[name="csrf-token"]').attr('content'),
+    //         joborderID : joborderID,
+    //         compDate : compDate,
+    //     },
+    //     success : (data,response)=>{
+    //         console.log(data);
+    //         var location = getLocation(data.joborder);
+    //         var teamsavail = getAvailableTeams(data.jobschedules, data.teams, data.joborder);
+    //         appendTugboatTeamDefaults(data.jobsched);
+    //         appendJoborderHeader(data.joborder);
+    //         appendJoborderBody(data.joborder,location);
+    //         appendJoborderTeams(data.jobsched,data.teams);
+    //         $('.assignDefaultTeams').data('id',`${data.jobsched[0].intJSJobOrderID}`);
+    //         $('.teamAssignment').css('display','none');
+    //         $('.assignTeamCard').css('display','block');
+    //         // $('.assignTeamCard').addClass('animated fadeIn');
+    //     },error : (error)=>{
+    //         throw error;
+    //     }
+    // })
 });
 
 $('.viewDefaultTeamsButton').on('click',function(event){
@@ -91,15 +127,31 @@ $('.viewDefaultTeamsButton').on('click',function(event){
 });
 
 $('.assignTeams').on('click',function(){
-    selected = [];
+    selectedteam = [];
     tugboatID = [];
+    console.log($(this).data('id'));
     $(".jobschedTugboats").each(function(key){
         tugboatID[key] = $(this).data('id');
     });
     $(".teamAssignmentSelect option:selected").each(function(select){
-        selected[select ] = parseInt($(this).val());    
+        selectedteam[select] = parseInt($(this).val());    
     });
-    console.log(selected, tugboatID);
+    console.log(selectedteam, tugboatID);
+    $.ajax({
+        url : `${url}/assignnewteams`,
+        type : 'POST',
+        data : {
+            "_token" : $('meta[name="csrf-token"]').attr('content'),
+            selectedteam : selectedteam,
+            tugboatID : tugboatID,
+        },
+        success : ()=>{
+
+        },
+        error : ()=>{
+
+        }
+    });
 });
 $('.assignDefaultTeams').on('click',function(){
     console.log('HI');
@@ -186,57 +238,61 @@ $('.addNewTeamButton').on('click',function(){
 });
 var checkbox = $('.employeesCheckbox:checkbox');
 
-// // Return Tugboats
-// $('.returnTugboat').on('click',function(){
-//     console.log('HI');
-//     console.log($(this).data('id'));
-//     var id = $(this).data('id');
-
-//     swal({
-//         title: "Are you Sure?",
-//         text: "Return This Team?",
-//         type: "info",
-//         showCancelButton: true,
-//         confirmButtonClass: "btn-info waves-effect",
-//         confirmButtonText: "Ok",
-//         closeOnConfirm: true
-//     },(isConfirm)=>{
-//         // return false;
-//         $.ajax({
-//             url : `${url}/returntugboat`,
-//             type : 'POST',
-//             data : { 
-//                 "_token" : $('meta[name="csrf-token"]').attr('content'),    
-//                 tugboatassignID : id,
-//             }, 
-//             beforeSend:  (request)=>{
-//                 return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-//             },
-//             success : (data, response)=>{
-//                 console.log('success pota');
-//                 console.log(data);
-//                 console.log(response);
-//                 swal({
-//                     title: "Success",
-//                     text: "Team Returned",
-//                     type: "success",
-//                     showCancelButton: false,
-//                     confirmButtonClass: "btn-success",
-//                     confirmButtonText: "Ok",
-//                     closeOnConfirm: true,
-//                     timer : 1500
-//                 },(isConfirm)=>{
-//                     if(isConfirm){
-//                         window.location = url;
-//                     }
-//                 });                       
-//             },
-//             error : (error)=>{
-//                 throw error;
-//             }
-//         });
-//     });
+// Return Tugboats
+// $('.tugboatsReturn').on('click',function(){
+//     console.log('heyaaa');
 // });
+
+$('.returnTugboats').on('click',function(){
+    console.log('HI');
+    console.log($(this).data('id'));
+    var id = $(this).data('id');
+
+    swal({
+        title: "Are you Sure?",
+        text: "Return This Team?",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonClass: "btn-info waves-effect",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true
+    },(isConfirm)=>{
+        // return false;
+        $.ajax({
+            url : `${url}/returntugboat`,
+            type : 'POST',
+            data : { 
+                "_token" : $('meta[name="csrf-token"]').attr('content'),    
+                tugboatassignID : id,
+            }, 
+            beforeSend:  (request)=>{
+                return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+            },
+            success : (data, response)=>{
+                console.log('success pota');
+                console.log(data);
+                console.log(response);
+                swal({
+                    title: "Success",
+                    text: "Team Returned",
+                    type: "success",
+                    showCancelButton: false,
+                    confirmButtonClass: "btn-success",
+                    confirmButtonText: "Ok",
+                    closeOnConfirm: true,
+                    timer : 1500
+                },(isConfirm)=>{
+                    if(isConfirm){
+                        window.location = url;
+                    }
+                });                       
+            },
+            error : (error)=>{
+                throw error;
+            }
+        });
+    });
+});
 
 function showTeamAssignment(teamID){
     var clone = $('.clonedTry').clone();
@@ -339,12 +395,126 @@ function submitTeamName(){
     });
 
 }
-function submitTeam(){
+
+$('.submitCreatedTeam').on('click',function(event){
+    event.preventDefault();
+    console.log('clicked');
+    
+    console.log('hi');
+    var title = $('#addTeamName').val(); 
+    var selectedmembers = [];
+
+    $('.employeesCheckbox:checkbox:checked').each(function(checked){
+        selectedmembers[checked] = {positionName : $(this).data('position'), employeeID : parseInt($(this).data('id'))};
+    });
+
+    $.ajax({
+        url : `${url}/getteamcompositions`,
+        type : 'POST',
+        data : {
+            "_token" : $('meta[name="csrf-token"]').attr('content'),    
+        },
+        success : (data)=>{
+            console.log(data);
+            console.log(selectedmembers);
+            var validationrule = [];
+            for(let count = 0; count < (data.positions).length; count++){
+                validationrule[count] = {positionName : data.positions[count].strPositionName, compositionNumber : 0};
+            }
+
+            for(let count = 0; count < selectedmembers.length; count++){
+                for(let counter = 0; counter < validationrule.length; counter++){
+                    if(selectedmembers[count].positionName === validationrule[counter].positionName){
+                        validationrule.splice(counter,1,{positionName : validationrule[counter].positionName, compositionNumber : (validationrule[counter].compositionNumber + 1)});
+                        console.log(validationrule[counter]);
+                    }
+                }
+            }
+            console.log(validationrule);
+            var errorcounter = 0;
+            for(let count=0; count < (data.positions.length); count++){
+                for(let counter=0; counter < (validationrule).length; counter++){
+                    if(data.positions[count].strPositionName === validationrule[counter].positionName){
+                        if(data.positions[count].intPositionCompNum !== validationrule[counter].compositionNumber){
+                            errorcounter =  errorcounter + 1;
+                        }
+                    }
+                }
+            }
+            membersID = [];
+            for(let count=0; count < selectedmembers.length; count++){
+                membersID[count] = parseInt(selectedmembers[count].employeeID);
+            }
+            console.log(parseInt(membersID));
+            
+            if(errorcounter > 0){
+                console.log('dami mong alam');
+                event.stopPropagation();
+                toastr.error("You did not meet the requirements needed for a team",'Team Creation Failed', { 
+                    positionClass : 'toast-bottom-right', 
+                    preventDuplicates : true, 
+                    showDuration : "2000",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                });
+            }else{
+                console.log(errorcounter);
+                console.log('eeey');
+                console.log('nagpropagate');
+                                
+                $.ajax({
+                    url : `${url}/store`,
+                    type : 'POST',
+                    data : { 
+                        "_token" : $('meta[name="csrf-token"]').attr('content'),    
+                        teamName : title,
+                        membersID : membersID,
+                    }, 
+                    beforeSend:(request)=>{
+                        return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                    },
+                    success : (data, response)=>{
+                        console.log('success pota');
+                        console.log(data);
+                        console.log(response);
+                        swal({
+                            title: "Success",
+                            text: "Employees Assigned",
+                            type: "success",
+                            showCancelButton: false,
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "Ok",
+                            closeOnConfirm: true,
+                            timer : 1500
+                        },
+                        (isConfirm)=>{
+                            if(isConfirm){
+                                window.location = url;
+                            }
+                        });                       
+                    },
+                    error : function(error){
+                        throw error;
+                    }
+            
+                });
+            }
+        },
+        error : (error)=>{
+
+        }
+    });
+})
+    
+function submitTeam(event){
+    event.preventDefault();
     console.log('hi');
     var title = $('#addTeamName').val(); 
     var captains = [];
     var chiefengineer = []; 
     var crew = [];
+    var selectedmembers = [];
+    var validationrule = [];
     $('.captCheckbox:checkbox:checked').each(function(checked){
         captains[checked] = parseInt($(this).val());    
     });
@@ -355,6 +525,93 @@ function submitTeam(){
         crew[checked] = $(this).val();
     });
 
+    $('.employeesCheckbox:checkbox:checked').each(function(checked){
+        selectedmembers[checked] = {positionName : $(this).data('position'), employeeID : $(this).data('id')};
+    });
+    
+    $.ajax({
+        url : `${url}/getteamcompositions`,
+        type : 'POST',
+        data : {
+            "_token" : $('meta[name="csrf-token"]').attr('content'),    
+        },
+        success : (data)=>{
+            console.log(data);
+            console.log(selectedmembers);
+            var validationrule = [];
+            for(let count = 0; count < (data.positions).length; count++){
+                validationrule[count] = {positionName : data.positions[count].strPositionName, compositionNumber : 0};
+            }
+
+            for(let count = 0; count < selectedmembers.length; count++){
+                for(let counter = 0; counter < validationrule.length; counter++){
+                    if(selectedmembers[count].positionName === validationrule[counter].positionName){
+                        validationrule.splice(counter,1,{positionName : validationrule[counter].positionName, compositionNumber : (validationrule[counter].compositionNumber + 1)});
+                        console.log(validationrule[counter]);
+                    }
+                }
+            }
+            console.log(validationrule);
+            var errorcounter = 0;
+            for(let count=0; count < (data.positions.length); count++){
+                for(let counter=0; counter < (validationrule).length; counter++){
+                    if(data.positions[count].strPositionName === validationrule[counter].positionName){
+                        if(data.positions[count].intPositionCompNum !== validationrule[counter].compositionNumber){
+                            errorcounter =  errorcounter + 1;
+                        }
+                    }
+                }
+            }
+            if(errorcounter > 0){
+                console.log('dami mong alam');
+                event.stopPropagation();
+
+            }else{
+                console.log(errorcounter);
+
+                $.ajax({
+                    url : url + '/store',
+                    type : 'POST',
+                    data : { 
+                        "_token" : $('meta[name="csrf-token"]').attr('content'),    
+                        teamName : title,
+                        
+                    }, 
+                    beforeSend:(request)=>{
+                        return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                    },
+                    success : (data, response)=>{
+                        console.log('success pota');
+                        console.log(data);
+                        console.log(response);
+                        swal({
+                            title: "Success",
+                            text: "Employees Assigned",
+                            type: "success",
+                            showCancelButton: false,
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "Ok",
+                            closeOnConfirm: true,
+                            timer : 1500
+                        },
+                        (isConfirm)=>{
+                            if(isConfirm){
+                                window.location = url;
+                            }
+                        });                       
+                    },
+                    error : function(error){
+                        throw error;
+                    }
+            
+                });
+            }
+        },
+        error : (error)=>{
+
+        }
+    })
+    // return false;
     if(captains.length == 0 && chiefengineer.length == 0 && crew.length == 0)
     {
         swal({

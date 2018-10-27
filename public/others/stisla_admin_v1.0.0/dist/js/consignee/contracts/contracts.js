@@ -6,7 +6,7 @@ $(document).ready(function(){
     $('#breadPB').hide();
     $('#breadSlash').hide();
     $('#breadCurrent').text('Contract');
-    console.log($('#user').val());
+
     $('.btnRequest').on('click',function(e){
         e.preventDefault();
     });
@@ -52,7 +52,7 @@ $(document).ready(function(){
     //         $('#violationFee').html(peso + data.contract[0].fltQuotationViolationFee);
     //         $('#consigneeLateFee').html(peso + data.contract[0].fltQuotationConsigneeLateFee);
     //         $('#minDamageFee').html(peso + data.contract[0].fltMinDamageFee);
-    //         $('#maxDamageFee').html(peso + data.contract[0].fltMaxDamageFee);
+    //         $('#maxDamageFee').html(peo + data.contract[0].fltMaxDamageFee);
     //         $('#discount').html(data.contract[0].intDiscount + percent);
     //     },
     //     error : function(error){
@@ -92,6 +92,8 @@ $(document).ready(function(){
             $('.btnAcceptContract').css('cursor', 'pointer');
           }
     });
+
+    pulseEffect();  
 });
 
 $('#quoteCustom').on('click',function(){
@@ -200,9 +202,8 @@ $('.defaultMatrixButton').on('click',function(event){
                     confirmButtonClass: "btn-success",
                     confirmButtonText: "Ok",
                     closeOnConfirm: true,
-                },
-                function(){
-                    window.location = url;
+                },(isConfirm)=>{
+                    location.reload();
                 });                       
             },
             error : function(error){
@@ -453,6 +454,7 @@ function showFinalContract(showID){
         }
     });
 }
+
 $('.acceptContract').on('click',function(){
     $('#applySignatureModal').modal('hide');
     console.log($(this).data('id'));
@@ -594,6 +596,47 @@ $('.applySignatureButton').on('click',function(){
     console.log($(this).data('id'));
     $('.acceptContract').data('id',$(this).data('id'));
     $('#applySignatureModal').modal('show');
+});
+
+$('.activateContract').on('click',function(){
+    console.log($(this).data('id'));
+    var contractID = $(this).data('id');
+    swal({
+        title: "Are You Sure?",
+        text : "Request for Contract Activation?",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonClass: "btn-info",
+        confirmButtonText: "Ok",
+    },(isConfirm)=>{
+        if(isConfirm)
+        {
+            $.ajax({
+                url : `${url}/requestforactivation`,
+                type : 'POST',
+                data : {
+                    "_token" : $('meta[name="csrf-token"]').attr('content'),
+                    contractID : contractID
+                },
+                success : (data, response)=>{
+                    console.log(data);
+                    swal({
+                        title: "Success",
+                        text : "Request for Contract Activation was Sent",
+                        type: "success",
+                        showCancelButton: true,
+                        confirmButtonClass: "btn-success",
+                        confirmButtonText: "Ok",
+                    },(isConfirm)=>{
+                        location.reload();
+                    });
+                },
+                error : (error)=>{
+
+                }
+            });
+        }
+    });
 });
 // function appendQuotes(quotations){
 //     console.log(quotations);

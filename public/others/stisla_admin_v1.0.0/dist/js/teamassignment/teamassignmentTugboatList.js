@@ -35,15 +35,10 @@ $('.occupiedTugboats').on('click',function(event){
                     <div class="col-auto">
                         <div class="card bg-${colorString}">
                             <div class="card-body">
-                                <div class="custom-control custom-checkbox custom-control-inline">
-                                    <input type="checkbox" id="addCheckEmployees${data.team[counter].intEmployeeID}" name="employees[]" value="${data.team[counter].intEmployeeID}" class="custom-control-input employeesCheckbox">
-                                    <label class="custom-control-label" for="addCheckEmployees${data.team[counter].intEmployeeID}">
-                                        <p class="card-text text-center ml-2">${data.team[counter].strLName},&nbsp;${data.team[counter].strFName}</p>
-                                        <small class="text-center float-right" style="text-transform: uppercase;">
-                                           ${data.team[counter].strPositionName}
-                                        </small>
-                                    </label>
-                                </div>
+                                <p class="card-text text-center ml-2">${data.team[counter].strLName},&nbsp;${data.team[counter].strFName}</p>
+                                <small class="text-center float-left" style="text-transform: uppercase;">
+                                    ${data.team[counter].strPositionName}
+                                </small>
                             </div>
                         </div>
                     </div>

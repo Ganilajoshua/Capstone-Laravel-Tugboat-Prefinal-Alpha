@@ -32,7 +32,14 @@ class JobOrdersController extends Controller
         $goods =  Goods::where('boolDeleted',0)
         ->where('isActive',1)
         ->get();
-        $contract = Contract::where('intCCompanyID',Auth::user()->intUCompanyID)->get();
+        $contract = DB::table('tblcompany as company')
+        ->leftjoin('tblcontractlist as contracts','contracts.intCCompanyID','company.intCompanyID')
+        ->join('users as user','user.intUCompanyID','company.intCompanyID')
+        ->where('user.intUCompanyID',Auth::user()->intUCompanyID)
+        ->orderBy('contracts.intContractListID','DESC')
+        ->limit('1')
+        ->get();
+        
         $berth = DB::table('tblberth as berth')
         ->join('tblpier as pier','berth.intBPierID','pier.intPierID')
         ->where('berth.isActive',1)
@@ -60,9 +67,9 @@ class JobOrdersController extends Controller
         ->where('enumStatus','Finished')
         ->get();
         $vesseltype = VesselType::all();
-        return view('Consignee.Joborders.joborder',
+        return view('Consignee.Joborders.index',
         compact('goods','createdjob','pendingjob','accepted','ongoing','finishedjob','contract','berth','vesseltype'));
-        // return response()->json(['joborder'=>$goods,Auth::user(),'berth'=>$berth]);
+        return response()->json(['contract'=>$contract]);
     }
 
     /**

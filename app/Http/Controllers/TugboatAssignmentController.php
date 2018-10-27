@@ -142,61 +142,52 @@ class TugboatAssignmentController extends Controller
      */
     public function create(Request $request)
     {
-        try{
-            DB::beginTransaction();
-            if(Auth::user()->enumUserType == 'Admin'){
-                $joborder = JobOrder::findOrFail($request->jobOrderID);
-                $jobID = $joborder->intJobOrderID;    
-                $joborder->timestamps = false;
-                $joborder->enumStatus = 'Ready';
-                $joborder->save();
-            }elseif(Auth::user()->enumUserType == 'Affiliates'){
-                $joborder = JobOrder::findOrFail($request->jobOrderID);
-                $getjoborder = JoborderForwardRequests::where('intJOFRJobOrderID',$request->jobOrderID)->get();
-                $joborders = JoborderForwardRequests::findOrFail($getjoborder[0]->intJOForwardRequestsID);
-                $jobID = $getjoborder[0]->intJOFRJobOrderID; 
-                $joborders->timestamps = false;
-                $joborders->enumStatus = 'Ready';
-                $joborders->save();
-            }
-    
-            $scheduleID = Schedules::max('intScheduleID') + 1 ;
-            $schedID = $scheduleID;     
+        if(Auth::user()->enumUserType == 'Admin'){
+            $joborder = JobOrder::findOrFail($request->jobOrderID);
+            $jobID = $joborder->intJobOrderID;    
+            $joborder->timestamps = false;
+            $joborder->enumStatus = 'Ready';
+            $joborder->save();
+        }elseif(Auth::user()->enumUserType == 'Affiliates'){
+            $joborder = JobOrder::findOrFail($request->jobOrderID);
+            $getjoborder = JoborderForwardRequests::where('intJOFRJobOrderID',$request->jobOrderID)->get();
+            $joborders = JoborderForwardRequests::findOrFail($getjoborder[0]->intJOForwardRequestsID);
+            $jobID = $getjoborder[0]->intJOFRJobOrderID; 
+            $joborders->timestamps = false;
+            $joborders->enumStatus = 'Ready';
+            $joborders->save();
+        }
+
+        $scheduleID = Schedules::max('intScheduleID') + 1 ;
+        $schedID = $scheduleID;     
+        
+        $schedule = new Schedules;
+        $schedule->timestamps = false;
+        $schedule->intScheduleID = $schedID;
+        $schedule->intScheduleCompanyID = Auth::user()->intUCompanyID;
+        $schedule->strScheduleDesc = $joborder->strJOTitle;
+        $schedule->dateStart = $joborder->datStartDate;
+        $schedule->dateEnd = $joborder->datEndDate;
+        $schedule->tmStart = $joborder->tmStart;
+        $schedule->tmEnd = $joborder->tmEnd;
+        $schedule->strColor = $request->colorIndicator;
+        $schedule->save();
+        
+        for($count=0; $count < count($request->tugboatsID); $count++){
             
-            $schedule = new Schedules;
-            $schedule->timestamps = false;
-            $schedule->intScheduleID = $schedID;
-            $schedule->intScheduleCompanyID = Auth::user()->intUCompanyID;
-            $schedule->strScheduleDesc = $joborder->strJODesc;
-            $schedule->dateStart = $joborder->datStartDate;
-            $schedule->dateEnd = $joborder->datEndDate;
-            $schedule->tmStart = $joborder->tmStart;
-            $schedule->tmEnd = $joborder->tmEnd;
-            $schedule->strColor = $request->colorIndicator;
-            $schedule->save();
+            // $tugboatassign = Tugboat::findOrFail($request->tugboatsID[$count]);
+            // $tugboatassign->timestamps = false;
+            // $tugboatassign->save();
             
-            for($count=0; $count < count($request->tugboatsID); $count++){
-                
-                // $tugboatassign = Tugboat::findOrFail($request->tugboatsID[$count]);
-                // $tugboatassign->timestamps = false;
-                // $tugboatassign->save();
-                
-                $jobsched = new JobSchedule;
-                $jobsched->timestamps = false;
-                $jobsched->intJSSchedID = $schedID;
-                $jobsched->intJSJobOrderID = $jobID;
-                $jobsched->intJSTugboatAssignID = $request->tugboatsID[$count];
-                $jobsched->intJSTugboatID = $request->tugboatsID[$count];
-                $jobsched->enumStatus = 'Pending';
-                $jobsched->save();
-            }
-            DB::commit();
-           
-        }catch(\Illuminate\Database\QueryException $errors){
-            DB::rollback();
-            $errorMessage = $errors->getMessage();
-            return Redirect::back()->withErrors($errorMessage);
-        } 
+            $jobsched = new JobSchedule;
+            $jobsched->timestamps = false;
+            $jobsched->intJSSchedID = $schedID;
+            $jobsched->intJSJobOrderID = $jobID;
+            $jobsched->intJSTugboatAssignID = $request->tugboatsID[$count];
+            $jobsched->intJSTugboatID = $request->tugboatsID[$count];
+            $jobsched->enumStatus = 'Pending';
+            $jobsched->save();
+        }
         return response()->json([$joborder]);
         
     
@@ -281,15 +272,15 @@ class TugboatAssignmentController extends Controller
         }
 
     }
-    public function showjoborder($intJobOrderID){
+    public function showjoborder(Request $request){
         // Find Job Order ID
-        $job = JobOrder::findOrFail($intJobOrderID);
+        $job = JobOrder::findOrFail($request->joborderID);
         if($job->enumServiceType == 'Hauling'){
             if($job->intJOBerthID == null){
                 $joborder = DB::table('tbljoborder as joborder')
                 ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
                 ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-                ->where('joborder.intJobOrderID',$intJobOrderID)
+                ->where('joborder.intJobOrderID',$request->joborderID)
                 ->get();
             }else{
                 $joborder = DB::table('tbljoborder as joborder')
@@ -297,7 +288,7 @@ class TugboatAssignmentController extends Controller
                 ->join('tblpier as pier','berth.intBPierID','intPierID')
                 ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
                 ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-                ->where('joborder.intJobOrderID',$intJobOrderID)
+                ->where('joborder.intJobOrderID',$request->joborderID)
                 ->get();
             }
         }else if($job->enumServiceType == 'Tug Assist'){
@@ -306,7 +297,7 @@ class TugboatAssignmentController extends Controller
             ->join('tblpier as pier','berth.intBPierID','intPierID')
             // ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
             ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-            ->where('joborder.intJobOrderID',$intJobOrderID)
+            ->where('joborder.intJobOrderID',$request->joborderID)
             ->get();    
         }
         // Get All Tugboats Available 
@@ -319,8 +310,22 @@ class TugboatAssignmentController extends Controller
         ->where('class.enumISMCodeStandard','YES')
         ->where('class.enumISPSCodeCompliance','YES')
         ->where('specs.enumAISGPSVHFRadar','YES')
-        ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
+        ->where(function($query){
+            $query->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
+            ->orWhere('tugboat.intForwardCompanyID', Auth::user()->intUCompanyID);
+        })
         ->groupBy('tugboat.intTugboatID')
+        ->get();
+
+        $jobsched = DB::table('tbljobsched as jobsched')
+        ->join('tblschedule as schedule','jobsched.intJSSchedID','schedule.intScheduleID')
+        ->where('schedule.dateStart',$request->compDate)
+        ->orWhere('schedule.dateEnd',$request->compDate)
+        ->get();
+
+        $teams = DB::table('tblteam as team')
+        ->where('team.intTCompanyID', Auth::user()->intUCompanyID)
+        ->orWhere('team.intTForwardCompanyID', Auth::user()->intUCompanyID)
         ->get();
 
         // $available 
@@ -331,7 +336,7 @@ class TugboatAssignmentController extends Controller
         // ->where('assign.enumStatus')
         // ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
         // ->get();
-        return response()->json(['joborder'=>$joborder,'tugboats'=>$tugboats]);
+        return response()->json(['joborder'=>$joborder,'tugboats'=>$tugboats,'teams'=>$teams,'jobsched'=>$jobsched]);
         
     }
     public function available(Request $request)

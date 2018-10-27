@@ -22,6 +22,7 @@
 
 @section('outside')
     @include('Joborder.info')
+    @include('Joborder.declinedModal')
     @include('Joborder.forward')
     {{-- @include('Joborder.declined') --}}
 @endsection

@@ -227,15 +227,18 @@ class DispatchTicketController extends Controller
         ->leftjoin('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->leftjoin('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->leftjoin('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
+        ->leftjoin('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->leftjoin('tblcontractlist as contract','company.intCompanyID','contract.intCCompanyID')
         ->leftjoin('tblfinalcontractfeesmatrix as finalmatrix','finalmatrix.intFCFContractListID','contract.intContractListID')
-        ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
         ->where('jobsched.enumstatus','Finished')
         ->where('dispatch.intDispatchTicketID',$id)
         ->groupby('dispatch.intDispatchTicketID')
         ->get();
         
+        // $matrix = DB::table('tblcontractlist as contract')
+        // ->join('tblfinalcontractfeesmatrix as finalmatrix','finalmatrix.intFCFContractListID','contract.intContractListID')
+        // ->where('contract.intCCompanyID',$id)
+        // ->get();
         $sign = DB::table('tbldispatchticket as dispatch')
         ->where('intDispatchTicketID',$id)
         ->get();

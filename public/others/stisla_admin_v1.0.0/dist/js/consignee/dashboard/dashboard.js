@@ -20,6 +20,7 @@ $(document).ready(function(){
         },
         success : function(data,response){
             console.log(data);
+            console.log(data.contract[0].intContractListID);
             var currDate = moment().format('YYYY-MM-DD');
             var expire = data.contract[0].datContractExpire;
             var active = data.contract[0].datContractActive;
@@ -31,15 +32,28 @@ $(document).ready(function(){
             console.log(notifyMonth);
             console.log(data.contract[0].datContractExpire);
             if(currDate == expire){
-                toastr.error('You Contract has Expired on &nbsp;' + data.contract[0].datContractExpire, "Contract Status", { positionClass: 'toast-bottom-right', preventDuplicates: true, "preventDuplicates": true,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "show",
-                "hideMethod": "hide"});
+                $.ajax({
+                    url : `${url}/setcontractexpired`,
+                    type : 'POST',
+                    data : {
+                        "_token" : $('meta[name="csrf-token"]').attr('content'),
+                        contractID : data.contract[0].intContractListID,
+                    },
+                    success : (data, response)=>{
+                        toastr.error('You Contract has Expired &nbsp;', "Contract Status", { positionClass: 'toast-bottom-right', preventDuplicates: true, "preventDuplicates": true,
+                        "showDuration": "300",
+                        "hideDuration": "1000",
+                        "timeOut": "5000",
+                        "extendedTimeOut": "1000",
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "show",
+                        "hideMethod": "hide"});
+                    },
+                    error : (error)=>{
+                        throw error;
+                    }
+                });
             }else if(currDate == notifyMonth){
                 toastr.warning('Your Contract will expire on ' + data.contract[0].datContractExpire, "Contract Status", { positionClass: 'toast-bottom-right', preventDuplicates: true, });
             }else if(currDate == startNotify || currDate == endNotify || currDate == active){

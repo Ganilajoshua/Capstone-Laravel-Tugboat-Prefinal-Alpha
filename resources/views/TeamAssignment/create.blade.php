@@ -80,7 +80,7 @@
                                                                 <div class="card bg-primary">
                                                                     <div class="card-body">
                                                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                                                            <input type="checkbox" id="addCheckCapt{{$captains->intEmployeeID}}" name="captains[]" data-id="{{$captains->intEmployeeID}}" data-position="{{$captains->strPositionName}}" data-name="{{$captains->strLName}}, {{$captains->strFName}}" value="{{$captains->intEmployeeID}}" class="custom-control-input captCheckbox">
+                                                                            <input type="checkbox" id="addCheckCapt{{$captains->intEmployeeID}}" name="captains[]" data-id="{{$captains->intEmployeeID}}" data-position="{{$captains->strPositionName}}" data-name="{{$captains->strLName}}, {{$captains->strFName}}" value="{{$captains->intEmployeeID}}" class="custom-control-input captCheckbox employeesCheckbox">
                                                                             <label class="custom-control-label" for="addCheckCapt{{$captains->intEmployeeID}}">
                                                                                 <p class="card-text text-center ml-2">{{$captains->strLName}}, {{$captains->strFName}}</p>
                                                                                 <small class="text-center float-right" style="text-transform: uppercase;">
@@ -106,7 +106,7 @@
                                                                 <div class="card bg-info">
                                                                     <div class="card-body">
                                                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                                                            <input type="checkbox" id="addCheckChief{{$chiefengineers->intEmployeeID}}" value="{{$chiefengineers->intEmployeeID}}" data-id="{{$chiefengineers->intEmployeeID}}" data-position="{{$chiefengineers->strPositionName}}" data-name="{{$chiefengineers->strLName}}, {{$chiefengineers->strFName}}" class="custom-control-input chiefCheckbox">
+                                                                            <input type="checkbox" id="addCheckChief{{$chiefengineers->intEmployeeID}}" value="{{$chiefengineers->intEmployeeID}}" data-id="{{$chiefengineers->intEmployeeID}}" data-position="{{$chiefengineers->strPositionName}}" data-name="{{$chiefengineers->strLName}}, {{$chiefengineers->strFName}}" class="custom-control-input chiefCheckbox employeesCheckbox">
                                                                             <label class="custom-control-label" for="addCheckChief{{$chiefengineers->intEmployeeID}}">
                                                                                 <p class="card-text text-center ml-2">{{$chiefengineers->strLName}}, {{$chiefengineers->strFName}}</p>
                                                                                 <small class="text-center float-right" style="text-transform: uppercase;">
@@ -132,7 +132,7 @@
                                                                 <div class="card bg-dark">
                                                                     <div class="card-body">
                                                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                                                            <input type="checkbox" id="addCheckCrews{{$crew->intEmployeeID}}" value="{{$crew->intEmployeeID}}" data-id="{{$crew->intEmployeeID}}" data-position="{{$crew->strPositionName}}" data-name="{{$crew->strLName}}, {{$crew->strFName}}" class="custom-control-input crewCheckbox">
+                                                                            <input type="checkbox" id="addCheckCrews{{$crew->intEmployeeID}}" value="{{$crew->intEmployeeID}}" data-id="{{$crew->intEmployeeID}}" data-position="{{$crew->strPositionName}}" data-name="{{$crew->strLName}}, {{$crew->strFName}}" class="custom-control-input crewCheckbox employeesCheckbox">
                                                                             <label class="custom-control-label" for="addCheckCrews{{$crew->intEmployeeID}}">
                                                                                 <p class="card-text text-center ml-2">{{$crew->strLName}}, {{$crew->strFName}}</p>
                                                                                 <small class="text-center float-right" style="text-transform: uppercase;">
@@ -157,8 +157,8 @@
                                                                 <div class="card bg-success">
                                                                     <div class="card-body">
                                                                         <div class="custom-control custom-checkbox custom-control-inline">
-                                                                            <input type="checkbox" id="addCheckCapt{{$others->intEmployeeID}}" class="custom-control-input">
-                                                                            <label class="custom-control-label" for="addCheckCapt{{$others->intEmployeeID}}">
+                                                                            <input type="checkbox" id="addCheckOthers{{$others->intEmployeeID}}" value="{{$others->intEmployeeID}}" data-id="{{$others->intEmployeeID}}" data-position="{{$others->strPositionName}}" data-name="{{$others->strLName}}, {{$others->strFName}}" class="custom-control-input employeesCheckbox">
+                                                                            <label class="custom-control-label" for="addCheckOthers{{$others->intEmployeeID}}">
                                                                                 <p class="card-text text-center ml-2">{{$others->strLName}}, {{$others->strFName}}</p>
                                                                                 <small class="text-center float-right" style="text-transform: uppercase;">
                                                                                     {{$others->strPositionName}}
@@ -200,7 +200,7 @@
                 
             </div>
             <div class="modal-footer">
-                <button onclick="submitTeam()" type="button" class="btn btn-primary waves-effect">Add</button>
+                <button type="button" class="submitCreatedTeam btn btn-primary waves-effect">Add</button>
             </div>
         </div>
     </div>

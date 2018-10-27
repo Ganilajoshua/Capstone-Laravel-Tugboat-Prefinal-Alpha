@@ -2,6 +2,7 @@ var url = '/administrator/transactions/dispatchandhauling/teamassignment';
 
 function appendTeamComposition(positions){
     console.log(positions);
+    $('.teamcompositionContainer').empty();
     for(var counter = 0; counter < (positions).length; counter++){
 
         var appendIcon = getPositionIcons(positions[counter]);
@@ -313,6 +314,8 @@ function appendTugboatTeamDefaults(jobsched){
 }
 
 function appendJoborderTeams(jobsched,teams){
+    console.log(teams[1].length);
+    // return false;
     $('.availableTeams').empty();
     for(var counter = 0; counter < jobsched.length;counter++){
         console.log(jobsched[counter].intJobSchedID);
@@ -336,16 +339,15 @@ function appendJoborderTeams(jobsched,teams){
             <div class="form-group">
                 <label for="addTeamSelect">Select Team # ${counter + 1}</sup></label>
                 <select id="addTeamSelect" style="background-color:transparent !important;" name="addTeam[]" class="addTeamSelect${counter + 1} teamAssignmentSelect form-control form-control input-lg wide">
-                    <option data-display="" value="0">Select Team</option>
                 </select> 
             </div>
         </div>`;
         $(appendSelectTeam).appendTo(`.tugboatTeam${jobsched[counter].intJobSchedID}`);
 
-       for(var count =0; count < teams.length; count++){
-           console.log(teams[count].strTeamName);
+       for(var count =0; count < teams[1].length; count++){
+           console.log(teams[1][count].strTeamName);
            var appendTeamOption = 
-           `<option value="${teams[count].intTeamID}">${teams[count].strTeamName}</option>`;
+           `<option value="${teams[1][count].intTeamID}" data-subtext="Available">${teams[1][count].strTeamName}</option>`;
            $(appendTeamOption).appendTo(`.addTeamSelect${counter + 1}`);
        }
     }

@@ -9,6 +9,23 @@ $(document).ready(function(){
   // Custom Select
   // $('select').niceSelect();
   // Filter
+
+  // Decline Reasons
+  $('.reason1').on('click',function(){
+    console.log($('.reason1').html());
+    $('#reasons').val($('.reason1').html());
+  });
+
+  $('.reason2').on('click',function(){
+    console.log($('.reason2').html());
+    $('#reasons').val($('.reason2').html());
+  });
+
+  $('.reason3').on('click',function(){
+    console.log($('.reason3').html());
+    $('#reasons').val($('.reason3').html());
+  });  
+
   var jobOrders = " Job Orders ";
   document.getElementById("ddJobOrder").innerHTML = "Pending" + jobOrders;
   $('#pendingJO').addClass('active');

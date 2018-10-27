@@ -26,15 +26,26 @@ class ContractsController extends Controller
     public function index()
     {
         $company = Company::where('intCompanyID', Auth::user()->intUCompanyID)->get();
+        
+        $contractlist = DB::table('tblcompany as company')
+        ->leftjoin('tblcontractlist as contracts','contracts.intCCompanyID','company.intCompanyID')
+        ->join('users as user','user.intUCompanyID','company.intCompanyID')
+        ->where('user.intUCompanyID',Auth::user()->intUCompanyID)
+        ->orderBy('contracts.intContractListID','DESC')
+        ->limit('1')
+        ->get();
+
         $contract = DB::table('tblcontractlist as contract')
         // ->join('tblquotation as quotation','contract.intCQuotationID','quotation.intQuotationID')
         ->where('contract.intCCompanyID',Auth::user()->intUCompanyID)->get();
 
-        $TermsCondition = DB::table('tblcompany as company')
-        ->select(array('strContractListDesc'))
-        ->leftjoin('tblcontractlist as contract','company.intCompanyID','contract.intCCompanyID')
-        ->where('intCCompanyID',Auth::user()->intUCompanyID)
-        ->get();
+        // $TermsCondition = DB::table('tblcompany as company')
+        // ->select(array('strContractListDesc'))
+        // ->leftjoin('tblcontractlist as contract','company.intCompanyID','contract.intCCompanyID')
+        // ->where('intCCompanyID',Auth::user()->intUCompanyID)
+        // ->get();
+
+        $termscondition = DB::table('tbltermscondition')->get();
         // Contract::where('intCCompanyID',Auth::user()->intUCompanyID)->get();
         $contractList = DB::table('users as users')
         ->leftjoin('tblcompany as company','users.intUCompanyID','company.intCompanyID')
@@ -43,6 +54,7 @@ class ContractsController extends Controller
         ->select('company.*','contracts.*','users.*')
         // ->where('contracts.intCQuotationID',null)
         ->get();
+
         
         error_log($contract);
         $contractListFinal = DB::table('users as users')
@@ -53,21 +65,23 @@ class ContractsController extends Controller
         ->select('company.*','contracts.*','users.*','matrix.*')
         // ->where('contracts.intCQuotationID',null)
         ->get();
+        // $contractListFinal = DB::table('tblfinalcontractfeesmatrix');
         $fees = ContractFeesMatrix::all();
-        return view('Consignee.Contracts.index')
-        ->with('TermsCondition',$TermsCondition)
-        ->with('company',$company)
-        ->with('contract',$contract)
-        ->with('contractList',$contractList)
-        ->with('fees',$fees)
-        ->with('contractListFinal',$contractListFinal);
+        return view('Consignee.Contracts.newindex',compact('company','contract','contractList','fees','contractListFinal','contractlist','TermsCondition','termscondition'));
+        // return view('Consignee.Contracts.index')
+        // ->with('TermsCondition',$TermsCondition)
+        // ->with('company',$company)
+        // ->with('contract',$contract)
+        // ->with('contractList',$contractList)
+        // ->with('fees',$fees)
+        // ->with('contractListFinal',$contractListFinal);
         // ->with('company',$company)
         // ->with('contract',$contract)
         // ->with('contractList',$contractList);
         // undefined offset[0] pag walang company na connected sa user
-        return response()->json(['list'=>$contractList]);
+        return response()->json(['list'=>$contract]);
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -155,7 +169,15 @@ class ContractsController extends Controller
         $contract->enumStatus = 'Requesting For Changes';
         $contract->save();
         return response()->json(['contract'=>$contract]);
-    }
+    }   
+    public function requestforactivation(Request $request){
+        $contract = Contract::findOrFail($request->contractID);
+        $contract->timestamps = false;
+        $contract->enumStatus = 'For Activation';
+        $contract->save();
+        
+        return response()->json(['contract'=>$contract]);
+    } 
     public function activate(Request $request){
         $contract = Contract::findOrFail($request->contractID);
         $contract->strConsigneeSign = $request->sign;

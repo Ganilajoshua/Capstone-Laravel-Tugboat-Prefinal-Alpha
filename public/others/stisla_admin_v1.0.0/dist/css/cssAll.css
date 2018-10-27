@@ -155,3 +155,20 @@ th.width40{
 .border-radius-x {
   border-radius: 3px !important;
 }
+
+.customFonts{
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 3px;
+  margin-bottom : 3px;
+  font-family: 'Montserrat';
+}
+.customFontsHP{
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: 'Montserrat';
+}

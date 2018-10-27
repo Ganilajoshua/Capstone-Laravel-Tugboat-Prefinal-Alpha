@@ -61,8 +61,7 @@ $('#transactionTree').addClass('active');
     $('.modalClose').on('click',function() {
       $('#applyAdminSignModal').modal('hide');
     });
-    // Back
-    // $('.btnGeneratePDF').hide();
+    // Back 
     $('.btnBack').on('click',function() {
         $('.dispatchTicketTable').css('display','block');
         $('.viewDetails').css('display','none');

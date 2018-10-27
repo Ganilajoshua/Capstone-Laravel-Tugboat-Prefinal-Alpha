@@ -119,4 +119,14 @@ $(document).ready(function(){
         swal("Deleted!", "Quotation has been deleted.", "success");
     });
   });
+
+  // Pulsing effect
+  pulseEffect();  
+  
 });
+
+function pulseEffect(){
+  $('.responseBox')
+  .delay(500).animate({'display': 'none'},500)
+  .delay(500).animate({'display': 'block'}, 500);
+}

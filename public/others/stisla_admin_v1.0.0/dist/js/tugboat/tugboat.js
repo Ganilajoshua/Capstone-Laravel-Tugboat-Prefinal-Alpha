@@ -24,7 +24,7 @@ function getData(id){
             $('#tugboatLength').html(data.main.strLength);
             $('#tugboatBreadth').html(data.main.strBreadth);
             $('#tugboatDepth').html(data.main.strDepth);
-            $('#tugboatHorsePower').html(data.main.strDepth);
+            $('#tugboatHorsePower').html(data.main.strHorsePower);
             $('#tugboatMaxSpeed').html(data.main.strMaxSpeed);
             $('#tugboatBollardPull').html(data.main.strBollardPull);
             $('#tugboatGrossTonnage').html(data.main.strGrossTonnage);
@@ -99,7 +99,7 @@ function infoEdit(){
             $('#editLength').val(data.main.strLength);
             $('#editBreadth').val(data.main.strBreadth);
             $('#editDepth').val(data.main.strDepth);
-            $('#editHorsePower').val(data.main.strDepth);
+            $('#editHorsePower').val(data.main.strHorsePower);
             $('#editMaxSpeed').val(data.main.strMaxSpeed);
             $('#editBollardPull').val(data.main.strBollardPull);
             $('#editGrossTonnage').val(data.main.strGrossTonnage);
@@ -172,7 +172,7 @@ function editData(findid){
             $('#editLength').val(data.main.strLength);
             $('#editBreadth').val(data.main.strBreadth);
             $('#editDepth').val(data.main.strDepth);
-            $('#editHorsePower').val(data.main.strDepth);
+            $('#editHorsePower').val(data.main.strHorsePower);
             $('#editMaxSpeed').val(data.main.strMaxSpeed);
             $('#editBollardPull').val(data.main.strBollardPull);
             $('#editGrossTonnage').val(data.main.strGrossTonnage);

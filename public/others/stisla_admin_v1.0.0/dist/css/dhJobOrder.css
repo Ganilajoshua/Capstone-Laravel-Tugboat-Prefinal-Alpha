@@ -1,4 +1,4 @@
-.pendingCards,.forwardedCards,.declinedCards{
+.createdCards,.forwardedCards,.declinedCards{
   display: none;
 }
 .addJobOrder{

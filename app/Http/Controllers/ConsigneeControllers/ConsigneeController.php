@@ -97,11 +97,27 @@ class ConsigneeController extends Controller
         //
     }
     public function getnotifs(Request $request){
+        $contractlist = DB::table('tblcompany as company')
+        ->leftjoin('tblcontractlist as contracts','contracts.intCCompanyID','company.intCompanyID')
+        ->join('users as user','user.intUCompanyID','company.intCompanyID')
+        ->where('user.intUCompanyID',Auth::user()->intUCompanyID)
+        ->orderBy('contracts.intContractListID','DESC')
+        ->limit('1')
+        ->get();
+
         $contract = Contract::where('intCCompanyID',Auth::user()->intUCompanyID)->get();
-        $contractexpire = Contract::findOrFail($contract[0]->intContractListID);
-        $contractexpire->timestamps = false;
-        $contractexpire->enumStatus = 'Expired';
-        $contractexpire->save();
+        // $contractexpire = Contract::findOrFail($contract[0]->intContractListID);
+        // $contractexpire->timestamps = false;
+        // $contractexpire->enumStatus = 'Expired';
+        // $contractexpire->save();
+        return response()->json(['contract'=>$contractlist,'contractlist'=>$contractlist]);
+    }
+    public function setcontractexpired(Request $request){
+        $contract = Contract::findOrFail($request->contractID);
+        $contract->timestamps = false;
+        $contract->enumStatus = 'Expired';
+        $contract->save();
+
         return response()->json(['contract'=>$contract]);
     }
 }

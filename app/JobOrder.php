@@ -30,6 +30,7 @@ class JobOrder extends Model
         'datEndDate',
         'tmStart',
         'tmEnd',
+        'strRemarks'
     ];
 
     public function company()

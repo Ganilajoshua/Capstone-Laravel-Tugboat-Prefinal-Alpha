@@ -291,10 +291,56 @@ function forwardJobOrder()
     
 }
 //Decline Job Order
-function declineJobOrder()
-{
+$('.declineJoborder').on('click',function(){
+    console.log($(this).data('id'));
+    var joborderID = $(this).data('id');
+    $('#declinedModal').modal('show');
+    $('.declineButton').data('id',joborderID);
+});
 
-}
+$('.declineButton').on('click',function(){
+    console.log($(this).data('id'));
+    var joborderID = $(this).data('id');
+    var reason = $('#reasons').val();
+    console.log(reason);
+    swal({
+        title: "Are you Sure?",
+        text: "Decline this Job Order?",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonClass: "btn-info",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true,
+    },(isConfirm)=>{
+        $.ajax({
+            url : `${url}/decline`,
+            type : 'POST',
+            data : {
+                "_token" : $('meta[name="csrf-token"]').attr('content'),
+                joborderID : joborderID,
+                reason : reason
+            },
+            success : (data,response)=>{
+                swal({
+                    title: "Success",
+                    text: "Job Order was Declined",
+                    type: "success",
+                    showCancelButton: false,
+                    confirmButtonClass: "btn-success",
+                    confirmButtonText: "Ok",
+                    closeOnConfirm: true,
+                },(isConfirm)=>{
+                    if(isConfirm){
+                        location.reload();
+                    }
+                });
+            },
+            error : (error)=>{
+                throw error;
+            }
+        })
+    });
+});
 //Create Job Schedule
 function createJobsched(id){
     console.log(id);

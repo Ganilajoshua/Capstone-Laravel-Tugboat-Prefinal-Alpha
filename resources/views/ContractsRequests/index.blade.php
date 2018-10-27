@@ -27,6 +27,9 @@
                         <li class="nav-item">
                             <a class="nav-link showAccepted" data-toggle="pill" href="#" role="tab">Accepted</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link showActivation" data-toggle="pill" href="#" role="tab">Requesting For Activation</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="card-body">
@@ -137,7 +140,7 @@
                                                     <td>{{$companyAccepted->strCompanyName}}</td>
                                                     <td>
                                                         <div class="ml-1 mr-1">
-                                                            <button id="addSignatureButton" class="btn btn-sm btn-primary" data-id="{{$companyAccepted->intContractListID}}" role="button">
+                                                            <button class="addSignatureButton btn btn-sm btn-primary" data-id="{{$companyAccepted->intContractListID}}" role="button">
                                                                 Sign
                                                             </button>
                                                         </div>
@@ -152,6 +155,49 @@
                                     <thead class="bg-primary">
                                         <tr>
                                             <th>Company Name</th>
+                                            <th class="noSortAction">Action</th>
+                                        </tr>
+                                    </thead>  
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="contractActivation animated fadeIn fast">
+                        <div class="table-responsive">
+                            @if(count($activation)>0)
+                                <table class="detailedTable table table-striped text-center mainTable" style="width:100%">
+                                    <thead class="bg-primary">
+                                        <tr>
+                                            <th>Company Name</th>
+                                            <th class="noSortAction">Action</th>
+                                        </tr>
+                                    </thead>  
+                                    <tbody>
+                                        @foreach($activation as $activation)
+                                            <tr>
+                                                <td>{{$activation->strCompanyName}}</td>
+                                                <td>    
+                                                    <div class="ml-1 mr-1">
+                                                        <button class="activateContract btn btn-sm btn-success waves-effect" data-id="{{$activation->intContractListID}}" data-toggle="tooltip" title="Activate Contract">
+                                                            <i class="miniIcon fas fa-check custSize"></i>
+                                                        </button>
+                                                        <button class="viewContractDetails btn btn-sm btn btn-primary waves-effect" data-id="{{$activation->intContractListID}}" data-toggle="tooltip" title="View Details">
+                                                            <i class="miniIcon fas fa-eye custSize"></i> 
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @else
+                                <table class="detailedTable table table-striped text-center  mainTable" style="width:100%">
+                                    <thead class="bg-primary">
+                                        <tr>
+                                            <th>Company Name</th>
+                                            <th>Status</th>
                                             <th class="noSortAction">Action</th>
                                         </tr>
                                     </thead>  
