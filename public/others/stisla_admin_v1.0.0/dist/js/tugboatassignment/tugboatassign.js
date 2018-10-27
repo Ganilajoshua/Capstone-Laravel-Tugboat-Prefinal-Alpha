@@ -238,8 +238,8 @@ $('.createTugboatAssignment').on('click',function(){
             console.log(data);
             console.log(data.joborder);
             console.table(data.jobsched);
-    
-            tugs = getAvailableTugs(data.jobsched,data.tugboats,data.joborder);
+            console.log(data.tugboats);
+            tugs = getAvailableTugs(data.jobsched, data.tugboats, data.joborder);
             
 
             console.log(tugs);
