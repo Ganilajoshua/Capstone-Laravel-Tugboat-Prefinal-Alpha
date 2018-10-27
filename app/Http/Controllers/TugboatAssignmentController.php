@@ -142,61 +142,52 @@ class TugboatAssignmentController extends Controller
      */
     public function create(Request $request)
     {
-        try{
-            DB::beginTransaction();
-            if(Auth::user()->enumUserType == 'Admin'){
-                $joborder = JobOrder::findOrFail($request->jobOrderID);
-                $jobID = $joborder->intJobOrderID;    
-                $joborder->timestamps = false;
-                $joborder->enumStatus = 'Ready';
-                $joborder->save();
-            }elseif(Auth::user()->enumUserType == 'Affiliates'){
-                $joborder = JobOrder::findOrFail($request->jobOrderID);
-                $getjoborder = JoborderForwardRequests::where('intJOFRJobOrderID',$request->jobOrderID)->get();
-                $joborders = JoborderForwardRequests::findOrFail($getjoborder[0]->intJOForwardRequestsID);
-                $jobID = $getjoborder[0]->intJOFRJobOrderID; 
-                $joborders->timestamps = false;
-                $joborders->enumStatus = 'Ready';
-                $joborders->save();
-            }
-    
-            $scheduleID = Schedules::max('intScheduleID') + 1 ;
-            $schedID = $scheduleID;     
+        if(Auth::user()->enumUserType == 'Admin'){
+            $joborder = JobOrder::findOrFail($request->jobOrderID);
+            $jobID = $joborder->intJobOrderID;    
+            $joborder->timestamps = false;
+            $joborder->enumStatus = 'Ready';
+            $joborder->save();
+        }elseif(Auth::user()->enumUserType == 'Affiliates'){
+            $joborder = JobOrder::findOrFail($request->jobOrderID);
+            $getjoborder = JoborderForwardRequests::where('intJOFRJobOrderID',$request->jobOrderID)->get();
+            $joborders = JoborderForwardRequests::findOrFail($getjoborder[0]->intJOForwardRequestsID);
+            $jobID = $getjoborder[0]->intJOFRJobOrderID; 
+            $joborders->timestamps = false;
+            $joborders->enumStatus = 'Ready';
+            $joborders->save();
+        }
+
+        $scheduleID = Schedules::max('intScheduleID') + 1 ;
+        $schedID = $scheduleID;     
+        
+        $schedule = new Schedules;
+        $schedule->timestamps = false;
+        $schedule->intScheduleID = $schedID;
+        $schedule->intScheduleCompanyID = Auth::user()->intUCompanyID;
+        $schedule->strScheduleDesc = $joborder->strJOTitle;
+        $schedule->dateStart = $joborder->datStartDate;
+        $schedule->dateEnd = $joborder->datEndDate;
+        $schedule->tmStart = $joborder->tmStart;
+        $schedule->tmEnd = $joborder->tmEnd;
+        $schedule->strColor = $request->colorIndicator;
+        $schedule->save();
+        
+        for($count=0; $count < count($request->tugboatsID); $count++){
             
-            $schedule = new Schedules;
-            $schedule->timestamps = false;
-            $schedule->intScheduleID = $schedID;
-            $schedule->intScheduleCompanyID = Auth::user()->intUCompanyID;
-            $schedule->strScheduleDesc = $joborder->strJODesc;
-            $schedule->dateStart = $joborder->datStartDate;
-            $schedule->dateEnd = $joborder->datEndDate;
-            $schedule->tmStart = $joborder->tmStart;
-            $schedule->tmEnd = $joborder->tmEnd;
-            $schedule->strColor = $request->colorIndicator;
-            $schedule->save();
+            // $tugboatassign = Tugboat::findOrFail($request->tugboatsID[$count]);
+            // $tugboatassign->timestamps = false;
+            // $tugboatassign->save();
             
-            for($count=0; $count < count($request->tugboatsID); $count++){
-                
-                // $tugboatassign = Tugboat::findOrFail($request->tugboatsID[$count]);
-                // $tugboatassign->timestamps = false;
-                // $tugboatassign->save();
-                
-                $jobsched = new JobSchedule;
-                $jobsched->timestamps = false;
-                $jobsched->intJSSchedID = $schedID;
-                $jobsched->intJSJobOrderID = $jobID;
-                $jobsched->intJSTugboatAssignID = $request->tugboatsID[$count];
-                $jobsched->intJSTugboatID = $request->tugboatsID[$count];
-                $jobsched->enumStatus = 'Pending';
-                $jobsched->save();
-            }
-            DB::commit();
-           
-        }catch(\Illuminate\Database\QueryException $errors){
-            DB::rollback();
-            $errorMessage = $errors->getMessage();
-            return Redirect::back()->withErrors($errorMessage);
-        } 
+            $jobsched = new JobSchedule;
+            $jobsched->timestamps = false;
+            $jobsched->intJSSchedID = $schedID;
+            $jobsched->intJSJobOrderID = $jobID;
+            $jobsched->intJSTugboatAssignID = $request->tugboatsID[$count];
+            $jobsched->intJSTugboatID = $request->tugboatsID[$count];
+            $jobsched->enumStatus = 'Pending';
+            $jobsched->save();
+        }
         return response()->json([$joborder]);
         
     

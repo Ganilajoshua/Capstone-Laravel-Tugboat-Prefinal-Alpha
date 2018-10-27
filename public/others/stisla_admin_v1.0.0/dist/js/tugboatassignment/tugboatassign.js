@@ -242,7 +242,7 @@ $('.createTugboatAssignment').on('click',function(){
             tugs = getAvailableTugs(data.jobsched, data.tugboats, data.joborder);
             
 
-            console.log(tugs);
+            console.log('tugs', tugs);
             $('.availableTugboats').empty();
 
             // Get Locations of Joborder
@@ -292,7 +292,7 @@ $('.createTugboatAssignment').on('click',function(){
             //         </div>
             //     </div>`;
             // $(appendAvailableTugboats).appendTo('.availableTugboats');
-            console.log(tugs[0][0]);
+            console.log(tugs[0]);
             if(tugs[0].length == 0){
                 var appendUnavailableTugboats =
                 `<h6>
@@ -372,7 +372,7 @@ $('.assignTugboatsButton').on('click',function(){
         // parseInt($(this).val());
     }); 
     console.log(colorIndicator);
-    console.log(tugboatsID);
+    console.log('ID', tugboatsID);
     console.log(id);
     // return false;    
     $.ajax({
