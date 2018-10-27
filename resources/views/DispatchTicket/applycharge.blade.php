@@ -17,7 +17,7 @@
                                 <div class="input-group-append">
                                     <span class="input-group-text">&#8369; </span>
                                 </div>
-                                <input type="number" name="amount" id="amount" class="form-control" disabled>
+                                <input class="form-control" name="amount" id="amount">
                             </div>
                             
                         </div>

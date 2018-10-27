@@ -12,6 +12,7 @@ use App\Agreements;
 use App\Standard;
 use App\QuotationFees;
 use App\ContractFeesMatrix;
+use App\TermsCondition;
 use App\FinalContractFeesMatrix;
 
 class ContractRequestsController extends Controller
@@ -53,14 +54,28 @@ class ContractRequestsController extends Controller
         ->get();
 
         $quotations = Quotations::where('boolDeleted',0)->get();
+        $TermsCondition = TermsCondition::find(1);
        
         return view('ContractsRequests.index',
-        compact('companyPending','company2','companyRChanges','companyAccepted','quotations','activation'));
+        compact('companyPending','company2','companyRChanges','companyAccepted','quotations','activation','TermsCondition'));
         // ->with('companyPending',$companyPending)
         // ->with('company2',$company2)
         // ->with('companyRChanges',$companyRChanges)
         // ->with('companyAccepted',$companyAccepted)
         // ->with('quotations',$quotations);
+
+        // ->join('tblcompany',function($join){
+
+        //     $join->on('tblcontractlist.intCCompanyID', '=','tblcompany.intCompanyID');
+        // })
+        // ->join('tblgoods',function($join){
+        //     $join->on('tblcompany.intCGoodsID', '=','tblgoods.intGoodsID');
+        // })
+        // ->where('tblcompany.boolDeleted', 0)
+        // ->where('tblcontractlist.intCQuotationID', null)
+        // ->where('tblcontractlist.intCTermsConditionID', null)
+        // ->get();
+
         // return response()->json(['company'=>$company]);
     }
 
@@ -71,11 +86,17 @@ class ContractRequestsController extends Controller
      */
     public function create($intContractID)
     {
+        $TermsCondition = DB::table('tbltermscondition')
+        ->select(array('strTermsConditionDesc'))
+        ->where('intTermsConditionID',1)
+        ->get();
+        // $TermsCondition = TermsCondition::allOrFail();
         $contract = Contract::findOrFail($intContractID);
         $contracts = $contract->intCCompanyID;
         $company = Company::findOrFail($contracts);
         $contractsfees = ContractFeesMatrix::all();
-        return response()->json(['company'=>$company,'contract'=>$contract,'contractfees'=>$contractsfees]);
+        error_log($TermsCondition);
+        return response()->json(['TermsCondition'=>$TermsCondition,'company'=>$company,'contract'=>$contract,'contractfees'=>$contractsfees]);
     }
 
     /**

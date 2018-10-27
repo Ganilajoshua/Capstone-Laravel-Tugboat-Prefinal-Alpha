@@ -38,7 +38,7 @@ class CPaymentController extends Controller
         ->leftjoin('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
         // ->join('tblvessel as vessel','joborder.intJOeVesselID','vessel.intVesselID')
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-        ->join('tblbalance as balance','balance.intBalanceID','company.intCompanyID')
+        ->leftjoin('tblbalance as balance','balance.intBalanceID','company.intCompanyID')
         ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
         ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
@@ -49,7 +49,8 @@ class CPaymentController extends Controller
         ->where('invoice.intIBillID',$Bill)
         ->groupby('dispatch.intDispatchTicketID')
         ->get();
-
+        error_log($dispatch);
+        error_log('$dispatch');
         // $Company = Company::findOrFail(Auth::user()->intUCompanyID);
         $Company = DB::table('tblcompany as company')
         ->join('tblbalance as balance','company.intCompanyID','balance.intBalanceID')
@@ -63,7 +64,7 @@ class CPaymentController extends Controller
 
         // $Bill = Invoice::findOrFail($intBillID);
         $Results = DB::table('tblinvoice as invoice')
-        ->join('tblcharges as charges','invoice.intInvoiceID','charges.intChargeID')
+        ->leftjoin('tblcharges as charges','invoice.intInvoiceID','charges.intChargeID')
         ->where('intIBillID',$Bill)
         ->get();
         $Counter = DB::table('tblinvoice as invoice')
@@ -115,12 +116,11 @@ class CPaymentController extends Controller
         $Bill->save();
         $a = $request->Balance;
         error_log(count($request->ChequeNum));
-        for($count = 0; $count <= count($request->ChequeNum); $count++){
-                
+        for($count = 0; $count <= count($request->ChequeNum); $count++)
+        {
                 $Cheque = new Cheque;
                 $Cheque->timestamps = false;
-                $Cheque->strChequeNum = $request->ChequeNum[$count];
-                
+                $Cheque->intChequeID = $request->ChequeNum[$count];
                 error_log($request->ChequeNum[$count]);  
                 // $Cheque->strTugboatInsuranceDesc = $request->insurances[$count];
                 $Cheque->intCBillID = $request->BillID;
@@ -132,7 +132,7 @@ class CPaymentController extends Controller
                 $Cheque->strMemo = $request->ChequeMemo[$count];
                 // $a = $a + $request->ChequeAmount[$count];
                 $Cheque->save();
-            }
+        }
             
             // $remains = $a - $request->Fee;
             // $Balance = Balance::findOrFail(Auth::user()->intUCompanyID);

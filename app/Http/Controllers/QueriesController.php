@@ -41,7 +41,6 @@ class QueriesController extends Controller
         ->groupBy('intDTCompanyID')
         ->get();
         
-
         $cpending = DB::table('tblcompany')
         ->select(array('strCompanyName', DB::raw('SUM(fltBalanceRemain) as counter')))
         ->join('tblinvoice','intCompanyID','intDTCompanyID')

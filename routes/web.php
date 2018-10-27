@@ -311,7 +311,9 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::post('/teamcomposition/update','TeamCompositionController@update');
         // Contract Fees Matrix 
         Route::resource('/contractfeesmatrix','ContractFeesMatrixController');
-        
+        //terms and condition
+        Route::resource('/termscondition','TermsAndConditionController');
+        Route::post('/termscondition/store','TermsAndConditionController@store');
     });
     Route::post('/Adminlogout','LoginControllers\AdminLoginController@logout');
 

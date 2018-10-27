@@ -137,7 +137,7 @@
 
 							</div>
 
-							<button id="addCheque" class="btn-primary waves-effect float-right">New Cheque</button>
+							<button id="addCheque" class="btn btn-primary waves-effect float-right">New Cheque</button>
 							</div>
 							
 							<div class="cashDetails animated fadeIn fast">

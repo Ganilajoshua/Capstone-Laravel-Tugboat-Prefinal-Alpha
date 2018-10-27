@@ -53,10 +53,13 @@ class PaymentController extends Controller
         $pending = DB::table('tbljoborder as joborder')
         ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
         ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
+        ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
+        ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
+        ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
         ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
         ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
         ->join('tblbill as bill','bill.intBillID','invoice.intIBillID')
-        ->join('tblcheque as cheque','bill.intBillID','cheque.intCBillID')
+        ->leftjoin('tblcheque as cheque','bill.intBillID','cheque.intCBillID')
         ->where('jobsched.enumstatus','Finished')
         ->where('bill.enumStatus','Pending')
         ->groupby('intBillID') 
@@ -119,9 +122,9 @@ class PaymentController extends Controller
         // $balance = $balance + $total;
         // $balance = $balance - $sum;
 
-        $Invoice = Invoice::find($request->bill);
-        $Invoice->enumStatus = 'Paid';
-        $Invoice->save();
+        // $Invoice = Invoice::find($request->bill);
+        // $Invoice->enumStatus = 'Paid';
+        // $Invoice->save();
         $Bill = Bill::find($request->bill);
         $Bill->timestamps = false;
         $Bill->enumStatus = 'Accepted';

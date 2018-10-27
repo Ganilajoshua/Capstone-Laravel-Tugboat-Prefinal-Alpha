@@ -11,9 +11,9 @@ $('.viewTeamButton').on('click',function(event){
         type : 'GET',
         dataType : 'JSON',
         success : function(data){
+            console.log(data);
+            console.log(data);
             $('.viewTeamCard').empty();
-            console.log(data)
-            console.log();
             if((data.employees).length == 0){
                 $('#viewTeamCompositionModal').modal('show');
             }else{

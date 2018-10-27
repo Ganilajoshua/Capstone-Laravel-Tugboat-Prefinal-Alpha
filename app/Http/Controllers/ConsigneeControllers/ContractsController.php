@@ -36,13 +36,15 @@ class ContractsController extends Controller
         ->get();
 
         $contract = DB::table('tblcontractlist as contract')
-        ->join('tblquotation as quotation','contract.intContractListID','quotation.intQContractListID')
-        ->where('contract.intCCompanyID',Auth::user()->intUCompanyID)
-        ->where('contract.intContractListID',$contractlist[0]->intContractListID)
-        // ->where('contract.intContractListID',$contractlist->)
-        ->get();
+        // ->join('tblquotation as quotation','contract.intCQuotationID','quotation.intQuotationID')
+        ->where('contract.intCCompanyID',Auth::user()->intUCompanyID)->get();
 
-        Contract::where('intCCompanyID',Auth::user()->intUCompanyID)->get();
+        $TermsCondition = DB::table('tblcompany as company')
+        ->select(array('strContractListDesc'))
+        ->leftjoin('tblcontractlist as contract','company.intCompanyID','contract.intCCompanyID')
+        ->where('intCCompanyID',Auth::user()->intUCompanyID)
+        ->get();
+        // Contract::where('intCCompanyID',Auth::user()->intUCompanyID)->get();
         $contractList = DB::table('users as users')
         ->leftjoin('tblcompany as company','users.intUCompanyID','company.intCompanyID')
         ->join('tblcontractlist as contracts','company.intCompanyID','contracts.intCCompanyID')
@@ -52,6 +54,7 @@ class ContractsController extends Controller
         ->get();
 
         
+        error_log($contract);
         $contractListFinal = DB::table('users as users')
         ->leftjoin('tblcompany as company','users.intUCompanyID','company.intCompanyID')
         ->join('tblcontractlist as contracts','company.intCompanyID','contracts.intCCompanyID')
@@ -62,7 +65,14 @@ class ContractsController extends Controller
         ->get();
         // $contractListFinal = DB::table('tblfinalcontractfeesmatrix');
         $fees = ContractFeesMatrix::all();
-        return view('Consignee.Contracts.newindex',compact('company','contract','contractList','fees','contractListFinal','contractlist'));
+        return view('Consignee.Contracts.newindex',compact('company','contract','contractList','fees','contractListFinal','contractlist','TermsCondition'));
+        // return view('Consignee.Contracts.index')
+        // ->with('TermsCondition',$TermsCondition)
+        // ->with('company',$company)
+        // ->with('contract',$contract)
+        // ->with('contractList',$contractList)
+        // ->with('fees',$fees)
+        // ->with('contractListFinal',$contractListFinal);
         // ->with('company',$company)
         // ->with('contract',$contract)
         // ->with('contractList',$contractList);

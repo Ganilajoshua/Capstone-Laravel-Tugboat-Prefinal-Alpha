@@ -10,7 +10,7 @@ use DB;
 use App\Invoice;
 use App\DispatchTicket;
 use App\Charges;
-
+use Carbon\Carbon;
 class DispatchTicketController extends Controller
 {
     
@@ -45,7 +45,6 @@ class DispatchTicketController extends Controller
         ->where('invoice.intIDispatchTicketID',null)
         ->groupby('dispatch.intDispatchTicketID')
         ->get(); 
-
         $dispatch2 = DB::table('tbljoborder as joborder')
         // ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
         ->leftjoin('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
@@ -239,10 +238,22 @@ class DispatchTicketController extends Controller
         $sign = DB::table('tbldispatchticket as dispatch')
         ->where('intDispatchTicketID',$id)
         ->get();
-        error_log($sign);
-        // return view('DispatchTicket.index')
-        // ->with('dispatch',$dispatch);
-        return response()->json(['dispatch'=>$dispatch,'id'=>$id,'sign'=>$sign]);    
+        // DB::raw('COUNT(intJobOrderID) as counter')
+
+        $dtStarted = DB::table('tbldispatchticket as dispatch')
+        ->select(array(DB::raw('tmEnded-tmStarted as timetotal')))
+        ->join('tbljobsched as jobsched','jobsched.intJSDispatchTicketID','dispatch.intDispatchTicketID')
+        ->where('dispatch.intDispatchTicketID',$id)
+        ->groupBy('dispatch.intDispatchTicketID')
+        ->get();
+        $date = DB::table('tbldispatchticket as dispatch')
+        ->select(array(DB::raw('dateEnded-dateStarted as date')))
+        ->join('tbljobsched as jobsched','jobsched.intJSDispatchTicketID','dispatch.intDispatchTicketID')
+        ->where('dispatch.intDispatchTicketID',$id)
+        ->groupBy('dispatch.intDispatchTicketID')
+        ->get();
+
+        return response()->json(['dispatch'=>$dispatch,'id'=>$id,'sign'=>$sign,'dtStarted'=>$dtStarted,'date'=>$date]);    
 
         }
         public function AdminAccept(Request $request)
@@ -267,6 +278,7 @@ class DispatchTicketController extends Controller
         $Invoice->enumStatus = 'Processing';
         $Invoice->fltBalanceRemain = $request->total;
         $Invoice->boolDeleted = 0;
+        $Invoice->save();
         
         $Charges = new Charges;
         $Charges->timestamps = false;
@@ -279,7 +291,6 @@ class DispatchTicketController extends Controller
         $Charges->fltCompanyDamageFee = $request->companydamagefee;
         $Charges->fltCompanyViolationFee = $request->companyviolation;
         $Charges->intDiscount = $request->discount;
-        $Invoice->save();
         $Charges->save();
 
     }

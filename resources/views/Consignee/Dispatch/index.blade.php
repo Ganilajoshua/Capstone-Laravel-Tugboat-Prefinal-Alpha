@@ -62,7 +62,7 @@
 									<td>
                                         {{$accept->strJODestination}}
                                     </td>
-									<td>san kukunin?</td>
+									<td>{{$accept->dateEnded}} {{$accept->tmEnded}}</td>
 									<td>
                                         {{$accept->enumServiceType}}
                                     </td>
