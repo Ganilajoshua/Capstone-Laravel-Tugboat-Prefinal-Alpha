@@ -206,7 +206,50 @@ class PaymentController extends Controller
         ->groupby('dispatch.intDispatchTicketID')
         ->get();
 
+        error_log($dispatch);
+        error_log('$dispatch');
+        error_log('$dispatch');
+        error_log('$dispatch');
         
+        error_log('$dispatch');
+        error_log('$dispatch');
+        error_log('$dispatch');
+        
+        error_log('$dispatch');
+        error_log('$dispatch');
+        error_log('$dispatch');
+        
+        error_log('$dispatch');
+        error_log('$dispatch');
+        error_log('$dispatch');
+        
+        error_log('$dispatch');
+        error_log('$dispatch');
+        error_log('$dispatch');
+        
+        error_log('$dispatch');
+        error_log('$dispatch');
+        error_log('$dispatch');
+        
+        error_log('$dispatch');
+        error_log('$dispatch');
+        error_log('$dispatch');
+        
+        error_log('$dispatch');
+        error_log('$dispatch');
+        error_log('$dispatch');
+        
+        error_log('$dispatch');
+        error_log('$dispatch');
+        error_log('$dispatch');
+        
+        error_log('$dispatch');
+        error_log('$dispatch');
+        error_log('$dispatch');
+        
+        error_log('$dispatch');
+        error_log('$dispatch');
+        error_log('$dispatch');
         return response()->json(['dispatch'=>$dispatch]);   
     }
     public function pendinginfo($id)
@@ -223,14 +266,15 @@ class PaymentController extends Controller
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
         ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
-        ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
-        ->join('tblbill as bill','invoice.intIBillID','bill.intBillID')
-        ->join('tblcharges as charges','charges.intChargeID','invoice.intInvoiceID')
-        ->join('tblbalance as balance','balance.intBalanceID','company.intCompanyID')
+        ->leftjoin('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
+        ->leftjoin('tblbill as bill','invoice.intIBillID','bill.intBillID')
+        ->leftjoin('tblcharges as charges','charges.intChargeID','invoice.intInvoiceID')
+        ->leftjoin('tblbalance as balance','balance.intBalanceID','company.intCompanyID')
         ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
         ->where('invoice.intInvoiceID',$id)
         ->groupby('dispatch.intDispatchTicketID')
         ->get();
+        error_log($dispatch);
         return response()->json(['dispatch'=>$dispatch]);   
     }
 }

@@ -49,7 +49,7 @@
                         <strong>Towed:</strong> <span id="towed"></span>
                     </div>
                     <div class="mb-1">
-                        <strong>Date:</strong> ????
+                        <strong>Date:</strong> <span id="dateEnded"></span>
                     </div>
                     <div class="mb-1">
                         <strong>Account:</strong> <span id="ID"></span>

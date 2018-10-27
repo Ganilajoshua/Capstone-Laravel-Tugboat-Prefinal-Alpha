@@ -200,7 +200,7 @@ function infopayment(id){
   function pendinginfo(id){
       console.log('1');
     $.ajax({
-        url : url + '/' + id + '/pendinginfo',
+        url : '/administrator/transactions/payment' + '/' + id + '/pendinginfo',
         type : 'GET',
         dataType : 'JSON',
         aysnc : true,
@@ -216,13 +216,18 @@ function infopayment(id){
                 $('#dispatch21').html(data.dispatch[0].intDispatchTicketID);
                 $('#dispatch31').html(data.dispatch[0].intDispatchTicketID);
                 $('#towed1').html(data.dispatch[0].strJOVesselName);
+
+
                 $('#start1').html(data.dispatch[0].strJOStartPoint);
                 $('#destination1').html(data.dispatch[0].strJODestination);
+                
+                
                 $('#service1').html(data.dispatch[0].enumServiceType);
                 $('#pNum1').html(data.dispatch[0].strCompanyContactPNum);
                 $('#eMail1').html(data.dispatch[0].strCompanyEmail);
                 $('#ID1').html(data.dispatch[0].intCompanyID);
                 $('#company1').html(data.dispatch[0].intCompanyID);
+                $('#date').html(data.dispatch[0].dateEnded); 
                 $('#amount1').html(data.dispatch[0].fltJOAmount);
                 $('#delayfee1').html(data.dispatch[0].fltTugboatDelayFee);
                 $('#conviolationfee1').html(data.dispatch[0].fltConsigneeViolationFee);
