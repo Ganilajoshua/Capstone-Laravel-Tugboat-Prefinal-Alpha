@@ -61,8 +61,7 @@ $('#transactionTree').addClass('active');
     $('.modalClose').on('click',function() {
       $('#applyAdminSignModal').modal('hide');
     });
-    // Back
-    // $('.btnGeneratePDF').hide();
+    // Back 
     $('.btnBack').on('click',function() {
         $('.dispatchTicketTable').css('display','block');
         $('.viewDetails').css('display','none');
@@ -97,10 +96,6 @@ function getData(id){
       success : function(data){
           //clear canvas
 
-<<<<<<< HEAD
-            console.log('success', data);
-=======
->>>>>>> 82982f54b67fa4ec1724b780582c3a56233a929c
             $('#viewDetails').empty();
             $('#viewCharges').empty();
             if(data.sign[0].strAdminSign!=null){
@@ -287,36 +282,11 @@ function getData(id){
                 console.log(final);
                 $('#amount').val(final);
             }
-<<<<<<< HEAD
-            var delay = Number(data.dispatch[0].fltFCFTugboatDelayFee);
-            var delay2 = Number(data.dispatch[0].fltFCFConsigneeLateFee);
-
-            var starttm = data.dispatch[0].tmStarted;
-            var endtm = data.dispatch[0].tmEnded;
-
-            var tm = starttm - endtm;
-
-            var startdt = data.dispatch[0].dateStarted;
-            var enddt = data.dispatch[0].dateEnded;
-            console.log(tm);
-            console.log(enddt);
-            console.log(startdt);
-            var startdt = data.dispatch[0].tmStarted;
-            
-            $("#discount").attr({
-                "value" : data.dispatch[0].intFCFDiscountFee,         
-             });
-            
-            
-            $("#delayrate").val(delay);
-            $("#conlatefee").val(delay2);
-=======
             else if(data.dispatch[0].enumServiceType == 'Tug Assist')
             {
 
             }
 
->>>>>>> 82982f54b67fa4ec1724b780582c3a56233a929c
             $("#discount").attr({
                 "max" : data.dispatch[0].intFCFDiscountFee,
                 "min" : 0         

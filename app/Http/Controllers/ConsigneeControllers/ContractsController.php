@@ -39,11 +39,13 @@ class ContractsController extends Controller
         // ->join('tblquotation as quotation','contract.intCQuotationID','quotation.intQuotationID')
         ->where('contract.intCCompanyID',Auth::user()->intUCompanyID)->get();
 
-        $TermsCondition = DB::table('tblcompany as company')
-        ->select(array('strContractListDesc'))
-        ->leftjoin('tblcontractlist as contract','company.intCompanyID','contract.intCCompanyID')
-        ->where('intCCompanyID',Auth::user()->intUCompanyID)
-        ->get();
+        // $TermsCondition = DB::table('tblcompany as company')
+        // ->select(array('strContractListDesc'))
+        // ->leftjoin('tblcontractlist as contract','company.intCompanyID','contract.intCCompanyID')
+        // ->where('intCCompanyID',Auth::user()->intUCompanyID)
+        // ->get();
+
+        $termscondition = DB::table('tbltermscondition')->get();
         // Contract::where('intCCompanyID',Auth::user()->intUCompanyID)->get();
         $contractList = DB::table('users as users')
         ->leftjoin('tblcompany as company','users.intUCompanyID','company.intCompanyID')
@@ -65,7 +67,7 @@ class ContractsController extends Controller
         ->get();
         // $contractListFinal = DB::table('tblfinalcontractfeesmatrix');
         $fees = ContractFeesMatrix::all();
-        return view('Consignee.Contracts.newindex',compact('company','contract','contractList','fees','contractListFinal','contractlist','TermsCondition'));
+        return view('Consignee.Contracts.newindex',compact('company','contract','contractList','fees','contractListFinal','contractlist','TermsCondition','termscondition'));
         // return view('Consignee.Contracts.index')
         // ->with('TermsCondition',$TermsCondition)
         // ->with('company',$company)

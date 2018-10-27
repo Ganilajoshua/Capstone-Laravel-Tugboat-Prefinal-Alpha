@@ -493,6 +493,22 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <textarea class="summernoteQuote" name="" id="" cols="30" rows="5"style="height: 50px; width: 90px;" disabled>
+                                        @foreach($termscondition as $termscondition)
+                                            {{ $termscondition->strTermsConditionTitle }}
+                                            
+                                            {{ $termscondition->strTermsConditionDesc }}
+                                        @endforeach
+                                    </textarea>    
+                                    <div class="row">
+                                        @foreach($termscondition as $termscondition)
+                                            <div class="col">
+                                                <div>
+                                                    
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
                                 <div class="card-footer text-center">
                                     <button data-id="{{$contractlist->intContractListID}}" class="activateContract btn btn-success waves-effect">Activate this Contract</button>     
@@ -521,7 +537,155 @@
                     </div>
                 </div>
             @elseif($contractlist->enumStatus == 'Active')
-                Active
+                <div class="container" id="activeContract" data-id="{{$contractlist->intContractListID}}">
+                    <div class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header bg-primary" style="border-radius:0px;">
+                                    <h4 class="text-center text-white">{{$contractlist->strContractListTitle}}</h4>
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="text-primary text-center">
+                                        {{-- <span class="alert alert-warning">
+                                            <i class="fas fa-exclamation-triangle mr-2"></i>This contract was finalized but not yet active!
+                                        </span> --}}
+                                        <span class="float-right">
+                                            <span class="text-black">Status : </span>
+                                            <button type="button" tab-index="-1" class="text-white btn btn-success btn-sm" style="font-size: 12px; border-radius: 3px; font-weight:bold; pointer-events: none;" aria-disabled="true">Active</button>
+                                        </span> 
+                                    </h4>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p class="text-black text-center" id="contractDetails"></p>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-5">
+                                        <div class="col-12">
+                                            <ul class="nav nav-pills nav-fill">
+                                                <li class="nav-item">
+                                                    <a class="nav-link showPending active" data-toggle="pill" href="#pillsHaulingM" role="tab" aria-controls="pills-home" aria-selected="true">Hauling Service Matrix</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link showRChanges" data-toggle="pill" href="#pillsTugAssistM" role="tab" aria-selected="false">Tug Assist Service Matrix</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="tab-content" id="pills-tabContent">
+                                        <div class="tab-pane fade show active" id="pillsHaulingM" role="tabpanel" aria-labelledby="pillsHaulingM-tab">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item text-primary">
+                                                            <p class="font-weight-bold">Standard Rate : </p></li>
+                                                        <li class="list-inline-item">
+                                                            <p class="text-black" id="standardRate">{{$contractListFinal[0]->fltFCFStandardRate}}</p></li>
+                                                    </ul>
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item text-primary">
+                                                            <p class="font-weight-bold">Tugboat Delay Fee : </p></li>
+                                                        <li class="list-inline-item">
+                                                            <p class="text-black" id="tugboatDelayFee">{{$contractListFinal[0]->fltFCFTugboatDelayFee}}</p></li>
+                                                    </ul>
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item text-primary">
+                                                            <p class="font-weight-bold">Violation Fee : </p></li>
+                                                        <li class="list-inline-item"> 
+                                                            <p class="text-black" id="violationFee">{{$contractListFinal[0]->fltFCFViolationFee}}</p></li>
+                                                    </ul>
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item text-primary">
+                                                            <p class="font-weight-bold">Consignee Late Fee : </p></li>
+                                                        <li class="list-inline-item">
+                                                        <p class="text-black" id="consigneeLateFee">{{$contractListFinal[0]->fltFCFConsigneeLateFee}}</p></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-6">
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item text-primary">
+                                                            <p class="font-weight-bold">Minimum Damage Fee : </p></li>
+                                                        <li class="list-inline-item">
+                                                        <p class="text-black" id="minDamageFee">{{$contractListFinal[0]->fltFCFMinDamageFee}}</p></li>
+                                                    </ul>
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item text-primary">
+                                                            <p class="font-weight-bold">Maximum Damage Fee : </p></li>
+                                                        <li class="list-inline-item">
+                                                            <p class="text-black" id="maxDamageFee">{{$contractListFinal[0]->fltFCFMaxDamageFee}}</p></li>
+                                                    </ul>
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item text-primary">
+                                                            <p class="font-weight-bold">Discount : </p></li>
+                                                        <li class="list-inline-item">
+                                                            <p class="text-black" id="discount">{{$contractListFinal[0]->intFCFDiscountFee}}</p></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="pillsTugAssistM" role="tabpanel" aria-labelledby="pillsTugAssistM-tab">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item text-primary">
+                                                            <p class="font-weight-bold">Standard Rate : </p></li>
+                                                        <li class="list-inline-item">
+                                                            <p class="text-black" id="standardRate">{{$contractListFinal[1]->fltFCFStandardRate}}</p></li>
+                                                    </ul>
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item text-primary">
+                                                            <p class="font-weight-bold">Tugboat Delay Fee : </p></li>
+                                                        <li class="list-inline-item">
+                                                            <p class="text-black" id="tugboatDelayFee">{{$contractListFinal[1]->fltFCFTugboatDelayFee}}</p></li>
+                                                    </ul>
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item text-primary">
+                                                            <p class="font-weight-bold">Violation Fee : </p></li>
+                                                        <li class="list-inline-item"> 
+                                                            <p class="text-black" id="violationFee">{{$contractListFinal[1]->fltFCFViolationFee}}</p></li>
+                                                    </ul>
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item text-primary">
+                                                            <p class="font-weight-bold">Consignee Late Fee : </p></li>
+                                                        <li class="list-inline-item">
+                                                        <p class="text-black" id="consigneeLateFee">{{$contractListFinal[1]->fltFCFConsigneeLateFee}}</p></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-6">
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item text-primary">
+                                                            <p class="font-weight-bold">Minimum Damage Fee : </p></li>
+                                                        <li class="list-inline-item">
+                                                        <p class="text-black" id="minDamageFee">{{$contractListFinal[1]->fltFCFMinDamageFee}}</p></li>
+                                                    </ul>
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item text-primary">
+                                                            <p class="font-weight-bold">Maximum Damage Fee : </p></li>
+                                                        <li class="list-inline-item">
+                                                            <p class="text-black" id="maxDamageFee">{{$contractListFinal[1]->fltFCFMaxDamageFee}}</p></li>
+                                                    </ul>
+                                                    <ul class="list-inline">
+                                                        <li class="list-inline-item text-primary">
+                                                            <p class="font-weight-bold">Discount : </p></li>
+                                                        <li class="list-inline-item">
+                                                            <p class="text-black" id="discount">{{$contractListFinal[1]->intFCFDiscountFee}}</p></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <textarea class="summernoteQuote" name="" id="" cols="30" rows="5"style="height: 50px; width: 90px;" disabled>
+                                        @foreach($termscondition as $termscondition)
+                                            {{ $termscondition->strTermsConditionTitle }}
+                                            
+                                            {{ $termscondition->strTermsConditionDesc }}
+                                        @endforeach
+                                    </textarea>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @elseif($contractlist->enumStatus == 'Expired')
             <div class="container">
                 <div id="forecast"></div>

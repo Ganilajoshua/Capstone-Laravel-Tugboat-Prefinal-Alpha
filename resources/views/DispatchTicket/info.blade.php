@@ -6,7 +6,6 @@
             </a>
         </div>
         <div class="card-body">
-                
             <div class="row">
                 <div class="col-12 col-sm-4 col-lg-4">
                     <h5 class="mb-2">From</h5>
@@ -155,11 +154,7 @@
                                         <div class="input-group-append">
                                             <span class="input-group-text">&#8369; </span>
                                         </div>
-<<<<<<< HEAD
-                                        <input type="number" name="amount" id="amount" min="0" class="form-control" required>
-=======
                                         <input type="number" name="amount" id="amount" min="0" class="form-control" disabled>
->>>>>>> 82982f54b67fa4ec1724b780582c3a56233a929c
                                     </div>
                                     
                                 </div>
@@ -262,7 +257,6 @@
                 </form>
                 </div>
             </div>
-
         <script>
             (function() {
             'use strict';
