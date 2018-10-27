@@ -12,6 +12,7 @@ use App\Agreements;
 use App\Standard;
 use App\QuotationFees;
 use App\ContractFeesMatrix;
+use App\TermsCondition;
 use App\FinalContractFeesMatrix;
 
 class ContractRequestsController extends Controller
@@ -69,7 +70,7 @@ class ContractRequestsController extends Controller
         ->where('tblcompany.boolDeleted', 0)
         ->get();
         $quotations = Quotations::where('boolDeleted',0)->get();
-       
+        $TermsCondition = TermsCondition::find(1);
 
         // ->join('tblcompany',function($join){
 
@@ -83,6 +84,7 @@ class ContractRequestsController extends Controller
         // ->where('tblcontractlist.intCTermsConditionID', null)
         // ->get();
         return view('ContractsRequests.index')
+        ->with('TermsCondition',$TermsCondition)
         ->with('companyPending',$companyPending)
         ->with('company2',$company2)
         ->with('companyRChanges',$companyRChanges)
@@ -98,11 +100,17 @@ class ContractRequestsController extends Controller
      */
     public function create($intContractID)
     {
+        $TermsCondition = DB::table('tbltermscondition')
+        ->select(array('strTermsConditionDesc'))
+        ->where('intTermsConditionID',1)
+        ->get();
+        // $TermsCondition = TermsCondition::allOrFail();
         $contract = Contract::findOrFail($intContractID);
         $contracts = $contract->intCCompanyID;
         $company = Company::findOrFail($contracts);
         $contractsfees = ContractFeesMatrix::all();
-        return response()->json(['company'=>$company,'contract'=>$contract,'contractfees'=>$contractsfees]);
+        error_log($TermsCondition);
+        return response()->json(['TermsCondition'=>$TermsCondition,'company'=>$company,'contract'=>$contract,'contractfees'=>$contractsfees]);
     }
 
     /**

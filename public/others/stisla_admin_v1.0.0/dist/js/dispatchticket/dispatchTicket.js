@@ -96,11 +96,8 @@ function getData(id){
       success : function(data){
           //clear canvas
 
-            console.log('success', data);
-            console.log(id);
             $('#viewDetails').empty();
             $('#viewCharges').empty();
-            console.log(data.sign[0].strAdminSign);
             if(data.sign[0].strAdminSign!=null){
                 $('.signAdminCanvas').signature('enable').signature('draw', data.sign[0].strAdminSign).signature('disable'); 
             }
@@ -122,6 +119,9 @@ function getData(id){
             $('#towed').html(data.dispatch[0].strJOVesselName);
             $('#date').html(data.dispatch[0].dateEnded);
             $('#start').html(data.dispatch[0].strJOStartPoint);
+            $('#date2').html(data.dispatch[0].dateEnded);
+            $('#end').html(data.dispatch[0].tmEnd);
+            
             $('#destination').html(data.dispatch[0].strJODestination);
             $('#service').html(data.dispatch[0].enumServiceType);
             $('#pNum').html(data.dispatch[0].strCompanyContactPNum);
@@ -130,38 +130,163 @@ function getData(id){
             $('#company').html(data.dispatch[0].intCompanyID);
             $('#arrive').html(data.dispatch[0].timeEnded);
 
-            if(data.dispatch[0].enumServiceType=='Hauling')
-            {
-                var amount = 20000;
-                // $('#amount1') = amount;
-                $('#standard1').html(data.dispatch[0].fltFCFStandardRate);
-                $('#delay1').html(data.dispatch[0].fltFCFTugboatDelayFee);
-                $('#violation1').html(data.dispatch[0].fltFCFViolationFee);
-                $('#conlatefee1').html(data.dispatch[0].fltFCFConsigneeLateFee);
-                $('#minDamage1').html(data.dispatch[0].fltFCFMinDamageFee);
-                $('#maxDamage1').html(data.dispatch[0].fltFCFMaxDamageFee);
-                $('#discount1').html(data.dispatch[0].intFCFDiscountFee);
+            // if(data.dispatch[0].enumServiceType=='Hauling')
+            // {
+            //     var amount = 20000;
+            //     // $('#amount1') = amount;
+            //     $('#standard1').html(data.dispatch[0].fltFCFStandardRate);
+            //     $('#delay1').html(data.dispatch[0].fltFCFTugboatDelayFee);
+            //     $('#violation1').html(data.dispatch[0].fltFCFViolationFee);
+            //     $('#conlatefee1').html(data.dispatch[0].fltFCFConsigneeLateFee);
+            //     $('#minDamage1').html(data.dispatch[0].fltFCFMinDamageFee);
+            //     $('#maxDamage1').html(data.dispatch[0].fltFCFMaxDamageFee);
+            //     $('#discount1').html(data.dispatch[0].intFCFDiscountFee);
+            // }
+            // else if(data.dispatch[0].enumServiceType=='Tug Assist')
+            // {
+            //     var amount = 20000;
+            //     // $('#amount1') = amount;
+            //     $('#standard1').html(data.dispatch[1].fltFCFStandardRate);
+            //     $('#delay1').html(data.dispatch[1].fltFCFTugboatDelayFee);
+            //     $('#violation1').html(data.dispatch[1].fltFCFViolationFee);
+            //     $('#conlatefee1').html(data.dispatch[1].fltFCFConsigneeLateFee);
+            //     $('#minDamage1').html(data.dispatch[1].fltFCFMinDamageFee);
+            //     $('#maxDamage1').html(data.dispatch[1].fltFCFMaxDamageFee);
+            //     $('#discount1').html(data.dispatch[1].intFCFDiscountFee);
+            // }
+            // var delay = Number(data.dispatch[0].fltFCFTugboatDelayFee);
+            // var delay2 = Number(data.dispatch[0].fltFCFConsigneeLateFee);
+
+            
+            // var tmStarted = data.dispatch[0].tmStarted;
+            // var tmEnded = data.dispatch[0].tmEnded;
+            // console.log(tmStarted, tmEnded);
+            // tmEnded.split(':');
+            // tmStarted.split(':');  
+            
+            // var time = tmEnded[0] - tmStarted[0];
+            // console.log(time);
+
+            // newdate.setDate(tmStarted.getDate() - 7); // minus the date
+            // var tmStarted = tmStarted - tmEnded;
+            // var nd = new Date(newdate);
+            // console.log(nd);
+
+            // $("#delayrate").val(delay);
+            // $("#conlatefee").val(delay2);
+
+            $('.btnBack').on('click',function() {
+                $('.dispatchTicketTable').css('display','block');
+                $('.viewDetails').css('display','none');
+                $('.viewCharges').css('display','none');
+        
+            });
+
+
+            
+
+            //ganilian logic
+            console.log(data.dispatch[0].fltFCFStandardRate);
+            var date = Number(data.date[0].date);
+            console.log(date);
+            var day = Number(date%100);
+            var date = Number(date-day);
+            
+            //day
+            var month = Number(date%10000);
+            var date = Number(date-month);
+            var month = Number((month/100)*30*24);
+            var month = Number((month/100));
+            console.log(month +'month');
+            //month
+            var year = Number(date%10000);
+            var date = Number(date-year);
+            var year = Number((year/10000)*365*24);
+            //year
+            var time = Number(data.dtStarted[0].timetotal);
+
+            var sec = Number(time%100);
+            var time = Number(time-sec);
+            var sec = Number(sec/1);
+            //by sec
+
+            var min = Number(time%10000);
+            var time = Number(time-min);
+            var min = Number(min/100);
+            
+            //by min
+            var hour = Number(time%1000000);
+            var time = Number(time-hour);
+            var hour = Number(hour/10000); 
+            //by hour
+
+            while(min < 0){
+                if(min < 0 ){
+                    hour = hour - 1;
+                    min = min + 60;
+                }
             }
-            else if(data.dispatch[0].enumServiceType=='Tug Assist')
-            {
-                var amount = 20000;
-                // $('#amount1') = amount;
-                $('#standard1').html(data.dispatch[1].fltFCFStandardRate);
-                $('#delay1').html(data.dispatch[1].fltFCFTugboatDelayFee);
-                $('#violation1').html(data.dispatch[1].fltFCFViolationFee);
-                $('#conlatefee1').html(data.dispatch[1].fltFCFConsigneeLateFee);
-                $('#minDamage1').html(data.dispatch[1].fltFCFMinDamageFee);
-                $('#maxDamage1').html(data.dispatch[1].fltFCFMaxDamageFee);
-                $('#discount1').html(data.dispatch[1].intFCFDiscountFee);
+
+            while(hour < 0){
+                if(hour < 0 ){
+                    day = day - 1;
+                    hour = hour + 24;
+                }
             }
-            var delay = Number(data.dispatch[0].fltFCFTugboatDelayFee);
-            var delay2 = Number(data.dispatch[0].fltFCFConsigneeLateFee);
+            
+            while(hour >= 24){
+                if(hour >= 24 ){
+                    day = day + 1;
+                    hour = hour - 24;
+                    console.log('a');
+                }
+            }
+            
+            while(min >= 60){
+                if(min >= 60 ){
+                    hour = hour + 1;
+                    min = min - 60;
+                }
+            }
+            var day = Number(day*24);   
+            
+            if(1 <= min && min <= 7){
+                min = 0;
+            }
+            else if(8 <= min && min <= 22){
+                min = .25;
+            }
+            else if(23 <= min && min <= 37){
+                min = .5;
+            }
+            else if(38 <= min && min <= 52){
+                min = .75;
+            }
+            else if(53 <= min && min <= 59){
+                min = 60;
+                hour = hour + 1;
+                min = min - 60;
+            }
+            var temp = Number(month+day+hour+min+sec);
+            console.log(temp + 'total');
+            // console.log(sec + 'sec'); 
+            // console.log(min + 'min');
+            // console.log(hour + 'hour');
+            // console.log(day + 'day');
+            // else if(min > 60){
+            // }
+            console.table(data.dispatch)
+            if(data.dispatch[0].enumServiceType == 'Hauling')
+            {
+                var final = Number(data.dispatch[0].fltFCFStandardRate * temp);
+                console.log(final);
+                $('#amount').val(final);
+            }
+            else if(data.dispatch[0].enumServiceType == 'Tug Assist')
+            {
 
+            }
 
-
-
-            $("#delayrate").val(delay);
-            $("#conlatefee").val(delay2);
             $("#discount").attr({
                 "max" : data.dispatch[0].intFCFDiscountFee,
                 "min" : 0         
@@ -182,10 +307,10 @@ function getData(id){
                 "max" : data.dispatch[0].fltFCFViolationFee,
                 "min" : 0  
              });
-            //  console.log(data.dispatch[0].intFCFDiscountFee);
-            
+             $('#conlatefee').val(data.dispatch[0].fltFCFConsigneeLateFee);
+             $('#delayrate').val(data.dispatch[0].fltFCFTugboatDelayFee);
 
-            
+
             var signConsignee = $('.signConsigneeCanvasDisplay').signature({
             syncField: '#signatureJSON'
             });

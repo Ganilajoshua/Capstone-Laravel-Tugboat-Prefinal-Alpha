@@ -102,6 +102,9 @@ function createContracts(contractID){
                 $('#addTALateFee').val(data.contractfees[1].fltCFConsigneeLateFee);
                 $('#minTADamageFee').val(data.contractfees[1].fltCFMinDamageFee);
                 $('#maxTADamageFee').val(data.contractfees[1].fltCFMaxDamageFee);
+                // console.log(data.TermsCondition[0].strTermsConditionDesc);
+                $('#addContractDetails').val(data.TermsCondition[0].strTermsConditionDesc);
+
                 // $('#discountRange').val();
 
             }

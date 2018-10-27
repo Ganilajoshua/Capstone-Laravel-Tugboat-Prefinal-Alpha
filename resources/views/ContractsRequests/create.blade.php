@@ -152,7 +152,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Content</label>
-                                        <textarea class="summernoteContract" id="addContractDetails"></textarea>
+                                    <textarea class="summernoteContract" id="addContractDetails">{{$TermsCondition->strTermsConditionDesc}}</textarea>
                                     </div>
                                 </div>
                                 <input type="hidden" id="hideCompanyID">

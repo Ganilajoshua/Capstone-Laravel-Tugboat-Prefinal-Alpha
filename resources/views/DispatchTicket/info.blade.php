@@ -3,7 +3,7 @@
         <div class="card-header">
             <a href="#" class="btnBack btn btn-lg btn-link float-left" data-toggle="tooltip" title="Back" role="button">
                 <i class="ion-chevron-left"></i>
-            </a>]
+            </a>
         </div>
         <div class="card-body">
             <div class="row">
@@ -75,7 +75,7 @@
                                 <td id="tugboat"></td>
                                 <td id="start"></td>
                                 <td id="destination"></td>
-                                <td id="arrive"></td>
+                                <td id="date2"> <span id="end"></span></td>
                                 <td id="service"></td>
                             </tr>
                         </tbody>
@@ -154,7 +154,7 @@
                                         <div class="input-group-append">
                                             <span class="input-group-text">&#8369; </span>
                                         </div>
-                                        <input type="number" name="amount" id="amount" min="0" class="form-control">
+                                        <input type="number" name="amount" id="amount" min="0" class="form-control" disabled>
                                     </div>
                                     
                                 </div>

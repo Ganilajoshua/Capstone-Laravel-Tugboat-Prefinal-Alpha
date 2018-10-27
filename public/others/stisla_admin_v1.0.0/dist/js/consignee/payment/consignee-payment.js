@@ -191,7 +191,7 @@ $(document).ready(function(){
         counter = Number(counter) + Number(balance);
         console.log(counter);
         if(amount > counter){
-            toastr.error('KULANG!!', 'DAGDAGAN MO PA!', {
+            toastr.error('Insufficient Amount', '', {
                 closeButton: true,
                 debug: false,
                 timeOut: 2000,

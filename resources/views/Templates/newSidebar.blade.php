@@ -130,6 +130,7 @@
                             <li id="menuTugboatMatrix"><a href="/contracts"><i class="fas fa-table"></i> Tugboat Matrix</a></li>
                             <li id="menuContractFeesMatrix"><a href="/administrator/utilities/contractfeesmatrix"><i class="fas fa-money-bill-alt"></i> Contract Fees Matrix</a></li>
                             <li id="menuTeamComp"><a href="/administrator/utilities/teamcomposition"><i class="fas fa-users"></i> Team Composition</a></li>
+                            <li id="menuTermsCondition"><a href="/administrator/utilities/termscondition"><i class="ion ion-ios-list"></i> Terms and Condition</a></li>
                         </ul>
                     </li>
                     {{-- if --}}

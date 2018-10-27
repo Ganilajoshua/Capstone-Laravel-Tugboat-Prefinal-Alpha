@@ -42,14 +42,15 @@ $(document).ready(function(){
             
             console.log('success', data);
             $('#viewDetails').empty();
-            // $('#tugboat').html(data.dispatch[0].strName);
+            $('#tugboat').html(data.dispatch[0].strName);
             $('#to').html(data.dispatch[0].strCompanyName);
                 $('#address').html(data.dispatch[0].strCompanyAddress);
                 $('#dispatch').html(data.dispatch[0].intDispatchTicketID);
                 $('#dispatch2').html(data.dispatch[0].intDispatchTicketID);
                 $('#dispatch3').html(data.dispatch[0].intDispatchTicketID);
                 $('#towed').html(data.dispatch[0].strJOVesselName);
-                //date
+                $('#date').html(data.dispatch[0].dateEnded);
+                $('#time').html(data.dispatch[0].tmEnded);   
                 $('#start').html(data.dispatch[0].strJOStartPoint);
                 $('#destination').html(data.dispatch[0].strJODestination);
                 $('#service').html(data.dispatch[0].enumServiceType);

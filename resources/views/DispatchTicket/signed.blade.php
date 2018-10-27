@@ -21,7 +21,7 @@
                     <td>{{$dispatch4->strName}}</td>
                     <td>{{$dispatch4->strJOStartPoint}}</td>
                     <td>{{$dispatch4->strJODestination}}</td>
-                    <td>san kukunin?</td>
+                    <td>{{$dispatch4->dateEnded}} {{$dispatch4->tmEnded}}</td>
                     <td>{{$dispatch4->enumServiceType}}</td>
                     <td style="width:15%">
                         <span data-target="#infoModal">
