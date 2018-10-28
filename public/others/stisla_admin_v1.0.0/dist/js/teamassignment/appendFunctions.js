@@ -314,6 +314,8 @@ function appendTugboatTeamDefaults(jobsched){
 }
 
 function appendJoborderTeams(jobsched,teams){
+    console.log(teams[1].length);
+    // return false;
     $('.availableTeams').empty();
     for(var counter = 0; counter < jobsched.length;counter++){
         console.log(jobsched[counter].intJobSchedID);
@@ -342,10 +344,10 @@ function appendJoborderTeams(jobsched,teams){
         </div>`;
         $(appendSelectTeam).appendTo(`.tugboatTeam${jobsched[counter].intJobSchedID}`);
 
-       for(var count =0; count < teams.length; count++){
-           console.log(teams[count].strTeamName);
+       for(var count =0; count < teams[1].length; count++){
+           console.log(teams[1][count].strTeamName);
            var appendTeamOption = 
-           `<option value="${teams[count].intTeamID}" data-subtext="Available">${teams[count].strTeamName}</option>`;
+           `<option value="${teams[1][count].intTeamID}" data-subtext="Available">${teams[1][count].strTeamName}</option>`;
            $(appendTeamOption).appendTo(`.addTeamSelect${counter + 1}`);
        }
     }

@@ -54,6 +54,7 @@ $(document).ready(function(){
         }
     });
 });
+
 $('.backButton').on('click',function(){
     $('.teamAssignment').css('display','block');
     $('.teamAssignment').addClass('animated fadeIn');
@@ -62,26 +63,59 @@ $('.backButton').on('click',function(){
 
 $('.assignTeam').on('click',function(){
     console.log($(this).data('id'));
-    var joborderID = $(this).data('id')
-    $.ajax({
-        url : `${url}/${joborderID}/getjoborder`,
-        type : 'GET',
-        dataType : 'JSON',
-        success : (data,response)=>{
+    console.log($(this).data('id'));
+    console.log('date', $(this).data('date'));
+    var compDate = $(this).data('date');
+    var joborderID = $(this).data('id');
+
+        $.ajax({
+        url : `${url}/getjoborderteams`,
+        type : 'POST',
+        data : {
+            "_token" : $('meta[name="csrf-token"]').attr('content'), 
+            joborderID : joborderID,
+            compDate : compDate,
+        },
+        success : (data, response)=>{
             console.log(data);
             var location = getLocation(data.joborder);
+            var teamsavail = getAvailableTeams(data.jobschedules, data.teams, data.joborder);
+
+            console.log('available teams', teamsavail);
+
             appendTugboatTeamDefaults(data.jobsched);
             appendJoborderHeader(data.joborder);
             appendJoborderBody(data.joborder,location);
-            appendJoborderTeams(data.jobsched,data.teams);
+            appendJoborderTeams(data.jobsched, teamsavail);
             $('.assignDefaultTeams').data('id',`${data.jobsched[0].intJSJobOrderID}`);
+            $('.assignTeams').data('id',`${data.jobsched[0].intJSJobOrderID}`);
+            
             $('.teamAssignment').css('display','none');
             $('.assignTeamCard').css('display','block');
-            // $('.assignTeamCard').addClass('animated fadeIn');
-        },error : (error)=>{
+        },
+        error : (error)=>{
             throw error;
         }
-    })
+    });
+    // $.ajax({
+    //     url : `${url}/${joborderID}/getjoborder`,
+    //     type : 'GET',
+    //     dataType : 'JSON',
+    //     success : (data,response)=>{
+    //         console.log(data);
+    //         var location = getLocation(data.joborder);
+    //         appendTugboatTeamDefaults(data.jobsched);
+    //         appendJoborderHeader(data.joborder);
+    //         appendJoborderBody(data.joborder,location);
+    //         appendJoborderTeams(data.jobsched,data.teams);
+    //         $('.assignDefaultTeams').data('id',`${data.jobsched[0].intJSJobOrderID}`);
+    //         $('.teamAssignment').css('display','none');
+    //         $('.assignTeamCard').css('display','block');
+    //         // $('.assignTeamCard').addClass('animated fadeIn');
+    //     },error : (error)=>{
+    //         throw error;
+    //     }
+    // })
 });
 
 $('.viewDefaultTeamsButton').on('click',function(event){
@@ -100,6 +134,7 @@ $('.assignTeams').on('click',function(){
         selected[select ] = parseInt($(this).val());    
     });
     console.log(selected, tugboatID);
+
 });
 $('.assignDefaultTeams').on('click',function(){
     console.log('HI');

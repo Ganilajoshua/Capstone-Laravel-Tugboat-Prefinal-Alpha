@@ -5,7 +5,7 @@
 @endsection
 
 @section('scripted')
-    @include('Contracts.scripts')
+    @include('Contracts.scripts')   
 @endsection
 
 @section('content')

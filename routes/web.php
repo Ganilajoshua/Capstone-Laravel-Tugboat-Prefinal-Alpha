@@ -175,7 +175,6 @@ Route::group(['prefix'=>'administrator/'],function(){
                 Route::get('/{intTeamID}/viewteam','TugboatTeamAssignmentController@viewteam');
                 Route::get('/{intTATeamID}/viewtugboatteam','TugboatTeamAssignmentController@viewtugboatteam');
                 Route::get('/{intTATugboatID}/showtugboatinformation','TugboatTeamAssignmentController@showtugboatinformation');
-                Route::get('/{intJobOrderID}/getjoborder','TugboatTeamAssignmentController@getjoborder');
                 Route::get('/{intJobOrderID}/showdefaultteams','TugboatTeamAssignmentController@showdefaultteams');
                 Route::post('/store','TugboatTeamAssignmentController@store');
                 Route::post('/teamassignment','TugboatTeamAssignmentController@teamassignment');
@@ -189,6 +188,7 @@ Route::group(['prefix'=>'administrator/'],function(){
                 Route::post('/returntugboat','TugboatTeamAssignmentController@returntugboat');
                 Route::post('/notifications','TugboatTeamAssignmentController@notifications');
                 Route::post('/getteamcompositions','TugboatTeamAssignmentController@getteamcompositions');
+                Route::post('/getjoborderteams','TugboatTeamAssignmentController@getjoborderteams');
                 Route::post('/assigndefaultteams','TugboatTeamAssignmentController@assigndefaultteams');
             
             });
@@ -453,6 +453,7 @@ Route::group(['prefix'=>'affiliates/'],function(){
                     Route::get('/{intTeamID}/viewteam','TugboatTeamAssignmentController@viewteam');
                     Route::get('/{intTATeamID}/viewtugboatteam','TugboatTeamAssignmentController@viewtugboatteam');
                     Route::get('/{intTATugboatID}/showtugboatinformation','TugboatTeamAssignmentController@showtugboatinformation');
+                    Route::get('/{intJobOrderID}/showdefaultteams','TugboatTeamAssignmentController@showdefaultteams');
                     Route::post('/store','TugboatTeamAssignmentController@store');
                     Route::post('/teamassignment','TugboatTeamAssignmentController@teamassignment');
                     Route::post('/cleartugboatteam','TugboatTeamAssignmentController@cleartugboatteam');
@@ -465,6 +466,8 @@ Route::group(['prefix'=>'affiliates/'],function(){
                     Route::post('/returntugboat','TugboatTeamAssignmentController@returntugboat');
                     Route::post('/notifications','TugboatTeamAssignmentController@notifications');
                     Route::post('/getteamcompositions','TugboatTeamAssignmentController@getteamcompositions');
+                    Route::post('/getjoborderteams','TugboatTeamAssignmentController@getjoborderteams');
+                    Route::post('/assigndefaultteams','TugboatTeamAssignmentController@assigndefaultteams');
                 });
 
                 // Dispatch and Hauling - Scheduling Route Group

@@ -182,7 +182,6 @@
                                                 <h4 class="text-center ml-5">Available</h4>
                                             </div>
                                             <div class="collapse show" id="ownedAvailableT">
-                                                
                                                 @if(count($compliance)>0)
                                                     <div class="card-body text-white">
                                                         @foreach($compliance as $compliance)
@@ -230,7 +229,6 @@
                                             </div>
                                             <div class="collapse show" id="ownedOccupiedT">
                                                 @if(count($tugboatAvail)>0)
-                                                    {{$tugboatAvail}}
                                                     <div class="card-body text-white">
                                                         @foreach($tugboatAvail as $tugboatAvail)
                                                             <div class="card mb-2 border border-info text-center">
@@ -293,10 +291,10 @@
                                                                 @foreach($tugboatsreceived as $tugboatsreceived)
                                                                     <div class="card mb-2 border border-success text-center">
                                                                         <div style="margin-top: 13px; margin-bottom: 13px;">
-                                                                            <a href="#" data-id="{{$tugboatsreceived->intTAssignID}}" class="occupiedTugboats float-left text-black mt-2 mb-2 ml-4">
+                                                                            <a href="#" data-id="{{$tugboatsreceived->intTugboatID}}" class="occupiedTugboats float-left text-black mt-2 mb-2 ml-4">
                                                                                 {{$tugboatsreceived->strName}}
                                                                             </a>
-                                                                            <button type="button" data-id="{{$tugboatsreceived->intTAssignID}}" class="returnTugboats tugboatsReturn btn btn-sm btn-info waves-effect waves-circle float-right mr-4" data-tooltip="tooltip" title="Return Tugboat">
+                                                                            <button type="button" data-id="{{$tugboatsreceived->intTugboatID}}" class="returnTugboats tugboatsReturn btn btn-sm btn-info waves-effect waves-circle float-right mr-4" data-tooltip="tooltip" title="Return Tugboat">
                                                                                 </span>
                                                                                     <i class="ultraminicon fas fa-undo"></i>
                                                                                 <span>
@@ -348,7 +346,7 @@
                                                         </div>
                                                         <div class="card-footer mt-2">
                                                             <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
-                                                            <button data-id="{{$notugboatteam->intJobOrderID}}" data-date="{{$notugboatteam->dtmETA}}" class="assignTeam btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Assign Team</button>
+                                                            <button data-id="{{$notugboatteam->intJobOrderID}}" data-date="{{$notugboatteam->dateStart}}" class="assignTeam btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Assign Team</button>
                                                             {{-- onclick="showTugboatModal({{$notugboat->intJobOrderID}})" --}}
                                                             {{-- onclick="showTugboatModal({{$notugboat->intJobOrderID}})" --}}
                                                         </div>
