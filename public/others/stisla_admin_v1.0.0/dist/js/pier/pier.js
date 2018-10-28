@@ -128,7 +128,6 @@ function postPier(){
                     showMethod: "slideDown",
                     hideMethod: "slideUp"
                 });
-
                 // console.log('title', error.errors.title);
                 // console.log('body', error.errors.body);
             }

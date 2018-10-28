@@ -75,7 +75,7 @@
                                 <td id="1tugboat"></td>
                                 <td id="start"></td>
                                 <td id="destination"></td>
-                                <td>??</td>
+                                <td id="date2"></td>
                                 <td id="service"></td>
                             </tr>
                         </tbody>

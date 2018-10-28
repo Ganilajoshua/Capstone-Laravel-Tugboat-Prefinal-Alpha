@@ -118,11 +118,26 @@ function getData(id){
             $('#dispatch3').html(data.dispatch[0].intDispatchTicketID);
             $('#towed').html(data.dispatch[0].strJOVesselName);
             $('#date').html(data.dispatch[0].dateEnded);
-            $('#start').html(data.dispatch[0].strJOStartPoint);
             $('#date2').html(data.dispatch[0].dateEnded);
             $('#end').html(data.dispatch[0].tmEnd);
             
-            $('#destination').html(data.dispatch[0].strJODestination);
+
+            if(data.dispatch[0].strJOStartPoint == null)
+            {
+                $('#start').html(data.dispatch[0].strBerthName +' '+data.dispatch[0].strPierName);
+                
+            }
+            else{
+                $('#start').html(data.dispatch[0].strJOStartPoint);
+            }
+            if(data.dispatch[0].strJODestination == null)
+            {
+                $('#destination').html(data.dispatch[0].strBerthName +' '+data.dispatch[0].strPierName);
+                
+            }
+            else{
+                $('#destination').html(data.dispatch[0].strJODestinationPoint);
+            }
             $('#service').html(data.dispatch[0].enumServiceType);
             $('#pNum').html(data.dispatch[0].strCompanyContactPNum);
             $('#eMail').html(data.dispatch[0].strCompanyEmail);

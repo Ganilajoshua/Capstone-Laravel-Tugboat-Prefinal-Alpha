@@ -165,7 +165,8 @@ function infopayment(id){
               
   
                 console.log('success', data);
-                console.log(id);
+                console.table(data.dispatch[0]);
+                $('#new').html(data.dispatch[0].intBillID);
                 $('#tugboat').html(data.dispatch[0].strName);
                 $('#to').html(data.dispatch[0].strCompanyName);
                 $('#address').html(data.dispatch[0].strCompanyAddress);
@@ -174,8 +175,26 @@ function infopayment(id){
                 $('#dispatch3').html(data.dispatch[0].intDispatchTicketID);
                 $('#towed').html(data.dispatch[0].strJOVesselName);
                 console.log(data.dispatch[0].strName);
-                $('#start').html(data.dispatch[0].strJOStartPoint);
-                $('#destination').html(data.dispatch[0].strJODestination);
+
+                $('#new').html(data.dispatch[0].intBillID);
+                if(data.dispatch[0].strJOStartPoint == null)
+                {
+                    $('#start').html(data.dispatch[0].strBerthName +' '+data.dispatch[0].strPierName);
+                    
+                }
+                else{
+                    $('#start').html(data.dispatch[0].strJOStartPoint);
+                }
+                if(data.dispatch[0].strJODestination == null)
+                {
+                    $('#destination').html(data.dispatch[0].strBerthName +' '+data.dispatch[0].strPierName);
+                    
+                }
+                else{
+                    $('#destination').html(data.dispatch[0].strJODestinationPoint);
+                }
+                // $('#new').html(data.dispatch[0].intBillID);
+                $('#transac').html(data.dispatch[0].dateEnded);
                 $('#service').html(data.dispatch[0].enumServiceType);
                 $('#pNum').html(data.dispatch[0].strCompanyContactPNum);
                 $('#eMail').html(data.dispatch[0].strCompanyEmail);
@@ -217,9 +236,22 @@ function infopayment(id){
                 $('#dispatch31').html(data.dispatch[0].intDispatchTicketID);
                 $('#towed1').html(data.dispatch[0].strJOVesselName);
 
-
-                $('#start1').html(data.dispatch[0].strJOStartPoint);
-                $('#destination1').html(data.dispatch[0].strJODestination);
+                if(data.dispatch[0].strJOStartPoint == null)
+                {
+                    $('#start1').html(data.dispatch[0].strBerthName +' '+data.dispatch[0].strPierName);
+                    
+                }
+                else{
+                    $('#start1').html(data.dispatch[0].strJOStartPoint);
+                }
+                if(data.dispatch[0].strJODestination == null)
+                {
+                    $('#destination1').html(data.dispatch[0].strBerthName +' '+data.dispatch[0].strPierName);
+                    
+                }
+                else{
+                    $('#destination1').html(data.dispatch[0].strJODestinationPoint);
+                }
                 
                 
                 $('#service1').html(data.dispatch[0].enumServiceType);
@@ -230,6 +262,7 @@ function infopayment(id){
                 $('#date').html(data.dispatch[0].dateEnded); 
                 $('#amount1').html(data.dispatch[0].fltJOAmount);
                 $('#delayfee1').html(data.dispatch[0].fltTugboatDelayFee);
+                $('#date2').html(data.dispatch[0].dateEnded);
                 $('#conviolationfee1').html(data.dispatch[0].fltConsigneeViolationFee);
                 $('#conlatefee1').html(data.dispatch[0].fltConsigneeLateFee);
                 $('#condamagefee1').html(data.dispatch[0].fltConsigneeDamageFee);

@@ -115,16 +115,6 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-
-        // $a = $request->bill;
-        // // $sum = $request->sum;
-        // $balance = $request->bal;
-        // $balance = $balance + $total;
-        // $balance = $balance - $sum;
-
-        // $Invoice = Invoice::find($request->bill);
-        // $Invoice->enumStatus = 'Paid';
-        // $Invoice->save();
         $Bill = Bill::find($request->bill);
         $Bill->timestamps = false;
         $Bill->enumStatus = 'Accepted';
@@ -205,51 +195,7 @@ class PaymentController extends Controller
         ->where('invoice.intInvoiceID',$id)
         ->groupby('dispatch.intDispatchTicketID')
         ->get();
-
-        error_log($dispatch);
-        error_log('$dispatch');
-        error_log('$dispatch');
-        error_log('$dispatch');
         
-        error_log('$dispatch');
-        error_log('$dispatch');
-        error_log('$dispatch');
-        
-        error_log('$dispatch');
-        error_log('$dispatch');
-        error_log('$dispatch');
-        
-        error_log('$dispatch');
-        error_log('$dispatch');
-        error_log('$dispatch');
-        
-        error_log('$dispatch');
-        error_log('$dispatch');
-        error_log('$dispatch');
-        
-        error_log('$dispatch');
-        error_log('$dispatch');
-        error_log('$dispatch');
-        
-        error_log('$dispatch');
-        error_log('$dispatch');
-        error_log('$dispatch');
-        
-        error_log('$dispatch');
-        error_log('$dispatch');
-        error_log('$dispatch');
-        
-        error_log('$dispatch');
-        error_log('$dispatch');
-        error_log('$dispatch');
-        
-        error_log('$dispatch');
-        error_log('$dispatch');
-        error_log('$dispatch');
-        
-        error_log('$dispatch');
-        error_log('$dispatch');
-        error_log('$dispatch');
         return response()->json(['dispatch'=>$dispatch]);   
     }
     public function pendinginfo($id)
@@ -274,7 +220,6 @@ class PaymentController extends Controller
         ->where('invoice.intInvoiceID',$id)
         ->groupby('dispatch.intDispatchTicketID')
         ->get();
-        error_log($dispatch);
         return response()->json(['dispatch'=>$dispatch]);   
     }
 }

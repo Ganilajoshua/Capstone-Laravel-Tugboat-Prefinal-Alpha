@@ -16,7 +16,7 @@
             <tr class="tr-shadow">
                 <td>{{$pending->intChequeID}}</td>
                 <td>{{$pending->strCompanyName}}</td>
-                <td>{{$pending->dtPayment}}</td>
+                <td>{{$pending->dateEnded}}</td>
                     <td>
                         <div class="badge badge-success">{{$pending->enumStatus}}</div>
                     </td>

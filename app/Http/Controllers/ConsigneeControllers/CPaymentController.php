@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
+use Carbon\Carbon;
 use App\Tugboat;
 use App\TugboatMainSpecifications;
 use App\TeamAssignment;
@@ -49,14 +50,11 @@ class CPaymentController extends Controller
         ->where('invoice.intIBillID',$Bill)
         ->groupby('dispatch.intDispatchTicketID')
         ->get();
-        error_log($dispatch);
-        error_log('$dispatch');
         // $Company = Company::findOrFail(Auth::user()->intUCompanyID);
         $Company = DB::table('tblcompany as company')
         ->join('tblbalance as balance','company.intCompanyID','balance.intBalanceID')
         ->where('company.intCompanyID',Auth::user()->intUCompanyID)
         ->get();
-        error_log($Company);
 
         $amount = DB::table('tblinvoice')
         ->where('intIBillID',$Bill)
@@ -109,39 +107,50 @@ class CPaymentController extends Controller
         $Bill->intBillID = $request->BillID;
         $Bill->enumStatus = 'Pending';
         $Bill->timestamps = false;
-        // Carbon::parse($request->ChequeDate)->format('Y/m/d');
-        // $counter = $request->ChequeNum;
-        // $counter = (array)$request->ChequeNum;
-
         $Bill->save();
-        $a = $request->Balance;
-        error_log(count($request->ChequeNum));
+        // $a = 0;
+        $b = 0;
         for($count = 0; $count <= count($request->ChequeNum); $count++)
         {
                 $Cheque = new Cheque;
                 $Cheque->timestamps = false;
                 $Cheque->intChequeID = $request->ChequeNum[$count];
-                error_log($request->ChequeNum[$count]);  
                 // $Cheque->strTugboatInsuranceDesc = $request->insurances[$count];
                 $Cheque->intCBillID = $request->BillID;
-                error_log($request->BillID);
-                $Cheque->dtPayment = $request->ChequeDate;
-                error_log($request->ChequeDate);
+                $Cheque->dtPayment = Carbon::parse($request->ChequeDate)->format('Y/m/d');
                 $Cheque->intAmount = $request->ChequeAmount[$count];
-                error_log($request->ChequeAmount[$count]);
                 $Cheque->strMemo = $request->ChequeMemo[$count];
-                // $a = $a + $request->ChequeAmount[$count];
+                $a = $request->ChequeAmount[$count];
+                $b = $b + $a;
+                error_log($b);
                 $Cheque->save();
         }
+        error_log('$request->Counter');
+        error_log('$request->Counter');
+        error_log('$request->Counter');
+        error_log('$request->Counter');
+        error_log('$request->Counter');
+        error_log('$request->Counter');
+        error_log('$request->Counter');
+        error_log('$request->Counter');
+        error_log('$request->Counter');
+        
+        // error_log($request->Balance);
+        // error_log($a);
+        
+            // $request->balance;
+            
+            
+            // $Balance = Balance::findOrFail(Auth::user()->intUCompanyID);
             
             // $remains = $a - $request->Fee;
-            // $Balance = Balance::findOrFail(Auth::user()->intUCompanyID);
             // $Balance->fltBalance = $remains;
             // $Balance->timestamps = false;
             // error_log($Balance);
             // $Balance->save();
         // $Balance = 
-        return response()->json(['Bill'=>$Bill,'Cheque'=>$Cheque,'Balance'=>$Balance]);  
+        // return redirect('/consignee/paymentbilling/billing');
+        // return response()->json(['Bill'=>$Bill,'Cheque'=>$Cheque,'Balance'=>$Balance]);  
     }
 
     /**
