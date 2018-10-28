@@ -55,15 +55,21 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <form action="/consignee/register" method="POST" enctype="multipart/form-data">
+                                    <form action="/consignee/register" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate="">
                                         <div class="companyDet fadeIn ">
                                             <div class="form-group">
                                                 <label for="companyname">Company Name<sup class="text-primary">&#10033;</sup></label>
-                                                <input id="companyname" type="text" class="form-control" name="companyname" autofocus>
+                                                <input id="companyname" type="text" class="form-control" name="companyname" autofocus required>
+                                                <div class="invalid-feedback">
+                                                    Please enter your company name.
+                                                </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="address">Address<sup class="text-primary">&#10033;</sup></label>
-                                                <input id="address" type="text" class="form-control" name="address" autofocus>
+                                                <input id="address" type="text" class="form-control" name="address" autofocus required>
+                                                <div class="invalid-feedback">
+                                                    Please enter your company address.
+                                                </div>
                                             </div>
                                             <div class="row">
                                                 {{-- <form action=""></form> --}}
@@ -72,7 +78,7 @@
                                                         <h6 style="font-size:12px;">DTI Permit<sup class="text-primary">&#10033;</sup></h6>
                                                         <div class="custom-file">
                                                             <label class="custom-file-label" for="dtiPermit" id="dtiPermitLabel">DTI Permit</label>
-                                                            <input type="file" name="file" class="custom-file-input" accept='image/*' id="dtiPermit" onchange="ValidateSingleInput(this);">
+                                                            <input type="file" name="file" class="custom-file-input" accept='image/*' id="dtiPermit" onchange="ValidateSingleInput(this);" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -93,47 +99,56 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                             <label for="email">Email<sup class="text-primary">&#10033;</sup></label>
-                                                            <input id="email" type="email" class="form-control" name="email">
+                                                            <input id="email" type="email" class="form-control" name="email" required>
                                                             <div class="invalid-feedback">
+                                                                Please enter your company email address.
                                                             </div>
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label for="username">Username<sup class="text-primary">&#10033;</sup></label>
-                                                        <input id="username" type="text" class="form-control" name="username">
+                                                        <input id="username" type="text" class="form-control" name="username" required>
+                                                        <div class="invalid-feedback">
+                                                            Please enter a username.
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="form-group">
-                                                            <label for="telnum">Telephone Number<sup class="text-primary">&#10033;</sup></label>
-                                                            <input id="telnum" type="number" class="form-control" name="telnum">
+                                                        <label for="telnum">Telephone Number<sup class="text-primary">&#10033;</sup></label>
+                                                        <input id="telnum" type="number" class="form-control" name="telnum" required>
                                                             <div class="invalid-feedback">
+                                                                Please enter your telephone number.
                                                             </div>
                                                     </div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label for="mobilenum">Mobile Number<sup class="text-primary">&#10033;</sup></label>
-                                                        <input id="mobilenum" type="number" class="form-control" name="mobilenum">
+                                                        <input id="mobilenum" type="number" class="form-control" name="mobilenum" required>
+                                                        <div class="invalid-feedback">
+                                                            Please enter your mobile number.
+                                                        </div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                             <div class="row">
                                                 <div class="form-group col-6">
                                                     <label for="password" class="d-block">Password<sup class="text-primary">&#10033;</sup></label>
-                                                    <input id="password" type="password" class="form-control" name="password">
+                                                    <input id="password" type="password" class="form-control" name="password" required>
                                                 </div>
                                                 <div class="form-group col-6">
                                                     <label for="password2" class="d-block">Password Confirmation<sup class="text-primary">&#10033;</sup></label>
-                                                    <input id="password2" type="password" class="form-control" name="password-confirm">
+                                                    <input id="password2" type="password" class="form-control" name="password-confirm" required>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" name="agree" class="custom-control-input" id="agree">
+                                                    <input type="checkbox" name="agree" class="custom-control-input" id="agree" required>
                                                     <label class="custom-control-label" for="agree">I agree with the <a href="#">terms and conditions</a><sup class="text-primary">&#10033;</sup></label>
                                                 </div>
                                             </div>
