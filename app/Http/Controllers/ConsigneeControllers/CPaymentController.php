@@ -109,7 +109,11 @@ class CPaymentController extends Controller
         $Bill->timestamps = false;
         $Bill->save();
         // $a = 0;
-        $b = 0;
+
+        $Balance = Balance::findOrFail(Auth::user()->intUCompanyID);
+        $Balance->fltBalance = $request->final;
+        $Balance->timestamps = false;
+        $Balance->save();
         for($count = 0; $count <= count($request->ChequeNum); $count++)
         {
                 $Cheque = new Cheque;
@@ -124,24 +128,12 @@ class CPaymentController extends Controller
                 $b = $b + $a;
                 error_log($b);
                 $Cheque->save();
-        }
-        error_log('$request->Counter');
-        error_log('$request->Counter');
-        error_log('$request->Counter');
-        error_log('$request->Counter');
-        error_log('$request->Counter');
-        error_log('$request->Counter');
-        error_log('$request->Counter');
-        error_log('$request->Counter');
-        error_log('$request->Counter');
-        
-        // error_log($request->Balance);
+            }
         // error_log($a);
         
             // $request->balance;
             
             
-            // $Balance = Balance::findOrFail(Auth::user()->intUCompanyID);
             
             // $remains = $a - $request->Fee;
             // $Balance->fltBalance = $remains;

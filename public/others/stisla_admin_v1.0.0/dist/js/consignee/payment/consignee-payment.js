@@ -214,10 +214,11 @@ $(document).ready(function(){
   function Finalize(){
     var Fee = $('#fee').val();
     var Balance = $('#balance').val();
+    var amount = $('#amount').val();
     var ChequeDate = $('#cDate').val();
     // alert(ChequeDate);
     // var ChequeDate = $('#chequeDate').val();
-    
+    // alert(amount);
     var id = $('#idBill').val();
         
     var ChequeMemo = [];
@@ -246,7 +247,8 @@ $(document).ready(function(){
     console.log(ChequeDate);
     console.log(id);
 
-    ;
+    var final = Number(total) - Number(amount);
+    alert(final);
     // return false;
     $.ajaxSetup({
         headers: {
@@ -258,6 +260,7 @@ $(document).ready(function(){
         url : '/consignee/paymentbilling/payment/store',
         type : 'POST',
         data : { "_token" : $('meta[name="csrf-token"]').attr('content'),
+            amount : amount,
             ChequeNum : ChequeNum,
             ChequeDate : ChequeDate,
             ChequeAmount : ChequeAmount,
@@ -265,6 +268,7 @@ $(document).ready(function(){
             BillID : id,
             Balance : Balance,
             counter : total,
+            final : final,
             Fee : Fee,
 
         },
@@ -292,6 +296,7 @@ $(document).ready(function(){
         },
         error : function(error){
             console.log(error)
+                    alert('stop');
                     window.location = '/consignee/paymentbilling/billing';
             // alert('dito');
             // swal({
