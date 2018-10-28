@@ -216,6 +216,7 @@ $(document).ready(function(){
     var Balance = $('#balance').val();
     var amount = $('#amount').val();
     var ChequeDate = $('#cDate').val();
+    var fltBalance = $('#fltBalance').val();
     // alert(ChequeDate);
     // var ChequeDate = $('#chequeDate').val();
     // alert(amount);
@@ -247,7 +248,7 @@ $(document).ready(function(){
     console.log(ChequeDate);
     console.log(id);
 
-    var final = Number(total) - Number(amount);
+    var final = (Number(total) + Number(fltBalance)) - Number(amount);
     alert(final);
     // return false;
     $.ajaxSetup({

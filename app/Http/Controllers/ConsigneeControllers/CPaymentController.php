@@ -124,9 +124,6 @@ class CPaymentController extends Controller
                 $Cheque->dtPayment = Carbon::parse($request->ChequeDate)->format('Y/m/d');
                 $Cheque->intAmount = $request->ChequeAmount[$count];
                 $Cheque->strMemo = $request->ChequeMemo[$count];
-                $a = $request->ChequeAmount[$count];
-                $b = $b + $a;
-                error_log($b);
                 $Cheque->save();
             }
         // error_log($a);

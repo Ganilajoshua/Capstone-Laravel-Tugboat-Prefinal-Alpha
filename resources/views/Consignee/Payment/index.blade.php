@@ -177,6 +177,10 @@
 						<select name="" id="amount" hidden>
 							<option value="{{$amount}}"></option>
 						</select>
+						<select name="" id="fltBalance" hidden>
+							<option value="{{$Company->fltBalance}}"></option>
+						</select>
+						
 						<input type="text" id="idBill" value="{{$Bill}}" hidden>
 						<input type="text" id="fee" value="{{$amount}}" hidden>
 						<div class="card-footer"style="background:#fff;border-top: 0px;">
