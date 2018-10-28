@@ -59,7 +59,7 @@
                     </div>
                     <input type="hidden" id="editIDhide">
                     <!-- <button type="Submit" onclick="postEmployee()" class="btnAdd btn btn-primary waves-effect float-right">Add</button> -->
-                    <button type="Submit" onclick="postEmployee()" class="btnAdd btn btn-primary waves-effect float-right">Add</button>
+                    <button type="Submit" class="btnAdd btn btn-primary waves-effect float-right">Add</button>
                 </form>
             </div>
         </div>
@@ -77,8 +77,13 @@
     var validation = Array.prototype.filter.call(forms, function(form) {
       form.addEventListener('submit', function(event) {
         if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        else{
+            event.preventDefault();
+            event.stopPropagation();
+            return postEmployee();
         }
         form.classList.add('was-validated');
       }, false);

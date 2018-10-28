@@ -50,6 +50,8 @@
           event.stopPropagation();
         }
         else{
+            event.preventDefault();
+            event.stopPropagation();
             return updateGoods();
         }
         form.classList.add('was-validated');

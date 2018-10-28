@@ -37,7 +37,9 @@
           event.stopPropagation();
         }
         else{
-           return updateTugboatType();
+            event.preventDefault();
+            event.stopPropagation();
+            return updateTugboatType();
         }
         form.classList.add('was-validated');
       }, false);

@@ -37,7 +37,9 @@
           event.stopPropagation();
         }
         else{
-           return editPositionSubmit();
+            event.preventDefault();
+            event.stopPropagation();
+            return editPositionSubmit();
         }
         form.classList.add('was-validated');
       }, false);

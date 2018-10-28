@@ -116,9 +116,20 @@ function postPier(){
                 });                       
             },
             error : function(error){
-                throw error;
-                console.log('title', error.errors.title);
-                console.log('body', error.errors.body);
+                toastr.error('Duplicate Data.', name + ' is already taken', {
+                    closeButton: true,
+                    debug: false,
+                    timeOut: 2000,
+                    positionClass: "toast-bottom-right",
+                    preventDuplicates: true,
+                    showDuration: 300,
+                    hideDuration: 300,
+                    showMethod: "slideDown",
+                    hideMethod: "slideUp"
+                });
+
+                // console.log('title', error.errors.title);
+                // console.log('body', error.errors.body);
             }
 
         });

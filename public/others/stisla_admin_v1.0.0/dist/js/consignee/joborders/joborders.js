@@ -15,9 +15,13 @@ $(document).ready(function(){
     });
 
     
-    $(`#addTugAssistStartDate,#addTugAssistEndDate,
-    #addHaulingStartDate,#addHaulingEndDate`).datetimepicker({
-        format: 'L'
+    $(`#addTugAssistStartDate,#addHaulingEndDate`).datetimepicker({
+        format: 'L',
+        minDate:new Date()
+    });
+    $(`#addTugAssistEndDate,#addHaulingEndDate`).datetimepicker({
+        format: 'L',
+        minDate:new Date()
     });
     $('#haulingETA').datetimepicker({
         format:'HH:mm'

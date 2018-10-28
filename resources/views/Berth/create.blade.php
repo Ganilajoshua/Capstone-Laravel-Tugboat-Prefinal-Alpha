@@ -52,10 +52,12 @@
     var validation = Array.prototype.filter.call(forms, function(form) {
       form.addEventListener('submit', function(event) {
         if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
+            event.preventDefault();
+            event.stopPropagation();
         }
         else{
+            event.preventDefault();
+            event.stopPropagation();
             return postBerth();
         }
         form.classList.add('was-validated');
