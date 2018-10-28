@@ -86,6 +86,7 @@ $('.assignTeam').on('click',function(){
             appendJoborderTeams(data.jobsched, teamsavail);
             $('.assignDefaultTeams').data('id',`${data.jobsched[0].intJSJobOrderID}`);
             $('.assignTeams').data('id',`${data.jobsched[0].intJSJobOrderID}`);
+            $('.assignTeams').data('date',$(this).data('date'));
             $('.teamAssignment').css('display','none');
             $('.assignTeamCard').css('display','block');
             // $('.assignTeamCard').addClass('animated fadeIn');
@@ -127,9 +128,12 @@ $('.viewDefaultTeamsButton').on('click',function(event){
 });
 
 $('.assignTeams').on('click',function(){
-    selectedteam = [];
-    tugboatID = [];
-    console.log($(this).data('id'));
+    var selectedteam = [];
+    var tugboatID = [];
+    var jobschedID = [];
+    var joborderID = $(this).data('id');
+    var compDate = $(this).data('date');
+    console.log($(this).data('id'), $(this).data('date'));
     $(".jobschedTugboats").each(function(key){
         tugboatID[key] = $(this).data('id');
     });
@@ -137,12 +141,69 @@ $('.assignTeams').on('click',function(){
         selectedteam[select] = parseInt($(this).val());    
     });
     console.log(selectedteam, tugboatID);
+
+    // return false;
+    $.ajax({
+        url : `${url}/getjoborderteams`,
+        type : 'POST',
+        data : {
+            "_token" : $('meta[name="csrf-token"]').attr('content'), 
+            joborderID : joborderID,
+            compDate : compDate,
+        },
+        success : (data, response)=>{
+            console.log(data);
+            for(var counter = 0; counter < data.jobsched.length; counter++){
+                console.log(data.jobsched[counter].intJobSchedID);
+                jobschedID.push(data.jobsched[counter].intJobSchedID);
+            }
+
+            console.log(jobschedID);
+            $.ajax({
+                url : `${url}/assignnewteams`,
+                type : 'POST',
+                data : {
+                    "_token" : $('meta[name="csrf-token"]').attr('content'),
+                    selectedteam : selectedteam,
+                    jobschedID : jobschedID,
+                    tugboatID : tugboatID,
+                },
+                success : (data, response)=>{
+                    console.log(data);
+                    swal({
+                        title: "Success",
+                        text: "Teams Assigned",
+                        type: "success",
+                        showCancelButton: true,
+                        confirmButtonClass: "btn-success waves-effect",
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: true
+                    },(isConfirm)=>{
+                        if(isConfirm){
+                            location.reload();
+                        }
+                    });
+                },
+                error : (error)=>{
+                    throw error;
+                }
+            });
+
+        },
+        error : (error)=>{
+            throw error;
+        }
+    });
+
+    return false;
+
     $.ajax({
         url : `${url}/assignnewteams`,
         type : 'POST',
         data : {
             "_token" : $('meta[name="csrf-token"]').attr('content'),
             selectedteam : selectedteam,
+            jobschedID : jobschedID,
             tugboatID : tugboatID,
         },
         success : ()=>{

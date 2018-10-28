@@ -614,4 +614,15 @@ class TugboatTeamAssignmentController extends Controller
         return response()->json(['teams'=>$teams]);
     }
 
+    public function assignnewteams(Request $request){
+        for($count = 0; $count < count($request->jobschedID); $count++){
+            $jobsched = JobSchedule::findOrFail($request->jobschedID[$count]);
+            $jobsched->timestamps = false;
+            $jobsched->intJSTeamID = $request->selectedteam[$count];
+            $jobsched->save();
+
+
+        }
+        return response()->json(['jobsched'=> $jobsched]);
+    }
 }
