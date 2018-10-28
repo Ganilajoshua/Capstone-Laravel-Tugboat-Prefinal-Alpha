@@ -116,6 +116,7 @@ function postPier(){
                 });                       
             },
             error : function(error){
+                console.log(error.responseText);
                 toastr.error('Duplicate Data.', name + ' is already taken', {
                     closeButton: true,
                     debug: false,
