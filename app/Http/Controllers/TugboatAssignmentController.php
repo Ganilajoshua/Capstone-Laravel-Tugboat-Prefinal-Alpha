@@ -275,6 +275,7 @@ class TugboatAssignmentController extends Controller
     public function showjoborder(Request $request){
         // Find Job Order ID
         $job = JobOrder::findOrFail($request->joborderID);
+        $joborder = [];
         if($job->enumServiceType == 'Hauling'){
             if($job->intJOBerthID == null){
                 $joborder = DB::table('tbljoborder as joborder')

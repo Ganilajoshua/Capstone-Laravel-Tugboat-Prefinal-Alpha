@@ -194,25 +194,6 @@ $('.assignTeams').on('click',function(){
             throw error;
         }
     });
-
-    return false;
-
-    $.ajax({
-        url : `${url}/assignnewteams`,
-        type : 'POST',
-        data : {
-            "_token" : $('meta[name="csrf-token"]').attr('content'),
-            selectedteam : selectedteam,
-            jobschedID : jobschedID,
-            tugboatID : tugboatID,
-        },
-        success : ()=>{
-
-        },
-        error : ()=>{
-
-        }
-    });
 });
 $('.assignDefaultTeams').on('click',function(){
     console.log('HI');

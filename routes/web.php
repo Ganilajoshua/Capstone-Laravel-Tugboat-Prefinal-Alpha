@@ -442,6 +442,7 @@ Route::group(['prefix'=>'affiliates/'],function(){
                     Route::post('/create','TugboatAssignmentController@create');
                     Route::post('/hauling','TugboatAssignmentController@hauling');
                     Route::post('/available','TugboatAssignmentController@available');
+                    Route::post('/showjoborder','TugboatAssignmentController@showjoborder');
                     Route::get('/{intTugboatID}/showassignedjoborders','TugboatAssignmentController@showassignedjoborders');
                     Route::post('/tugboatsavailable','TugboatAssignmentController@tugboatsavailable');
                 });

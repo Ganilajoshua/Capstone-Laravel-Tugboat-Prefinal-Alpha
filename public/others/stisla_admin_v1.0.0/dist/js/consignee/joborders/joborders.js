@@ -15,14 +15,16 @@ $(document).ready(function(){
     });
 
     
-    $(`#addTugAssistStartDate,#addHaulingEndDate`).datetimepicker({
+    $(`#addTugAssistStartDate, #addHaulingStartDate`).datetimepicker({
         format: 'L',
         minDate:new Date()
     });
-    $(`#addTugAssistEndDate,#addHaulingEndDate`).datetimepicker({
+
+    $(`#addTugAssistEndDate, #addHaulingEndDate`).datetimepicker({
         format: 'L',
         minDate:new Date()
     });
+
     $('#haulingETA').datetimepicker({
         format:'HH:mm'
     });
@@ -63,7 +65,7 @@ function submitJobOrderHauling(){
     var goods = $('#addHaulingGoods').val();
     // var vesselType = $('#').val();
     var details = $('#addExHaulingDetails').val();
-    var serviceType = $(this).data('service');
+    var serviceType = 'Hauling';
     var berth;
     var dLocation;
     var sLocation;
@@ -201,7 +203,7 @@ function submitJobOrderTugAssist(){
     console.log($('#addTugAssistVesselType').val());
     console.log($('.addExDetails').val());
     var title = $('#addTugAssistTitle').val();
-    var serviceType = $(this).data('service');
+    var serviceType = 'Tug Assist';
     var startDate = $('.addTugAssistStartDate').val();
     var startTime = $('.addTugAssistStartTime').val();
     var endDate = $('.addTugAssistEndDate').val();
