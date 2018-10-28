@@ -176,9 +176,13 @@
         
         </form>
     </div>
-
+    <script src="/others/stisla_admin_v1.0.0/dist/modules/jquery.min.js"></script>
+    <script src="/others/stisla_admin_v1.0.0/dist/modules/jquery-ui.min.js"></script>
     <script>
             (function() {
+
+                
+    
                 'use strict';
                 window.addEventListener('load', function() {
                     // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -186,7 +190,25 @@
                   // Loop over them and prevent submission
                   var validation = Array.prototype.filter.call(forms, function(form) {
                       form.addEventListener('submit', function(event) {
-                          if (form.checkValidity() === false) {
+                
+                var start = new Date($('.addTugAssistStartDate').val());
+                var end = new Date($('.addTugAssistEndDate').val());
+                    var result = end - start;
+                    var result2 = end - start;
+
+                // if(result1 = '0')
+                // {
+                //     alert('nyenye');
+                // }
+                // else if(result2 > '1'){
+                //     alert('a');
+                // }
+                console.log($('.addTugAssistStartDate').val());
+                console.log($('.addTugAssistEndDate').val());
+                console.log(result);
+                console.log(result2);
+                
+                if (form.checkValidity() === false) {
 
                         event.preventDefault();
                         event.stopPropagation();

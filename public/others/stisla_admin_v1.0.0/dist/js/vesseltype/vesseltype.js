@@ -23,8 +23,8 @@ $('.createVesselType').on('click',function(){
 });
 
 // Add Vessel Type Button Submit
-
-$('.storeVesselType').on('click',function(){
+function storeVesselType(){
+// $('.storeVesselType').on('click',function(){
     console.log('hi');
     name = $('#addVesselTypeName').val();   
     console.log(name);
@@ -60,9 +60,10 @@ $('.storeVesselType').on('click',function(){
             throw error;
         }
     });
-});
-
+// });
+};
 // Edit Vessel Type Button
+// function editVesselType(){
 $('.editVesselType').on('click',function(){
     var editID = $(this).data('id');
     console.log(editID);
@@ -82,9 +83,11 @@ $('.editVesselType').on('click',function(){
         }
     })
 });
+// };
 
 // Edit Vessel Type Button Submit
-$('.updateVesselType').on('click',function(){
+function updateVesselType(){
+// $('.updateVesselType').on('click',function(){
     var vesselTypeID = $(this).data('id');
     var vesselTypeName = $('#editVesselTypeName').val();
 
@@ -121,8 +124,8 @@ $('.updateVesselType').on('click',function(){
             throw error;
         }
     });
-});
-
+// });
+};
 // Delete Vessel Type Button 
 $('.deleteVesselType').on('click',function(){
     console.log($(this).data('id'));

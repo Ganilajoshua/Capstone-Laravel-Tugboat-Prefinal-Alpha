@@ -40,6 +40,8 @@
           event.stopPropagation();
         }
         else{
+            event.preventDefault();
+            event.stopPropagation();
             return editPierSubmit(); 
         }
         form.classList.add('was-validated');

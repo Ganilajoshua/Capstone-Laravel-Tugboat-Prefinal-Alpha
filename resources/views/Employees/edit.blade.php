@@ -83,6 +83,8 @@
           event.stopPropagation();
         }
         else{
+            event.preventDefault();
+            event.stopPropagation();
             return editEmployeeSubmit();
         }
         form.classList.add('was-validated');
