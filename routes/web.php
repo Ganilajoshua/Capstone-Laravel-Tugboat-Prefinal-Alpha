@@ -190,7 +190,7 @@ Route::group(['prefix'=>'administrator/'],function(){
                 Route::post('/getteamcompositions','TugboatTeamAssignmentController@getteamcompositions');
                 Route::post('/getjoborderteams','TugboatTeamAssignmentController@getjoborderteams');
                 Route::post('/assigndefaultteams','TugboatTeamAssignmentController@assigndefaultteams');
-            
+                Route::post('/assignnewteams','TugboatTeamAssignmentController@assignnewteams');
             });
             
             // Dispatch and Hauling - Tugboat Assignment Route Group
@@ -468,6 +468,7 @@ Route::group(['prefix'=>'affiliates/'],function(){
                     Route::post('/getteamcompositions','TugboatTeamAssignmentController@getteamcompositions');
                     Route::post('/getjoborderteams','TugboatTeamAssignmentController@getjoborderteams');
                     Route::post('/assigndefaultteams','TugboatTeamAssignmentController@assigndefaultteams');
+                    Route::post('/assignnewteams','TugboatTeamAssignmentController@assignnewteams');
                 });
 
                 // Dispatch and Hauling - Scheduling Route Group
