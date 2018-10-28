@@ -1,5 +1,5 @@
 <div class="haulingTab">
-    <form class="needs-validation" novalidate="">
+    <form class="needs-validation" novalidate=""  name="form">
         <div class="row">
             <div class="col-12 col-sm-12 col-lg-12">
                 <div class="form-group">
@@ -109,14 +109,14 @@
                 <div class="form-group">
                     <label for="addHaulingGoods">Goods to be delivered<sup class="text-primary">&#10033;</sup></label>
                     {{-- <input type="text" class="form-control" id="addHaulingGoods" placeholder="Very Good" required> --}}
-                    <select id="addHaulingGoods" name="addHaulingGoods" class="form-control">
-                        <option>Select Goods</option>
+                    <select id="addHaulingGoods" name="addHaulingGoods" class="form-control" required>
+                        <option value="" disabled="disabled" selected="selected">Select Goods</option>
                         @foreach($goods as $goods)
                             <option value="{{$goods->intGoodsID}}">{{$goods->strGoodsName}}</option>
                         @endforeach
                     </select>
                     <div class="invalid-feedback">
-                        Please fill in the Estimated Goods to be delivered.
+                       Select goods.
                     </div>
                 </div>
             </div>
@@ -137,7 +137,7 @@
                 <div class="col-12 col-sm-12 col-lg-6">
                     <div class="form-group">
                         <label for="#startingLocationLP">Starting Location<sup class="text-primary">&#10033;</sup></label>
-                        <input id="startingLocationLP" type="text" class="form-control" placeholder="Pandacan, Manila" required>
+                        <input id="startingLocationLP" type="text" class="form-control" placeholder="Pandacan, Manila">
                         <div class="invalid-feedback">
                             Please Type The Starting Location
                         </div>
@@ -147,13 +147,13 @@
                     <div class="form-group">
                         <label for="addBerthLP">Select Berth<sup class="text-primary">&#10033;</sup></label>
                         <select id="addBerthLP" name="addBerthLP" class="form-control">
-                            <option>Select Berth</option>
+                            <option disabled="disabled" selected="selected">Select Berth</option>
                             @foreach($berth as $berths)
                                 <option value="{{$berths->intBerthID}}">{{$berths->strPierName}} - {{$berths->strBerthName}}</option>
                             @endforeach
                         </select>
                         <div class="invalid-feedback">
-                            Please fill in the Estimated Goods to be delivered.
+                            Please select a Berth.
                         </div>
                     </div>
                 </div>
@@ -165,20 +165,20 @@
                     <div class="form-group">
                         <label for="addBerthPL">Select Berth<sup class="text-primary">&#10033;</sup></label>
                         <select id="addBerthPL" name="addBerthPL" class="form-control">
-                            <option>Select Berth</option>
+                            <option value="" disabled="disabled" selected="selected">Select Berth</option>
                             @foreach($berth as $berth)
                                 <option value="{{$berth->intBerthID}}">{{$berth->strPierName}} - {{$berth->strBerthName}}</option>
                             @endforeach
                         </select>
                         <div class="invalid-feedback">
-                            Please fill in the Estimated Goods to be delivered.
+                            Please select a Berth.
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-sm-12 col-lg-6">
                     <div class="form-group">
                         <label for="destinationLocationPL">Destination Location<sup class="text-primary">&#10033;</sup></label>
-                        <input id="destinationLocationPL" type="text" class="form-control" placeholder="Pandacan, Manila" required>
+                        <input id="destinationLocationPL" type="text" class="form-control" placeholder="Pandacan, Manila">
                         <div class="invalid-feedback">
                             Please Type The Destination Location
                         </div>
@@ -191,7 +191,7 @@
                 <div class="col-12 col-sm-12 col-lg-6">
                     <div class="form-group">
                         <label for="startingLocationLL">Starting Location<sup class="text-primary">&#10033;</sup></label>
-                        <input id="startingLocationLL" type="text" class="form-control" placeholder="Pandacan, Manila" required>
+                        <input id="startingLocationLL" type="text" class="form-control" placeholder="Pandacan, Manila">
                         <div class="invalid-feedback">
                             Please Type The Starting Location
                         </div>
@@ -200,7 +200,7 @@
                 <div class="col-12 col-sm-12 col-lg-6">
                     <div class="form-group">
                         <label for="destinationLocationLL">Destination Location<sup class="text-primary">&#10033;</sup></label>
-                        <input id="destinationLocationLL" type="text" class="form-control" placeholder="Pandacan, Manila" required>
+                        <input id="destinationLocationLL" type="text" class="form-control" placeholder="Pandacan, Manila">
                         <div class="invalid-feedback">
                             Please Type The Destination Location
                         </div>
@@ -212,6 +212,35 @@
             <label for="addExHaulingDetails">Extra Details</label>
             <textarea class="form-control" id="addExHaulingDetails" rows="5"></textarea>
         </div>
-        <button id="submitJob" type="button" class="submitJobOrderHauling btn btn-primary float-right waves-effect" data-service="Hauling">Submit</button>
+        {{-- <button id="submitJob" type="Submit" class="submitJobOrderHauling btn btn-primary float-right waves-effect" data-service="Hauling">Submit</button> --}}
+        <button type="submit" class="btn btn-primary float-right waves-effect" data-service="Hauling">Submit</button>
+    
     </form>
 </div>
+
+<script>
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function(form) {
+          form.addEventListener('submit', function(event) {
+              if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          else{
+              //   return postPier(); 
+              event.preventDefault();
+              event.stopPropagation();
+            return submitJobOrderHauling();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+
+</script>

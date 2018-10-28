@@ -33,12 +33,12 @@
                                     <h4>Log-in</h4>
                                 </div>
                                 <div class="card-body">
-                                    <form method="POST" action="/consignee/login" class="needs-validation" novalidate="">
+                                    <form method="POST" name="form" action="/consignee/login" class="needs-validation" onsubmit="return validateForm()" novalidate="">
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input id="email" class="form-control" name="email" tabindex="1" required autofocus>
+                                            <input id="email" class="form-control" name="email" tabindex="1" type="email" required autofocus>
                                             <div class="invalid-feedback">
-                                                Please enter a valid Email address.
+                                                <p id="valmail"></p>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -82,7 +82,9 @@
                 </div>
             </section>
         </div>
-
+        <script>
+            
+        </script>
         <script src="/others/stisla_admin_v1.0.0/dist/modules/jquery.min.js"></script>
         <script src="/others/stisla_admin_v1.0.0/dist/modules/popper.js"></script>
         <script src="/others/stisla_admin_v1.0.0/dist/js/moment.min.js"></script>
@@ -95,6 +97,7 @@
         <script src="/others/stisla_admin_v1.0.0/dist/js/scripts.js"></script>
         <script src="/others/stisla_admin_v1.0.0/dist/js/demo.js"></script>
         <script src="/others/stisla_admin_v1.0.0/dist/modules/pace/pace.min.js"></script>
+        <script type="text/javascript" src="/others/stisla_admin_v1.0.0/dist/js/login/login.js"></script>
     </body>
 
 </html>

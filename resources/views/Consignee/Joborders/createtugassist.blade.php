@@ -1,5 +1,5 @@
     <div class="tugAssistTab getService" data-service="Tug Assist">
-        <form class="needs-validation" novalidate="">
+        <form class="needs-validation2" novalidate="" name="form">
             <div class="row">
                 <div class="col-12 col-sm-12 col-lg-12">
                     <div class="form-group">
@@ -94,33 +94,13 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="row">
-                <div class="col-12">
-                    <div class="form-group">
-                        <label for="addTugAssistRoute">Select Route<sup class="text-primary">&#10033;</sup></label>
-                        <input type="text" class="form-control" id="addTugAssistRoute" placeholder="Route" required>
-                        <select id="addTugAssistRoute" name="addTugAssistRoute" class="form-control">
-                            <option value="LocPier">Location to Pier</option>
-                            <option value="PierLoc">Pier to Location</option>
-                            <option value="LocLoc">Location to Location</option>
-                        </select>
-                    </div>
-                </div>
-            </div> --}}
+
             <div class="LocPier">
                 <div class="row">
+
                     {{-- <div class="col-12 col-sm-12 col-lg-6">
                         <div class="form-group">
-                            <label for="startingLocation">Starting Location<sup class="text-primary">&#10033;</sup></label>
-                            <input id="startingLocation" type="text" class="form-control" placeholder="Pandacan, Manila" required>
-                            <div class="invalid-feedback">
-                                Please Type The Starting Location
-                            </div>
-                        </div>
-                    </div> --}}
-                    <div class="col-12 col-sm-12 col-lg-6">
-                        <div class="form-group">
-                            <label for="addBerth">Select Berth<sup class="text-primary">&#10033;</sup></label>
+                            <label for="addBerth">aaaaaaaSelect Berth<sup class="text-primary">&#10033;</sup></label>
                             <select name="addBerth" class="form-control addBerth" required>
                                 <option value="">Select Berth</option>
                                 @foreach($berth as $berths)
@@ -131,7 +111,7 @@
                                 Please fill in the The Corresponding Berth and Pier
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
             <div class="PierLoc">
@@ -152,8 +132,8 @@
                     <div class="col-12 col-sm-12 col-lg-6">
                         <div class="form-group">
                             <label for="addTugAssistBerth">Select Berth<sup class="text-primary">&#10033;</sup></label>
-                            <select name="addTugAssistBerth" class="addTugAssistBerth form-control">
-                                <option>Select Berth</option>
+                            <select name="addTugAssistBerth" class="addTugAssistBerth form-control" required>
+                                <option value="" disabled="disabled" selected="selected">Select Berth</option>
                                 @foreach($berth as $berth)
                                     <option value="{{$berth->intBerthID}}">{{$berth->strPierName}} - {{$berth->strBerthName}}</option>
                                 @endforeach
@@ -170,7 +150,7 @@
                     <div class="col-12 col-sm-12 col-lg-6">
                         <div class="form-group">
                             <label for="startingLocation">Starting Location<sup class="text-primary">&#10033;</sup></label>
-                            <input id="startingLocation" type="text" class="form-control" placeholder="Pandacan, Manila" required>
+                            <input id="startingLocation" type="text" class="form-control" placeholder="Pandacan, Manila" >
                             <div class="invalid-feedback">
                                 Please Type The Starting Location
                             </div>
@@ -179,7 +159,7 @@
                     <div class="col-12 col-sm-12 col-lg-6">
                         <div class="form-group">
                             <label for="destinationLocation">Destination Location<sup class="text-primary">&#10033;</sup></label>
-                            <input id="destinationLocation" type="text" class="form-control" placeholder="Pandacan, Manila" required>
+                            <input id="destinationLocation" type="text" class="form-control" placeholder="Pandacan, Manila">
                             <div class="invalid-feedback">
                                 Please Type The Destination Location
                             </div>
@@ -189,11 +169,40 @@
             </div>
             <div class="form-group">
                 <label for="addExDetails">Extra Details</label>
-                <textarea class="form-control addExDetails" rows="5" required></textarea>
-                <div class="invalid-feedback">
-                    Please Add Details
-                </div>
+                <textarea class="form-control addExDetails" rows="5"></textarea>
             </div>
-            <button id="submitJob" role="button" class="submitJobOrderTugAssist btn btn-primary float-right waves-effect" data-service="Tug Assist">Submit</button>
+            {{-- <button id="submitJob" type="submit" role="button" class="submitJobOrderTugAssist btn btn-primary float-right waves-effect" data-service="Tug Assist">Submit</button> --}}
+            <button type="submit" role="button" class="btn btn-primary float-right waves-effect" data-service="Tug Assist">Submit</button>
+        
         </form>
     </div>
+
+    <script>
+            (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('needs-validation2');
+                  // Loop over them and prevent submission
+                  var validation = Array.prototype.filter.call(forms, function(form) {
+                      form.addEventListener('submit', function(event) {
+                          if (form.checkValidity() === false) {
+
+                        event.preventDefault();
+                        event.stopPropagation();
+                        // alert('hi');
+                      }
+                      else{
+                          //   return postPier(); 
+                          event.preventDefault();
+                          event.stopPropagation();
+                        //   alert('low');
+                        return submitJobOrderTugAssist();
+                      }
+                      form.classList.add('was-validated');
+                    }, false);
+                  });
+                }, false);
+              })();
+            
+            </script>
