@@ -21,6 +21,42 @@
         </div>
     </div>
     <div class="row">
+        <div class="col">
+            <div class="card card-success">
+                <div class="card-header text-black">
+                    <div class="float-right">
+                        <a data-collapse="#availableTeams" class="btn btn-icon"><i class="ion ion-minus"></i></a>
+                    </div>
+                    <h4 class="text-center ml-5">Show Teams Available</h4>
+                </div>
+                <div class="collapse" id="availableTeams">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="card card-success">
+                                    <div class="card-header bg-success text-white text-center">
+                                        <h4> Available For This Day and Time </h4>
+                                    </div>
+                                    <div class="card-body availableTugs" style="max-height: 500px; overflow-y: auto;">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card card-danger">
+                                    <div class="card-header bg-danger text-white text-center">
+                                        <h4> Unavailable For This Day and Time</h4>
+                                    </div>
+                                    <div class="card-body unavailableTugs" style="max-height: 500px; overflow-y: auto;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>          
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-12">
             <div class="card card-primary">
                 <div class="card-header startHaulingHeader">

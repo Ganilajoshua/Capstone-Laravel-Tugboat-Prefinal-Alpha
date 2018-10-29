@@ -83,6 +83,67 @@ $('.assignTeam').on('click',function(){
             appendTugboatTeamDefaults(data.jobsched);
             appendJoborderHeader(data.joborder);
             appendJoborderBody(data.joborder,location);
+
+            console.log(teamsavail);
+            if(teamsavail[0].length == 0){
+                var appendUnavailableTugboats =
+                `<h6>
+                    <div class=" text-danger text-center">
+                        <i class="fas fa-times mr-2 mt-2"></i> No Unavailable Teams <i class="fas fa-times ml-2"></i>
+                    </div>
+                </h6>`;
+                $(appendUnavailableTugboats).appendTo('.unavailableTugs');
+
+            }else{
+                for(var counter = 0; counter < (teamsavail[0].length); counter++){
+                    var appendUnavailableTugboats = 
+                    `<div class="card mb-2 border border-danger">
+                        <div style="margin-top: 13px; margin-bottom: 13px;"> 
+                            <div class="ml-4 mt-2 mb-2">
+                                <span class="customFontsHP">${teamsavail[0][counter].strTeamName}</span>
+                            </div>
+                        </div>
+                    </div>`;
+                    $(appendUnavailableTugboats).appendTo('.unavailableTugs');
+                }
+            }
+            if(teamsavail[1].length == 0){
+                var appendUnavailableTugboats =
+                `<h6>
+                    <div class=" text-danger text-center">
+                        <i class="fas fa-times mr-2 mt-2"></i> No Available Teams <i class="fas fa-times ml-2"></i>
+                    </div>
+                </h6>`;
+                $(appendUnavailableTugboats).appendTo('.availableTugs');
+
+            }
+            for(var counter = 0; counter < (teamsavail[1].length); counter++){
+
+                // var appendAvailableTugboats = 
+                //     `<div class="col-lg-12 col-sm-12 col-md-12">
+                //         <div class="card bg-success">
+                //             <div class="card-body">
+                //                 <div class="custom-control custom-checkbox custom-control-inline">
+                //                     <input type="checkbox" id="availableTugboat${data.tugboats[counter].intTugboatID}" data-id="${data.tugboats[counter].intTugboatID}" name="tugboatlist[]" class="custom-control-input tugboatsCheckbox">
+                //                     <label class="custom-control-label" for="availableTugboat${data.tugboats[counter].intTugboatID}">
+                //                         <p class="card-text text-center ml-2">${data.tugboats[counter].strName}<small>${data.tugboats[counter].strHorsePower}HP</small></p>
+                //                     </label>
+                //                 </div>
+                //             </div>
+                //         </div>
+                //     </div>`;
+
+                var appendAvailableTugboats = 
+                    `<div class="card mb-2 border border-success">
+                        <div style="margin-top: 13px; margin-bottom: 13px;"> 
+                            <div class="ml-4 mt-2 mb-2">
+                                <span class="customFontsHP">${teamsavail[1][counter].strTeamName}</span>
+                            </div>
+                        </div>
+                    </div>`;
+                
+                $(appendAvailableTugboats).appendTo('.availableTugs');    
+            }
             appendJoborderTeams(data.jobsched, teamsavail);
             $('.assignDefaultTeams').data('id',`${data.jobsched[0].intJSJobOrderID}`);
             $('.assignTeams').data('id',`${data.jobsched[0].intJSJobOrderID}`);
