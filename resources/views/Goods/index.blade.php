@@ -30,7 +30,6 @@
                     <thead class="bg-primary">
                         <tr>
                             <th>Goods</th>
-
                             <th>Status</th>
                             <th class="noSortAction">Action</th>
                         </tr>

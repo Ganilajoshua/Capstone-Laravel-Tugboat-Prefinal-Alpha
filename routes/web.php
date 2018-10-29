@@ -417,8 +417,6 @@ Route::group(['prefix'=>'affiliates/'],function(){
             Route::get('/tugboat/{intTugboatMainID}/delete','TugboatController@delete');
             Route::get('/tugboat/{intTugboatMainID}/destroy','TugboatController@destroy');
         });
-
-
     });
     Route::group(['prefix'=>'transactions/'],function(){
             // Dispatch and Hauling Module Route Group

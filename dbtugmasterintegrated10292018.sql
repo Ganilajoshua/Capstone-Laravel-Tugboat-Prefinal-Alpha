@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 28, 2018 at 05:17 AM
+-- Generation Time: Oct 29, 2018 at 04:01 AM
 -- Server version: 5.7.21
 -- PHP Version: 5.6.35
 
@@ -126,6 +126,7 @@ CREATE TABLE IF NOT EXISTS `tblberth` (
   `isActive` tinyint(1) DEFAULT '1',
   `boolDeleted` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`intBerthID`),
+  UNIQUE KEY `intBPierID` (`intBPierID`,`strBerthName`),
   KEY `fk_tblBerth_tblPier1_idx` (`intBPierID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
@@ -142,9 +143,7 @@ INSERT INTO `tblberth` (`intBerthID`, `intBPierID`, `strBerthName`, `isActive`, 
 (6, 3, 'Berth 6', 1, 0),
 (7, 6, 'Berth 7', 1, 0),
 (8, 3, 'Berth 84', 1, 0),
-(9, 2, 'Berth 100', 1, 1),
-(10, 10, 'Berth 3', 1, 0),
-(11, 1, 'Berth 5', 1, 0);
+(9, 2, 'Berth 100', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -221,10 +220,10 @@ DROP TABLE IF EXISTS `tblcheque`;
 CREATE TABLE IF NOT EXISTS `tblcheque` (
   `intChequeID` int(11) NOT NULL AUTO_INCREMENT,
   `intCBillID` int(11) NOT NULL,
-  `dtPayment` int(11) NOT NULL,
+  `dtPayment` date NOT NULL,
   `intABANum` int(11) NOT NULL,
   `intAmount` int(11) NOT NULL,
-  `strMemo` int(11) NOT NULL,
+  `strMemo` varchar(100) NOT NULL,
   `intRouteNum` int(11) NOT NULL,
   `intAccountNum` int(11) NOT NULL,
   `boolDeleted` int(11) NOT NULL,
@@ -523,23 +522,22 @@ DROP TABLE IF EXISTS `tblgoods`;
 CREATE TABLE IF NOT EXISTS `tblgoods` (
   `intGoodsID` int(11) NOT NULL AUTO_INCREMENT,
   `strGoodsName` varchar(45) DEFAULT NULL,
-  `fltRateperTon` float DEFAULT NULL,
-  `fltGoodWeight` float DEFAULT NULL,
   `isActive` tinyint(1) DEFAULT '1',
   `boolDeleted` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`intGoodsID`)
+  PRIMARY KEY (`intGoodsID`),
+  UNIQUE KEY `strGoodsName_UNIQUE` (`strGoodsName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tblgoods`
 --
 
-INSERT INTO `tblgoods` (`intGoodsID`, `strGoodsName`, `fltRateperTon`, `fltGoodWeight`, `isActive`, `boolDeleted`) VALUES
-(1, 'Cooking Oil', 500, NULL, 1, 0),
-(2, 'Metal Rolls', 500, NULL, 1, 0),
-(3, 'Gravel', 700, NULL, 1, 0),
-(4, 'Diesel', 700, NULL, 1, 0),
-(5, 'Red Sand', 200, NULL, 1, 0);
+INSERT INTO `tblgoods` (`intGoodsID`, `strGoodsName`, `isActive`, `boolDeleted`) VALUES
+(1, 'Cooking Oil', 1, 0),
+(2, 'Metal Rolls', 1, 0),
+(3, 'Gravel', 1, 0),
+(4, 'Diesel', 1, 0),
+(5, 'Red Sand', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -634,7 +632,7 @@ CREATE TABLE IF NOT EXISTS `tbljoborder` (
   KEY `fk_tblSchedule_tblBerth1` (`intJOBerthID`),
   KEY `fk_tblJoborder_tblGoods1_idx` (`intJOGoodsID`),
   KEY `fk_tblJoborder_tblVesselType1_idx` (`intJOVesselTypeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbljoborder`
@@ -649,7 +647,9 @@ INSERT INTO `tbljoborder` (`intJobOrderID`, `strJOTitle`, `strJODesc`, `intJOBer
 (6, 'Testing mo to 2', 'Testing mo toooooooo', 7, NULL, NULL, NULL, NULL, 3, NULL, 'MT Space Betelgeuse', NULL, NULL, 'Scheduled', 18, 8, 'Tug Assist', '2018-10-29', '2018-10-29', '09:18:00', '13:18:00', 0, '2018-10-26 23:20:43', '2018-10-26 23:20:43', NULL),
 (7, 'Job Order Title 1', 'Details Ey', 1, NULL, 'Pandacan Manila', NULL, 1, 32, NULL, 'MT Space Orion', NULL, NULL, 'Scheduled', 3200, NULL, 'Hauling', '2018-10-29', '2018-10-29', '12:00:00', '15:00:00', 0, '2018-10-27 20:36:10', '2018-10-27 20:36:10', NULL),
 (8, 'Testing 1', 'Details', 1, 'Pandacan, Manila', NULL, NULL, 1, 32, NULL, 'Kahit Ano', NULL, NULL, 'Created', 3200, NULL, NULL, '2018-10-28', '2018-10-28', '13:00:00', '19:30:00', 0, '2018-10-27 21:05:04', '2018-10-27 21:05:04', NULL),
-(9, 'Test 2', 'Details', 1, NULL, 'Pandacan, Manila', NULL, 1, 32, NULL, 'MT Space Donn', NULL, NULL, 'Scheduled', 3200, NULL, 'Hauling', '2018-10-28', '2018-10-28', '15:00:00', '17:00:00', 0, '2018-10-27 21:07:23', '2018-10-27 21:07:23', NULL);
+(9, 'Test 2', 'Details', 1, NULL, 'Pandacan, Manila', NULL, 1, 32, NULL, 'MT Space Donn', NULL, NULL, 'Scheduled', 3200, NULL, 'Hauling', '2018-10-28', '2018-10-28', '15:00:00', '17:00:00', 0, '2018-10-27 21:07:23', '2018-10-27 21:07:23', NULL),
+(10, 'Job Order Final Testing 1', 'Testing Details 1', 1, NULL, 'Pandacan, Manila', NULL, 1, 3, NULL, 'MT Space Lawrence', NULL, NULL, 'Scheduled', 3200, NULL, 'Hauling', '2018-10-30', '2018-10-30', '11:00:00', '14:00:00', 0, '2018-10-28 19:10:25', '2018-10-28 19:10:25', NULL),
+(11, 'Job Order Testing 2', 'Details 2', 5, NULL, 'Pandacan, Manila', NULL, 2, 3, NULL, 'MT Heneral Luna', NULL, NULL, 'Ready', 3000, NULL, 'Hauling', '2018-10-30', '2018-10-30', '10:00:00', '15:00:00', 0, '2018-10-28 19:13:26', '2018-10-28 19:13:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -700,7 +700,7 @@ CREATE TABLE IF NOT EXISTS `tbljobsched` (
   KEY `fk_tbljobsched_tbltugboat_idx` (`intJSTugboatID`),
   KEY `fk_tbljobsched_tblteam_idx` (`intJSTeamID`),
   KEY `fk_tbljobsched_tbldispatchticket1_idx` (`intJSDispatchTicketID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbljobsched`
@@ -710,7 +710,8 @@ INSERT INTO `tbljobsched` (`intJobSchedID`, `intJSJobOrderID`, `intJSSchedID`, `
 (1, 1, 1, 2, 2, 4, 'Pending', NULL, NULL, NULL, NULL, 0, NULL, NULL),
 (2, 4, 2, 2, 2, 4, 'Pending', NULL, NULL, NULL, NULL, 0, NULL, NULL),
 (3, 4, 2, 4, 4, 2, 'Pending', NULL, NULL, NULL, NULL, 0, NULL, NULL),
-(4, 2, 3, 5, 5, NULL, 'Pending', NULL, NULL, NULL, NULL, 0, NULL, NULL);
+(4, 2, 3, 5, 5, 1, 'Pending', NULL, NULL, NULL, NULL, 0, NULL, NULL),
+(5, 11, 4, 2, 2, NULL, 'Pending', NULL, NULL, NULL, NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -785,8 +786,9 @@ CREATE TABLE IF NOT EXISTS `tblpier` (
   `strPierName` varchar(45) DEFAULT NULL,
   `isActive` tinyint(1) DEFAULT '1',
   `boolDeleted` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`intPierID`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`intPierID`),
+  UNIQUE KEY `strPierName_UNIQUE` (`strPierName`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tblpier`
@@ -1023,7 +1025,7 @@ CREATE TABLE IF NOT EXISTS `tblschedule` (
   `tmEnd` time DEFAULT NULL,
   `tmStart` time DEFAULT NULL,
   PRIMARY KEY (`intScheduleID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tblschedule`
@@ -1032,7 +1034,8 @@ CREATE TABLE IF NOT EXISTS `tblschedule` (
 INSERT INTO `tblschedule` (`intScheduleID`, `strScheduleDesc`, `dttmETA`, `dttmETD`, `strColor`, `boolDeleted`, `datScheduleDate`, `intScheduleCompanyID`, `dateStart`, `dateEnd`, `tmEnd`, `tmStart`) VALUES
 (1, 'Donn JO', NULL, NULL, NULL, 0, NULL, 1, '2018-10-26', '2018-10-27', '10:00:00', '08:00:00'),
 (2, 'Testing JO', NULL, NULL, NULL, 0, NULL, 1, '2018-10-29', '2018-10-29', '10:15:00', '03:15:00'),
-(3, 'Homie JO', NULL, NULL, NULL, 0, NULL, 1, '2018-10-26', '2018-10-27', '06:00:00', '15:00:00');
+(3, 'Homie JO', NULL, NULL, NULL, 0, NULL, 1, '2018-10-26', '2018-10-27', '06:00:00', '15:00:00'),
+(4, 'Job Order Testing 2', NULL, NULL, NULL, 0, NULL, 1, '2018-10-30', '2018-10-30', '15:00:00', '10:00:00');
 
 -- --------------------------------------------------------
 
@@ -1433,7 +1436,8 @@ CREATE TABLE IF NOT EXISTS `tblvesseltype` (
   `strVesselTypeName` varchar(45) DEFAULT NULL,
   `boolDeleted` tinyint(1) DEFAULT '0',
   `isActive` tinyint(1) DEFAULT '1',
-  PRIMARY KEY (`intVesselTypeID`)
+  PRIMARY KEY (`intVesselTypeID`),
+  UNIQUE KEY `strVesselTypeName_UNIQUE` (`strVesselTypeName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
@@ -1483,9 +1487,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `intUCompanyID`, `remember_token`, `created_at`, `updated_at`, `enumUserType`, `isVerified`, `isActive`, `boolDeleted`, `token`) VALUES
-(1, 'HEMSI', 'hienergymarineservices@gmail.com', '$2y$10$EPf6MLFuhVXXVji1gE.vnONc2PdnoHSEkJ1H8wIPJcLbz2CE6.4de', 1, '7KMtsOuGULuRbwdpXe2qUqjSlNrx88eIUg39m8nHSN1ysh5TkDMsxb163QD5', '2018-08-26 21:39:55', '2018-08-27 02:50:40', 'Admin', 0, 1, 0, NULL),
+(1, 'HEMSI', 'hienergymarineservices@gmail.com', '$2y$10$EPf6MLFuhVXXVji1gE.vnONc2PdnoHSEkJ1H8wIPJcLbz2CE6.4de', 1, 'ZynJerxN0nFRE0TuqvAthbesB30lilGCo9mUXuPuQm7m35MLovrBosHTS4um', '2018-08-26 21:39:55', '2018-08-27 02:50:40', 'Admin', 0, 1, 0, NULL),
 (2, 'Tugmasters', 'tugmaster@gmail.com', '$2y$10$uGDjz7KPIoaX5jCw/NN9NOC7AdruGebYbIYuIRn1xuSvss8vwA0l.', 2, 'lo5fRaj1t8CqbtWMtK5kSVA0ZIDecXQwAVO79vU4ikKRimwp1VY9pSfNx8I3', '2018-08-26 21:43:36', '2018-08-26 21:43:36', 'Affiliates', 0, 1, 0, NULL),
-(3, 'Black Pink', 'blackpinkyg@gmail.com', '$2y$10$QeUnO0ypzktouf/19X6k3OEJkQ7iryv2Q24xrv7F1v.ohyQyLoYRW', 3, 'uo1C7NcCYvvU74tn78Jgnl6aeZJ13wq04WG6wSyfeDUmRsPr6sIwL8YFoyoj', '2018-08-26 22:08:35', '2018-09-30 22:38:43', 'Consignee', 0, 1, 0, NULL),
+(3, 'Black Pink', 'blackpinkyg@gmail.com', '$2y$10$QeUnO0ypzktouf/19X6k3OEJkQ7iryv2Q24xrv7F1v.ohyQyLoYRW', 3, 'KeenQKgWdLpQfDgoMhC8wvOMpoVCNTTH7Saf9wg7FXG00DB5HgbVxM074BuZ', '2018-08-26 22:08:35', '2018-09-30 22:38:43', 'Consignee', 0, 1, 0, NULL),
 (4, 'TWICE', 'twicejype@gmail.com', '$2y$10$7pFLHptgmpu00ZO534rUE.UVQkVp9Vq.cFfPhzGt9REt4lmrOVTAy', 4, 'eF2aWBHWjDL7i3xgaWEpQWQyAluvtEUUz8GYp2ZvF7krNgIpODBijGCs23zR', '2018-08-27 02:46:55', '2018-10-12 11:15:07', 'Consignee', 0, 1, 0, NULL),
 (5, 'TWICE', 'twicesujype@gmail.com', '$2y$10$q9nlpjUEfEOKVgzmMAuVJeTx4XbYvGBpKth22ZaVlXKnjJRS0gVie', 5, 'xJVLr2FlnEoZUsPTwne6RjTEhF7tJ6Tff607ubCuxhMUuum0tm4x4fRvmt2Y', '2018-08-27 02:47:56', '2018-10-12 11:15:10', 'Consignee', 0, 1, 0, NULL),
 (6, 'Isaac Tailoring Shop', 'isaac@gmail.com', '$2y$10$j8z4HECOGsHqXiBa1J5EueWk/e9PNIapA4TRrKvpPL9I46AelTNRK', 6, '7ZN2sDcHi2QHVevs0Z993JvhTusfB3Of3YC7qZD3dMOzmOsmZIfRZJ7eu4Sr', '2018-08-27 04:41:35', '2018-08-27 05:47:58', 'Consignee', 0, 1, 0, NULL),
