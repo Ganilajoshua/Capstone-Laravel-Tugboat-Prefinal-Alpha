@@ -49,7 +49,7 @@
                         <strong>Towed:</strong> <span id="towed"></span>
                     </div>
                     <div class="mb-1">
-                        <strong>Date:</strong> ????
+                        <strong>Date:</strong> <span id="dateEnded"></span>
                     </div>
                     <div class="mb-1">
                         <strong>Account:</strong> <span id="ID"></span>
@@ -75,7 +75,7 @@
                                 <td id="1tugboat"></td>
                                 <td id="start"></td>
                                 <td id="destination"></td>
-                                <td>??</td>
+                                <td id="date2"></td>
                                 <td id="service"></td>
                             </tr>
                         </tbody>

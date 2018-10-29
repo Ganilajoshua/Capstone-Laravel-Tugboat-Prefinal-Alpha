@@ -14,15 +14,17 @@ $(document).ready(function(){
         }
     });
 
-    
-    $(`#addTugAssistStartDate, #addHaulingStartDate`).datetimepicker({
-        format: 'L',
-        minDate:new Date()
-    });
 
-    $(`#addTugAssistEndDate, #addHaulingEndDate`).datetimepicker({
-        format: 'L',
-        minDate:new Date()
+$(`#addTugAssistStartDate, #addHaulingStartDate`).datetimepicker({
+    format: 'L',
+    dateFormat: "yy-mm-dd",   
+     minDate: new Date,
+ 
+    });
+    $(`#addTugAssistEndDate,#addHaulingEndDate`).datetimepicker({
+    format: 'L',
+    dateFormat: "yy-mm-dd",   
+     minDate: new Date,
     });
 
     $('#haulingETA').datetimepicker({

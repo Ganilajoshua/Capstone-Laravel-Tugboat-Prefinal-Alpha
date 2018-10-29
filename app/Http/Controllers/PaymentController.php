@@ -115,16 +115,6 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-
-        // $a = $request->bill;
-        // // $sum = $request->sum;
-        // $balance = $request->bal;
-        // $balance = $balance + $total;
-        // $balance = $balance - $sum;
-
-        // $Invoice = Invoice::find($request->bill);
-        // $Invoice->enumStatus = 'Paid';
-        // $Invoice->save();
         $Bill = Bill::find($request->bill);
         $Bill->timestamps = false;
         $Bill->enumStatus = 'Accepted';
@@ -205,7 +195,6 @@ class PaymentController extends Controller
         ->where('invoice.intInvoiceID',$id)
         ->groupby('dispatch.intDispatchTicketID')
         ->get();
-
         
         return response()->json(['dispatch'=>$dispatch]);   
     }
@@ -223,10 +212,10 @@ class PaymentController extends Controller
         ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
         ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
         ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
-        ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
-        ->join('tblbill as bill','invoice.intIBillID','bill.intBillID')
-        ->join('tblcharges as charges','charges.intChargeID','invoice.intInvoiceID')
-        ->join('tblbalance as balance','balance.intBalanceID','company.intCompanyID')
+        ->leftjoin('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
+        ->leftjoin('tblbill as bill','invoice.intIBillID','bill.intBillID')
+        ->leftjoin('tblcharges as charges','charges.intChargeID','invoice.intInvoiceID')
+        ->leftjoin('tblbalance as balance','balance.intBalanceID','company.intCompanyID')
         ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
         ->where('invoice.intInvoiceID',$id)
         ->groupby('dispatch.intDispatchTicketID')

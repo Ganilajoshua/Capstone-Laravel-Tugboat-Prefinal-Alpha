@@ -73,7 +73,7 @@
                                     <td id="tugboat1"></td>
                                     <td id="start1"></td>
                                     <td id="destination1"></td>
-                                    <td>??</td>
+                                    <td id="date"></td>
                                     <td id="service1"></td>
                                 </tr>
                             </tbody>
@@ -129,7 +129,7 @@
                                 </table>
                         </div>
             </div class="float-right">
-            <select name="" id="new" hidden>
+            <select name="" id="new">
                 <option id="bill"></option>
             </select>
             <select name="" id="sum" hidden>

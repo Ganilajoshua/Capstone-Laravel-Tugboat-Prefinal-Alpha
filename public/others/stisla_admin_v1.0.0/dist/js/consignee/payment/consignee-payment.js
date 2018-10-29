@@ -202,8 +202,10 @@ $(document).ready(function(){
                 showMethod: "slideDown",
                 hideMethod: "slideUp"
             });
+            event.preventDefault();
+            event.stopPropagation();
         }
-        else
+        else if(amount < counter)
         {
             return Finalize();
         }
@@ -212,30 +214,43 @@ $(document).ready(function(){
   function Finalize(){
     var Fee = $('#fee').val();
     var Balance = $('#balance').val();
+    var amount = $('#amount').val();
     var ChequeDate = $('#cDate').val();
+    var fltBalance = $('#fltBalance').val();
+    // alert(ChequeDate);
+    // var ChequeDate = $('#chequeDate').val();
+    // alert(amount);
     var id = $('#idBill').val();
         
     var ChequeMemo = [];
     $("input[name='chequeMemo[]").each(function(memo){
         ChequeMemo[memo] = $(this).val();
         memo++;
+        // alert($(this).val());
     })
 
     var ChequeNum = [];
         $("input[name='chequeNum[]").each(function(num){
             ChequeNum[num] = $(this).val();
             num++;
+            // alert($(this).val());
         })
-    var counter;
-    var ChequeAmount = [];
+        var counter = 0;
+        var ChequeAmount = [];
         $("input[name='chequeAmount[]").each(function(amount){
             ChequeAmount[amount] = $(this).val();
             amount++;
-        counter = Number(counter) + Number($(this).val() + Number(balance));
-        console.log(counter);
-        })
+            // alert($(this).val());
+        counter = Number(counter) + Number($(this).val());
+    })
+    var total = counter;
+    alert(total);
     console.log(ChequeDate);
     console.log(id);
+
+    var final = (Number(total) + Number(fltBalance)) - Number(amount);
+    alert(final);
+    // return false;
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -246,12 +261,15 @@ $(document).ready(function(){
         url : '/consignee/paymentbilling/payment/store',
         type : 'POST',
         data : { "_token" : $('meta[name="csrf-token"]').attr('content'),
+            amount : amount,
             ChequeNum : ChequeNum,
             ChequeDate : ChequeDate,
             ChequeAmount : ChequeAmount,
             ChequeMemo : ChequeMemo,
             BillID : id,
             Balance : Balance,
+            counter : total,
+            final : final,
             Fee : Fee,
 
         },
@@ -270,26 +288,37 @@ $(document).ready(function(){
             },
             function(isConfirm){
                 if(isConfirm){
-                    window.location = '/consignee/paymentbilling/billing';
+                    
+                    alert('yow');
+                    // window.location = '/consignee/paymentbilling/billing';
+                    // window.location.replace = "/consignee/paymentbilling/billing";
                 }
             });                       
         },
         error : function(error){
             console.log(error)
-            swal({
-                title: "The Billing has been Finalize",
-                text: "Sent",
-                type: "success",
-                showCancelButton: false,
-                confirmButtonClass: "btn-success",
-                confirmButtonText: "Ok",
-                closeOnConfirm: true,
-            },
-            function(isConfirm){
-                if(isConfirm){
+                    alert('stop');
                     window.location = '/consignee/paymentbilling/billing';
-                }
-            });        
+            // alert('dito');
+            // swal({
+            //     title: "The Billing has been Finalize",
+            //     text: "Sent",
+            //     type: "success",
+            //     showCancelButton: false,
+            //     confirmButtonClass: "btn-success",
+            //     confirmButtonText: "Ok",
+            //     closeOnConfirm: true,
+            // },
+            error.preventDefault(),
+            error.stopPropagation()
+            // function(isConfirm){
+            //     if(isConfirm){
+            //         isConfirm.preventDefault();
+            //         isConfirm.stopPropagation();
+            
+            //     }
+            // }
+            // );        
         } 
     });
 }

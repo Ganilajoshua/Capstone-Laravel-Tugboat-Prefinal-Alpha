@@ -14,7 +14,7 @@
                 @foreach($pending as $pending)
                     <tr class="tr-shadow">
                         <td>{{$pending->intChequeID}}</td>
-                        <td></td>
+                        <td>{{$pending->dtPayment}}</td>
                         <td>
                             <div class="badge badge-success">{{$pending->enumStatus}}</div>
                         </td>
