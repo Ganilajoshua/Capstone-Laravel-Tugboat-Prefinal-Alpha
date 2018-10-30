@@ -19,8 +19,24 @@
                     <td>{{$dispatch3->intDispatchTicketID}}</td>
                     <td>{{$dispatch3->strCompanyName}}</td>
                     <td>{{$dispatch3->strName}}</td>
-                    <td>{{$dispatch3->strJOStartPoint}}</td>
-                    <td>{{$dispatch3->strJODestination}}</td>
+                    @if($dispatch3->strJOStartPoint == null)
+                        <td>
+                            {{$dispatch3->strBerthName}} {{$dispatch3->strPierName}}
+                        </td>
+                    @else
+                        <td>
+                            {{$dispatch3->strJOStartPoint}}
+                        </td>
+                    @endif
+                    @if($dispatch3->strJODestination == null)
+                        <td>
+                            {{$dispatch3->strBerthName}} {{$dispatch3->strPierName}}
+                        </td>
+                    @else
+                    <td>
+                        {{$dispatch3->strJODestination}}
+                    </td>
+                    @endif
                     <td>{{$dispatch3->dateEnded}} {{$dispatch3->tmEnded}}</td>
                     <td>{{$dispatch3->enumServiceType}}</td>
                     <td style="width:15%">

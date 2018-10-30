@@ -55,13 +55,26 @@
                                     </td>
 									<td>
                                         {{$accept->strName}}
-                                    </td>
-									<td>
-                                        {{$accept->strJOStartPoint}}
-                                    </td>
+									</td>
+									@if($accept->strJOStartPoint = null)
+										<td>
+											{{$accept->strBerthName}} {{$accept->strPierName}}
+										</td>
+									@else
+										<td>
+											{{$accept->strJOStartPoint}}
+										</td>
+									@endif
+									@if($accept->strJODestination = null)
+										<td>
+											{{$accept->strBerthName}} {{$accept->strPierName}}
+										</td>
+									@else
 									<td>
                                         {{$accept->strJODestination}}
-                                    </td>
+									</td>
+									@endif
+								
 									<td>{{$accept->dateEnded}} {{$accept->tmEnded}}</td>
 									<td>
                                         {{$accept->enumServiceType}}
