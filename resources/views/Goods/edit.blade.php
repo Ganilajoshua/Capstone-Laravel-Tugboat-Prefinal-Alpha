@@ -16,14 +16,7 @@
                                 <input type="text" class="form-control" id="editGoodsName" name="editGoodsName" placeholder="Goods Name" pattern="[a-zA-Z ]{1,}" required>
                                 <div class="invalid-feedback">Invalid Input</div>
                             </div>
-                        </div>
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="editGoodsRate">Rate Per Ton<sup class="text-primary">&#10033;</sup></label>
-                                <input type="text" class="form-control" id="editGoodsRate" name="editGoodsRate" placeholder="Rate per Ton" pattern="^([0-9]{1,})" required>
-                                <div class="invalid-feedback">Invalid Input</div>
-                            </div>
-                        </div>     
+                        </div>   
                     </div>
                     <input type="hidden" id="editIDhide">
                     <!-- <button type="button" onclick="updateGoods()" class="btnAdd btn btn-primary waves-effect float-right">Update</button> -->

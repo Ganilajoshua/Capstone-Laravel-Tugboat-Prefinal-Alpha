@@ -42,7 +42,6 @@ class GoodsController extends Controller
         $goods =  new Goods;
         $goods->timestamps = false;
         $goods->strGoodsName = $request->goodsName;
-        $goods->fltRateperTon = $request->goodsRate;
         $goods->save();
         return response()->json(['goods'=>$goods]);
     }
@@ -82,9 +81,7 @@ class GoodsController extends Controller
         $goods = Goods::findOrFail($request->goodsID);
         $goods->timestamps = false;
         $goods->strGoodsName = $request->goodsName;
-        $goods->fltRateperTon = $request->goodsRate;
         $goods->save();
-        return response()->json(['goods'=>$goods]);
     }
 
     /**

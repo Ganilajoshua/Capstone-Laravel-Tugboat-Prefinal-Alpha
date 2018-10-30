@@ -17,13 +17,6 @@
                                 <div class="invalid-feedback">Invalid Input</div>
                             </div>
                         </div>
-                        <div class="col">    
-                            <div class="form-group">
-                                <label for="addGoodsRate">Rate per Ton<sup class="text-primary">&#10033;</sup></label>
-                                <input type="text" class="form-control" id="addGoodsRate" name="addGoodsRate" placeholder="Rate per Ton" pattern="^([0-9]{1,})" required>
-                                <div class="invalid-feedback">Invalid Input</div>
-                            </div>
-                        </div>
                     </div>
                     <!-- <button type="Submit" onclick="createGoods()" class="btnAdd btn btn-primary waves-effect float-right">Add</button> -->
                     <button type="Submit"  class="btnAdd btn btn-primary waves-effect float-right">Add</button>
