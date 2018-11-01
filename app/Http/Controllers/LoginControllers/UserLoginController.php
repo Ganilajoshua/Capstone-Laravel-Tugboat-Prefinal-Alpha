@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use App\Notifications\VerifyEmail;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Balance;
 use App\Company;
 
 use Auth;
@@ -48,6 +49,8 @@ class UserLoginController extends Controller
         $company->strCompanyEmail = $request->input('email');
         $company->strCompanyContactPNum = $request->input('mobilenum');
         $company->strCompanyContactTNum = $request->input('telnum');
+
+
         if($request->hasFile('file')){
             // return $request->all();
             $image = $request->file('file');
@@ -60,6 +63,12 @@ class UserLoginController extends Controller
             // $request->file->storeAs('public/stisla_admin_v1.0.0/dist/img/Consignee/Permits',$filename);
         }
         $company->save();
+
+        $balance = new Balance;
+        $balance->timestamps = false;
+        $balance->intBalanceID = $ID;
+        $balance->save();
+
         // return response(['username'=>$request->input('username')]);
         $user = User::create([
             'name' => $request->input('username'),

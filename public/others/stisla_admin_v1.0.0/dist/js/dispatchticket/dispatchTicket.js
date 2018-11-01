@@ -200,7 +200,6 @@ function getData(id){
 
             
 
-            //ganilian logic
             console.log(data.dispatch[0].fltFCFStandardRate);
             var date = Number(data.date[0].date);
             console.log(date);
