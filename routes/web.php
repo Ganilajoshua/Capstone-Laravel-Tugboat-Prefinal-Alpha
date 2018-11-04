@@ -132,6 +132,11 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::get('/invoice/{intInvoiceID}/show','InvoiceController@show');
         Route::post('/invoice/pay','InvoiceController@pay');
 
+        Route::get('/invoice/{intInvoiceID}/pdf', function(){
+            return view('invoice.pdf');
+        });
+        Route::get('/invoice/{intInvoiceID}/pdf','InvoiceController@print');
+
         Route::group(['prefix'=>'consignee/'],function(){
             //Consignee Accounts
             Route::group(['prefix'=>'accounts'],function(){
@@ -147,6 +152,7 @@ Route::group(['prefix'=>'administrator/'],function(){
             Route::resource('/','ConsigneeAccountsController');
             Route::post('/verify','ConsigneeAccountsController@verify');
             Route::post('/activate','ConsigneeAccountsController@activate');
+
             Route::get('/{intCompanyID}/show','ConsigneeAccountsController@show');
             
             Route::group(['prefix'=>'contracts/'],function(){
@@ -270,13 +276,13 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::post('/dispatchticket/AdminAccept','DispatchTicketController@AdminAccept');
         Route::post('/dispatchticket/Void','DispatchTicketController@Void');
         Route::post('/dispatchticket/store','DispatchTicketController@store');
-        Route::post('/dispatchticket/finalize','DispatchTicketController@finalize');
         Route::post('/dispatchticket/charges','DispatchTicketController@charges');
+        Route::post('/dispatchticket/finalize','DispatchTicketController@finalize');
         // Route::get('/dispatchticket/printPDF','DispatchTicketController@printPDF');
-        Route::get('/dispatchticket/printPDF','DispatchTicketController@printPDF');
-        Route::get('/dispatchticket/printPDF', function(){
-            return view('dispatchticket.printPDF');
-        });
+        // Route::get('/dispatchticket/info', function(){
+        //     return view('dispatchticket.info');
+        // });
+        // Route::get('/dispatchticket/printPDF','DispatchTicketController@printPDF');
         //Scheduling
         Route::post('/scheduling/tugboatsavailable','SchedulingController@tugboatsavailable');
     });
@@ -352,6 +358,14 @@ Route::group(['prefix'=>'consignee/'],function(){
     Route::post('/contracts/store','ConsigneeControllers\ContractsController@store');
     Route::post('/contracts/getnotifs','ConsigneeControllers\ContractsController@getnotifs');
     Route::post('/contracts/requestforactivation','ConsigneeControllers\ContractsController@requestforactivation');
+    
+
+    Route::get('/contracts/{contractid}/pdf', function(){
+        return view('contract.pdf');
+    });
+    Route::get('/contracts/{contractid}/pdf','ConsigneeControllers\ContractsController@print');
+
+
     //Job Orders
     Route::resource('/joborders','ConsigneeControllers\JobOrdersController');
     Route::post('/joborders/create','ConsigneeControllers\JobOrdersController@create');
@@ -504,7 +518,7 @@ Route::group(['prefix'=>'affiliates/'],function(){
 //Routes with CRUD and Full Resources 
 //Maintenance
 
-Route::resource('/equipments','EquipmentsController');
+// Route::resource('/equipments','EquipmentsController');
 // Route::resource('/login','LoginController');
 Route::resource('/invoiceTugboat','InvoiceController');
 //Transactions

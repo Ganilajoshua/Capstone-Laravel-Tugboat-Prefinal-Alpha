@@ -47,6 +47,8 @@
                                                             <button  onclick="infopayment({{$invoice->intInvoiceID}})" class="btnView btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
                                                                 <i class="bigIcon ion ion-ios-eye"></i>
                                                             </button>
+                                                            <a href="{{url('/administrator/transactions/invoice/1/pdf')}}" class="btn active waves-effect">Generate PDF</a>
+                            
                                                         </div>
                                                         </span>
                                                     </td>

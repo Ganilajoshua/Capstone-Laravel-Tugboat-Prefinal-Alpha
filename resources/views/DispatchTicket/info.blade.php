@@ -130,7 +130,7 @@
             {{-- <button onclick="finalize()" class="btnFinalizeDT btn btn-primary waves-effect float-right">Finalize Dispatch Ticket</button> --}}
             {{-- <button class="btnFinalizeDT finalize btn btn-primary waves-effect float-right">Finalize Dispatch Ticket</button> --}}
             <button class="finalize btnFinalizeDT btn btn-primary waves-effect float-right">Dispatch Ticket</button>
-            
+            <a href="{{ url('/administrator/transactions/dispatchticket/info')}}">Generate PDF</a>
         </div>
     </div>
 </div>

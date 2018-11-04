@@ -15,6 +15,27 @@ use PDF;
 use Redirect;
 class DispatchTicketController extends Controller
 {
+    public function printPDF()
+    {
+ 
+        // $admintbs = DB::table('tbltugboat as tugboat')
+        // ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+        // ->join('tblcompany as company','tugboat.intTCompanyID','company.intCompanyID')
+        // ->where('tugboat.boolDeleted',0)
+        // ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
+        // ->get();  
+        // $admintbs = DB::table('tbltugboat as tugboat')
+        // ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+        // ->join('tblcompany as company','tugboat.intTCompanyID','company.intCompanyID')
+        // ->where('tugboat.boolDeleted',0)
+        // ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
+        // ->get();  
+        $pdf = PDF::loadView('DispatchTicket.printPDF');
+        return $pdf->download('printPDF.pdf');
+
+        
+        
+    }
     
     /**
      * Display a listing of the resource.
@@ -327,26 +348,4 @@ class DispatchTicketController extends Controller
         ->get();
         return response()->json(['validate'=>$validate]); 
     }
-    public function printPDF()
-    {
- 
-        // $admintbs = DB::table('tbltugboat as tugboat')
-        // ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        // ->join('tblcompany as company','tugboat.intTCompanyID','company.intCompanyID')
-        // ->where('tugboat.boolDeleted',0)
-        // ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
-        // ->get();  
-        // $admintbs = DB::table('tbltugboat as tugboat')
-        // ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        // ->join('tblcompany as company','tugboat.intTCompanyID','company.intCompanyID')
-        // ->where('tugboat.boolDeleted',0)
-        // ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
-        // ->get();  
-        $pdf = PDF::loadView('DispatchTicket.printPDF')->setPaper('letter', 'landscape');;
-        return $pdf->download('printPDF.pdf');
-
-        
-        
-    }
-
 }
