@@ -14,7 +14,7 @@
                 @foreach($pending as $pending)
                     <tr class="tr-shadow">
                         <td>{{$pending->intChequeID}}</td>
-                        <td>{{$pending->dtPayment}}</td>
+                        <td>{{$pending->dateEnded}}</td>
                         <td>
                             <div class="badge badge-success">{{$pending->enumStatus}}</div>
                         </td>
@@ -23,6 +23,9 @@
                             <div class="table-data-feature">
                                 <button class="item waves-effect btnView" data-toggle="tooltip" data-placement="top" title="More">
                                     <i class="zmdi zmdi-more"></i>
+                                </button>
+                                <button class="item waves-effect" data-toggle="tooltip" data-placement="top" title="Print">
+                                    <a class="miniIcon fa fa-print" href="{{url('/consignee/paymentbilling/billing/'.$pending->intInvoiceID.'/pdf')}}"></a>
                                 </button>
                             </div>
                         </td>

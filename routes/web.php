@@ -384,6 +384,14 @@ Route::group(['prefix'=>'consignee/'],function(){
         Route::resource('/billing','ConsigneeControllers\CBillingController');
         Route::post('/billing/store','ConsigneeControllers\CBillingController@store');
         Route::get('/billing/pending','ConsigneeControllers\CBillingController@pending');
+
+        Route::get('/billing/{billingid}/pdf', function(){
+            return view('billing.pdf');
+        });
+        Route::get('/billing/{billingid}/pdf','ConsigneeControllers\CBillingController@print');
+        
+        //
+
         Route::resource('/payment','ConsigneeControllers\CPaymentController');
         Route::get('/payment/{intBillID}/info','ConsigneeControllers\CPaymentController@info');
         Route::post('/payment/store','ConsigneeControllers\CPaymentController@store');
