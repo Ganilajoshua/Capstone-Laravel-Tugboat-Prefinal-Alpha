@@ -45,9 +45,29 @@
     <h6 class="text-center mb-2 pdfTitle">Tugmaster Bargepool Inc</h6>
     <h6 class="text-center mb-5 pdfTitle">Anonas St. Sta Mesa Manila</h6>
     
-    <h6 class="text-center mb-5 pdfTitle">Terms and Condition</h4>
     
-    <h1>{{ $contract[0]->intCCompanyID }}</h1>
+    <p>
+        This is the official contract of <b>{{ $contract[0]->strCompanyName }}</b>. This contract is activated on <b>{{ $contract[0]->datContractActive }}</b> and valid until <b>{{ $contract[0]->datContractExpire }}</b>. Listed below are the official rates for both services, Tug Assist Service and Hauling Service, that should be followed.
+    </p>
+    
+    <p>{{ $matrix[0]->enumFCFServiceType }}</p>
+    <p>{{ $matrix[0]->fltFCFStandardRate }}</p>
+    <p>{{ $matrix[0]->fltFCFTugboatDelayFee }}</p>
+    <p>{{ $matrix[0]->fltFCFViolationFee }}</p>
+    <p>{{ $matrix[0]->fltFCFConsigneeLateFee }}</p>
+    <p>{{ $matrix[0]->fltFCFMinDamageFee }}</p>
+    <p>{{ $matrix[0]->fltFCFMaxDamageFee }}</p>
+    <p>{{ $matrix[0]->intFCFDiscountFee }}</p>
+
+    <p>{{ $matrix[1]->enumFCFServiceType }}</p>
+    <p>{{ $matrix[1]->fltFCFStandardRate }}</p>
+    <p>{{ $matrix[1]->fltFCFTugboatDelayFee }}</p>
+    <p>{{ $matrix[1]->fltFCFViolationFee }}</p>
+    <p>{{ $matrix[1]->fltFCFConsigneeLateFee }}</p>
+    <p>{{ $matrix[1]->fltFCFMinDamageFee }}</p>
+    <p>{{ $matrix[1]->fltFCFMaxDamageFee }}</p>
+    <p>{{ $matrix[1]->intFCFDiscountFee }}</p>
+    <h6 class="text-center mb-5 pdfTitle">Terms and Condition</h4>
     <div class="html">
         {!! $contract[0]->strContractListDesc !!}
     </div>

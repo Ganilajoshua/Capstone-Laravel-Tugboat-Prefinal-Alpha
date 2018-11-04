@@ -29,9 +29,19 @@ class ContractsController extends Controller
         // $contract = $id;
         $contract = DB::table('tblcontractlist as contractlist')
         // ->select(array('strContractListDesc as a'))
+        ->join('tblcompany as company','company.intCompanyID','contractlist.intCCompanyID')
         ->where('intCCompanyID',Auth::user()->intUCompanyID)
+        ->where('enumStatus','Active')
         ->get();
-        $pdf = PDF::loadView('Consignee.Contracts.pdf', compact('contract'))->setPaper('letter', 'portrait');;
+
+        $matrix = DB::table('tblcontractlist as contractlist')
+        // ->select(array('strContractListDesc as a'))
+        ->join('tblcompany as company','company.intCompanyID','contractlist.intCCompanyID')
+        ->join('tblfinalcontractfeesmatrix as matrix','contractlist.intContractListID','matrix.intFCFContractListID')
+        ->where('intCCompanyID',Auth::user()->intUCompanyID)
+        ->where('enumStatus','Active')
+        ->get();
+        $pdf = PDF::loadView('Consignee.Contracts.pdf', compact('contract','matrix'))->setPaper('letter', 'portrait');;
         return $pdf->download('Contract.pdf');
     }
     public function index()
