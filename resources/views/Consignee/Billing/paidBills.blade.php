@@ -15,7 +15,7 @@
                 @foreach($paid as $paid)
                     <tr class="tr-shadow">
                         <td>{{$paid->intChequeID}}</td>
-                        <td>{{$paid->dateEnded}}</td>
+                        <td>{{$paid->created_at}}</td>
                         <td>
                             <div class="badge badge-success">{{$paid->enumStatus}}</div>
                         </td>

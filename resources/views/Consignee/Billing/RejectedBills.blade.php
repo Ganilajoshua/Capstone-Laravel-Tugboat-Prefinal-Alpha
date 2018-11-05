@@ -15,7 +15,7 @@
                     @foreach($rejected as $rejected)
                         <tr class="tr-shadow">
                             <td>{{$rejected->intChequeID}}</td>
-                            <td>{{$rejected->dateEnded}}</td>
+                            <td>{{$rejected->created_at}}</td>
                             <td>
                                 <div class="badge badge-success">{{$rejected->enumStatus}}</div>
                             </td>

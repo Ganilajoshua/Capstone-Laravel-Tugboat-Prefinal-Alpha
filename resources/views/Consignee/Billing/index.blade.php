@@ -71,7 +71,7 @@
 																</label>
 															</td>
 															<td>{{$dispatch->intInvoiceID}}</td>
-															<td>{{$dispatch->dateEnded}}</td>
+															<td>{{$dispatch->created_at}}</td>
 															<td>{{$dispatch->fltBalanceRemain}}</td>
 															<td>
 																<div class="table-data-feature">
