@@ -218,7 +218,7 @@ class ReportsController extends Controller
         SELECT strCompanyName,strCompanyAddress, strName, tbltugboat.enumTStatus as enumTStatus from tbltugboat 
         JOIN tbltugboatmain on tbltugboat.intTTugboatMainID = tbltugboatmain.intTugboatMainID
         JOIN tblcompany on tbltugboat.intTCompanyID= tblcompany.intCompanyID
-        WHERE tbltugboat.boolDeleted = 0 AND tbltugboat.intTCompanyID ='.Auth::user()->intUCompanyID.'
+        WHERE tbltugboat.boolDeleted = 0 AND tbltugboat.updated_at IS NULL OR tbltugboat.updated_at BETWEEN "'.$finalStartDate.'" AND "'.$finalEndDate.'" AND tbltugboat.intTCompanyID ='.Auth::user()->intUCompanyID.'
         '));
         return response()->json(['data'=>$admintbs]);
     }
@@ -243,7 +243,7 @@ class ReportsController extends Controller
         JOIN tbljobsched on tbljoborder.intJobOrderID=tbljobsched.intJSJobOrderID
         JOIN tbldispatchticket on tbljobsched.intJSDispatchTicketID=tbldispatchticket.intDispatchTicketID
         LEFT JOIN tblinvoice on tbldispatchticket.intDispatchTicketID = tblinvoice.intIDispatchTicketID
-        WHERE tbljobsched.enumStatus= "Finished" AND tblinvoice.intInvoiceID <> NULL 
+        WHERE tbljobsched.enumStatus= "Finished" AND tblinvoice.intInvoiceID <> NULL AND tblinvoice.created_at BETWEEN "'.$finalStartDate.'" AND "'.$finalEndDate.'"
         GROUP BY tblinvoice.intInvoiceID'));
 
         return response()->json(['data'=>$sales]);
