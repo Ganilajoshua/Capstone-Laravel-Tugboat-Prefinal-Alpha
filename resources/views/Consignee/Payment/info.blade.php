@@ -21,7 +21,7 @@
 
                         <tr>
                             <td class="tdBorderLeft">Job Order Amount</td>
-                            <td class="tdBorderLeft" id="amount"></td>
+                            <td class="tdBorderLeft" id="amount1"></td>
                             <td></td>
                         </tr>
                         <tr>

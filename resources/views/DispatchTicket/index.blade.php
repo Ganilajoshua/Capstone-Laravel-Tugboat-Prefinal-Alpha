@@ -17,7 +17,11 @@
                 </small>
             </div>
 		</h1>
+<<<<<<< HEAD
 		{{-- <a href="{{ url('/administrator/transactions/dispatchticket/printPDF')}}" class="btn btn-primary waves-effect">Generate PDF</a> --}}
+=======
+	
+>>>>>>> e8a5ce3546f5d28091753d704cafd0b4c9564477
 		<div class="dispatchTicketTable zoomIn animated fast">
 			<div class="card card-primary">
 				<div class="card-header">
@@ -64,8 +68,24 @@
 										<td>{{$dispatch->intDispatchTicketID}}</td>
 										<td>{{$dispatch->strCompanyName}}</td>
 										<td>{{$dispatch->strName}}</td>
-										<td>{{$dispatch->strJOStartPoint}}</td>
-										<td>{{$dispatch->strJODestination}}</td>
+										@if($dispatch->strJOStartPoint == null)
+											<td>
+												{{$dispatch->strBerthName}} {{$dispatch->strPierName}}
+											</td>
+										@else
+											<td>
+												{{$dispatch->strJOStartPoint}}
+											</td>
+										@endif
+										@if($dispatch->strJODestination == null)
+											<td>
+												{{$dispatch->strBerthName}} {{$dispatch->strPierName}}
+											</td>
+										@else
+										<td>
+											{{$dispatch->strJODestination}}
+										</td>
+										@endif
 										<td>{{$dispatch->dateEnded}} {{$dispatch->tmEnded}}</td>
 										<td>{{$dispatch->enumServiceType}}</td>
 										<td style="width:15%">

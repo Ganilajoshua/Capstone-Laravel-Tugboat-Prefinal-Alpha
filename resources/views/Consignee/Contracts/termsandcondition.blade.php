@@ -12,6 +12,7 @@
                     {{$TermsCondition[0]->strContractListDesc}}
                 {{-- @endforeach --}}
                 </textarea>
+                
                 @endif
                 
             </div>

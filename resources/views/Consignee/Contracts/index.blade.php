@@ -523,10 +523,10 @@
                                         </textarea>
                                         @endif
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
             </div>
         @elseif(($contractList[0]->enumStatus) == 'Expired')
 

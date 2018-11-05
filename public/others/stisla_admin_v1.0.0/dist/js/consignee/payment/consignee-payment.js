@@ -163,8 +163,8 @@ $(document).ready(function(){
         success : function(data){
             console.log('success', data);
             var counter = (data.Results[0]);
-            
-            $('#amount').html(data.Results[0].fltJOAmount);
+            console.table(data.Results[0]);
+            $('#amount1').html(data.Results[0].fltJOAmount);
             $('#delayfee').html(data.Results[0].fltTugboatDelayFee);
             $('#conviolationfee').html(data.Results[0].fltConsigneeViolationFee);
             $('#conlatefee').html(data.Results[0].fltConsigneeLateFee);

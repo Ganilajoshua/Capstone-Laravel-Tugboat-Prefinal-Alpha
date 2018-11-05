@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use DB;
 use Auth;
+use PDF;
 use App\Invoice;
 use App\Bill;
 class CBillingController extends Controller
@@ -15,6 +16,17 @@ class CBillingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function print($id)
+    {
+        // $contract = $id;
+        $contract = 1;
+        // DB::table('tblcontractlist as contractlist')
+        // ->select(array('strContractListDesc as a'))
+        // ->where('intCCompanyID',Auth::user()->intUCompanyID)
+        // ->get();
+        $pdf = PDF::loadView('Consignee.Billing.pdf', compact('contract'))->setPaper('letter', 'portrait');;
+        return $pdf->download('Billing.pdf');
+    }
     public function index()
     {
         $dispatch = DB::table('tbljoborder as joborder')

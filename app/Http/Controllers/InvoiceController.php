@@ -8,6 +8,7 @@ use App\Invoice;
 use App\DispatchTicket;
 use App\Charges;
 use App\Bill;
+use PDF;
 class InvoiceController extends Controller
 {
     /**
@@ -15,6 +16,33 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function print($id)
+    {
+        $invoice = DB::table('tbljoborder as joborder')
+        // ->join('tblservices as service','joborder.intJOServiceTypeID','service.intServicesID')
+        ->leftjoin('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
+        ->leftjoin('tblpier as pier','berth.intBPierID','pier.intPierID')
+        // ->join('tblbarge as barge','joborder.intJOBargeID','barge.intBargeID')
+        // ->leftjoin('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+        // ->join('tblvessel as vessel','joborder.intJOeVesselID','vessel.intVesselID')
+        ->leftjoin('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->leftjoin('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
+        ->leftjoin('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
+        ->leftjoin('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
+        ->leftjoin('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+        ->leftjoin('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
+        ->leftjoin('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
+        // ->join('tblbill as bill','invoice.intIBillID','bill.intBillID')
+        ->join('tblcharges as charges','charges.intChargeID','invoice.intInvoiceID')
+        ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
+        ->where('invoice.intInvoiceID',$id)
+        ->groupby('dispatch.intDispatchTicketID')
+        ->get();
+
+        $pdf = PDF::loadView('Invoice.pdf', compact('invoice'))->setPaper('letter', 'portrait');;
+        return $pdf->download('Invoice.pdf');
+    }
+
     public function index()
     {
         $invoice = DB::table('tbljoborder as joborder')
@@ -71,20 +99,19 @@ class InvoiceController extends Controller
         // ->join('tblbarge as barge','joborder.intJOBargeID','barge.intBargeID')
         // ->leftjoin('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
         // ->join('tblvessel as vessel','joborder.intJOeVesselID','vessel.intVesselID')
-        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-        ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
-        ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
-        ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
-        ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
-        ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
+        ->leftjoin('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->leftjoin('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
+        ->leftjoin('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
+        ->leftjoin('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
+        ->leftjoin('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+        ->leftjoin('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
+        ->leftjoin('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
         // ->join('tblbill as bill','invoice.intIBillID','bill.intBillID')
         ->join('tblcharges as charges','charges.intChargeID','invoice.intInvoiceID')
         ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
         ->where('invoice.intInvoiceID',$id)
         ->groupby('dispatch.intDispatchTicketID')
-        ->get(); 
-        error_log($dispatch);
+        ->get();
         return response()->json(['dispatch'=>$dispatch]);   
     
     }

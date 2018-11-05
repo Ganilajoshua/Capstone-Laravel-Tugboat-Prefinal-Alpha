@@ -116,16 +116,16 @@ class CPaymentController extends Controller
         $Balance->save();
         for($count = 0; $count <= count($request->ChequeNum); $count++)
         {
-                $Cheque = new Cheque;
-                $Cheque->timestamps = false;
-                $Cheque->intChequeID = $request->ChequeNum[$count];
-                // $Cheque->strTugboatInsuranceDesc = $request->insurances[$count];
-                $Cheque->intCBillID = $request->BillID;
-                $Cheque->dtPayment = Carbon::parse($request->ChequeDate)->format('Y/m/d');
-                $Cheque->intAmount = $request->ChequeAmount[$count];
-                $Cheque->strMemo = $request->ChequeMemo[$count];
-                $Cheque->save();
-            }
+            $Cheque = new Cheque;
+            $Cheque->timestamps = false;
+            $Cheque->intChequeID = $request->ChequeNum[$count];
+            // $Cheque->strTugboatInsuranceDesc = $request->insurances[$count];
+            $Cheque->intCBillID = $request->BillID;
+            $Cheque->dtPayment = Carbon::parse($request->ChequeDate)->format('Y/m/d');
+            $Cheque->intAmount = $request->ChequeAmount[$count];
+            $Cheque->strMemo = $request->ChequeMemo[$count];
+            $Cheque->save();
+        }
         // error_log($a);
         
             // $request->balance;

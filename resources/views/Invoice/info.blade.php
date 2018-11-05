@@ -30,8 +30,7 @@
                         <div id="to" class="mb-1 font-weight-bold">
                             {{-- <p id="to"></p> --}}
                         </div>
-                        <div id="address" class="mb-1">
-                        </div>
+                        <div class="mb-1">Address: <span id="address"></span></div>
                         <div class="mb-1">
                         </div>
                         <div class="mb-1">
@@ -129,7 +128,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                        </div>
+                        </div>      
             </div>
         </div>
     </div>

@@ -15,6 +15,7 @@ use App\ContractFeesMatrix;
 
 use Auth;
 use DB;
+use PDF;
 
 class ContractsController extends Controller
 {
@@ -23,6 +24,26 @@ class ContractsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function print($id)
+    {
+        // $contract = $id;
+        $contract = DB::table('tblcontractlist as contractlist')
+        // ->select(array('strContractListDesc as a'))
+        ->join('tblcompany as company','company.intCompanyID','contractlist.intCCompanyID')
+        ->where('intCCompanyID',Auth::user()->intUCompanyID)
+        ->where('enumStatus','Active')
+        ->get();
+
+        $matrix = DB::table('tblcontractlist as contractlist')
+        // ->select(array('strContractListDesc as a'))
+        ->join('tblcompany as company','company.intCompanyID','contractlist.intCCompanyID')
+        ->join('tblfinalcontractfeesmatrix as matrix','contractlist.intContractListID','matrix.intFCFContractListID')
+        ->where('intCCompanyID',Auth::user()->intUCompanyID)
+        ->where('enumStatus','Active')
+        ->get();
+        $pdf = PDF::loadView('Consignee.Contracts.pdf', compact('contract','matrix'))->setPaper('letter', 'portrait');;
+        return $pdf->download('Contract.pdf');
+    }
     public function index()
     {
         $company = Company::where('intCompanyID', Auth::user()->intUCompanyID)->get();
@@ -55,8 +76,7 @@ class ContractsController extends Controller
         // ->where('contracts.intCQuotationID',null)
         ->get();
 
-        
-        error_log($contract);
+        $id = Auth::user()->intUCompanyID;
         $contractListFinal = DB::table('users as users')
         ->leftjoin('tblcompany as company','users.intUCompanyID','company.intCompanyID')
         ->join('tblcontractlist as contracts','company.intCompanyID','contracts.intCCompanyID')
@@ -67,7 +87,8 @@ class ContractsController extends Controller
         ->get();
         // $contractListFinal = DB::table('tblfinalcontractfeesmatrix');
         $fees = ContractFeesMatrix::all();
-        return view('Consignee.Contracts.newindex',compact('company','contract','contractList','fees','contractListFinal','contractlist','TermsCondition','termscondition'));
+        error_log($id);
+        return view('Consignee.Contracts.newindex',compact('id','company','contract','contractList','fees','contractListFinal','contractlist','TermsCondition','termscondition'));
         // return view('Consignee.Contracts.index')
         // ->with('TermsCondition',$TermsCondition)
         // ->with('company',$company)

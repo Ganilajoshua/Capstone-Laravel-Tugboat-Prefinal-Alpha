@@ -175,7 +175,6 @@ function infopayment(id){
                 $('#dispatch3').html(data.dispatch[0].intDispatchTicketID);
                 $('#towed').html(data.dispatch[0].strJOVesselName);
                 console.log(data.dispatch[0].strName);
-
                 $('#new').html(data.dispatch[0].intBillID);
                 if(data.dispatch[0].strJOStartPoint == null)
                 {
@@ -191,7 +190,7 @@ function infopayment(id){
                     
                 }
                 else{
-                    $('#destination').html(data.dispatch[0].strJODestinationPoint);
+                    $('#destination').html(data.dispatch[0].strJODestination);
                 }
                 // $('#new').html(data.dispatch[0].intBillID);
                 $('#transac').html(data.dispatch[0].dateEnded);
@@ -250,7 +249,7 @@ function infopayment(id){
                     
                 }
                 else{
-                    $('#destination1').html(data.dispatch[0].strJODestinationPoint);
+                    $('#destination1').html(data.dispatch[0].strJODestination);
                 }
                 
                 

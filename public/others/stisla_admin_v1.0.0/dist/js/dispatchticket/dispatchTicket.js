@@ -136,7 +136,7 @@ function getData(id){
                 
             }
             else{
-                $('#destination').html(data.dispatch[0].strJODestinationPoint);
+                $('#destination').html(data.dispatch[0].strJODestination);
             }
             $('#service').html(data.dispatch[0].enumServiceType);
             $('#pNum').html(data.dispatch[0].strCompanyContactPNum);
@@ -289,17 +289,10 @@ function getData(id){
             // console.log(day + 'day');
             // else if(min > 60){
             // }
-            console.table(data.dispatch)
-            if(data.dispatch[0].enumServiceType == 'Hauling')
-            {
                 var final = Number(data.dispatch[0].fltFCFStandardRate * temp);
                 console.log(final);
                 $('#amount').val(final);
-            }
-            else if(data.dispatch[0].enumServiceType == 'Tug Assist')
-            {
 
-            }
 
             $("#discount").attr({
                 "max" : data.dispatch[0].intFCFDiscountFee,

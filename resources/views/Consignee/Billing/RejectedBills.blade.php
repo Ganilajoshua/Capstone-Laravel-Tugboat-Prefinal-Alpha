@@ -15,16 +15,19 @@
                     @foreach($rejected as $rejected)
                         <tr class="tr-shadow">
                             <td>{{$rejected->intChequeID}}</td>
-                            <td></td>
+                            <td>{{$rejected->dateEnded}}</td>
                             <td>
                                 <div class="badge badge-success">{{$rejected->enumStatus}}</div>
                             </td>
                             <td>{{$rejected->intAmount}}</td>
                             <td>
                                 <div class="ml-1 mr-1">
-                                    {{-- <button onclick="validate({{$rejected->intBillID}})" class="btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
-                                        <i class="bigIcon ion ion-ios-approve"></i>
-                                    </button> --}}
+                                    <button class="item waves-effect btnView" data-toggle="tooltip" data-placement="top" title="More">
+                                        <i class="zmdi zmdi-more"></i>
+                                    </button>
+                                    <button class="item waves-effect" data-toggle="tooltip" data-placement="top" title="Print">
+                                        <a class="miniIcon fa fa-print" href="{{url('/consignee/paymentbilling/billing/'.$pending->intInvoiceID.'/pdf')}}"></a>
+                                    </button>
                                 </div>
                             </td>
                         </tr>
