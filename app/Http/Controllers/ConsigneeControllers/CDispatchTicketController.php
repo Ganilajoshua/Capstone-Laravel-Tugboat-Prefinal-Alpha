@@ -10,6 +10,7 @@ use App\Contract;
 use App\JobOrder;
 use DB;
 use Auth;
+use PDF;
 class CDispatchTicketController extends Controller
 {
     /**
@@ -17,6 +18,28 @@ class CDispatchTicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function print($id)
+    {
+        $dispatch = DB::table('tbljoborder as joborder')
+        ->leftjoin('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
+        ->leftjoin('tblpier as pier','berth.intBPierID','pier.intPierID')
+        ->leftjoin('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
+        ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
+        ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
+        ->leftjoin('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
+        ->where('company.intCompanyID',Auth::user()->intUCompanyID)
+        ->where('jobsched.enumstatus','Finished')
+        ->where('dispatch.intDispatchTicketID',$id)
+        ->get(); 
+
+        // $dispatch = $id;
+
+        $pdf = PDF::loadView('Consignee.Dispatch.pdf', compact('dispatch'))->setPaper('letter', 'portrait');;
+        return $pdf->download('Dispatch.pdf');
+    }
     public function index()
     {   
         $dispatch = DB::table('tbljoborder as joborder')

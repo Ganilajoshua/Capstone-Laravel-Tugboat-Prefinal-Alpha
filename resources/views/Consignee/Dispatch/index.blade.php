@@ -9,63 +9,61 @@
 @endsection
 
 @section('content')
-    <section class="p-t-20">
-        <h1 class="section-header">
-            <div>
-                Dispatch Ticket
-            </div>
-		</h1>
-		<div class="dispatchTicketTable zoomIn animated fast">
-			<div class="card card-primary">
-			<div class="card-header">
-				<ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
-					<li class="nav-item">
-						<a class="nav-link active" id="pendingDispatch-tab" data-toggle="pill" href="#pendingDispatch" role="tab" aria-controls="pendingDispatch" aria-selected="true">Pending Dispatch Ticket</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" id="signed-tab" data-toggle="pill" href="#signed" role="tab" aria-controls="signed" aria-selected="true">Signed Dispatch Ticket</a>
-					</li>
-					<li class="nav-item">
-							<a class="nav-link" id="doneDispatch-tab" data-toggle="pill" href="#doneDispatch" role="tab" aria-controls="doneDispatch" aria-selected="false">Finalized Dispatch Ticket</a>
-					</li>
-				</ul>
-			</div>
-		<div class="card-body">
-			<div class="tab-content" id="pills-tabContent">
-				<div class="tab-pane fade show active" id="pendingDispatch" role="tabpanel" aria-labelledby="pendingDispatch-tab">
-					<div class="table-responsive">
-						<table class="detailedTable text-center table table-striped" style="width:100%">
-							<thead class="bg-primary">
-								<tr>
-									<th>Ticket #</th>
-									<th>Tugboat Used</th>
-									<th>From</th>
-									<th>To</th>
-									<th>Time Arrived</th>
-									<th>Purpose of Service</th>
-									<th class="noSortAction">Actions</th>
-								</tr>
-							</thead>
-							<tbody>
-					@if(count($accept)>0)
-						@foreach($accept as $accept)
-								<tr>
-									<td>
-                                        {{$accept->intDispatchTicketID}}
-                                    </td>
-									<td>
-                                        {{$accept->strName}}
-									</td>
-									@if($accept->strJOStartPoint = null)
-										<td>
-											{{$accept->strBerthName}} {{$accept->strPierName}}
+	<section class="p-t-20">
+		<div class="container">
+			<h1 class="section-header">
+			</h1>
+			<div class="dispatchTicketTable zoomIn animated fast">
+				<div class="card card-primary">
+					<div class="card-header">
+						<ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" id="pendingDispatch-tab" data-toggle="pill" href="#pendingDispatch" role="tab" aria-controls="pendingDispatch" aria-selected="true">Pending Dispatch Ticket</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="signed-tab" data-toggle="pill" href="#signed" role="tab" aria-controls="signed" aria-selected="true">Signed Dispatch Ticket</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" id="doneDispatch-tab" data-toggle="pill" href="#doneDispatch" role="tab" aria-controls="doneDispatch" aria-selected="false">Finalized Dispatch Ticket</a>
+							</li>
+						</ul>
+					</div>
+					<div class="card-body">
+						<div class="tab-content" id="pills-tabContent">
+							<div class="tab-pane fade show active" id="pendingDispatch" role="tabpanel" aria-labelledby="pendingDispatch-tab">
+								<div class="table-responsive">
+									<table class="detailedTable text-center table table-striped" style="width:100%">
+											<thead class="bg-primary">
+												<tr>
+													<th>Ticket #</th>
+													<th>Tugboat Used</th>
+													<th>From</th>
+													<th>To</th>
+													<th>Time Arrived</th>
+													<th>Purpose of Service</th>
+													<th class="noSortAction">Actions</th>
+												</tr>
+											</thead>
+											<tbody>
+												@if(count($accept)>0)
+												@foreach($accept as $accept)
+												<tr>
+													<td>
+														{{$accept->intDispatchTicketID}}
+													</td>
+													<td>
+														{{$accept->strName}}
+													</td>
+													@if($accept->strJOStartPoint == null)
+													<td>
+														{{$accept->strPierName}} {{$accept->strBerthName}}
 										</td>
 									@else
 										<td>
 											{{$accept->strJOStartPoint}}
 										</td>
 									@endif
-									@if($accept->strJODestination = null)
+									@if($accept->strJODestination == null)
 										<td>
 											{{$accept->strBerthName}} {{$accept->strPierName}}
 										</td>
@@ -86,7 +84,7 @@
 												<i class="bigIcon ion ion-ios-eye"></i>
 											</button>
 											<button class="btn btn-sm btn-success waves-circle waves-effect" data-toggle="tooltip" title="Print" role="button">
-												<i class="miniIcon fa fa-print"></i>
+													<a class="miniIcon fa fa-print" target="_blank" href="{{url('/consignee/dispatchticket/'.$dispatch3->intDispatchTicketID.'/pdf')}}"></a>
 											</button>
 										</div>
 										</span>
@@ -114,5 +112,6 @@
 	</div>
 		</div>
 		@include('Consignee.Dispatch.info')
+		</div>
     </section>
 @endsection

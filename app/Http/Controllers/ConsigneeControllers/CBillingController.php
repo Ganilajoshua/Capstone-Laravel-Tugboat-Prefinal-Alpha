@@ -18,12 +18,24 @@ class CBillingController extends Controller
      */
     public function print($id)
     {
-        // $contract = $id;
-        $contract = 1;
-        // DB::table('tblcontractlist as contractlist')
-        // ->select(array('strContractListDesc as a'))
-        // ->where('intCCompanyID',Auth::user()->intUCompanyID)
-        // ->get();
+        $contract = DB::table('tbljoborder as joborder')
+        ->leftjoin('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
+        ->leftjoin('tblpier as pier','berth.intBPierID','pier.intPierID')
+        ->leftjoin('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
+        ->join('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
+        ->join('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
+        ->leftjoin('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+        ->join('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
+        ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
+        ->join('tblcharges as charges','charges.intChargeID','invoice.intInvoiceID')
+        ->where('invoice.intInvoiceID',$id)
+        ->where('company.intCompanyID',Auth::user()->intUCompanyID)
+        ->where('jobsched.enumstatus','Finished')
+
+        ->get(); 
+
         $pdf = PDF::loadView('Consignee.Billing.pdf', compact('contract'))->setPaper('letter', 'portrait');;
         return $pdf->download('Billing.pdf');
     }

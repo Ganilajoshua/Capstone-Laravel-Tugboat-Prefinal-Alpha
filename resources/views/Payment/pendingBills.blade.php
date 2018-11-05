@@ -26,6 +26,9 @@
                             <button onclick="pendinginfo({{$pending->intBillID}})" class="info btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
                                     <i class="bigIcon ion ion-ios-eye"></i>
                             </button>
+                            <button class="btn btn-sm btn-success waves-circle waves-effect" data-toggle="tooltip" title="Print" role="button">
+                                    <a class="miniIcon fa fa-print" href="{{url('/administrator/transactions/dispatchticket/'.$dispatch4->intDispatchTicketID.'/pdf')}}"></a>
+                            </button>
                         </div>
                     </td>
                 </tr>

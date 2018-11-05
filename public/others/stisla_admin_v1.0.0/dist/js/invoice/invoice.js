@@ -1,4 +1,3 @@
-var url = '/administrator/transactions/invoice';
 
 $('.btnView').on('click',function(){
     $('.billingTable').hide();
@@ -11,20 +10,21 @@ $('.btnBack').on('click',function(){
 });
 $('.detailedTable').DataTable( {
     columnDefs: [
-    { targets: 'noSortAction', orderable: false }
-], 
-fade:true,
-"language": {
-  "lengthMenu": 'Display <select class="custom-select custom-select form-control form-control">'+
-  '<option hidden>1000</option>'+
-  '<option value="-1">All</option>'+
-  '<option value="10">10</option>'+
-  '<option value="20">25</option>'+
-  '<option value="50">50</option>'+
-  '<option value="100">100</option>'+
-  '</select> records'},
-});
-
+        { targets: 'noSortAction', orderable: false }
+    ], 
+    fade:true,
+    "language": {
+        "lengthMenu": 'Display <select class="custom-select custom-select form-control form-control">'+
+        '<option hidden>1000</option>'+
+        '<option value="-1">All</option>'+
+        '<option value="10">10</option>'+
+        '<option value="20">25</option>'+
+        '<option value="50">50</option>'+
+        '<option value="100">100</option>'+
+        '</select> records'},
+    });
+    
+    var url = '/administrator/transactions/invoice';
 function infopayment(id){
 console.log(id);
     // return false;
@@ -47,8 +47,21 @@ console.log(id);
                 $('#dispatch3').html(data.dispatch[0].intDispatchTicketID);
                 $('#towed').html(data.dispatch[0].strJOVesselName);
                 console.log(data.dispatch[0].strName);
+            if(data.dispatch[0].strJOStartPoint==null){
+                $('#start').html(data.dispatch[0].strPierName+' '+data.dispatch[0].strBerthName);
+            }
+            else{
                 $('#start').html(data.dispatch[0].strJOStartPoint);
+
+            }
+            if(data.dispatch[0].strJODestination==null){
+                $('#destination').html(data.dispatch[0].strPierName+' '+data.dispatch[0].strBerthName);
+            }
+            else{
                 $('#destination').html(data.dispatch[0].strJODestination);
+            }
+            
+                $('#time').html(data.dispatch[0].tmEnded);
                 $('#service').html(data.dispatch[0].enumServiceType);
                 $('#pNum').html(data.dispatch[0].strCompanyContactPNum);
                 $('#eMail').html(data.dispatch[0].strCompanyEmail);

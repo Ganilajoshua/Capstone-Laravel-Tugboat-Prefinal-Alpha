@@ -278,12 +278,14 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::post('/dispatchticket/store','DispatchTicketController@store');
         Route::post('/dispatchticket/charges','DispatchTicketController@charges');
         Route::post('/dispatchticket/finalize','DispatchTicketController@finalize');
-        // Route::get('/dispatchticket/printPDF','DispatchTicketController@printPDF');
-        // Route::get('/dispatchticket/info', function(){
-        //     return view('dispatchticket.info');
-        // });
-        // Route::get('/dispatchticket/printPDF','DispatchTicketController@printPDF');
-        //Scheduling
+        
+        
+        Route::get('/dispatchticket/{dispatchticketid}/pdf', function(){
+            return view('dispatchticket.pdf');
+        });
+        Route::get('/dispatchticket/{dispatchticketid}/pdf','DispatchTicketController@print');
+        
+
         Route::post('/scheduling/tugboatsavailable','SchedulingController@tugboatsavailable');
     });
     //Reports Routes
@@ -379,7 +381,13 @@ Route::group(['prefix'=>'consignee/'],function(){
     Route::get('/dispatchticket/{intDispatchTicketID}/info','ConsigneeControllers\CDispatchTicketController@info');
     Route::post('/dispatchticket/store','ConsigneeControllers\CDispatchTicketController@store');
 
+
+    Route::get('/dispatchticket/{dispatchticketid}/pdf', function(){
+        return view('dispatchticket.pdf');
+    });
+    Route::get('/dispatchticket/{dispatchticketid}/pdf','ConsigneeControllers\CDispatchTicketController@print');
     
+
     Route::group(['prefix'=>'paymentbilling/'],function(){
         Route::resource('/billing','ConsigneeControllers\CBillingController');
         Route::post('/billing/store','ConsigneeControllers\CBillingController@store');

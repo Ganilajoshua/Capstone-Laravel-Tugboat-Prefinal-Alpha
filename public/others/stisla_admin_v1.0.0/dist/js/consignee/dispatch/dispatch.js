@@ -51,8 +51,21 @@ $(document).ready(function(){
                 $('#towed').html(data.dispatch[0].strJOVesselName);
                 $('#date').html(data.dispatch[0].dateEnded);
                 $('#time').html(data.dispatch[0].tmEnded);   
+
+            if(data.dispatch[0].strJOStartPoint==null){
+                $('#start').html(data.dispatch[0].strPierName+' '+data.dispatch[0].strBerthName);
+                }
+            else{   
                 $('#start').html(data.dispatch[0].strJOStartPoint);
+                }
+
+            if(data.dispatch[0].strJODestination==null){
+                $('#destination').html(data.dispatch[0].strPierName+' '+data.dispatch[0].strBerthName);
+                }
+            else{   
                 $('#destination').html(data.dispatch[0].strJODestination);
+                }
+                
                 $('#service').html(data.dispatch[0].enumServiceType);
                 $('#pNum').html(data.dispatch[0].strCompanyContactPNum);
                 $('#eMail').html(data.dispatch[0].strCompanyEmail);

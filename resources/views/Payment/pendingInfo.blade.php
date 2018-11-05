@@ -129,7 +129,7 @@
                                 </table>
                         </div>
             </div class="float-right">
-            <select name="" id="new">
+            <select name="" id="new" hidden>
                 <option id="bill"></option>
             </select>
             <select name="" id="sum" hidden>

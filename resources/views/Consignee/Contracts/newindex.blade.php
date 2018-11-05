@@ -674,13 +674,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <textarea class="summernoteQuote" name="" id="" cols="30" rows="5"style="height: 50px; width: 90px;" disabled>
+                                    {{-- <textarea class="summernoteQuote" name="" id="" cols="30" rows="5"style="height: 50px; width: 90px;" disabled> --}}
                                         @foreach($termscondition as $termscondition)
-                                            {{ $termscondition->strTermsConditionTitle }}
+                                        <br>
+                                        <br>
+                                        <hr>
+                                            {!! $termscondition->strTermsConditionTitle !!}
                                             
-                                            {{ $termscondition->strTermsConditionDesc }}
+                                            {!! $termscondition->strTermsConditionDesc !!}
                                         @endforeach
-                                    </textarea>    
+                                    {{-- </textarea>     --}}
                                     <a href="{{url('/consignee/contracts/'.$id.'/pdf')}}" class="btn active waves-effect">Generate PDF</a>
                                 </div>
                             </div>

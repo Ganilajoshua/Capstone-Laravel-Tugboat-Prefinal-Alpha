@@ -68,6 +68,7 @@
     <p>{{ $matrix[1]->fltFCFMaxDamageFee }}</p>
     <p>{{ $matrix[1]->intFCFDiscountFee }}</p>
     <h6 class="text-center mb-5 pdfTitle">Terms and Condition</h4>
+        
     <div class="html">
         {!! $contract[0]->strContractListDesc !!}
     </div>
