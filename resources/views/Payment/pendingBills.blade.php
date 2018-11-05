@@ -27,9 +27,8 @@
                                     <i class="bigIcon ion ion-ios-eye"></i>
                             </button>
                             <button class="btn btn-sm btn-success waves-circle waves-effect" data-toggle="tooltip" title="Print" role="button">
-                                    <a class="miniIcon fa fa-print" href="{{url('/administrator/transactions/dispatchticket/'.$dispatch4->intDispatchTicketID.'/pdf')}}"></a>
+                                    <a class="miniIcon fa fa-print" href="{{url('/administrator/transactions/payment/'.$pending->intBillID.'/pdf')}}"></a>
                             </button>
-                        </div>
                     </td>
                 </tr>
                 @endforeach

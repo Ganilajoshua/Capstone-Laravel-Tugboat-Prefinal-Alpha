@@ -25,6 +25,9 @@
                                 <button onclick="pendinginfo({{$rejected->intBillID}})" class="rejects btn btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
                                     <i class="bigIcon ion ion-ios-approve"></i>
                                 </button>
+                                <button class="btn btn-sm btn-success waves-circle waves-effect" data-toggle="tooltip" title="Print" role="button">
+                                        <a class="miniIcon fa fa-print" href="{{url('/administrator/transactions/payment/'.$rejected->intBillID.'/pdf')}}"></a>
+                                </button>
                             </div>
                         </td>
                     </tr>   

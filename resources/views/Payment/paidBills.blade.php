@@ -26,6 +26,9 @@
                                 <button onclick="pendinginfo({{$paid->intBillID}})" class="paidss btn-sm btn-primary waves-circle waves-effect" data-toggle="tooltip" title="View Details" role="button">
                                     <i class="bigIcon ion ion-ios-eye"></i>
                                 </button>
+                                <button class="btn btn-sm btn-success waves-circle waves-effect" data-toggle="tooltip" title="Print" role="button">
+                                        <a class="miniIcon fa fa-print" href="{{url('/administrator/transactions/payment/'.$paid->intBillID.'/pdf')}}"></a>
+                                </button>
                             </div>
                         </td>
                     </tr>

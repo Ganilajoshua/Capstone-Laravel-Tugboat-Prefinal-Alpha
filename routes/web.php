@@ -128,6 +128,11 @@ Route::group(['prefix'=>'administrator/'],function(){
         Route::post('/payment/reject','PaymentController@reject');
         Route::post('/payment/store','PaymentController@store');
         
+        Route::get('/payment/{intpaymentID}/pdf', function(){
+            return view('payment.pdf');
+        });
+        Route::get('/payment/{intpaymentID}/pdf','PaymentController@print');
+
         Route::resource('/invoice','InvoiceController');
         Route::get('/invoice/{intInvoiceID}/show','InvoiceController@show');
         Route::post('/invoice/pay','InvoiceController@pay');
