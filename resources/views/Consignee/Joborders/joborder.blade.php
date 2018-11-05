@@ -8,7 +8,6 @@
 @endsection
 @section('content')
     @if(count($contract) > 0)
-
             <section class="statistic statistic2">
                 <div class="container">
                     <div class="row">

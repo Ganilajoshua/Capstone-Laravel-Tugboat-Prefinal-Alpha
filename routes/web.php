@@ -209,6 +209,7 @@ Route::group(['prefix'=>'administrator/'],function(){
                 Route::post('/create','TugboatAssignmentController@create');
                 Route::post('/hauling','TugboatAssignmentController@hauling');
                 Route::post('/available','TugboatAssignmentController@available');
+                Route::post('/canceljoborder','TugboatAssignmentController@canceljoborder');
                 Route::post('/tugboatsavailable','TugboatAssignmentController@tugboatsavailable');
             });
             
@@ -261,7 +262,7 @@ Route::group(['prefix'=>'administrator/'],function(){
         //Final Contracts
         
         //Dispatch and Hauling - Forward Requests
-        Route::resource('/forwardrequests','ForwardRequestsController');
+        Route::resource('/requests','RequestsController');
 
         //Scheduling Controller
         Route::resource('/scheduling','SchedulingController');
@@ -368,12 +369,15 @@ Route::group(['prefix'=>'consignee/'],function(){
 
     //Job Orders
     Route::resource('/joborders','ConsigneeControllers\JobOrdersController');
+    Route::get('/joborders/{intJobOrderID}/show','ConsigneeControllers\JobOrdersController@show');
     Route::post('/joborders/create','ConsigneeControllers\JobOrdersController@create');
     Route::post('/joborders/{intJobOrderID}/store','ConsigneeControllers\JobOrdersController@store');
     Route::post('/joborders/haulingservice','ConsigneeControllers\JobOrdersController@haulingservice');
     Route::post('/joborders/update','ConsigneeControllers\JobOrdersController@update');
-    Route::get('/joborders/{intJobOrderID}/show','ConsigneeControllers\JobOrdersController@show');
-
+    Route::post('/joborders/delete','ConsigneeControllers\JobOrdersController@delete');
+    // Route::get('/joborders/{intJobOrderID}/rescheduleinfo','ConsigneeControllers\JobOrdersController@rescheduleinfo');
+    
+    
     Route::resource('/dispatchticket','ConsigneeControllers\CDispatchTicketController');
     Route::get('/dispatchticket','ConsigneeControllers\CDispatchTicketController@index');
     Route::get('/dispatchticket/{intDispatchTicketID}/info','ConsigneeControllers\CDispatchTicketController@info');

@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Response;
+use Illuminate\Response\JsonResponse;
 
-class ForwardRequestsController extends Controller
+use Auth;
+use DB;
+
+class RequestsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +18,13 @@ class ForwardRequestsController extends Controller
      */
     public function index()
     {
-        return view('ForwardRequests.index');
+        $reschedule = DB::table('tbljoborder as joborder')
+        ->join('tblreschedule as resched','joborder.intJobOrderID','resched.intRJobOrderID')
+        ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->where('joborder.enumStatus','For Rescheduling')
+        ->get();
+
+        return view('Requests.index',compact('reschedule'));
     }
 
     /**
@@ -81,5 +91,13 @@ class ForwardRequestsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function reschedule(Request $request){
+        
+    }
+
+    public function voidjoborder(Request $request){
+        
     }
 }

@@ -391,3 +391,46 @@ function requestJoborder(requestID){
     });
 }
 
+$('.deleteJoborder').on('click',function(){
+    console.log($(this).data('id'));
+    swal({
+        title: "Are You Sure?",
+        text: "Delete this Job Order?",
+        type: "error",
+        showCancelButton: true,
+        confirmButtonClass: "btn-danger",
+        confirmButtonText: "Yes",
+        closeOnConfirm: true,
+    },(isConfirm)=>{
+        if(isConfirm){
+            $.ajax({
+                url : `${url}/delete`,
+                type : 'POST',
+                data : {
+                    "_token" : $('meta[name="csrf-token"]').attr('content'),
+                    joborderID : $(this).data('id'),
+                },
+                success : (data, response)=>{
+                    swal({
+                        title: "Success",
+                        text: "Job Order Deleted",
+                        type: "success",
+                        showCancelButton: false,
+                        confirmButtonClass: "btn-success",
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: true,
+                        timer : 1500
+                    },
+                    function(isConfirm){
+                        if(isConfirm){
+                            location.reload();
+                        }
+                    }); 
+                },
+                error : (error)=>{
+
+                }
+            });
+        }
+    });
+});

@@ -91,6 +91,7 @@
                 <div class="card-footer startHaulingFooter">
                     <div class="float-right mr-1 mb-3">
                         <button type="button" class="btn btn-primary waves-effect mr-2 backButton">Back</button>
+                        <button type="button" class="btn btn-primary waves-effect mr-2 cancelJoborder">Cancel / Void</button>
                         <button type="button" class="btn btn-primary waves-effect assignTugboatsButton">Assign Tugboats</button>
                     </div>
                 </div>

@@ -129,13 +129,8 @@
             {{-- <button onclick="finalizeDispatch()" id="finalize" class="btnFinalizeDT btn btn-primary waves-effect float-right">Finalize Dispatch Ticket</button> --}}
             {{-- <button onclick="finalize()" class="btnFinalizeDT btn btn-primary waves-effect float-right">Finalize Dispatch Ticket</button> --}}
             {{-- <button class="btnFinalizeDT finalize btn btn-primary waves-effect float-right">Finalize Dispatch Ticket</button> --}}
-<<<<<<< HEAD
-            <button class="finalize btnFinalizeDT btn btn-primary waves-effect float-right">Apply Charges</button>
-            
-=======
             <button class="finalize btnFinalizeDT btn btn-primary waves-effect float-right">Dispatch Ticket</button>
             <a href="{{ url('/administrator/transactions/dispatchticket/info')}}">Generate PDF</a>
->>>>>>> e8a5ce3546f5d28091753d704cafd0b4c9564477
         </div>
     </div>
 </div>

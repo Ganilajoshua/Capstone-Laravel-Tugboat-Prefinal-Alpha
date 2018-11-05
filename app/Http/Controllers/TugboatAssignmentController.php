@@ -414,4 +414,14 @@ class TugboatAssignmentController extends Controller
         return response()->json(['tugboat'=>$tugboat,'insurances'=>$insurances]);
     }
 
+    public function canceljoborder(Request $request){
+        $joborder = JobOrder::findOrFail($request->joborderID);
+        $joborder->timestamps = false;
+        $joborder->enumStatus = 'Voided';
+        $joborder->strRemarks = $request->details;
+        $joborder->save();
+
+        return response()->json(['joborder'=>$joborder]);
+    }
+
 }

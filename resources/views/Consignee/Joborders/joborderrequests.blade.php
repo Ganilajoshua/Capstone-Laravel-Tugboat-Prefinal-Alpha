@@ -103,9 +103,7 @@
                                 <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
                             </div>
                         </div>
-                    </div>
-                @elseif($pendingjob->enumStatus == 'For Rescheduling')
-                @elseif
+                    </div>  
                 @endif
             @endforeach
         </div>

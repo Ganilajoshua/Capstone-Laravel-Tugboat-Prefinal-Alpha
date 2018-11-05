@@ -1,8 +1,8 @@
-    <div class="modal fade" id="declinedModal" tabindex="-1" role="dialog" aria-labelledby="forwardModalLabel" aria-hidden="true" >
+    <div class="modal fade" id="rescheduleModal" tabindex="-1" role="dialog" aria-labelledby="forwardModalLabel" aria-hidden="true" >
         <div class="modal-dialog modal-lg" style="max-width: 68%;"role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="forwardModalLabel">Decline Job Order</h5>
+                    <h5 class="modal-title" id="forwardModalLabel">Reschedule Request Details</h5>
                     <button type="button" class="close modalClose" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -38,7 +38,12 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary waves-effect declineButton">Submit</button>
+                    <div class="row mr-1">
+                        <div class="col">
+                            <button type="button" class="btn btn-success waves-effect acceptButton mr-2">Accept</button>
+                            <button type="button" class="btn btn-danger waves-effect declineButton">Decline</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

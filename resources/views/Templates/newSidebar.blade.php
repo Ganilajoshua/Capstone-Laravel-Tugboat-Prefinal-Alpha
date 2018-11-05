@@ -75,7 +75,7 @@
                                 </li>
                                 <li id="tDispatch"><a href="#" class="has-dropdown waves-effect"><i class="ion ion-android-boat"></i>Dispatch &amp; Hauling</a>
                                     <ul class="menu-dropdown">
-                                        <li id="menuForwardReq"><a href="/administrator/transactions/forwardrequests"><i class="ion-ios-upload"></i>Forward Requests</a></li>
+                                        <li id="menuForwardReq"><a href="/administrator/transactions/requests"><i class="ion-ios-upload"></i>Requests</a></li>
                                         <li id="menuJobOrder"><a class="waves-effect" href="/administrator/transactions/dispatchandhauling/joborders"><i class="ion ion-ios-list"></i>Job Order</a></li>
                                         <li id="menuTugboatAssignment"><a class="waves-effect" href="/administrator/transactions/dispatchandhauling/tugboatassignment"><i class="ion ion-android-boat"></i>Tugboat Assignment</a></li>
                                         <li id="menuTeamBuilder"><a class="waves-effect" href="/administrator/transactions/dispatchandhauling/teamassignment"><i class="ion ion-ios-people"></i>Team Builder</a></li>

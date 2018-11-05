@@ -76,10 +76,7 @@ $('.acceptJoborder').on('click',function(){
 
 //View Forward Request Modal
 $('.forwardJoborder').on('click',function(){
-    console.log('Hi CacaOOOOOOO');
-    console.log($(this).data('id'));
     var joborderID = $(this).data('id');
-    console.log(joborderID);
     swal({
         title: "Are You Sure?",
         text: "Forward This Job Order?",

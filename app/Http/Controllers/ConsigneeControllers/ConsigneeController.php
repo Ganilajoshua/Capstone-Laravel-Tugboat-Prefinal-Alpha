@@ -23,12 +23,20 @@ class ConsigneeController extends Controller
      */
     public function index()
     {   
-        $ongoing = JobOrder::where('boolDeleted',0)
+        // $ongoing = JobOrder::where('boolDeleted',0)
+        // ->where('intJOCompanyID',Auth::user()->intUCompanyID)
+        // ->where('enumStatus','Ongoing')
+        // ->get();
+
+        $ongoing = DB::table('tbljoborder as joborder')
+        ->join('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
         ->where('intJOCompanyID',Auth::user()->intUCompanyID)
-        ->where('enumStatus','Ongoing')
+        ->where('jobsched.enumStatus','Ongoing')
+        ->groupBy('joborder.intJobOrderID')
         ->get();
         $company = Company::where('intCompanyID', Auth::user()->intUCompanyID)->get();
         return view('Consignee.Dashboard.dashboard',compact('company','ongoing'));
+        // return response()->json([$ongoing]);
     }
 
     /**

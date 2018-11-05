@@ -213,6 +213,7 @@ $('.createTugboatAssignment').on('click',function(){
     var compDate = $(this).data('date');
     console.log(joborderID);
     $('.assignTugboatsButton').data('id',joborderID);
+    $('.cancelJoborder').data('id',joborderID);
     $('.suggestedTugboatsContainer').empty();
     var appendBestTugContainer =
     `<div class="row">
@@ -516,3 +517,65 @@ function proceedToHauling(jobOrderID){
     
     });
 }
+
+$('.cancelJoborder').on('click',function(){
+    var text = `Good Day!\rWe humbly ask for your kind consideration, your desired Team or Tugboat is Unavailable for the schedule you requested,\ryour desired Team or Tugboat will be available at an ET (Estimated Time) of MM-DD-YYYY --:--:--,\rwe kindly offer that you recreate this joborder at this given time, looking forward to Serving you`;
+    swal({
+        title: "Are You Sure?",
+        text: "Cancel or Void and Disregard This Job Order?",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonClass: "btn-info",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true,
+    },(isConfirm)=>{
+        if(isConfirm){
+            $('#exDetails').val(text);
+            $('.cancelButton').data('id',$(this).data('id'));
+            $('#cancelJoborderModal').modal('show');
+        }
+    });
+});
+
+$('.cancelButton').on('click',function(){
+    console.log($(this).data('id'));
+    var joborderID = $(this).data('id');
+    var details = $('#exDetails').val();
+    console.log(details);
+    // return false;
+    $.ajax({
+        url : `${url}/canceljoborder`,
+        type : 'POST',
+        data : { 
+            "_token" : $('meta[name="csrf-token"]').attr('content'), 
+            joborderID : joborderID,
+            details : details,
+        }, 
+        beforeSend: function (request) {
+            return request.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+        },
+        success : function(data, response){
+            console.log('success pota');
+            console.log(data);
+            console.log(response);
+            swal({
+                title: "Success",
+                text: "Job Order Was Cancelled and The Consignee Was Notified",
+                type: "success",
+                showCancelButton: false,
+                confirmButtonClass: "btn-success",
+                confirmButtonText: "Ok",
+                closeOnConfirm: true,
+                timer : 1500
+            },
+            function(isConfirm){
+                if(isConfirm){
+                    location.reload();
+                }
+            });                       
+        },
+        error : function(error){
+            throw error;
+        }
+    });
+});

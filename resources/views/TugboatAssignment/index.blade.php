@@ -331,6 +331,7 @@
     </section>
     @include('TugboatAssignment.assignmodal')
     @include('TugboatAssignment.assignTugboat')
+    @include('TugboatAssignment.canceljoborderModal');
     @include('TugboatAssignment.tugboatJoborders')
     @include('TugboatAssignment.info')
 @endsection

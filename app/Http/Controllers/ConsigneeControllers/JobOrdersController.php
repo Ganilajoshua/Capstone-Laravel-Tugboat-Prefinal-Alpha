@@ -62,14 +62,36 @@ class JobOrdersController extends Controller
         ->where('intJOCompanyID',Auth::user()->intUCompanyID)
         ->where('enumStatus','Accepted')
         ->get();
+        
+        $cancelled = JobOrder::where('boolDeleted',0)
+        ->where('intJOCompanyID',Auth::user()->intUCompanyID)
+        ->where('enumStatus','Voided')
+        ->get();
+
         $finishedjob = JobOrder::where('boolDeleted',0)
         ->where('intJOCompanyID',Auth::user()->intUCompanyID)
         ->where('enumStatus','Finished')
         ->get();
+        
+        $jobhistoryfinished = DB::table('tbljoborder as joborder')
+        ->leftjoin('tbljobsched as jobsched','jobsched.intJSJobOrderID','joborder.intJobOrderID')
+        ->where('joborder.intJOCompanyID',Auth::user()->intUCompanyID)
+        ->where('jobsched.enumStatus','Finished')
+        ->groupBy('joborder.intJobOrderID')
+        ->orderBy('joborder.intJobOrderID','ASC')
+        ->get();
+
+        $jobhistorydeclined = DB::table('tbljoborder as joborder')
+        ->leftjoin('tbljobsched as jobsched','jobsched.intJSJobOrderID','joborder.intJobOrderID')
+        ->where('joborder.intJOCompanyID',Auth::user()->intUCompanyID)
+        ->where('joborder.enumStatus','Declined')
+        ->groupBy('joborder.intJobOrderID')
+        ->get();
+
         $vesseltype = VesselType::all();
-        return view('Consignee.Joborders.index',
-        compact('goods','createdjob','pendingjob','accepted','ongoing','finishedjob','contract','berth','vesseltype'));
-        return response()->json(['contract'=>$contract]);
+            return view('Consignee.Joborders.index',
+            compact('goods','createdjob','pendingjob','accepted','ongoing','finishedjob','contract','berth','vesseltype','jobhistorydeclined','jobhistoryfinished','cancelled'));
+        return response()->json(['jobhistory'=>$cancelled]);
     }
 
     /**
@@ -168,6 +190,49 @@ class JobOrdersController extends Controller
         return response()->json(['joborder'=>$joborder]);    
     }
 
+    public function rescheduleinfo($intJobOrderID){
+        $job = JobOrder::findOrFail($intJobOrderID);
+
+        // $joborder = DB::table('tbljoborder as joborder')
+        // ->join('tblreschedule as resched','joborder.intJobOrderID','resched.intRJobOrderID')
+        // ->where('joborder.enumStatus','For Rescheduling')
+        // ->get();
+
+        if($job->enumServiceType == 'Hauling'){
+            if($job->intJOBerthID == null){
+                $joborder = DB::table('tbljoborder as joborder')
+                ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+                ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+                ->join('tblreschedule as resched','joborder.intJobOrderID','resched.intRJobOrderID')
+                ->where('joborder.enumStatus','For Rescheduling')
+                ->where('joborder.intJobOrderID',$intJobOrderID)
+                ->get();
+            }else{
+                $joborder = DB::table('tbljoborder as joborder')
+                ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
+                ->join('tblpier as pier','berth.intBPierID','intPierID')
+                ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+                ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+                ->join('tblreschedule as resched','joborder.intJobOrderID','resched.intRJobOrderID')
+                ->where('joborder.enumStatus','For Rescheduling')
+                ->where('joborder.intJobOrderID',$intJobOrderID)
+                ->get();
+            }
+        }else if($job->enumServiceType == 'Tug Assist'){
+            $joborder = DB::table('tbljoborder as joborder')
+            ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
+            ->join('tblpier as pier','berth.intBPierID','intPierID')
+            // ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+            ->join('tblreschedule as resched','joborder.intJobOrderID','resched.intRJobOrderID')
+            ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+            ->where('joborder.enumStatus','For Rescheduling')
+            ->where('joborder.intJobOrderID',$intJobOrderID)
+            ->get();    
+        }
+        
+
+        return response()->json(['joborder'=>$joborder]);
+    }
     /**
      * Display the specified resource.
      *
@@ -212,4 +277,14 @@ class JobOrdersController extends Controller
     {
         //
     }
+
+    public function delete(Request $request){
+        $joborder = JobOrder::findOrFail($request->joborderID);
+        $joborder->timestamps = false;
+        $joborder->boolDeleted = 1;
+        $joborder->save();
+        
+        return response()->json(['joborder'=>$joborder]);
+    }
+
 }
