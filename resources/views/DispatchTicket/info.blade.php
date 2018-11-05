@@ -129,7 +129,7 @@
             {{-- <button onclick="finalizeDispatch()" id="finalize" class="btnFinalizeDT btn btn-primary waves-effect float-right">Finalize Dispatch Ticket</button> --}}
             {{-- <button onclick="finalize()" class="btnFinalizeDT btn btn-primary waves-effect float-right">Finalize Dispatch Ticket</button> --}}
             {{-- <button class="btnFinalizeDT finalize btn btn-primary waves-effect float-right">Finalize Dispatch Ticket</button> --}}
-            <button class="finalize btnFinalizeDT btn btn-primary waves-effect float-right">Dispatch Ticket</button>
+            <button class="finalize btnFinalizeDT btn btn-primary waves-effect float-right">Apply Charges</button>
             
         </div>
     </div>

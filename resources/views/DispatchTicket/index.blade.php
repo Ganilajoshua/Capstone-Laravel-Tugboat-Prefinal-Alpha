@@ -17,7 +17,7 @@
                 </small>
             </div>
 		</h1>
-		<a href="{{ url('/administrator/transactions/dispatchticket/printPDF')}}" class="btn btn-primary waves-effect">Generate PDF</a>
+		{{-- <a href="{{ url('/administrator/transactions/dispatchticket/printPDF')}}" class="btn btn-primary waves-effect">Generate PDF</a> --}}
 		<div class="dispatchTicketTable zoomIn animated fast">
 			<div class="card card-primary">
 				<div class="card-header">

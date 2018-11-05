@@ -1,3 +1,5 @@
+var url = '/administrator/reports';
+
 $(document).ready(function(){
     $('#reportsTree').addClass('active');
     $('.detailedTable').DataTable({columnDefs: [
@@ -20,255 +22,279 @@ $(document).ready(function(){
         allowClear: false
     });
     
-    $('#daterange-btn').daterangepicker(
-        {
-          ranges   : {
-            'Today'       : [moment(), moment()],
-            'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-            'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
-            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-            'This Month'  : [moment().startOf('month'), moment().endOf('month')],
-            'Last Month'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-          },
-          startDate: moment().subtract(29, 'days'),
-          endDate  : moment()
-        },
-        function (start, end) {
-          $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+        $('.submitReports').on('click', function() {
+            id = $('.selectReport').val();
+            date = $('#date').val();
+            console.log(date);
+            console.log(id);
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            
+            $.ajax({
+            type: 'POST',
+            url: url + '/datepick',
+            data: {
+                "_token" : $('meta[name="csrf-token"]').attr('content'),
+                date:date,id:id
+                },
+            success: function(data){
+                console.log(data);
+                },
+            });
+        });
+        // $('#date').inputmask('99/99/9999-99/99/9999');
+            var start = moment();
+            var end = moment();
+
+        function cb(start, end) {
+            $('#date input').val(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            var test = $('#date input').html(start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD'))
+            var datetest = moment(test).format('YYYY-MM-DD' + ' - ' + 'YYYY-MM-DD')
+            console.log(datetest);
         }
-      )
-      //Date picker
-      $('#datepicker').datepicker({
-        autoclose: true
-      });
-      // Charts
-      
-        var ctxDTReport = document.getElementById("disabledTugboatChart").getContext('2d');
-        var disabledTugboatChart = new Chart(ctxDTReport, {
-            type: 'bar',
-            data: {
-            labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            datasets: [{
-                label: 'DISABLED TUGBOAT TO',
-                data: [460, 458, 330, 502, 430, 610, 488],
-                borderWidth: 2,
-                backgroundColor: 'rgb(87,75,144)',
-                borderColor: 'rgb(87,75,144)',
-                borderWidth: 2.5,
-                pointBackgroundColor: '#ffffff',
-                pointRadius: 4
-            },
-            {
-                label: 'MT Energy Star',
-                data: [1000, 200, 300, 200, 150, 25, 700],
-                borderWidth: 2,
-                backgroundColor: 'rgb(61, 199, 190)',
-                borderColor: 'rgb(61, 199, 190)',
-                borderWidth: 2.5,
-                pointBackgroundColor: '#ffffff',
-                pointRadius: 4
-            }]
-            },
-            options: {
-            legend: {
-                display: true
-            },
-            responsive: true,
-            scales: {
-                yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    stepSize: 150
-                }
-                }],
-                xAxes: [{
-                gridLines: {
-                    display: false
-                }
-                }]
-            },
+        $('#date').daterangepicker({
+            ranges: {
+                'Today': [moment(), moment()],
+                'Yesterday'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
             }
-        });
+        }, cb);
+        cb(start, end);
+
+    //   // Charts
       
-        var ctxJOReport = document.getElementById("joReportChart").getContext('2d');
-        var joReportChart = new Chart(ctxJOReport, {
-            type: 'line',
-            data: {
-            labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            datasets: [{
-                label: 'JOB ORDER TO',
-                data: [430, 610, 488],
-                borderWidth: 2,
-                borderColor: 'rgb(87,75,144)',
-                borderWidth: 2.5,
-                pointBackgroundColor: '#ffffff',
-                pointRadius: 4
-            },
-            {
-                label: 'MT Energy Star',
-                data: [1000, 200, 300, 200, 150, 25, 700],
-                borderWidth: 2,
-                borderColor: 'rgb(61, 199, 190)',
-                borderWidth: 2.5,
-                pointBackgroundColor: '#ffffff',
-                pointRadius: 4
-            }]
-            },
-            options: {
-            legend: {
-                display: true
-            },
-            responsive: true,
-            scales: {
-                yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    stepSize: 150
-                }
-                }],
-                xAxes: [{
-                gridLines: {
-                    display: false
-                }
-                }]
-            },
-            }
-        });
+    //     var ctxDTReport = document.getElementById("disabledTugboatChart").getContext('2d');
+    //     var disabledTugboatChart = new Chart(ctxDTReport, {
+    //         type: 'bar',
+    //         data: {
+    //         labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    //         datasets: [{
+    //             label: 'DISABLED TUGBOAT TO',
+    //             data: [460, 458, 330, 502, 430, 610, 488],
+    //             borderWidth: 2,
+    //             backgroundColor: 'rgb(87,75,144)',
+    //             borderColor: 'rgb(87,75,144)',
+    //             borderWidth: 2.5,
+    //             pointBackgroundColor: '#ffffff',
+    //             pointRadius: 4
+    //         },
+    //         {
+    //             label: 'MT Energy Star',
+    //             data: [1000, 200, 300, 200, 150, 25, 700],
+    //             borderWidth: 2,
+    //             backgroundColor: 'rgb(61, 199, 190)',
+    //             borderColor: 'rgb(61, 199, 190)',
+    //             borderWidth: 2.5,
+    //             pointBackgroundColor: '#ffffff',
+    //             pointRadius: 4
+    //         }]
+    //         },
+    //         options: {
+    //         legend: {
+    //             display: true
+    //         },
+    //         responsive: true,
+    //         scales: {
+    //             yAxes: [{
+    //             ticks: {
+    //                 beginAtZero: true,
+    //                 stepSize: 150
+    //             }
+    //             }],
+    //             xAxes: [{
+    //             gridLines: {
+    //                 display: false
+    //             }
+    //             }]
+    //         },
+    //         }
+    //     });
       
-        var ctxSalesReport = document.getElementById("salesReportChart").getContext('2d');
-        var salesReportChart = new Chart(ctxSalesReport, {
-            type: 'line',
-            data: {
-            labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            datasets: [{
-                label: 'SALES TU',
-                data: [460, 458, 610, 488],
-                borderWidth: 2,
-                borderColor: 'rgb(87,75,144)',
-                borderWidth: 2.5,
-                pointBackgroundColor: '#ffffff',
-                pointRadius: 4
-            },
-            {
-                label: 'MT Energy Star',
-                data: [1000, 200, 300, 200, 150, 25, 700],
-                borderWidth: 2,
-                borderColor: 'rgb(61, 199, 190)',
-                borderWidth: 2.5,
-                pointBackgroundColor: '#ffffff',
-                pointRadius: 4
-            }]
-            },
-            options: {
-            legend: {
-                display: true
-            },
-            responsive: true,
-            scales: {
-                yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    stepSize: 150
-                }
-                }],
-                xAxes: [{
-                gridLines: {
-                    display: false
-                }
-                }]
-            },
-            }
-        });
+    //     var ctxJOReport = document.getElementById("joReportChart").getContext('2d');
+    //     var joReportChart = new Chart(ctxJOReport, {
+    //         type: 'line',
+    //         data: {
+    //         labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    //         datasets: [{
+    //             label: 'JOB ORDER TO',
+    //             data: [430, 610, 488],
+    //             borderWidth: 2,
+    //             borderColor: 'rgb(87,75,144)',
+    //             borderWidth: 2.5,
+    //             pointBackgroundColor: '#ffffff',
+    //             pointRadius: 4
+    //         },
+    //         {
+    //             label: 'MT Energy Star',
+    //             data: [1000, 200, 300, 200, 150, 25, 700],
+    //             borderWidth: 2,
+    //             borderColor: 'rgb(61, 199, 190)',
+    //             borderWidth: 2.5,
+    //             pointBackgroundColor: '#ffffff',
+    //             pointRadius: 4
+    //         }]
+    //         },
+    //         options: {
+    //         legend: {
+    //             display: true
+    //         },
+    //         responsive: true,
+    //         scales: {
+    //             yAxes: [{
+    //             ticks: {
+    //                 beginAtZero: true,
+    //                 stepSize: 150
+    //             }
+    //             }],
+    //             xAxes: [{
+    //             gridLines: {
+    //                 display: false
+    //             }
+    //             }]
+    //         },
+    //         }
+    //     });
       
-        var ctxSOAReport = document.getElementById("SOAReportChart").getContext('2d');
-        var SOAReportChart = new Chart(ctxSOAReport, {
-            type: 'line',
-            data: {
-            labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            datasets: [{
-                label: 'SOA NAMAN TU',
-                data: [460, 458, 0, 610, 488],
-                borderWidth: 2,
-                borderColor: 'rgb(87,75,144)',
-                borderWidth: 2.5,
-                pointBackgroundColor: '#ffffff',
-                pointRadius: 4
-            },
-            {
-                label: 'MT Energy Star',
-                data: [1000, 200, 300, 200, 150, 25, 700],
-                borderWidth: 2,
-                borderColor: 'rgb(61, 199, 190)',
-                borderWidth: 2.5,
-                pointBackgroundColor: '#ffffff',
-                pointRadius: 4
-            }]
-            },
-            options: {
-            legend: {
-                display: true
-            },
-            responsive: true,
-            scales: {
-                yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    stepSize: 150
-                }
-                }],
-                xAxes: [{
-                gridLines: {
-                    display: false
-                }
-                }]
-            },
-            }
-        });
+    //     var ctxSalesReport = document.getElementById("salesReportChart").getContext('2d');
+    //     var salesReportChart = new Chart(ctxSalesReport, {
+    //         type: 'line',
+    //         data: {
+    //         labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    //         datasets: [{
+    //             label: 'SALES TU',
+    //             data: [460, 458, 610, 488],
+    //             borderWidth: 2,
+    //             borderColor: 'rgb(87,75,144)',
+    //             borderWidth: 2.5,
+    //             pointBackgroundColor: '#ffffff',
+    //             pointRadius: 4
+    //         },
+    //         {
+    //             label: 'MT Energy Star',
+    //             data: [1000, 200, 300, 200, 150, 25, 700],
+    //             borderWidth: 2,
+    //             borderColor: 'rgb(61, 199, 190)',
+    //             borderWidth: 2.5,
+    //             pointBackgroundColor: '#ffffff',
+    //             pointRadius: 4
+    //         }]
+    //         },
+    //         options: {
+    //         legend: {
+    //             display: true
+    //         },
+    //         responsive: true,
+    //         scales: {
+    //             yAxes: [{
+    //             ticks: {
+    //                 beginAtZero: true,
+    //                 stepSize: 150
+    //             }
+    //             }],
+    //             xAxes: [{
+    //             gridLines: {
+    //                 display: false
+    //             }
+    //             }]
+    //         },
+    //         }
+    //     });
       
-        var ctsServiceReport = document.getElementById("serviceReportChart").getContext('2d');
-        var serviceReportChart = new Chart(ctsServiceReport, {
-            type: 'line',
-            data: {
-            labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            datasets: [{
-                label: 'SERVICEEEE',
-                data: [460, 430, 610, 488],
-                borderWidth: 2,
-                borderColor: 'rgb(87,75,144)',
-                borderWidth: 2.5,
-                pointBackgroundColor: '#ffffff',
-                pointRadius: 4
-            },
-            {
-                label: 'MT Energy Star',
-                data: [1000, 200, 300, 200, 150, 25, 700],
-                borderWidth: 2,
-                borderColor: 'rgb(61, 199, 190)',
-                borderWidth: 2.5,
-                pointBackgroundColor: '#ffffff',
-                pointRadius: 4
-            }]
-            },
-            options: {
-            legend: {
-                display: true
-            },
-            responsive: true,
-            scales: {
-                yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    stepSize: 150
-                }
-                }],
-                xAxes: [{
-                gridLines: {
-                    display: false
-                }
-                }]
-            },
-            }
-        });
+    //     var ctxSOAReport = document.getElementById("SOAReportChart").getContext('2d');
+    //     var SOAReportChart = new Chart(ctxSOAReport, {
+    //         type: 'line',
+    //         data: {
+    //         labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    //         datasets: [{
+    //             label: 'SOA NAMAN TU',
+    //             data: [460, 458, 0, 610, 488],
+    //             borderWidth: 2,
+    //             borderColor: 'rgb(87,75,144)',
+    //             borderWidth: 2.5,
+    //             pointBackgroundColor: '#ffffff',
+    //             pointRadius: 4
+    //         },
+    //         {
+    //             label: 'MT Energy Star',
+    //             data: [1000, 200, 300, 200, 150, 25, 700],
+    //             borderWidth: 2,
+    //             borderColor: 'rgb(61, 199, 190)',
+    //             borderWidth: 2.5,
+    //             pointBackgroundColor: '#ffffff',
+    //             pointRadius: 4
+    //         }]
+    //         },
+    //         options: {
+    //         legend: {
+    //             display: true
+    //         },
+    //         responsive: true,
+    //         scales: {
+    //             yAxes: [{
+    //             ticks: {
+    //                 beginAtZero: true,
+    //                 stepSize: 150
+    //             }
+    //             }],
+    //             xAxes: [{
+    //             gridLines: {
+    //                 display: false
+    //             }
+    //             }]
+    //         },
+    //         }
+    //     });
+      
+    //     var ctsServiceReport = document.getElementById("serviceReportChart").getContext('2d');
+    //     var serviceReportChart = new Chart(ctsServiceReport, {
+    //         type: 'line',
+    //         data: {
+    //         labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    //         datasets: [{
+    //             label: 'SERVICEEEE',
+    //             data: [460, 430, 610, 488],
+    //             borderWidth: 2,
+    //             borderColor: 'rgb(87,75,144)',
+    //             borderWidth: 2.5,
+    //             pointBackgroundColor: '#ffffff',
+    //             pointRadius: 4
+    //         },
+    //         {
+    //             label: 'MT Energy Star',
+    //             data: [1000, 200, 300, 200, 150, 25, 700],
+    //             borderWidth: 2,
+    //             borderColor: 'rgb(61, 199, 190)',
+    //             borderWidth: 2.5,
+    //             pointBackgroundColor: '#ffffff',
+    //             pointRadius: 4
+    //         }]
+    //         },
+    //         options: {
+    //         legend: {
+    //             display: true
+    //         },
+    //         responsive: true,
+    //         scales: {
+    //             yAxes: [{
+    //             ticks: {
+    //                 beginAtZero: true,
+    //                 stepSize: 150
+    //             }
+    //             }],
+    //             xAxes: [{
+    //             gridLines: {
+    //                 display: false
+    //             }
+    //             }]
+    //         },
+    //         }
+    //     });
 
     $('.submitReports').on('click',function(){
         if($('.selectReport').val() == "disabledTugboats"){

@@ -284,7 +284,7 @@ Route::group(['prefix'=>'administrator/'],function(){
     Route::group(['prefix'=>'reports/'],function(){
         Route::resource('/','ReportsController');
         // Disabled Tugboat Report
-        Route::get('/disabledTReport', function(){
+        Route::get('/disabledTReport', function(){ 
             return view('Reports.disabledTReportPDF');
         });
         Route::get('/disabledTReport','ReportsController@printPDF1');
@@ -308,6 +308,8 @@ Route::group(['prefix'=>'administrator/'],function(){
             return view('Reports.serviceReportPDF');
         });
         Route::get('/serviceReport','ReportsController@printPDF5');
+
+        Route::post('/datepick','ReportsController@datepick');
     });
     //Queries Routes
     Route::group(['prefix'=>'queries/'],function(){

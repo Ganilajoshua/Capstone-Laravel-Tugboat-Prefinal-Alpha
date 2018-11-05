@@ -46,15 +46,16 @@
                                 </select>
                             </div>
                             <div class="col-12 col-lg-5">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <button type="button" class="btn btn-primary pull-right" id="daterange-btn">
-                                            <span>
-                                                <i class="fa fa-calendar"></i> Date range picker
-                                            </span>
-                                            <i class="fa fa-caret-down"></i>
-                                        </button>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                     </div>
+                                    {!! Form::input('text','date',null,[
+                                    'class' => 'form-control',
+                                    'id'=>'date',
+                                    'placeholder'=>'Date',
+                                    'required'])
+                                     !!}
                                 </div>
                             </div>
                             <div class="col-lg-1 col-12">
@@ -65,18 +66,18 @@
                             <div class="col-12">
                                 <div class="float-left">
                                     <div class="btn-group btn-group-toggle" role="group" aria-label="Button group with nested dropdown">
-                                        <button type="button" class="tableView btn btn-secondary active waves-effect"><i class="fas fa-table mr-1"></i>Table View</button>
-                                        <button type="button" class="chartView btn btn-secondary waves-effect"><i class="fas fa-chart-area mr-1"></i>Chart View</button>
+                                        <button type="button"  style="display:none;" class="tableView btn btn-secondary active waves-effect"><i class="fas fa-table mr-1"></i>Table View</button>
+                                        {{-- <button type="button" class="chartView btn btn-secondary waves-effect"><i class="fas fa-chart-area mr-1"></i>Chart View</button> --}}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        @include('Reports.charts')
+                        {{-- @include('Reports.charts') --}}
                         <div class="row mt-5 rowDisabledTugboats animated fadeIn fast">
                             <div class="col-12">
                                 <table class="detailedTable table table-striped text-center border-primary" style="width:100%">
                                     <thead class="bg-primary">
-                                        <tr>
+                                        <tr class="text-center">
                                             <th>Tugboat Name</th>
                                             <th class="width40">Remarks</th>
                                         </tr>
@@ -99,20 +100,34 @@
                                 <table class="detailedTable table table-striped border-primary" style="width:100%">
                                     <thead class="bg-primary">
                                         <tr class="text-center">
-                                            <th>Date &amp; Time</th>
                                             <th>Job Order No.</th>
+                                            <th>Job Order Date &amp; Time Estimated Start</th>
+                                            <th>Job Order Date &amp; Time Estimated End</th>
                                             <th>Consignee Name</th>
-                                            <th>Total Amount(&#8369;)</th>
+                                            <th>Job Sched Actual Date &amp; Time of Start</th>
+                                            <th>Job Sched Actual Date &amp; Time of End</th>
+                                            <th>Job Order Status</th>
                                         </tr>
                                     </thead>  
                                     <tbody>
                                         @if(count($joborders)>0)
                                             @foreach($joborders as $joborder)
                                                 <tr>
-                                                <td class="text-center">{{$joborder->datStartDate}} {{$joborder->tmStart}}</td>
-                                                <td class="text-center">JO-{{$joborder->intJobOrderID}} </td>
-                                                <td class="text-center">{{$joborder->strCompanyName}}</td>
-                                                <td class="text-center">{{$joborder->totaljo}}</td>
+                                                    <td class="text-center">JO-{{$joborder->intJobOrderID}} </td>
+                                                    <td class="text-center">{{$joborder->datStartDate}} {{$joborder->tmStart}}</td>
+                                                    <td class="text-center">{{$joborder->datEndDate}} {{$joborder->tmEnd}}</td>
+                                                    <td class="text-center">{{$joborder->strCompanyName}}</td>
+                                                    @if(($joborder->dateStarted)!=null && ($joborder->tmStarted)!=null )
+                                                        <td class="text-center">{{$joborder->dateStarted}} {{$joborder->tmStarted}}</td>
+                                                    @else
+                                                        <td class="text-center">Not yet Started</td>
+                                                    @endif
+                                                    @if(($joborder->dateEnded)!=null && ($joborder->tmEnded)!=null )
+                                                        <td class="text-center">{{$joborder->dateEnded}} {{$joborder->tmEnded}}</td>
+                                                    @else
+                                                        <td class="text-center">Not yet Ended</td>
+                                                    @endif
+                                                    <td class="text-center">{{$joborder->enumStatus}}</td>
                                                 </tr>
                                             @endforeach
                                         @endif
@@ -124,7 +139,7 @@
                             <div class="col-12">
                                 <table class="detailedTable table table-striped text-center border-primary" style="width:100%">
                                     <thead class="bg-primary">
-                                        <tr>
+                                        <tr class="text-center">
                                             <th>Invoice No.</th>
                                             <th>Consignee Name</th>
                                             <th>Status</th>
@@ -132,6 +147,7 @@
                                         </tr>
                                     </thead>  
                                     <tbody>
+                                        @if(count($sales)>0)
                                             @foreach ($sales as $sale)
                                                 <tr>
                                                     <td>INV-{{$sale->intInvoiceID}}</td>
@@ -140,6 +156,7 @@
                                                     <td>{{$sale->salessum}}</td>
                                                 </tr>
                                             @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -148,7 +165,7 @@
                             <div class="col-12">
                                 <table class="detailedTable table table-striped text-center border-primary" style="width:100%">
                                     <thead class="bg-primary">
-                                        <tr>
+                                        <tr class="text-center">
                                             <th>Consignee Name</th>
                                             <th>Start of Contract</th>
                                             <th>End of Contract</th>
@@ -158,10 +175,9 @@
                                         </tr>
                                     </thead>  
                                     <tbody>
-                                            @if(count($consignees)>0)
+                                        @if(count($consignees)>0)
                                             @foreach($consignees as $consignee)
-                                        <tr>
-                                                
+                                            <tr>
                                                 <td class="text-center">{{$consignee->strCompanyName}}</td>
                                                 <td class="text-center">{{$consignee->datContractActive}}</td>
                                                 <td class="text-center">{{$consignee->datContractExpire}}</td>
@@ -170,15 +186,15 @@
                                                 @else
                                                     <td class="text-center">{{$consignee->enumConValidity}} months</td>
                                                 @endif
-                                                <td class="text-center">{{$consignee->enumStatus}}</td>
+                                                    <td class="text-center">{{$consignee->enumStatus}}</td>
                                                 @if(($consignee->fund)!=null)
-                                                <td class="text-center">{{$consignee->fund}}</td>
+                                                    <td class="text-center">{{$consignee->fund}}</td>
                                                 @else
-                                                <td class="text-center">0</td>
+                                                    <td class="text-center">0</td>
                                                 @endif
-                                        </tr>
+                                            </tr>
                                             @endforeach
-                                            @endif
+                                         @endif
                                     </tbody> 
                                 </table>
                             </div>
@@ -187,7 +203,7 @@
                             <div class="col-12">
                                 <table class="detailedTable table table-striped text-center border-primary" style="width:100%">
                                     <thead class="bg-primary">
-                                        <tr>
+                                        <tr class="text-center">
                                             <th>Service Name</th>
                                             <th>Number of Job Orders Catered</th>
                                             <th>Amount (&#8369;)</th>
