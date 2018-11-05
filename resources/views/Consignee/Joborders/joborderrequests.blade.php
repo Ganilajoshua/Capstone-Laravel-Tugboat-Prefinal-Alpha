@@ -35,7 +35,7 @@
                             </div>
                         </div>
                     </div>
-                @elseif($pendingjob->enumStatus == 'Forward Pending')
+                @elseif($pendingjob->enumStatus == 'Forwarded')
                     <div class="col-12 col-sm-12 col-lg-6 pendingCards">
                         <div class="card card-sm-2 card-primary border-primary">
                             <div class="card-icon">
@@ -48,7 +48,7 @@
                                 <h3>{{$pendingjob->strJODesc}}</h3>
                                 <small class="float-left mt-2 mt-3" style="font-size:15px;"> {{Auth::user()->name}} </small>
                                 <h3 class="float-right mt-3" style="font-size: 15px;">
-                                    <span class="">STATUS : </span>
+                                    <span class="">STATUS :</span>
                                     <button type="button" tab-index="-1" class="text-white btn btn-dark btn-sm disabled" style="font-size: 10px; border-radius: 3px; font-weight:bold; pointer-events: none;" aria-disabled="true">{{$pendingjob->enumStatus}}</button>
                                 </h3>
                                 
@@ -104,6 +104,8 @@
                             </div>
                         </div>
                     </div>
+                @elseif($pendingjob->enumStatus == 'For Rescheduling')
+                @elseif
                 @endif
             @endforeach
         </div>

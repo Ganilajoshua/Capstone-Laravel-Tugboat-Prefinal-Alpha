@@ -57,7 +57,7 @@
                                                 </li>
                                                 <hr>
                                                 <li class="nav-item">
-                                                    <a class="nav-link" id="navThirdTab" data-toggle="tab" href="#thirdTab" role="tab" aria-selected="false">Pending Requests<span class="badge badge-danger ml-2">17</span></a>
+                                                    <a class="nav-link" id="navThirdTab" data-toggle="tab" href="#thirdTab" role="tab" aria-selected="false">Pending Requests</a>
                                                 </li>
                                                 <hr>
                                                 <li class="nav-item">

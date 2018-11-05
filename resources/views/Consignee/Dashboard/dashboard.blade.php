@@ -81,7 +81,61 @@
                 </div>
             </div>
         </section>
-    @endif 
+    @endif
+    {{-- <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-12 col-12 col-sm-12">
+                    <div class="card">
+                        <div class="card-header bg-primary">
+                            <h4 class="text-center text-white">Activity Log</h4>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled list-unstyled-border">
+                                <li class="media">
+                                    <img class="mr-3 rounded-circle" width="50" src="/others/stisla_admin_v1.0.0/dist/img/tbLogo.png" alt="avatar">
+                                    <div class="media-body">
+                                        <div class="float-right"><small>10m</small></div>
+                                        <div class="media-title">Administrator</div>
+                                        <small>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</small>
+                                    </div>
+                                </li>
+                                <li class="media">
+                                    <img class="mr-3 rounded-circle" width="50" src="/others/stisla_admin_v1.0.0/dist/img/tbLogo.png" alt="avatar">
+                                    <div class="media-body">
+                                        <div class="float-right"><small>10m</small></div>
+                                        <div class="media-title">Administrator</div>
+                                        <small>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</small>
+                                    </div>
+                                </li>
+                                <li class="media">
+                                    <img class="mr-3 rounded-circle" width="50" src="/others/stisla_admin_v1.0.0/dist/img/tbLogo.png" alt="avatar">
+                                    <div class="media-body">
+                                        <div class="float-right"><small>10m</small></div>
+                                        <div class="media-title">Administrator</div>
+                                        <small>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</small>
+                                    </div>
+                                </li>
+                                <li class="media">
+                                    <img class="mr-3 rounded-circle" width="50" src="/others/stisla_admin_v1.0.0/dist/img/tbLogo.png" alt="avatar">
+                                    <div class="media-body">
+                                        <div class="float-right"><small>10m</small></div>
+                                        <div class="media-title">Administrator</div>
+                                        <small>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</small>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="text-center">
+                                <a href="#" class="btn btn-primary btn-round">
+                                View All
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>  --}}
 @endsection
 
 @section('pakingshet')

@@ -34,7 +34,7 @@
                             <div class="card-wrap">
                                 <div class="card-header">
                                 <a data-collapse="#ongoingJOCard" class="btn btn-icon text-white float-right"><i class="ion ion-minus"></i></a>
-                                    <h4 class="text-white" style="color:#fff !important;">Ongoing Job Orders</h4>
+                                    <h4 class="text-white" style="color:#fff !important;">Ongoing Job Orders</h4><span class="badge badge-light" style="border-radius: 1px !important;">{{count($ongoing)}}</span>
                                 </div>
                                 <div class="card-body mt-1 text-white" style="font-size:25px;">
                                 </div>
