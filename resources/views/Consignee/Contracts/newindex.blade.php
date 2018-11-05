@@ -684,7 +684,7 @@
                                             {!! $termscondition->strTermsConditionDesc !!}
                                         @endforeach
                                     {{-- </textarea>     --}}
-                                    <a href="{{url('/consignee/contracts/'.$id.'/pdf')}}" class="btn active waves-effect">Generate PDF</a>
+                                    <a href="{{url('/consignee/contracts/'.$id.'/pdf')}}" target="_blank" class="btn active waves-effect">Generate PDF</a>
                                 </div>
                             </div>
                         </div>

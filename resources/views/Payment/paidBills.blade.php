@@ -16,7 +16,7 @@
                     <tr class="tr-shadow">
                         <td>{{$paid->intChequeID}}</td>
                         <td>{{$paid->strCompanyName}}</td>
-                        <td>{{$paid->dtPayment}}</td>
+                        <td>{{$paid->created_at}}</td>
                         <td>
                             <div class="badge badge-success">{{$paid->enumStatus}}</div>
                         </td>
@@ -27,7 +27,7 @@
                                     <i class="bigIcon ion ion-ios-eye"></i>
                                 </button>
                                 <button class="btn btn-sm btn-success waves-circle waves-effect" data-toggle="tooltip" title="Print" role="button">
-                                        <a class="miniIcon fa fa-print" href="{{url('/administrator/transactions/payment/'.$paid->intBillID.'/pdf')}}"></a>
+                                        <a target="_blank" class="miniIcon fa fa-print" href="{{url('/administrator/transactions/payment/'.$paid->intBillID.'/pdf')}}"></a>
                                 </button>
                             </div>
                         </td>

@@ -81,7 +81,7 @@
 																	<button class="item waves-effect" data-toggle="tooltip" data-placement="top" title="Print">
 																		{{-- <i class="miniIcon fa fa-print"></i> --}}
 																		{{-- <a class="miniIcon fa fa-print" href="{{url('/consignee/contracts/'.$id.'/pdf')}}"></a> --}}
-																		<a class="miniIcon fa fa-print" href="{{url('/consignee/paymentbilling/billing/'.$dispatch->intInvoiceID.'/pdf')}}"></a>
+																		<a class="miniIcon fa fa-print" target="_blank" href="{{url('/consignee/paymentbilling/billing/'.$dispatch->intInvoiceID.'/pdf')}}"></a>
 																	</button>
 																</div>
 															</td>
