@@ -200,27 +200,28 @@ class JobOrdersController extends Controller
                 $joborder = DB::table('tbljoborder as joborder')
                 ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
                 ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-                ->join('tblreschedule as resched','joborder.intJobOrderID','resched.intRJobOrderID')
                 ->where('joborder.enumStatus','Voided')
                 ->where('joborder.intJobOrderID',$intJobOrderID)
                 ->get();
+                $service = 'HAULING';
+                $berth = 'NONE';
             }else{
                 $joborder = DB::table('tbljoborder as joborder')
                 ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
                 ->join('tblpier as pier','berth.intBPierID','intPierID')
                 ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
                 ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-                ->join('tblreschedule as resched','joborder.intJobOrderID','resched.intRJobOrderID')
                 ->where('joborder.enumStatus','Voided')
                 ->where('joborder.intJobOrderID',$intJobOrderID)
                 ->get();
+                $service = 'HAULING';
+                $berth = 'Yes';
             }
         }else if($job->enumServiceType == 'Tug Assist'){
             $joborder = DB::table('tbljoborder as joborder')
             ->join('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
             ->join('tblpier as pier','berth.intBPierID','intPierID')
             // ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
-            ->join('tblreschedule as resched','joborder.intJobOrderID','resched.intRJobOrderID')
             ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
             ->where('joborder.enumStatus','Voided')
             ->where('joborder.intJobOrderID',$intJobOrderID)
@@ -291,7 +292,7 @@ class JobOrdersController extends Controller
         ->where('intJOCompanyID',Auth::user()->intUCompanyID)
         ->get();
 
-        return response()->json(['joborder'=>$joborder]);
+        return response()->json(['joborder'=>$cancelledjoborder]);
     }
 
 }

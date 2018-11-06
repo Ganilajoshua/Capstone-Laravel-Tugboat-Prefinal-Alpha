@@ -40,6 +40,7 @@ $(document).ready(function(){
                 var appendBadge = `<span class="badge badge-info ml-2" style="border-radius: 3px !important;"> Pending </span>`;
                 $(appendBadge).appendTo(`#joborder${jobs[counter].intJobOrderID}`);
             $(`#joborder${jobs[counter].intJobOrderID}Button`).data('delayedorder', 0);
+            $(`#joborder${jobs[counter].intJobOrderID}Button`).addClass('disabled');
         }
     }
     // Define Ajax Setup Headers For CSRF Token

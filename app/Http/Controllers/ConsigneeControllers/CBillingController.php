@@ -63,6 +63,7 @@ class CBillingController extends Controller
         ->join('tblinvoice as invoice','invoice.intIDispatchTicketID','dispatch.intDispatchTicketID')
         ->join('tblbill as bill','bill.intBillID','invoice.intIBillID')
         ->join('tblcheque as cheque','bill.intBillID','cheque.intCBillID')
+        ->where('company.intCompanyID',Auth::user()->intUCompanyID)
         ->where('jobsched.enumstatus','Finished')
         ->where('bill.enumStatus','Accepted')
         ->groupby('intBillID')

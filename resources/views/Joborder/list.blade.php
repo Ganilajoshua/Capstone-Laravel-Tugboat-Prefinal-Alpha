@@ -114,6 +114,7 @@
                                             <h6 class="mt-3">{{$declined->strCompanyName}}</h6>
                                         </div>
                                         <div class="card-footer mt-2">
+                                                {{$declined->intJobOrderID}}
                                             <a href="#" data-id="{{$declined->intJobOrderID}}" class="joborderMoreInfoButton" >More Info <i class="ion ion-ios-arrow-right"></i></a>
                                             {{-- <button data-id="{{$declined->intJobOrderID}} "class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect declineJoborder">Decline</button> 
                                             <button data-id="{{$declined->intJobOrderID}} "class="btn btn-primary btn-sm text-center float-right ml-2 waves-effect forwardJoborder">Forward</button>

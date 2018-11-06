@@ -35,6 +35,7 @@
                                                     <h6>{{$pendingjobs->strCompanyName}}</h6>
                                                 </div>
                                                 <div class="card-footer mt-2">
+                                                    {{$pendingjobs->intJobOrderID}}
                                                     <a href="#" class="joborderHaulingInfo" data-id="{{$pendingjobs->intJobOrderID}}">More Info <i class="ion ion-ios-arrow-right"></i></a>
                                                     {{-- <button data-id="{{$pendingjobs->intJobOrderID}}" class="terminateHauling btn btn-danger btn-sm text-center float-right ml-2 waves-effect">End</button> --}}
                                                     <button data-id="{{$pendingjobs->intJobOrderID}}" id="joborder{{$pendingjobs->intJobOrderID}}Button" class="viewStartHauling btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Start</button>

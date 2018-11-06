@@ -418,6 +418,8 @@ $('.closeButton').on('click',function(){
 $('.cancelledJoborderDetails').on('click',function(){
     console.log($(this).data('id'));
     var joborderID = $(this).data('id');
+    console.log(joborderID);
+
     $.ajax({
         url : `${url}/${joborderID}/cancelleddetails`,
         type : 'GET',
@@ -426,13 +428,13 @@ $('.cancelledJoborderDetails').on('click',function(){
             console.log(data);
             $('.joborderTitle').empty();
             var appendHeader = 
-            `<h4>Job Order # ${data.joborder[0].intJobOrderID}
+            `<h4>Job Order # ${data.job.intJobOrderID}
                 <span class="badge badge-danger ml-4">CANCELLED</span>
             </h4>`;
             $(appendHeader).appendTo('.joborderTitle');
             locations = getLocation(data.joborder);
             appendJoborderBody(data.joborder,locations);
-            $('.details').html(`${data.joborder[0].strRemarks}`);
+            $('.details').html(`${data.job.strRemarks}`);
             $('#cancelledJoborderModal').modal('show');
         },
         error : (error)=>{
