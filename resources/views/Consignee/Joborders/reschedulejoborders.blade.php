@@ -19,7 +19,7 @@
                             </h3>
                         </div>
                         <div class="card-footer mt-2">
-                            <a href="#" data-id="{{$cancelled->intJobOrderID}}" class="reschedulingMoreInfo">More Info <i class="ion ion-ios-arrow-right"></i></a>
+                            <a href="#" data-id="{{$cancelled->intJobOrderID}}" class="cancelledJoborderDetails">More Info <i class="ion ion-ios-arrow-right"></i></a>
                             <button data-id="{{$cancelled->intJobOrderID}}" class="btn btn-danger btn-sm text-center float-right ml-2 waves-effect deleteJoborder">Delete</button>
                         </div>
                     </div>

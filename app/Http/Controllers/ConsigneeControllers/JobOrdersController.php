@@ -190,13 +190,10 @@ class JobOrdersController extends Controller
         return response()->json(['joborder'=>$joborder]);    
     }
 
-    public function rescheduleinfo($intJobOrderID){
+    public function cancelleddetails($intJobOrderID){
         $job = JobOrder::findOrFail($intJobOrderID);
 
-        // $joborder = DB::table('tbljoborder as joborder')
-        // ->join('tblreschedule as resched','joborder.intJobOrderID','resched.intRJobOrderID')
-        // ->where('joborder.enumStatus','For Rescheduling')
-        // ->get();
+        $joborder = [];
 
         if($job->enumServiceType == 'Hauling'){
             if($job->intJOBerthID == null){
@@ -204,7 +201,7 @@ class JobOrdersController extends Controller
                 ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
                 ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
                 ->join('tblreschedule as resched','joborder.intJobOrderID','resched.intRJobOrderID')
-                ->where('joborder.enumStatus','For Rescheduling')
+                ->where('joborder.enumStatus','Voided')
                 ->where('joborder.intJobOrderID',$intJobOrderID)
                 ->get();
             }else{
@@ -214,7 +211,7 @@ class JobOrdersController extends Controller
                 ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
                 ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
                 ->join('tblreschedule as resched','joborder.intJobOrderID','resched.intRJobOrderID')
-                ->where('joborder.enumStatus','For Rescheduling')
+                ->where('joborder.enumStatus','Voided')
                 ->where('joborder.intJobOrderID',$intJobOrderID)
                 ->get();
             }
@@ -225,13 +222,13 @@ class JobOrdersController extends Controller
             // ->join('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
             ->join('tblreschedule as resched','joborder.intJobOrderID','resched.intRJobOrderID')
             ->join('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
-            ->where('joborder.enumStatus','For Rescheduling')
+            ->where('joborder.enumStatus','Voided')
             ->where('joborder.intJobOrderID',$intJobOrderID)
             ->get();    
         }
         
 
-        return response()->json(['joborder'=>$joborder]);
+        return response()->json(['joborder'=>$joborder,'job'=>$job]);
     }
     /**
      * Display the specified resource.
@@ -284,6 +281,16 @@ class JobOrdersController extends Controller
         $joborder->boolDeleted = 1;
         $joborder->save();
         
+        return response()->json(['joborder'=>$joborder]);
+    }
+
+    public function notifs(Request $request){
+        
+        $cancelledjoborder = JobOrder::where('boolDeleted',0)
+        ->where('enumStatus','Voided')
+        ->where('intJOCompanyID',Auth::user()->intUCompanyID)
+        ->get();
+
         return response()->json(['joborder'=>$joborder]);
     }
 

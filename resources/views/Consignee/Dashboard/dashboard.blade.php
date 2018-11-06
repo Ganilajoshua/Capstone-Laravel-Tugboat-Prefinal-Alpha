@@ -28,7 +28,6 @@
                 <div class="row m-t-25">
                     @foreach($ongoing as $ongoing)
                         @if($ongoing->isDelayed == 1)
-                            {{$ongoing->isDelayed}}
                             <div class="col-12 col-sm-12 col-lg-4 pendingCards">
                                 <div class="card card-sm-2 card-primary border-primary">
                                     <div class="card-icon">

@@ -370,13 +370,13 @@ Route::group(['prefix'=>'consignee/'],function(){
     //Job Orders
     Route::resource('/joborders','ConsigneeControllers\JobOrdersController');
     Route::get('/joborders/{intJobOrderID}/show','ConsigneeControllers\JobOrdersController@show');
+    Route::get('/joborders/{intJobOrderID}/cancelleddetails','ConsigneeControllers\JobOrdersController@cancelleddetails');
     Route::post('/joborders/create','ConsigneeControllers\JobOrdersController@create');
     Route::post('/joborders/{intJobOrderID}/store','ConsigneeControllers\JobOrdersController@store');
     Route::post('/joborders/haulingservice','ConsigneeControllers\JobOrdersController@haulingservice');
     Route::post('/joborders/update','ConsigneeControllers\JobOrdersController@update');
     Route::post('/joborders/delete','ConsigneeControllers\JobOrdersController@delete');
-    // Route::get('/joborders/{intJobOrderID}/rescheduleinfo','ConsigneeControllers\JobOrdersController@rescheduleinfo');
-    
+    Route::post('/joborders/notifs','ConsigneeControllers\JobOrdersController@notifs');
     
     Route::resource('/dispatchticket','ConsigneeControllers\CDispatchTicketController');
     Route::get('/dispatchticket','ConsigneeControllers\CDispatchTicketController@index');

@@ -65,7 +65,7 @@
                                                     </li>
                                                     <hr>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" id="navFifthTab" data-toggle="tab" href="#fifthTab" role="tab" aria-selected="true">Cancelled Job Orders</a>
+                                                        <a class="nav-link" id="navFifthTab" data-toggle="tab" href="#fifthTab" role="tab" aria-selected="true">Cancelled Job Orders <span class="fifthTabAppend ml-2"></span></a>
                                                     </li>
                                                     <hr>
                                                     <li class="nav-item">

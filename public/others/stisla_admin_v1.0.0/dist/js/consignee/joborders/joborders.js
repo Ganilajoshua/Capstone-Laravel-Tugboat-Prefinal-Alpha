@@ -14,6 +14,26 @@ $(document).ready(function(){
         }
     });
 
+    $.ajax({
+        url : `${url}/notifs`,
+        type : 'POST',
+        data : {
+            "_token" : $('meta[name="csrf-token"]').attr('content'),
+        },
+        success : (data, response)=>{
+            console.log(data);
+            if((data.joborder).length > 0){
+                $('.fifthTabAppend').empty();
+                appendBadge = 
+                `<span class="badge badge-danger">${(data.joborder).length}</span>`
+                $(appendBadge).appendTo('.fifthTabAppend');
+            }
+        },
+        error : (error, response)=>{
+            console.log(error)
+        },
+    });
+
 
 $(`#addTugAssistStartDate, #addHaulingStartDate`).datetimepicker({
     format: 'L',
@@ -391,6 +411,36 @@ function requestJoborder(requestID){
     });
 }
 
+$('.closeButton').on('click',function(){
+    $('.modal').modal('hide');
+})
+
+$('.cancelledJoborderDetails').on('click',function(){
+    console.log($(this).data('id'));
+    var joborderID = $(this).data('id');
+    $.ajax({
+        url : `${url}/${joborderID}/cancelleddetails`,
+        type : 'GET',
+        dataType : 'JSON',
+        success : (data,response)=>{
+            console.log(data);
+            $('.joborderTitle').empty();
+            var appendHeader = 
+            `<h4>Job Order # ${data.joborder[0].intJobOrderID}
+                <span class="badge badge-danger ml-4">CANCELLED</span>
+            </h4>`;
+            $(appendHeader).appendTo('.joborderTitle');
+            locations = getLocation(data.joborder);
+            appendJoborderBody(data.joborder,locations);
+            $('.details').html(`${data.joborder[0].strRemarks}`);
+            $('#cancelledJoborderModal').modal('show');
+        },
+        error : (error)=>{
+            console.log(error);
+        }
+    });
+});
+
 $('.deleteJoborder').on('click',function(){
     console.log($(this).data('id'));
     swal({
@@ -434,3 +484,143 @@ $('.deleteJoborder').on('click',function(){
         }
     });
 });
+
+function getLocation(joborders){
+    console.log(joborders);
+    var sLocation = [];
+    var dLocation = [];
+
+    if((joborders[0].intJOBerthID) == null){
+        sLocation = joborders[0].strJOStartPoint;
+        dLocation = joborders[0].strJODestination;
+    }
+    else if((joborders[0].strJOStartPoint) == null){
+        sLocation = `${joborders[0].strPierName} - ${joborders[0].strBerthName}`;
+        dLocation = joborders[0].strJODestination;
+    }
+    else if((joborders[0].strJODestination) == null){
+        sLocation = joborders[0].strJOStartPoint;
+        dLocation = `${joborders[0].strPierName} - ${joborders[0].strBerthName}`;
+    }
+    var locations = [
+        {sLocation,dLocation}
+    ];
+    console.log(locations);
+    return locations;
+}
+
+function appendJoborderBody(joborders,location){
+    $('.cancelledModalBody').empty();
+    console.log(location);
+    if(joborders[0].enumServiceType == 'Tug Assist'){
+        var appendBody =
+        `<div class="row joborderDetailsContainer">
+            <div class="col-6">
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Service Type : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">
+                            ${joborders[0].enumServiceType}
+                        </h6>
+                    </li>
+                </ul>
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Date of Transaction : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">
+                            ${moment(joborders[0].datStartDate).format('MMMM D, YYYY')} - ${moment(joborders[0].datEndDate).format('MMMM D, YYYY')}
+                        </h6>
+                    </li>
+                </ul>
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Estimated Time of Hauling : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">
+                        ${joborders[0].tmStart} HRS - ${joborders[0].tmEnd} HRS 
+                        </h6>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6">
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Location : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">${location[0].sLocation}</h6></li>
+                </ul>
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Total Weight : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">${joborders[0].fltWeight} Tons</h6></li>
+                </ul>
+            </div>
+        </div>`;
+        $(appendBody).appendTo('.cancelledModalBody');
+
+    }
+    else if(joborders[0].enumServiceType == 'Hauling'){
+        var appendBody =
+        `<div class="row joborderDetailsContainer">
+            <div class="col-6">
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Service Type : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">
+                            ${joborders[0].enumServiceType}
+                        </h6>
+                    </li>
+                </ul>
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Date of Transaction : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">
+                            ${moment(joborders[0].datStartDate).format('MMMM D, YYYY')} - ${moment(joborders[0].datEndDate).format('MMMM D, YYYY')}
+                        </h6>
+                    </li>
+                </ul>
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Estimated Time of Hauling : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">
+                        ${joborders[0].tmStart} HRS - ${joborders[0].tmEnd} HRS 
+                        </h6>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-6">
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Starting Location : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">${location[0].sLocation}</h6></li>
+                </ul>
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Destination : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">${location[0].dLocation}</h6></li>
+                </ul>
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Goods to be delivered : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">${joborders[0].strGoodsName}</h6></li>
+                </ul>
+                <ul class="list-inline">
+                    <li class="list-inline-item text-primary">
+                        <h6 style="font-size: 15.5px;">Total Weight : </h6></li>
+                    <li class="list-inline-item">
+                        <h6 style="font-size: 15.5px;">${joborders[0].fltWeight} Tons</h6></li>
+                </ul>
+            </div>
+        </div>`;
+        $(appendBody).appendTo('.cancelledModalBody');
+    }
+}
