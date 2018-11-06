@@ -49,6 +49,7 @@ class HaulingController extends Controller
         ->get(); 
         $pendingjobs = DB::table('tbljobsched as jobsched')
         ->join('tbljoborder as joborder','joborder.intJobOrderID','intJSJobOrderID')
+        ->join('tblschedule as sched','sched.intScheduleID','jobsched.intJSSchedID')
         ->join('tblcompany as company','company.intCompanyID','joborder.intJOCompanyID')
         ->where('jobsched.enumStatus','Pending')
         ->groupBy('jobsched.intJSJobOrderID')
@@ -207,6 +208,7 @@ class HaulingController extends Controller
             $jobschedule->dateStarted = $request->startDate;
             $jobschedule->tmStarted = $request->startTime;
             $jobschedule->enumStatus = 'Ongoing';
+            $jobschedule->isDelayed = $request->isDelayed;
             $jobschedule->save();
         }
     }

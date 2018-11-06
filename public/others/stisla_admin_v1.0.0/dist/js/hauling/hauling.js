@@ -8,7 +8,40 @@ $(document).ready(function(){
     $('#menuTeamBuilder').addClass('inactive');
     $('#menuTugboatAssignment').addClass('inactive');
     $('#menuScheduling').addClass('inactive');
+    console.log($('.pendingJobsNotifs').val());
+    var jobs = JSON.parse($('.pendingJobsNotifs').val());
+    console.log(jobs);
+    console.log(moment().format("Y-MM-D HH:mm"));  
+    for(var counter = 0 ; counter < jobs.length; counter++){
+        var date = jobs[counter].startDate;
+        console.log(moment().format("Y-MM-D"), jobs[counter].dateStart);
+        console.log(moment().format("HH:mm"));
+        var currdate = moment().format("Y-MM-D");
+        if(moment(currdate).isAfter(jobs[counter].dateStart)){
+            console.log('delayed by araw');
+            console.log(moment().format("Y-MM-D"), jobs[counter].dateStart);
 
+            $(`#joborder${jobs[counter].intJobOrderID}`).empty();
+            var appendBadge = `<span class="badge badge-danger ml-2" style="border-radius: 3px !important;"> Delayed </span>`;
+            $(appendBadge).appendTo(`#joborder${jobs[counter].intJobOrderID}`);
+            $(`#joborder${jobs[counter].intJobOrderID}Button`).data('delayedorder', 1);
+
+        }else if(moment(currdate).isSame(jobs[counter].dateStart)){
+            if(moment().format("HH:mm") > jobs[counter].tmStart){
+                console.log('delayed by oras');
+                $(`#joborder${jobs[counter].intJobOrderID}`).empty();
+                var appendBadge = `<span class="badge badge-danger ml-2" style="border-radius: 3px !important;"> Delayed </span>`;
+                $(appendBadge).appendTo(`#joborder${jobs[counter].intJobOrderID}`);
+                $(`#joborder${jobs[counter].intJobOrderID}Button`).data('delayedorder', 1);
+            }
+        }
+        else if(moment(currdate).isBefore(jobs[counter].dateStart)){
+            $(`#joborder${jobs[counter].intJobOrderID}`).empty();
+                var appendBadge = `<span class="badge badge-info ml-2" style="border-radius: 3px !important;"> Pending </span>`;
+                $(appendBadge).appendTo(`#joborder${jobs[counter].intJobOrderID}`);
+            $(`#joborder${jobs[counter].intJobOrderID}Button`).data('delayedorder', 0);
+        }
+    }
     // Define Ajax Setup Headers For CSRF Token
     $.ajaxSetup({
         headers: {
@@ -106,6 +139,7 @@ $('.backButton').on('click',function(){
 $('.viewStartHauling').on('click',function(event){
     console.log('HEYAA');
     var joborderID = $(this).data('id');
+    console.log($(this).data('delayedorder'));
     event.preventDefault();
     $.ajax({
         url : `${url}/${joborderID}/show`,
@@ -117,6 +151,7 @@ $('.viewStartHauling').on('click',function(event){
             $('.startHaulingHeader').empty();
             $('.startHaulingBody').empty();
             $('.startHaulingProcess').data('id',data.joborder[0].intJobOrderID)
+            $('.startHaulingProcess').data('delayedorder',$(this).data('delayedorder'));
             // var dLocation ;
             // var sLocation ;
             var team = [];
@@ -154,8 +189,10 @@ $('.viewStartHauling').on('click',function(event){
 $('.startHaulingProcess').on('click',function(){
     console.log($(this).data('id'));
     var joborderID = $(this).data('id');
+    var isDelayed = $(this).data('delayedorder');
     var startDate = moment().format("Y-MM-D");
     var startTime = moment().format("HH:mm");
+
     swal({
         title: "Start Hauling?",
         text: "Deploy Tugboats on Job Orders",
@@ -177,6 +214,7 @@ $('.startHaulingProcess').on('click',function(){
                     joborderID : joborderID,
                     startDate : startDate,
                     startTime : startTime,
+                    isDelayed : isDelayed,
                 },
                 success : (data,response) =>{
                     console.log(data);
@@ -419,7 +457,6 @@ $('.updateLocationSubmit').on('click',function(){
 $('.showUpdates').on('click',function(){
     console.log('heyaaaaa', $(this).data('id'));
     var id = $(this).data('id');
-    $('#locationUpdates').modal('show');
     $.ajax({
         url : `${url}/${id}/locationupdates`,
         type : 'GET',    
@@ -451,6 +488,8 @@ $('.showUpdates').on('click',function(){
                     $(appendTable).appendTo('.locationUpdatesBody');
                 }
             }
+
+            $('#locationUpdates').modal('show');
         },
         error : (error)=>{
             throw error;

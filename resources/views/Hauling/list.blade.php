@@ -19,6 +19,7 @@
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade show active" id="pillsPending" role="tabpanel" aria-labelledby="pillsPending-tab">
                             <div class="row">
+                                <input type="hidden" class="pendingJobsNotifs" value="{{$pendingjobs}}">
                                 @if(count($pendingjobs) > 0)
                                     @foreach($pendingjobs as $pendingjobs)
                                         <div class="col-12 col-sm-12 col-lg-6">
@@ -27,7 +28,7 @@
                                                     <i class="ion ion-android-boat text-primary"></i>
                                                 </div>
                                                 <div class="card-header">
-                                                    <h4 class="text-primary mb-2">Job Order # {{$pendingjobs->intJobOrderID}}</h4>
+                                                    <h4 class="text-primary mb-2">Job Order # {{$pendingjobs->intJobOrderID}} <span id="joborder{{$pendingjobs->intJobOrderID}}"></span></h4>
                                                 </div>
                                                 <div class="card-body">
                                                     <h3>{{$pendingjobs->strJOTitle}}</h3>
@@ -36,7 +37,7 @@
                                                 <div class="card-footer mt-2">
                                                     <a href="#" class="joborderHaulingInfo" data-id="{{$pendingjobs->intJobOrderID}}">More Info <i class="ion ion-ios-arrow-right"></i></a>
                                                     {{-- <button data-id="{{$pendingjobs->intJobOrderID}}" class="terminateHauling btn btn-danger btn-sm text-center float-right ml-2 waves-effect">End</button> --}}
-                                                    <button data-id="{{$pendingjobs->intJobOrderID}}" class="viewStartHauling btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Start</button>
+                                                    <button data-id="{{$pendingjobs->intJobOrderID}}" id="joborder{{$pendingjobs->intJobOrderID}}Button" class="viewStartHauling btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Start</button>
                                                 </div>
                                             </div>
                                         </div>
