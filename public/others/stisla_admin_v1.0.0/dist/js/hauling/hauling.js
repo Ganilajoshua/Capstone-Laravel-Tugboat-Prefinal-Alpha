@@ -26,21 +26,30 @@ $(document).ready(function(){
             $(appendBadge).appendTo(`#joborder${jobs[counter].intJobOrderID}`);
             $(`#joborder${jobs[counter].intJobOrderID}Button`).data('delayedorder', 1);
 
+            var appendBadge1 = `<span class="badge badge-info ml-2" style="border-radius: 3px !important;"> Pending </span>`;
+            $(appendBadge1).appendTo(`#joborder${jobs[counter].intJobOrderID}`);    
+
         }else if(moment(currdate).isSame(jobs[counter].dateStart)){
             if(moment().format("HH:mm") > jobs[counter].tmStart){
                 console.log('delayed by oras');
                 $(`#joborder${jobs[counter].intJobOrderID}`).empty();
                 var appendBadge = `<span class="badge badge-danger ml-2" style="border-radius: 3px !important;"> Delayed </span>`;
                 $(appendBadge).appendTo(`#joborder${jobs[counter].intJobOrderID}`);
+                var appendBadge1 = `<span class="badge badge-info ml-2" style="border-radius: 3px !important;"> Pending </span>`;
+                $(appendBadge1).appendTo(`#joborder${jobs[counter].intJobOrderID}`);
                 $(`#joborder${jobs[counter].intJobOrderID}Button`).data('delayedorder', 1);
             }
         }
         else if(moment(currdate).isBefore(jobs[counter].dateStart)){
             $(`#joborder${jobs[counter].intJobOrderID}`).empty();
-                var appendBadge = `<span class="badge badge-info ml-2" style="border-radius: 3px !important;"> Pending </span>`;
+                var appendBadge = `<span class="badge badge-success ml-2" style="border-radius: 3px !important;"> On Time </span>`;
                 $(appendBadge).appendTo(`#joborder${jobs[counter].intJobOrderID}`);
+                var appendBadge1 = `<span class="badge badge-info ml-2" style="border-radius: 3px !important;"> Pending </span>`;
+                $(appendBadge1).appendTo(`#joborder${jobs[counter].intJobOrderID}`);
             $(`#joborder${jobs[counter].intJobOrderID}Button`).data('delayedorder', 0);
             $(`#joborder${jobs[counter].intJobOrderID}Button`).addClass('disabled');
+            $(`#joborder${jobs[counter].intJobOrderID}Button`).prop('disabled', true);
+
         }
     }
     // Define Ajax Setup Headers For CSRF Token
