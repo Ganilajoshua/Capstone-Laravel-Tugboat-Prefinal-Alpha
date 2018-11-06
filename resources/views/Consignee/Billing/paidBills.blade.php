@@ -15,7 +15,7 @@
                 @foreach($paid as $paid)
                     <tr class="tr-shadow">
                         <td>{{$paid->intChequeID}}</td>
-                        <td>{{$paid->dateEnded}}</td>
+                        <td>{{$paid->created_at}}</td>
                         <td>
                             <div class="badge badge-success">{{$paid->enumStatus}}</div>
                         </td>
@@ -26,7 +26,7 @@
                                     <i class="zmdi zmdi-more"></i>
                                 </button>
                                 <button class="item waves-effect" data-toggle="tooltip" data-placement="top" title="Print">
-                                    <a class="miniIcon fa fa-print" href="{{url('/consignee/paymentbilling/billing/'.$pending->intInvoiceID.'/pdf')}}"></a>
+                                    <a class="miniIcon fa fa-print" target="_blank" href="{{url('/consignee/paymentbilling/billing/'.$pending->intInvoiceID.'/pdf')}}"></a>
                                 </button>
                             </div>
                         </td>

@@ -21,12 +21,25 @@
                         <td>
                             {{$dispatch2->strName}}
                         </td>
-                        <td>
-                            {{$dispatch2->strJOStartPoint}}
-                        </td>
+                        @if($dispatch2->strJOStartPoint == null)
+                            <td>
+                                {{$dispatch2->strPierName}} {{$dispatch2->strBerthName}}
+                            </td>
+                        @else
+                            <td>
+                                {{$dispatch2->strJOStartPoint}}
+                            </td>
+                        @endif
+                        @if($dispatch2->strJODestination == null)
+                            <td>
+                                {{$dispatch2->strBerthName}} {{$dispatch2->strPierName}}
+                            </td>
+                        @else
                         <td>
                             {{$dispatch2->strJODestination}}
                         </td>
+                        @endif
+                    
                         <td>{{$dispatch2->dateEnded}} {{$dispatch2->tmEnded}}</td>
                         <td>
                             {{$dispatch2->enumServiceType}}
@@ -38,7 +51,7 @@
                                     <i class="bigIcon ion ion-ios-eye"></i>
                                 </button>
                                 <button class="btn btn-sm btn-success waves-circle waves-effect" data-toggle="tooltip" title="Print" role="button">
-                                    <i class="miniIcon fa fa-print"></i>
+                                        <a class="miniIcon fa fa-print" target="_blank" href="{{url('/consignee/dispatchticket/'.$dispatch3->intDispatchTicketID.'/pdf')}}"></a>
                                 </button>
                             </div>
                             </span>

@@ -91,8 +91,8 @@
 													<i class="bigIcon ion ion-ios-eye"></i>
 												</button>
 												<button class="btn btn-sm btn-success waves-circle waves-effect" data-toggle="tooltip" title="Print" role="button">
-													<i class="miniIcon fa fa-print"></i>
-												</button>
+														<a class="miniIcon fa fa-print" target="_blank" href="{{url('/administrator/transactions/dispatchticket/'.$dispatch->intDispatchTicketID.'/pdf')}}"></a>
+													</button>
 											</div>
 											</span>
 										</td>

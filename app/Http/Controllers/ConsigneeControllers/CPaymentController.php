@@ -106,7 +106,7 @@ class CPaymentController extends Controller
         // $Bill = Bill::findOrFail($request->BillID);
         $Bill->intBillID = $request->BillID;
         $Bill->enumStatus = 'Pending';
-        $Bill->timestamps = false;
+        // $Bill->timestamps = false;
         $Bill->save();
         // $a = 0;
 

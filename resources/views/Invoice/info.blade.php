@@ -74,7 +74,7 @@
                                     <td id="tugboat"></td>
                                     <td id="start"></td>
                                     <td id="destination"></td>
-                                    <td>??</td>
+                                    <td id="time"></td>
                                     <td id="service"></td>
                                 </tr>
                             </tbody>
@@ -129,7 +129,7 @@
                                     </tbody>
                                 </table>
                         </div>      
-            </div>
+                </div>
         </div>
     </div>
     </div>

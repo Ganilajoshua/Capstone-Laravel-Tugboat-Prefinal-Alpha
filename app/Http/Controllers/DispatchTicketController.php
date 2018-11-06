@@ -15,26 +15,26 @@ use PDF;
 use Redirect;
 class DispatchTicketController extends Controller
 {
-    public function printPDF()
+    public function print($id)
     {
- 
-        // $admintbs = DB::table('tbltugboat as tugboat')
-        // ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        // ->join('tblcompany as company','tugboat.intTCompanyID','company.intCompanyID')
-        // ->where('tugboat.boolDeleted',0)
-        // ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
-        // ->get();  
-        // $admintbs = DB::table('tbltugboat as tugboat')
-        // ->join('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
-        // ->join('tblcompany as company','tugboat.intTCompanyID','company.intCompanyID')
-        // ->where('tugboat.boolDeleted',0)
-        // ->where('tugboat.intTCompanyID',Auth::user()->intUCompanyID)
-        // ->get();  
-        $pdf = PDF::loadView('DispatchTicket.printPDF');
-        return $pdf->download('printPDF.pdf');
+        $dispatch = DB::table('tbljoborder as joborder')
+        ->leftjoin('tblberth as berth','joborder.intJOBerthID','berth.intBerthID')
+        ->leftjoin('tblpier as pier','berth.intBPierID','pier.intPierID')
+        ->leftjoin('tblgoods as goods','joborder.intJOGoodsID','goods.intGoodsID')
+        ->leftjoin('tblcompany as company','joborder.intJOCompanyID','company.intCompanyID')
+        ->leftjoin('tbljobsched as jobsched','joborder.intJobOrderID','jobsched.intJSJobOrderID')
+        ->leftjoin('tbltugboatassign as tugboatassign','jobsched.intJSTugboatAssignID','tugboatassign.intTAssignID')
+        ->leftjoin('tbltugboat as tugboat','tugboatassign.intTATugboatID','tugboat.intTugboatID')
+        ->leftjoin('tbltugboatmain as main','tugboat.intTTugboatMainID','main.intTugboatMainID')
+        ->leftjoin('tbldispatchticket as dispatch','dispatch.intDispatchTicketID','jobsched.intJSDispatchTicketID')
+        ->where('jobsched.enumstatus','Finished')
+        ->where('dispatch.intDispatchTicketID',$id)
+        ->get(); 
 
-        
-        
+        // $dispatch = $id;
+
+        $pdf = PDF::loadView('DispatchTicket.pdf', compact('dispatch'))->setPaper('letter', 'portrait');;
+        return $pdf->download('DispatchTicket.pdf');
     }
     
     /**

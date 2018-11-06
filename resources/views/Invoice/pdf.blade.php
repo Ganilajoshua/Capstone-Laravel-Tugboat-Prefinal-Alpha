@@ -108,19 +108,15 @@
                             <td>{{$invoice[0]->intDispatchTicketID}}</td>
                             <td>{{$invoice[0]->strName}}</td>
 
-                        {{-- <td>
-                        @if(count({{$invoice[0]->strJOStartPoint}})==null)
+                        <td>
                                 {{$invoice[0]->strBerthName}} {{$invoice[0]->strPierName}}
-                        @else
                                 {{$invoice[0]->strJOStartPoint}}
-                        @endif
-                        </td> --}}
-{{-- 
-                        @if({{$invoice[0]->strJODestination}}==null)
-                            <td>{{$invoice[0]->strBerthName}} {{$invoice[0]->strPierName}}</td>
-                        @else
+                        </td>
+                        {{-- @if({{$invoice[0]->strJODestination}}==null) --}}
+                            {{-- <td>{{$invoice[0]->strBerthName}} {{$invoice[0]->strPierName}}</td> --}}
+                        {{-- @else --}}
                             <td>{{$invoice[0]->strJODestination}}</td>
-                        @endif  --}}
+                        {{-- @endif  --}}
 
                             <td>{{$invoice[0]->tmEnded}}</td>
                             <td>{{$invoice[0]->enumServiceType}}</td>
@@ -129,54 +125,54 @@
                 </table>
             </div>
         </div>
-    <div class="row">
-            <div class="table-responsive">
-                    {{-- @foreach(count($Counter)>0) --}}
-                    <table class="table table-striped border-primary text-center"  style="width:100%">
-                        <thead class="bg-primary text-black"  style="width:100%">
-                            <th class="">Particulars</th>
-                            <th class="">Add ( &#8369; )</th>
-                            <th class="">Less ( &#8369; )</th>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class="tdBorderLeft">Job Order Amount</td>
-                            <td class="tdBorderLeft" id="amount"></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="tdBorderLeft">Tugboat Delay Fee</td>
-                            <td class="tdBorderLeft"></td>
-                            <td id="delayfee"></td>
-                        </tr>
-                        <tr>
-                            <td class="tdBorderLeft">Violation Fee</td>
-                            <td class="tdBorderLeft" id="conviolationfee"></td>
-                            <td id="comviolationfee"></td>
-                        </tr>
-                        <tr>
-                            <td class="tdBorderLeft">Late Fee</td>
-                            <td class="tdBorderLeft" id="conlatefee"></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="tdBorderLeft">Damage Fee</td>
-                            <td class="tdBorderLeft" id="condamagefee"></td>
-                            <td id="comdamagefee"></td>
-                        </tr>
-                        <tr>
-                                <td class="tdBorderLeft">Discounts</td>
-                                <td class="tdBorderLeft" ><span id="discount"></span>%</td>
+        <div class="row">
+                <div class="table-responsive">
+                        <table class="table table-striped border-primary text-center">
+                            <thead class="bg-primary text-black">
+                                <th class="">Particulars</th>
+                                <th class="">Add ( &#8369; )</th>
+                                <th class="">Less ( &#8369; )</th>
+                            </thead>
+                            <tbody>
+        
+                            <tr>
+                                <td class="tdBorderLeft">Job Order Amount</td>
+                                <td class="tdBorderLeft">{{$invoice[0]->fltJOAmount}}</td>
                                 <td></td>
                             </tr>
-                            <tr style="background:white;">
-                                    <td class="tdBorderLeft"><h6>TOTAL ( &#8369; )</h6></td>
-                                    <td colspan="2" id="total"></td>
+                            <tr>
+                                <td class="tdBorderLeft">Tugboat Delay Fee</td>
+                                <td class="tdBorderLeft"></td>
+                                <td>{{$invoice[0]->fltTugboatDelayFee}}</td>
                             </tr>
-                            </tbody>
-                        </table>
-                </div>      
-    </div>
+                            <tr>
+                                <td class="tdBorderLeft">Violation Fee</td>
+                                <td class="tdBorderLeft" id="">{{$invoice[0]->fltConsigneeViolationFee}}</td>
+                                <td id="">{{$invoice[0]->fltCompanyViolationFee}}</td>
+                            </tr>
+                            <tr>
+                                <td class="tdBorderLeft">Late Fee</td>
+                                <td class="tdBorderLeft" id="conlatefee">{{$invoice[0]->fltConsigneeLateFee}}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="tdBorderLeft">Damage Fee</td>
+                                <td class="tdBorderLeft" id="">{{$invoice[0]->fltConsigneeDamageFee}}</td>
+                                <td id="">{{$invoice[0]->fltCompanyDamageFee}}</td>
+                            </tr>
+                            <tr>
+                                    <td class="tdBorderLeft">Discounts</td>
+                                    <td class="tdBorderLeft" ><span id="discount">{{$invoice[0]->intDiscount}}</span>%</td>
+                                    <td></td>
+                                </tr>
+                                <tr style="background:white;">
+                                        <td class="tdBorderLeft"><h6>TOTAL ( &#8369; )</h6></td>
+                                        <td colspan="2" id="total">{{$invoice[0]->fltBalanceRemain}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                    </div>      
+            </div>
 </div>
     <footer class="text-center">Generated by TSMS</footer>
 </body>

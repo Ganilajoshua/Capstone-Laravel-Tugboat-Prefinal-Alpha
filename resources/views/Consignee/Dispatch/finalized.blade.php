@@ -21,13 +21,26 @@
                         <td>
                             {{$dispatch3->strName}}
                         </td>
-                        <td>
-                            {{$dispatch3->strJOStartPoint}}
-                        </td>
-                        <td>
-                            {{$dispatch3->strJODestination}}
-                        </td>
-                        <td>san kukunin?</td>
+                        @if($dispatch3->strJOStartPoint == null)
+										<td>
+											{{$dispatch3->strPierName}} {{$dispatch3->strBerthName}}
+										</td>
+									@else
+										<td>
+											{{$dispatch3->strJOStartPoint}}
+										</td>
+									@endif
+									@if($dispatch3->strJODestination == null)
+										<td>
+											{{$dispatch3->strBerthName}} {{$dispatch3->strPierName}}
+										</td>
+									@else
+									<td>
+                                        {{$dispatch3->strJODestination}}
+									</td>
+									@endif
+								
+									<td>{{$dispatch3->dateEnded}} {{$dispatch3->tmEnded}}</td>
                         <td>
                             {{$dispatch3->enumServiceType}}
                         </td>
@@ -38,7 +51,7 @@
                                     <i class="bigIcon ion ion-ios-eye"></i>
                                 </button>
                                 <button class="btn btn-sm btn-success waves-circle waves-effect" data-toggle="tooltip" title="Print" role="button">
-                                    <i class="miniIcon fa fa-print"></i>
+                                        <a class="miniIcon fa fa-print" target="_blank" href="{{url('/consignee/dispatchticket/'.$dispatch3->intDispatchTicketID.'/pdf')}}"></a>
                                 </button>
                             </div>
                             </span>
