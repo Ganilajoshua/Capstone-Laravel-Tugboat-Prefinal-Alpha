@@ -49,24 +49,44 @@
     <p>
         This is the official contract of <b>{{ $contract[0]->strCompanyName }}</b>. This contract is activated on <b>{{ $contract[0]->datContractActive }}</b> and valid until <b>{{ $contract[0]->datContractExpire }}</b>. Listed below are the official rates for both services, Tug Assist Service and Hauling Service, that should be followed.
     </p>
-    
-    <p>{{ $matrix[0]->enumFCFServiceType }}</p>
-    <p>{{ $matrix[0]->fltFCFStandardRate }}</p>
-    <p>{{ $matrix[0]->fltFCFTugboatDelayFee }}</p>
-    <p>{{ $matrix[0]->fltFCFViolationFee }}</p>
-    <p>{{ $matrix[0]->fltFCFConsigneeLateFee }}</p>
-    <p>{{ $matrix[0]->fltFCFMinDamageFee }}</p>
-    <p>{{ $matrix[0]->fltFCFMaxDamageFee }}</p>
-    <p>{{ $matrix[0]->intFCFDiscountFee }}</p>
-
-    <p>{{ $matrix[1]->enumFCFServiceType }}</p>
-    <p>{{ $matrix[1]->fltFCFStandardRate }}</p>
-    <p>{{ $matrix[1]->fltFCFTugboatDelayFee }}</p>
-    <p>{{ $matrix[1]->fltFCFViolationFee }}</p>
-    <p>{{ $matrix[1]->fltFCFConsigneeLateFee }}</p>
-    <p>{{ $matrix[1]->fltFCFMinDamageFee }}</p>
-    <p>{{ $matrix[1]->fltFCFMaxDamageFee }}</p>
-    <p>{{ $matrix[1]->intFCFDiscountFee }}</p>
+    <div class="row mt-3">
+            <table class="text-center table table-bordered border-primary">
+                <thead class="bg-primary" style="font-size:10px !important;">
+                    <tr>
+                        <th class="text-white">Service Type</th>
+                        <th class="text-white">Standard Rate</th>
+                        <th class="text-white">Tugboat Delay Fee</th>
+                        <th class="text-white">Consignee Violation Fee</th>
+                        <th class="text-white">Consignee Late Fee</th>
+                        <th class="text-white">Minimum Damage Fee</th>
+                        <th class="text-white">Maximum Damage Fee</th>
+                        <th class="text-white">Discount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Hauling</td>
+                        <td>{{ $matrix[0]->fltFCFStandardRate }}</td>
+                        <td>{{ $matrix[0]->fltFCFTugboatDelayFee }}</td>
+                        <td>{{ $matrix[0]->fltFCFViolationFee }}</td>
+                        <td>{{ $matrix[0]->fltFCFConsigneeLateFee }}</td>
+                        <td>{{ $matrix[0]->fltFCFMinDamageFee }}</td>
+                        <td>{{ $matrix[0]->fltFCFMaxDamageFee }}</td>
+                        <td>{{ $matrix[0]->intFCFDiscountFee }}</td>
+                    </tr>
+                    <tr>
+                        <td>Tug Assist</td>
+                        <td>{{ $matrix[1]->fltFCFStandardRate }}</td>
+                        <td>{{ $matrix[1]->fltFCFTugboatDelayFee }}</td>
+                        <td>{{ $matrix[1]->fltFCFViolationFee }}</td>
+                        <td>{{ $matrix[1]->fltFCFConsigneeLateFee }}</td>
+                        <td>{{ $matrix[1]->fltFCFMinDamageFee }}</td>
+                        <td>{{ $matrix[1]->fltFCFMaxDamageFee }}</td>
+                        <td>{{ $matrix[1]->intFCFDiscountFee }}</td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
     <h6 class="text-center mb-5 pdfTitle">Terms and Condition</h4>
         
     <div class="html">

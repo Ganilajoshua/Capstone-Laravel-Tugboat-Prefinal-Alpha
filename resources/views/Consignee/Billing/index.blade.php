@@ -78,11 +78,11 @@
 																	<button class="item waves-effect btnView" data-toggle="tooltip" data-placement="top" title="More">
 																		<i class="zmdi zmdi-more"></i>
 																	</button>
-																	<button class="item waves-effect" data-toggle="tooltip" data-placement="top" title="Print">
+																	<a class="item waves-effect" target="_blank" href="{{url('/consignee/paymentbilling/billing/'.$dispatch->intInvoiceID.'/pdf')}}" data-toggle="tooltip" data-placement="top" title="Print">
 																		{{-- <i class="miniIcon fa fa-print"></i> --}}
 																		{{-- <a class="miniIcon fa fa-print" href="{{url('/consignee/contracts/'.$id.'/pdf')}}"></a> --}}
-																		<a class="miniIcon fa fa-print" target="_blank" href="{{url('/consignee/paymentbilling/billing/'.$dispatch->intInvoiceID.'/pdf')}}"></a>
-																	</button>
+																		<i class="miniIcon fa fa-print text-white"></i>
+																	</a>
 																</div>
 															</td>
 														</tr>

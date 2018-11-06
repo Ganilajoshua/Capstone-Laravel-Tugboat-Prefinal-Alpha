@@ -545,19 +545,18 @@
                                     <h4 class="text-center text-white">{{$contractlist->strContractListTitle}}</h4>
                                 </div>
                                 <div class="card-body">
-                                    <h4 class="text-primary text-center">
-                                        {{-- <span class="alert alert-warning">
-                                            <i class="fas fa-exclamation-triangle mr-2"></i>This contract was finalized but not yet active!
-                                        </span> --}}
-                                        <span class="float-right">
-                                            <span class="text-black">Status : </span>
-                                            <button type="button" tab-index="-1" class="text-white btn btn-success btn-sm" style="font-size: 12px; border-radius: 3px; font-weight:bold; pointer-events: none;" aria-disabled="true">Active</button>
-                                        </span> 
-                                    </h4>
-                                    <hr>
-                                    <div class="row">
+                                    <div class="row mb-4">
                                         <div class="col-12">
-                                            <p class="text-black text-center" id="contractDetails"></p>
+                                                <h4 class="text-primary text-center">
+                                                    {{-- <span class="alert alert-warning">
+                                                        <i class="fas fa-exclamation-triangle mr-2"></i>This contract was finalized but not yet active!
+                                                    </span> --}}
+                                                    <span class="float-left"><a href="{{url('/consignee/contracts/'.$id.'/pdf')}}" target="_blank" class="btn btn-primary waves-effect">Generate PDF</a></span>
+                                                    <span class="float-right">
+                                                        <span class="text-black">Status : </span>
+                                                        <button type="button" tab-index="-1" class="text-white btn btn-success btn-sm" style="font-size: 12px; border-radius: 3px; font-weight:bold; pointer-events: none;" aria-disabled="true">Active</button>
+                                                    </span> 
+                                                </h4>
                                         </div>
                                     </div>
                                     <div class="row mb-5">
@@ -683,8 +682,7 @@
                                             
                                             {!! $termscondition->strTermsConditionDesc !!}
                                         @endforeach
-                                    {{-- </textarea>     --}}
-                                    <a href="{{url('/consignee/contracts/'.$id.'/pdf')}}" target="_blank" class="btn active waves-effect">Generate PDF</a>
+                                    
                                 </div>
                             </div>
                         </div>
