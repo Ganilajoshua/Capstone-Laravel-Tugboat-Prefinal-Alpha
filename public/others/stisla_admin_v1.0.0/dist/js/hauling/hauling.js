@@ -17,6 +17,7 @@ $(document).ready(function(){
         console.log(moment().format("Y-MM-D"), jobs[counter].dateStart);
         console.log(moment().format("HH:mm"));
         var currdate = moment().format("Y-MM-D");
+        var currtime = moment().format("HH:mm");
         if(moment(currdate).isAfter(jobs[counter].dateStart)){
             console.log('delayed by araw');
             console.log(moment().format("Y-MM-D"), jobs[counter].dateStart);
@@ -30,8 +31,19 @@ $(document).ready(function(){
             $(appendBadge1).appendTo(`#joborder${jobs[counter].intJobOrderID}`);    
 
         }else if(moment(currdate).isSame(jobs[counter].dateStart)){
-            if(moment().format("HH:mm") > jobs[counter].tmStart){
-                console.log('delayed by oras');
+            console.log('same');    
+
+            if(currtime <= (jobs[counter].tmStart)){
+                console.log('Hindi Pa Delay Yung Oras');
+                $(`#joborder${jobs[counter].intJobOrderID}`).empty();
+                var appendBadge = `<span class="badge badge-success ml-2" style="border-radius: 3px !important;"> On Time </span>`;
+                $(appendBadge).appendTo(`#joborder${jobs[counter].intJobOrderID}`);
+                var appendBadge1 = `<span class="badge badge-info ml-2" style="border-radius: 3px !important;"> Pending </span>`;
+                $(appendBadge1).appendTo(`#joborder${jobs[counter].intJobOrderID}`);
+                $(`#joborder${jobs[counter].intJobOrderID}Button`).data('delayedorder', 1);
+            
+            }else if(currtime > (jobs[counter].tmStart)){
+
                 $(`#joborder${jobs[counter].intJobOrderID}`).empty();
                 var appendBadge = `<span class="badge badge-danger ml-2" style="border-radius: 3px !important;"> Delayed </span>`;
                 $(appendBadge).appendTo(`#joborder${jobs[counter].intJobOrderID}`);
@@ -133,6 +145,12 @@ $('.joborderHaulingInfo').on('click',function(event){
             `<small class="">Job Order # ${joborderID}</small>
             <h4 class="mt-2">${data.joborder[0].strCompanyName}</h4>`;
             $(appendJobSchedTitle).appendTo('#jobscheduleTitle');
+            
+            getServiceType(data.joborder);
+
+            location = getLocations(data.joborder[0]);
+            appendJoborder(data.joborder,location);
+
             $('#jobschedInfoModal').modal('show');
         },
         error : (error)=>{
@@ -140,6 +158,7 @@ $('.joborderHaulingInfo').on('click',function(event){
         }
     });
 });
+
 $('.backButton').on('click',function(){
     $('.startHaulingContainer').css('display','none');
     $('.jobOrderList').css('display','block');
@@ -506,3 +525,4 @@ $('.showUpdates').on('click',function(){
         }
     });
 });
+

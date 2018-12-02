@@ -35,7 +35,6 @@
                                                     <h6>{{$pendingjobs->strCompanyName}}</h6>
                                                 </div>
                                                 <div class="card-footer mt-2">
-                                                    
                                                     <a href="#" class="joborderHaulingInfo" data-id="{{$pendingjobs->intJobOrderID}}">More Info <i class="ion ion-ios-arrow-right"></i></a>
                                                     {{-- <button data-id="{{$pendingjobs->intJobOrderID}}" class="terminateHauling btn btn-danger btn-sm text-center float-right ml-2 waves-effect">End</button> --}}
                                                     <button data-id="{{$pendingjobs->intJobOrderID}}" id="joborder{{$pendingjobs->intJobOrderID}}Button" class="viewStartHauling btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Start</button>
@@ -74,7 +73,7 @@
                                                     </h6>
                                                 </div>
                                                 <div class="card-footer mt-2">
-                                                    <a href="#" data-toggle="modal" data-target="#moreInfoModal">More Info <i class="ion ion-ios-arrow-right"></i></a>
+                                                    <a href="#" class="joborderHaulingInfo" data-id="{{$ongoingjobs->intJobOrderID}}">More Info <i class="ion ion-ios-arrow-right"></i></a>
                                                     <button data-id="{{$ongoingjobs->intJobOrderID}}" class="terminateHauling btn btn-danger btn-sm text-center float-right ml-2 waves-effect">End</button>
                                                     <button data-id="{{$ongoingjobs->intJSDispatchTicketID}}" class="updateLocation btn btn-primary btn-sm text-center float-right ml-2 waves-effect">Update Location</button>
                                                     <button data-id="{{$ongoingjobs->intJSDispatchTicketID}}" class="showUpdates btn btn-primary btn-sm text-center float-right waves-effect">Show Updates</button>
