@@ -16,8 +16,6 @@
                     <div class="col">
                         <form class="needs-validation" novalidate="">
                             <div class="card">
-                                <div class="defaultMatrix">
-                                </div>
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="addContractTitle">Title<sup class="text-primary">&#10033;</sup></label>
@@ -159,7 +157,7 @@
                                 </div>
                                 <input type="hidden" id="hideCompanyID">
                                 <div class="card-footer">
-                                    <button onclick="showContracts()" type="button" class="float-right btn btn-primary waves-effect">Save</button>
+                                    <button onclick="storeContracts()" type="button" class="float-right btn btn-primary waves-effect">Save</button>
                                 </div>
                             </div>
                         </form>

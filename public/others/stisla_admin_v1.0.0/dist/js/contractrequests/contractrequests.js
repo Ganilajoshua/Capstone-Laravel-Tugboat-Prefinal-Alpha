@@ -165,51 +165,64 @@ function storeContracts(){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });   
-    $.ajax({
-        url : url + '/store',
-        type : 'POST',
-        data : {
-            "_token" : $('meta[name="csrf-token"]').attr('content'),
-            contractTitle : title,
-            contractDetails : details,
-            contractValidity : validity,
-            contractID : id,
-            servicetype : servicetype,
-            standardFee : standardFee,
-            delayFee : delayFee,
-            violationFee : violationFee,
-            latefee : latefee,
-            minDamage : minDamage,
-            maxDamage : maxDamage,
-            discount : discount,
-            // contractDelayFee : delayFee,
-            // contractViolationFee : violationFee,
-            // contractLateFee : lateFee,
-            // contractStandardFee : standardFee,
-            // contractMinDamage : minDamage,
-            // contractMaxDamage : maxDamage,
-            contractDiscount : discount,
-        },
-        success : function(data,response){
-            console.log(data);
-            swal({
-                title: "Success",
-                text: "Initial Contract Created",
-                type: "success",
-                showCancelButton: false,
-                confirmButtonClass: "btn-success",
-                confirmButtonText: "Ok",
-                closeOnConfirm: true,
-                timer : 1500
-            },
-            function(isConfirm){
-                if(isConfirm){
-                    window.location = url;
+    swal({
+        title: "Initial Contract",
+        text: "Create Initial contract?",
+        type: "info",
+        showCancelButton: true,
+        confirmButtonClass: "btn-primary",
+        confirmButtonText: "Ok",
+        closeOnConfirm: true
+    },
+    function(isConfirm){
+        if(isConfirm){
+            $.ajax({
+                url : url + '/store',
+                type : 'POST',
+                data : {
+                    "_token" : $('meta[name="csrf-token"]').attr('content'),
+                    contractTitle : title,
+                    contractDetails : details,
+                    contractValidity : validity,
+                    contractID : id,
+                    servicetype : servicetype,
+                    standardFee : standardFee,
+                    delayFee : delayFee,
+                    violationFee : violationFee,
+                    latefee : latefee,
+                    minDamage : minDamage,
+                    maxDamage : maxDamage,
+                    discount : discount,
+                    // contractDelayFee : delayFee,
+                    // contractViolationFee : violationFee,
+                    // contractLateFee : lateFee,
+                    // contractStandardFee : standardFee,
+                    // contractMinDamage : minDamage,
+                    // contractMaxDamage : maxDamage,
+                    contractDiscount : discount,
+                },
+                success : function(data,response){
+                    console.log(data);
+                    swal({
+                        title: "Success",
+                        text: "Initial Contract Created",
+                        type: "success",
+                        showCancelButton: false,
+                        confirmButtonClass: "btn-success",
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: true,
+                        timer : 1500
+                    },
+                    function(isConfirm){
+                        if(isConfirm){
+                            window.location = url;
+                        }
+                    });           
+                },
+                error : function(error){
+        
                 }
-            });           
-        },
-        error : function(error){
-
+            });  
         }
     });   
 }
@@ -238,19 +251,19 @@ function showContracts(){
     // return false;
     $('.modalContractDetails').empty();
 
-            // if(data.standard == null){
-            var appendData =
-            "<h2>"+ title +"</h2>" +
-            "<p>"+ details +"</p>" + 
-            "<p> Standard Rate : "+ standardFee +"</p>" +
-            "<p> Consignee Late Fee : "+ lateFee +"</p>" +
-            "<p> Tugboat Delay Fee : "+ delayFee +"</p>" +
-            "<p> Violation Fee : "+ violationFee +"</p>" +
-            "<p> Minimum Damage Fee(s) : "+ minDamage +"</p>" +
-            "<p> Maximum Damage Fee(s) : "+ maxDamage +"</p>" +
-            "<p> Maximum Discount : "+ discount +"</p>";
-            $(appendData).appendTo('.modalContractDetails');
-            $('#viewContractInfo').modal('show');
+            // // if(data.standard == null){
+            // var appendData =
+            // "<h2>"+ title +"</h2>" +
+            // "<p>"+ details +"</p>" + 
+            // "<p> Standard Rate : "+ standardFee +"</p>" +
+            // "<p> Consignee Late Fee : "+ lateFee +"</p>" +
+            // "<p> Tugboat Delay Fee : "+ delayFee +"</p>" +
+            // "<p> Violation Fee : "+ violationFee +"</p>" +
+            // "<p> Minimum Damage Fee(s) : "+ minDamage +"</p>" +
+            // "<p> Maximum Damage Fee(s) : "+ maxDamage +"</p>" +
+            // "<p> Maximum Discount : "+ discount +"</p>";
+            // $(appendData).appendTo('.modalContractDetails');
+            // // $('#viewContractInfo').modal('show');
                 
             //     console.log((data.quotationfees).length);
             //     $(appendData).appendTo('.modalContractDetails');

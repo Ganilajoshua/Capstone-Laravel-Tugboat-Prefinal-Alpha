@@ -53,7 +53,7 @@
                                             @foreach($company as $company)
                                                 <tr>
                                                     <td>{{$company->strCompanyName}}</td>
-                                                    <td>date here</td>
+                                                    <td>{{$company->datContractExpire}}</td>
                                                     <td>
                                                         <div class="ml-1 mr-1">
                                                             <button class="btn btn-sm btn btn-primary waves-effect waves-circle" data-toggle="tooltip" title="View Details">

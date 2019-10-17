@@ -33,18 +33,26 @@ class ContractsController extends Controller
         $contractList = DB::table('users as users')
         ->leftjoin('tblcompany as company','users.intUCompanyID','company.intCompanyID')
         ->join('tblcontractlist as contracts','company.intCompanyID','contracts.intCCompanyID')
-        
         ->where('contracts.intCCompanyID',Auth::user()->intUCompanyID)
         ->select('company.*','contracts.*','users.*')
         // ->where('contracts.intCQuotationID',null)
         ->get();
+        
+        $contractListFinal = DB::table('users as users')
+        ->leftjoin('tblcompany as company','users.intUCompanyID','company.intCompanyID')
+        ->join('tblcontractlist as contracts','company.intCompanyID','contracts.intCCompanyID')
+        ->join('tblfinalcontractfeesmatrix as matrix','contracts.intContractListID','matrix.intFCFContractListID')
+        ->where('contracts.intCCompanyID',Auth::user()->intUCompanyID)
+        ->select('company.*','contracts.*','users.*','matrix.*')
+        // ->where('contracts.intCQuotationID',null)
+        ->get();
         $fees = ContractFeesMatrix::all();
-        return view('Consignee.Contracts.index',compact('company','contract','contractList','fees'));
+        return view('Consignee.Contracts.index',compact('company','contract','contractList','fees','contractListFinal'));
         // ->with('company',$company)
         // ->with('contract',$contract)
         // ->with('contractList',$contractList);
         // undefined offset[0] pag walang company na connected sa user
-        // return response()->json(['contract'=>$contract,'list'=>$contractList]);
+        return response()->json(['list'=>$contractList]);
     }
 
     /**
